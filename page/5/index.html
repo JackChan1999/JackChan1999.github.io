@@ -253,6 +253,380 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/字符串格式化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/30/字符串格式化/" itemprop="url">
+                  字符串格式化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:04+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>原文出处：<a href="http://blog.csdn.net/lonely_fireworks/article/details/7962171/" target="_blank" rel="external">http://blog.csdn.net/lonely_fireworks/article/details/7962171/</a></p>
+</blockquote>
+<p>#相关阅读</p>
+<ul>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52765748" target="_blank" rel="external">Java基础：String类</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52820512" target="_blank" rel="external">Java字符串格式化</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52822073" target="_blank" rel="external">Java基础：正则表达式</a></li>
+</ul>
+<h1 id="1-常规类型的格式化"><a href="#1-常规类型的格式化" class="headerlink" title="1. 常规类型的格式化"></a><strong>1. 常规类型的格式化</strong></h1><p>String类的format()方法用于创建格式化的字符串以及连接多个字符串对象。熟悉C语言的同学应该记得C语言的sprintf()方法，两者有类似之处。</p>
+<p>format()方法有两种重载形式</p>
+<ul>
+<li><p>format(String format, Object… args)</p>
+<p>新字符串使用本地语言环境，制定字符串格式和参数生成格式化的新字符串。</p>
+</li>
+<li><p>format(Locale locale, String format, Object… args)<br>使用指定的语言环境，制定字符串格式和参数生成格式化的字符串。</p>
+</li>
+</ul>
+<p>显示不同转换符实现不同数据类型到字符串的转换，如图所示。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">转换符</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%s</td>
+<td style="text-align:left">字符串类型</td>
+<td style="text-align:left">“mingrisoft”</td>
+</tr>
+<tr>
+<td style="text-align:left">%c</td>
+<td style="text-align:left">字符类型</td>
+<td style="text-align:left">‘m’</td>
+</tr>
+<tr>
+<td style="text-align:left">%b</td>
+<td style="text-align:left">布尔类型</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">%d</td>
+<td style="text-align:left">整数类型（十进制）</td>
+<td style="text-align:left">99</td>
+</tr>
+<tr>
+<td style="text-align:left">%x</td>
+<td style="text-align:left">整数类型（十六进制）</td>
+<td style="text-align:left">FF</td>
+</tr>
+<tr>
+<td style="text-align:left">%o</td>
+<td style="text-align:left">整数类型（八进制）</td>
+<td style="text-align:left">77</td>
+</tr>
+<tr>
+<td style="text-align:left">%f</td>
+<td style="text-align:left">浮点类型</td>
+<td style="text-align:left">99.99</td>
+</tr>
+<tr>
+<td style="text-align:left">%a</td>
+<td style="text-align:left">十六进制浮点类型</td>
+<td style="text-align:left">FF.35AE</td>
+</tr>
+<tr>
+<td style="text-align:left">%e</td>
+<td style="text-align:left">指数类型</td>
+<td style="text-align:left">9.38e+5</td>
+</tr>
+<tr>
+<td style="text-align:left">%g</td>
+<td style="text-align:left">通用浮点类型（f和e类型中较短的）</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">%h</td>
+<td style="text-align:left">散列码，Integer.toHexString(arg.hashCode())</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">%%</td>
+<td style="text-align:left">百分比类型</td>
+<td style="text-align:left">％</td>
+</tr>
+<tr>
+<td style="text-align:left">%n</td>
+<td style="text-align:left">换行符</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">%tx</td>
+<td style="text-align:left">日期与时间类型（x代表不同的日期与时间转换符</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-测试用例"><a href="#2-测试用例" class="headerlink" title="2. 测试用例"></a>2. 测试用例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    String str=<span class="keyword">null</span>;  </div><div class="line">    str=String.format(<span class="string">"Hi,%s"</span>, <span class="string">"王力"</span>);  </div><div class="line">    System.out.println(str);  </div><div class="line">    str=String.format(<span class="string">"Hi,%s:%s.%s"</span>, <span class="string">"王南"</span>,<span class="string">"王力"</span>,<span class="string">"王张"</span>);            </div><div class="line">    System.out.println(str);                           </div><div class="line">    System.out.printf(<span class="string">"字母a的大写是：%c %n"</span>, <span class="string">'A'</span>);  </div><div class="line">    System.out.printf(<span class="string">"3&gt;7的结果是：%b %n"</span>, <span class="number">3</span>&gt;<span class="number">7</span>);  </div><div class="line">    System.out.printf(<span class="string">"100的一半是：%d %n"</span>, <span class="number">100</span>/<span class="number">2</span>);  </div><div class="line">    System.out.printf(<span class="string">"100的16进制数是：%x %n"</span>, <span class="number">100</span>);  </div><div class="line">    System.out.printf(<span class="string">"100的8进制数是：%o %n"</span>, <span class="number">100</span>);  </div><div class="line">    System.out.printf(<span class="string">"50元的书打8.5折扣是：%f 元%n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面价格的16进制数是：%a %n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面价格的指数表示：%e %n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面价格的指数和浮点数结果的长度较短的是：%g %n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面的折扣是%d%% %n"</span>, <span class="number">85</span>);  </div><div class="line">    System.out.printf(<span class="string">"字母A的散列码是：%h %n"</span>, <span class="string">'A'</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Hi,王力  </div><div class="line">Hi,王南:王力.王张  </div><div class="line">字母a的大写是：A   </div><div class="line">3&gt;7的结果是：false   </div><div class="line">100的一半是：50   </div><div class="line">100的16进制数是：64   </div><div class="line">100的8进制数是：144   </div><div class="line">50元的书打8.5折扣是：42.500000 元  </div><div class="line">上面价格的16进制数是：0x1.54p5   </div><div class="line">上面价格的指数表示：4.250000e+01   </div><div class="line">上面价格的指数和浮点数结果的长度较短的是：42.5000   </div><div class="line">上面的折扣是85%   </div><div class="line">字母A的散列码是：41</div></pre></td></tr></table></figure>
+<h1 id="3-搭配转换符的标志"><a href="#3-搭配转换符的标志" class="headerlink" title="3. 搭配转换符的标志"></a><strong>3. 搭配转换符的标志</strong></h1><p><img src="http://img.blog.csdn.net/20161015013315639" alt="字符串格式化"></p>
+<h1 id="4-测试用例"><a href="#4-测试用例" class="headerlink" title="4. 测试用例"></a>4. 测试用例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    String str=<span class="keyword">null</span>;  </div><div class="line">    <span class="comment">//$使用  </span></div><div class="line">    str=String.format(<span class="string">"格式参数$的使用：%1$d,%2$s"</span>, <span class="number">99</span>,<span class="string">"abc"</span>);             </div><div class="line">    System.out.println(str);                       </div><div class="line">    <span class="comment">//+使用  </span></div><div class="line">    System.out.printf(<span class="string">"显示正负数的符号：%+d与%d%n"</span>, <span class="number">99</span>,-<span class="number">99</span>);  </div><div class="line">    <span class="comment">//补O使用  </span></div><div class="line">    System.out.printf(<span class="string">"最牛的编号是：%03d%n"</span>, <span class="number">7</span>);  </div><div class="line">    <span class="comment">//空格使用  </span></div><div class="line">    System.out.printf(<span class="string">"Tab键的效果是：% 8d%n"</span>, <span class="number">7</span>);  </div><div class="line">    <span class="comment">//.使用  </span></div><div class="line">    System.out.printf(<span class="string">"整数分组的效果是：%,d%n"</span>, <span class="number">9989997</span>);  </div><div class="line">    <span class="comment">//空格和小数点后面个数  </span></div><div class="line">    System.out.printf(<span class="string">"一本书的价格是：% 50.5f元%n"</span>, <span class="number">49.8</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">格式参数$的使用：99,abc  </div><div class="line">显示正负数的符号：+99与-99  </div><div class="line">最牛的编号是：007  </div><div class="line">Tab键的效果是：7  </div><div class="line">整数分组的效果是：9,989,997  </div><div class="line">一本书的价格是：49.80000元</div></pre></td></tr></table></figure>
+<h1 id="5-日期和事件字符串格式化"><a href="#5-日期和事件字符串格式化" class="headerlink" title="5. 日期和事件字符串格式化"></a><strong>5. 日期和事件字符串格式化</strong></h1><p>在程序界面中经常需要显示时间和日期，但是其显示的 格式经常不尽人意，需要编写大量的代码经过各种算法才得到理想的日期与时间格式。字符串格式中还有%tx转换符没有详细介绍，它是专门用来格式化日期和时 间的。%tx转换符中的x代表另外的处理日期和时间格式的转换符，它们的组合能够将日期和时间格式化成多种格式。</p>
+<p>常见日期和时间组合的格式，如图所示。<br>| 转换符  | 说明                    | 示例                          |<br>| :— | :——————– | :————————– |<br>| c    | 包括全部日期和时间信息           | 星期六 十月 27 14:21:20 CST 2007 |<br>| F    | “年-月-日”格式             | 2007-10-27                  |<br>| D    | “月/日/年”格式             | 10/27/07                    |<br>| r    | “HH:MM:SS PM”格式（12时制） | 02:25:51 下午                 |<br>| T    | “HH:MM:SS”格式（24时制）    | 14:28:16                    |<br>| R    | “HH:MM”格式（24时制）       | 14:28                       |</p>
+<h1 id="6-测试用例"><a href="#6-测试用例" class="headerlink" title="6. 测试用例"></a>6. 测试用例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    Date date=<span class="keyword">new</span> Date();                                  </div><div class="line">    <span class="comment">//c的使用  </span></div><div class="line">    System.out.printf(<span class="string">"全部日期和时间信息：%tc%n"</span>,date);          </div><div class="line">    <span class="comment">//f的使用  </span></div><div class="line">    System.out.printf(<span class="string">"年-月-日格式：%tF%n"</span>,date);  </div><div class="line">    <span class="comment">//d的使用  </span></div><div class="line">    System.out.printf(<span class="string">"月/日/年格式：%tD%n"</span>,date);  </div><div class="line">    <span class="comment">//r的使用  </span></div><div class="line">    System.out.printf(<span class="string">"HH:MM:SS PM格式（12时制）：%tr%n"</span>,date);  </div><div class="line">    <span class="comment">//t的使用  </span></div><div class="line">    System.out.printf(<span class="string">"HH:MM:SS格式（24时制）：%tT%n"</span>,date);  </div><div class="line">    <span class="comment">//R的使用  </span></div><div class="line">    System.out.printf(<span class="string">"HH:MM格式（24时制）：%tR"</span>,date);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">全部日期和时间信息：星期一 九月 10 10:43:36 CST 2012  </div><div class="line">年-月-日格式：2012-09-10  </div><div class="line">月/日/年格式：09/10/12  </div><div class="line">HH:MM:SS PM格式（12时制）：10:43:36 上午  </div><div class="line">HH:MM:SS格式（24时制）：10:43:36  </div><div class="line">HH:MM格式（24时制）：10:43</div></pre></td></tr></table></figure></p>
+<p>定义日期格式的转换符可以使日期通过指定的转换符生成新字符串。这些日期转换符如图所示。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Date date=<span class="keyword">new</span> Date();</div><div class="line">        <span class="comment">//b的使用，月份简称  </span></div><div class="line">        String str=String.format(Locale.US,<span class="string">"英文月份简称：%tb"</span>,date);</div><div class="line">        System.out.println(str);</div><div class="line">        System.out.printf(<span class="string">"本地月份简称：%tb%n"</span>,date);</div><div class="line">        <span class="comment">//B的使用，月份全称  </span></div><div class="line">        str=String.format(Locale.US,<span class="string">"英文月份全称：%tB"</span>,date);</div><div class="line">        System.out.println(str);</div><div class="line">        System.out.printf(<span class="string">"本地月份全称：%tB%n"</span>,date);</div><div class="line">        <span class="comment">//a的使用，星期简称  </span></div><div class="line">        str=String.format(Locale.US,<span class="string">"英文星期的简称：%ta"</span>,date);</div><div class="line">        System.out.println(str);</div><div class="line">        <span class="comment">//A的使用，星期全称  </span></div><div class="line">        System.out.printf(<span class="string">"本地星期的简称：%tA%n"</span>,date);</div><div class="line">        <span class="comment">//C的使用，年前两位  </span></div><div class="line">        System.out.printf(<span class="string">"年的前两位数字（不足两位前面补0）：%tC%n"</span>,date);</div><div class="line">        <span class="comment">//y的使用，年后两位  </span></div><div class="line">        System.out.printf(<span class="string">"年的后两位数字（不足两位前面补0）：%ty%n"</span>,date);</div><div class="line">        <span class="comment">//j的使用，一年的天数  </span></div><div class="line">        System.out.printf(<span class="string">"一年中的天数（即年的第几天）：%tj%n"</span>,date);</div><div class="line">        <span class="comment">//m的使用，月份  </span></div><div class="line">        System.out.printf(<span class="string">"两位数字的月份（不足两位前面补0）：%tm%n"</span>,date);</div><div class="line">        <span class="comment">//d的使用，日（二位，不够补零）  </span></div><div class="line">        System.out.printf(<span class="string">"两位数字的日（不足两位前面补0）：%td%n"</span>,date);</div><div class="line">        <span class="comment">//e的使用，日（一位不补零）  </span></div><div class="line">        System.out.printf(<span class="string">"月份的日（前面不补0）：%te"</span>,date);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">英文月份简称：Sep  </div><div class="line">本地月份简称：九月  </div><div class="line">英文月份全称：September  </div><div class="line">本地月份全称：九月  </div><div class="line">英文星期的简称：Mon  </div><div class="line">本地星期的简称：星期一  </div><div class="line">年的前两位数字（不足两位前面补0）：20  </div><div class="line">年的后两位数字（不足两位前面补0）：12  </div><div class="line">一年中的天数（即年的第几天）：254  </div><div class="line">两位数字的月份（不足两位前面补0）：09  </div><div class="line">两位数字的日（不足两位前面补0）：10  </div><div class="line">月份的日（前面不补0）：10</div></pre></td></tr></table></figure>
+<p>和日期格式转换符相比，时间格式的转换符要更多、更精确。它可以将时间格式化成时、分、秒甚至时毫秒等单位。格式化时间字符串的转换符如图所示。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">转换符</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">H</td>
+<td style="text-align:left">2位数字24时制的小时（不足2位前面补0）</td>
+<td style="text-align:left">15</td>
+</tr>
+<tr>
+<td style="text-align:left">I</td>
+<td style="text-align:left">2位数字12时制的小时（不足2位前面补0）</td>
+<td style="text-align:left">03</td>
+</tr>
+<tr>
+<td style="text-align:left">K</td>
+<td style="text-align:left">2位数字24时制的小时（前面不补0）</td>
+<td style="text-align:left">15</td>
+</tr>
+<tr>
+<td style="text-align:left">L</td>
+<td style="text-align:left">2位数字12时制的小时（前面不补0）</td>
+<td style="text-align:left">3</td>
+</tr>
+<tr>
+<td style="text-align:left">M</td>
+<td style="text-align:left">2位数字的分钟（不足2位前面补0）</td>
+<td style="text-align:left">03</td>
+</tr>
+<tr>
+<td style="text-align:left">S</td>
+<td style="text-align:left">2位数字的秒（不足2位前面补0）</td>
+<td style="text-align:left">09</td>
+</tr>
+<tr>
+<td style="text-align:left">L</td>
+<td style="text-align:left">3位数字的毫秒（不足3位前面补0）</td>
+<td style="text-align:left">015</td>
+</tr>
+<tr>
+<td style="text-align:left">N</td>
+<td style="text-align:left">9位数字的毫秒数（不足9位前面补0）</td>
+<td style="text-align:left">562000000</td>
+</tr>
+<tr>
+<td style="text-align:left">p</td>
+<td style="text-align:left">小写字母的上午或下午标记</td>
+<td style="text-align:left">中：下午,英：pm</td>
+</tr>
+<tr>
+<td style="text-align:left">z</td>
+<td style="text-align:left">相对于GMT的RFC822时区的偏移量</td>
+<td style="text-align:left">+0800</td>
+</tr>
+<tr>
+<td style="text-align:left">Z</td>
+<td style="text-align:left">时区缩写字符串</td>
+<td style="text-align:left">CST</td>
+</tr>
+<tr>
+<td style="text-align:left">S</td>
+<td style="text-align:left">1970-1-1 00:00:00 到现在所经过的秒数</td>
+<td style="text-align:left">1193468128</td>
+</tr>
+<tr>
+<td style="text-align:left">Q</td>
+<td style="text-align:left">1970-1-1 00:00:00 到现在所经过的毫秒数</td>
+<td style="text-align:left">1193468128984</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7-测试代码"><a href="#7-测试代码" class="headerlink" title="7. 测试代码"></a>7. 测试代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    Date date = <span class="keyword">new</span> Date();  </div><div class="line">    <span class="comment">//H的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字24时制的小时（不足2位前面补0）:%tH%n"</span>, date);  </div><div class="line">    <span class="comment">//I的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字12时制的小时（不足2位前面补0）:%tI%n"</span>, date);  </div><div class="line">    <span class="comment">//k的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字24时制的小时（前面不补0）:%tk%n"</span>, date);  </div><div class="line">    <span class="comment">//l的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字12时制的小时（前面不补0）:%tl%n"</span>, date);  </div><div class="line">    <span class="comment">//M的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字的分钟（不足2位前面补0）:%tM%n"</span>, date);  </div><div class="line">    <span class="comment">//S的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字的秒（不足2位前面补0）:%tS%n"</span>, date);  </div><div class="line">    <span class="comment">//L的使用  </span></div><div class="line">    System.out.printf(<span class="string">"3位数字的毫秒（不足3位前面补0）:%tL%n"</span>, date);  </div><div class="line">    <span class="comment">//N的使用  </span></div><div class="line">    System.out.printf(<span class="string">"9位数字的毫秒数（不足9位前面补0）:%tN%n"</span>, date);  </div><div class="line">    <span class="comment">//p的使用  </span></div><div class="line">    String str = String.format(Locale.US, <span class="string">"小写字母的上午或下午标记(英)：%tp"</span>, date);  </div><div class="line">    System.out.println(str);   </div><div class="line">    System.out.printf(<span class="string">"小写字母的上午或下午标记（中）：%tp%n"</span>, date);  </div><div class="line">    <span class="comment">//z的使用  </span></div><div class="line">    System.out.printf(<span class="string">"相对于GMT的RFC822时区的偏移量:%tz%n"</span>, date);  </div><div class="line">    <span class="comment">//Z的使用  </span></div><div class="line">    System.out.printf(<span class="string">"时区缩写字符串:%tZ%n"</span>, date);  </div><div class="line">    <span class="comment">//s的使用  </span></div><div class="line">    System.out.printf(<span class="string">"1970-1-1 00:00:00 到现在所经过的秒数：%ts%n"</span>, date);  </div><div class="line">    <span class="comment">//Q的使用  </span></div><div class="line">    System.out.printf(<span class="string">"1970-1-1 00:00:00 到现在所经过的毫秒数：%tQ%n"</span>, date);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">2位数字24时制的小时（不足2位前面补0）:11  </div><div class="line">2位数字12时制的小时（不足2位前面补0）:11  </div><div class="line">2位数字24时制的小时（前面不补0）:11  </div><div class="line">2位数字12时制的小时（前面不补0）:11  </div><div class="line">2位数字的分钟（不足2位前面补0）:03  </div><div class="line">2位数字的秒（不足2位前面补0）:52  </div><div class="line">3位数字的毫秒（不足3位前面补0）:773  </div><div class="line">9位数字的毫秒数（不足9位前面补0）:773000000  </div><div class="line">小写字母的上午或下午标记(英)：am  </div><div class="line">小写字母的上午或下午标记（中）：上午  </div><div class="line">相对于GMT的RFC822时区的偏移量:+0800  </div><div class="line">时区缩写字符串:CST  </div><div class="line">1970-1-1 00:00:00 到现在所经过的秒数：1347246232  </div><div class="line">1970-1-1 00:00:00 到现在所经过的毫秒数：1347246232773</div></pre></td></tr></table></figure>
+<h1 id="8-在android-String-resource中使用-amp-160"><a href="#8-在android-String-resource中使用-amp-160" class="headerlink" title="8. 在android String resource中使用&amp;#160"></a>8. 在android String resource中使用&amp;#160</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"downloaded"</span>&gt;</span>&amp;#160;%s %%<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在显示文本信息时，一句话结束之后需要用空格来分隔两个句子，但是在string.xml中当内容没有在双引号内时空格是没有用的。</p>
+<p>要想让string.xml中的字符串显示空格可以用 &amp;#160 ; 来代替空格，但是 &amp;#160 ; 来代替空格时他只是被当做了一个字符并且会和其他的单词组合在一起变成一个新的字符串，</p>
+<p>也就是说它是没用分隔符的功能的。</p>
+<h1 id="9-Formatter"><a href="#9-Formatter" class="headerlink" title="9. Formatter"></a><strong>9. Formatter</strong></h1><p>printf 风格的格式字符串的解释程序。此类提供了对布局对齐和排列的支持，以及对数值、字符串和日期/时间数据的常规格式和特定于语言环境的输出的支持</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">   <span class="comment">// Send all output to the Appendable object sb</span></div><div class="line">   Formatter formatter = <span class="keyword">new</span> Formatter(sb, Locale.US);</div><div class="line"></div><div class="line">   <span class="comment">// Explicit argument indices may be used to re-order output.</span></div><div class="line">   formatter.format(<span class="string">"%4$2s %3$2s %2$2s %1$2s"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>)</div><div class="line">   <span class="comment">// -&gt; " d  c  b  a"</span></div><div class="line"></div><div class="line">   <span class="comment">// Optional locale as the first argument can be used to get</span></div><div class="line">   <span class="comment">// locale-specific formatting of numbers.  The precision and width can be</span></div><div class="line">   <span class="comment">// given to round and align the value.</span></div><div class="line">   formatter.format(Locale.FRANCE, <span class="string">"e = %+10.4f"</span>, Math.E);</div><div class="line">   <span class="comment">// -&gt; "e =    +2,7183"</span></div><div class="line"></div><div class="line">   <span class="comment">// The '(' numeric flag may be used to format negative numbers with</span></div><div class="line">   <span class="comment">// parentheses rather than a minus sign.  Group separators are</span></div><div class="line">   <span class="comment">// automatically inserted.</span></div><div class="line">   formatter.format(<span class="string">"Amount gained or lost since last statement: $ %(,.2f"</span>,</div><div class="line">                    balanceDelta);</div><div class="line">   <span class="comment">// -&gt; "Amount gained or lost since last statement: $ (6,217.58)"</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Writes a formatted string to System.out.</span></div><div class="line">  System.out.format(<span class="string">"Local time: %tT"</span>, Calendar.getInstance());</div><div class="line">  <span class="comment">// -&gt; "Local time: 13:34:18"</span></div><div class="line"></div><div class="line">  <span class="comment">// Writes formatted output to System.err.</span></div><div class="line">  System.err.printf(<span class="string">"Unable to open file '%1$s': %2$s"</span>,</div><div class="line">                    fileName, exception.getMessage());</div><div class="line">  <span class="comment">// -&gt; "Unable to open file 'food': No such file or directory"</span></div></pre></td></tr></table></figure>
+<h1 id="10-格式字符串语法"><a href="#10-格式字符串语法" class="headerlink" title="10. 格式字符串语法"></a>10. 格式字符串语法</h1><p>产生格式化输出的每个方法都需要格式字符串 和参数列表。格式字符串是一个 String，它可以包含固定文本以及一个或多个嵌入的格式说明符</p>
+<h2 id="10-1-常规类型、字符类型和数值类型的格式说明符的语法如下"><a href="#10-1-常规类型、字符类型和数值类型的格式说明符的语法如下" class="headerlink" title="10.1 常规类型、字符类型和数值类型的格式说明符的语法如下"></a>10.1 常规类型、字符类型和数值类型的格式说明符的语法如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%[argument_index$][flags][width][.precision]conversion</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">格式说明符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">argument_index</td>
+<td style="text-align:left">可选的argument_index是一个十进制整数，用于表明参数在参数列表中的位置。第一个参数由 “1$” 引用，第二个参数由 “2$” 引用，依此类推</td>
+</tr>
+<tr>
+<td style="text-align:left">flags</td>
+<td style="text-align:left">可选 flags 是修改输出格式的字符集。有效标志集取决于转换类型</td>
+</tr>
+<tr>
+<td style="text-align:left">width</td>
+<td style="text-align:left">可选 width 是一个非负十进制整数，表明要向输出中写入的最少字符数</td>
+</tr>
+<tr>
+<td style="text-align:left">precision</td>
+<td style="text-align:left">可选 precision 是一个非负十进制整数，通常用来限制字符数。特定行为取决于转换类型</td>
+</tr>
+<tr>
+<td style="text-align:left">conversion</td>
+<td style="text-align:left">所需 conversion 是一个表明应该如何格式化参数的字符。给定参数的有效转换集取决于参数的数据类型</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-2-转换conversion"><a href="#10-2-转换conversion" class="headerlink" title="10.2 转换conversion"></a><strong>10.2 转换conversion</strong></h2><h2 id="10-3-日期和时间格式化"><a href="#10-3-日期和时间格式化" class="headerlink" title="10.3 日期和时间格式化"></a><strong>10.3 日期和时间格式化</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%[argument_index$][flags][width]conversion</div></pre></td></tr></table></figure>
+<h1 id="11-NumberFormat"><a href="#11-NumberFormat" class="headerlink" title="11. NumberFormat"></a><strong>11. NumberFormat</strong></h1><h1 id="12-MessageFormat"><a href="#12-MessageFormat" class="headerlink" title="12. MessageFormat"></a><strong>12. MessageFormat</strong></h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 包含了点位符的字符串就是模板！</div><div class="line"> * 点位符：&#123;0&#125;、&#123;1&#125;、&#123;2&#125;</div><div class="line"> * 可变参数，需要指定模板中的点位符的值！有几个点位符就要提供几个参数</div><div class="line"> */</div><div class="line">String s = MessageFormat.format(<span class="string">"&#123;0&#125;或&#123;1&#125;错误！"</span>, <span class="string">"用户名"</span>, <span class="string">"密码"</span>);</div><div class="line">System.out.println(s);</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/正则表达式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -327,17 +701,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/正则表达式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/正则表达式/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -712,17 +1075,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/String类/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/String类/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1069,391 +1421,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/字符串格式化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/30/字符串格式化/" itemprop="url">
-                  字符串格式化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:04+08:00">
-                2017-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/字符串格式化/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/字符串格式化/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>原文出处：<a href="http://blog.csdn.net/lonely_fireworks/article/details/7962171/" target="_blank" rel="external">http://blog.csdn.net/lonely_fireworks/article/details/7962171/</a></p>
-</blockquote>
-<p>#相关阅读</p>
-<ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52765748" target="_blank" rel="external">Java基础：String类</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52820512" target="_blank" rel="external">Java字符串格式化</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52822073" target="_blank" rel="external">Java基础：正则表达式</a></li>
-</ul>
-<h1 id="1-常规类型的格式化"><a href="#1-常规类型的格式化" class="headerlink" title="1. 常规类型的格式化"></a><strong>1. 常规类型的格式化</strong></h1><p>String类的format()方法用于创建格式化的字符串以及连接多个字符串对象。熟悉C语言的同学应该记得C语言的sprintf()方法，两者有类似之处。</p>
-<p>format()方法有两种重载形式</p>
-<ul>
-<li><p>format(String format, Object… args)</p>
-<p>新字符串使用本地语言环境，制定字符串格式和参数生成格式化的新字符串。</p>
-</li>
-<li><p>format(Locale locale, String format, Object… args)<br>使用指定的语言环境，制定字符串格式和参数生成格式化的字符串。</p>
-</li>
-</ul>
-<p>显示不同转换符实现不同数据类型到字符串的转换，如图所示。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">转换符</th>
-<th style="text-align:left">说明</th>
-<th style="text-align:left">示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">%s</td>
-<td style="text-align:left">字符串类型</td>
-<td style="text-align:left">“mingrisoft”</td>
-</tr>
-<tr>
-<td style="text-align:left">%c</td>
-<td style="text-align:left">字符类型</td>
-<td style="text-align:left">‘m’</td>
-</tr>
-<tr>
-<td style="text-align:left">%b</td>
-<td style="text-align:left">布尔类型</td>
-<td style="text-align:left">true</td>
-</tr>
-<tr>
-<td style="text-align:left">%d</td>
-<td style="text-align:left">整数类型（十进制）</td>
-<td style="text-align:left">99</td>
-</tr>
-<tr>
-<td style="text-align:left">%x</td>
-<td style="text-align:left">整数类型（十六进制）</td>
-<td style="text-align:left">FF</td>
-</tr>
-<tr>
-<td style="text-align:left">%o</td>
-<td style="text-align:left">整数类型（八进制）</td>
-<td style="text-align:left">77</td>
-</tr>
-<tr>
-<td style="text-align:left">%f</td>
-<td style="text-align:left">浮点类型</td>
-<td style="text-align:left">99.99</td>
-</tr>
-<tr>
-<td style="text-align:left">%a</td>
-<td style="text-align:left">十六进制浮点类型</td>
-<td style="text-align:left">FF.35AE</td>
-</tr>
-<tr>
-<td style="text-align:left">%e</td>
-<td style="text-align:left">指数类型</td>
-<td style="text-align:left">9.38e+5</td>
-</tr>
-<tr>
-<td style="text-align:left">%g</td>
-<td style="text-align:left">通用浮点类型（f和e类型中较短的）</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">%h</td>
-<td style="text-align:left">散列码，Integer.toHexString(arg.hashCode())</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">%%</td>
-<td style="text-align:left">百分比类型</td>
-<td style="text-align:left">％</td>
-</tr>
-<tr>
-<td style="text-align:left">%n</td>
-<td style="text-align:left">换行符</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">%tx</td>
-<td style="text-align:left">日期与时间类型（x代表不同的日期与时间转换符</td>
-</tr>
-</tbody>
-</table>
-<h1 id="2-测试用例"><a href="#2-测试用例" class="headerlink" title="2. 测试用例"></a>2. 测试用例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    String str=<span class="keyword">null</span>;  </div><div class="line">    str=String.format(<span class="string">"Hi,%s"</span>, <span class="string">"王力"</span>);  </div><div class="line">    System.out.println(str);  </div><div class="line">    str=String.format(<span class="string">"Hi,%s:%s.%s"</span>, <span class="string">"王南"</span>,<span class="string">"王力"</span>,<span class="string">"王张"</span>);            </div><div class="line">    System.out.println(str);                           </div><div class="line">    System.out.printf(<span class="string">"字母a的大写是：%c %n"</span>, <span class="string">'A'</span>);  </div><div class="line">    System.out.printf(<span class="string">"3&gt;7的结果是：%b %n"</span>, <span class="number">3</span>&gt;<span class="number">7</span>);  </div><div class="line">    System.out.printf(<span class="string">"100的一半是：%d %n"</span>, <span class="number">100</span>/<span class="number">2</span>);  </div><div class="line">    System.out.printf(<span class="string">"100的16进制数是：%x %n"</span>, <span class="number">100</span>);  </div><div class="line">    System.out.printf(<span class="string">"100的8进制数是：%o %n"</span>, <span class="number">100</span>);  </div><div class="line">    System.out.printf(<span class="string">"50元的书打8.5折扣是：%f 元%n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面价格的16进制数是：%a %n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面价格的指数表示：%e %n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面价格的指数和浮点数结果的长度较短的是：%g %n"</span>, <span class="number">50</span>*<span class="number">0.85</span>);  </div><div class="line">    System.out.printf(<span class="string">"上面的折扣是%d%% %n"</span>, <span class="number">85</span>);  </div><div class="line">    System.out.printf(<span class="string">"字母A的散列码是：%h %n"</span>, <span class="string">'A'</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Hi,王力  </div><div class="line">Hi,王南:王力.王张  </div><div class="line">字母a的大写是：A   </div><div class="line">3&gt;7的结果是：false   </div><div class="line">100的一半是：50   </div><div class="line">100的16进制数是：64   </div><div class="line">100的8进制数是：144   </div><div class="line">50元的书打8.5折扣是：42.500000 元  </div><div class="line">上面价格的16进制数是：0x1.54p5   </div><div class="line">上面价格的指数表示：4.250000e+01   </div><div class="line">上面价格的指数和浮点数结果的长度较短的是：42.5000   </div><div class="line">上面的折扣是85%   </div><div class="line">字母A的散列码是：41</div></pre></td></tr></table></figure>
-<h1 id="3-搭配转换符的标志"><a href="#3-搭配转换符的标志" class="headerlink" title="3. 搭配转换符的标志"></a><strong>3. 搭配转换符的标志</strong></h1><p><img src="http://img.blog.csdn.net/20161015013315639" alt="字符串格式化"></p>
-<h1 id="4-测试用例"><a href="#4-测试用例" class="headerlink" title="4. 测试用例"></a>4. 测试用例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    String str=<span class="keyword">null</span>;  </div><div class="line">    <span class="comment">//$使用  </span></div><div class="line">    str=String.format(<span class="string">"格式参数$的使用：%1$d,%2$s"</span>, <span class="number">99</span>,<span class="string">"abc"</span>);             </div><div class="line">    System.out.println(str);                       </div><div class="line">    <span class="comment">//+使用  </span></div><div class="line">    System.out.printf(<span class="string">"显示正负数的符号：%+d与%d%n"</span>, <span class="number">99</span>,-<span class="number">99</span>);  </div><div class="line">    <span class="comment">//补O使用  </span></div><div class="line">    System.out.printf(<span class="string">"最牛的编号是：%03d%n"</span>, <span class="number">7</span>);  </div><div class="line">    <span class="comment">//空格使用  </span></div><div class="line">    System.out.printf(<span class="string">"Tab键的效果是：% 8d%n"</span>, <span class="number">7</span>);  </div><div class="line">    <span class="comment">//.使用  </span></div><div class="line">    System.out.printf(<span class="string">"整数分组的效果是：%,d%n"</span>, <span class="number">9989997</span>);  </div><div class="line">    <span class="comment">//空格和小数点后面个数  </span></div><div class="line">    System.out.printf(<span class="string">"一本书的价格是：% 50.5f元%n"</span>, <span class="number">49.8</span>);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">格式参数$的使用：99,abc  </div><div class="line">显示正负数的符号：+99与-99  </div><div class="line">最牛的编号是：007  </div><div class="line">Tab键的效果是：7  </div><div class="line">整数分组的效果是：9,989,997  </div><div class="line">一本书的价格是：49.80000元</div></pre></td></tr></table></figure>
-<h1 id="5-日期和事件字符串格式化"><a href="#5-日期和事件字符串格式化" class="headerlink" title="5. 日期和事件字符串格式化"></a><strong>5. 日期和事件字符串格式化</strong></h1><p>在程序界面中经常需要显示时间和日期，但是其显示的 格式经常不尽人意，需要编写大量的代码经过各种算法才得到理想的日期与时间格式。字符串格式中还有%tx转换符没有详细介绍，它是专门用来格式化日期和时 间的。%tx转换符中的x代表另外的处理日期和时间格式的转换符，它们的组合能够将日期和时间格式化成多种格式。</p>
-<p>常见日期和时间组合的格式，如图所示。<br>| 转换符  | 说明                    | 示例                          |<br>| :— | :——————– | :————————– |<br>| c    | 包括全部日期和时间信息           | 星期六 十月 27 14:21:20 CST 2007 |<br>| F    | “年-月-日”格式             | 2007-10-27                  |<br>| D    | “月/日/年”格式             | 10/27/07                    |<br>| r    | “HH:MM:SS PM”格式（12时制） | 02:25:51 下午                 |<br>| T    | “HH:MM:SS”格式（24时制）    | 14:28:16                    |<br>| R    | “HH:MM”格式（24时制）       | 14:28                       |</p>
-<h1 id="6-测试用例"><a href="#6-测试用例" class="headerlink" title="6. 测试用例"></a>6. 测试用例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    Date date=<span class="keyword">new</span> Date();                                  </div><div class="line">    <span class="comment">//c的使用  </span></div><div class="line">    System.out.printf(<span class="string">"全部日期和时间信息：%tc%n"</span>,date);          </div><div class="line">    <span class="comment">//f的使用  </span></div><div class="line">    System.out.printf(<span class="string">"年-月-日格式：%tF%n"</span>,date);  </div><div class="line">    <span class="comment">//d的使用  </span></div><div class="line">    System.out.printf(<span class="string">"月/日/年格式：%tD%n"</span>,date);  </div><div class="line">    <span class="comment">//r的使用  </span></div><div class="line">    System.out.printf(<span class="string">"HH:MM:SS PM格式（12时制）：%tr%n"</span>,date);  </div><div class="line">    <span class="comment">//t的使用  </span></div><div class="line">    System.out.printf(<span class="string">"HH:MM:SS格式（24时制）：%tT%n"</span>,date);  </div><div class="line">    <span class="comment">//R的使用  </span></div><div class="line">    System.out.printf(<span class="string">"HH:MM格式（24时制）：%tR"</span>,date);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">全部日期和时间信息：星期一 九月 10 10:43:36 CST 2012  </div><div class="line">年-月-日格式：2012-09-10  </div><div class="line">月/日/年格式：09/10/12  </div><div class="line">HH:MM:SS PM格式（12时制）：10:43:36 上午  </div><div class="line">HH:MM:SS格式（24时制）：10:43:36  </div><div class="line">HH:MM格式（24时制）：10:43</div></pre></td></tr></table></figure></p>
-<p>定义日期格式的转换符可以使日期通过指定的转换符生成新字符串。这些日期转换符如图所示。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Date date=<span class="keyword">new</span> Date();</div><div class="line">        <span class="comment">//b的使用，月份简称  </span></div><div class="line">        String str=String.format(Locale.US,<span class="string">"英文月份简称：%tb"</span>,date);</div><div class="line">        System.out.println(str);</div><div class="line">        System.out.printf(<span class="string">"本地月份简称：%tb%n"</span>,date);</div><div class="line">        <span class="comment">//B的使用，月份全称  </span></div><div class="line">        str=String.format(Locale.US,<span class="string">"英文月份全称：%tB"</span>,date);</div><div class="line">        System.out.println(str);</div><div class="line">        System.out.printf(<span class="string">"本地月份全称：%tB%n"</span>,date);</div><div class="line">        <span class="comment">//a的使用，星期简称  </span></div><div class="line">        str=String.format(Locale.US,<span class="string">"英文星期的简称：%ta"</span>,date);</div><div class="line">        System.out.println(str);</div><div class="line">        <span class="comment">//A的使用，星期全称  </span></div><div class="line">        System.out.printf(<span class="string">"本地星期的简称：%tA%n"</span>,date);</div><div class="line">        <span class="comment">//C的使用，年前两位  </span></div><div class="line">        System.out.printf(<span class="string">"年的前两位数字（不足两位前面补0）：%tC%n"</span>,date);</div><div class="line">        <span class="comment">//y的使用，年后两位  </span></div><div class="line">        System.out.printf(<span class="string">"年的后两位数字（不足两位前面补0）：%ty%n"</span>,date);</div><div class="line">        <span class="comment">//j的使用，一年的天数  </span></div><div class="line">        System.out.printf(<span class="string">"一年中的天数（即年的第几天）：%tj%n"</span>,date);</div><div class="line">        <span class="comment">//m的使用，月份  </span></div><div class="line">        System.out.printf(<span class="string">"两位数字的月份（不足两位前面补0）：%tm%n"</span>,date);</div><div class="line">        <span class="comment">//d的使用，日（二位，不够补零）  </span></div><div class="line">        System.out.printf(<span class="string">"两位数字的日（不足两位前面补0）：%td%n"</span>,date);</div><div class="line">        <span class="comment">//e的使用，日（一位不补零）  </span></div><div class="line">        System.out.printf(<span class="string">"月份的日（前面不补0）：%te"</span>,date);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">英文月份简称：Sep  </div><div class="line">本地月份简称：九月  </div><div class="line">英文月份全称：September  </div><div class="line">本地月份全称：九月  </div><div class="line">英文星期的简称：Mon  </div><div class="line">本地星期的简称：星期一  </div><div class="line">年的前两位数字（不足两位前面补0）：20  </div><div class="line">年的后两位数字（不足两位前面补0）：12  </div><div class="line">一年中的天数（即年的第几天）：254  </div><div class="line">两位数字的月份（不足两位前面补0）：09  </div><div class="line">两位数字的日（不足两位前面补0）：10  </div><div class="line">月份的日（前面不补0）：10</div></pre></td></tr></table></figure>
-<p>和日期格式转换符相比，时间格式的转换符要更多、更精确。它可以将时间格式化成时、分、秒甚至时毫秒等单位。格式化时间字符串的转换符如图所示。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">转换符</th>
-<th style="text-align:left">说明</th>
-<th style="text-align:left">示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">H</td>
-<td style="text-align:left">2位数字24时制的小时（不足2位前面补0）</td>
-<td style="text-align:left">15</td>
-</tr>
-<tr>
-<td style="text-align:left">I</td>
-<td style="text-align:left">2位数字12时制的小时（不足2位前面补0）</td>
-<td style="text-align:left">03</td>
-</tr>
-<tr>
-<td style="text-align:left">K</td>
-<td style="text-align:left">2位数字24时制的小时（前面不补0）</td>
-<td style="text-align:left">15</td>
-</tr>
-<tr>
-<td style="text-align:left">L</td>
-<td style="text-align:left">2位数字12时制的小时（前面不补0）</td>
-<td style="text-align:left">3</td>
-</tr>
-<tr>
-<td style="text-align:left">M</td>
-<td style="text-align:left">2位数字的分钟（不足2位前面补0）</td>
-<td style="text-align:left">03</td>
-</tr>
-<tr>
-<td style="text-align:left">S</td>
-<td style="text-align:left">2位数字的秒（不足2位前面补0）</td>
-<td style="text-align:left">09</td>
-</tr>
-<tr>
-<td style="text-align:left">L</td>
-<td style="text-align:left">3位数字的毫秒（不足3位前面补0）</td>
-<td style="text-align:left">015</td>
-</tr>
-<tr>
-<td style="text-align:left">N</td>
-<td style="text-align:left">9位数字的毫秒数（不足9位前面补0）</td>
-<td style="text-align:left">562000000</td>
-</tr>
-<tr>
-<td style="text-align:left">p</td>
-<td style="text-align:left">小写字母的上午或下午标记</td>
-<td style="text-align:left">中：下午,英：pm</td>
-</tr>
-<tr>
-<td style="text-align:left">z</td>
-<td style="text-align:left">相对于GMT的RFC822时区的偏移量</td>
-<td style="text-align:left">+0800</td>
-</tr>
-<tr>
-<td style="text-align:left">Z</td>
-<td style="text-align:left">时区缩写字符串</td>
-<td style="text-align:left">CST</td>
-</tr>
-<tr>
-<td style="text-align:left">S</td>
-<td style="text-align:left">1970-1-1 00:00:00 到现在所经过的秒数</td>
-<td style="text-align:left">1193468128</td>
-</tr>
-<tr>
-<td style="text-align:left">Q</td>
-<td style="text-align:left">1970-1-1 00:00:00 到现在所经过的毫秒数</td>
-<td style="text-align:left">1193468128984</td>
-</tr>
-</tbody>
-</table>
-<h1 id="7-测试代码"><a href="#7-测试代码" class="headerlink" title="7. 测试代码"></a>7. 测试代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">    Date date = <span class="keyword">new</span> Date();  </div><div class="line">    <span class="comment">//H的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字24时制的小时（不足2位前面补0）:%tH%n"</span>, date);  </div><div class="line">    <span class="comment">//I的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字12时制的小时（不足2位前面补0）:%tI%n"</span>, date);  </div><div class="line">    <span class="comment">//k的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字24时制的小时（前面不补0）:%tk%n"</span>, date);  </div><div class="line">    <span class="comment">//l的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字12时制的小时（前面不补0）:%tl%n"</span>, date);  </div><div class="line">    <span class="comment">//M的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字的分钟（不足2位前面补0）:%tM%n"</span>, date);  </div><div class="line">    <span class="comment">//S的使用  </span></div><div class="line">    System.out.printf(<span class="string">"2位数字的秒（不足2位前面补0）:%tS%n"</span>, date);  </div><div class="line">    <span class="comment">//L的使用  </span></div><div class="line">    System.out.printf(<span class="string">"3位数字的毫秒（不足3位前面补0）:%tL%n"</span>, date);  </div><div class="line">    <span class="comment">//N的使用  </span></div><div class="line">    System.out.printf(<span class="string">"9位数字的毫秒数（不足9位前面补0）:%tN%n"</span>, date);  </div><div class="line">    <span class="comment">//p的使用  </span></div><div class="line">    String str = String.format(Locale.US, <span class="string">"小写字母的上午或下午标记(英)：%tp"</span>, date);  </div><div class="line">    System.out.println(str);   </div><div class="line">    System.out.printf(<span class="string">"小写字母的上午或下午标记（中）：%tp%n"</span>, date);  </div><div class="line">    <span class="comment">//z的使用  </span></div><div class="line">    System.out.printf(<span class="string">"相对于GMT的RFC822时区的偏移量:%tz%n"</span>, date);  </div><div class="line">    <span class="comment">//Z的使用  </span></div><div class="line">    System.out.printf(<span class="string">"时区缩写字符串:%tZ%n"</span>, date);  </div><div class="line">    <span class="comment">//s的使用  </span></div><div class="line">    System.out.printf(<span class="string">"1970-1-1 00:00:00 到现在所经过的秒数：%ts%n"</span>, date);  </div><div class="line">    <span class="comment">//Q的使用  </span></div><div class="line">    System.out.printf(<span class="string">"1970-1-1 00:00:00 到现在所经过的毫秒数：%tQ%n"</span>, date);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">2位数字24时制的小时（不足2位前面补0）:11  </div><div class="line">2位数字12时制的小时（不足2位前面补0）:11  </div><div class="line">2位数字24时制的小时（前面不补0）:11  </div><div class="line">2位数字12时制的小时（前面不补0）:11  </div><div class="line">2位数字的分钟（不足2位前面补0）:03  </div><div class="line">2位数字的秒（不足2位前面补0）:52  </div><div class="line">3位数字的毫秒（不足3位前面补0）:773  </div><div class="line">9位数字的毫秒数（不足9位前面补0）:773000000  </div><div class="line">小写字母的上午或下午标记(英)：am  </div><div class="line">小写字母的上午或下午标记（中）：上午  </div><div class="line">相对于GMT的RFC822时区的偏移量:+0800  </div><div class="line">时区缩写字符串:CST  </div><div class="line">1970-1-1 00:00:00 到现在所经过的秒数：1347246232  </div><div class="line">1970-1-1 00:00:00 到现在所经过的毫秒数：1347246232773</div></pre></td></tr></table></figure>
-<h1 id="8-在android-String-resource中使用-amp-160"><a href="#8-在android-String-resource中使用-amp-160" class="headerlink" title="8. 在android String resource中使用&amp;#160"></a>8. 在android String resource中使用&amp;#160</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">string</span> <span class="attr">name</span>=<span class="string">"downloaded"</span>&gt;</span>&amp;#160;%s %%<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>在显示文本信息时，一句话结束之后需要用空格来分隔两个句子，但是在string.xml中当内容没有在双引号内时空格是没有用的。</p>
-<p>要想让string.xml中的字符串显示空格可以用 &amp;#160 ; 来代替空格，但是 &amp;#160 ; 来代替空格时他只是被当做了一个字符并且会和其他的单词组合在一起变成一个新的字符串，</p>
-<p>也就是说它是没用分隔符的功能的。</p>
-<h1 id="9-Formatter"><a href="#9-Formatter" class="headerlink" title="9. Formatter"></a><strong>9. Formatter</strong></h1><p>printf 风格的格式字符串的解释程序。此类提供了对布局对齐和排列的支持，以及对数值、字符串和日期/时间数据的常规格式和特定于语言环境的输出的支持</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">   <span class="comment">// Send all output to the Appendable object sb</span></div><div class="line">   Formatter formatter = <span class="keyword">new</span> Formatter(sb, Locale.US);</div><div class="line"></div><div class="line">   <span class="comment">// Explicit argument indices may be used to re-order output.</span></div><div class="line">   formatter.format(<span class="string">"%4$2s %3$2s %2$2s %1$2s"</span>, <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>)</div><div class="line">   <span class="comment">// -&gt; " d  c  b  a"</span></div><div class="line"></div><div class="line">   <span class="comment">// Optional locale as the first argument can be used to get</span></div><div class="line">   <span class="comment">// locale-specific formatting of numbers.  The precision and width can be</span></div><div class="line">   <span class="comment">// given to round and align the value.</span></div><div class="line">   formatter.format(Locale.FRANCE, <span class="string">"e = %+10.4f"</span>, Math.E);</div><div class="line">   <span class="comment">// -&gt; "e =    +2,7183"</span></div><div class="line"></div><div class="line">   <span class="comment">// The '(' numeric flag may be used to format negative numbers with</span></div><div class="line">   <span class="comment">// parentheses rather than a minus sign.  Group separators are</span></div><div class="line">   <span class="comment">// automatically inserted.</span></div><div class="line">   formatter.format(<span class="string">"Amount gained or lost since last statement: $ %(,.2f"</span>,</div><div class="line">                    balanceDelta);</div><div class="line">   <span class="comment">// -&gt; "Amount gained or lost since last statement: $ (6,217.58)"</span></div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Writes a formatted string to System.out.</span></div><div class="line">  System.out.format(<span class="string">"Local time: %tT"</span>, Calendar.getInstance());</div><div class="line">  <span class="comment">// -&gt; "Local time: 13:34:18"</span></div><div class="line"></div><div class="line">  <span class="comment">// Writes formatted output to System.err.</span></div><div class="line">  System.err.printf(<span class="string">"Unable to open file '%1$s': %2$s"</span>,</div><div class="line">                    fileName, exception.getMessage());</div><div class="line">  <span class="comment">// -&gt; "Unable to open file 'food': No such file or directory"</span></div></pre></td></tr></table></figure>
-<h1 id="10-格式字符串语法"><a href="#10-格式字符串语法" class="headerlink" title="10. 格式字符串语法"></a>10. 格式字符串语法</h1><p>产生格式化输出的每个方法都需要格式字符串 和参数列表。格式字符串是一个 String，它可以包含固定文本以及一个或多个嵌入的格式说明符</p>
-<h2 id="10-1-常规类型、字符类型和数值类型的格式说明符的语法如下"><a href="#10-1-常规类型、字符类型和数值类型的格式说明符的语法如下" class="headerlink" title="10.1 常规类型、字符类型和数值类型的格式说明符的语法如下"></a>10.1 常规类型、字符类型和数值类型的格式说明符的语法如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%[argument_index$][flags][width][.precision]conversion</div></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">格式说明符</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">argument_index</td>
-<td style="text-align:left">可选的argument_index是一个十进制整数，用于表明参数在参数列表中的位置。第一个参数由 “1$” 引用，第二个参数由 “2$” 引用，依此类推</td>
-</tr>
-<tr>
-<td style="text-align:left">flags</td>
-<td style="text-align:left">可选 flags 是修改输出格式的字符集。有效标志集取决于转换类型</td>
-</tr>
-<tr>
-<td style="text-align:left">width</td>
-<td style="text-align:left">可选 width 是一个非负十进制整数，表明要向输出中写入的最少字符数</td>
-</tr>
-<tr>
-<td style="text-align:left">precision</td>
-<td style="text-align:left">可选 precision 是一个非负十进制整数，通常用来限制字符数。特定行为取决于转换类型</td>
-</tr>
-<tr>
-<td style="text-align:left">conversion</td>
-<td style="text-align:left">所需 conversion 是一个表明应该如何格式化参数的字符。给定参数的有效转换集取决于参数的数据类型</td>
-</tr>
-</tbody>
-</table>
-<h2 id="10-2-转换conversion"><a href="#10-2-转换conversion" class="headerlink" title="10.2 转换conversion"></a><strong>10.2 转换conversion</strong></h2><h2 id="10-3-日期和时间格式化"><a href="#10-3-日期和时间格式化" class="headerlink" title="10.3 日期和时间格式化"></a><strong>10.3 日期和时间格式化</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%[argument_index$][flags][width]conversion</div></pre></td></tr></table></figure>
-<h1 id="11-NumberFormat"><a href="#11-NumberFormat" class="headerlink" title="11. NumberFormat"></a><strong>11. NumberFormat</strong></h1><h1 id="12-MessageFormat"><a href="#12-MessageFormat" class="headerlink" title="12. MessageFormat"></a><strong>12. MessageFormat</strong></h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 包含了点位符的字符串就是模板！</div><div class="line"> * 点位符：&#123;0&#125;、&#123;1&#125;、&#123;2&#125;</div><div class="line"> * 可变参数，需要指定模板中的点位符的值！有几个点位符就要提供几个参数</div><div class="line"> */</div><div class="line">String s = MessageFormat.format(<span class="string">"&#123;0&#125;或&#123;1&#125;错误！"</span>, <span class="string">"用户名"</span>, <span class="string">"密码"</span>);</div><div class="line">System.out.println(s);</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1514,7 +1481,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1525,7 +1492,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1721,14 +1688,6 @@
 
   
 
-    
-      <script id="dsq-count-scr" src="https://评论.disqus.com/count.js" async></script>
-    
-
-    
-
-  
-
 
 
 
@@ -1747,6 +1706,10 @@
   
 
 
+
+
+
+  
 
 
 
