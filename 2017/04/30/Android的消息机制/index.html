@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android的消息机制 | 分享Android开发技术</title>
+  <title>Android的消息机制 | JackChan的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android的消息机制">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/Android的消息机制/index.html">
-<meta property="og:site_name" content="分享Android开发技术">
+<meta property="og:site_name" content="JackChan的技术博客">
 <meta property="og:description" content="1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303152457864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303151844350?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -20,7 +20,7 @@
 <meta name="twitter:description" content="1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170303152457864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
-    <link rel="alternate" href="/atom.xml" title="分享Android开发技术" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="JackChan的技术博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -41,11 +41,11 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">分享Android开发技术</a>
+        <a href="/" id="logo">JackChan的技术博客</a>
       </h1>
       
         <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Android开发</a>
+          <a href="/" id="subtitle">生活不止眼前的苟且，还有诗和远方</a>
         </h2>
       
     </div>
@@ -188,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/04/30/Android的消息机制/" data-id="cj24ohrtq0000pgzmi967m7ju" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/04/30/Android的消息机制/" data-id="cj24p8nrb0001oszmgv646azf" class="article-share-link">Share</a>
       
       
     </footer>
