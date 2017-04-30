@@ -1,0 +1,813 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="多线程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="第一题现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。 123456789101112131415161718192021222324252627public class Test &amp;#123;                    public">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用JDK5中同步技术的3个面试题">
+<meta property="og:url" content="http://yoursite.com/2017/04/30/使用JDK5中同步技术的3个面试题/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="第一题现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。 123456789101112131415161718192021222324252627public class Test &amp;#123;                    public">
+<meta property="og:updated_time" content="2017-04-30T16:08:44.727Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用JDK5中同步技术的3个面试题">
+<meta name="twitter:description" content="第一题现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。 123456789101112131415161718192021222324252627public class Test &amp;#123;                    public">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/30/使用JDK5中同步技术的3个面试题/"/>
+
+
+
+
+
+  <title>使用JDK5中同步技术的3个面试题 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/使用JDK5中同步技术的3个面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用JDK5中同步技术的3个面试题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/30/使用JDK5中同步技术的3个面试题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/30/使用JDK5中同步技术的3个面试题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">          </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">              </div><div class="line">            System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">            <span class="comment">/*模拟处理16行日志，下面的代码产生了16个日志对象，当前代码需要运行16秒才能打印完这些日志。 </span></div><div class="line">            修改程序代码，开四个线程让这16个对象在4秒钟打完。 </div><div class="line">            */  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++)&#123;  <span class="comment">//这行代码不能改动  </span></div><div class="line">                <span class="keyword">final</span> String log = <span class="string">""</span>+(i+<span class="number">1</span>);   <span class="comment">//这行代码不能改动  </span></div><div class="line">                &#123;  </div><div class="line">                        Test.parseLog(log);  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        <span class="comment">//parseLog方法内部的代码不能改动  </span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">parseLog</span><span class="params">(String log)</span></span>&#123;  </div><div class="line">            System.out.println(log+<span class="string">":"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">              </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;         </div><div class="line">        &#125;     </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>实现：通过阻塞队列实现线程间的通信</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.concurrent.ArrayBlockingQueue;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.BlockingQueue;  </div><div class="line">  </div><div class="line"><span class="comment">//BlockingQueue  </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">          </div><div class="line">        <span class="comment">//创建一个空间大小为16的阻塞队列，空间大小可以任意，因为每次打印都要1秒，在此期间，  </span></div><div class="line">        <span class="comment">//4个线程足以不断去从队列中取数据，然后打印,即在1秒内打印4条日志信息  </span></div><div class="line">        <span class="keyword">final</span> BlockingQueue&lt;String&gt; queue = <span class="keyword">new</span> ArrayBlockingQueue&lt;String&gt;(<span class="number">16</span>);  </div><div class="line">          </div><div class="line">        <span class="comment">//开启4个线程打印  </span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">4</span>;i++)&#123;  </div><div class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;  </div><div class="line">                <span class="meta">@Override</span>  </div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">                    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;  </div><div class="line">                        <span class="keyword">try</span> &#123;  </div><div class="line">                            <span class="comment">//开始没有数据，阻塞，一旦有其中一个线程就去取数据，即不再阻塞，就开始打印</span></div><div class="line">                            String log = queue.take();    </div><div class="line">                            parseLog(log);  </div><div class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                            e.printStackTrace();  </div><div class="line">                        &#125;  </div><div class="line">                    &#125;  </div><div class="line">                &#125;  </div><div class="line">                  </div><div class="line">            &#125;).start();  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        <span class="comment">//打印秒数  </span></div><div class="line">        System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">          </div><div class="line">          </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++)&#123;  <span class="comment">// 这行代码不能改动  </span></div><div class="line">            <span class="keyword">final</span> String log = <span class="string">""</span>+(i+<span class="number">1</span>); <span class="comment">// 这行代码不能改动  </span></div><div class="line">            &#123;  </div><div class="line">                    <span class="keyword">try</span> &#123;  </div><div class="line">                        queue.put(log);  <span class="comment">// 向队列中存储数据  </span></div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                        e.printStackTrace();  </div><div class="line">                    &#125;  </div><div class="line">                    <span class="comment">//Test.parseLog(log);  </span></div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">//parseLog方法内部的代码不能改动  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">parseLog</span><span class="params">(String log)</span></span>&#123;  </div><div class="line">        System.out.println(log+<span class="string">":"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">          </div><div class="line">        <span class="keyword">try</span> &#123;  </div><div class="line">            Thread.sleep(<span class="number">1000</span>);     <span class="comment">// 模拟每条日志打印需要1秒  </span></div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125;         </div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h1><p>现成程序中的Test类中的代码在不断地产生数据，然后交给TestDo.doSome()方法去处理，就好像生产者在不断地产生数据，消费者在不断消费数据。</p>
+<p>请将程序改造成有10个线程来消费生成者产生的数据，这些消费者都调用TestDo.doSome()方法去进行处理，故每个消费者都需要一秒才能处理完，程序应保证这些消费者线程依次有序地消费数据，只有上一个消费者消费完后，下一个消费者才能消费数据，下一个消费者是谁都可以，但要保证这些消费者线程拿到的数据是有顺序的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">      </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">              </div><div class="line">            System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;  <span class="comment">//这行不能改动  </span></div><div class="line">                String input = i+<span class="string">""</span>;  <span class="comment">//这行不能改动  </span></div><div class="line">                String output = TestDo.doSome(input);  </div><div class="line">                System.out.println(Thread.currentThread().getName()+ <span class="string">":"</span> + output);  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">//不能改动此TestDo类  </span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestDo</span> </span>&#123;  </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">doSome</span><span class="params">(String input)</span></span>&#123;  </div><div class="line">              </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;  </div><div class="line">            String output = input + <span class="string">":"</span>+ (System.currentTimeMillis() / <span class="number">1000</span>);  </div><div class="line">            <span class="keyword">return</span> output;  </div><div class="line">        &#125;  </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>在实现之前先介绍一个阻塞队列：SynchronousQuene，一种阻塞队列，其中每个插入操作必须等待另一个线程的对应移除操作 ，反之亦然。同步队列没有任何内部容量，甚至连一个队列的容量都没有。除非另一个线程试图移除某个元素，否则也不能（使用任何方法）插入元素；也不能迭代队列，因为其中没有元素可用于迭代。</p>
+<p>应用：它非常适合于传递性设计，在这种设计中，在一个线程中运行的对象要将某些信息、事件或任务传递给在另一个线程中运行的对象，它就必须与该对象同步。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.concurrent.SynchronousQueue;  </div><div class="line">  </div><div class="line"><span class="comment">/*Semaphore与SynchronousQueue的混合使用。 </span></div><div class="line">    由于Semaphore只有1个许可权，所以谁先拿到谁执行，然后释放，保证依次执行, </div><div class="line">    用锁也行，只要保证一个线程执行即可 </div><div class="line">    SynchronousQueue是必须有其他线程取的动作，这样一一对应 </div><div class="line">*/  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">          </div><div class="line">        <span class="comment">//定义一个许可权为1的信号灯  </span></div><div class="line">        <span class="keyword">final</span> Semaphore semaphore = <span class="keyword">new</span> Semaphore(<span class="number">1</span>);  </div><div class="line">          </div><div class="line">        <span class="comment">//产生的结果无序  </span></div><div class="line">        <span class="keyword">final</span> SynchronousQueue&lt;String&gt; queue = <span class="keyword">new</span> SynchronousQueue&lt;String&gt;();  </div><div class="line">          </div><div class="line">        <span class="comment">//产生10个线程  </span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;  </div><div class="line">            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable()&#123;  </div><div class="line">                <span class="meta">@Override</span>  </div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;   </div><div class="line">                    <span class="keyword">try</span> &#123;  </div><div class="line">                        semaphore.acquire();    <span class="comment">//获取许可  </span></div><div class="line">                        String input = queue.take();    <span class="comment">//获取并移除此队列的头  </span></div><div class="line">                        String output = TestDo.doSome(input);  </div><div class="line">                        System.out.println(Thread.currentThread().getName()+ <span class="string">":"</span> + output);  </div><div class="line">                        semaphore.release();    <span class="comment">//释放许可  </span></div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                        <span class="comment">// TODO Auto-generated catch block  </span></div><div class="line">                        e.printStackTrace();  </div><div class="line">                    &#125;     </div><div class="line">                &#125;  </div><div class="line">            &#125;).start();  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;  <span class="comment">//这行不能改动  </span></div><div class="line">            String input = i+<span class="string">""</span>;  <span class="comment">//这行不能改动  </span></div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                queue.put(input); <span class="comment">//将指定元素添加到此队列  </span></div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="comment">//不能改动此TestDo类  </span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDo</span> </span>&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">doSome</span><span class="params">(String input)</span></span>&#123;  </div><div class="line">          </div><div class="line">        <span class="keyword">try</span> &#123;  </div><div class="line">            Thread.sleep(<span class="number">1000</span>);  </div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125;  </div><div class="line">        String output = input + <span class="string">":"</span>+ (System.currentTimeMillis() / <span class="number">1000</span>);  </div><div class="line">        <span class="keyword">return</span> output;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h1><p>现有程序同时启动了4个线程去调用TestDo.doSome(key, value)方法，由于TestDo.doSome(key, value)方法内的代码是先暂停1秒，然后再输出以秒为单位的当前时间值，所以，会打印出4个相同的时间值，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">4:4:1258199615</div><div class="line">1:1:1258199615</div><div class="line">3:3:1258199615</div><div class="line">1:2:1258199615</div></pre></td></tr></table></figure>
+<p>请修改代码，如果有几个线程调用TestDo.doSome(key, value)方法时，传递进去的key相等（equals比较为true），则这几个线程应互斥排队输出结果，即当有两个线程的key都是”1”时，它们中的一个要比另外其他线程晚1秒输出结果，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">4:4:1258199615</div><div class="line">1:1:1258199615</div><div class="line">3:3:1258199615</div><div class="line">1:2:1258199616</div></pre></td></tr></table></figure>
+<p>总之，当每个线程中指定的key相等时，这些相等key的线程应每隔一秒依次输出时间值（要用互斥），如果key不同，则并行执行（相互之间不互斥）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//不能改动此Test类      </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;  </div><div class="line">      </div><div class="line">    <span class="keyword">private</span> TestDo testDo;  </div><div class="line">    <span class="keyword">private</span> String key;  </div><div class="line">    <span class="keyword">private</span> String value;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">(String key,String key2,String value)</span></span>&#123;  </div><div class="line">        <span class="keyword">this</span>.testDo = TestDo.getInstance();  </div><div class="line">        <span class="comment">/*常量"1"和"1"是同一个对象，下面这行代码就是要用"1"+""的方式产生新的对象， </span></div><div class="line">        以实现内容没有改变，仍然相等（都还为"1"），但对象却不再是同一个的效果*/  </div><div class="line">        <span class="keyword">this</span>.key = key+key2;   </div><div class="line">        <span class="keyword">this</span>.value = value;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException</span>&#123;  </div><div class="line">        Test a = <span class="keyword">new</span> Test(<span class="string">"1"</span>,<span class="string">""</span>,<span class="string">"1"</span>);  </div><div class="line">        Test b = <span class="keyword">new</span> Test(<span class="string">"1"</span>,<span class="string">""</span>,<span class="string">"2"</span>);  </div><div class="line">        Test c = <span class="keyword">new</span> Test(<span class="string">"3"</span>,<span class="string">""</span>,<span class="string">"3"</span>);  </div><div class="line">        Test d = <span class="keyword">new</span> Test(<span class="string">"4"</span>,<span class="string">""</span>,<span class="string">"4"</span>);  </div><div class="line">        System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">        a.start();  </div><div class="line">        b.start();  </div><div class="line">        c.start();  </div><div class="line">        d.start();  </div><div class="line">  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;  </div><div class="line">        testDo.doSome(key, value);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDo</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">TestDo</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TestDo _instance = <span class="keyword">new</span> TestDo();   </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TestDo <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> _instance;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSome</span><span class="params">(Object key, String value)</span> </span>&#123;  </div><div class="line">  </div><div class="line">        <span class="comment">// 以大括号内的是需要局部同步的代码，不能改动!  </span></div><div class="line">        &#123;  </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">                System.out.println(key+<span class="string">":"</span>+value + <span class="string">":"</span>  </div><div class="line">                        + (System.currentTimeMillis() / <span class="number">1000</span>));  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于源代码中关于实现值相同而对象不同的效果进行解释：<br>对于：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a = <span class="string">"1"</span>+<span class="string">""</span>;</div><div class="line">b = <span class="string">"1"</span>+<span class="string">""</span>;</div></pre></td></tr></table></figure></p>
+<p>编译器自动优化，所以a和b是同一个对象</p>
+<p>而对于：key = key+key2;  由于是变量，编译器无法识别，这时a和b把“1”和“”赋值给key和key2时会得到两个不同的对象</p>
+<p>思想：将集合中的对象作为同步代码块的锁，即this锁，每次将对象存入集合中的时候，就判断是否原集合中已经存在一个与将要存入集合的对象值相同的对象，即用equals比较，如果有，那么就获取原来的这个对象，把这个对象作为将要存入对象的锁，这样它们持有的就是同一把锁，即可实现互斥，这样就可以实现值相同的对象在不同的时刻打印的效果</p>
+<p>代码中出现的问题：在遍历ArrayList集合查找与要存入值相同元素的时候，进行了添加的动作，所以会出现并发修改异常，因此使用并发的CopyOnWriteArrayList</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;  </div><div class="line"><span class="keyword">import</span> java.util.Iterator;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.CopyOnWriteArrayList;  </div><div class="line">  </div><div class="line">  </div><div class="line"><span class="comment">//不能改动此Test类      </span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;  </div><div class="line">      </div><div class="line">    <span class="keyword">private</span> TestDo testDo;  </div><div class="line">    <span class="keyword">private</span> String key;  </div><div class="line">    <span class="keyword">private</span> String value;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">(String key,String key2,String value)</span></span>&#123;  </div><div class="line">        <span class="keyword">this</span>.testDo = TestDo.getInstance();  </div><div class="line">        <span class="comment">/*常量"1"和"1"是同一个对象，下面这行代码就是要用"1"+""的方式产生新的对象， </span></div><div class="line">        以实现内容没有改变，仍然相等（都还为"1"），但对象却不再是同一个的效果*/  </div><div class="line">          </div><div class="line">        <span class="keyword">this</span>.key = key+key2;    <span class="comment">//这里是变量，所以不会优化  </span></div><div class="line"><span class="comment">/*      a = "1"+""; </span></div><div class="line">        b = "1"+""   </div><div class="line">        编译器自动优化，所以a和b是同一个对象 </div><div class="line">*/  </div><div class="line">        <span class="keyword">this</span>.value = value;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException</span>&#123;  </div><div class="line">        Test a = <span class="keyword">new</span> Test(<span class="string">"1"</span>,<span class="string">""</span>,<span class="string">"1"</span>);  </div><div class="line">        Test b = <span class="keyword">new</span> Test(<span class="string">"1"</span>,<span class="string">""</span>,<span class="string">"2"</span>);  </div><div class="line">        Test c = <span class="keyword">new</span> Test(<span class="string">"3"</span>,<span class="string">""</span>,<span class="string">"3"</span>);  </div><div class="line">        Test d = <span class="keyword">new</span> Test(<span class="string">"4"</span>,<span class="string">""</span>,<span class="string">"4"</span>);  </div><div class="line">        System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">        a.start();  </div><div class="line">        b.start();  </div><div class="line">        c.start();  </div><div class="line">        d.start();  </div><div class="line">  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;  </div><div class="line">        testDo.doSome(key, value);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestDo</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">TestDo</span><span class="params">()</span> </span>&#123;&#125;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TestDo _instance = <span class="keyword">new</span> TestDo();   </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> TestDo <span class="title">getInstance</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">return</span> _instance;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="comment">//private ArrayList keys = new ArrayList();  </span></div><div class="line">    <span class="comment">//迭代的时候不能修改数据，所以使用同步的ArrayList  </span></div><div class="line">    <span class="keyword">private</span> CopyOnWriteArrayList keys = <span class="keyword">new</span> CopyOnWriteArrayList();  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSome</span><span class="params">(Object key, String value)</span> </span>&#123;  </div><div class="line">        Object o = key;  </div><div class="line">        <span class="keyword">if</span>(!keys.contains(o))&#123;  <span class="comment">//比较是否已经存入了一个相同值的对象  </span></div><div class="line">            keys.add(o);  </div><div class="line">        &#125;<span class="keyword">else</span>&#123;  </div><div class="line">              </div><div class="line">            <span class="comment">//迭代，找出原集合里和传进来的值相同的对象  </span></div><div class="line">            <span class="keyword">for</span>(Iterator iter=keys.iterator();iter.hasNext();)&#123;  </div><div class="line">                <span class="keyword">try</span> &#123;  </div><div class="line">                    Thread.sleep(<span class="number">20</span>);   <span class="comment">// 迭代的时候休息一会，在ArrayList下演示并发修改异常  </span></div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                    e.printStackTrace();  </div><div class="line">                &#125;  </div><div class="line">                Object oo = iter.next();  </div><div class="line">                <span class="keyword">if</span>(oo.equals(o))&#123;   <span class="comment">//如果两个对象的值相同  </span></div><div class="line">                    <span class="comment">//就让原集合中的那个相等值的对象作为锁对象，由于原对象之前做的就是锁</span></div><div class="line">                    <span class="comment">//这样两个锁就相同了，就可以实现互斥</span></div><div class="line">                  	o = oo;    </div><div class="line">                    <span class="keyword">break</span>;  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">synchronized</span>(o)  </div><div class="line">        <span class="comment">// 以大括号内的是需要局部同步的代码，不能改动!  </span></div><div class="line">        &#123;  </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">                System.out.println(key+<span class="string">":"</span>+value + <span class="string">":"</span>  </div><div class="line">                        + (System.currentTimeMillis() / <span class="number">1000</span>));  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/30/线程范围内共享数据/" rel="next" title="线程范围内共享数据">
+                <i class="fa fa-chevron-left"></i> 线程范围内共享数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/30/Android的消息机制/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一题"><span class="nav-number">1.</span> <span class="nav-text">第一题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二题"><span class="nav-number">2.</span> <span class="nav-text">第二题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三题"><span class="nav-number">3.</span> <span class="nav-text">第三题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://评论.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/04/30/使用JDK5中同步技术的3个面试题/';
+          this.page.identifier = '2017/04/30/使用JDK5中同步技术的3个面试题/';
+          this.page.title = '使用JDK5中同步技术的3个面试题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://评论.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
