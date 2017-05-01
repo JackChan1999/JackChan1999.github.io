@@ -1,0 +1,1394 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="gitbook," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="各大站长平时除了写博客外，可以使用 gitbook 将一系列的博客专栏整理成电子书出版。这样既方便各大网友阅读，还可以带来新的离线阅读功能。 在以前我们只能靠出版社，或者编写 word 文档，来实现。然而有了 gitbook 之后，一切都变得那么简单了。今天就为大家分享一下，如果在 Windows 系统上安装 gitbook，进行电子书的编写和发布。">
+<meta name="keywords" content="gitbook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitBook使用教程">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/gitbook/GitBook使用教程/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="各大站长平时除了写博客外，可以使用 gitbook 将一系列的博客专栏整理成电子书出版。这样既方便各大网友阅读，还可以带来新的离线阅读功能。 在以前我们只能靠出版社，或者编写 word 文档，来实现。然而有了 gitbook 之后，一切都变得那么简单了。今天就为大家分享一下，如果在 Windows 系统上安装 gitbook，进行电子书的编写和发布。">
+<meta property="og:image" content="https://www.gitbook.com/assets/images/editor/preview_windows.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-8d0c8b6063488ef7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-14e549f7801c794c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-41675f06ba92da6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-e895f74985d2b8b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-7472f7955ba3bb2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-5cbfae01a0d89658.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-7d5e93fba468f90b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-dc1685249c334339.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-200aa47662a10f16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-d55f8ff166ebfabe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-68ef58754fe4feea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-0e12415cc8846989.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-24614430f8fc2ac1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-4a49aed0f136dbe3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-8d69bf8557ebe4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-05-01T11:16:30.981Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitBook使用教程">
+<meta name="twitter:description" content="各大站长平时除了写博客外，可以使用 gitbook 将一系列的博客专栏整理成电子书出版。这样既方便各大网友阅读，还可以带来新的离线阅读功能。 在以前我们只能靠出版社，或者编写 word 文档，来实现。然而有了 gitbook 之后，一切都变得那么简单了。今天就为大家分享一下，如果在 Windows 系统上安装 gitbook，进行电子书的编写和发布。">
+<meta name="twitter:image" content="https://www.gitbook.com/assets/images/editor/preview_windows.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/gitbook/GitBook使用教程/"/>
+
+
+
+
+
+  <title>GitBook使用教程 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/gitbook/GitBook使用教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GitBook使用教程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T19:15:19+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gitbook/" itemprop="url" rel="index">
+                    <span itemprop="name">gitbook</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/gitbook/GitBook使用教程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/gitbook/GitBook使用教程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>各大站长平时除了写博客外，可以使用 gitbook 将一系列的博客专栏整理成电子书出版。这样既方便各大网友阅读，还可以带来新的离线阅读功能。</p>
+<p>在以前我们只能靠出版社，或者编写 word 文档，来实现。然而有了 gitbook 之后，一切都变得那么简单了。今天就为大家分享一下，如果在 Windows 系统上安装 gitbook，进行电子书的编写和发布。</p>
+<a id="more"></a>
+<h1 id="1-GitBook-Editor"><a href="#1-GitBook-Editor" class="headerlink" title="1. GitBook Editor"></a><a href="https://www.gitbook.com/editor" target="_blank" rel="external">1. GitBook Editor</a></h1><p>最简单的方式就是使用GitBook编辑器，没有什么难度，后面的教程主要针对命令行的方式。</p>
+<p><img src="https://www.gitbook.com/assets/images/editor/preview_windows.png" alt=""></p>
+<p>PS：GitBook的book页面默认没有download按钮的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-8d0c8b6063488ef7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="GitBook"></p>
+<p>需要到设置中打开，打开后再次publish生效</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-14e549f7801c794c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="GitBook"></p>
+<h2 id="1-1-同步GitHub"><a href="#1-1-同步GitHub" class="headerlink" title="1.1 同步GitHub"></a>1.1 同步GitHub</h2><p><img src="http://upload-images.jianshu.io/upload_images/3981391-41675f06ba92da6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook"></p>
+<h2 id="1-2-更新失败，无法转换成pdf-mobi-epub格式"><a href="#1-2-更新失败，无法转换成pdf-mobi-epub格式" class="headerlink" title="1.2 更新失败，无法转换成pdf/mobi/epub格式"></a>1.2 更新失败，无法转换成pdf/mobi/epub格式</h2><p><img src="http://upload-images.jianshu.io/upload_images/3981391-e895f74985d2b8b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-7472f7955ba3bb2a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook"></p>
+<h2 id="1-3-Token"><a href="#1-3-Token" class="headerlink" title="1.3 Token"></a>1.3 Token</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global gitbook.user username</div><div class="line">git config --global gitbook.token yourtoken</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-5cbfae01a0d89658.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="token"></p>
+<h1 id="2-安装-nodejs"><a href="#2-安装-nodejs" class="headerlink" title="2. 安装 nodejs"></a>2. 安装 nodejs</h1><p>首先我们需要做的是安装 <a href="http://nodejs.cn/" target="_blank" rel="external">Nodejs</a>。大家可以到 <a href="http://nodejs.cn/" target="_blank" rel="external">Nodejs</a> 的官网进行下载。下载完成后，执行双击进行运行安装。安装完成后，打开 cmd 命令行，输入 node -v 查看安装的 nodejs 的相关版本信息。</p>
+<p>也可以在安装目录中找到 node.exe 文件，打开输入 node -v 查看安装的 nodejs 的相关版本信息。</p>
+<h1 id="3-nodejs-镜像配置"><a href="#3-nodejs-镜像配置" class="headerlink" title="3. nodejs 镜像配置"></a>3. nodejs 镜像配置</h1><p>nodejs 安装完成后，我们就可以开始安装 gitbook 了。但是在安装之前，我们还需要配置一下 nodejs 插件安装的下载镜像地址。因为默认的镜像地址是在国外，需要翻墙才可以访问，因此我们需要设置国内的镜像地址。国内的我推荐大家使用阿里巴巴的镜像地址 <a href="http://registry.npm.taobao.org" target="_blank" rel="external">http://registry.npm.taobao.org</a> 。执行下面的命令，进行配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry http://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<p>除了上面的方法外，我们也可以在用户主目录下编辑 .npmrc 文件，添加一行 registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="external">http://registry.npm.taobao.org</a> 保存就可以了。用户的主目录一般在 C:\Users\Administrator ，具体随你的操作系统系统盘而定。</p>
+<h1 id="4-全局安装-gitbook"><a href="#4-全局安装-gitbook" class="headerlink" title="4. 全局安装 gitbook"></a>4. 全局安装 gitbook</h1><p>现在我们可以开始安装全局的 gitbook 了。执行 npm install gitbook-cli -g 命令，进行安装。安装的过程中，由于需要下载安装包，因此大家需要等待一定的时间，具体时长取决于你的网速和硬件配置。</p>
+<p>安装完成后，我们可以执行 gitbook -v 查看安装的版本信息。</p>
+<h1 id="5-gitbook-常用的命令"><a href="#5-gitbook-常用的命令" class="headerlink" title="5. gitbook 常用的命令"></a>5. gitbook 常用的命令</h1><p>安装完成了后，我们就可以开始编写内容，进行电子书发布了。具体的操作，大家可以参考《<a href="http://www.chengweiyang.cn/gitbook/installation/README.html" target="_blank" rel="external">GitBook简明教程</a>》进行学习。我这里给大家推荐3种最常用的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">gitbook init //初始化目录文件</div><div class="line">gitbook help //列出gitbook所有的命令</div><div class="line">gitbook --help //输出gitbook-cli的帮助信息</div><div class="line">gitbook build //生成静态网页</div><div class="line">gitbook serve //生成静态网页并运行服务器</div><div class="line">gitbook build --gitbook=2.0.1 //生成时指定gitbook的版本, 本地没有会先下载</div><div class="line">gitbook ls //列出本地所有的gitbook版本</div><div class="line">gitbook ls-remote //列出远程可用的gitbook版本</div><div class="line">gitbook fetch 标签/版本号 //安装对应的gitbook版本</div><div class="line">gitbook update //更新到gitbook的最新版本</div><div class="line">gitbook uninstall 2.0.1 //卸载对应的gitbook版本</div><div class="line">gitbook build --log=debug //指定log的级别</div><div class="line">gitbook builid --debug //输出错误信息</div></pre></td></tr></table></figure>
+<h2 id="gitbook"><a href="#gitbook" class="headerlink" title="gitbook"></a>gitbook</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook</div><div class="line"> Usage: gitbook [options] [command]</div><div class="line"></div><div class="line"></div><div class="line"> Commands:</div><div class="line"></div><div class="line">   ls                        List versions installed locally</div><div class="line">   current                   Display currently activated version</div><div class="line">   ls-remote                 List remote versions available for install</div><div class="line">   fetch [version]           Download and install a &lt;version&gt;</div><div class="line">   alias [folder] [version]  Set an alias named &lt;version&gt; pointing to &lt;folder&gt;</div><div class="line">   uninstall [version]       Uninstall a version</div><div class="line">   update [tag]              Update to the latest version of GitBook</div><div class="line">   help                      List commands for GitBook</div><div class="line">   *                         run a command with a specific gitbook version</div><div class="line"></div><div class="line"> Options:</div><div class="line"></div><div class="line">   -h, --help               output usage information</div><div class="line">   -v, --gitbook [version]  specify GitBook version to use</div><div class="line">   -d, --debug              enable verbose error</div><div class="line">   -V, --version            Display running versions of gitbook and gitbook-cli</div></pre></td></tr></table></figure>
+<h2 id="gitbook-serve"><a href="#gitbook-serve" class="headerlink" title="gitbook serve"></a>gitbook serve</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitbook-test&gt;gitbook serve</div><div class="line">Live reload server started on port: 35729</div><div class="line">Press CTRL+C to quit ...</div><div class="line"></div><div class="line">info: 7 plugins are installed</div><div class="line">info: loading plugin &quot;livereload&quot;... OK</div><div class="line">info: loading plugin &quot;highlight&quot;... OK</div><div class="line">info: loading plugin &quot;search&quot;... OK</div><div class="line">info: loading plugin &quot;lunr&quot;... OK</div><div class="line">info: loading plugin &quot;sharing&quot;... OK</div><div class="line">info: loading plugin &quot;fontsettings&quot;... OK</div><div class="line">info: loading plugin &quot;theme-default&quot;... OK</div><div class="line">info: found 3 pages</div><div class="line">info: found 0 asset files</div><div class="line">info: &gt;&gt; generation finished with success in 1.9s !</div><div class="line"></div><div class="line">Starting server ...</div><div class="line">Serving book on http://localhost:4000</div></pre></td></tr></table></figure>
+<h2 id="gitbook-ls"><a href="#gitbook-ls" class="headerlink" title="gitbook ls"></a>gitbook ls</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook ls</div><div class="line">GitBook Versions Installed:</div><div class="line"></div><div class="line">    * 3.2.2</div><div class="line"></div><div class="line">Run &quot;gitbook update&quot; to update to the latest version.</div></pre></td></tr></table></figure>
+<h2 id="gitbook-ls-remote"><a href="#gitbook-ls-remote" class="headerlink" title="gitbook ls-remote"></a>gitbook ls-remote</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook ls-remote</div><div class="line">Available GitBook Versions:</div><div class="line"></div><div class="line">     4.0.0-alpha.5, 4.0.0-alpha.4, 4.0.0-alpha.3, 4.0.0-alpha.2, 4.0.0-alpha.1, 3.2.2, 3.2.1, 3.2.0, 3.2.0-pre.1, 3.2.0-</div><div class="line">pre.0, 3.1.1, 3.1.0, 3.0.3, 3.0.2, 3.0.1, 3.0.0, 3.0.0-pre.15, 3.0.0-pre.14, 3.0.0-pre.13, 3.0.0-pre.12, 3.0.0-pre.11, 3</div><div class="line">.0.0-pre.10, 3.0.0-pre.9, 3.0.0-pre.8, 3.0.0-pre.7, 3.0.0-pre.6, 3.0.0-pre.5, 3.0.0-pre.4, 3.0.0-pre.3, 3.0.0-pre.2, 3.0</div><div class="line">.0-pre.1, 2.6.7, 2.6.6, 2.6.5, 2.6.4, 2.6.3, 2.6.2, 2.6.1, 2.6.0, 2.5.2, 2.5.1, 2.5.0, 2.5.0-beta.7, 2.5.0-beta.6, 2.5.0</div><div class="line">-beta.5, 2.5.0-beta.4, 2.5.0-beta.3, 2.5.0-beta.2, 2.5.0-beta.1, 2.4.3, 2.4.2, 2.4.1, 2.4.0, 2.3.3, 2.3.2, 2.3.1, 2.3.0,</div><div class="line"> 2.2.0, 2.1.0, 2.0.4, 2.0.3, 2.0.2, 2.0.1, 2.0.0, 2.0.0-beta.5, 2.0.0-beta.4, 2.0.0-beta.3, 2.0.0-beta.2, 2.0.0-beta.1,</div><div class="line">2.0.0-alpha.9, 2.0.0-alpha.8, 2.0.0-alpha.7, 2.0.0-alpha.6, 2.0.0-alpha.5, 2.0.0-alpha.4, 2.0.0-alpha.3, 2.0.0-alpha.2,</div><div class="line">2.0.0-alpha.1</div><div class="line"></div><div class="line">Tags:</div><div class="line"></div><div class="line">     latest : 3.2.2</div><div class="line">     pre : 4.0.0-alpha.5</div></pre></td></tr></table></figure>
+<h2 id="gitbook-V"><a href="#gitbook-V" class="headerlink" title="gitbook -V"></a>gitbook -V</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook -V</div><div class="line">CLI version: 2.3.0</div><div class="line">GitBook version: 3.2.2</div></pre></td></tr></table></figure>
+<h2 id="gitbook-pdf"><a href="#gitbook-pdf" class="headerlink" title="gitbook pdf"></a>gitbook pdf</h2><p><img src="http://upload-images.jianshu.io/upload_images/3981391-7d5e93fba468f90b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook pdf"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook pdf</div><div class="line">info: 7 plugins are installed</div><div class="line">info: 6 explicitly listed</div><div class="line">info: loading plugin &quot;highlight&quot;... OK</div><div class="line">info: loading plugin &quot;search&quot;... OK</div><div class="line">info: loading plugin &quot;lunr&quot;... OK</div><div class="line">info: loading plugin &quot;sharing&quot;... OK</div><div class="line">info: loading plugin &quot;fontsettings&quot;... OK</div><div class="line">info: loading plugin &quot;theme-default&quot;... OK</div><div class="line">info: found 3 pages</div><div class="line">info: found 0 asset files</div><div class="line"></div><div class="line">EbookError: Error during ebook generation: &apos;ebook-convert&apos; is not recognized as an internal or external command,</div><div class="line">operable program or batch file.</div></pre></td></tr></table></figure>
+<p>错误提示：ebook-convert不是内部或外部命令，原因是GitBook在生成PDF的过程中使用到calibre的转换功能，没有安装calibre或安装了calibre没有配置环境变量都会导致转换PDF失败<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook pdf</div><div class="line">info: 7 plugins are installed</div><div class="line">info: 6 explicitly listed</div><div class="line">info: loading plugin &quot;highlight&quot;... OK</div><div class="line">info: loading plugin &quot;search&quot;... OK</div><div class="line">info: loading plugin &quot;lunr&quot;... OK</div><div class="line">info: loading plugin &quot;sharing&quot;... OK</div><div class="line">info: loading plugin &quot;fontsettings&quot;... OK</div><div class="line">info: loading plugin &quot;theme-default&quot;... OK</div><div class="line">info: found 3 pages</div><div class="line">info: found 2 asset files</div><div class="line">info: &gt;&gt; generation finished with success in 8.6s !</div><div class="line">info: &gt;&gt; 1 file(s) generated</div></pre></td></tr></table></figure></p>
+<p>安装calibre后，转换成功。PS：安装calibre后需要重新启动命令行窗口</p>
+<h2 id="设置PDF输出格式"><a href="#设置PDF输出格式" class="headerlink" title="设置PDF输出格式"></a>设置PDF输出格式</h2><p>book.json<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"gitbook"</span>: <span class="string">"2.x.x"</span>,</div><div class="line">  <span class="attr">"title"</span>: <span class="string">"Go语言圣经"</span>,</div><div class="line">  <span class="attr">"description"</span>: <span class="string">"&lt;The Go Programming Language&gt;中文版"</span>,</div><div class="line">  <span class="attr">"language"</span>: <span class="string">"zh"</span>,</div><div class="line">  <span class="attr">"structure"</span>: &#123;</div><div class="line">    <span class="attr">"readme"</span>: <span class="string">"preface.md"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"pluginsConfig"</span>: &#123;</div><div class="line">    <span class="attr">"fontSettings"</span>: &#123;</div><div class="line">      <span class="attr">"theme"</span>: <span class="string">"white"</span>,</div><div class="line">      <span class="attr">"family"</span>: <span class="string">"msyh"</span>,</div><div class="line">      <span class="attr">"size"</span>: <span class="number">2</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"plugins"</span>: [</div><div class="line">      <span class="string">"yahei"</span>,</div><div class="line">      <span class="string">"katex"</span>,</div><div class="line">      <span class="string">"-search"</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"fontState"</span>: &#123;</div><div class="line">    <span class="attr">"size"</span>: <span class="string">"2"</span>,</div><div class="line">    <span class="attr">"family"</span>: <span class="string">"sans"</span>,</div><div class="line">    <span class="attr">"theme"</span>: <span class="string">"night"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"pdf"</span>: &#123;</div><div class="line">    <span class="attr">"pageNumbers"</span>: <span class="literal">true</span>, </div><div class="line">    <span class="attr">"fontFamily"</span>: <span class="string">"Arial"</span>,</div><div class="line">    <span class="attr">"fontSize"</span>: <span class="number">12</span>,</div><div class="line">    <span class="attr">"paperSize"</span>: <span class="string">"a4"</span>,</div><div class="line">    <span class="attr">"margin"</span>: &#123;</div><div class="line">      <span class="attr">"right"</span>: <span class="number">62</span>,</div><div class="line">      <span class="attr">"left"</span>: <span class="number">62</span>,</div><div class="line">      <span class="attr">"top"</span>: <span class="number">56</span>,</div><div class="line">      <span class="attr">"bottom"</span>: <span class="number">56</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Variable</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>pdf.pageNumbers</code></td>
+<td style="text-align:left">是否添加页码，默认是true</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.fontSize</code></td>
+<td style="text-align:left">字体大小，默认是12</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.fontFamily</code></td>
+<td style="text-align:left">字体，默认字体是Arial</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.paperSize</code></td>
+<td style="text-align:left">Paper size, options are <code>&#39;a0&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a5&#39;, &#39;a6&#39;, &#39;b0&#39;, &#39;b1&#39;, &#39;b2&#39;, &#39;b3&#39;, &#39;b4&#39;, &#39;b5&#39;, &#39;b6&#39;, &#39;legal&#39;, &#39;letter&#39;</code> (default is <code>a4</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.margin.top</code></td>
+<td style="text-align:left">Top margin (default is <code>56</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.margin.bottom</code></td>
+<td style="text-align:left">Bottom margin (default is <code>56</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.margin.right</code></td>
+<td style="text-align:left">Right margin (default is <code>62</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>pdf.margin.left</code></td>
+<td style="text-align:left">Left margin (default is <code>62</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gitbook-mobi"><a href="#gitbook-mobi" class="headerlink" title="gitbook mobi"></a>gitbook mobi</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook mobi</div><div class="line">info: 7 plugins are installed</div><div class="line">info: 6 explicitly listed</div><div class="line">info: loading plugin &quot;highlight&quot;... OK</div><div class="line">info: loading plugin &quot;search&quot;... OK</div><div class="line">info: loading plugin &quot;lunr&quot;... OK</div><div class="line">info: loading plugin &quot;sharing&quot;... OK</div><div class="line">info: loading plugin &quot;fontsettings&quot;... OK</div><div class="line">info: loading plugin &quot;theme-default&quot;... OK</div><div class="line">info: found 32 pages</div><div class="line">info: found 34 asset files</div><div class="line">info: &gt;&gt; generation finished with success in 26.0s !</div><div class="line">info: &gt;&gt; 1 file(s) generated</div></pre></td></tr></table></figure>
+<h2 id="gitbook-epub"><a href="#gitbook-epub" class="headerlink" title="gitbook epub"></a>gitbook epub</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;gitbook epub</div><div class="line">info: 7 plugins are installed</div><div class="line">info: 6 explicitly listed</div><div class="line">info: loading plugin &quot;highlight&quot;... OK</div><div class="line">info: loading plugin &quot;search&quot;... OK</div><div class="line">info: loading plugin &quot;lunr&quot;... OK</div><div class="line">info: loading plugin &quot;sharing&quot;... OK</div><div class="line">info: loading plugin &quot;fontsettings&quot;... OK</div><div class="line">info: loading plugin &quot;theme-default&quot;... OK</div><div class="line">info: found 32 pages</div><div class="line">info: found 34 asset files</div><div class="line">info: &gt;&gt; generation finished with success in 18.5s !</div><div class="line">info: &gt;&gt; 1 file(s) generated</div></pre></td></tr></table></figure>
+<h1 id="6-calibre"><a href="#6-calibre" class="headerlink" title="6. calibre"></a>6. calibre</h1><p><a href="http://calibre-ebook.com/download" target="_blank" rel="external">下载地址</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-dc1685249c334339.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="calibre"></p>
+<h2 id="ebook-convert"><a href="#ebook-convert" class="headerlink" title="ebook-convert"></a>ebook-convert</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;ebook-convert</div><div class="line">用法: ebook-convert.exe input_file output_file [options]</div><div class="line"></div><div class="line">转换不同格式的电子书。</div><div class="line"></div><div class="line">input_file 表示输入文件，output_file 表示输出文件。这两者作为命令行参数必须指定到最前面。</div><div class="line"></div><div class="line">输出的电子书格式可由 output_file 的扩展名得到。同时 output_file 也可以是一种以 .EXT 为扩展名的特殊格式。在这种情况下，输出文件的名称则使用输入文件的名称。注意：文件名不能以连字号作为开头。如果 output_</div><div class="line">file 不含扩展名，那么它将被视为一个目录并将会在该目录下生成 HTML 格式的“开放式电子书(OEB)”。这些文件会被视为正常文件而被输出插件所识别。</div><div class="line"></div><div class="line">在指定输入和输出文件后，您可以自定义特定的转换选项。根据输入和输出文件的类型不同可用的转换选项也不同。如需获取针对输入和输出文件的帮助，请在命令行中输入 -h。</div><div class="line"></div><div class="line">对于转换系统的完整文档请查阅</div><div class="line">https://manual.calibre-ebook.com/conversion.html</div><div class="line"></div><div class="line">给 ebook-convert.exe 传有空格的参数时，请将参数包括在引号中。例如 &quot;C:\some path with spaces&quot;</div><div class="line"></div><div class="line">选项:</div><div class="line">  --version       显示程序版本号并退出</div><div class="line"></div><div class="line">  -h, --help      显示此帮助信息并退出</div><div class="line"></div><div class="line">  --list-recipes  列出内建的订阅清单名。您可以通过如下命令创建基于内建订阅清单的电子书： ebook-convert &quot;Recipe</div><div class="line">                  Name.recipe&quot; output.epub</div></pre></td></tr></table></figure>
+<h2 id="ebook-convert-–version"><a href="#ebook-convert-–version" class="headerlink" title="ebook-convert –version"></a>ebook-convert –version</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">C:\Users\AllenIverson\Desktop\gitcourse&gt;ebook-convert --version</div><div class="line">ebook-convert.exe (calibre 2.81.0)</div><div class="line">Created by: Kovid Goyal &lt;kovid@kovidgoyal.net&gt;</div></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><img src="http://upload-images.jianshu.io/upload_images/3981391-200aa47662a10f16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="calibre"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-d55f8ff166ebfabe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="calibre"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-68ef58754fe4feea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="calibre"></p>
+<h1 id="7-GitBook-编译，生成pdf报错"><a href="#7-GitBook-编译，生成pdf报错" class="headerlink" title="7. GitBook 编译，生成pdf报错"></a>7. GitBook 编译，生成pdf报错</h1><p>最近在使用 GitBook 生成静态网页和pdf文件时，百度，谷歌了很久也没有类似的解决方案，最近发现是版本问题，我把我的相关经验分享给大家！</p>
+<p>在执行 gitbook build ，gitbook serve，gitbook pdf等命令均保持。报错了错误提示内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">info: 10 plugins are installed</div><div class="line">info: 9 explicitly listed</div><div class="line">info: loading plugin &quot;baidu&quot;... OK</div><div class="line">info: loading plugin &quot;donate&quot;... OK</div><div class="line">info: loading plugin &quot;sitemap&quot;... OK</div><div class="line">info: loading plugin &quot;highlight&quot;... OK</div><div class="line">info: loading plugin &quot;search&quot;... OK</div><div class="line">info: loading plugin &quot;lunr&quot;... OK</div><div class="line">info: loading plugin &quot;sharing&quot;... OK</div><div class="line">info: loading plugin &quot;fontsettings&quot;... OK</div><div class="line">info: loading plugin &quot;theme-default&quot;... OK</div><div class="line">info: found 24 pages</div><div class="line">info: found 2 asset files</div><div class="line">warn: &quot;options&quot; property is deprecated, use config.get(key) instead</div><div class="line">warn: &quot;options.generator&quot; property is deprecated, use &quot;output.name&quot; instead</div><div class="line">error: error while generating page &quot;README.md&quot;:</div><div class="line"></div><div class="line">TypeError: this.contentPath is not a function</div></pre></td></tr></table></figure>
+<p>当然也有些网友的报错内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">warn: &quot;options&quot; property is deprecated, use config.get(key) instead</div><div class="line">warn: &quot;page.progress&quot; property is deprecated</div><div class="line">warn: &quot;sections&quot; property is deprecated, use page.content instead</div><div class="line">TypeError: Path must be a string. Received undefined</div></pre></td></tr></table></figure>
+<p>这种问题的原因是，gitbook的版本太低。大家执行 gitbook update 命令进行升级，升级到3.2.2版本即可。</p>
+<p>也有网友反映，报一下的错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error: Couldn&apos;t locate plugins &quot;baidu, donate&quot;, Run &apos;gitbook install&apos; to install plugins from registry.</div></pre></td></tr></table></figure>
+<p>这是提示插件没有安装的错误。大家执行 gitbook install 命令完成安装即可。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-0e12415cc8846989.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook install"></p>
+<h1 id="8-gitbook-convert"><a href="#8-gitbook-convert" class="headerlink" title="8. gitbook-convert"></a>8. <a href="https://github.com/GitbookIO/gitbook-convert" target="_blank" rel="external">gitbook-convert</a></h1><p>把docx、xml、html、odt文档转成GitBook</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install gitbook-convert -g</div></pre></td></tr></table></figure>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p><img src="http://upload-images.jianshu.io/upload_images/3981391-24614430f8fc2ac1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook-convert"></p>
+<h2 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gitbook-convert [options] &lt;file&gt; [export-directory]</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-4a49aed0f136dbe3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook-convert"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-8d69bf8557ebe4d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="gitbook-convert"></p>
+<h1 id="9-常用插件"><a href="#9-常用插件" class="headerlink" title="9. 常用插件"></a>9. 常用插件</h1><p>Gitbook 本身功能丰富，但同时可以使用插件来进行个性化定制。<a href="http://localhost:4000/start/plugin.html" target="_blank" rel="external">Gitbook 插件</a> 里已经有100多个插件，可以在 <code>book.json</code> 文件的 <code>plugins</code> 和 <code>pluginsConfig</code> 字段添加插件及相关配置，添加后别忘了进行安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">// book.json</div><div class="line">&#123;</div><div class="line">  &quot;title&quot;: &quot;Webpack 中文指南&quot;,</div><div class="line">  &quot;description&quot;: &quot;Webpack 是当下最热门的前端资源模块化管理和打包工具，本书大部分内容翻译自 Webpack 官网。&quot;,</div><div class="line">  &quot;language&quot;: &quot;zh&quot;,</div><div class="line">  &quot;plugins&quot;: [</div><div class="line">    &quot;disqus&quot;,</div><div class="line">    &quot;github&quot;,</div><div class="line">    &quot;editlink&quot;,</div><div class="line">    &quot;prism&quot;,</div><div class="line">    &quot;-highlight&quot;,</div><div class="line">    &quot;baidu&quot;,</div><div class="line">    &quot;splitter&quot;,</div><div class="line">    &quot;sitemap&quot;</div><div class="line">  ],</div><div class="line">  &quot;pluginsConfig&quot;: &#123;</div><div class="line">    &quot;disqus&quot;: &#123;</div><div class="line">      &quot;shortName&quot;: &quot;webpack-handbook&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;github&quot;: &#123;</div><div class="line">      &quot;url&quot;: &quot;https://github.com/zhaoda/webpack-handbook&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;editlink&quot;: &#123;</div><div class="line">      &quot;base&quot;: &quot;https://github.com/zhaoda/webpack-handbook/blob/master/content&quot;,</div><div class="line">      &quot;label&quot;: &quot;编辑本页&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;baidu&quot;: &#123;</div><div class="line">        &quot;token&quot;: &quot;a9787f0ab45d5e237bab522431d0a7ec&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;sitemap&quot;: &#123;</div><div class="line">        &quot;hostname&quot;: &quot;http://zhaoda.net/&quot;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 安装插件</div><div class="line">$ gitbook install ./</div></pre></td></tr></table></figure>
+<h2 id="editlink"><a href="#editlink" class="headerlink" title="editlink"></a><a href="https://plugins.gitbook.com/plugin/editlink" target="_blank" rel="external">editlink</a></h2><p>内容顶部显示 <code>编辑本页</code> 链接。</p>
+<h2 id="ad"><a href="#ad" class="headerlink" title="ad"></a><a href="https://plugins.gitbook.com/plugin/ad" target="_blank" rel="external">ad</a></h2><p>在每个页面顶部和底部添加广告或任何自定义内容。</p>
+<h2 id="splitter"><a href="#splitter" class="headerlink" title="splitter"></a><a href="https://plugins.gitbook.com/plugin/splitter" target="_blank" rel="external">splitter</a></h2><p>在左侧目录和右侧内容之间添加一个可以拖拽的栏，用来调整两边的宽度。</p>
+<h2 id="image-captions"><a href="#image-captions" class="headerlink" title="image-captions"></a><a href="https://plugins.gitbook.com/plugin/image-captions" target="_blank" rel="external">image-captions</a></h2><p>抓取内容中图片的 <code>alt</code> 或 <code>title</code> 属性，在图片下面显示标题。</p>
+<h2 id="github"><a href="#github" class="headerlink" title="github"></a><a href="https://plugins.gitbook.com/plugin/github" target="_blank" rel="external">github</a></h2><p>在右上角显示 github 仓库的图标链接。</p>
+<h2 id="anchors"><a href="#anchors" class="headerlink" title="anchors"></a><a href="https://plugins.gitbook.com/plugin/anchors" target="_blank" rel="external">anchors</a></h2><p>标题带有 github 样式的锚点。</p>
+<h2 id="chart"><a href="#chart" class="headerlink" title="chart"></a><a href="https://plugins.gitbook.com/plugin/chart" target="_blank" rel="external">chart</a></h2><p>使用 C3.js 图表。</p>
+<h2 id="styles-sass"><a href="#styles-sass" class="headerlink" title="styles-sass"></a><a href="https://plugins.gitbook.com/plugin/styles-sass" target="_blank" rel="external">styles-sass</a></h2><p>使用 SASS 替换 CSS。</p>
+<h2 id="styles-less"><a href="#styles-less" class="headerlink" title="styles-less"></a><a href="https://plugins.gitbook.com/plugin/styles-less" target="_blank" rel="external">styles-less</a></h2><p>使用 LESS 替换 CSS。</p>
+<h2 id="ga"><a href="#ga" class="headerlink" title="ga"></a><a href="https://plugins.gitbook.com/plugin/ga" target="_blank" rel="external">ga</a></h2><p>添加 Google 统计代码。</p>
+<h2 id="disqus"><a href="#disqus" class="headerlink" title="disqus"></a><a href="https://plugins.gitbook.com/plugin/disqus" target="_blank" rel="external">disqus</a></h2><p>添加 disqus 评论插件。</p>
+<h2 id="sitemap"><a href="#sitemap" class="headerlink" title="sitemap"></a><a href="https://plugins.gitbook.com/plugin/sitemap" target="_blank" rel="external">sitemap</a></h2><p>生成站点地图。</p>
+<h2 id="latex-codecogs"><a href="#latex-codecogs" class="headerlink" title="latex-codecogs"></a><a href="https://plugins.gitbook.com/plugin/latex-codecogs" target="_blank" rel="external">latex-codecogs</a></h2><p>使用数学方程式。</p>
+<h2 id="mermaid"><a href="#mermaid" class="headerlink" title="mermaid"></a><a href="https://plugins.gitbook.com/plugin/mermaid" target="_blank" rel="external">mermaid</a></h2><p>使用流程图。</p>
+<h2 id="book-summary-scroll-position-saver"><a href="#book-summary-scroll-position-saver" class="headerlink" title="book-summary-scroll-position-saver"></a><a href="https://plugins.gitbook.com/plugin/book-summary-scroll-position-saver" target="_blank" rel="external">book-summary-scroll-position-saver</a></h2><p>自动保存左侧目录区域导航条的位置。</p>
+<h2 id="sharing"><a href="#sharing" class="headerlink" title="sharing"></a><a href="https://plugins.gitbook.com/plugin/sharing" target="_blank" rel="external">sharing</a></h2><p>默认的分享插件。</p>
+<h2 id="fontsettings"><a href="#fontsettings" class="headerlink" title="fontsettings"></a><a href="https://plugins.gitbook.com/plugin/fontsettings" target="_blank" rel="external">fontsettings</a></h2><p>默认的字体、字号、颜色设置插件。</p>
+<h2 id="search"><a href="#search" class="headerlink" title="search"></a><a href="https://plugins.gitbook.com/plugin/search" target="_blank" rel="external">search</a></h2><p>默认搜索插件。</p>
+<h2 id="tbfed-pagefooter"><a href="#tbfed-pagefooter" class="headerlink" title="tbfed-pagefooter"></a><a href="https://plugins.gitbook.com/plugin/tbfed-pagefooter" target="_blank" rel="external">tbfed-pagefooter</a></h2><p>自定义页脚，显示版权和最后修订时间。</p>
+<h2 id="prism"><a href="#prism" class="headerlink" title="prism"></a><a href="https://plugins.gitbook.com/plugin/prism" target="_blank" rel="external">prism</a></h2><p>基于 <a href="http://prismjs.com/" target="_blank" rel="external">Prism</a> 的代码高亮。</p>
+<h2 id="atoc"><a href="#atoc" class="headerlink" title="atoc"></a><a href="https://plugins.gitbook.com/plugin/atoc" target="_blank" rel="external">atoc</a></h2><p>插入 TOC 目录。</p>
+<h2 id="ace"><a href="#ace" class="headerlink" title="ace"></a><a href="https://plugins.gitbook.com/plugin/ace" target="_blank" rel="external">ace</a></h2><p>插入代码高亮编辑器。</p>
+<h2 id="highlight"><a href="#highlight" class="headerlink" title="highlight"></a><a href="https://plugins.gitbook.com/plugin/highlight" target="_blank" rel="external">highlight</a></h2><p>默认的代码高亮插件，通常会使用 prism 来替换。</p>
+<h2 id="github-buttons"><a href="#github-buttons" class="headerlink" title="github-buttons"></a><a href="https://plugins.gitbook.com/plugin/github-buttons" target="_blank" rel="external">github-buttons</a></h2><p>显示 github 仓库的 star 和 fork 按钮。</p>
+<h2 id="sectionx"><a href="#sectionx" class="headerlink" title="sectionx"></a><a href="https://plugins.gitbook.com/plugin/sectionx" target="_blank" rel="external">sectionx</a></h2><p>分离各个段落，并提供一个展开收起的按钮。</p>
+<h2 id="mcqx"><a href="#mcqx" class="headerlink" title="mcqx"></a><a href="https://plugins.gitbook.com/plugin/mcqx" target="_blank" rel="external">mcqx</a></h2><p>使用选择题。</p>
+<h2 id="include-codeblock"><a href="#include-codeblock" class="headerlink" title="include-codeblock"></a><a href="https://plugins.gitbook.com/plugin/include-codeblock" target="_blank" rel="external">include-codeblock</a></h2><p>通过引用文件插入代码。</p>
+<h2 id="fbqx"><a href="#fbqx" class="headerlink" title="fbqx"></a><a href="https://plugins.gitbook.com/plugin/fbqx" target="_blank" rel="external">fbqx</a></h2><p>使用填空题。</p>
+<h2 id="spoiler"><a href="#spoiler" class="headerlink" title="spoiler"></a><a href="https://plugins.gitbook.com/plugin/spoiler" target="_blank" rel="external">spoiler</a></h2><p>隐藏答案，当鼠标划过时才显示。</p>
+<h2 id="anchor-navigation"><a href="#anchor-navigation" class="headerlink" title="anchor-navigation"></a><a href="https://plugins.gitbook.com/plugin/anchor-navigation" target="_blank" rel="external">anchor-navigation</a></h2><p>锚点导航。</p>
+<h2 id="youtubex"><a href="#youtubex" class="headerlink" title="youtubex"></a><a href="https://plugins.gitbook.com/plugin/youtubex" target="_blank" rel="external">youtubex</a></h2><p>插入 YouTube 视频。</p>
+<h2 id="redirect"><a href="#redirect" class="headerlink" title="redirect"></a><a href="https://plugins.gitbook.com/plugin/redirect" target="_blank" rel="external">redirect</a></h2><p>页面跳转。</p>
+<h2 id="expandable-chapters"><a href="#expandable-chapters" class="headerlink" title="expandable-chapters"></a><a href="https://plugins.gitbook.com/plugin/expandable-chapters" target="_blank" rel="external">expandable-chapters</a></h2><p>收起或展开章节目录中的父节点。</p>
+<h2 id="baidu"><a href="#baidu" class="headerlink" title="baidu"></a><a href="https://plugins.gitbook.com/plugin/baidu" target="_blank" rel="external">baidu</a></h2><p>使用百度统计。</p>
+<h2 id="duoshuo"><a href="#duoshuo" class="headerlink" title="duoshuo"></a><a href="https://plugins.gitbook.com/plugin/duoshuo" target="_blank" rel="external">duoshuo</a></h2><p>使用多说评论。</p>
+<h2 id="jsfiddle"><a href="#jsfiddle" class="headerlink" title="jsfiddle"></a><a href="https://plugins.gitbook.com/plugin/jsfiddle" target="_blank" rel="external">jsfiddle</a></h2><p>插入 JSFiddle 组件。</p>
+<h2 id="jsbin"><a href="#jsbin" class="headerlink" title="jsbin"></a><a href="https://plugins.gitbook.com/plugin/jsbin" target="_blank" rel="external">jsbin</a></h2><p>插入 JSBin 组件。</p>
+<h2 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h2><p>最好先查看别人的插件是怎么做的，然后再看<a href="https://developer.gitbook.com/plugins/index.html" target="_blank" rel="external">官方文档</a>。</p>
+<h1 id="10-配置"><a href="#10-配置" class="headerlink" title="10. 配置"></a>10. 配置</h1><p>在book.json中配置，键值对的形式</p>
+<ul>
+<li>title 设置书本的标题</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"title" : "Gitbook Use"</div></pre></td></tr></table></figure>
+<ul>
+<li>author 作者的相关信息</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"author" : "zhangjikai"</div></pre></td></tr></table></figure>
+<ul>
+<li>description 书本的简单描述</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"description" : "记录Gitbook的配置和一些插件的使用"</div></pre></td></tr></table></figure>
+<ul>
+<li>language Gitbook使用的语言, 版本2.6.4中可选的语言如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">en, ar, bn, cs, de, en, es, fa, fi, fr, he, it, ja, ko, no, pl, pt, ro, ru, sv, uk, vi, zh-hans, zh-tw</div></pre></td></tr></table></figure>
+<p>配置使用简体中文</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">"language" : "zh-hans"</div></pre></td></tr></table></figure>
+<ul>
+<li>links 在左侧导航栏添加链接信息</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">"links" : &#123;</div><div class="line">    "sidebar" : &#123;</div><div class="line">        "Home" : "http://zhangjikai.com"</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>styles 自定义页面样式， 默认情况下各generator对应的css文件</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">"styles": &#123;</div><div class="line">    "website": "styles/website.css",</div><div class="line">    "ebook": "styles/ebook.css",</div><div class="line">    "pdf": "styles/pdf.css",</div><div class="line">    "mobi": "styles/mobi.css",</div><div class="line">    "epub": "styles/epub.css"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例如使<code>&lt;h1&gt; &lt;h2&gt;</code>标签有下边框， 可以在<code>website.css</code>中设置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">h1 , h2&#123;</div><div class="line">    border-bottom: 1px solid #EFEAEA;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>plugins 配置使用的插件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&quot;plugins&quot;: [</div><div class="line">    &quot;disqus&quot;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>添加新插件之后需要运行<code>gitbook install</code>来安装新的插件</p>
+<p>Gitbook默认带有5个插件：</p>
+<ul>
+<li>highlight</li>
+<li>search</li>
+<li>sharing</li>
+<li>font-settings</li>
+<li>livereload</li>
+</ul>
+<p>如果要去除自带的插件， 可以在插件名称前面加<code>-</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">"plugins": [</div><div class="line">    "-search"</div><div class="line">]</div></pre></td></tr></table></figure>
+<h1 id="11-更多GitBook教程"><a href="#11-更多GitBook教程" class="headerlink" title="11. 更多GitBook教程"></a>11. 更多GitBook教程</h1><ul>
+<li><a href="https://www.gitbook.com/book/wastemobile/gitbook-chinese/details" target="_blank" rel="external">GitBook 中文解說 - 2.4</a></li>
+<li><a href="https://www.gitbook.com/book/zhanghqgit/gitbook-documentation/details" target="_blank" rel="external">gitbook-documentation</a></li>
+<li><a href="https://www.gitbook.com/book/chestnutme/gitbook-documentation/details" target="_blank" rel="external">gitbook-documentation</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gitbook/" rel="tag"># gitbook</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/数据结构和算法/二叉树/" rel="next" title="二叉树">
+                <i class="fa fa-chevron-left"></i> 二叉树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-GitBook-Editor"><span class="nav-number">1.</span> <span class="nav-text">1. GitBook Editor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-同步GitHub"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 同步GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-更新失败，无法转换成pdf-mobi-epub格式"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 更新失败，无法转换成pdf/mobi/epub格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Token"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Token</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-安装-nodejs"><span class="nav-number">2.</span> <span class="nav-text">2. 安装 nodejs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-nodejs-镜像配置"><span class="nav-number">3.</span> <span class="nav-text">3. nodejs 镜像配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-全局安装-gitbook"><span class="nav-number">4.</span> <span class="nav-text">4. 全局安装 gitbook</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-gitbook-常用的命令"><span class="nav-number">5.</span> <span class="nav-text">5. gitbook 常用的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook"><span class="nav-number">5.1.</span> <span class="nav-text">gitbook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-serve"><span class="nav-number">5.2.</span> <span class="nav-text">gitbook serve</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-ls"><span class="nav-number">5.3.</span> <span class="nav-text">gitbook ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-ls-remote"><span class="nav-number">5.4.</span> <span class="nav-text">gitbook ls-remote</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-V"><span class="nav-number">5.5.</span> <span class="nav-text">gitbook -V</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-pdf"><span class="nav-number">5.6.</span> <span class="nav-text">gitbook pdf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置PDF输出格式"><span class="nav-number">5.7.</span> <span class="nav-text">设置PDF输出格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-mobi"><span class="nav-number">5.8.</span> <span class="nav-text">gitbook mobi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gitbook-epub"><span class="nav-number">5.9.</span> <span class="nav-text">gitbook epub</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-calibre"><span class="nav-number">6.</span> <span class="nav-text">6. calibre</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ebook-convert"><span class="nav-number">6.1.</span> <span class="nav-text">ebook-convert</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ebook-convert-–version"><span class="nav-number">6.2.</span> <span class="nav-text">ebook-convert –version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">6.3.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-GitBook-编译，生成pdf报错"><span class="nav-number">7.</span> <span class="nav-text">7. GitBook 编译，生成pdf报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-gitbook-convert"><span class="nav-number">8.</span> <span class="nav-text">8. gitbook-convert</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">8.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">8.2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-1"><span class="nav-number">8.3.</span> <span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-常用插件"><span class="nav-number">9.</span> <span class="nav-text">9. 常用插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#editlink"><span class="nav-number">9.1.</span> <span class="nav-text">editlink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ad"><span class="nav-number">9.2.</span> <span class="nav-text">ad</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#splitter"><span class="nav-number">9.3.</span> <span class="nav-text">splitter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#image-captions"><span class="nav-number">9.4.</span> <span class="nav-text">image-captions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github"><span class="nav-number">9.5.</span> <span class="nav-text">github</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#anchors"><span class="nav-number">9.6.</span> <span class="nav-text">anchors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chart"><span class="nav-number">9.7.</span> <span class="nav-text">chart</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#styles-sass"><span class="nav-number">9.8.</span> <span class="nav-text">styles-sass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#styles-less"><span class="nav-number">9.9.</span> <span class="nav-text">styles-less</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ga"><span class="nav-number">9.10.</span> <span class="nav-text">ga</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#disqus"><span class="nav-number">9.11.</span> <span class="nav-text">disqus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sitemap"><span class="nav-number">9.12.</span> <span class="nav-text">sitemap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#latex-codecogs"><span class="nav-number">9.13.</span> <span class="nav-text">latex-codecogs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mermaid"><span class="nav-number">9.14.</span> <span class="nav-text">mermaid</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#book-summary-scroll-position-saver"><span class="nav-number">9.15.</span> <span class="nav-text">book-summary-scroll-position-saver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sharing"><span class="nav-number">9.16.</span> <span class="nav-text">sharing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fontsettings"><span class="nav-number">9.17.</span> <span class="nav-text">fontsettings</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#search"><span class="nav-number">9.18.</span> <span class="nav-text">search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tbfed-pagefooter"><span class="nav-number">9.19.</span> <span class="nav-text">tbfed-pagefooter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prism"><span class="nav-number">9.20.</span> <span class="nav-text">prism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atoc"><span class="nav-number">9.21.</span> <span class="nav-text">atoc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ace"><span class="nav-number">9.22.</span> <span class="nav-text">ace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#highlight"><span class="nav-number">9.23.</span> <span class="nav-text">highlight</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github-buttons"><span class="nav-number">9.24.</span> <span class="nav-text">github-buttons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sectionx"><span class="nav-number">9.25.</span> <span class="nav-text">sectionx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mcqx"><span class="nav-number">9.26.</span> <span class="nav-text">mcqx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#include-codeblock"><span class="nav-number">9.27.</span> <span class="nav-text">include-codeblock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fbqx"><span class="nav-number">9.28.</span> <span class="nav-text">fbqx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spoiler"><span class="nav-number">9.29.</span> <span class="nav-text">spoiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#anchor-navigation"><span class="nav-number">9.30.</span> <span class="nav-text">anchor-navigation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#youtubex"><span class="nav-number">9.31.</span> <span class="nav-text">youtubex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redirect"><span class="nav-number">9.32.</span> <span class="nav-text">redirect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expandable-chapters"><span class="nav-number">9.33.</span> <span class="nav-text">expandable-chapters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#baidu"><span class="nav-number">9.34.</span> <span class="nav-text">baidu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#duoshuo"><span class="nav-number">9.35.</span> <span class="nav-text">duoshuo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsfiddle"><span class="nav-number">9.36.</span> <span class="nav-text">jsfiddle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsbin"><span class="nav-number">9.37.</span> <span class="nav-text">jsbin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发插件"><span class="nav-number">9.38.</span> <span class="nav-text">开发插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-配置"><span class="nav-number">10.</span> <span class="nav-text">10. 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-更多GitBook教程"><span class="nav-number">11.</span> <span class="nav-text">11. 更多GitBook教程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/gitbook/GitBook使用教程/';
+          this.page.identifier = '2017/05/01/gitbook/GitBook使用教程/';
+          this.page.title = 'GitBook使用教程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
