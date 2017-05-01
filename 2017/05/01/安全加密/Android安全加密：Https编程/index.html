@@ -1,0 +1,1234 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Https编程," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Android安全加密专题文章索引 Android安全加密：对称加密 Android安全加密：非对称加密 Android安全加密：消息摘要Message Digest Android安全加密：数字签名和数字证书 Android安全加密：Https编程  概述SSL(Secure Sockets Layer 安全套接层)，为网景公司(Netscape)所研发，用以保障在Internet 上数据传输之">
+<meta name="keywords" content="Https编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android安全加密：Https编程">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/安全加密/Android安全加密：Https编程/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="Android安全加密专题文章索引 Android安全加密：对称加密 Android安全加密：非对称加密 Android安全加密：消息摘要Message Digest Android安全加密：数字签名和数字证书 Android安全加密：Https编程  概述SSL(Secure Sockets Layer 安全套接层)，为网景公司(Netscape)所研发，用以保障在Internet 上数据传输之">
+<meta property="og:image" content="http://img.blog.csdn.net/20160910142930760">
+<meta property="og:image" content="http://img.blog.csdn.net/20160910143017261">
+<meta property="og:updated_time" content="2017-05-01T10:30:29.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android安全加密：Https编程">
+<meta name="twitter:description" content="Android安全加密专题文章索引 Android安全加密：对称加密 Android安全加密：非对称加密 Android安全加密：消息摘要Message Digest Android安全加密：数字签名和数字证书 Android安全加密：Https编程  概述SSL(Secure Sockets Layer 安全套接层)，为网景公司(Netscape)所研发，用以保障在Internet 上数据传输之">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160910142930760">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：Https编程/"/>
+
+
+
+
+
+  <title>Android安全加密：Https编程 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：Https编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android安全加密：Https编程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:29:10+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全加密/" itemprop="url" rel="index">
+                    <span itemprop="name">安全加密</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/安全加密/Android安全加密：Https编程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/安全加密/Android安全加密：Https编程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Android安全加密专题文章索引"><a href="#Android安全加密专题文章索引" class="headerlink" title="Android安全加密专题文章索引"></a>Android安全加密专题文章索引</h2><ol>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52491077" target="_blank" rel="external">Android安全加密：对称加密</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52494640" target="_blank" rel="external">Android安全加密：非对称加密</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52494725" target="_blank" rel="external">Android安全加密：消息摘要Message Digest</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52494832" target="_blank" rel="external">Android安全加密：数字签名和数字证书</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52494902" target="_blank" rel="external">Android安全加密：Https编程</a></li>
+</ol>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a><strong>概述</strong></h2><p><strong>SSL</strong>(Secure Sockets Layer <strong>安全套接层</strong>)，为网景公司(Netscape)所研发，用以保障在Internet 上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取及窃听。一般通用之规格为40 bit 之安全标准，美国则已推出128 bit 之更高安全标准，但限制出境。只要3.0 版本以上之I.E.或Netscape 浏览器即可支持SSL。</p>
+<p><strong>TLS</strong>（Transport Layer Security <strong>传输层安全</strong>），用于在两个通信应用程序之间提供保密性和数据完整性。TLS 是SSL 的标准化后的产物，有1.0 ，1.1 ，1.2 三个版本，默认使用1.0。TLS1.0 和SSL3.0 几乎没<br>有区别，事实上我们现在用的都是TLS，但因为历史上习惯了SSL 这个称呼。</p>
+<a id="more"></a>
+<h3 id="SSL-通信简单图示："><a href="#SSL-通信简单图示：" class="headerlink" title="SSL 通信简单图示："></a><strong>SSL 通信简单图示：</strong></h3><p><img src="http://img.blog.csdn.net/20160910142930760" alt="ssl"></p>
+<h3 id="SSL-通信详细图示："><a href="#SSL-通信详细图示：" class="headerlink" title="SSL 通信详细图示："></a><strong>SSL 通信详细图示：</strong></h3><p><img src="http://img.blog.csdn.net/20160910143017261" alt="ssl"></p>
+<p>当请求使用自签名证书的网站数据时，例如请求12306 的客运服务页面：<a href="https://kyfw.12306.cn/otn/，则会报下面的错误，原因是客户端的根认证机构不能识别该证书错误信息：unable" target="_blank" rel="external">https://kyfw.12306.cn/otn/，则会报下面的错误，原因是客户端的根认证机构不能识别该证书错误信息：unable</a> to find valid certification path to requested target</p>
+<h2 id="解决方案1"><a href="#解决方案1" class="headerlink" title="解决方案1"></a><strong>解决方案1</strong></h2><p>一个证书可不可信，是由TrustManager 决定的，所以我们只需要自定义一个什么都不做的TrustManager即可，服务器出示的所有证书都不做校验，一律放行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"><span class="comment">//协议传输层安全TLS(transport layer secure)</span></div><div class="line">SSLContext sslContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</div><div class="line"><span class="comment">//创建信任管理器（TrustManager 负责校验证书是否可信）</span></div><div class="line">TrustManager[] tm = <span class="keyword">new</span> TrustManager[]&#123;<span class="keyword">new</span> EmptyX509TrustManager()&#125;;</div><div class="line"><span class="comment">//使用自定义的信任管理器初始化SSL 上下文对象</span></div><div class="line">sslContext.init(<span class="keyword">null</span>, tm, <span class="keyword">null</span>);</div><div class="line"><span class="comment">//设置全局的SSLSocketFactory 工厂（对所有ssl 链接都产生影响）</span></div><div class="line">HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());</div><div class="line"></div><div class="line"> <span class="comment">//URL url = new URL("https://www.baidu.com");</span></div><div class="line"> URL url = <span class="keyword">new</span> URL(<span class="string">"https://kyfw.12306.cn/otn/"</span>);</div><div class="line"> HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();</div><div class="line"> InputStream in = conn.getInputStream();</div><div class="line"> System.out.println(Util.inputstream2String(in));</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="comment">/**</span></div><div class="line"> * 自定义一个什么都不做的信任管理器，所有证书都不做校验，一律放行</div><div class="line"> */</div><div class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">EmptyX509TrustManager</span> <span class="keyword">implements</span> <span class="title">X509TrustManager</span></span>&#123;</div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkClientTrusted</span><span class="params">(X509Certificate[] chain, String authType)</span></span></div><div class="line"> <span class="keyword">throws</span> CertificateException &#123;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkServerTrusted</span><span class="params">(X509Certificate[] chain, String authType)</span></span></div><div class="line"> <span class="keyword">throws</span> CertificateException &#123;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> <span class="meta">@Override</span></div><div class="line"> <span class="keyword">public</span> X509Certificate[] getAcceptedIssuers() &#123;</div><div class="line"> <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="解决方案2"><a href="#解决方案2" class="headerlink" title="解决方案2"></a><strong>解决方案2</strong></h2><p>12306 服务器出示的证书是中铁集团SRCA 给他颁发的，所以SRCA 的证书是能够识别12306 的证书的，所以只需要把SRCA 证书导入系统的KeyStore 里，之后交给TrustManagerFactory 进行初始化，则可把SRCA 添加至根证书认证机构，之后校验的时候，SRCA 对12306 证书校验时就能通过认证。</p>
+<p>这种解决方案有两种使用方式：一是直接使用SRCA.cer 文件，二是使用改文件的RFC 格式数据，将其写在代码里。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//12306 证书的RFC 格式（注意要记得手动添加两个换行符）</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CERT_12306_RFC = <span class="string">"-----BEGIN CERTIFICATE-----\n"</span>+</div><div class="line"><span class="string">"MIICmjCCAgOgAwIBAgIIbyZr5/jKH6QwDQYJKoZIhvcNAQEFBQAwRzELMAkGA1UEBhMCQ04xKTAn"</span>+</div><div class="line"><span class="string">"BgNVBAoTIFNpbm9yYWlsIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MQ0wCwYDVQQDEwRTUkNBMB4X"</span>+</div><div class="line"><span class="string">"DTA5MDUyNTA2NTYwMFoXDTI5MDUyMDA2NTYwMFowRzELMAkGA1UEBhMCQ04xKTAnBgNVBAoTIFNp"</span>+</div><div class="line"><span class="string">"bm9yYWlsIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MQ0wCwYDVQQDEwRTUkNBMIGfMA0GCSqGSIb3"</span>+</div><div class="line"><span class="string">"DQEBAQUAA4GNADCBiQKBgQDMpbNeb34p0GvLkZ6t72/OOba4mX2K/eZRWFfnuk8e5jKDH+9BgCb2"</span>+</div><div class="line"><span class="string">"9bSotqPqTbxXWPxIOz8EjyUO3bfR5pQ8ovNTOlks2rS5BdMhoi4sUjCKi5ELiqtyww/XgY5iFqv6"</span>+</div><div class="line"><span class="string">"D4Pw9QvOUcdRVSbPWo1DwMmH75It6pk/rARIFHEjWwIDAQABo4GOMIGLMB8GA1UdIwQYMBaAFHle"</span>+</div><div class="line"><span class="string">"tne34lKDQ+3HUYhMY4UsAENYMAwGA1UdEwQFMAMBAf8wLgYDVR0fBCcwJTAjoCGgH4YdaHR0cDov"</span>+</div><div class="line"><span class="string">"LzE5Mi4xNjguOS4xNDkvY3JsMS5jcmwwCwYDVR0PBAQDAgH+MB0GA1UdDgQWBBR5XrZ3t+JSg0Pt"</span>+</div><div class="line"><span class="string">"x1GITGOFLABDWDANBgkqhkiG9w0BAQUFAAOBgQDGrAm2U/of1LbOnG2bnnQtgcVaBXiVJF8LKPaV"</span>+</div><div class="line"><span class="string">"23XQ96HU8xfgSZMJS6U00WHAI7zp0q208RSUft9wDq9ee///VOhzR6Tebg9QfyPSohkBrhXQenvQ"</span>+</div><div class="line"><span class="string">"og555S+C3eJAAVeNCTeMS3N/M5hzBRJAoffn3qoYdAO1Q8bTguOi+2849A=="</span>+</div><div class="line"><span class="string">"-----END CERTIFICATE-----\n"</span>;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"> <span class="comment">// 使用传输层安全协议TLS(transport layer secure)</span></div><div class="line"> SSLContext sslContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</div><div class="line"> <span class="comment">//使用SRCA.cer 文件的形式</span></div><div class="line"></div><div class="line"><span class="comment">//FileInputStream certInputStream = new FileInputStream(new File("srca.cer"));</span></div><div class="line"><span class="comment">//也可以通过RFC 字符串的形式使用证书</span></div><div class="line">ByteArrayInputStream certInputStream = <span class="keyword">new</span></div><div class="line">ByteArrayInputStream(CERT_12306_RFC.getBytes());</div><div class="line"><span class="comment">// 初始化keyStore，用来导入证书</span></div><div class="line">KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());</div><div class="line"><span class="comment">//参数null 表示使用系统默认keystore，也可使用其他keystore（需事先将srca.cer 证书导入</span></div><div class="line">keystore 里）</div><div class="line">keyStore.load(<span class="keyword">null</span>);</div><div class="line"><span class="comment">//通过流创建一个证书</span></div><div class="line">Certificate certificate = CertificateFactory.getInstance(<span class="string">"X.509"</span>)</div><div class="line">.generateCertificate(certInputStream);</div><div class="line"><span class="comment">// 把srca.cer 这个证书导入到KeyStore 里，别名叫做srca</span></div><div class="line">keyStore.setCertificateEntry(<span class="string">"srca"</span>, certificate);</div><div class="line"><span class="comment">// 设置使用keyStore 去进行证书校验</span></div><div class="line">TrustManagerFactory trustManagerFactory = TrustManagerFactory</div><div class="line">.getInstance(TrustManagerFactory.getDefaultAlgorithm());</div><div class="line">trustManagerFactory.init(keyStore);</div><div class="line"><span class="comment">//用我们设定好的TrustManager 去做ssl 通信协议校验，即证书校验</span></div><div class="line">sslContext.init(<span class="keyword">null</span>, trustManagerFactory.getTrustManagers(), <span class="keyword">null</span>);</div><div class="line">HttpsURLConnection.setDefaultSSLSocketFactory(sslContext</div><div class="line">.getSocketFactory());</div><div class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"https://kyfw.12306.cn/otn/"</span>);</div><div class="line">HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();</div><div class="line">InputStream in = conn.getInputStream();</div><div class="line">System.out.println(Util.inputstream2String(in));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Android-里的https-请求："><a href="#Android-里的https-请求：" class="headerlink" title="Android 里的https 请求："></a><strong>Android 里的https 请求：</strong></h2><p>把scra.cer 文件考到assets 或raw 目录下，或者直接使用证书的RFC 格式，接下来的做法和java工程代码一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//ByteArrayInputStream in = new ByteArrayInputStream("rfc".getBytes());</span></div><div class="line">CertificateFactory cf = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</div><div class="line">InputStream caInput = <span class="keyword">new</span> BufferedInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"load-der.crt"</span>));</div><div class="line">Certificate ca;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    ca = cf.generateCertificate(caInput);</div><div class="line">    System.out.println(<span class="string">"ca="</span> + ((X509Certificate) ca).getSubjectDN());</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    caInput.close();</div><div class="line">&#125;</div><div class="line">String keyStoreType = KeyStore.getDefaultType();</div><div class="line">KeyStore keyStore = KeyStore.getInstance(keyStoreType);</div><div class="line">keyStore.load(<span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">keyStore.setCertificateEntry(<span class="string">"ca"</span>, ca);</div><div class="line"></div><div class="line">String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();</div><div class="line">TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);</div><div class="line">tmf.init(keyStore);</div><div class="line"></div><div class="line">SSLContext context = SSLContext.getInstance(<span class="string">"TLS"</span>);</div><div class="line">context.init(<span class="keyword">null</span>, tmf.getTrustManagers(), <span class="keyword">null</span>);</div><div class="line"></div><div class="line">URL url = <span class="keyword">new</span> URL(<span class="string">"https://certs.cac.washington.edu/CAtest/"</span>);</div><div class="line">HttpsURLConnection urlConnection =</div><div class="line">        (HttpsURLConnection)url.openConnection();</div><div class="line">urlConnection.setSSLSocketFactory(context.getSocketFactory());</div><div class="line">InputStream in = urlConnection.getInputStream();</div><div class="line">copyInputStreamToOutputStream(in, System.out);</div></pre></td></tr></table></figure>
+<h2 id="双向证书验证"><a href="#双向证书验证" class="headerlink" title="双向证书验证"></a><strong>双向证书验证</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">CertificateFactory certificateFactory = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</div><div class="line">KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());</div><div class="line">keyStore.load(<span class="keyword">null</span>);</div><div class="line"></div><div class="line">SSLContext sslContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</div><div class="line">TrustManagerFactory trustManagerFactory = TrustManagerFactory.</div><div class="line">        getInstance(TrustManagerFactory.getDefaultAlgorithm());</div><div class="line">trustManagerFactory.init(keyStore);</div><div class="line"></div><div class="line"><span class="comment">//初始化keystore</span></div><div class="line">KeyStore clientKeyStore = KeyStore.getInstance(KeyStore.getDefaultType());</div><div class="line">clientKeyStore.load(getAssets().open(<span class="string">"client.bks"</span>), <span class="string">"123456"</span>.toCharArray());</div><div class="line"></div><div class="line">KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());</div><div class="line">keyManagerFactory.init(clientKeyStore, <span class="string">"123456"</span>.toCharArray());</div><div class="line"></div><div class="line">sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), <span class="keyword">new</span> SecureRandom());</div></pre></td></tr></table></figure>
+<h2 id="Nogotofail"><a href="#Nogotofail" class="headerlink" title="Nogotofail"></a><strong>Nogotofail</strong></h2><p>网络流量安全测试工具，Google的开源项目：<a href="https://github.com/google/nogotofail" target="_blank" rel="external">https://github.com/google/nogotofail</a></p>
+<h2 id="Android安全加密专题总结"><a href="#Android安全加密专题总结" class="headerlink" title="Android安全加密专题总结"></a><strong>Android安全加密专题总结</strong></h2><p>以上学习所有内容，对称加密、非对称加密、消息摘要、数字签名等知识都是为了理解数字证书工作原理而作为一个预备知识。数字证书是密码学里的终极武器，是人类几千年历史总结的智慧的结晶，只有在明白了数字证书工作原理后，才能理解Https 协议的安全通讯机制。最终才能在SSL 开发过程中得心应手。</p>
+<p>另外，对称加密和消息摘要这两个知识点是可以单独拿来使用的。</p>
+<p>数字证书使用到了以上学习的所有知识</p>
+<ul>
+<li>对称加密与非对称加密结合使用实现了秘钥交换，之后通信双方使用该秘钥进行对称加密通信。</li>
+<li>消息摘要与非对称加密实现了数字签名，根证书机构对目标证书进行签名，在校验的时候，根证书用公钥对其进行校验。若校验成功，则说明该证书是受信任的。</li>
+<li>Keytool 工具可以创建证书，之后交给根证书机构认证后直接使用自签名证书，还可以输出证书的RFC格式信息等。</li>
+<li>数字签名技术实现了身份认证与数据完整性保证。</li>
+<li>加密技术保证了数据的保密性，消息摘要算法保证了数据的完整性，对称加密的高效保证了数据处理的可靠性，数字签名技术保证了操作的不可否认性。</li>
+</ul>
+<p>通过以上内容的学习，我们要能掌握以下知识点：</p>
+<ul>
+<li>基础知识：bit 位、字节、字符、字符编码、进制转换、io</li>
+<li>知道怎样在实际开发里怎样使用对称加密解决问题</li>
+<li>知道对称加密、非对称加密、消息摘要、数字签名、数字证书是为了解决什么问题而出现的</li>
+<li>了解SSL 通讯流程</li>
+<li>实际开发里怎样请求Https 的接口</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Https编程/" rel="tag"># Https编程</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/响应式编程/RxJava/" rel="next" title="RxJava 系列教程文章索引">
+                <i class="fa fa-chevron-left"></i> RxJava 系列教程文章索引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/安全加密/Android安全加密：对称加密/" rel="prev" title="Android安全加密：对称加密">
+                Android安全加密：对称加密 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android安全加密专题文章索引"><span class="nav-number">1.</span> <span class="nav-text">Android安全加密专题文章索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL-通信简单图示："><span class="nav-number">2.1.</span> <span class="nav-text">SSL 通信简单图示：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL-通信详细图示："><span class="nav-number">2.2.</span> <span class="nav-text">SSL 通信详细图示：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案1"><span class="nav-number">3.</span> <span class="nav-text">解决方案1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案2"><span class="nav-number">4.</span> <span class="nav-text">解决方案2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-里的https-请求："><span class="nav-number">5.</span> <span class="nav-text">Android 里的https 请求：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向证书验证"><span class="nav-number">6.</span> <span class="nav-text">双向证书验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nogotofail"><span class="nav-number">7.</span> <span class="nav-text">Nogotofail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android安全加密专题总结"><span class="nav-number">8.</span> <span class="nav-text">Android安全加密专题总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/安全加密/Android安全加密：Https编程/';
+          this.page.identifier = '2017/05/01/安全加密/Android安全加密：Https编程/';
+          this.page.title = 'Android安全加密：Https编程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

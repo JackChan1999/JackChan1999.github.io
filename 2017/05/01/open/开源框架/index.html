@@ -1,0 +1,2356 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="开源框架," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Android开源框架系列 Android开源项目 Android开发常用开源框架2 Android开发常用开源框架3 2017年伊始，你需要尝试的25个Android第三方库 Android开发常用第三方平台 免费的计算机编程类中文书籍 free-programming-books Mark！Android最佳的开源库集锦 移动开发周刊：Android最佳的开源库集锦 GitHub Top 10">
+<meta name="keywords" content="开源框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发常用开源框架">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/open/开源框架/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="Android开源框架系列 Android开源项目 Android开发常用开源框架2 Android开发常用开源框架3 2017年伊始，你需要尝试的25个Android第三方库 Android开发常用第三方平台 免费的计算机编程类中文书籍 free-programming-books Mark！Android最佳的开源库集锦 移动开发周刊：Android最佳的开源库集锦 GitHub Top 10">
+<meta property="og:image" content="http://img.blog.csdn.net/20170428144103234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161023134413810">
+<meta property="og:image" content="https://github.com/googlesamples/android-topeka/raw/master/screenshots/categories.png">
+<meta property="og:image" content="https://github.com/googlesamples/android-topeka/raw/master/screenshots/category_history.png">
+<meta property="og:image" content="https://github.com/googlesamples/android-topeka/raw/master/screenshots/quiz_shakespeare.png">
+<meta property="og:image" content="https://github.com/googlesamples/android-UniversalMusicPlayer/raw/master/screenshots/phone.png">
+<meta property="og:image" content="https://github.com/googlesamples/android-UniversalMusicPlayer/raw/master/screenshots/phone_lockscreen.png">
+<meta property="og:image" content="https://github.com/googlesamples/android-UniversalMusicPlayer/raw/master/screenshots/phone_fullscreen_player.png">
+<meta property="og:image" content="https://github.com/google/flexbox-layout/raw/master/assets/flex-direction.gif">
+<meta property="og:image" content="https://github.com/Yalantis/uCrop/raw/master/preview.gif">
+<meta property="og:image" content="https://github.com/jdamcd/android-crop/raw/master/screenshot.png">
+<meta property="og:image" content="https://github.com/ArthurHub/Android-Image-Cropper/raw/master/art/demo.gif?raw=true">
+<meta property="og:image" content="https://github.com/ryanhoo/PhotoCropper/raw/master/images/photo-cropper-demonstration.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/albinmathew/PhotoCrop/master/screenshots/pic1.png">
+<meta property="og:image" content="https://github.com/Bilibili/boxing/raw/master/screenshot/multi_image.webp">
+<meta property="og:image" content="https://github.com/Bilibili/boxing/raw/master/screenshot/single_image_crop.webp">
+<meta property="og:image" content="https://github.com/Bilibili/boxing/raw/master/screenshot/video.webp">
+<meta property="og:image" content="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/example_1.png">
+<meta property="og:image" content="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/select_1.png">
+<meta property="og:image" content="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/select_2.png">
+<meta property="og:image" content="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/select_3.png">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/8949716/17476407/7d54831e-5d92-11e6-83d0-4049039e0899.gif">
+<meta property="og:image" content="https://cloud.githubusercontent.com/assets/8949716/18590019/cde4acdc-7c5f-11e6-8877-b702aba7ae0c.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/crazycodeboy/TakePhoto/master/Screenshots/takephoto_preview.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/crazycodeboy/TakePhoto/master/Screenshots/%E9%A2%84%E8%A7%88%E5%9B%BE.jpg">
+<meta property="og:image" content="https://github.com/pengjianbo/GalleryFinal/raw/master/images/gallery_final_effect.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0093/2021/32e1bf04-8735-3c17-abac-c8bc267fede4.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0093/2023/f7cd1809-f717-302a-bc60-0135264492aa.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0093/2025/c6ade696-bfbb-3432-8fc9-375df8cfbfeb.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0093/2027/0445a204-f6b1-37ae-b73c-40ea4376b54a.png">
+<meta property="og:image" content="http://dl2.iteye.com/upload/attachment/0093/2029/a619dd0c-98fe-3295-80bb-ccc64dfe352e.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/e17a2a83e3e205a822d27172cb3736d4f441344d/68747470733a2f2f7261772e6769746875622e636f6d2f68646f64656e686f662f436972636c65496d616765566965772f6d61737465722f73637265656e73686f742e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/ed1e075be6ed97fa9091d3702e9b96d3e85b7a35/68747470733a2f2f7261772e6769746875622e636f6d2f6d616b6572616d656e2f526f756e646564496d616765566965772f6d61737465722f73637265656e73686f742e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/d4970a90842c50a708f94b7bd996657c41ab62fb/68747470733a2f2f7261772e6769746875622e636f6d2f6d616b6572616d656e2f526f756e646564496d616765566965772f6d61737465722f73637265656e73686f742d6f76616c2e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/d359ae58a72bc330df60758703185777a15bd1a0/687474703a2f2f692e696d6775722e636f6d2f6953697a4838322e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/9c26fa38f23bb218558ad1843f59042ae3d90309/68747470733a2f2f7261772e6769746875622e636f6d2f6b696b6f736f2f616e64726f69642d737461636b626c75722f6d61737465722f6172742f73637265656e73686f74312e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/821ae0abdf62af50624fc429f79b2d47f4f22d53/68747470733a2f2f7261772e6769746875622e636f6d2f6b696b6f736f2f616e64726f69642d737461636b626c75722f6d61737465722f6172742f73637265656e73686f74322e706e67">
+<meta property="og:image" content="https://github.com/wasabeef/Blurry/raw/master/art/blurry.gif">
+<meta property="og:image" content="https://github.com/flurgle/BlurKit-Android/raw/master/.repo/demo.gif">
+<meta property="og:image" content="https://github.com/Dimezis/BlurView/raw/master/BlurScreenshot.png">
+<meta property="og:image" content="https://github.com/qiujuer/ImageBlurring/raw/master/images/anim.gif">
+<meta property="og:image" content="https://github.com/ashqal/MD360Player4Android/raw/master/app/demo/preview2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/afollestad/material-camera/master/art/showcase1.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/897d4f84233a7131ffc3cb2b4394914c04b9140a/687474703a2f2f7374617469632e736d6172746973616e6f732e636e2f636f6d6d6f6e2f696d672f74686972642d6d656469756d2f6f6e652d737465702d69636f6e5f386461623932336635332e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/62a0c203e5120555afd516356d61b615e5f09e49/687474703a2f2f7374617469632e736d6172746973616e6f732e636e2f636f6d6d6f6e2f696d672f74686972642d6d656469756d2f62696762616e672d69636f6e5f393066393230323939322e706e67">
+<meta property="og:updated_time" content="2017-05-01T10:19:27.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发常用开源框架">
+<meta name="twitter:description" content="Android开源框架系列 Android开源项目 Android开发常用开源框架2 Android开发常用开源框架3 2017年伊始，你需要尝试的25个Android第三方库 Android开发常用第三方平台 免费的计算机编程类中文书籍 free-programming-books Mark！Android最佳的开源库集锦 移动开发周刊：Android最佳的开源库集锦 GitHub Top 10">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170428144103234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/open/开源框架/"/>
+
+
+
+
+
+  <title>Android开发常用开源框架 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/open/开源框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android开发常用开源框架
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:16:11+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/open/开源框架/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/open/开源框架/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android开源框架系列"><a href="#Android开源框架系列" class="headerlink" title="Android开源框架系列"></a><strong>Android开源框架系列</strong></h1><ul>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/53857958" target="_blank" rel="external">Android开源项目</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/53763565" target="_blank" rel="external">Android开发常用开源框架2</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/53783009" target="_blank" rel="external">Android开发常用开源框架3</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/56013369" target="_blank" rel="external">2017年伊始，你需要尝试的25个Android第三方库</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52901991" target="_blank" rel="external">Android开发常用第三方平台</a></li>
+<li><a href="https://github.com/justjavac/free-programming-books-zh_CN" target="_blank" rel="external">免费的计算机编程类中文书籍</a></li>
+<li><a href="https://github.com/vhf/free-programming-books" target="_blank" rel="external">free-programming-books</a></li>
+<li><a href="http://weibo.com/ttarticle/p/show?id=2309404039858120191334" target="_blank" rel="external">Mark！Android最佳的开源库集锦</a></li>
+<li><a href="http://weibo.com/ttarticle/p/show?id=2309404040295888065499" target="_blank" rel="external">移动开发周刊：Android最佳的开源库集锦</a></li>
+<li><a href="http://mp.weixin.qq.com/s?__biz=MzA4NTQwNDcyMA==&amp;mid=402675429&amp;idx=1&amp;sn=ba3afd2069004b220eaa8a77fdecbaf7&amp;scene=4#wechat_redirect" target="_blank" rel="external">GitHub Top 100的Android开源库</a></li>
+<li><a href="https://github.com/Trinea/android-open-project" target="_blank" rel="external">Android 开源项目分类汇总</a></li>
+<li><a href="https://github.com/Freelander/Android_Data/blob/master/Android-Librarys-Top-100.md" target="_blank" rel="external">GitHub Android Libraries Top 100 简介</a></li>
+<li><a href="https://github.com/Freelander/Android_Data" target="_blank" rel="external">Android 学习资料收集</a></li>
+<li><a href="https://github.com/wasabeef/awesome-android-ui" target="_blank" rel="external">awesome-android-ui</a></li>
+<li><a href="https://github.com/lightSky/Awesome-MaterialDesign" target="_blank" rel="external">Awesome-MaterialDesign</a></li>
+<li><a href="https://snowdream.github.io/awesome-android/" target="_blank" rel="external">awesome-android</a></li>
+<li><a href="https://github.com/ZQiang94/Andriod-collect-blogs" target="_blank" rel="external">Andriod-collect-blogs</a></li>
+<li><a href="https://github.com/shijiebei2009/Algorithms" target="_blank" rel="external">计算机常用基础算法</a></li>
+</ul>
+<a id="more"></a>
+<p><img src="http://img.blog.csdn.net/20170428144103234?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="开源框架"></p>
+<p><img src="http://img.blog.csdn.net/20161023134413810" alt="开源框架"></p>
+<h1 id="开源框架"><a href="#开源框架" class="headerlink" title="开源框架"></a>开源框架</h1><p><a href="https://github.com/JackChan1999/Android_Open_Project" target="_blank" rel="external">https://github.com/JackChan1999/Android_Open_Project</a></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="README.md">Android开发常用框架</a></li>
+<li><a href="android-open-project/android-open-project.md">android-open-project</a></li>
+<li><a href="company/company.md">开源项目</a></li>
+<li><a href="快速开发/快速开发.md">快速开发框架</a></li>
+<li><a href="工具集/commons.md">工具集</a></li>
+<li><a href="android-open-project/2017年伊始，你需要尝试的25个Android第三方库.md">2017年伊始，你需要尝试的25个Android第三方库</a></li>
+<li><a href="开放平台/第三方开发平台.md">第三方开发平台</a></li>
+<li><a href="图片处理/图片处理.md">图片处理</a></li>
+<li><a href="网络请求/net.md">网络请求</a></li>
+<li><a href="响应式编程/rx.md">响应式编程</a></li>
+<li><a href="性能优化/performance.md">性能优化</a></li>
+<li><a href="图表/chart.md">图表</a></li>
+<li><a href="二维码/qrcode.md">二维码</a></li>
+<li><a href="动画/animation.md">动画</a></li>
+<li><a href="多媒体/media.md">多媒体</a></li>
+<li><a href="缓存/cache.md">缓存</a></li>
+<li><a href="事件总线/eventbus.md">事件总线</a></li>
+<li><a href="数据库/database.md">数据库</a></li>
+<li><a href="依赖注入/inject.md">依赖注入</a></li>
+<li><a href="hotfix/hotfix.md">热修复</a></li>
+<li><a href="Log日志/logutils.md">Log日志</a></li>
+<li><a href="UI控件/widget.md">UI控件</a></li>
+<li><a href="UI控件/TextView.md">TextView</a></li>
+<li><a href="UI控件/demo1.md">UI控件第1季</a></li>
+<li><a href="utils/utils.md">utils</a></li>
+<li><a href="project/project.md">project</a></li>
+<li><a href="后台处理/后台处理.md">后台处理</a></li>
+<li><a href="MaterialDesign/Awesome-MaterialDesign.md">Awesome-MaterialDesign</a></li>
+</ul>
+<h1 id="Square-amp-JakeWharton"><a href="#Square-amp-JakeWharton" class="headerlink" title="Square&amp; JakeWharton"></a><strong>Square&amp; JakeWharton</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></td>
+<td style="text-align:left">一个强大的图片下载与缓存的库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/okhttp" target="_blank" rel="external">OkHttp</a></td>
+<td style="text-align:left">Square出品，一个Http与Http/2的客户端</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/retrofit" target="_blank" rel="external">Retrofit</a></td>
+<td style="text-align:left">Square出品，类型安全的Http客户端</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/butterknife" target="_blank" rel="external">ButterKnife</a></td>
+<td style="text-align:left">将Android视图和回调方法绑定到字段和方法上</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/sqlbrite" target="_blank" rel="external">sqlbrite</a></td>
+<td style="text-align:left">一个响应式的数据查询框架</td>
+</tr>
+<tr>
+<td style="text-align:left">keywhiz</td>
+<td style="text-align:left">一个隐私管理分配系统，能很好地与SOA配合</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/leakcanary" target="_blank" rel="external">LeakCanary</a></td>
+<td style="text-align:left">内存泄漏检测工具</td>
+</tr>
+<tr>
+<td style="text-align:left">javapoet</td>
+<td style="text-align:left">动态生成Java源码</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/phrase" target="_blank" rel="external">phrase</a></td>
+<td style="text-align:left">字符串格式化</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/dagger" target="_blank" rel="external">dagger</a></td>
+<td style="text-align:left">依赖注入框架</td>
+</tr>
+<tr>
+<td style="text-align:left">Flow</td>
+<td style="text-align:left">Flow 将一个应用分成一个逻辑上的 Screen组合，Screen不是任何形式的特殊的库对象，而是一个被创造来代表我们应用视图的普通java对象（POJO）</td>
+</tr>
+<tr>
+<td style="text-align:left">Mortar</td>
+<td style="text-align:left">Mortar是一个专注拖拽和依赖注入的库，Mortar 用以下几个不同的部分将一个应用分为可组合的模块：Blueprints, Presenters and a boatload of custom Views</td>
+</tr>
+<tr>
+<td style="text-align:left">RxBinding</td>
+<td style="text-align:left">可以实现数据层与View层的绑定，当数据发生变化，View会自动更新UI</td>
+</tr>
+<tr>
+<td style="text-align:left">RxAndroid</td>
+<td style="text-align:left">RxJava的扩展, 优雅地处理异步请求</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/timber" target="_blank" rel="external">timber</a></td>
+<td style="text-align:left">对Android的Log类进行封装后的一个Log工具</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/ViewPagerIndicator" target="_blank" rel="external">ViewPagerIndicator</a></td>
+<td style="text-align:left">Paging indicator widgets compatible with the ViewPager</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/DiskLruCache" target="_blank" rel="external">DiskLruCache</a></td>
+<td style="text-align:left">Java实现基于LRU的磁盘缓存</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/otto" target="_blank" rel="external">Otto</a></td>
+<td style="text-align:left">Otto 是 Square 公司出的一个事件库 (pub/sub 模式), 用来简化应用程序组件之间的通讯, otto 修改自 Google 的 Guava 库, 专门为 Android 平台进行了优化, 与上面介绍的 EventBus 相比, 两个库各有各的优点, 完全取决于我们自己项目的需求来选择它们哪一个</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/javapoet" target="_blank" rel="external">javapoet</a></td>
+<td style="text-align:left">A Java API for generating .java source files 动态生成Java源码</td>
+</tr>
+</tbody>
+</table>
+<h1 id="阿里巴巴"><a href="#阿里巴巴" class="headerlink" title="阿里巴巴"></a>阿里巴巴</h1><table>
+<thead>
+<tr>
+<th style="text-align:left">项目名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/freeline" target="_blank" rel="external">freeline</a></td>
+<td style="text-align:left">Freeline 是 Android 平台上的秒级编译方案，Instant Run 的替代品，也可以从 Freeline 官方主页来获取更多的信息。Freeline 由蚂蚁聚宝 Android 团队开发，它可以充分利用缓存文件，在几秒钟内迅速地对代码的改动进行编译并部署到设备上，有效地减少了日常开发中的大量重新编译与安装的耗时。Freeline能够为Android开发者节省很多喝杯咖啡的时间</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/weex" target="_blank" rel="external">weex</a></td>
+<td style="text-align:left">A framework for building Mobile cross-platform UI</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/fastjson" target="_blank" rel="external">fastjson</a></td>
+<td style="text-align:left">A fast JSON parser/generator for Java</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/dubbo" target="_blank" rel="external">Dubbo</a></td>
+<td style="text-align:left">Dubbo is a distributed, high performance RPC framework enpowering applications with service import/export capabilities</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">AndFix</a></td>
+<td style="text-align:left">AndFix is a library that offer hot-fix for Android App.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">dexposed</a></td>
+<td style="text-align:left">dexposed enable ‘god’ mode for single android application.</td>
+</tr>
+</tbody>
+</table>
+<p>#小米开源项目<br>| 项目名称                                     | 功能描述           |<br>| :————————————— | :————- |<br>| <a href="https://github.com/MiCode/Notes" target="_blank" rel="external">Notes</a> | 小米便签社区开源版      |<br>| <a href="https://github.com/MiCode/FileExplorer" target="_blank" rel="external">FileExplorer</a> | MIUI文件管理器社区开源版 |<br>| <a href="https://github.com/MiCode/SoundRecorder" target="_blank" rel="external">SoundRecorder</a> | MIUI录音机社区开源版   |</p>
+<p>#Google开源项目<br>| 项目名称                                     | 功能描述                                     |<br>| :————————————— | :————————————— |<br>| <a href="https://github.com/google/gcm" target="_blank" rel="external">GCM</a>     | Google Cloud Messaging 消息推送              |<br>| <a href="https://github.com/google/iosched" target="_blank" rel="external"> iosched：</a> | Google I/O Android App                   |<br>| <a href="https://github.com/googlesamples/android-topeka" target="_blank" rel="external">android-topeka</a> | Google官方给出的material design应用指南           |<br>| <a href="https://github.com/googlesamples/android-UniversalMusicPlayer" target="_blank" rel="external">android-UniversalMusicPlayer</a> | Google官方给出的m音乐播放器，支持Android phones, tablets, Auto, Wear and Cast devices |<br>| <a href="https://github.com/google/ExoPlayer" target="_blank" rel="external">ExoPlayer</a> | An extensible media player for Android   |<br>| <a href="https://github.com/google/guava" target="_blank" rel="external">guava</a> | Google Core Libraries for Java 6+        |<br>| <a href="https://github.com/google/flexbox-layout" target="_blank" rel="external">flexbox-layout</a> | FlexboxLayout is a library project which brings the similar capabilities of CSS Flexible Box Layout Module to Android. |<br>| <a href="https://github.com/google/guice" target="_blank" rel="external">guice</a> | 轻量级的依赖注入框架                               |<br>| <a href="https://github.com/google/gson" target="_blank" rel="external">gson</a>   | A Java serialization/deserialization library that can convert Java Objects into JSON and back. |<br>| <a href="https://github.com/google/protobuf" target="_blank" rel="external">protobuf</a> | Protocol Buffers - Google’s data interchange format |<br>| <a href="https://github.com/google/material-design-icons" target="_blank" rel="external">material-design-icons</a> | Material Design icons by Google          |<br>| <a href="https://github.com/google/auto" target="_blank" rel="external">auto</a>   | Auto 是 Java 生成器源代码集合，包括：AutoFactory - 兼容 JSR-330 的工厂；AutoService - ServiceLoader 的 Provider-configuration 文件；AutoValue - Java 1.6+ 的不可变 value-type 代码生成；Common - Helper 实用工具，用来编写注释处理器 |<br>| <a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">android-architecture</a> | A collection of samples to discuss and showcase different architectural tools and patterns for Android apps |</p>
+<p>##<a href="https://github.com/googlesamples/android-topeka" target="_blank" rel="external">android-topeka</a></p>
+<p><img src="https://github.com/googlesamples/android-topeka/raw/master/screenshots/categories.png" width="200"> <img src="https://github.com/googlesamples/android-topeka/raw/master/screenshots/category_history.png" width="200"> <img src="https://github.com/googlesamples/android-topeka/raw/master/screenshots/quiz_shakespeare.png" width="200"></p>
+<p>##<a href="https://github.com/googlesamples/android-UniversalMusicPlayer" target="_blank" rel="external">android-UniversalMusicPlayer</a></p>
+<p><img src="https://github.com/googlesamples/android-UniversalMusicPlayer/raw/master/screenshots/phone.png" width="200"> <img src="https://github.com/googlesamples/android-UniversalMusicPlayer/raw/master/screenshots/phone_lockscreen.png" width="200"> <img src="https://github.com/googlesamples/android-UniversalMusicPlayer/raw/master/screenshots/phone_fullscreen_player.png" width="200"> </p>
+<p>##<a href="https://github.com/google/ExoPlayer" target="_blank" rel="external">ExoPlayer</a></p>
+<p>An extensible media player for Android</p>
+<p><a href="http://v.youku.com/v_show/id_XMTU4MzA5NjA0NA==.html?f=27314446" target="_blank" rel="external">Streaming media with ExoPlayer - Google I/O 2016</a></p>
+<p>##<a href="https://github.com/google/guava" target="_blank" rel="external">guava</a></p>
+<p>##<a href="https://github.com/google/flexbox-layout" target="_blank" rel="external">flexbox-layout</a></p>
+<p><img src="https://github.com/google/flexbox-layout/raw/master/assets/flex-direction.gif" width="300"></p>
+<h1 id="1-图片加载，缓存，处理"><a href="#1-图片加载，缓存，处理" class="headerlink" title="1. 图片加载，缓存，处理"></a><strong>1. 图片加载，缓存，处理</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">Android Universal Image Loader</a></td>
+<td style="text-align:left">一个强大的加载，缓存，展示图片的库，<font color="red"><b>已过时</b></font></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a></td>
+<td style="text-align:left">一个强大的图片下载与缓存的库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/facebook/fresco" target="_blank" rel="external">Fresco</a></td>
+<td style="text-align:left">一个用于管理图像和他们使用的内存的库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/bumptech/glide" target="_blank" rel="external">Glide</a></td>
+<td style="text-align:left">一个图片加载和缓存的库，使用的App有：网易新闻</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/florent37/GlidePalette" target="_blank" rel="external">GlidePalette</a></td>
+<td style="text-align:left">Android Lollipop Palette is now easy to use with Glide</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/florent37/PicassoPalette" target="_blank" rel="external">PicassoPalette</a></td>
+<td style="text-align:left">Android Lollipop Palette is now easy to use with Picasso !</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wasabeef/picasso-transformations" target="_blank" rel="external">Picasso-transformations</a></td>
+<td style="text-align:left">一个为Picasso提供多种图片变换的库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wasabeef/glide-transformations" target="_blank" rel="external">Glide-transformations</a></td>
+<td style="text-align:left">一个为Glide提供多种图片变换的库</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>Picasso是著名的开源组织Square出品的图片处理框架，使用的比较多</p>
+<p>Glide是Google的员工基于Picasso开发，优化的，Android官网推荐使用的图片处理框架</p>
+<p>Fresco是Facebook开源的图片处理框架，真正做到了三级缓存，功能强大，强烈推荐使用</p>
+<p>Android Universal Image Loader是一个老牌的图片处理框架，但是在2015年的9月份已经停止更新维护，所以不推荐使用</p>
+<h1 id="2-图片裁剪"><a href="#2-图片裁剪" class="headerlink" title="2. 图片裁剪"></a><strong>2. 图片裁剪</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Yalantis/uCrop" target="_blank" rel="external">uCrop</a></td>
+<td style="text-align:left"><a href="https://yalantis.com/blog/introducing-ucrop-our-own-image-cropping-library-for-android/" target="_blank" rel="external">Image Cropping Library for Android</a>，使用的App有：薄荷，哔哩哔哩</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/jdamcd/android-crop" target="_blank" rel="external">android-crop</a></td>
+<td style="text-align:left">图片裁剪，使用的App有：网易新闻，芒果TV</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/edmodo/cropper" target="_blank" rel="external">cropper</a></td>
+<td style="text-align:left">图片裁剪开源框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ArthurHub/Android-Image-Cropper" target="_blank" rel="external">Android-Image-Cropper</a></td>
+<td style="text-align:left">Image Cropping Library for Android, optimized for Camera / Gallery</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ryanhoo/PhotoCropper" target="_blank" rel="external">PhotoCropper</a></td>
+<td style="text-align:left">Android 大图片裁剪终极解决方案</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/lvillani/android-cropimage" target="_blank" rel="external">android-cropimage</a></td>
+<td style="text-align:left">CropImage Activity from Gallery.apk packaged as a reusable Android library</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/albinmathew/PhotoCrop" target="_blank" rel="external">PhotoCrop</a></td>
+<td style="text-align:left">A Library which can be used to crop images in Android similar to Facebook and Telegram，使用的App有：快手</td>
+</tr>
+</tbody>
+</table>
+<h2 id="uCrop"><a href="#uCrop" class="headerlink" title="uCrop"></a>uCrop</h2><p><img src="https://github.com/Yalantis/uCrop/raw/master/preview.gif" alt=""></p>
+<h2 id="android-crop"><a href="#android-crop" class="headerlink" title="android-crop"></a>android-crop</h2><p><img src="https://github.com/jdamcd/android-crop/raw/master/screenshot.png" alt=""></p>
+<h2 id="Android-Image-Cropper"><a href="#Android-Image-Cropper" class="headerlink" title="Android-Image-Cropper"></a>Android-Image-Cropper</h2><p><img src="https://github.com/ArthurHub/Android-Image-Cropper/raw/master/art/demo.gif?raw=true" alt=""></p>
+<h2 id="PhotoCropper"><a href="#PhotoCropper" class="headerlink" title="PhotoCropper"></a>PhotoCropper</h2><p><img src="https://github.com/ryanhoo/PhotoCropper/raw/master/images/photo-cropper-demonstration.gif" alt=""></p>
+<h2 id="PhotoCrop"><a href="#PhotoCrop" class="headerlink" title="PhotoCrop"></a>PhotoCrop</h2><p><img src="https://raw.githubusercontent.com/albinmathew/PhotoCrop/master/screenshots/pic1.png" alt=""></p>
+<h1 id="3-图片选择"><a href="#3-图片选择" class="headerlink" title="3. 图片选择"></a><strong>3. 图片选择</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/lovetuzitong/MultiImageSelector" target="_blank" rel="external">MultiImageSelector</a></td>
+<td style="text-align:left">图片选择，使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/bingoogolapple/BGAPhotoPicker-Android" target="_blank" rel="external">BGAPhotoPicker-Android</a></td>
+<td style="text-align:left">Android 图片选择、预览、九宫格图片控件、拖拽排序九宫格图片控件</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/crazycodeboy/TakePhoto" target="_blank" rel="external">TakePhoto</a></td>
+<td style="text-align:left">轻量级Android照片处理框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/FinalTeam/RxGalleryFinal" target="_blank" rel="external">RxGalleryFinal</a></td>
+<td style="text-align:left">Android图片单选/多选、拍照、裁剪、压缩。视频选择和录制。<a href="https://github.com/pengjianbo/GalleryFinal" target="_blank" rel="external">GalleryFinal</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Bilibili/boxing" target="_blank" rel="external">boxing</a></td>
+<td style="text-align:left">一个多媒体选择器库，B站出品。可以选择一张或者多张图片，提供预览和裁剪功能。同样支持gif图，选择视频和图像压缩功能。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="boxing"><a href="#boxing" class="headerlink" title="boxing"></a>boxing</h2><p><img src="https://github.com/Bilibili/boxing/raw/master/screenshot/multi_image.webp" width="300"> <img src="https://github.com/Bilibili/boxing/raw/master/screenshot/single_image_crop.webp" width="300"> <img src="https://github.com/Bilibili/boxing/raw/master/screenshot/video.webp" width="300"></p>
+<h2 id="MultiImageSelector"><a href="#MultiImageSelector" class="headerlink" title="MultiImageSelector"></a>MultiImageSelector</h2><p><img src="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/example_1.png" alt=""> <img src="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/select_1.png" alt=""></p>
+<p><img src="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/select_2.png" alt=""> <img src="https://github.com/lovetuzitong/MultiImageSelector/raw/master/art/select_3.png" alt=""></p>
+<h2 id="BGAPhotoPicker-Android"><a href="#BGAPhotoPicker-Android" class="headerlink" title="BGAPhotoPicker-Android"></a>BGAPhotoPicker-Android</h2><p><img src="https://cloud.githubusercontent.com/assets/8949716/17476407/7d54831e-5d92-11e6-83d0-4049039e0899.gif" alt=""> <img src="https://cloud.githubusercontent.com/assets/8949716/18590019/cde4acdc-7c5f-11e6-8877-b702aba7ae0c.png" alt=""></p>
+<h2 id="TakePhoto"><a href="#TakePhoto" class="headerlink" title="TakePhoto"></a>TakePhoto</h2><p><img src="https://raw.githubusercontent.com/crazycodeboy/TakePhoto/master/Screenshots/takephoto_preview.png" alt="预览图"><br><img src="https://raw.githubusercontent.com/crazycodeboy/TakePhoto/master/Screenshots/%E9%A2%84%E8%A7%88%E5%9B%BE.jpg" alt="运行效果图"></p>
+<h2 id="RxGalleryFinal"><a href="#RxGalleryFinal" class="headerlink" title="RxGalleryFinal"></a>RxGalleryFinal</h2><p><img src="https://github.com/pengjianbo/GalleryFinal/raw/master/images/gallery_final_effect.png" alt=""></p>
+<h1 id="4-图片转换，压缩，滤镜"><a href="#4-图片转换，压缩，滤镜" class="headerlink" title="4. 图片转换，压缩，滤镜"></a><strong>4. 图片转换，压缩，滤镜</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/CyberAgent/android-gpuimage" target="_blank" rel="external">Android-gpuimage</a></td>
+<td style="text-align:left">一个开源的基于GPU的图像处理库，提供各种各样的图像处理滤镜，并且支持照相机和摄像机的实时滤镜，使用的App有：快手</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/chrisbanes/PhotoView" target="_blank" rel="external">photoview</a></td>
+<td style="text-align:left">使用的App有：薄荷,网易新闻</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/hdodenhof/CircleImageView" target="_blank" rel="external">circleimageview</a></td>
+<td style="text-align:left">圆形图片，使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/vinc3m1/RoundedImageView" target="_blank" rel="external">RoundedImageView</a></td>
+<td style="text-align:left">圆形图片，使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/pungrue26/SelectableRoundedImageView" target="_blank" rel="external">SelectableRoundedImageView</a></td>
+<td style="text-align:left">Android ImageView that supports different radii on each corner</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/koral--/android-gif-drawable" target="_blank" rel="external">android-gif-drawable</a></td>
+<td style="text-align:left">gif图片，使用的App有：网易新闻，快手</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Curzibn/Luban" target="_blank" rel="external">Luban</a></td>
+<td style="text-align:left">可能是最接近微信朋友圈的图片压缩算法</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/zetbaitsu/Compressor" target="_blank" rel="external">Compressor</a></td>
+<td style="text-align:left">Compressor is a lightweight and powerful android image compression library</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Android-gpuimage"><a href="#Android-gpuimage" class="headerlink" title="Android-gpuimage"></a>Android-gpuimage</h2><p><img src="http://dl2.iteye.com/upload/attachment/0093/2021/32e1bf04-8735-3c17-abac-c8bc267fede4.png" alt=""> <img src="http://dl2.iteye.com/upload/attachment/0093/2023/f7cd1809-f717-302a-bc60-0135264492aa.png" alt=""> <img src="http://dl2.iteye.com/upload/attachment/0093/2025/c6ade696-bfbb-3432-8fc9-375df8cfbfeb.png" alt=""> </p>
+<p><img src="http://dl2.iteye.com/upload/attachment/0093/2027/0445a204-f6b1-37ae-b73c-40ea4376b54a.png" alt=""> <img src="http://dl2.iteye.com/upload/attachment/0093/2029/a619dd0c-98fe-3295-80bb-ccc64dfe352e.png" alt=""></p>
+<h2 id="circleimageview"><a href="#circleimageview" class="headerlink" title="circleimageview"></a>circleimageview</h2><p><img src="https://camo.githubusercontent.com/e17a2a83e3e205a822d27172cb3736d4f441344d/68747470733a2f2f7261772e6769746875622e636f6d2f68646f64656e686f662f436972636c65496d616765566965772f6d61737465722f73637265656e73686f742e706e67" width="400"></p>
+<h2 id="RoundedImageView"><a href="#RoundedImageView" class="headerlink" title="RoundedImageView"></a>RoundedImageView</h2><p><img src="https://camo.githubusercontent.com/ed1e075be6ed97fa9091d3702e9b96d3e85b7a35/68747470733a2f2f7261772e6769746875622e636f6d2f6d616b6572616d656e2f526f756e646564496d616765566965772f6d61737465722f73637265656e73686f742e706e67" alt=""> <img src="https://camo.githubusercontent.com/d4970a90842c50a708f94b7bd996657c41ab62fb/68747470733a2f2f7261772e6769746875622e636f6d2f6d616b6572616d656e2f526f756e646564496d616765566965772f6d61737465722f73637265656e73686f742d6f76616c2e706e67" alt=""></p>
+<h2 id="SelectableRoundedImageView"><a href="#SelectableRoundedImageView" class="headerlink" title="SelectableRoundedImageView"></a>SelectableRoundedImageView</h2><p><img src="https://camo.githubusercontent.com/d359ae58a72bc330df60758703185777a15bd1a0/687474703a2f2f692e696d6775722e636f6d2f6953697a4838322e706e67" alt="">)</p>
+<h1 id="5-高斯模糊，毛玻璃，图片模糊"><a href="#5-高斯模糊，毛玻璃，图片模糊" class="headerlink" title="5. 高斯模糊，毛玻璃，图片模糊"></a><strong>5. 高斯模糊，毛玻璃，图片模糊</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/kikoso/android-stackblur" target="_blank" rel="external">android-stackblur</a></td>
+<td style="text-align:left">Android StackBlur is a library that can perform a blurry effect on a Bitmap based on a gradient or radius, and return the result. The library is based on the code of Mario Klingemann.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wasabeef/Blurry" target="_blank" rel="external">Blurry</a></td>
+<td style="text-align:left">Blurry is an easy blur library for Android</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wonderkiln/blurkit-android" target="_blank" rel="external">blurkit-android</a></td>
+<td style="text-align:left">The missing Android blurring library. Fast blur-behind layout that parallels iOS.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Dimezis/BlurView" target="_blank" rel="external">BlurView</a></td>
+<td style="text-align:left">Dynamic iOS-like blur of underlying Views for Android</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/qiujuer/ImageBlurring" target="_blank" rel="external">ImageBlurring</a></td>
+<td style="text-align:left">Android blurring image(bitmap) by java and jni</td>
+</tr>
+</tbody>
+</table>
+<h2 id="android-stackblur"><a href="#android-stackblur" class="headerlink" title="android-stackblur"></a>android-stackblur</h2><p><img src="https://camo.githubusercontent.com/9c26fa38f23bb218558ad1843f59042ae3d90309/68747470733a2f2f7261772e6769746875622e636f6d2f6b696b6f736f2f616e64726f69642d737461636b626c75722f6d61737465722f6172742f73637265656e73686f74312e706e67" width="400"> <img src="https://camo.githubusercontent.com/821ae0abdf62af50624fc429f79b2d47f4f22d53/68747470733a2f2f7261772e6769746875622e636f6d2f6b696b6f736f2f616e64726f69642d737461636b626c75722f6d61737465722f6172742f73637265656e73686f74322e706e67" width="400"></p>
+<h2 id="Blurry"><a href="#Blurry" class="headerlink" title="Blurry"></a>Blurry</h2><p><img src="https://github.com/wasabeef/Blurry/raw/master/art/blurry.gif" alt=""></p>
+<h2 id="blurkit-android"><a href="#blurkit-android" class="headerlink" title="blurkit-android"></a>blurkit-android</h2><p><img src="https://github.com/flurgle/BlurKit-Android/raw/master/.repo/demo.gif" alt=""></p>
+<h2 id="BlurView"><a href="#BlurView" class="headerlink" title="BlurView"></a>BlurView</h2><p><img src="https://github.com/Dimezis/BlurView/raw/master/BlurScreenshot.png" width="400"></p>
+<h2 id="ImageBlurring"><a href="#ImageBlurring" class="headerlink" title="ImageBlurring"></a>ImageBlurring</h2><p><img src="https://github.com/qiujuer/ImageBlurring/raw/master/images/anim.gif" width="400"></p>
+<h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a><strong>缓存</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">LruCache</td>
+<td style="text-align:left">Android原生API，内存缓存</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/DiskLruCache" target="_blank" rel="external">DiskLruCache</a></td>
+<td style="text-align:left">Java实现基于LRU的磁盘缓存</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/yangfuhai/ASimpleCache" target="_blank" rel="external">ASimpleCache</a></td>
+<td style="text-align:left">一个为android制定的轻量级的开源缓存框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/hongyangAndroid/base-diskcache" target="_blank" rel="external">base-diskcache</a></td>
+<td style="text-align:left">Android 缓存库，融合了DiskLruCache和ASimpleCache</td>
+</tr>
+</tbody>
+</table>
+<h1 id="网络请求"><a href="#网络请求" class="headerlink" title="网络请求"></a><strong>网络请求</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">httpclient</td>
+<td style="text-align:left">apache开源的网络请求框架，<font color="red"><b>已过时</b></font></td>
+</tr>
+<tr>
+<td style="text-align:left">AsyncHttpClient</td>
+<td style="text-align:left">基于httpclient封装，<font color="red"><b>已过时</b></font></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/okhttp" target="_blank" rel="external">OkHttp</a></td>
+<td style="text-align:left">Square出品，一个Http与Http/2的客户端</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/retrofit" target="_blank" rel="external">Retrofit</a></td>
+<td style="text-align:left">Square出品，类型安全的Http客户端</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://android.googlesource.com/platform/frameworks/volley" target="_blank" rel="external">Volley</a></td>
+<td style="text-align:left">Google推出的Android异步网络请求框架和图片加载框架，使用的App有：网易新闻</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>从Android 6.0 开始，Google删除了apache的开源网络请求框架httpclient，所以基于httpclient的AsyncHttpClient也不推荐使用了</p>
+<p>Volley适合那些请求频繁但数据量不大的场景，不适用于大数据的请求，比如下载文件</p>
+<p>Android 6.0 后，Android开始使用OkHttp，而Retrofit是一个网络代理框架，可以更简单的使用OkHttp</p>
+<h1 id="网络解析"><a href="#网络解析" class="headerlink" title="网络解析"></a><strong>网络解析</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/google/gson" target="_blank" rel="external">Gson</a></td>
+<td style="text-align:left">一个Java序列化/反序列化库，可以将JSON和java对象互相转换</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/codehaus/jackson" target="_blank" rel="external">Jackson</a></td>
+<td style="text-align:left">Jackson可以轻松地将Java对象转换成json对象和xml文档，同样也可以将json、xml转换成Java对象</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/fastjson" target="_blank" rel="external">Fastjson</a></td>
+<td style="text-align:left">Java上一个快速的JSON解析器/生成器</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://sourceforge.net/projects/htmlparser/" target="_blank" rel="external">HtmlPaser</a></td>
+<td style="text-align:left">一种用来解析单个独立html或嵌套html的方式</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/jhy/jsoup" target="_blank" rel="external">Jsoup</a></td>
+<td style="text-align:left">一个以最好的DOM，CSS和jQuery解析html的库</td>
+</tr>
+</tbody>
+</table>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a><strong>数据库</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://sourceforge.net/projects/ormlite/files/releases/com/j256/ormlite/" target="_blank" rel="external">OrmLite</a></td>
+<td style="text-align:left">JDBC和Android的轻量级ORM java包</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/satyan/sugar" target="_blank" rel="external">Sugar</a></td>
+<td style="text-align:left">用超级简单的方法处理Android数据库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/greenrobot/greenDAO" target="_blank" rel="external">GreenDAO</a></td>
+<td style="text-align:left">一种轻快地将对象映射到SQLite数据库的ORM解决方案，使用的App有：薄荷，京东</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/pardom/ActiveAndroid" target="_blank" rel="external">ActiveAndroid</a></td>
+<td style="text-align:left">以活动记录方式为Android SQLite提供持久化</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/sqlbrite" target="_blank" rel="external">SQLBrite</a></td>
+<td style="text-align:left">SQLiteOpenHelper 和ContentResolver的轻量级包装</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/sqlcipher/android-database-sqlcipher" target="_blank" rel="external">android-database-sqlcipher</a></td>
+<td style="text-align:left">数据库加密</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/pushtorefresh/storio" target="_blank" rel="external">storio</a></td>
+<td style="text-align:left">Beautiful API for SQLiteDatabase and ContentResolver</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/realm/realm-java" target="_blank" rel="external">realm-java</a></td>
+<td style="text-align:left">移动数据库，高性能数据库：一个SQLite和ORM的替换品</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/greenrobot/ObjectBox" target="_blank" rel="external">ObjectBox</a></td>
+<td style="text-align:left">相信不少人都用过GreenDao和EventBus，这两库都是greenrobot公司出品。ObjectBox也是该公司出品。GreenDao号称是最快的与SQLite的对象关系映射（ORM）。但是自从2011年以来，公司声称发现了许多的缺陷，有很多问题影响了性能。所以开发出另外一套性能最好且易用的NoSQL数据库，优于其他数据库5-15倍的性能。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a><strong>依赖注入</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/butterknife" target="_blank" rel="external">ButterKnife</a></td>
+<td style="text-align:left">将Android视图和回调方法绑定到字段和方法上</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/google/dagger" target="_blank" rel="external">Dagger2</a></td>
+<td style="text-align:left">一个Android和java快速依赖注射器</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/androidannotations/androidannotations" target="_blank" rel="external">AndroidAnotations</a></td>
+<td style="text-align:left">快速安卓开发。易于维护</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/roboguice/roboguice" target="_blank" rel="external">RoboGuice</a></td>
+<td style="text-align:left">Android平台的Google Guice <font color="red"><b>已退役</b></font></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/google/guice" target="_blank" rel="external">guice</a></td>
+<td style="text-align:left">Google开发的依赖注入框架</td>
+</tr>
+</tbody>
+</table>
+<h1 id="图表Chart"><a href="#图表Chart" class="headerlink" title="图表Chart"></a><strong>图表Chart</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/diogobernardino/WilliamChart" target="_blank" rel="external">WilliamChart</a></td>
+<td style="text-align:left">创建图表的Android库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/lecho/hellocharts-android" target="_blank" rel="external">HelloCharts</a></td>
+<td style="text-align:left">兼容到API8的Android图表库，使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">MPAndroidChart</a></td>
+<td style="text-align:left">一个强大的Android图表视图/图形库，使用的App有：春雨医生</td>
+</tr>
+</tbody>
+</table>
+<h1 id="后台处理"><a href="#后台处理" class="headerlink" title="后台处理"></a><strong>后台处理</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/tape" target="_blank" rel="external">Tape</a></td>
+<td style="text-align:left">一个轻快的，事务性的，基于文件的FIFO的库</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/yigit/android-priority-jobqueue" target="_blank" rel="external">Android Priority Job Queue</a></td>
+<td style="text-align:left">一个专门为Android轻松调度任务的工作队列</td>
+</tr>
+</tbody>
+</table>
+<h1 id="事件总线"><a href="#事件总线" class="headerlink" title="事件总线"></a><strong>事件总线</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/greenrobot/EventBus" target="_blank" rel="external">EventBus</a></td>
+<td style="text-align:left">安卓优化的事件总线，简化了活动、片段、线程、服务等的通信，使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/otto" target="_blank" rel="external">Otto</a></td>
+<td style="text-align:left">一个基于Guava的增强的事件总线</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/eleme/HermesEventBus" target="_blank" rel="external">HermesEventBus</a></td>
+<td style="text-align:left">一个基于EventBus的、能在进程间发送和接收event的库，在IPC或者插件开发中非常有用</td>
+</tr>
+</tbody>
+</table>
+<h1 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a><strong>响应式编程</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="external">RxJava</a></td>
+<td style="text-align:left">JVM上的响应式扩展</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ReactiveX/RxJavaJoins" target="_blank" rel="external">RxJavaJoins</a></td>
+<td style="text-align:left">为RxJava提供Joins操作</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ReactiveX/RxAndroid" target="_blank" rel="external">RxAndroid</a></td>
+<td style="text-align:left">Android上的响应式扩展，在RxJava基础上添加了Android线程调度</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/RxBinding" target="_blank" rel="external">RxBinding</a></td>
+<td style="text-align:left">提供用RxJava绑定Android UI的API</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/google/agera" target="_blank" rel="external">Agera</a></td>
+<td style="text-align:left">Android上的响应式编程</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/trello/RxLifecycle" target="_blank" rel="external">RxLifecycle</a></td>
+<td style="text-align:left">Lifecycle handling APIs for Android apps using RxJava</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Log框架"><a href="#Log框架" class="headerlink" title="Log框架"></a><strong>Log框架</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/orhanobut/logger" target="_blank" rel="external">Logger</a></td>
+<td style="text-align:left">简单，漂亮，强大的Android日志工具</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/hugo" target="_blank" rel="external">Hugo</a></td>
+<td style="text-align:left">在调试版本上注解的触发方法进行日志记录</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/JakeWharton/timber" target="_blank" rel="external">Timber</a></td>
+<td style="text-align:left">一个小的，可扩展的日志工具</td>
+</tr>
+</tbody>
+</table>
+<h1 id="测试框架"><a href="#测试框架" class="headerlink" title="测试框架"></a><strong>测试框架</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/mockito/mockito" target="_blank" rel="external">Mockito</a></td>
+<td style="text-align:left">Java编写的Mocking单元测试框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/RobotiumTech/robotium" target="_blank" rel="external">Robotium</a></td>
+<td style="text-align:left">Android UI 测试</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/robolectric/robolectric" target="_blank" rel="external">Robolectric</a></td>
+<td style="text-align:left">Android单元测试框架</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>Android自带很多测试工具：JUnit，Monkeyrunner，UiAutomator，Espresso等</p>
+<h1 id="调试框架"><a href="#调试框架" class="headerlink" title="调试框架"></a><strong>调试框架</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/facebook/stetho" target="_blank" rel="external">Stetho</a></td>
+<td style="text-align:left">调试Android应用的桥梁，使得可以利用Chrome开发者工具进行调试</td>
+</tr>
+</tbody>
+</table>
+<h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a><strong>性能优化</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/leakcanary" target="_blank" rel="external">LeakCanary</a></td>
+<td style="text-align:left">内存泄漏检测工具</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://blog.zhaiyifan.cn/2016/01/16/BlockCanaryTransparentPerformanceMonitor/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">BlockCanary</a></td>
+<td style="text-align:left">轻松找出Android App界面卡顿元凶</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ACRA/acra" target="_blank" rel="external">ACRA</a></td>
+<td style="text-align:left">Android应用程序崩溃报告</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/google/guava" target="_blank" rel="external">Google Guava</a></td>
+<td style="text-align:left">Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。 所有这些工具每天都在被Google的工程师应用在产品服务中。</td>
+</tr>
+<tr>
+<td style="text-align:left">google protobuf</td>
+<td style="text-align:left">由google开发，并且在google内部使用。Protobuf的作用和xml、json是一回事，但他是二进制格式，性能好、效率高。<a href="http://www.cppblog.com/woaidongmao/archive/2009/06/23/88391.html" target="_blank" rel="external">ProtoBuf开发者指南</a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="热修复"><a href="#热修复" class="headerlink" title="热修复"></a><strong>热修复</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Tencent/tinker" target="_blank" rel="external">tinker</a></td>
+<td style="text-align:left">腾讯开源的一个热修复框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">AndFix</a></td>
+<td style="text-align:left">alibaba热修复框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">dexposed</a></td>
+<td style="text-align:left">alibaba热修复框架</td>
+</tr>
+</tbody>
+</table>
+<h1 id="二维码"><a href="#二维码" class="headerlink" title="二维码"></a><strong>二维码</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/zxing/zxing" target="_blank" rel="external">Zxing</a></td>
+<td style="text-align:left">一个二维码开源框架</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/dm77/barcodescanner" target="_blank" rel="external">barcodescanner</a></td>
+<td style="text-align:left">使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/bingoogolapple/BGAQRCode-Android" target="_blank" rel="external">BGAQRCode-Android</a></td>
+<td style="text-align:left">扫描二维码、扫描条形码、相册获取图片后识别、生成带 Logo 二维码、支持微博微信 QQ 二维码扫描样式</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/journeyapps/zxing-android-embedded/tree/master/zxing-android-embedded/src/com/journeyapps/barcodescanner" target="_blank" rel="external">zxing-android-embedded</a></td>
+<td style="text-align:left">使用的App有：春雨医生，芒果TV</td>
+</tr>
+</tbody>
+</table>
+<h1 id="多媒体"><a href="#多媒体" class="headerlink" title="多媒体"></a><strong>多媒体</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Bilibili/ijkplayer" target="_blank" rel="external">ijkplayer</a></td>
+<td style="text-align:left">Bilibili开源的视频播放器</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Bilibili/DanmakuFlameMaster" target="_blank" rel="external">DanmakuFlameMaster </a></td>
+<td style="text-align:left">Android开源弹幕引擎·烈焰弹幕使，使用的App有：网易新闻</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/yixia/VitamioBundle" target="_blank" rel="external">Vitamio</a></td>
+<td style="text-align:left">一款全能多媒体开发框架，全面支持硬件解码与 GPU 渲染</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/FFmpeg/FFmpeg" target="_blank" rel="external">FFmpeg</a></td>
+<td style="text-align:left">一个基于C语言的多媒体开源框架</td>
+</tr>
+<tr>
+<td style="text-align:left">百度媒体云</td>
+<td style="text-align:left">基于百度视频处理、人脸识别、语音等技术媒体相关的整体解决方案</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/google/ExoPlayer" target="_blank" rel="external">ExoPlayer</a></td>
+<td style="text-align:left">Google开源的视频播放器</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h1 id="KSYStreamer-Android"><a href="#KSYStreamer-Android" class="headerlink" title="KSYStreamer_Android"></a><a href="https://github.com/ksvc/KSYStreamer_Android/" target="_blank" rel="external"><strong>KSYStreamer_Android</strong></a></h1><p>金山云Android采集推流SDK(Livestream SDK)，支持内置/自定义美颜(Beauty Filter)、美声(Beauty Voice)、软硬编(Software/Hardware Encoder) 、网络自适应(Network Auto Adapt)、混音(Voice Mixer)、混响(Reverb)、画中画(PIP)、连麦(RTC)、动态贴纸(Sticker) </p>
+<p>#<strong>KSYMediaPlayer_Android</strong><br>金山云Android播放SDK（KSYUN Live Streaming player SDK），支持RTMP HTTP-FLV HLS 协议（supporting RTMP HTTP-FLV HLS protocol），直播延时2-3秒（Living delay 2 or 3 seconds），supporting jitter control，software&amp;hardware decode</p>
+<p>#<strong>KSYLive_Android</strong><br>Android播放&amp;推流融合版本[Android Play and LiveStreaming SDK] 直播延时2-3秒（Living delay 2 or 3 seconds），supporting jitter control，software&amp;hardware decode, 支持内置/自定义美颜(Beauty Filter)、美声(Beauty Voice)、软硬编(Software/Hardware Encoder) 、网络自适应(Network Auto Adapt)、混音(Voice Mixer)、混响(Reverb)、画中画(PIP)</p>
+<p>#<strong>KSYMediaPlayer_Android</strong></p>
+<p>金山云Android播放SDK（KSYUN Live Streaming player SDK），支持RTMP HTTP-FLV HLS 协议（supporting RTMP HTTP-FLV HLS protocol），直播延时2-3秒（Living delay 2 or 3 seconds），supporting jitter control，software&amp;hardware decode</p>
+<p>#<strong>MD360Player4Android</strong><br>Android上全景视频渲染的库</p>
+<p><img src="https://github.com/ashqal/MD360Player4Android/raw/master/app/demo/preview2.jpg" alt="MD360Player4Android"></p>
+<h1 id="汉语转拼音"><a href="#汉语转拼音" class="headerlink" title="汉语转拼音"></a><strong>汉语转拼音</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://pinyin4j.sourceforge.net/" target="_blank" rel="external">pinyin4j</a></td>
+<td style="text-align:left"><a href="https://github.com/belerweb/pinyin4j" target="_blank" rel="external">https://github.com/belerweb/pinyin4j</a></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/promeG/TinyPinyin" target="_blank" rel="external">TinyPinyin</a></td>
+<td style="text-align:left">适用于Java和Android的快速、低内存占用的汉字转拼音库。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/handsomezhou/PinyinSearchLibrary" target="_blank" rel="external">PinyinSearchLibrary</a></td>
+<td style="text-align:left">The library of PinyinSearch,a Java Library which provide data parsing methods, data matching method and so on for T9 search and Qwerty search.PinyinSearch = T9Search + QwertySearch</td>
+</tr>
+<tr>
+<td style="text-align:left">com.pinyin4android</td>
+<td style="text-align:left">唯品会使用</td>
+</tr>
+</tbody>
+</table>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a><strong>下载</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Aspsine/MultiThreadDownload" target="_blank" rel="external">MultiThreadDownload</a></td>
+<td style="text-align:left">使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/lingochamp/FileDownloader" target="_blank" rel="external">FileDownloader</a></td>
+<td style="text-align:left">Android 文件下载引擎，稳定、高效、灵活、简单易用</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ssseasonnn/RxDownload" target="_blank" rel="external">RxDownload</a></td>
+<td style="text-align:left">基于RxJava和Retrofit打造的下载工具, 支持多线程下载和断点续传, 智能判断是否支持断点续传等功能</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wlfcolin/file-downloader" target="_blank" rel="external">file-downloader</a></td>
+<td style="text-align:left">安卓上轻量级Http/Https文件下载框架，我的目标是让安卓文件下载越简单越好，尽可能以最简洁明了的方式完成复杂需求。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a><strong>动画</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/facebook/rebound" target="_blank" rel="external">facebook:rebound</a></td>
+<td style="text-align:left">A Java library that models spring dynamics and adds real world physics to your app</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/florent37/ViewAnimator" target="_blank" rel="external">ViewAnimator</a></td>
+<td style="text-align:left">A fluent Android animation library</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/lgvalle/Material-Animations" target="_blank" rel="external">Material-Animations</a></td>
+<td style="text-align:left">Android Transition animations explanation with examples</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/daimajia/AndroidViewAnimations" target="_blank" rel="external">AndroidViewAnimations</a></td>
+<td style="text-align:left">Cute view animation collection.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/nhaarman/ListViewAnimations" target="_blank" rel="external">ListViewAnimations</a></td>
+<td style="text-align:left">An Android library which allows developers to easily add animations to ListView items</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wasabeef/recyclerview-animators" target="_blank" rel="external">recyclerview-animators</a></td>
+<td style="text-align:left">An Android Animation library which easily add itemanimator to RecyclerView items.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/gabrielemariotti/RecyclerViewItemAnimators" target="_blank" rel="external">RecyclerViewItemAnimators</a></td>
+<td style="text-align:left">An Android library which provides simple Item animations to RecyclerView items</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/daimajia/AnimationEasingFunctions" target="_blank" rel="external">AnimationEasingFunctions</a></td>
+<td style="text-align:left">Android Animation Easing Functions. Let’s make animation more real!</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/z56402344/BaseAnimation" target="_blank" rel="external">BaseAnimation</a></td>
+<td style="text-align:left">BaseAnimation收集网络Android相关动画集合，自定义控件等，近200多种源码</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/kakajika/FragmentAnimations" target="_blank" rel="external">FragmentAnimations</a></td>
+<td style="text-align:left">3D animations for support-v4 Fragment transition.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/alphamu/AnimatedEditText" target="_blank" rel="external">AnimatedEditText</a></td>
+<td style="text-align:left">Androids EditText that animates the typed text. EditText is extended to create AnimatedEditText and a PinEntryEditText.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/ToxicBakery/ViewPagerTransforms" target="_blank" rel="external">ViewPagerTransforms</a></td>
+<td style="text-align:left">Library containing common animations needed for transforming ViewPager scrolling for Android v13+</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/airbnb/lottie-android" target="_blank" rel="external">lottie-android</a></td>
+<td style="text-align:left">Render After Effects animations natively on Android and iOS</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Android选择器类库"><a href="#Android选择器类库" class="headerlink" title="Android选择器类库"></a><strong>Android选择器类库</strong></h1><p>包括日期时间选择器、单项选择器、地址选择器、颜色选择器、文件目录选择器、数字选择器、星座选择器等</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">框架名称</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/prolificinteractive/material-calendarview" target="_blank" rel="external">material-calendarview</a></td>
+<td style="text-align:left">material design 风格的日历控件使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/wdullaer/MaterialDateTimePicker" target="_blank" rel="external">MaterialDateTimePicker</a></td>
+<td style="text-align:left">Pick a date or time on Android in style，使用的App有：薄荷</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/android-times-square" target="_blank" rel="external">android-times-square</a></td>
+<td style="text-align:left">Standalone Android widget for picking a single date from a calendar view.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/jdsjlzx/AndroidPicker" target="_blank" rel="external">AndroidPicker</a></td>
+<td style="text-align:left">安卓选择器类库，包括日期时间选择器、单项选择器、地址选择器、颜色选择器、文件目录选择器、数字选择器、星座选择器等。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/saiwu-bigkoo/Android-PickerView" target="_blank" rel="external">Android-PickerView</a></td>
+<td style="text-align:left">仿iOS的PickerView控件，有时间选择和选项选择并支持一二三级联动效果</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/AigeStudio/WheelPicker" target="_blank" rel="external">WheelPicker</a></td>
+<td style="text-align:left">Simple and fantastic wheel view in realistic effect for android.</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/DroidNinja/Android-FilePicker" target="_blank" rel="external">Android-FilePicker</a></td>
+<td style="text-align:left">Photopicker and document picker for android</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Carbs0126/NumberPickerView" target="_blank" rel="external">NumberPickerView</a></td>
+<td style="text-align:left">another NumberPicker with more flexible attributes on Android platform</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://github.com/Airsaid/Android-PickerView-Library" target="_blank" rel="external">Android-PickerView-Library</a></td>
+<td style="text-align:left">Simple PickerView for Android</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Rajawali"><a href="#Rajawali" class="headerlink" title="Rajawali"></a><a href="https://github.com/Rajawali/Rajawali" target="_blank" rel="external"><strong>Rajawali</strong></a></h1><p>Rajawali是一个用于Android应用的3D引擎，基于 OpenGL ES 2.0。它可以用于普通的应用程序，以及实时壁纸。使用的App有：网易新闻</p>
+<p>##<strong>aspectj</strong><br>AspectJ是一个面向切面的框架，它扩展了Java语言。使用的App有：网易新闻</p>
+<h2 id="Apache-Thrift"><a href="#Apache-Thrift" class="headerlink" title="Apache Thrift"></a><a href="http://www.ibm.com/developerworks/cn/java/j-lo-apachethrift/" target="_blank" rel="external"><strong>Apache Thrift</strong></a></h2><p>可伸缩的跨语言服务开发框架，使用的App有：网易新闻</p>
+<p>##<strong>Fabric SDK</strong><br><a href="https://realm.io/cn/news/oredev-ty-smith-building-android-sdks-fabric/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">https://realm.io/cn/news/oredev-ty-smith-building-android-sdks-fabric/?utm_source=tuicool&amp;utm_medium=referral</a></p>
+<p>##<strong>GNU Trove</strong><br>Trove 是一个快速、轻量级 Collection 类的集合。Trove 提供所有标准 java.util Collections 类的更快的版本以及能够直接在原语（primitive）（例如包含 int 键或值的 Map 等）上操作的 Collections 类的版本。使用的App有：网易新闻</p>
+<p>##<a href="http://java-websocket.org/" target="_blank" rel="external"><strong>Java-WebSocket</strong></a><br>简单的说，websocket就是用来做网页聊天以及手机推送用的。使用的App有薄荷</p>
+<p>以前不管使用HTTP轮询或使用TCP长连接等方式制作在线聊天系统，都有天然缺陷，随着Html5的兴起，其中有一个新的协议WebSocket protocol，可实现浏览器与服务器全双工通信(full-duplex)，它可以做到：浏览器和服务器只需要做一个握手的动作，然后，浏览器和服务器之间就形成了一条快速通道。两者之间就直接可以数据互相传送。这个新的协议的特点正好适合这种在线即时通信。</p>
+<p>现很多网站为了实现即时通讯，所用的技术都是轮询(polling)。轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP request，然后由服务器返回最新的数据给客服端的浏览器。这种传统的HTTP request 的模式带来很明显的缺点 – 浏览器需要不断的向服务器发出请求，然而HTTP request 的header是非常长的，里面包含的数据可能只是一个很小的值，这样会占用很多的带宽。</p>
+<p>而最比较新的技术去做轮询的效果是Comet – 用了AJAX。但这种技术虽然可达到全双工通信，但依然需要发出请求。</p>
+<p>在 WebSocket API，浏览器和服务器只需要要做一个握手的动作，然后，浏览器和服务器之间就形成了一条快速通道。两者之间就直接可以数据互相传送。</p>
+<p>##org.eclipse.mat<br>内存分析。使用的App有薄荷，网易新闻</p>
+<p>##<a href="https://github.com/tianzhijiexian/CommonAdapter" target="_blank" rel="external"><strong>CommonAdapter</strong></a></p>
+<p>使用的App有：薄荷</p>
+<p>##<a href="https://github.com/tianzhijiexian/Android-Best-Practices" target="_blank" rel="external"><strong>Android-Best-Practices</strong></a></p>
+<p>##<a href="https://github.com/Jacksgong/JKeyboardPanelSwitch" target="_blank" rel="external"><strong>JKeyboardPanelSwitch</strong></a><br>Android键盘面板冲突 布局闪动处理方案</p>
+<blockquote>
+<p>起源，之前在微信工作的时候，为了给用户带来更好的基础体验，做了很多尝试，踩了很多输入法的坑，特别是动态调整键盘高度，二级页面是透明背景，魅族早期的Smart bar等, 后来逐一完善了，考虑到拥抱开源，看业界还是有很多应用存在类似问题。就有了这个repo</p>
+</blockquote>
+<p>使用的App有：薄荷</p>
+<p>##<strong>美洽</strong><br>最快连接你与顾客 美洽，在线客服软件的漂亮之选  </p>
+<p>MeiqiaSDK-Android <a href="https://github.com/Meiqia/MeiqiaSDK-Android" target="_blank" rel="external">https://github.com/Meiqia/MeiqiaSDK-Android</a></p>
+<p>使用的App有：薄荷</p>
+<p>##<a href="https://github.com/orhanobut/logger" target="_blank" rel="external"><strong>logger</strong></a><br>使用的App有：薄荷</p>
+<p>##<strong>DeepLinkDispatch</strong><br>最常见的应用就是在网页中跳转到App的某个页面，电商类应用可是都用了的。根据data跳转不同的页面</p>
+<p>使用的App有：京东</p>
+<p>##<a href="https://github.com/keyboardsurfer/Crouton" target="_blank" rel="external"><strong>Crouton</strong></a></p>
+<p>Context sensitive notifications for Android</p>
+<p>##Bolts-Android 一个底层库集合</p>
+<p>##com.arcsoft.livebroadcast</p>
+<p>##<a href="https://github.com/KeepSafe/ReLinker" target="_blank" rel="external">ReLinker</a><br>Relink是一个加载Android so文件(shared library)的一个库。</p>
+<p><a href="http://blog.csdn.net/whywhom/article/details/49780699" target="_blank" rel="external">在Android平台上加载本地库的危险性</a></p>
+<p>##<a href="https://www.kik.com/" target="_blank" rel="external">kik</a></p>
+<p>CHAT ON KIK</p>
+<p>Kik lets you connect with friends,<br>groups and the world around you<br>through chat. And now, you can<br>chat with bots too.</p>
+<p>##<a href="https://github.com/NanoHttpd/nanohttpd" target="_blank" rel="external"><strong>nanohttpd</strong></a></p>
+<p>嵌入式HTTP服务器 ，NanoHTTPD是一个免费、轻量级的(只有一个Java文件) HTTP服务器,可以很好地嵌入到Java程序中。支持 GET, POST, PUT, HEAD 和 DELETE 请求，支持文件上传，占用内存很小。可轻松定制临时文件使用和线程模型。</p>
+<p>##<strong>i-jetty</strong><br>jetty经过交叉编译移植到android平台的web服务器软件，它可以部署web网站</p>
+<p>##com.googlecode.mp4parser</p>
+<p>##<strong>Sparta</strong><br>com.hp.hpl.sparta：XML、DOM、XPath解析器，<a href="http://sparta-xml.sourceforge.net/" target="_blank" rel="external">http://sparta-xml.sourceforge.net/</a></p>
+<p>##<strong><a href="http://jregex.sourceforge.net/" target="_blank" rel="external">JRegex</a></strong><br>JRegex：jregex：正则表达式库</p>
+<p>##<strong><a href="https://github.com/droidwolf/NativeSubprocess" target="_blank" rel="external">NativeSubprocess</a></strong></p>
+<p>唯品会使用</p>
+<p>NativeSubprocess 是一个可以让你在android 程序中创建linux子进程并执行你的java代码的so库。由于市面上典型的内存清理工具只清理apk 包关联的进程，而不会处理linux原生进程，所以NativeSubprocess 可以做什么您懂的！</p>
+<p>##<strong>androidquery</strong><br>Android-Query（AQuery）是一个轻量级的开发包，用于实现 Android 上的异步任务和操作 UI 元素，可让 Android 应用开发更简单、更容易，也更有趣。</p>
+<p>唯品会使用，<a href="https://github.com/androidquery/androidquery" target="_blank" rel="external">https://github.com/androidquery/androidquery</a></p>
+<p>##<strong>MarsDaemon</strong><br>进程常驻，进程保活</p>
+<p>唯品会使用 <a href="https://github.com/Marswin/MarsDaemon" target="_blank" rel="external">https://github.com/Marswin/MarsDaemon</a></p>
+<p>##<strong>SA-iSecurity</strong><br>SA-iSecurity 客户端安全输入系统，唯品会使用</p>
+<p>##<strong>口碑推荐平台TapReason</strong><br>TapReason提供了一款无广告的App增长解决方案。他们的广告是最值得信赖的，因为这些广告都是来自于好友或同事的推荐。唯品会使用</p>
+<p>##<a href="https://github.com/sephiroth74/ImageViewZoom" target="_blank" rel="external"><strong>ImageViewZoom</strong></a><br>Android ImageView widget with zoom and pan capabilities，春雨医生使用</p>
+<p>##<strong>LayoutCast</strong><br>Cast android code and resource changes to the running application through ADB.<br>Android SDK sucks. It’s so slow to build and run which waste me a lot of time every day.</p>
+<p>把代码和资源文件的改动直接同步到手机上，应用不需要重启。省去了编译运行漫长的等待，比较适合真机调试的时候使用。</p>
+<p>##<a href="http://www.joda.org/joda-time/" target="_blank" rel="external"><strong>Joda-Time</strong></a></p>
+<p>JodaTime 提供了一组Java类包用于处理包括ISO8601标准在内的date和time。可以利用它把JDK Date和Calendar类完全替换掉，而且仍然能够提供很好的集成。</p>
+<p>Joda-Time主要的特点包括：</p>
+<ol>
+<li>易于使用:Calendar让获取”正常的”的日期变得很困难，使它没办法提供简单的方法，而Joda-Time能够 直接进行访问域并且索引值1就是代表January。</li>
+<li>易于扩展：JDK支持多日历系统是通过Calendar的子类来实现，这样就显示的非常笨重而且事实 上要实现其它日历系统是很困难的。Joda-Time支持多日历系统是通过基于Chronology类的插件体系来实现。</li>
+<li>提供一组完整的功能：它打算提供 所有关系到date-time计算的功能．Joda-Time当前支持6种日历系统，而且在将来还会继续添加。有着比JDK Calendar更好的整体性能等等。</li>
+</ol>
+<p><a href="https://github.com/JodaOrg/joda-time" target="_blank" rel="external">https://github.com/JodaOrg/joda-time</a></p>
+<p>##<a href="http://msgpack.org/" target="_blank" rel="external"><strong>msgpack</strong></a></p>
+<p>MessagePack是一个基于二进制高效的对象序列化Library用于跨语言通信。<br>它可以像JSON那样，在许多种语言之间交换结构对象；但是它比JSON更快速也更轻巧。 比Google Protocol Buffers还要快4倍 </p>
+<p><a href="https://github.com/msgpack/msgpack-java" target="_blank" rel="external">https://github.com/msgpack/msgpack-java</a></p>
+<p>##<a href="https://github.com/scribejava/scribejava" target="_blank" rel="external"><strong>scribejava</strong></a></p>
+<p>ScribeJava 是一个简单的 Java 实现的 OAuth/OAuth2 库。</p>
+<p>##<a href="http://logback.qos.ch/" target="_blank" rel="external">Logback</a><br>Logback是由log4j创始人Ceki Gülcü设计的又一个开源日志组件。logback当前分成三个模块：logback-core,logback- classic和logback-access。</p>
+<p>##frame-video-view</p>
+<p>No more issues with VideoView</p>
+<p>##<a href="https://github.com/JakeWharton/scalpel" target="_blank" rel="external"><strong>JakeWharton scalpel</strong></a></p>
+<p>Jake Wharton，Android开发领域传奇一般的存在，熟悉Android开发的同学应该都听说过，即便没有，也应该会经常用到他主导或参与贡献的开源 项目，他在GitHub上开源了多个Android兼容性、依赖注入相关的知名项目，目前就职Square, 也参与贡献了Square公司开源的诸如Retrofit, okhttp等热门项目。</p>
+<p>Jake大神喜欢以刀命名自己的项目，可能他觉得这能很好的表达它们作为开发利器的犀利程度，不过没准他也很喜欢中国武侠小说呢。</p>
+<p>他最有名的两把刀，一把是Dagger, 匕首，一个依赖注入框架，用来解耦开发中各模块依赖的，最早由他开发与维护，后来转给Google维护；另一把是同样大名鼎鼎的ButterKnife， 黄油刀，有了它，你再也不用写findViewById了，以后有机会给大家详细介绍它们。</p>
+<p>今天的主角是它们不那么知名的小兄弟，Scalpel，这把非常酷炫实用的解剖刀。</p>
+<p>他其实就是实现了一个三维效果的界面布局层次展示，不需要手机连接开发设备，只需要简单几行代码将其集成到你的应用中，即可开启酷炫之旅，它提供的功能包括：</p>
+<ul>
+<li><p>通过setLayerInteractionEnabled(boolean)可开启与关闭此功能。</p>
+</li>
+<li><p>通过setDrawViews(boolean)可控制是否绘制View, 也就是说它可以仅仅是个简单的布局线框图，也可以是色彩丰富的真实效果图。</p>
+</li>
+<li><p>通过setDrawIds(boolean)可控制是否显示各控件的Id, 你就能知道你自己正在调试的那个控件到底在哪了？</p>
+</li>
+<li><p>通过setChromeColor，setChromeShadowColor可自定义线框图的颜色，随你喜欢。</p>
+</li>
+</ul>
+<p>##<strong>material-camera</strong><br><a href="https://github.com/afollestad/material-camera" target="_blank" rel="external">https://github.com/afollestad/material-camera</a></p>
+<p><img src="https://raw.githubusercontent.com/afollestad/material-camera/master/art/showcase1.png" alt="material-camera"></p>
+<p>##<a href="https://github.com/orhanobut/hawk" target="_blank" rel="external">hawk</a><br>Android的安全、简单Key-Value存储</p>
+<h2 id="bugsnag"><a href="#bugsnag" class="headerlink" title="bugsnag"></a><a href="https://github.com/bugsnag/bugsnag-android" target="_blank" rel="external"><strong>bugsnag</strong></a></h2><p>Bugsnag crash reporting for Android apps ，Bugsnag exception reporter for Android</p>
+<h2 id="goldengate"><a href="#goldengate" class="headerlink" title="goldengate"></a><a href="https://github.com/Flipboard/GoldenGate" target="_blank" rel="external">goldengate</a></h2><p>An Android annotation processor for generating type safe javascript bindings (Bridges)</p>
+<h2 id="Helpshift"><a href="#Helpshift" class="headerlink" title="Helpshift"></a>Helpshift</h2><h2 id="slf4j"><a href="#slf4j" class="headerlink" title="slf4j"></a><a href="http://www.slf4j.org/" target="_blank" rel="external"><strong>slf4j</strong></a></h2><p>SLF4J，即简单日志门面（Simple Logging Facade for Java），不是具体的日志解决方案，它只服务于各种各样的日志系统。按照官方的说法，SLF4J是一个用于日志系统的简单Facade，允许最终用户在部署其应用时使用其所希望的日志系统。</p>
+<h2 id="Nuwa热修复"><a href="#Nuwa热修复" class="headerlink" title="Nuwa热修复"></a><a href="https://github.com/jasonross/Nuwa" target="_blank" rel="external"><strong>Nuwa热修复</strong></a></h2><p>Nuwa, pure java implementation, can hotfix your android application.</p>
+<p><a href="http://blog.csdn.net/sbsujjbcy/article/details/50812674" target="_blank" rel="external">Android 热修复Nuwa的原理及Gradle插件源码解析</a></p>
+<h2 id="megvii人脸识别"><a href="#megvii人脸识别" class="headerlink" title="megvii人脸识别"></a>megvii人脸识别</h2><h2 id="RadiusNetworks"><a href="#RadiusNetworks" class="headerlink" title="RadiusNetworks"></a>RadiusNetworks</h2><p><a href="http://www.radiusnetworks.com/" target="_blank" rel="external">http://www.radiusnetworks.com/</a></p>
+<p><a href="https://github.com/RadiusNetworks" target="_blank" rel="external">https://github.com/RadiusNetworks</a></p>
+<h2 id="Swiper"><a href="#Swiper" class="headerlink" title="Swiper"></a><a href="http://www.swiper.com.cn/" target="_blank" rel="external"><strong>Swiper</strong></a></h2><ul>
+<li><p>开源，免费，强大的移动端触摸滑动插件</p>
+</li>
+<li><p>Swiper常用于移动端网站的内容触摸滑动</p>
+</li>
+<li><p>Swiper3依然拥有progress，这是制作3D切换效果的利器</p>
+</li>
+<li><p>在Swiper上加些小动画，制作高大上的展示</p>
+</li>
+</ul>
+<h2 id="Netty"><a href="#Netty" class="headerlink" title="Netty"></a><strong>Netty</strong></h2><p>Netty是由JBOSS提供的一个java开源框架。Netty提供异步的、事件驱动的网络应用程序框架和工具，用以快速开发高性能、高可靠性的网络服务器和客户端程序。</p>
+<p>也就是说，Netty 是一个基于NIO的客户、服务器端编程框架，使用Netty 可以确保你快速和简单的开发出一个网络应用，例如实现了某种协议的客户，服务端应用。Netty相当简化和流线化了网络应用的编程开发过程，例如，TCP和UDP的socket服务开发。</p>
+<p>“快速”和“简单”并不用产生维护性或性能上的问题。Netty 是一个吸收了多种协议的实现经验，这些协议包括FTP,SMTP,HTTP，各种二进制，文本协议，并经过相当精心设计的项目，最终，Netty 成功的找到了一种方式，在保证易于开发的同时还保证了其应用的性能，稳定性和伸缩性。</p>
+<p>##<a href="https://github.com/chrisbanes/cheesesquare" target="_blank" rel="external">cheesesquare：Demos the new Android Design library</a></p>
+<p>##<a href="https://github.com/geometer/FBReaderJ" target="_blank" rel="external"><strong>FBReaderJ</strong></a></p>
+<p>FBReaderJ是一个Android 平台上的电子书阅读器。这是一个Java版的FBReader图书阅读器的克隆。 FBReaderJ支持多种电子书格式： oeb ， epub ，和fb2 。直读从zip、tar和gzip等格式</p>
+<p>##<a href="https://github.com/fusesource/hawtdispatch" target="_blank" rel="external"><strong>hawtdispatch</strong></a></p>
+<p>HawtDispatch is a small ( less than 100k ) thread pooling and NIO handling framework API modeled after the libdispatch API. libdispatch is the API that Apple created to power the Grand Central Dispatch (GCD) technology in OS X. It allows you to more easily develop multi-threaded applications which can more easily scale to take advantage of all the processing cores on your machine. At the same time, its development model simplifies solving many of the problems that plague multi-threaded NIO development.</p>
+<p>##ZeroMQ 一个轻量级消息内核</p>
+<p>##<a href="https://github.com/crossbario/autobahn-android" target="_blank" rel="external">autobahn-android</a><br>WebSocket &amp; WAMP in Java for Android</p>
+<h1 id="Robotium"><a href="#Robotium" class="headerlink" title="Robotium"></a><a href="https://github.com/RobotiumTech/robotium" target="_blank" rel="external">Robotium</a></h1><p>Robotium 是一款国外的Android自动化测试框架，主要针对Android平台的应用进行黑盒自动化测试，它提供了模拟各种手势操作（点击、长 按、滑动等）、查找和断言机制的API，能够对各种控件进行操作。Robotium结合Android官方提供的测试框架达到对应用程序进行自动化的测 试。另外，Robotium 4.0版本已经支持对WebView的操作。Robotium 对Activity，Dialog，Toast，Menu 都是支持的。</p>
+<h1 id="One-Step-amp-Big-Bang"><a href="#One-Step-amp-Big-Bang" class="headerlink" title="One Step &amp; Big Bang"></a><strong><a href="https://github.com/SmartisanTech/android" target="_blank" rel="external">One Step &amp; Big Bang</a></strong></h1><p><img src="https://camo.githubusercontent.com/897d4f84233a7131ffc3cb2b4394914c04b9140a/687474703a2f2f7374617469632e736d6172746973616e6f732e636e2f636f6d6d6f6e2f696d672f74686972642d6d656469756d2f6f6e652d737465702d69636f6e5f386461623932336635332e706e67" alt=""> <img src="https://camo.githubusercontent.com/62a0c203e5120555afd516356d61b615e5f09e49/687474703a2f2f7374617469632e736d6172746973616e6f732e636e2f636f6d6d6f6e2f696d672f74686972642d6d656469756d2f62696762616e672d69636f6e5f393066393230323939322e706e67" alt=""></p>
+<blockquote>
+<p>锤子科技的一小步，智能手机进化的一大步</p>
+</blockquote>
+<hr>
+<h3 id="什么是一步（One-Step）？"><a href="#什么是一步（One-Step）？" class="headerlink" title="什么是一步（One Step）？"></a>什么是一步（One Step）？</h3><p>通过拖拽完成将信息发送至应用或联系人的动作，节省了在不同应用之间切换的诸多步骤，第一次打通了手持设备中应用间的边界</p>
+<p><a href="http://www.smartisan.com/m1/#/os?section=onestep" target="_blank" rel="external">进一步了解 One Step</a></p>
+<h3 id="什么是大爆炸（Big-Bang）？"><a href="#什么是大爆炸（Big-Bang）？" class="headerlink" title="什么是大爆炸（Big Bang）？"></a>什么是大爆炸（Big Bang）？</h3><p>用拇指大面积按压屏幕中的文字，Big Bang 会将你按住的那一段文字全部“炸”开并且按照语义智能拆分成易于选取的独立的字和词，由你随心所欲地选择，并可直接搜索、分享和复制。Big Bang 开创性地解决了在手机这样的小屏幕上难于处理文字的弊端</p>
+<p><a href="http://www.smartisan.com/m1/#/os#blastParticiple" target="_blank" rel="external">进一步了解 Big Bang</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开源框架/" rel="tag"># 开源框架</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/open/第三方平台/" rel="next" title="Android开发常用第三方平台">
+                <i class="fa fa-chevron-left"></i> Android开发常用第三方平台
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/java/Java基础入门/" rel="prev" title="Java基础入门">
+                Java基础入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android开源框架系列"><span class="nav-number">1.</span> <span class="nav-text">Android开源框架系列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开源框架"><span class="nav-number">2.</span> <span class="nav-text">开源框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">3.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Square-amp-JakeWharton"><span class="nav-number">4.</span> <span class="nav-text">Square& JakeWharton</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阿里巴巴"><span class="nav-number">5.</span> <span class="nav-text">阿里巴巴</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-图片加载，缓存，处理"><span class="nav-number">6.</span> <span class="nav-text">1. 图片加载，缓存，处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-图片裁剪"><span class="nav-number">7.</span> <span class="nav-text">2. 图片裁剪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#uCrop"><span class="nav-number">7.1.</span> <span class="nav-text">uCrop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-crop"><span class="nav-number">7.2.</span> <span class="nav-text">android-crop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Image-Cropper"><span class="nav-number">7.3.</span> <span class="nav-text">Android-Image-Cropper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PhotoCropper"><span class="nav-number">7.4.</span> <span class="nav-text">PhotoCropper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PhotoCrop"><span class="nav-number">7.5.</span> <span class="nav-text">PhotoCrop</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-图片选择"><span class="nav-number">8.</span> <span class="nav-text">3. 图片选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#boxing"><span class="nav-number">8.1.</span> <span class="nav-text">boxing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MultiImageSelector"><span class="nav-number">8.2.</span> <span class="nav-text">MultiImageSelector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BGAPhotoPicker-Android"><span class="nav-number">8.3.</span> <span class="nav-text">BGAPhotoPicker-Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TakePhoto"><span class="nav-number">8.4.</span> <span class="nav-text">TakePhoto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxGalleryFinal"><span class="nav-number">8.5.</span> <span class="nav-text">RxGalleryFinal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-图片转换，压缩，滤镜"><span class="nav-number">9.</span> <span class="nav-text">4. 图片转换，压缩，滤镜</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-gpuimage"><span class="nav-number">9.1.</span> <span class="nav-text">Android-gpuimage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#circleimageview"><span class="nav-number">9.2.</span> <span class="nav-text">circleimageview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RoundedImageView"><span class="nav-number">9.3.</span> <span class="nav-text">RoundedImageView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SelectableRoundedImageView"><span class="nav-number">9.4.</span> <span class="nav-text">SelectableRoundedImageView</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-高斯模糊，毛玻璃，图片模糊"><span class="nav-number">10.</span> <span class="nav-text">5. 高斯模糊，毛玻璃，图片模糊</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#android-stackblur"><span class="nav-number">10.1.</span> <span class="nav-text">android-stackblur</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Blurry"><span class="nav-number">10.2.</span> <span class="nav-text">Blurry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blurkit-android"><span class="nav-number">10.3.</span> <span class="nav-text">blurkit-android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BlurView"><span class="nav-number">10.4.</span> <span class="nav-text">BlurView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageBlurring"><span class="nav-number">10.5.</span> <span class="nav-text">ImageBlurring</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缓存"><span class="nav-number">11.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络请求"><span class="nav-number">12.</span> <span class="nav-text">网络请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络解析"><span class="nav-number">13.</span> <span class="nav-text">网络解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">14.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#依赖注入"><span class="nav-number">15.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图表Chart"><span class="nav-number">16.</span> <span class="nav-text">图表Chart</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后台处理"><span class="nav-number">17.</span> <span class="nav-text">后台处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件总线"><span class="nav-number">18.</span> <span class="nav-text">事件总线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#响应式编程"><span class="nav-number">19.</span> <span class="nav-text">响应式编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log框架"><span class="nav-number">20.</span> <span class="nav-text">Log框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试框架"><span class="nav-number">21.</span> <span class="nav-text">测试框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试框架"><span class="nav-number">22.</span> <span class="nav-text">调试框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能优化"><span class="nav-number">23.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#热修复"><span class="nav-number">24.</span> <span class="nav-text">热修复</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二维码"><span class="nav-number">25.</span> <span class="nav-text">二维码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多媒体"><span class="nav-number">26.</span> <span class="nav-text">多媒体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#KSYStreamer-Android"><span class="nav-number">27.</span> <span class="nav-text">KSYStreamer_Android</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#汉语转拼音"><span class="nav-number">28.</span> <span class="nav-text">汉语转拼音</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载"><span class="nav-number">29.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画"><span class="nav-number">30.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android选择器类库"><span class="nav-number">31.</span> <span class="nav-text">Android选择器类库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rajawali"><span class="nav-number">32.</span> <span class="nav-text">Rajawali</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-Thrift"><span class="nav-number">32.1.</span> <span class="nav-text">Apache Thrift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bugsnag"><span class="nav-number">32.2.</span> <span class="nav-text">bugsnag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#goldengate"><span class="nav-number">32.3.</span> <span class="nav-text">goldengate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Helpshift"><span class="nav-number">32.4.</span> <span class="nav-text">Helpshift</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slf4j"><span class="nav-number">32.5.</span> <span class="nav-text">slf4j</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nuwa热修复"><span class="nav-number">32.6.</span> <span class="nav-text">Nuwa热修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#megvii人脸识别"><span class="nav-number">32.7.</span> <span class="nav-text">megvii人脸识别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RadiusNetworks"><span class="nav-number">32.8.</span> <span class="nav-text">RadiusNetworks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swiper"><span class="nav-number">32.9.</span> <span class="nav-text">Swiper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty"><span class="nav-number">32.10.</span> <span class="nav-text">Netty</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Robotium"><span class="nav-number">33.</span> <span class="nav-text">Robotium</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#One-Step-amp-Big-Bang"><span class="nav-number">34.</span> <span class="nav-text">One Step & Big Bang</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是一步（One-Step）？"><span class="nav-number">34.0.1.</span> <span class="nav-text">什么是一步（One Step）？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是大爆炸（Big-Bang）？"><span class="nav-number">34.0.2.</span> <span class="nav-text">什么是大爆炸（Big Bang）？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/open/开源框架/';
+          this.page.identifier = '2017/05/01/open/开源框架/';
+          this.page.title = 'Android开发常用开源框架';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

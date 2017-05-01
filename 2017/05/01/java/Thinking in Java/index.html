@@ -1,0 +1,1421 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Thinking in Java (Java 编程思想)本书来自网络，全科-不安分的码农整理成电子书，支持PDF，ePub，Mobi格式，方便大家下载阅读。  阅读地址 下载地址 github地址 GitBook  第13章没有编辑，觉得没有意义，Java的GUI现在应用少，有时间再编辑好">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Thinking in Java (Java 编程思想)">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/java/Thinking in Java/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="Thinking in Java (Java 编程思想)本书来自网络，全科-不安分的码农整理成电子书，支持PDF，ePub，Mobi格式，方便大家下载阅读。  阅读地址 下载地址 github地址 GitBook  第13章没有编辑，觉得没有意义，Java的GUI现在应用少，有时间再编辑好">
+<meta property="og:image" content="http://img.blog.csdn.net/20170430140135578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170430140221203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-05-01T09:49:49.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thinking in Java (Java 编程思想)">
+<meta name="twitter:description" content="Thinking in Java (Java 编程思想)本书来自网络，全科-不安分的码农整理成电子书，支持PDF，ePub，Mobi格式，方便大家下载阅读。  阅读地址 下载地址 github地址 GitBook  第13章没有编辑，觉得没有意义，Java的GUI现在应用少，有时间再编辑好">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170430140135578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/java/Thinking in Java/"/>
+
+
+
+
+
+  <title>Thinking in Java (Java 编程思想) | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/java/Thinking in Java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Thinking in Java (Java 编程思想)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T17:46:36+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/java/Thinking in Java/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/java/Thinking in Java/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Thinking-in-Java-Java-编程思想"><a href="#Thinking-in-Java-Java-编程思想" class="headerlink" title="Thinking in Java (Java 编程思想)"></a><strong>Thinking in Java (Java 编程思想)</strong></h2><p>本书来自网络，<a href="http://quanke.name" target="_blank" rel="external">全科-不安分的码农</a>整理成电子书，支持PDF，ePub，Mobi格式，方便大家下载阅读。</p>
+<ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/" target="_blank" rel="external">阅读地址</a></li>
+<li><a href="https://www.gitbook.com/book/alleniverson/thinking-in-java/details" target="_blank" rel="external">下载地址</a></li>
+<li><a href="https://github.com/JackChen1999/think-in-java" target="_blank" rel="external">github地址</a></li>
+<li><a href="https://www.gitbook.com/@alleniverson" target="_blank" rel="external">GitBook</a></li>
+</ul>
+<p>第13章没有编辑，觉得没有意义，Java的GUI现在应用少，有时间再编辑好</p>
+<a id="more"></a>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h2><ul>
+<li><a href="README.html">前言</a></li>
+<li><a href="写在前面的话.html">写在前面的话</a></li>
+<li><a href="引言.html">引言</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/第1章%20对象入门.html" target="_blank" rel="external">第1章 对象入门</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.1%20抽象的进步.html" target="_blank" rel="external">1.1 抽象的进步</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.2%20对象的接口.html" target="_blank" rel="external">1.2 对象的接口</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.3%20实现方案的隐藏.html" target="_blank" rel="external">1.3 实现方案的隐藏</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.4%20方案的重复使用.html" target="_blank" rel="external">1.4 方案的重复使用</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.5%20继承：重新使用接口.html" target="_blank" rel="external">1.5 继承：重新使用接口</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.6%20多形对象的互换使用.html" target="_blank" rel="external">1.6 多形对象的互换使用</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.7%20对象的创建和存在时间.html" target="_blank" rel="external">1.7 对象的创建和存在时间</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.8%20违例控制：解决错误.html" target="_blank" rel="external">1.8 违例控制：解决错误</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.9%20多线程.html" target="_blank" rel="external">1.9 多线程</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.10%20永久性.html" target="_blank" rel="external">1.10 永久性</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.11%20Java和因特网.html" target="_blank" rel="external">1.11 Java和因特网</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.12%20分析和设计.html" target="_blank" rel="external">1.12 分析和设计</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter1/1.13%20Java还是C++.html" target="_blank" rel="external">1.13 Java还是C++</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/第2章%20一切都是对象.html" target="_blank" rel="external">第2章 一切都是对象</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.1%20用句柄操纵对象.html" target="_blank" rel="external">2.1 用句柄操纵对象</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.2%20所有对象都必须创建.html" target="_blank" rel="external">2.2 所有对象都必须创建</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.3%20绝对不要清除对象.html" target="_blank" rel="external">2.3 绝对不要清除对象</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.4%20新建数据类型：类.html" target="_blank" rel="external">2.4 新建数据类型：类</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.5%20方法、自变量和返回值.html" target="_blank" rel="external">2.5 方法、自变量和返回值</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.6%20构建Java程序.html" target="_blank" rel="external">2.6 构建Java程序</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.7%20我们的第一个Java程序.html" target="_blank" rel="external">2.7 我们的第一个Java程序</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.8%20注释和嵌入文档.html" target="_blank" rel="external">2.8 注释和嵌入文档</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.9%20编码样式.html" target="_blank" rel="external">2.9 编码样式</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.10%20总结.html" target="_blank" rel="external">2.10 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter2/2.11%20练习.html" target="_blank" rel="external">2.11 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter3/第3章%20控制程序流程.html" target="_blank" rel="external">第3章 控制程序流程</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter3/3.1%20使用Java运算符.html" target="_blank" rel="external">3.1 使用Java运算符</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter3/3.2%20执行控制.html" target="_blank" rel="external">3.2 执行控制</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter3/3.3%20总结.html" target="_blank" rel="external">3.3 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter3/3.4%20练习.html" target="_blank" rel="external">3.4 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/第4章%20初始化和清除.html" target="_blank" rel="external">第4章 初始化和清除</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.1%20用构建器自动初始化.html" target="_blank" rel="external">4.1 用构建器自动初始化</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.2%20方法过载.html" target="_blank" rel="external">4.2 方法过载</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.3%20清除：收尾和垃圾收集.html" target="_blank" rel="external">4.3 清除：收尾和垃圾收集</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.4%20成员初始化.html" target="_blank" rel="external">4.4 成员初始化</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.5%20数组初始化.html" target="_blank" rel="external">4.5 数组初始化</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.6%20总结.html" target="_blank" rel="external">4.6 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter4/4.7%20练习.html" target="_blank" rel="external">4.7 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/第5章%20隐藏实施过程.html" target="_blank" rel="external">第5章 隐藏实施过程</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/5.1%20包：库单元.html" target="_blank" rel="external">5.1 包：库单元</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/5.2%20Java访问指示符.html" target="_blank" rel="external">5.2 Java访问指示符</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/5.3%20接口与实现.html" target="_blank" rel="external">5.3 接口与实现</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/5.4%20类访问.html" target="_blank" rel="external">5.4 类访问</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/5.5%20总结.html" target="_blank" rel="external">5.5 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter5/5.6%20练习.html" target="_blank" rel="external">5.6 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/第6章%20类再生.html" target="_blank" rel="external">第6章 类再生</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.1%20合成的语法.html" target="_blank" rel="external">6.1 合成的语法</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.2%20继承的语法.html" target="_blank" rel="external">6.2 继承的语法</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.3%20合成与继承的结合.html" target="_blank" rel="external">6.3 合成与继承的结合</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.4%20到底选择合成还是继承.html" target="_blank" rel="external">6.4 到底选择合成还是继承</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.5%20protected.html" target="_blank" rel="external">6.5 protected</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.6%20累积开发.html" target="_blank" rel="external">6.6 累积开发</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.7%20上溯造型.html" target="_blank" rel="external">6.7 上溯造型</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.8%20final关键字.html" target="_blank" rel="external">6.8 final关键字</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.9%20初始化和类装载.html" target="_blank" rel="external">6.9 初始化和类装载</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.10%20总结.html" target="_blank" rel="external">6.10 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter6/6.11%20练习.html" target="_blank" rel="external">6.11 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/第7章%20多形性.html" target="_blank" rel="external">第7章 多形性</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.1%20上溯造型.html" target="_blank" rel="external">7.1 上溯造型</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.2%20深入理解.html" target="_blank" rel="external">7.2 深入理解</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.3%20覆盖与过载.html" target="_blank" rel="external">7.3 覆盖与过载</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.4%20抽象类和方法.html" target="_blank" rel="external">7.4 抽象类和方法</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.5%20接口.html" target="_blank" rel="external">7.5 接口</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.6%20内部类.html" target="_blank" rel="external">7.6 内部类</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.7%20构建器和多形性.html" target="_blank" rel="external">7.7 构建器和多形性</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.8%20通过继承进行设计.html" target="_blank" rel="external">7.8 通过继承进行设计</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.9%20总结.html" target="_blank" rel="external">7.9 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter7/7.10%20练习.html" target="_blank" rel="external">7.10 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/第8章%20对象的容纳.html" target="_blank" rel="external">第8章 对象的容纳</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.1%20数组.html" target="_blank" rel="external">8.1 数组</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.2%20集合.html" target="_blank" rel="external">8.2 集合</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.3%20枚举器（反复器）.html" target="_blank" rel="external">8.3 枚举器（反复器）</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.4%20集合的类型.html" target="_blank" rel="external">8.4 集合的类型</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.5%20排序.html" target="_blank" rel="external">8.5 排序</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.6%20通用集合库.html" target="_blank" rel="external">8.6 通用集合库</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.7%20新集合.html" target="_blank" rel="external">8.7 新集合</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.8%20总结.html" target="_blank" rel="external">8.8 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter8/8.9%20练习.html" target="_blank" rel="external">8.9 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/第9章%20违例差错控制.html" target="_blank" rel="external">第9章 违例差错控制</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.1%20基本违例.html" target="_blank" rel="external">9.1 基本违例</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.2%20违例的捕获.html" target="_blank" rel="external">9.2 违例的捕获</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.3%20标准Java违例.html" target="_blank" rel="external">9.3 标准Java违例</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.4%20创建自己的违例.html" target="_blank" rel="external">9.4 创建自己的违例</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.5%20违例的限制.html" target="_blank" rel="external">9.5 违例的限制</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.6%20用finally清除.html" target="_blank" rel="external">9.6 用finally清除</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.7%20构建器.html" target="_blank" rel="external">9.7 构建器</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.8%20违例匹配.html" target="_blank" rel="external">9.8 违例匹配</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.9%20总结.html" target="_blank" rel="external">9.9 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter9/9.10%20练习.html" target="_blank" rel="external">9.10 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/第10章%20Java%20IO系统.html" target="_blank" rel="external">第10章 Java IO系统</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.1%20输入和输出.html" target="_blank" rel="external">10.1 输入和输出</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.2%20增添属性和有用的接口.html" target="_blank" rel="external">10.2 增添属性和有用的接口</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.3%20本身的缺陷：RandomAccessFile.html" target="_blank" rel="external">10.3 本身的缺陷：RandomAccessFile</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.4%20File类.html" target="_blank" rel="external">10.4 File类</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.5%20IO流的典型应用.html" target="_blank" rel="external">10.5 IO流的典型应用</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.6%20StreamTokenizer.html" target="_blank" rel="external">10.6 StreamTokenizer</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.7%20Java%201.1的IO流.html" target="_blank" rel="external">10.7 Java 1.1的IO流</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.8%20压缩.html" target="_blank" rel="external">10.8 压缩</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.9%20对象序列化.html" target="_blank" rel="external">10.9 对象序列化</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.10%20总结.html" target="_blank" rel="external">10.10 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter10/10.11%20练习.html" target="_blank" rel="external">10.11 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter11/第11章%20运行期类型鉴定.html" target="_blank" rel="external">第11章 运行期类型鉴定</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter11/11.1%20对RTTI的需要.html" target="_blank" rel="external">11.1 对RTTI的需要</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter11/11.2%20RTTI语法.html" target="_blank" rel="external">11.2 RTTI语法</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter11/11.3%20反射：运行期类信息.html" target="_blank" rel="external">11.3 反射：运行期类信息</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter11/11.4%20总结.html" target="_blank" rel="external">11.4 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter11/11.5%20练习.html" target="_blank" rel="external">11.5 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/第12章%20传递和返回对象.html" target="_blank" rel="external">第12章 传递和返回对象</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/12.1%20传递句柄.html" target="_blank" rel="external">12.1 传递句柄</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/12.2%20制作本地副本.html" target="_blank" rel="external">12.2 制作本地副本</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/12.3%20克隆的控制.html" target="_blank" rel="external">12.3 克隆的控制</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/12.4%20只读类.html" target="_blank" rel="external">12.4 只读类</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/12.5%20总结.html" target="_blank" rel="external">12.5 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter12/12.6%20练习.html" target="_blank" rel="external">12.6 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter13/第13章%20创建窗口和程序片.html" target="_blank" rel="external">第13章 创建窗口和程序片</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/第14章%20多线程.html" target="_blank" rel="external">第14章 多线程</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.1%20反应灵敏的用户界面.html" target="_blank" rel="external">14.1 反应灵敏的用户界面</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.2%20共享有限的资源.html" target="_blank" rel="external">14.2 共享有限的资源</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.3%20堵塞.html" target="_blank" rel="external">14.3 堵塞</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.4%20优先级.html" target="_blank" rel="external">14.4 优先级</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.5%20回顾runnable.html" target="_blank" rel="external">14.5 回顾runnable</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.6%20总结.html" target="_blank" rel="external">14.6 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter14/14.7%20练习.html" target="_blank" rel="external">14.7 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/第15章%20网络编程.html" target="_blank" rel="external">第15章 网络编程</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.1%20机器的标识.html" target="_blank" rel="external">15.1 机器的标识</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.2%20套接字.html" target="_blank" rel="external">15.2 套接字</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.3%20服务多个客户.html" target="_blank" rel="external">15.3 服务多个客户</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.4%20数据报.html" target="_blank" rel="external">15.4 数据报</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.5%20一个Web应用.html" target="_blank" rel="external">15.5 一个Web应用</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.6%20Java与CGI的沟通.html" target="_blank" rel="external">15.6 Java与CGI的沟通</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.7%20用JDBC连接数据库.html" target="_blank" rel="external">15.7 用JDBC连接数据库</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.8%20远程方法.html" target="_blank" rel="external">15.8 远程方法</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.9%20总结.html" target="_blank" rel="external">15.9 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter15/15.10%20练习.html" target="_blank" rel="external">15.10 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/第16章%20设计范式.html" target="_blank" rel="external">第16章 设计范式</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.1%20范式的概念.html" target="_blank" rel="external">16.1 范式的概念</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.2%20观察器范式.html" target="_blank" rel="external">16.2 观察器范式</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.3%20模拟垃圾回收站.html" target="_blank" rel="external">16.3 模拟垃圾回收站</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.4%20改进设计.html" target="_blank" rel="external">16.4 改进设计</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.5%20抽象的应用.html" target="_blank" rel="external">16.5 抽象的应用</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.6%20多重派遣.html" target="_blank" rel="external">16.6 多重派遣</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.7%20访问器范式.html" target="_blank" rel="external">16.7 访问器范式</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.8%20RTTI真的有害吗.html" target="_blank" rel="external">16.8 RTTI真的有害吗</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.9%20总结.html" target="_blank" rel="external">16.9 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter16/16.10%20练习.html" target="_blank" rel="external">16.10 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter17/第17章%20项目.html" target="_blank" rel="external">第17章 项目</a><ul>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter17/17.1%20文字处理.html" target="_blank" rel="external">17.1 文字处理</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter17/17.2%20方法查找工具.html" target="_blank" rel="external">17.2 方法查找工具</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter17/17.3%20复杂性理论.html" target="_blank" rel="external">17.3 复杂性理论</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter17/17.4%20总结.html" target="_blank" rel="external">17.4 总结</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/chapter17/17.5%20练习.html" target="_blank" rel="external">17.5 练习</a></li>
+</ul>
+</li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/附录/附录A%20使用非JAVA代码.html" target="_blank" rel="external">附录A 使用非JAVA代码</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/附录/附录B%20对比C++和Java.html" target="_blank" rel="external">附录B 对比C++和Java</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/附录/附录C%20Java编程规则.html" target="_blank" rel="external">附录C Java编程规则</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/附录/附录D%20性能.html" target="_blank" rel="external">附录D 性能</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/附录/附录E%20关于垃圾收集的一些话.html" target="_blank" rel="external">附录E 关于垃圾收集的一些话</a></li>
+<li><a href="https://alleniverson.gitbooks.io/thinking-in-java/content/附录/附录F%20推荐读物.html" target="_blank" rel="external">附录F 推荐读物</a></li>
+</ul>
+<h2 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a><strong>关注我</strong></h2><ul>
+<li>Email：<a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#x3a;&#x38;&#x31;&#53;&#55;&#49;&#x32;&#55;&#x33;&#x39;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;">&#x38;&#x31;&#53;&#55;&#49;&#x32;&#55;&#x33;&#x39;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;</a></li>
+<li>CSDN博客：<a href="http://blog.csdn.net/axi295309066" target="_blank" rel="external">Allen Iverson</a></li>
+<li>新浪微博：<a href="http://weibo.com/u/1848214604?topnav=1&amp;wvr=6&amp;topsug=1&amp;is_all=1" target="_blank" rel="external">AndroidDeveloper</a></li>
+<li>GitHub：<a href="https://github.com/JackChan1999" target="_blank" rel="external">JackChan1999</a></li>
+<li>GitBook：<a href="https://www.gitbook.com/@alleniverson" target="_blank" rel="external">alleniverson</a></li>
+<li>个人博客：<a href="https://jackchan1999.github.io/" target="_blank" rel="external">JackChan</a></li>
+</ul>
+<p>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">微信赞赏支持</th>
+<th style="text-align:center">支付宝赞赏支持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="http://img.blog.csdn.net/20170430140135578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></td>
+<td style="text-align:center"><img src="http://img.blog.csdn.net/20170430140221203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/Android下的Linux/" rel="next" title="Android下的Linux">
+                <i class="fa fa-chevron-left"></i> Android下的Linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/python/Python基础入门/" rel="prev" title="Python基础入门">
+                Python基础入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Thinking-in-Java-Java-编程思想"><span class="nav-number">1.</span> <span class="nav-text">Thinking in Java (Java 编程思想)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关注我"><span class="nav-number">3.</span> <span class="nav-text">关注我</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/java/Thinking in Java/';
+          this.page.identifier = '2017/05/01/java/Thinking in Java/';
+          this.page.title = 'Thinking in Java (Java 编程思想)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

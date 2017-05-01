@@ -1,0 +1,1288 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="源码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Android 开源项目源码解析android-open-project-analysis 这是一个协作项目，最终多数开源库原理解析会在这里分享出来 Android源码设计模式分析项目android_design_patterns_analysis 该项目通过分析Android系统中的设计模式来提升大家对设计模式的理解，从源码的角度来剖析既增加了对Android系统本身的了解，也从优秀的设计中领悟">
+<meta name="keywords" content="源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android源码分析">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/Android源码分析/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="Android 开源项目源码解析android-open-project-analysis 这是一个协作项目，最终多数开源库原理解析会在这里分享出来 Android源码设计模式分析项目android_design_patterns_analysis 该项目通过分析Android系统中的设计模式来提升大家对设计模式的理解，从源码的角度来剖析既增加了对Android系统本身的了解，也从优秀的设计中领悟">
+<meta property="og:updated_time" content="2017-05-01T09:59:59.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android源码分析">
+<meta name="twitter:description" content="Android 开源项目源码解析android-open-project-analysis 这是一个协作项目，最终多数开源库原理解析会在这里分享出来 Android源码设计模式分析项目android_design_patterns_analysis 该项目通过分析Android系统中的设计模式来提升大家对设计模式的理解，从源码的角度来剖析既增加了对Android系统本身的了解，也从优秀的设计中领悟">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/Android源码分析/"/>
+
+
+
+
+
+  <title>Android源码分析 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Android源码分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android源码分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T17:58:46+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/Android源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/Android源码分析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Android-开源项目源码解析"><a href="#Android-开源项目源码解析" class="headerlink" title="Android 开源项目源码解析"></a><strong>Android 开源项目源码解析</strong></h2><p><a href="https://github.com/android-cn/android-open-project-analysis" target="_blank" rel="external">android-open-project-analysis</a></p>
+<p>这是一个协作项目，最终多数开源库原理解析会在这里分享出来</p>
+<h2 id="Android源码设计模式分析项目"><a href="#Android源码设计模式分析项目" class="headerlink" title="Android源码设计模式分析项目"></a><strong>Android源码设计模式分析项目</strong></h2><p><a href="https://github.com/simple-android-framework-exchange/android_design_patterns_analysis" target="_blank" rel="external">android_design_patterns_analysis</a></p>
+<p>该项目通过分析Android系统中的设计模式来提升大家对设计模式的理解，从源码的角度来剖析既增加了对Android系统本身的了解，也从优秀的设计中领悟模式的实际运用以及它适用的场景，避免在实际开发中的生搬硬套。</p>
+<h2 id="Android知名开源库简单实现以及设计分析"><a href="#Android知名开源库简单实现以及设计分析" class="headerlink" title="Android知名开源库简单实现以及设计分析"></a><strong>Android知名开源库简单实现以及设计分析</strong></h2><p><a href="https://github.com/simple-android-framework-exchange/simple-android-opensource-framework" target="_blank" rel="external">simple-android-opensource-framework</a></p>
+<p>该项目通过分析并实现Android平台知名开源框架的简单版本来提升自我，并达到深入理解各大开源库的核心原理的目的。稳定、强大的开源库一般都较为复杂，比如Universal-ImageLoader，因此简版开源库不需要完全按照原版来实现，只需要把核心架构、原理实现，并且做到可运用到实际项目中即可。在实现开源库简版的同时，作者需要写一系列文章来剖析它的实现原理以及为什么要这么设计，在提升自我的同时将框架的设计与实现、领悟分享给他人，希望大家在提升自我的同时对行业做出一些贡献。</p>
+<a id="more"></a>
+<h2 id="Android-SDK-源码解析"><a href="#Android-SDK-源码解析" class="headerlink" title="Android SDK 源码解析"></a><strong>Android SDK 源码解析</strong></h2><p><a href="https://github.com/LittleFriendsGroup/AndroidSdkSourceAnalysis" target="_blank" rel="external">AndroidSdkSourceAnalysis</a></p>
+<p>android sdk 源码解析——旨在帮助Android开发者更好的学习Android！我们只是一群普通的程序员，但是，我们热爱分享，想热热闹闹的玩点有意义的事！如果你也想陪我们一起愉快的玩耍，欢迎加入我们！Issues认领分析文章！</p>
+<ul>
+<li><a href="https://www.gitbook.com/book/alleniverson/android-source-analysis/details" target="_blank" rel="external">PDF、Mobi、ePub下载</a></li>
+<li><a href="http://download.csdn.net/detail/axi295309066/9788564" target="_blank" rel="external">Android源码分析.pdf</a></li>
+<li><a href="https://www.gitbook.com/book/alleniverson/android-source-analysis/content" target="_blank" rel="external">在线阅读</a></li>
+<li><a href="https://github.com/JackChen1999/Android_Source_Analysis" target="_blank" rel="external">GitHub托管</a></li>
+</ul>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h1><ul>
+<li><a href="README.md">前言</a></li>
+<li><a href="common\README.md">Android源码分析 公共技术点</a><ul>
+<li><a href="common/公共技术点之Java反射.md">公共技术点之Java反射</a></li>
+<li><a href="common/公共技术点之Java注解.md">公共技术点之Java注解</a></li>
+<li><a href="common/公共技术点之Java动态代理.md">公共技术点之Java动态代理</a></li>
+<li><a href="common/公共技术点之View绘制流程.md">公共技术点之View绘制流程</a></li>
+<li><a href="common/公共技术点之View事件传递.md">公共技术点之View事件传递</a></li>
+<li><a href="common/公共技术点之Android动画基础.md">公共技术点之Android动画基础</a></li>
+</ul>
+</li>
+<li><a href="chapter1/README.md">Android源码分析 第1期</a><ul>
+<li><a href="chapter1/AsyncTask源码分析.md">AsyncTask源码分析</a></li>
+<li><a href="chapter1/Binder源码分析.md">Binder源码分析</a></li>
+<li><a href="chapter1/BottomSheets源码解析.md">BottomSheets源码解析</a></li>
+<li><a href="chapter1/CompoundButton源码分析.md">CompoundButton源码分析</a></li>
+<li><a href="chapter1/CoordinatorLayout源码分析.md">CoordinatorLayout源码分析</a></li>
+<li><a href="chapter1/FloatingActionButton源码解析.md">FloatingActionButton源码解析</a></li>
+<li><a href="chapter1/LruCache源码解析.md">LruCache源码解析</a></li>
+<li><a href="chapter1/Scroller源码解析.md">Scroller源码解析</a></li>
+<li><a href="chapter1/SearchView源码解析.md">SearchView源码解析</a></li>
+<li><a href="chapter1/SwipeRefreshLayout.md">SwipeRefreshLayout</a></li>
+<li><a href="chapter1/TabLayout源码解析.md">TabLayout源码解析</a></li>
+<li><a href="chapter1/TextView源码解析.md">TextView源码解析</a></li>
+<li><a href="chapter1/ViewDragHelper源码解析.md">ViewDragHelper源码解析</a></li>
+</ul>
+</li>
+<li><a href="chapter2\README.md">Android源码分析 第2期</a><ul>
+<li><a href="chapter2/Bundle源码解析.md">Bundle源码解析</a></li>
+<li><a href="chapter2/Handler源码解析.md">Handler源码解析</a></li>
+<li><a href="chapter2/LayoutInflater源码解析.md">LayoutInflater源码解析</a></li>
+<li><a href="chapter2/LocalBroadcastManager源码解析.md">LocalBroadcastManager源码解析</a></li>
+<li><a href="chapter2/MediaPlayer源码分析.md">MediaPlayer源码分析</a></li>
+<li><a href="chapter2/NavigationView源码解析.md">NavigationView源码解析</a></li>
+<li><a href="chapter2/NestedScrolling事件机制源码解析.md">NestedScrolling事件机制源码解析</a></li>
+<li><a href="chapter2/NestedScrollView源码解析.md">NestedScrollView源码解析</a></li>
+<li><a href="chapter2/ScrollView源码解析.md">ScrollView源码解析</a></li>
+<li><a href="chapter2/Service源码解析.md">Service源码解析</a></li>
+<li><a href="chapter2/SharePreferences源码解析.md">SharePreferences源码解析</a></li>
+<li><a href="chapter2/SQLiteOpenHelper源码解析.md">SQLiteOpenHelper源码解析</a></li>
+<li><a href="chapter2/TextInputLayout源码解析.md">TextInputLayout源码解析</a></li>
+</ul>
+</li>
+<li><a href="chapter3\README.md">Android源码分析 第3期</a><ul>
+<li><a href="chapter3/Android%20Lock%20Pattern%20源码解析.md">Android Lock Pattern 源码解析</a></li>
+<li><a href="chapter3/Android%20Universal%20Image%20Loader%20源码分析.md">Android Universal Image Loader 源码分析</a></li>
+<li><a href="chapter3/android-Ultra-Pull-To-Refresh%20源码解析.md">android-Ultra-Pull-To-Refresh 源码解析</a></li>
+<li><a href="chapter3/BaseAdapterHelper%20源码分析.md">BaseAdapterHelper 源码分析</a></li>
+<li><a href="chapter3/CalendarListView%20源码解析.md">CalendarListView 源码解析</a></li>
+<li><a href="chapter3/CircularFloatingActionMenu.md">CircularFloatingActionMenu</a></li>
+<li><a href="chapter3/Cling%20源码解析.md">Cling 源码解析</a></li>
+<li><a href="chapter3/Dagger%20源码解析.md">Dagger 源码解析</a></li>
+<li><a href="chapter3/DiscreteSeekBar%20源码解析.md">DiscreteSeekBar 源码解析</a></li>
+<li><a href="chapter3/DynamicLoadApk%20源码解析.md">DynamicLoadApk 源码解析</a></li>
+<li><a href="chapter3/EventBus%20源码解析.md">EventBus 源码解析</a></li>
+<li><a href="chapter3/HoloGraphLibrary%20源码解析.md">HoloGraphLibrary 源码解析</a></li>
+<li><a href="chapter3/PagerSlidingTabStrip%20源码解析.md">PagerSlidingTabStrip 源码解析</a></li>
+<li><a href="chapter3/PhotoView%20源码解析.md">PhotoView 源码解析</a></li>
+<li><a href="chapter3/Side%20Menu.Android%20源码解析.md">Side Menu.Android 源码解析</a></li>
+<li><a href="chapter3/SlidingMenu%20源码解析.md">SlidingMenu 源码解析</a></li>
+<li><a href="chapter3/ViewPagerindicator%20源码解析.md">ViewPagerindicator 源码解析</a></li>
+<li><a href="chapter3/Volley源码解析.md">Volley源码解析</a></li>
+<li><a href="chapter3/xUtils%20源码解析.md">xUtils 源码解析</a></li>
+</ul>
+</li>
+<li><a href="design_patterns/android_design_patterns_analysis.md">Android源码设计模式分析 第4期</a><ul>
+<li><a href="design_patterns/oop-principles/oop-principles.md">面向对象六大原则</a></li>
+<li><a href="design_patterns/singleton/readme.md">Android设计模式源码解析之单例模式</a></li>
+<li><a href="design_patterns/adapter/readme.md">Android设计模式源码解析之适配器模式</a></li>
+<li><a href="design_patterns/bridge/readme.md">Android设计模式源码解析之桥接模式</a></li>
+<li><a href="design_patterns/builder/readme.md">Android设计模式源码解析之Builder模式</a></li>
+<li><a href="design_patterns/chain-of-responsibility/readme.md">Android设计模式源码解析之责任链模式</a></li>
+<li><a href="design_patterns/command/readme.md">Android设计模式源码解析之命令模式</a></li>
+<li><a href="design_patterns/facade/readme.md">Android设计模式源码解析之外观模式</a></li>
+<li><a href="design_patterns/iterator/readme.md">Android设计模式源码解析之迭代器模式</a></li>
+<li><a href="design_patterns/prototype/readme.md">Android设计模式源码解析之原型模式</a></li>
+<li><a href="design_patterns/proxy/README.md">Android设计模式源码解析之代理模式</a></li>
+<li><a href="design_patterns/strategy/README.md">Android设计模式源码解析之策略模式</a></li>
+<li><a href="design_patterns/template-method/readme.md">Android设计模式源码解析之模板方法模式</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/源码/" rel="tag"># 源码</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/python/Python基础入门/" rel="next" title="Python基础入门">
+                <i class="fa fa-chevron-left"></i> Python基础入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/设计模式/Java设计模式/" rel="prev" title="Java设计模式">
+                Java设计模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-开源项目源码解析"><span class="nav-number">1.</span> <span class="nav-text">Android 开源项目源码解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android源码设计模式分析项目"><span class="nav-number">2.</span> <span class="nav-text">Android源码设计模式分析项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android知名开源库简单实现以及设计分析"><span class="nav-number">3.</span> <span class="nav-text">Android知名开源库简单实现以及设计分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-SDK-源码解析"><span class="nav-number">4.</span> <span class="nav-text">Android SDK 源码解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number"></span> <span class="nav-text">目录</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/Android源码分析/';
+          this.page.identifier = '2017/05/01/android/Android源码分析/';
+          this.page.title = 'Android源码分析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

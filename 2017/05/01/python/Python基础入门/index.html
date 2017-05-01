@@ -1,0 +1,1413 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Python基础入门  十年生死两茫茫，不思量，自难忘，华年短暂，陈辞岁月悠悠伤，  满腔热血已芜荒，展未来，后生强，战战兢兢，如履薄冰心彷徨，  青丝化雪、鬓角成霜，已是英雄迟暮，人生怎慷慨激昂？">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础入门">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/python/Python基础入门/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="Python基础入门  十年生死两茫茫，不思量，自难忘，华年短暂，陈辞岁月悠悠伤，  满腔热血已芜荒，展未来，后生强，战战兢兢，如履薄冰心彷徨，  青丝化雪、鬓角成霜，已是英雄迟暮，人生怎慷慨激昂？">
+<meta property="og:image" content="http://img.blog.csdn.net/20170430135838561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170430140135578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170430140221203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-05-01T09:57:41.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础入门">
+<meta name="twitter:description" content="Python基础入门  十年生死两茫茫，不思量，自难忘，华年短暂，陈辞岁月悠悠伤，  满腔热血已芜荒，展未来，后生强，战战兢兢，如履薄冰心彷徨，  青丝化雪、鬓角成霜，已是英雄迟暮，人生怎慷慨激昂？">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170430135838561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/python/Python基础入门/"/>
+
+
+
+
+
+  <title>Python基础入门 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/python/Python基础入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python基础入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T17:51:46+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/python/Python基础入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/python/Python基础入门/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Python基础入门"><a href="#Python基础入门" class="headerlink" title="Python基础入门"></a><strong>Python基础入门</strong></h2><p><img src="http://img.blog.csdn.net/20170430135838561?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="Python基础入门"></p>
+<blockquote>
+<p>十年生死两茫茫，不思量，自难忘，华年短暂，陈辞岁月悠悠伤， </p>
+<p>满腔热血已芜荒，展未来，后生强，战战兢兢，如履薄冰心彷徨， </p>
+<p>青丝化雪、鬓角成霜，已是英雄迟暮，人生怎慷慨激昂？</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="GitHub托管主页"><a href="#GitHub托管主页" class="headerlink" title="GitHub托管主页"></a><strong>GitHub托管主页</strong></h2><p><a href="https://github.com/JackChan1999/Python2-Course" target="_blank" rel="external">https://github.com/JackChan1999/Python2-Course</a></p>
+<p>请读者点击Star进行关注并支持！</p>
+<h2 id="在线阅读"><a href="#在线阅读" class="headerlink" title="在线阅读"></a><strong>在线阅读</strong></h2><p><a href="https://alleniverson.gitbooks.io/python2-course/content/" target="_blank" rel="external">https://alleniverson.gitbooks.io/python2-course/content/</a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h2><ul>
+<li><p><a href="README.md">前言</a></p>
+</li>
+<li><p><a href="study.md">Python学习之路</a></p>
+</li>
+<li><p><a href="1-Python简介/Python简介.md">Python简介</a></p>
+</li>
+<li><p><a href="2-安装Python/安装Python.md">安装Python</a></p>
+<ul>
+<li><a href="2-安装Python/Python解释器.md">Python解释器</a></li>
+</ul>
+</li>
+<li><p><a href="3-第一个Python程序/第一个Python程序.md">第一个Python程序</a></p>
+<ul>
+<li><a href="3-第一个Python程序/使用文本编辑器.md">使用文本编辑器</a></li>
+<li><a href="3-第一个Python程序/输入和输出.md">输入和输出</a></li>
+</ul>
+</li>
+<li><p><a href="4-Python基础/Python基础.md">Python基础</a></p>
+<ul>
+<li><a href="4-Python基础/数据类型和变量.md">数据类型和变量</a></li>
+<li><a href="4-Python基础/字符串和编码.md">字符串和编码</a></li>
+<li><a href="4-Python基础/使用list和tuple.md">使用list和tuple</a></li>
+<li><a href="4-Python基础/条件判断和循环.md">条件判断和循环</a></li>
+<li><a href="4-Python基础/使用dict和set.md">使用dict和set</a></li>
+<li><a href="4-Python基础\时间和日期.md">时间和日期</a></li>
+</ul>
+</li>
+<li><p><a href="5-函数/函数.md">函数</a></p>
+<ul>
+<li><a href="5-函数/定义函数.md">定义函数</a></li>
+<li><a href="5-函数/调用函数.md">调用函数</a></li>
+<li><a href="5-函数/函数的参数.md">函数的参数</a></li>
+<li><a href="5-函数/递归函数.md">递归函数</a></li>
+</ul>
+</li>
+<li><p><a href="6-高级特性/高级特性.md">高级特性</a></p>
+<ul>
+<li><a href="6-高级特性/切片.md">切片</a></li>
+<li><a href="6-高级特性/迭代.md">迭代</a></li>
+<li><a href="6-高级特性/列表生成式.md">列表生成式</a></li>
+<li><a href="6-高级特性/生成器.md">生成器</a></li>
+</ul>
+</li>
+<li><p><a href="7-函数式编程/函数式编程.md">函数式编程</a></p>
+<ul>
+<li><a href="7-函数式编程/高阶函数.md">高阶函数</a><ul>
+<li><a href="7-函数式编程/map和reduce.md">map和reduce</a></li>
+<li><a href="7-函数式编程/filter.md">filter</a></li>
+<li><a href="7-函数式编程/sorted.md">sorted</a></li>
+</ul>
+</li>
+<li><a href="7-函数式编程/返回函数.md">返回函数</a></li>
+<li><a href="7-函数式编程/匿名函数.md">匿名函数</a></li>
+<li><a href="7-函数式编程/装饰器.md">装饰器</a></li>
+<li><a href="7-函数式编程/偏函数.md">偏函数</a></li>
+</ul>
+</li>
+<li><p><a href="8-模块/模块.md">模块</a></p>
+<ul>
+<li><a href="8-模块/安装第三方模块.md">安装第三方模块</a></li>
+<li><a href="8-模块/使用模块.md">使用模块</a></li>
+<li><a href="8-模块/使用__future__.md">使用<strong>future</strong></a></li>
+<li><a href="8-模块\常用内建模块.md">常用内建模块</a></li>
+<li><a href="8-模块\常用第三方模块.md">常用第三方模块</a></li>
+</ul>
+</li>
+<li><p><a href="9-面向对象编程/面向对象编程.md">面向对象编程</a></p>
+<ul>
+<li><a href="9-面向对象编程/类和实例.md">类和实例</a></li>
+<li><a href="9-面向对象编程/访问限制.md">访问限制</a></li>
+<li><a href="9-面向对象编程/继承和多态.md">继承和多态</a></li>
+<li><a href="9-面向对象编程/获取对象信息.md">获取对象信息</a></li>
+</ul>
+</li>
+<li><p><a href="10-面向对象高级编程/面向对象高级编程.md">面向对象高级编程</a></p>
+<ul>
+<li><a href="10-面向对象高级编程/使用__slots__.md">使用<strong>slots</strong></a></li>
+<li><a href="10-面向对象高级编程/使用@property.md">property</a></li>
+<li><a href="10-面向对象高级编程/多重继承.md">多重继承</a></li>
+<li><a href="10-面向对象高级编程/定制类.md">定制类</a></li>
+<li><a href="10-面向对象高级编程/使用元类.md">使用元类</a></li>
+</ul>
+</li>
+<li><p><a href="11-错误、调试和测试/错误、调试和测试.md">错误、调试和测试</a></p>
+<ul>
+<li><a href="11-错误、调试和测试/错误处理.md">错误处理</a></li>
+<li><a href="11-错误、调试和测试/调试.md">调试</a></li>
+<li><a href="11-错误、调试和测试/单元测试.md">单元测试</a></li>
+<li><a href="11-错误、调试和测试/文档测试.md">文档测试</a></li>
+</ul>
+</li>
+<li><p><a href="12-IO编程/IO编程.md">IO编程</a></p>
+<ul>
+<li><a href="12-IO编程/文件读写.md">文件读写</a></li>
+<li><a href="12-IO编程/操作文件和目录.md">操作文件和目录</a></li>
+<li><a href="12-IO编程/序列化.md">序列化</a></li>
+</ul>
+</li>
+<li><p><a href="13-进程和线程/进程和线程.md">进程和线程</a></p>
+<ul>
+<li><a href="13-进程和线程/多进程.md">多进程</a></li>
+<li><a href="13-进程和线程/多线程.md">多线程</a></li>
+<li><a href="13-进程和线程/分布式进程.md">分布式进程</a></li>
+<li><a href="13-进程和线程/ThreadLocal.md">ThreadLocal</a></li>
+</ul>
+</li>
+<li><p><a href="14-正则表达式/正则表达式.md">正则表达式</a></p>
+</li>
+<li><p><a href="15-常用内建模块/常用内建模块.md">常用内建模块</a></p>
+<ul>
+<li><a href="15-常用内建模块/collections.md">collections</a></li>
+<li><a href="15-常用内建模块/base64.md">base64</a></li>
+<li><a href="15-常用内建模块/struct.md">struct</a></li>
+<li><a href="15-常用内建模块/itertools.md">itertools</a></li>
+<li><a href="15-常用内建模块/XML.md">XML</a></li>
+<li><a href="15-常用内建模块/HTMLParser.md">HTMLParser</a></li>
+</ul>
+</li>
+<li><p><a href="16-常用第三方模块/常用第三方模块.md">常用第三方模块</a></p>
+<ul>
+<li><a href="16-常用第三方模块/PIL.md">PIL</a></li>
+</ul>
+</li>
+<li><p><a href="17-图形界面/图形界面.md">图形界面</a></p>
+</li>
+<li><p><a href="18-网络编程/网络编程.md">网络编程</a></p>
+<ul>
+<li><a href="18-网络编程/TCP、IP简介.md">TCP、IP简介</a></li>
+<li><a href="18-网络编程/TCP编程.md">TCP编程</a></li>
+<li><a href="18-网络编程/UDP编程.md">UDP编程</a></li>
+</ul>
+</li>
+<li><p><a href="19-Email/Email.md">电子邮件</a></p>
+<ul>
+<li><a href="19-Email/SMTP发送邮件.md">SMTP发送邮件</a></li>
+<li><a href="19-Email/POP3收取邮件.md">POP3收取邮件</a></li>
+</ul>
+</li>
+<li><p><a href="20-访问数据库/访问数据库.md">访问数据库</a></p>
+<ul>
+<li><a href="20-访问数据库/使用SQLite.md">使用SQLite</a></li>
+<li><a href="20-访问数据库/使用MySQL.md">使用MySQL</a></li>
+<li><a href="20-访问数据库/使用SQLAlchemy.md">使用SQLAlchemy</a></li>
+</ul>
+</li>
+<li><p><a href="21-Web开发/Web开发.md">Web开发</a></p>
+<ul>
+<li><a href="21-Web开发/HTML简介.md">HTML简介</a></li>
+<li><a href="21-Web开发/HTTP协议简介.md">HTTP协议简介</a></li>
+<li><a href="21-Web开发/WSGI接口.md">WSGI接口</a></li>
+<li><a href="21-Web开发/使用Web框架.md">使用Web框架</a></li>
+<li><a href="21-Web开发/使用模块.md">使用模块</a></li>
+</ul>
+</li>
+<li><p><a href="22-协程/协程.md">协程</a></p>
+<ul>
+<li><a href="22-协程/gevent.md">gevent</a></li>
+</ul>
+</li>
+<li><p><a href="23-应用案例剖析/应用案例剖析.md">应用案例剖析</a></p>
+</li>
+<li><p><a href="24-网络抓包/README.md">网络抓包</a></p>
+</li>
+<li><p><a href="25-实战/README.md">实战</a></p>
+<ul>
+<li><a href="25-实战/1-搭建开发环境.md">搭建开发环境</a></li>
+<li><a href="25-实战/2-编写数据库模块.md">编写数据库模块</a></li>
+<li><a href="25-实战/3-编写ORM.md">编写ORM</a></li>
+<li><a href="25-实战/4-编写Model.md">编写Model</a></li>
+<li><a href="25-实战/5-编写Web框架.md">编写Web框架</a></li>
+<li><a href="25-实战/6-添加配置文件.md">添加配置文件</a></li>
+<li><a href="25-实战/7-编写MVC.md">编写MVC</a></li>
+<li><a href="25-实战/8-构建前端.md">构建前端</a></li>
+<li><a href="25-实战/9-编写API.md">编写API</a></li>
+<li><a href="25-实战/10-用户注册和登录.md">用户注册和登录</a></li>
+<li><a href="25-实战/11-编写日志创建页.md">编写日志创建页</a></li>
+<li><a href="25-实战/12-编写日志列表页.md">编写日志列表页</a></li>
+<li><a href="25-实战/13-提升开发效率.md">提升开发效率</a></li>
+<li><a href="25-实战/14-完成Web App.md">完成Web App</a></li>
+<li><a href="25-实战/15-部署Web App.md">部署Web App</a></li>
+<li><a href="25-实战/16-编写移动App.md">编写移动App</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="关注我"><a href="#关注我" class="headerlink" title="关注我"></a>关注我</h2><ul>
+<li>Email：<a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#58;&#56;&#x31;&#x35;&#x37;&#x31;&#x32;&#x37;&#51;&#x39;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">&#56;&#x31;&#x35;&#x37;&#x31;&#x32;&#x37;&#51;&#x39;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;</a></li>
+<li>CSDN博客：<a href="http://blog.csdn.net/axi295309066" target="_blank" rel="external">Allen Iverson</a></li>
+<li>新浪微博：<a href="http://weibo.com/u/1848214604?topnav=1&amp;wvr=6&amp;topsug=1&amp;is_all=1" target="_blank" rel="external">AndroidDeveloper</a></li>
+<li>GitHub：<a href="https://github.com/JackChan1999" target="_blank" rel="external">JackChan1999</a></li>
+<li>GitBook：<a href="https://www.gitbook.com/@alleniverson" target="_blank" rel="external">alleniverson</a></li>
+<li>个人博客：<a href="https://jackchan1999.github.io/" target="_blank" rel="external">JackChan</a></li>
+</ul>
+<p>如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作！</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">微信赞赏支持</th>
+<th style="text-align:center">支付宝赞赏支持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="http://img.blog.csdn.net/20170430140135578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></td>
+<td style="text-align:center"><img src="http://img.blog.csdn.net/20170430140221203?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/java/Thinking in Java/" rel="next" title="Thinking in Java (Java 编程思想)">
+                <i class="fa fa-chevron-left"></i> Thinking in Java (Java 编程思想)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/Android源码分析/" rel="prev" title="Android源码分析">
+                Android源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python基础入门"><span class="nav-number">1.</span> <span class="nav-text">Python基础入门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GitHub托管主页"><span class="nav-number">2.</span> <span class="nav-text">GitHub托管主页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线阅读"><span class="nav-number">3.</span> <span class="nav-text">在线阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">4.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关注我"><span class="nav-number">5.</span> <span class="nav-text">关注我</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/python/Python基础入门/';
+          this.page.identifier = '2017/05/01/python/Python基础入门/';
+          this.page.title = 'Python基础入门';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

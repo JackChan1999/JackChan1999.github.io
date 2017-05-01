@@ -1,0 +1,1653 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="第三方平台," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="keywords" content="第三方平台">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发常用第三方平台">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/open/第三方平台/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:image" content="http://img.blog.csdn.net/20161023155813600">
+<meta property="og:updated_time" content="2017-05-01T10:13:50.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发常用第三方平台">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161023155813600">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/open/第三方平台/"/>
+
+
+
+
+
+  <title>Android开发常用第三方平台 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/open/第三方平台/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android开发常用第三方平台
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:10:46+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/open/" itemprop="url" rel="index">
+                    <span itemprop="name">open</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/open/第三方平台/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/open/第三方平台/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.blog.csdn.net/20161023155813600" alt="第三方开发平台"></p>
+<a id="more"></a>
+<h1 id="1-性能监测"><a href="#1-性能监测" class="headerlink" title="1. 性能监测"></a><strong>1. 性能监测</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/square/leakcanary" target="_blank" rel="external">LeakCanary</a></td>
+<td style="text-align:left">square出品的检测内存泄露</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.bonree.com/" target="_blank" rel="external">博睿bonree</a></td>
+<td style="text-align:left">领先的应用性能管理服务提供商,性能监测,移动监测…平台</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.tingyun.com/" target="_blank" rel="external">听云</a></td>
+<td style="text-align:left">国内权威的应用性能监控平台</td>
+</tr>
+</tbody>
+</table>
+<h1 id="2-移动支付"><a href="#2-移动支付" class="headerlink" title="2. 移动支付"></a><strong>2. 移动支付</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">支付宝</td>
+<td style="text-align:left">阿里巴巴支付平台</td>
+</tr>
+<tr>
+<td style="text-align:left">微信支付</td>
+<td style="text-align:left">微信支付平台</td>
+</tr>
+<tr>
+<td style="text-align:left">银联支付</td>
+<td style="text-align:left">中国银联手机支付平台</td>
+</tr>
+<tr>
+<td style="text-align:left">tenpay</td>
+<td style="text-align:left">QQ财付通</td>
+</tr>
+<tr>
+<td style="text-align:left">umpay</td>
+<td style="text-align:left">联动优势支付平台</td>
+</tr>
+<tr>
+<td style="text-align:left">MMBilling</td>
+<td style="text-align:left">中国移动应用内计费SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">Ping++</td>
+<td style="text-align:left">使用的App有：薄荷</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-即时通讯"><a href="#3-即时通讯" class="headerlink" title="3. 即时通讯"></a><strong>3. 即时通讯</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MIPUSH</td>
+<td style="text-align:left">小米推送，用的最多最稳定的推送服务之一</td>
+</tr>
+<tr>
+<td style="text-align:left">个推</td>
+<td style="text-align:left">手机推送服务</td>
+</tr>
+<tr>
+<td style="text-align:left">JPush</td>
+<td style="text-align:left">极光推送</td>
+</tr>
+<tr>
+<td style="text-align:left">百度推送</td>
+<td style="text-align:left">百度推送服务</td>
+</tr>
+<tr>
+<td style="text-align:left">MQTT</td>
+<td style="text-align:left">MQTT协议，似乎和推送有关系</td>
+</tr>
+<tr>
+<td style="text-align:left">环信</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">信鸽</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-语音平台"><a href="#4-语音平台" class="headerlink" title="4. 语音平台"></a><strong>4. 语音平台</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">讯飞SDK</td>
+<td style="text-align:left">科大讯飞语音SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">百度语音识别</td>
+<td style="text-align:left">百度语音识别SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">mobvoi</td>
+<td style="text-align:left">移动语音搜索</td>
+</tr>
+<tr>
+<td style="text-align:left">云知声</td>
+<td style="text-align:left">云知声语音处理</td>
+</tr>
+</tbody>
+</table>
+<h1 id="5-统计分析"><a href="#5-统计分析" class="headerlink" title="5. 统计分析"></a><strong>5. 统计分析</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">友盟统计</td>
+<td style="text-align:left">用的较多的分析统计工具</td>
+</tr>
+<tr>
+<td style="text-align:left">Flurry</td>
+<td style="text-align:left">国外流行的统计工具</td>
+</tr>
+<tr>
+<td style="text-align:left">百度移动统计</td>
+<td style="text-align:left">百度开发者中心</td>
+</tr>
+<tr>
+<td style="text-align:left">Cobub Razor</td>
+<td style="text-align:left">移动统计分析工具</td>
+</tr>
+<tr>
+<td style="text-align:left">google analytics</td>
+<td style="text-align:left">google统计</td>
+</tr>
+<tr>
+<td style="text-align:left">lotuseed</td>
+<td style="text-align:left">莲子统计</td>
+</tr>
+<tr>
+<td style="text-align:left">Localytics</td>
+<td style="text-align:left">国外统计分析工具</td>
+</tr>
+<tr>
+<td style="text-align:left">comscore</td>
+<td style="text-align:left">国外的统计工具</td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-测试平台"><a href="#6-测试平台" class="headerlink" title="6. 测试平台"></a><strong>6. 测试平台</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">百度云测</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">360代码卫士</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">腾讯Bugly</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">云测Testin</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Crashlytics</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7-分享平台"><a href="#7-分享平台" class="headerlink" title="7. 分享平台"></a><strong>7. 分享平台</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ShareSDK</td>
+<td style="text-align:left">App分享库</td>
+</tr>
+<tr>
+<td style="text-align:left">facebook-android-sdk</td>
+<td style="text-align:left">Facebook SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">腾讯微信</td>
+<td style="text-align:left">腾讯微信SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">weiboSDK</td>
+<td style="text-align:left">新浪微博SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">qweibo</td>
+<td style="text-align:left">Q版微博</td>
+</tr>
+<tr>
+<td style="text-align:left">t4j</td>
+<td style="text-align:left">网易微博开放平台</td>
+</tr>
+<tr>
+<td style="text-align:left">yixin</td>
+<td style="text-align:left">易信开放平台</td>
+</tr>
+<tr>
+<td style="text-align:left">人人SDK</td>
+<td style="text-align:left">人人网SDK</td>
+</tr>
+<tr>
+<td style="text-align:left">翼聊</td>
+<td style="text-align:left">中国电信天翼开放平台</td>
+</tr>
+<tr>
+<td style="text-align:left">evernote</td>
+<td style="text-align:left">Evernote API</td>
+</tr>
+<tr>
+<td style="text-align:left">有道云笔记SDK</td>
+<td style="text-align:left">印象笔记有道云笔记SDK</td>
+</tr>
+</tbody>
+</table>
+<h1 id="8-多媒体"><a href="#8-多媒体" class="headerlink" title="8. 多媒体"></a><strong>8. 多媒体</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CC视频</td>
+<td style="text-align:left">视频云平台</td>
+</tr>
+<tr>
+<td style="text-align:left">Vitamio</td>
+<td style="text-align:left">多媒体开发框架</td>
+</tr>
+<tr>
+<td style="text-align:left">leptonica</td>
+<td style="text-align:left">图像处理库</td>
+</tr>
+<tr>
+<td style="text-align:left">tesseract-ocr</td>
+<td style="text-align:left">图像OCR库</td>
+</tr>
+<tr>
+<td style="text-align:left">aacdecoder-android</td>
+<td style="text-align:left">Android上的Audio (AAC) 解码器</td>
+</tr>
+<tr>
+<td style="text-align:left">百度媒体云</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">videolan</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Vplayer</td>
+</tr>
+</tbody>
+</table>
+<h1 id="9-地图定位"><a href="#9-地图定位" class="headerlink" title="9. 地图定位"></a><strong>9. 地图定位</strong></h1><table>
+<thead>
+<tr>
+<th>平台名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>百度定位</td>
+<td>百度地图SDK</td>
+</tr>
+<tr>
+<td>百度地图</td>
+<td>百度地图SDK</td>
+</tr>
+<tr>
+<td>amap</td>
+<td>高德地图API</td>
+</tr>
+<tr>
+<td>图吧SDK</td>
+<td>图吧地图API</td>
+</tr>
+<tr>
+<td>MapABC</td>
+<td>MapABC地图SDK</td>
+</tr>
+</tbody>
+</table>
+<h1 id="10-广告平台"><a href="#10-广告平台" class="headerlink" title="10. 广告平台"></a><strong>10. 广告平台</strong></h1><table>
+<thead>
+<tr>
+<th style="text-align:left">平台名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://www.umeng.com/" target="_blank" rel="external">友盟SDK</a></td>
+<td style="text-align:left">友盟统计、自动更新、用户反馈、社会化组件</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.domob.cn/" target="_blank" rel="external">多盟</a></td>
+<td style="text-align:left">多盟平台</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://wangmeng.baidu.com/" target="_blank" rel="external">百度移动联盟</a></td>
+<td style="text-align:left">百度广告联盟</td>
+</tr>
+<tr>
+<td style="text-align:left">google ads</td>
+<td style="text-align:left">google广告</td>
+</tr>
+<tr>
+<td style="text-align:left">AdChina</td>
+<td style="text-align:left">易传媒广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">AdsMogo</td>
+<td style="text-align:left">芒果移动广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">Adwo</td>
+<td style="text-align:left">安沃移动广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">mobisage</td>
+<td style="text-align:left">艾德思奇移动广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">Miaozhen</td>
+<td style="text-align:left">秒针第三方广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">AdMaster</td>
+<td style="text-align:left">admaster广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">易积分</td>
+<td style="text-align:left">易积分移动广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">inmobi</td>
+<td style="text-align:left">国外的广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">点信传媒</td>
+<td style="text-align:left">广告平台</td>
+</tr>
+<tr>
+<td style="text-align:left">有米广告</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">万普世纪</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Punchbox</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">inmobi</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://www.appsdk.com.cn/admin/dev_index.html" target="_blank" rel="external">APPSDK</a></td>
+<td style="text-align:left">APPSDK移动广告平台长期致力于为中国的开发者提供广告资源、用户资源，并提供应用优化和发展规划建议为开发者创造价值，是我们最大的价值</td>
+</tr>
+</tbody>
+</table>
+<h1 id="11-云服务器"><a href="#11-云服务器" class="headerlink" title="11. 云服务器"></a><strong>11. 云服务器</strong></h1><table>
+<thead>
+<tr>
+<th>平台名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bmob</td>
+<td>数据库，服务器平台，短信验证，邮件验证，第三方支付</td>
+</tr>
+<tr>
+<td>阿里云</td>
+<td>阿里巴巴的云服务</td>
+</tr>
+<tr>
+<td>腾讯云</td>
+<td>腾讯的云服务</td>
+</tr>
+<tr>
+<td>七牛云</td>
+<td>国内领先的企业级公有云服务商</td>
+</tr>
+<tr>
+<td>leancloud</td>
+<td>野狗实时后端云</td>
+</tr>
+</tbody>
+</table>
+<h1 id="12-安全加密"><a href="#12-安全加密" class="headerlink" title="12. 安全加密"></a><strong>12. 安全加密</strong></h1><table>
+<thead>
+<tr>
+<th>平台名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>爱加密</td>
+<td></td>
+</tr>
+<tr>
+<td>邦邦加密</td>
+<td></td>
+</tr>
+<tr>
+<td>360加密</td>
+</tr>
+</tbody>
+</table>
+<h1 id="13-Crashlytics"><a href="#13-Crashlytics" class="headerlink" title="13. Crashlytics"></a><strong>13. Crashlytics</strong></h1><p>一个错误代码报告分析服务<br><a href="https://www.zhihu.com/question/20750459" target="_blank" rel="external">https://www.zhihu.com/question/20750459</a><br><a href="http://try.crashlytics.com/" target="_blank" rel="external">http://try.crashlytics.com/</a><br>使用的App有：网易新闻</p>
+<h1 id="14-个信"><a href="#14-个信" class="headerlink" title="14. 个信"></a><a href="http://www.igexin.com/index.html" target="_blank" rel="external"><strong>14. 个信</strong></a></h1><p>手机资讯推送广告领导者，个信是个推旗下智能场景入口级营销平台；个信孕育个推，又始于个推。使用的App有：网易新闻</p>
+<h1 id="15-MediaV聚胜万合"><a href="#15-MediaV聚胜万合" class="headerlink" title="15. MediaV聚胜万合"></a><strong>15. MediaV聚胜万合</strong></h1><h1 id="16-魔窗MagicWindow"><a href="#16-魔窗MagicWindow" class="headerlink" title="16. 魔窗MagicWindow"></a><strong>16. 魔窗MagicWindow</strong></h1><p>使用的App有：薄荷，<a href="http://www.magicwindow.cn/" target="_blank" rel="external">http://www.magicwindow.cn/</a></p>
+<h3 id="一键唤醒App内指定页"><a href="#一键唤醒App内指定页" class="headerlink" title="一键唤醒App内指定页"></a>一键唤醒App内指定页</h3><p>与一般链接点击“打开App”后只能达到首页完全不同，魔窗的mLink直接把用户送达至App内的指定相关页面。</p>
+<h3 id="什么是mLink"><a href="#什么是mLink" class="headerlink" title="什么是mLink?"></a>什么是mLink?</h3><p>企业级深度链接（Deeplink）解决方案，让App能像Web一样通过URL进行任意内容的分发、管理和一链直达 。</p>
+<h3 id="场景还原（Deferred-Deeplink）大幅提升未安装App人群的转化率"><a href="#场景还原（Deferred-Deeplink）大幅提升未安装App人群的转化率" class="headerlink" title="场景还原（Deferred Deeplink）大幅提升未安装App人群的转化率"></a>场景还原（Deferred Deeplink）大幅提升未安装App人群的转化率</h3><p>每个新用户打开App都停留在首页已经过时！mLink为您App的用户带来所见即所得的体验，在新用户首次使用App时直达想看的相关内容页，大幅提升用户参与度和转化率！</p>
+<h1 id="17-CocosPlay"><a href="#17-CocosPlay" class="headerlink" title="17. CocosPlay"></a><a href="http://play.cocos.com/" target="_blank" rel="external"><strong>17. CocosPlay</strong></a></h1><p>手机页游最佳解决方案！</p>
+<h1 id="18-AppsFlyer-移动应用跟踪与归因分析"><a href="#18-AppsFlyer-移动应用跟踪与归因分析" class="headerlink" title="18. AppsFlyer - 移动应用跟踪与归因分析"></a>18. AppsFlyer - 移动应用跟踪与归因分析</h1><p>移动应用跟踪与归因分析平台帮助应用开发者、品牌商和广告代理商跟踪并优化各自的用户获取渠道。</p>
+<p>成为移动归因分析的标杆，AppsFlyer 是移动广告归因与分析领域的市场领导者，能够帮助营销人员准确找到自身定位、优化广告支出并增加其投资回报</p>
+<h1 id="19-Twitter-Fabric"><a href="#19-Twitter-Fabric" class="headerlink" title="19. Twitter Fabric"></a>19. Twitter Fabric</h1><h1 id="20-mAppTracker-移动用户流量审计"><a href="#20-mAppTracker-移动用户流量审计" class="headerlink" title="20. mAppTracker-移动用户流量审计"></a>20. mAppTracker-移动用户流量审计</h1>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/第三方平台/" rel="tag"># 第三方平台</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/JavaWeb开发概述/" rel="next" title="JavaWeb开发概述">
+                <i class="fa fa-chevron-left"></i> JavaWeb开发概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/open/开源框架/" rel="prev" title="Android开发常用开源框架">
+                Android开发常用开源框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-性能监测"><span class="nav-number">1.</span> <span class="nav-text">1. 性能监测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-移动支付"><span class="nav-number">2.</span> <span class="nav-text">2. 移动支付</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-即时通讯"><span class="nav-number">3.</span> <span class="nav-text">3. 即时通讯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-语音平台"><span class="nav-number">4.</span> <span class="nav-text">4. 语音平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-统计分析"><span class="nav-number">5.</span> <span class="nav-text">5. 统计分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-测试平台"><span class="nav-number">6.</span> <span class="nav-text">6. 测试平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-分享平台"><span class="nav-number">7.</span> <span class="nav-text">7. 分享平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-多媒体"><span class="nav-number">8.</span> <span class="nav-text">8. 多媒体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-地图定位"><span class="nav-number">9.</span> <span class="nav-text">9. 地图定位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-广告平台"><span class="nav-number">10.</span> <span class="nav-text">10. 广告平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-云服务器"><span class="nav-number">11.</span> <span class="nav-text">11. 云服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-安全加密"><span class="nav-number">12.</span> <span class="nav-text">12. 安全加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-Crashlytics"><span class="nav-number">13.</span> <span class="nav-text">13. Crashlytics</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#14-个信"><span class="nav-number">14.</span> <span class="nav-text">14. 个信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#15-MediaV聚胜万合"><span class="nav-number">15.</span> <span class="nav-text">15. MediaV聚胜万合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#16-魔窗MagicWindow"><span class="nav-number">16.</span> <span class="nav-text">16. 魔窗MagicWindow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一键唤醒App内指定页"><span class="nav-number">16.0.1.</span> <span class="nav-text">一键唤醒App内指定页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是mLink"><span class="nav-number">16.0.2.</span> <span class="nav-text">什么是mLink?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景还原（Deferred-Deeplink）大幅提升未安装App人群的转化率"><span class="nav-number">16.0.3.</span> <span class="nav-text">场景还原（Deferred Deeplink）大幅提升未安装App人群的转化率</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#17-CocosPlay"><span class="nav-number">17.</span> <span class="nav-text">17. CocosPlay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#18-AppsFlyer-移动应用跟踪与归因分析"><span class="nav-number">18.</span> <span class="nav-text">18. AppsFlyer - 移动应用跟踪与归因分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#19-Twitter-Fabric"><span class="nav-number">19.</span> <span class="nav-text">19. Twitter Fabric</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#20-mAppTracker-移动用户流量审计"><span class="nav-number">20.</span> <span class="nav-text">20. mAppTracker-移动用户流量审计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/open/第三方平台/';
+          this.page.identifier = '2017/05/01/open/第三方平台/';
+          this.page.title = 'Android开发常用第三方平台';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
