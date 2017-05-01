@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20161025001328454">
 <meta property="og:image" content="http://img.blog.csdn.net/20161025001336913">
 <meta property="og:image" content="http://img.blog.csdn.net/20161025001349032">
-<meta property="og:updated_time" content="2017-04-30T16:12:41.213Z">
+<meta property="og:updated_time" content="2017-05-01T02:32:26.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="这里首先介绍了java5中的并发的小工具包：java.util.concurrent.atomic，然后介绍了线程池的概念，对使用java5的方式创建不同形式的线程进行了演示，之后介绍了两个 对象：Callable和Future，用于获取线程执行后的结果，对于线程锁技术则在另外一篇文章中介绍。 Java5中的线程并发库都在java.util.concurrent包及子包中 1. Executor类">
@@ -406,6 +406,7 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <h1 id="2-ThreadPoolExecutor"><a href="#2-ThreadPoolExecutor" class="headerlink" title="2. ThreadPoolExecutor"></a><strong>2. ThreadPoolExecutor</strong></h1><p>ExecutorService的默认实现，同时也是Executors的底层实现</p>
 <h2 id="2-1-构造方法"><a href="#2-1-构造方法" class="headerlink" title="2.1 构造方法"></a><strong>2.1 构造方法</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></div><div class="line">    <span class="keyword">int</span> corePoolSize, //核心线程数</div><div class="line">    <span class="keyword">int</span> maximumPoolSize, //最大线程数</div><div class="line">    <span class="keyword">long</span> keepAliveTime, //保持时间</div><div class="line">    TimeUnit unit, //时间单位</div><div class="line">    BlockingQueue&lt;Runnable&gt; workQueue, //阻塞队列</div><div class="line">    ThreadFactory threadFactory, //线程工厂</div><div class="line">    RejectedExecutionHandler handler //异常捕获器</div><div class="line">)</div></pre></td></tr></table></figure>
 <h3 id="2-1-1-int-corePoolSize"><a href="#2-1-1-int-corePoolSize" class="headerlink" title="2.1.1 int corePoolSize"></a><strong>2.1.1 int corePoolSize</strong></h3><p>核心池的大小，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中</p>
@@ -617,8 +618,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/同步工具类/" rel="next" title="同步工具类">
-                <i class="fa fa-chevron-left"></i> 同步工具类
+              <a href="/2017/04/30/线程范围内共享数据/" rel="next" title="线程范围内共享数据">
+                <i class="fa fa-chevron-left"></i> 线程范围内共享数据
               </a>
             
           </div>
@@ -627,8 +628,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/线程范围内共享数据/" rel="prev" title="线程范围内共享数据">
-                线程范围内共享数据 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/Android的消息机制/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

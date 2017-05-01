@@ -90,23 +90,23 @@
 
 
 
-<meta name="description" content="1. 多线程概述1.1 多线程引入 由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。 1.2 多线程概述1.2.1 什么是进程？进程就是正在运行的程序，是系统进行资源分配和调用的独立单位。每一个进程都有它自己的内存空间和系统资源。 1.2.2 多进程有什么意义呢?单进程的计算机只能做一件事情，而我们现在的计">
+<meta name="description" content="1. 多线程概述1.1 多线程引入 由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。">
 <meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/多线程/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
-<meta property="og:description" content="1. 多线程概述1.1 多线程引入 由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。 1.2 多线程概述1.2.1 什么是进程？进程就是正在运行的程序，是系统进行资源分配和调用的独立单位。每一个进程都有它自己的内存空间和系统资源。 1.2.2 多进程有什么意义呢?单进程的计算机只能做一件事情，而我们现在的计">
+<meta property="og:description" content="1. 多线程概述1.1 多线程引入 由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。">
 <meta property="og:image" content="http://img.blog.csdn.net/20150827214823243">
 <meta property="og:image" content="http://img.blog.csdn.net/20150810174959628">
 <meta property="og:image" content="http://img.blog.csdn.net/20150915110410513">
 <meta property="og:image" content="http://img.blog.csdn.net/20150810170803595">
 <meta property="og:image" content="http://img.blog.csdn.net/20150915105356500">
 <meta property="og:image" content="http://img.blog.csdn.net/20150810173609584">
-<meta property="og:updated_time" content="2017-04-30T16:05:50.811Z">
+<meta property="og:updated_time" content="2017-05-01T02:29:49.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程">
-<meta name="twitter:description" content="1. 多线程概述1.1 多线程引入 由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。 1.2 多线程概述1.2.1 什么是进程？进程就是正在运行的程序，是系统进行资源分配和调用的独立单位。每一个进程都有它自己的内存空间和系统资源。 1.2.2 多进程有什么意义呢?单进程的计算机只能做一件事情，而我们现在的计">
+<meta name="twitter:description" content="1. 多线程概述1.1 多线程引入 由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20150827214823243">
 
 
@@ -366,6 +366,7 @@
       
         <h1 id="1-多线程概述"><a href="#1-多线程概述" class="headerlink" title="1. 多线程概述"></a><strong>1. 多线程概述</strong></h1><h2 id="1-1-多线程引入"><a href="#1-1-多线程引入" class="headerlink" title="1.1 多线程引入"></a><strong>1.1 多线程引入</strong></h2><p><img src="http://img.blog.csdn.net/20150827214823243" alt=""></p>
 <p>由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。</p>
+<a id="more"></a>
 <h2 id="1-2-多线程概述"><a href="#1-2-多线程概述" class="headerlink" title="1.2 多线程概述"></a><strong>1.2 多线程概述</strong></h2><h3 id="1-2-1-什么是进程？"><a href="#1-2-1-什么是进程？" class="headerlink" title="1.2.1 什么是进程？"></a><strong>1.2.1 什么是进程？</strong></h3><p>进程就是正在运行的程序，是系统进行资源分配和调用的独立单位。每一个进程都有它自己的内存空间和系统资源。</p>
 <h3 id="1-2-2-多进程有什么意义呢"><a href="#1-2-2-多进程有什么意义呢" class="headerlink" title="1.2.2 多进程有什么意义呢?"></a><strong>1.2.2 多进程有什么意义呢?</strong></h3><p>单进程的计算机只能做一件事情，而我们现在的计算机都可以做多件事情。举例：一边玩游戏(游戏进程)，一边听音乐(音乐进程)。也就是说现在的计算机都是支持多进程的，可以在一个时间段内执行多个任务。并且呢，可以提高CPU的使用率，解决了多部分代码同时运行的问题。</p>
 <p>其实，多个应用程序同时执行都是CPU在做着快速的切换完成的。这个切换是随机的。CPU的切换是需要花费时间的，从而导致了效率的降低。</p>
@@ -822,8 +823,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/泛型/" rel="next" title="泛型">
-                <i class="fa fa-chevron-left"></i> 泛型
+              <a href="/2017/04/30/线程锁技术/" rel="next" title="线程锁技术">
+                <i class="fa fa-chevron-left"></i> 线程锁技术
               </a>
             
           </div>
@@ -832,8 +833,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/线程锁技术/" rel="prev" title="线程锁技术">
-                线程锁技术 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/多个线程之间共享数据的方式探讨/" rel="prev" title="多个线程之间共享数据的方式探讨">
+                多个线程之间共享数据的方式探讨 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170303152457864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303151844350?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303172217572?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-30T15:59:49.932Z">
+<meta property="og:updated_time" content="2017-05-01T02:27:10.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋过冬漫长">
 <meta name="twitter:description" content="title: Android的消息机制categories: androidtags: 消息机制 1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么And">
@@ -342,6 +342,7 @@
 <h1 id="1-ANR异常"><a href="#1-ANR异常" class="headerlink" title="1. ANR异常"></a><strong>1. ANR异常</strong></h1><p>Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常。所以，比较耗时的操作都必须要交给子线程。</p>
 <p>解决办法：可以通过Handler来解决这个问题，将比较耗时的操作交给子线程，然后子线程通过Handler，发送消息给主线程，让主线程去更新界面。什么样的操作时比较耗时的？</p>
 <p>1、访问网络，2、大文件的拷贝，3、阻塞式的请求，socket</p>
+<a id="more"></a>
 <h1 id="2-Handler、Looper、Message、MessageQueue"><a href="#2-Handler、Looper、Message、MessageQueue" class="headerlink" title="2. Handler、Looper、Message、MessageQueue"></a><strong>2. Handler、Looper、Message、MessageQueue</strong></h1><p>Android 的Handler 机制（也有人叫消息机制）目的是为了跨线程通信，也就是多线程通信。之所以需要跨线程通信是因为在Android 中主线程通常只负责UI 的创建和修改，子线程负责网络访问和耗时操作，因此，主线程和子线程需要经常配合使用才能完成整个Android 功能。</p>
 <p>在Android中，线程内部或者线程之间进行信息交互时经常会使用消息，这些基础的东西如果我们熟悉其内部的原理，将会使我们容易、更好地架构系统，避免一些低级的错误。在学习Android中消息机制之前，我们先了解与消息有关的几个类：</p>
 <ul>
@@ -496,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/使用JDK5中同步技术的3个面试题/" rel="next" title="使用JDK5中同步技术的3个面试题">
-                <i class="fa fa-chevron-left"></i> 使用JDK5中同步技术的3个面试题
+              <a href="/2017/04/30/线程池/" rel="next" title="线程池">
+                <i class="fa fa-chevron-left"></i> 线程池
               </a>
             
           </div>

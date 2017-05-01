@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021117041918.png">
 <meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021116212815.png">
 <meta property="og:image" content="http://pic002.cnblogs.com/images/2012/263119/2012021119563476.png">
-<meta property="og:updated_time" content="2017-04-30T16:01:35.221Z">
+<meta property="og:updated_time" content="2017-05-01T02:27:35.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Http协议详解">
 <meta name="twitter:description" content="当今web程序的开发技术真是百家争鸣，ASP.NET, PHP, JSP，Perl, AJAX 等等。 无论Web技术在未来如何发展，理解Web程序之间通信的基本协议相当重要, 因为它让我们理解了Web应用程序的内部工作. 本文将对HTTP协议进行详细的实例讲解，内容较多，希望大家耐心看。也希望对大家的开发工作或者测试工作有所帮助。使用Fiddler工具非常方便地捕获HTTP Request和HT">
@@ -376,6 +376,7 @@
         <p>当今web程序的开发技术真是百家争鸣，ASP.NET, PHP, JSP，Perl, AJAX 等等。 无论Web技术在未来如何发展，理解Web程序之间通信的基本协议相当重要, 因为它让我们理解了Web应用程序的内部工作. 本文将对HTTP协议进行详细的实例讲解，内容较多，希望大家耐心看。也希望对大家的开发工作或者测试工作有所帮助。使用Fiddler工具非常方便地捕获HTTP Request和HTTP Response,  关于Fiddler工具的用法，请看我另一篇博客[<a href="http://www.cnblogs.com/TankXiao/archive/2012/02/06/2337728.html" target="_blank" rel="external">Fiddler 教程</a>]</p>
 <h1 id="1-什么是HTTP协议"><a href="#1-什么是HTTP协议" class="headerlink" title="1. 什么是HTTP协议"></a>1. 什么是HTTP协议</h1><p>协议是指计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则，超文本传输协议(HTTP)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器</p>
 <p>目前我们使用的是HTTP/1.1 版本</p>
+<a id="more"></a>
 <h1 id="2-Web服务器，浏览器-代理服务器"><a href="#2-Web服务器，浏览器-代理服务器" class="headerlink" title="2. Web服务器，浏览器,代理服务器"></a>2. Web服务器，浏览器,代理服务器</h1><p>当我们打开浏览器，在地址栏中输入URL，然后我们就看到了网页。 原理是怎样的呢？</p>
 <p>实际上我们输入URL后，我们的浏览器给Web服务器发送了一个Request, Web服务器接到Request后进行处理，生成相应的Response，然后发送给浏览器， 浏览器解析Response中的HTML,这样我们就看到了网页，过程如下图所示</p>
 <p><img src="http://images2015.cnblogs.com/blog/263119/201702/263119-20170226084020460-1834612400.png" alt="img"></p>

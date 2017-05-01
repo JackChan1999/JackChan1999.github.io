@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170302181345556?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302181357798?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170302181409595?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-04-30T15:59:18.028Z">
+<meta property="og:updated_time" content="2017-05-01T02:26:52.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android的事件分发">
 <meta name="twitter:description" content="1. Touch事件和绘制事件的异同之处Touch事件和绘制事件很类似，都是由ViewRoot派发下来的，但是不同之处在绘制事件是由应用中的某个View发起请求，一层一层上传到ViewRoot，再有ViewRoot下发绘制，传递canvas给所有子View让其绘制自身，绘制好后，再通知WMS进行画到屏幕上。而Touch事件是由硬件捕获到触摸后由系统传递给应用的ViewRoot，再由ViewRoot">
@@ -367,6 +367,7 @@
         <h1 id="1-Touch事件和绘制事件的异同之处"><a href="#1-Touch事件和绘制事件的异同之处" class="headerlink" title="1. Touch事件和绘制事件的异同之处"></a><strong>1. Touch事件和绘制事件的异同之处</strong></h1><p>Touch事件和绘制事件很类似，都是由ViewRoot派发下来的，但是不同之处在绘制事件是由应用中的某个View发起请求，一层一层上传到ViewRoot，再有ViewRoot下发绘制，传递canvas给所有子View让其绘制自身，绘制好后，再通知WMS进行画到屏幕上。而Touch事件是由硬件捕获到触摸后由系统传递给应用的ViewRoot，再由ViewRoot往下一层一层传递。</p>
 <p>他们的处理过程都是自上而下的分发，但是绘制多了一层自下往上的请求。</p>
 <p>事件存在消耗，事件的处理方法都会返回一个boolean值，如果该值为true，则本次事件下发将会终止。</p>
+<a id="more"></a>
 <h1 id="2-MotionEvent"><a href="#2-MotionEvent" class="headerlink" title="2. MotionEvent"></a><strong>2. MotionEvent</strong></h1><h2 id="2-1-MotionEvent对象的产生"><a href="#2-1-MotionEvent对象的产生" class="headerlink" title="2.1 MotionEvent对象的产生"></a><strong>2.1 MotionEvent对象的产生</strong></h2><p>系统有一个线程在循环收集屏幕硬件信息，当用户触摸屏幕时，该线程会把从硬件设备收集到的信息封装成一个MotionEvent对象，然后把该对象存放到一个消息队列中。</p>
 <p>系统的另一个线程循环的读取消息队列中的MotionEvent，然后交给WMS去派发，WMS把该事件派发给当前处于活动的Activity，即处于活动栈最顶端的Activity。</p>
 <p>这就是一个先进先出的消费者和生产者的模板，一个线程不停的创建MotionEvent对象放入队列中，另一个线程不断的从队列中取出MotionEvent对象进行分发。</p>

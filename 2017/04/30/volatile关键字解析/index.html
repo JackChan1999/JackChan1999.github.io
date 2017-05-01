@@ -99,7 +99,7 @@
 <meta property="og:description" content="原文链接：http://www.cnblogs.com/dolphin0520/p/3920373.html  volatile这个关键字可能很多朋友都听说过，或许也都用过。在Java 5之前，它是一个备受争议的关键字，因为在程序中使用它往往会导致出人意料的结果。在Java 5之后，volatile关键字才得以重获生机。 volatile关键字虽然从字面上理解起来比较简单，但是要用好不是一件容易">
 <meta property="og:image" content="http://images.cnitblog.com/blog/288799/201408/212219343783699.jpg">
 <meta property="og:image" content="http://images.cnitblog.com/blog/288799/201408/212305263939989.jpg">
-<meta property="og:updated_time" content="2017-04-30T16:03:19.392Z">
+<meta property="og:updated_time" content="2017-05-01T02:28:29.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="volatile关键字解析">
 <meta name="twitter:description" content="原文链接：http://www.cnblogs.com/dolphin0520/p/3920373.html  volatile这个关键字可能很多朋友都听说过，或许也都用过。在Java 5之前，它是一个备受争议的关键字，因为在程序中使用它往往会导致出人意料的结果。在Java 5之后，volatile关键字才得以重获生机。 volatile关键字虽然从字面上理解起来比较简单，但是要用好不是一件容易">
@@ -372,6 +372,7 @@
 <li>深入剖析volatile关键字</li>
 <li>使用volatile关键字的场景</li>
 </ul>
+<a id="more"></a>
 <h1 id="1-内存模型的相关概念"><a href="#1-内存模型的相关概念" class="headerlink" title="1. 内存模型的相关概念"></a>1. 内存模型的相关概念</h1><p>大家都知道，计算机在执行程序时，每条指令都是在CPU中执行的，而执行指令过程中，势必涉及到数据的读取和写入。由于程序运行过程中的临时数据是存放在主存（物理内存）当中的，这时就存在一个问题，由于CPU执行速度很快，而从内存读取数据和向内存写入数据的过程跟CPU执行指令的速度比起来要慢的多，因此如果任何时候对数据的操作都要通过和内存的交互来进行，会大大降低指令执行的速度。因此在CPU里面就有了高速缓存。</p>
 <p>也就是，当程序在运行过程中，会将运算需要的数据从主存复制一份到CPU的高速缓存当中，那么CPU进行计算时就可以直接从它的高速缓存读取数据和向其中写入数据，当运算结束之后，再将高速缓存中的数据刷新到主存当中。举个简单的例子，比如下面的这段代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i = i + <span class="number">1</span>;</div></pre></td></tr></table></figure>
@@ -598,8 +599,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/定时器、互斥、同步通信技术/" rel="next" title="定时器、互斥、同步通信技术">
-                <i class="fa fa-chevron-left"></i> 定时器、互斥、同步通信技术
+              <a href="/2017/04/30/泛型/" rel="next" title="泛型">
+                <i class="fa fa-chevron-left"></i> 泛型
               </a>
             
           </div>
@@ -608,8 +609,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/同步工具类/" rel="prev" title="同步工具类">
-                同步工具类 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/定时器、互斥、同步通信技术/" rel="prev" title="定时器、互斥、同步通信技术">
+                定时器、互斥、同步通信技术 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

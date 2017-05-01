@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="秋过冬漫长">
 <meta property="og:description" content="系列阅读 Java基础：类加载器 Java基础：反射 Java基础：注解 Java基础：动态代理  1. 什么是类加载器类加载器就是用来加载类的东西！类加载器也是一个类：ClassLoader 类加载器可以被加载到内存，是通过类加载器完成的！Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：  BootStrap：引导类加载器，加载rt.jar中的类 Ex">
 <meta property="og:image" content="http://img.blog.csdn.net/20161022174331888">
-<meta property="og:updated_time" content="2017-04-30T16:07:50.754Z">
+<meta property="og:updated_time" content="2017-05-01T02:30:31.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类加载器">
 <meta name="twitter:description" content="系列阅读 Java基础：类加载器 Java基础：反射 Java基础：注解 Java基础：动态代理  1. 什么是类加载器类加载器就是用来加载类的东西！类加载器也是一个类：ClassLoader 类加载器可以被加载到内存，是通过类加载器完成的！Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：  BootStrap：引导类加载器，加载rt.jar中的类 Ex">
@@ -375,6 +375,7 @@
 <p>类加载器之间存在上下级关系，系统类加载器的上级是扩展类加载器，而扩展类加载器的上级是引导类加载器</p>
 <p>类加载器也是Java类，因为其它java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是java类，这正是BootStrap。</p>
 <p>Java虚拟机中的所有类装载器采用具有父子关系的树形结构进行组织，在实例化每个类装载器对象时，需要为其指定一个父级类装载器对象或者默认采用系统类装载器为其父级类加载</p>
+<a id="more"></a>
 <h1 id="2-类的加载"><a href="#2-类的加载" class="headerlink" title="2. 类的加载"></a><strong>2. 类的加载</strong></h1><p>当程序要使用某个类时，如果该类还未被加载到内存中，则系统会通过加载，连接，初始化三步来实现对这个类进行初始化。</p>
 <h2 id="2-1-加载"><a href="#2-1-加载" class="headerlink" title="2.1 加载"></a><strong>2.1 加载</strong></h2><p>就是指将class文件读入内存，并为之创建一个Class对象。任何类被使用时系统都会建立一个Class对象。</p>
 <h2 id="2-2-连接"><a href="#2-2-连接" class="headerlink" title="2.2 连接"></a><strong>2.2 连接</strong></h2><ul>

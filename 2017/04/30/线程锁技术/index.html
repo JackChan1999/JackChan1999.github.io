@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/30/线程锁技术/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
 <meta property="og:description" content="笔记摘要这里介绍了java5中的线程锁技术：Lock和Condition，实现线程间的通信，其中的读锁和写锁的使用通过一个缓存系统进行了演示，对于Condition的应用通过一个阻塞队列进行演示。 线程锁技术：Lock &amp;amp; Condition 实现线程同步通信所属包：java.util.concurrent.locks    线程锁 说明     Synchronized 同步方法，锁对象">
-<meta property="og:updated_time" content="2017-04-30T16:12:06.740Z">
+<meta property="og:updated_time" content="2017-05-01T02:32:51.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程锁技术">
 <meta name="twitter:description" content="笔记摘要这里介绍了java5中的线程锁技术：Lock和Condition，实现线程间的通信，其中的读锁和写锁的使用通过一个缓存系统进行了演示，对于Condition的应用通过一个阻塞队列进行演示。 线程锁技术：Lock &amp;amp; Condition 实现线程同步通信所属包：java.util.concurrent.locks    线程锁 说明     Synchronized 同步方法，锁对象">
@@ -393,6 +393,7 @@
 </tr>
 </tbody>
 </table>
+<a id="more"></a>
 <h1 id="1-Lock"><a href="#1-Lock" class="headerlink" title="1. Lock"></a><strong>1. Lock</strong></h1><p>Lock比传统线程模型中的synchronized方式更加面向对象，相对于synchronized 方法和语句它具有更广泛的锁定操作，此实现允许更灵活的结构，可以具有差别很大的属性，可以支持多个相关的 Condition 对象。 </p>
 <p>于现实生活中类似，锁本身也是一个对象。两个线程执行的代码片段要实现同步互斥的结果，它们必须用同一个Lock对象，锁是上在代表要操作的资源的类的内部方法中，而不是线程代码中。</p>
 <h2 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h2><p>分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，写锁与写锁互斥，这是由JVM自己控制的。你只要上好相应的锁即可。如果你的代码只读数据，可以很多人同时读，但不能同时写，那就上读锁；如果你的代码修改数据，只能有一个人在写，且不能同时读取，那就上写锁。总之，读的时候上读锁，写的时候上写锁！</p>
@@ -468,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/多线程/" rel="next" title="多线程">
-                <i class="fa fa-chevron-left"></i> 多线程
+              <a href="/2017/04/30/定时器、互斥、同步通信技术/" rel="next" title="定时器、互斥、同步通信技术">
+                <i class="fa fa-chevron-left"></i> 定时器、互斥、同步通信技术
               </a>
             
           </div>
@@ -478,8 +479,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/多个线程之间共享数据的方式探讨/" rel="prev" title="多个线程之间共享数据的方式探讨">
-                多个线程之间共享数据的方式探讨 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/多线程/" rel="prev" title="多线程">
+                多线程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

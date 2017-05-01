@@ -99,7 +99,7 @@
 <meta property="og:description" content="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket先来一个讲TCP、UDP和HTTP关系的，注意红色mark的部分 1. TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层。在网络层有IP协议、ICMP协议、ARP协议、RARP协议和BOOTP协议。在传输层中有TCP协议与UDP协议。在应用层有FTP、HTTP、TELNET、SMTP、DNS等协议。因此，HTTP本身就是一个">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/goodcandle/socket2.jpg">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/goodcandle/socket2.jpg">
-<meta property="og:updated_time" content="2017-04-30T16:11:52.876Z">
+<meta property="og:updated_time" content="2017-05-01T02:33:07.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket">
 <meta name="twitter:description" content="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket先来一个讲TCP、UDP和HTTP关系的，注意红色mark的部分 1. TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层。在网络层有IP协议、ICMP协议、ARP协议、RARP协议和BOOTP协议。在传输层中有TCP协议与UDP协议。在应用层有FTP、HTTP、TELNET、SMTP、DNS等协议。因此，HTTP本身就是一个">
@@ -365,6 +365,7 @@
 <h3 id="2-HTTP协议是建立在请求-响应模型上的。"><a href="#2-HTTP协议是建立在请求-响应模型上的。" class="headerlink" title="2. HTTP协议是建立在请求/响应模型上的。"></a>2. HTTP协议是建立在请求/响应模型上的。</h3><p>首先由客户建立一条与服务器的TCP链接，并发送一个请求到服务器，请求中包含请求方法、URI、协议版本以及相关的MIME样式的消息。服务器响应一个状态行，包含消息的协议版本、一个成功和失败码以及相关的MIME式样的消息。</p>
 <p>HTTP/1.0为每一次HTTP的请求/响应建立一条新的TCP链接，因此一个包含HTML内容和图片的页面将需要建立多次的短期的TCP链接。一次TCP链接的建立将需要3次握手。</p>
 <p>另外，为了获得适当的传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销。    </p>
+<a id="more"></a>
 <h3 id="3-结论"><a href="#3-结论" class="headerlink" title="3. 结论"></a>3. 结论</h3><p>虽然HTTP本身是一个协议，但其最终还是基于TCP的。不过，目前，有人正在研究基于TCP+UDP混合的HTTP协议。</p>
 <h3 id="4-Socket是什么呢？"><a href="#4-Socket是什么呢？" class="headerlink" title="4. Socket是什么呢？"></a>4. Socket是什么呢？</h3><p>Socket是应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。</p>
 <p><img src="http://images.cnblogs.com/cnblogs_com/goodcandle/socket2.jpg" alt=""></p>
@@ -452,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/网络编程/" rel="next" title="网络编程">
-                <i class="fa fa-chevron-left"></i> 网络编程
+              <a href="/2017/04/30/String类/" rel="next" title="String类">
+                <i class="fa fa-chevron-left"></i> String类
               </a>
             
           </div>
@@ -462,8 +463,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/动态代理/" rel="prev" title="动态代理">
-                动态代理 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/网络编程/" rel="prev" title="网络编程">
+                网络编程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

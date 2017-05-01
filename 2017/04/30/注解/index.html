@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="秋过冬漫长">
 <meta property="og:description" content="#系列阅读  Java基础：类加载器 Java基础：反射 Java基础：注解 Java基础：动态代理  1. 概述注解相当于一种标记，在程序中加了注解就等于为程序打上了某种标记，没加，则等于没有某种标记，以后，javac编译器，开发工具和其他程序可以用反射来了解你的类及各种元素上有无何种标记，看你有什么标记，就去干相应的事。标记可以加在包，类，字段，方法，方法的参数以及局部变量上 开发中常见注解：">
 <meta property="og:image" content="http://img.blog.csdn.net/20161022152925252">
-<meta property="og:updated_time" content="2017-04-30T16:11:18.414Z">
+<meta property="og:updated_time" content="2017-05-01T02:33:34.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="注解">
 <meta name="twitter:description" content="#系列阅读  Java基础：类加载器 Java基础：反射 Java基础：注解 Java基础：动态代理  1. 概述注解相当于一种标记，在程序中加了注解就等于为程序打上了某种标记，没加，则等于没有某种标记，以后，javac编译器，开发工具和其他程序可以用反射来了解你的类及各种元素上有无何种标记，看你有什么标记，就去干相应的事。标记可以加在包，类，字段，方法，方法的参数以及局部变量上 开发中常见注解：">
@@ -379,6 +379,7 @@
 <li>运行时动态处理</li>
 <li>编译时动态处理</li>
 </ul>
+<a id="more"></a>
 <h1 id="2-注解类型"><a href="#2-注解类型" class="headerlink" title="2. 注解类型"></a>2. 注解类型</h1><p>8种基本数据类型，String，Class，enum，annotation，以上类型的数组类型</p>
 <h1 id="3-定义注解"><a href="#3-定义注解" class="headerlink" title="3. 定义注解"></a>3. 定义注解</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> ViewInject &#123;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span></span>;<span class="comment">//当使用注解时，如果只给名为value的属性赋值时，可以省略“value=”</span></div><div class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> "zhangsan"</span>;<span class="comment">//默认值</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="interface"><a href="#interface" class="headerlink" title="@interface"></a>@interface</h3><p>使用@interface声明一个注解类</p>
@@ -568,8 +569,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/动态代理/" rel="next" title="动态代理">
-                <i class="fa fa-chevron-left"></i> 动态代理
+              <a href="/2017/04/30/网络编程/" rel="next" title="网络编程">
+                <i class="fa fa-chevron-left"></i> 网络编程
               </a>
             
           </div>

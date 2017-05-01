@@ -97,7 +97,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/30/泛型/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
 <meta property="og:description" content="1. 泛型概述泛型（Generic type 或者 generics）是对 Java 语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看作是使用参数化类型时指定的类型的一个占位符，就像方法的形式参数是运行时传递的值的占位符一样。 泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法的创">
-<meta property="og:updated_time" content="2017-04-30T16:08:04.993Z">
+<meta property="og:updated_time" content="2017-05-01T02:30:19.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="泛型">
 <meta name="twitter:description" content="1. 泛型概述泛型（Generic type 或者 generics）是对 Java 语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看作是使用参数化类型时指定的类型的一个占位符，就像方法的形式参数是运行时传递的值的占位符一样。 泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法的创">
@@ -362,6 +362,7 @@
 <p>在Java SE 1.5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的“任意化”，“任意化”带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。</p>
 <p>泛型的好处是在编译的时候检查类型安全，并且所有的强制转换都是自动和隐式的，以提高代码的重用率。</p>
 <p>可以在集合框架（Collection framework）中看到泛型的动机。例如，Map 类允许您向一个 Map添加任意类的对象，即使最常见的情况是在给定映射（map）中保存某个特定类型（比如 String）的对象。</p>
+<a id="more"></a>
 <p>因为 Map.get() 被定义为返回 Object，所以一般必须将 Map.get() 的结果强制类型转换为期望的类型，如下面的代码所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Map m = <span class="keyword">new</span> HashMap();</div><div class="line">m.put(<span class="string">"key"</span>, <span class="string">"blarg"</span>);</div><div class="line">String s = (String) m.get(<span class="string">"key"</span>);</div></pre></td></tr></table></figure>
 <p>要让程序通过编译，必须将 get() 的结果强制类型转换为 String，并且希望结果真的是一个 String。但是有可能某人已经在该映射中保存了不是 String 的东西，这样的话，上面的代码将会抛出 ClassCastException。</p>
@@ -529,8 +530,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/反射/" rel="next" title="反射">
-                <i class="fa fa-chevron-left"></i> 反射
+              <a href="/2017/04/30/动态代理/" rel="next" title="动态代理">
+                <i class="fa fa-chevron-left"></i> 动态代理
               </a>
             
           </div>
@@ -539,8 +540,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/多线程/" rel="prev" title="多线程">
-                多线程 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/volatile关键字解析/" rel="prev" title="volatile关键字解析">
+                volatile关键字解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

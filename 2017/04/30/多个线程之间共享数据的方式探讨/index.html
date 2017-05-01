@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="##内容摘要 多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计 ##1. 如果每个线程执行的代码相同可以使用同一个Runnable对象，这个Run">
+<meta name="description" content="##内容摘要 多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计">
 <meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多个线程之间共享数据的方式探讨">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/多个线程之间共享数据的方式探讨/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
-<meta property="og:description" content="##内容摘要 多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计 ##1. 如果每个线程执行的代码相同可以使用同一个Runnable对象，这个Run">
-<meta property="og:updated_time" content="2017-04-30T16:05:12.684Z">
+<meta property="og:description" content="##内容摘要 多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计">
+<meta property="og:updated_time" content="2017-05-01T02:29:35.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多个线程之间共享数据的方式探讨">
-<meta name="twitter:description" content="##内容摘要 多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计 ##1. 如果每个线程执行的代码相同可以使用同一个Runnable对象，这个Run">
+<meta name="twitter:description" content="##内容摘要 多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计">
 
 
 
@@ -359,6 +359,7 @@
       
         <p>##<strong>内容摘要</strong></p>
 <p>多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计</p>
+<a id="more"></a>
 <p>##<strong>1. 如果每个线程执行的代码相同</strong><br>可以使用同一个Runnable对象，这个Runnable对象中有那个共享数据，例如：卖票系统</p>
 <p>###1.1 简单的卖票系统示例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ticket</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;  </div><div class="line">    <span class="keyword">private</span>  <span class="keyword">int</span> tick = <span class="number">20</span>;  </div><div class="line">    Object obj = <span class="keyword">new</span> Object();  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;  </div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;  </div><div class="line">            <span class="keyword">synchronized</span>(obj)&#123;  </div><div class="line">                <span class="keyword">if</span>(tick&gt;<span class="number">0</span>)&#123;  </div><div class="line">                    <span class="comment">//只能try，因为run是复写了Runnable接口的run,接口的run没有抛  </span></div><div class="line">                    <span class="comment">//try&#123;Thread.sleep(10);&#125;catch(Exception e)&#123;&#125;  </span></div><div class="line">                    System.out.println(Thread.currentThread().getName()+<span class="string">"....sale : "</span>+ tick--);  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span>  <span class="title">TicketDemo</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">          </div><div class="line">        <span class="comment">//只建立了一个Ticket对象，内存中只有一个tick成员变量，所以是共享数据  </span></div><div class="line">        Ticket t = <span class="keyword">new</span> Ticket();  </div><div class="line">  </div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(t);  </div><div class="line">        Thread t2 = <span class="keyword">new</span> Thread(t);  </div><div class="line">        Thread t3 = <span class="keyword">new</span> Thread(t);  </div><div class="line">        Thread t4 = <span class="keyword">new</span> Thread(t);  </div><div class="line">        t1.start();  </div><div class="line">        t2.start();  </div><div class="line">        t3.start();  </div><div class="line">        t4.start();  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -425,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/线程锁技术/" rel="next" title="线程锁技术">
-                <i class="fa fa-chevron-left"></i> 线程锁技术
+              <a href="/2017/04/30/多线程/" rel="next" title="多线程">
+                <i class="fa fa-chevron-left"></i> 多线程
               </a>
             
           </div>
@@ -435,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/定时器、互斥、同步通信技术/" rel="prev" title="定时器、互斥、同步通信技术">
-                定时器、互斥、同步通信技术 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/同步工具类/" rel="prev" title="同步工具类">
+                同步工具类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

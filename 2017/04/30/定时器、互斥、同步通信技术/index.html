@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="笔记摘要这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性 1. 多线程的几个知识点1.1 为何使用实现Runnable的方式创建线程更普遍？new Runnable()的方式，更加体现面向对">
+<meta name="description" content="笔记摘要这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性">
 <meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="定时器、互斥、同步通信技术">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/定时器、互斥、同步通信技术/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
-<meta property="og:description" content="笔记摘要这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性 1. 多线程的几个知识点1.1 为何使用实现Runnable的方式创建线程更普遍？new Runnable()的方式，更加体现面向对">
-<meta property="og:updated_time" content="2017-04-30T16:04:11.125Z">
+<meta property="og:description" content="笔记摘要这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性">
+<meta property="og:updated_time" content="2017-05-01T02:28:59.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定时器、互斥、同步通信技术">
-<meta name="twitter:description" content="笔记摘要这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性 1. 多线程的几个知识点1.1 为何使用实现Runnable的方式创建线程更普遍？new Runnable()的方式，更加体现面向对">
+<meta name="twitter:description" content="笔记摘要这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性">
 
 
 
@@ -358,6 +358,7 @@
 
       
         <h1 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h1><p>这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性</p>
+<a id="more"></a>
 <h1 id="1-多线程的几个知识点"><a href="#1-多线程的几个知识点" class="headerlink" title="1. 多线程的几个知识点"></a><strong>1. 多线程的几个知识点</strong></h1><h2 id="1-1-为何使用实现Runnable的方式创建线程更普遍？"><a href="#1-1-为何使用实现Runnable的方式创建线程更普遍？" class="headerlink" title="1.1 为何使用实现Runnable的方式创建线程更普遍？"></a><strong>1.1 为何使用实现Runnable的方式创建线程更普遍？</strong></h2><p>new Runnable()的方式，更加体现面向对象的思想</p>
 <p>通过 new Thread()创建一个线程，代码封装在runnable对象中，代码和线程独立分开来，但最终将它们组合在一起。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">  </div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// code</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -442,8 +443,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/30/多个线程之间共享数据的方式探讨/" rel="next" title="多个线程之间共享数据的方式探讨">
-                <i class="fa fa-chevron-left"></i> 多个线程之间共享数据的方式探讨
+              <a href="/2017/04/30/volatile关键字解析/" rel="next" title="volatile关键字解析">
+                <i class="fa fa-chevron-left"></i> volatile关键字解析
               </a>
             
           </div>
@@ -452,8 +453,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/30/volatile关键字解析/" rel="prev" title="volatile关键字解析">
-                volatile关键字解析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/30/线程锁技术/" rel="prev" title="线程锁技术">
+                线程锁技术 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
