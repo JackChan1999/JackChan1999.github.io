@@ -1,0 +1,1362 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jni," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="JNI与底层调用1：http://blog.csdn.net/axi295309066/article/details/60758515JNI与底层调用2：http://blog.csdn.net/axi295309066/article/details/60778076C/C++在Android开发中的应用：http://blog.csdn.net/axi295309066/article/de">
+<meta name="keywords" content="jni">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNI与底层调用2">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/JNI与底层调用2/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="JNI与底层调用1：http://blog.csdn.net/axi295309066/article/details/60758515JNI与底层调用2：http://blog.csdn.net/axi295309066/article/details/60778076C/C++在Android开发中的应用：http://blog.csdn.net/axi295309066/article/de">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-73aa20ad4dfb9daa?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-889a9e07d9c54615?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-f0b34463ac47bca4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-9b86248398bf34e5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-0c937b371be43730?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-36c2dd63a7b77ce1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-0ba3a4179a7a9919?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-701d4870dc60927c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-b225cf39b186412f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-6014c322a870b126?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-fd1bd5d9ac79af1f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-b2657a85ab049c82?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-a5417003755d0d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-7986bd9ded2d43ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-240b7c5a763dd2a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-d9f9222c31ac8e01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-07f1662b853b84ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-1106547b0fdff91d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-dad9eda5b41118bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-2552e54d9aee35db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-d9c495e97f1e1588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-2f651be5988f3d62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-7a40323f07500843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-d18ef77f8b64bf36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-7f57a3dc84aadeb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-5677047a8ebcc4d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-c1e56491db89df31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-56a6c7ed55606ca5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190230310?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190314498?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190344707?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190414333?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190552938?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190623423?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190742752?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170307190931643?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/ujaEPeJyrxuNRTeFDkIah7qODoDo8NcGAibsUVf5O06NqT1hIwycIazPwj1ialxvic3iaMOzhF05yRibO6qiaNGI045w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_png/ujaEPeJyrxuNRTeFDkIah7qODoDo8NcGXSuX43NWccCGmVZxNbfEgL75EgY9nYwYJqNNDTeE04RHrHnvlRf2FA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1">
+<meta property="og:updated_time" content="2017-05-01T04:46:29.717Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JNI与底层调用2">
+<meta name="twitter:description" content="JNI与底层调用1：http://blog.csdn.net/axi295309066/article/details/60758515JNI与底层调用2：http://blog.csdn.net/axi295309066/article/details/60778076C/C++在Android开发中的应用：http://blog.csdn.net/axi295309066/article/de">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3981391-73aa20ad4dfb9daa?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/JNI与底层调用2/"/>
+
+
+
+
+
+  <title>JNI与底层调用2 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/JNI与底层调用2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JNI与底层调用2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/JNI与底层调用2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/JNI与底层调用2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JNI与底层调用1：<a href="http://blog.csdn.net/axi295309066/article/details/60758515" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/60758515</a><br>JNI与底层调用2：<a href="http://blog.csdn.net/axi295309066/article/details/60778076" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/60778076</a><br>C/C++在Android开发中的应用：<a href="http://blog.csdn.net/axi295309066/article/details/60954771" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/60954771</a></p>
+<h1 id="1-掌握如何使用广播接收者拦截电话和短信"><a href="#1-掌握如何使用广播接收者拦截电话和短信" class="headerlink" title="1. 掌握如何使用广播接收者拦截电话和短信"></a><strong>1. 掌握如何使用广播接收者拦截电话和短信</strong></h1><p>在日常生活中，当手机丢失后，我们可以启动一系列的措施来获取丢失手机的位置信息，或者清楚丢失手机的数据来防止隐私数据泄露，本章就针对这些防盗保护措施进行讲解。</p>
+<a id="more"></a>
+<h1 id="2-JNI-开发中常见错误"><a href="#2-JNI-开发中常见错误" class="headerlink" title="2. JNI 开发中常见错误"></a><strong>2. JNI 开发中常见错误</strong></h1><h2 id="2-1-动态库名称写错，或者不存在"><a href="#2-1-动态库名称写错，或者不存在" class="headerlink" title="2.1 动态库名称写错，或者不存在"></a><strong>2.1 动态库名称写错，或者不存在</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span>&#123;</div><div class="line">    System.loadLibrary(<span class="string">"hell0"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我们在写上面代码的时候如果不小心将hello 写成了hell0。或者libhello.so 动态库不存在，那么系统启动时会报如下异常。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-73aa20ad4dfb9daa?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h2 id="2-2-Android-mk-配置文件写错"><a href="#2-2-Android-mk-配置文件写错" class="headerlink" title="2.2 Android.mk 配置文件写错"></a><strong>2.2 Android.mk 配置文件写错</strong></h2><p>如果修改配置文件中的某个参数名称被写错，那么我们在调用ndk-build.cmd 命令的时候很可能报如下异常。出现这类异常，就需要我们检查我们的Android.mk 文件，看是否写错。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-889a9e07d9c54615?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h2 id="2-3-目标文件名画蛇添足导致的错误"><a href="#2-3-目标文件名画蛇添足导致的错误" class="headerlink" title="2.3 目标文件名画蛇添足导致的错误"></a><strong>2.3 目标文件名画蛇添足导致的错误</strong></h2><p>手机防盗界面会展示出一系列的信息，如用户设置的安全号码、手机防盗保护是否开启等信息，手机防盗界面LostFindActivity.java 的效果图如图3-5 所示。<br>如果我们将Android.mk 中的目标文件名：LOCAL_MODULE := hello 写成了LOCAL_MODULE:=hello.so，那么当我们使用ndk 进行编译的时候会出现如下错误。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-f0b34463ac47bca4?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>上面的异常告诉我们，LOCAL_MODULE 不能有文件拓展名。</p>
+<h2 id="2-4-源文件名写错"><a href="#2-4-源文件名写错" class="headerlink" title="2.4 源文件名写错"></a><strong>2.4 源文件名写错</strong></h2><p>如果我们将Android.mk 中的源文件名：LOCAL_SRC_FILES := hello.c 写成了LOCAL_SRC_FILES :=helo.c（少些了一个单词），那么当使用ndk 进行编译的时候会出现如下错误：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-9b86248398bf34e5?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h2 id="2-5-平台使用错误"><a href="#2-5-平台使用错误" class="headerlink" title="2.5 平台使用错误"></a><strong>2.5 平台使用错误</strong></h2><p>如果我们编译的时候用的是arm 平台，但是将目标文件运行在了x86 平台上，那么会产生如下错误。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-0c937b371be43730?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>如果想让我们编译的动态库既支持arm 平台又支持x86 平台，那么我们可以在工程中的jni 目录下添加Application.mk 文件。关于Application.mk 的配置在本人的上一个文档中有说明，这里就不再介绍。</p>
+<h2 id="2-6-C-语言中被Java-调用的方法名写错"><a href="#2-6-C-语言中被Java-调用的方法名写错" class="headerlink" title="2.6 C 语言中被Java 调用的方法名写错"></a><strong>2.6 C 语言中被Java 调用的方法名写错</strong></h2><p>比如C 语言中的方法jstring Java_com_itheima_jnihello_MainActivity_helloC 把helloC 写成了heloC，那么将会报如下错误。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-36c2dd63a7b77ce1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h1 id="3-自动生成JNI-头文件"><a href="#3-自动生成JNI-头文件" class="headerlink" title="3. 自动生成JNI 头文件"></a><strong>3. 自动生成JNI 头文件</strong></h1><p>对于一些特殊的Java 方法名，我们很难写出其对应的JNI 方法名，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public native String a_b__c_d();</div></pre></td></tr></table></figure></p>
+<p>这时候我们可以通过我们的JDK 工具自动生成头文件。该工具位于JDK 中，如果我们给电脑配置JAVA_HOME 则可以直接在命令行中使用，使用法则很简单。如下图所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-0ba3a4179a7a9919?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>下面演示如何使用javah 工具生成我们MainActivity.java 中native 方法的头文件。<br>将命令行控制台切换到我们MainActivity.class（注意：是.class 不是.java）所在目录。本人的目录如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-701d4870dc60927c?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>执行javah 命令：javah com.itheima.jnihello.MainActivity，发现报了如下错误：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-b225cf39b186412f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>Tips：出现上面的错误时因为我用的是jdk7 版本，jdk7 在编译MainActivity.class 类的时候会查找其所有的父类，但是在当前命令行中是不可能有MainActivity 类的父类路径的。有两种办法可以解决上述问题：<br>1）改成jdk6 版本<br>2）将native 方法定义在另外一个独立的类中<br>本人在这里采用第二种方法来解决该问题，因此我创建一个类，将所有的native 方法都定义在该类中。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-6014c322a870b126?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>JNIMethod.java 代码清单如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.itheima.jnihello.jni;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNIMethod</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">a_b__c_d</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再次执行javah 命令：javah com.itheima.jnihello.jni.JNIMethod</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-fd1bd5d9ac79af1f?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>这次发现没有报错，生成的头文件在如下位置：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-b2657a85ab049c82?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>打开生成的头文件，将生成的方法签名拷贝出来添加到我们的hello.c 源文件中即可。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-a5417003755d0d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h1 id="4-JNI-的值传递"><a href="#4-JNI-的值传递" class="headerlink" title="4. JNI 的值传递"></a><strong>4. JNI 的值传递</strong></h1><p>本章我们通过一个案例来介绍几种常见的JNI 值传递场景。<br>创建一个新的Android 工程《JNI 值传递》。在工程中创建com.itheima.jnipassdata.DataProvider 类。在该类中定义三个native 方法。代码清单如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataProvider</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 模拟用C 语言计算一些负责算法</div><div class="line">     * <span class="doctag">@param</span> x</div><div class="line">     * <span class="doctag">@param</span> y</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 模拟用C 语言加密字符串</div><div class="line">     * <span class="doctag">@param</span> str</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">encideString</span><span class="params">(String str)</span></span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 模拟用C 语言进行一些图像算法</div><div class="line">     * <span class="doctag">@param</span> colorArray</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span>[] changeColor(<span class="keyword">int</span>[] colorArray);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用javah 工具生成头文件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-7986bd9ded2d43ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>生成的头文件在相对于命令行的当前目录下。<br>在工程中创建jni 目录，在改jni 目录中创建Hello.c 文件，将上一步生成的方法拷贝到Hello.c文件中，并实现里面的方法Hello.c 代码清单如下。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"jni.h"</span></span></div><div class="line"><span class="comment">//把java 的string 转化成c 的字符串</span></div><div class="line"><span class="function"><span class="keyword">char</span>* <span class="title">Jstring2CStr</span><span class="params">(JNIEnv* env, jstring jstr)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span>* rtn = <span class="literal">NULL</span>;</div><div class="line">    jclass clsstring = (*env)-&gt;FindClass(env,<span class="string">"java/lang/String"</span>); <span class="comment">//String</span></div><div class="line">    jstring strencode = (*env)-&gt;NewStringUTF(env,<span class="string">"GB2312"</span>); <span class="comment">//"gb2312"</span></div><div class="line">    jmethodID mid = (*env)-&gt;GetMethodID(env,clsstring, <span class="string">"getBytes"</span>,</div><div class="line">        <span class="string">"(Ljava/lang/String;)[B"</span>); <span class="comment">//getBytes(Str);</span></div><div class="line">    jbyteArray barr= (jbyteArray)(*env)-&gt;CallObjectMethod(env,jstr,mid,strencode);</div><div class="line">    <span class="comment">// String .getByte("GB2312");</span></div><div class="line">    jsize alen = (*env)-&gt;GetArrayLength(env,barr);</div><div class="line">    jbyte* ba = (*env)-&gt;GetByteArrayElements(env,barr,JNI_FALSE);</div><div class="line">    <span class="keyword">if</span>(alen &gt; <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        rtn = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(alen+<span class="number">1</span>); <span class="comment">//"\0"</span></div><div class="line">        <span class="built_in">memcpy</span>(rtn,ba,alen);</div><div class="line">        rtn[alen]=<span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    (*env)-&gt;ReleaseByteArrayElements(env,barr,ba,<span class="number">0</span>); <span class="comment">//释放内存空间</span></div><div class="line">    <span class="keyword">return</span> rtn;</div><div class="line">&#125;</div><div class="line"><span class="function">jint <span class="title">Java_com_ithiema_jnipassdata_DataProvider_add</span></span></div><div class="line">        <span class="params">(JNIEnv* env, jobject obj, jint x, jint y)</span>&#123;</div><div class="line">    <span class="keyword">return</span> x+y;</div><div class="line">&#125;;</div><div class="line"><span class="function">jstring <span class="title">Java_com_ithiema_jnipassdata_DataProvider_encideString</span></span></div><div class="line">        <span class="params">(JNIEnv * env, jobject obj, jstring jstr)</span>&#123;</div><div class="line">    <span class="keyword">char</span>* str = Jstring2CStr(env,jstr);</div><div class="line">    <span class="keyword">char</span>* hello = <span class="string">"hello"</span>;</div><div class="line">    <span class="built_in">strcat</span>(str,hello);</div><div class="line">    <span class="comment">//下面的两种写法是一样的效果</span></div><div class="line">    <span class="comment">//return (*(*env)).NewStringUTF(env,str);</span></div><div class="line">    <span class="keyword">return</span> (*env)-&gt;NewStringUTF(env,str);</div><div class="line">&#125;;</div><div class="line"><span class="function">jintArray <span class="title">Java_com_ithiema_jnipassdata_DataProvider_changeColor</span></span></div><div class="line">        <span class="params">(JNIEnv * env, jobject obj, jintArray jarray)</span>&#123;</div><div class="line">    <span class="keyword">int</span> size = (*env)-&gt;GetArrayLength(env,jarray);</div><div class="line">    <span class="keyword">int</span>* arr = (*env)-&gt;GetIntArrayElements(env,jarray,<span class="number">0</span>);</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;size;i++)&#123;</div><div class="line">        arr[i]+=<span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> jarray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用NDK 工具将上面的C 代码编译成动态库文件，首先得在工程的jni 目录下添加Android.mk和Application.mk 文件<br>在MainActivity 类中调用C 语言，MainActivity.java 代码清单如下。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"</div><div class="line">              xmlns:tools="http://schemas.android.com/tools"</div><div class="line">              android:layout_width="match_parent"</div><div class="line">              android:layout_height="match_parent"</div><div class="line">              android:orientation="vertical"</div><div class="line">              tools:context=".MainActivity" &gt;</div><div class="line"></div><div class="line">    &lt;ImageView</div><div class="line">        android:layout_width="wrap_content"</div><div class="line">        android:layout_height="wrap_content"</div><div class="line">        android:id="@+id/iv"</div><div class="line">        /&gt;</div><div class="line">    &lt;Button</div><div class="line">        android:layout_gravity="right"</div><div class="line">        android:layout_width="wrap_content"</div><div class="line">        android:layout_height="wrap_content"</div><div class="line">        android:text="lomo"</div><div class="line">        android:onClick="click"</div><div class="line">        /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
+<p>布局文件比较简单，就不再给出。运行上面代码，效果图如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-240b7c5a763dd2a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h2 id="4-1-让C-语言输出Log-日志"><a href="#4-1-让C-语言输出Log-日志" class="headerlink" title="4.1 让C 语言输出Log 日志"></a><strong>4.1 让C 语言输出Log 日志</strong></h2><p>让我们的C 语言也能在LogCat 中输出一些信息是一个很简单但也很常见的实际需求。为了方便演示我们直接在本章节中创建的工程中演示如何让C 语言打印LogCat 日志。<br>在Android.mk 中添加如下属性：LOCAL_LDLIBS := -llog，在C 源码头部引入如下头文件和宏定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;android/log.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_TAG <span class="meta-string">"System.out"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)</span></div></pre></td></tr></table></figure>
+<p>在C 代码中可以将LOGD（）或者LOGI（）函数当做C 语言中的printf（）函数使用。这里我将add 方法添加添加了一条日志输入</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function">jint <span class="title">Java_com_ithiema_jnipassdata_DataProvider_add</span></span></div><div class="line"><span class="params">(JNIEnv* env, jobject obj, jint x, jint y)</span>&#123;</div><div class="line">LOGI(<span class="string">"x+y=%d"</span>,x+y);</div><div class="line"><span class="keyword">return</span> x+y;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重新编译hello.so 动态库，既然我们修改了Android.mk 和C 源码文件，那么一定要记得重新使用NDK 编译C 语言为动态库，否则日志不会输入而且也不报异常。<br>再次部署程序到模拟器，调用add 方法，发现在LogCat 中成功输出了如下信息：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-d9f9222c31ac8e01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h1 id="5-案例-调用美图秀秀的动态库"><a href="#5-案例-调用美图秀秀的动态库" class="headerlink" title="5. 案例-调用美图秀秀的动态库"></a><strong>5. 案例-调用美图秀秀的动态库</strong></h1><p>在美图秀秀1.0 版本的时候程序员对其代码并没有加密以及反反编译等处理，因此我们可以将其apk反编译出来。里面关于图形的核心算法都是通过so 库来实现的，我们可以拿过来直接使用。<br>声明：本文档中使用的美图秀秀只用于学习交流Android 技术，禁止用于其他目的！美图秀秀1.0 版本<a href="http://pan.baidu.com/s/1bnAjLGN" target="_blank" rel="external">下载地址</a><br>将下载好的mtxx.apk 进行反编译，将反编译好的资源作为原料备用。关于如何反编译美图秀秀请见本文档最后一章。</p>
+<p>Tips：解压好的目录打开lib 包，发现只有armeabi 一个文件夹，说明该so 文件只能在arm 架构的CPU上运行。<br>创建一个新的Android 工程《黑马美图秀秀》。将反编译好的libmtimage-jni.so 拷贝到工程的libs-&gt;armeab（i 该目录需要手动创建）目录下。通过反编译的 jar 包发现美图秀秀的 jni 方法都定义在 JNI.java类中，我们用jd-gui 工具将反编译的jar 包打开，找到JNI.java，然后拷贝其中的native 方法到我们的工程中。本人的工程目录结构如下所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-07f1662b853b84ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>Tips：我们使用了美图秀秀的JNI 源码，那么我们的JNI.java 名字以及其所在的包名必须严格跟原美图秀秀保持一致，不然程序从so 动态库中是找不到目标方法的。原因很简单，因为C 中方法名是根据JNI.java 中的方法全限定名生成的。<br>编写activity_main.xml 布局文件，布局文件清单如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">              <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">              <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">              <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span> &gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/iv"</span></div><div class="line">        /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"right"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"lomo"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"click"</span></div><div class="line">        /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在工程的res-&gt;drawable-hdpi 目录下放入一张图片。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-1106547b0fdff91d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>编写MainActivity.java 代码，在改类中实现核心方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> ImageView iv;</div><div class="line">    <span class="keyword">private</span> Bitmap bitmap;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.loadLibrary(<span class="string">"mtimage-jni"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.beautiful);</div><div class="line">        iv = (ImageView) findViewById(R.id.iv);</div><div class="line">        iv.setImageBitmap(bitmap);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View view)</span></span>&#123;</div><div class="line">        JNI jni = <span class="keyword">new</span> JNI();</div><div class="line">        <span class="comment">//获取Bitmap 的宽和高</span></div><div class="line">        <span class="keyword">int</span> width = bitmap.getWidth();</div><div class="line">        <span class="keyword">int</span> height = bitmap.getHeight();</div><div class="line">        <span class="comment">//创建一个整型数组，存放每个像素点</span></div><div class="line">        <span class="keyword">int</span>[] pixels = <span class="keyword">new</span> <span class="keyword">int</span>[width*height];</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 获取bitmap 的像素数组</div><div class="line">         * 第一个参数是int[]</div><div class="line">         * 第二个参数是第获取一个像素的偏移量，这里是0，也就是从第一个像素开始获取</div><div class="line">         * 第三个参数每行获取多少个像素，当然bitmap 的宽度就是每行的像素个数</div><div class="line">         * 第四个参数、第五个参数分别是开始获取像素的x、y 坐标，这个坐标是相对于bitmap 本身来说的，因此是0,0</div><div class="line">         * 第六、七个参数分别是每行、每列获取像素的个数</div><div class="line">         */</div><div class="line">        bitmap.getPixels(pixels, <span class="number">0</span>, width, <span class="number">0</span>, <span class="number">0</span>, width, height);</div><div class="line">        <span class="comment">//调用美图秀秀API</span></div><div class="line">        jni.StyleLomoB(pixels, width, height);</div><div class="line">        <span class="comment">//重新根据pixels 数组创建一个Bitmap 对象</span></div><div class="line">        Bitmap newBitmap = Bitmap.createBitmap(pixels, width, height,</div><div class="line">                bitmap.getConfig());</div><div class="line">        iv.setImageBitmap(newBitmap);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行上面打代码，效果如下：<br>1）处理前</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-dad9eda5b41118bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni18.png"></p>
+<p>2）处理后</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-2552e54d9aee35db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni19.png"></p>
+<h1 id="6-C-语言调用Java-代码"><a href="#6-C-语言调用Java-代码" class="headerlink" title="6. C 语言调用Java 代码"></a><strong>6. C 语言调用Java 代码</strong></h1><p>之前我们学习的JNI 都是Java 代码调用C 代码，本章节中演示C 代码如何调用Java 代码。<br>创建一个新的Android 工程《C 语言调用Java》，在工程中创建jni 目录，在改目录下放置Android.mk 和jni.h 文件（从老工程中拷贝）。工程目录结构如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-d9c495e97f1e1588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>编写DataProvider.java 文件，在该文件中编写native 方法，DataProvider.java 代码清单如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataProvider</span> </span>&#123;</div><div class="line">    <span class="comment">//C 代码调用该方法发送短信</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodInJava</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"我是Java 中的方法，我被调用了"</span>);</div><div class="line">        SmsManager manager = SmsManager.getDefault();</div><div class="line">        manager.sendTextMessage(<span class="string">"5556"</span>, <span class="keyword">null</span>, <span class="string">"hello I'm from Java"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//C 代码调用该方法传递一个字符串，获取一个字符串</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">methodInJava2</span><span class="params">(String str)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"hello:"</span>+str;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//C 代码调用一个空参返回值为void 的实例方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodInJava3</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"我是Java 中的方法3，我被调用了"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//C 语言调用静态方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">methodInJava4</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"我是静态方法。被调用了。"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//定义四个native 方法，这些方法在MainActivity 中被调用，这些方法在C 代码中回调上面的Java 代码</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">callCMethod</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">callCMethod2</span><span class="params">(String str)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">callCMethod3</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">callCMethod4</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在jni 中创建calljava.c 文件，在该文件中实现调用java 的方法。代码清单如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">#include &lt;jni.h&gt;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">void Java_com_itheima_callJava_DataProvider_callCMethod(JNIEnv * env, jobject obj)&#123;</div><div class="line">    //类似java 的反射，获取java 对象</div><div class="line">    jclass clazz = (*env)-&gt;FindClass(env,"com/itheima/callJava/DataProvider");</div><div class="line">    //根据方法签名获取目标方法</div><div class="line">    jmethodID methodID = (*env)-&gt;GetMethodID(env,clazz,"methodInJava","()V");</div><div class="line">    //调用目标方法</div><div class="line">    (*env)-&gt;CallVoidMethod(env,obj,methodID);</div><div class="line">&#125;</div><div class="line">jstring Java_com_itheima_callJava_DataProvider_callCMethod2(JNIEnv * env, jobject</div><div class="line">        obj,jstring str)&#123;</div><div class="line">    jclass clazz = (*env)-&gt;FindClass(env,"com/itheima/callJava/DataProvider");</div><div class="line">    jmethodID methodID =</div><div class="line">            (*env)-&gt;GetMethodID(env,clazz,"methodInJava2","(Ljava/lang/String;)Ljava/lang/String;</div><div class="line">            ");</div><div class="line">            jstring jstr = (*env)-&gt;CallObjectMethod(env,obj,methodID,str);</div><div class="line">    return jstr;</div><div class="line">&#125;</div><div class="line">void Java_com_itheima_callJava_MainActivity_callCMethod3(JNIEnv * env, jobject obj)&#123;</div><div class="line">    jclass clazz = (*env)-&gt;FindClass(env,"com/itheima/callJava/DataProvider");</div><div class="line">    jmethodID methodID = (*env)-&gt;GetMethodID(env,clazz,"methodInJava3","()V");</div><div class="line">    jobject o = (*env)-&gt;AllocObject(env,clazz);</div><div class="line">    (*env)-&gt;CallVoidMethod(env,o,methodID);</div><div class="line">&#125;</div><div class="line">void Java_com_itheima_callJava_DataProvider_callCMethod4(JNIEnv * env, jobject obj)&#123;</div><div class="line">    jclass clazz = (*env)-&gt;FindClass(env,"com/itheima/callJava/DataProvider");</div><div class="line">    jmethodID methodID = (*env)-&gt;GetStaticMethodID(env,clazz,"methodInJava4","()V");</div><div class="line">    (*env)-&gt;CallStaticVoidMethod(env,clazz,methodID);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用NDK 工具，将calljava.c 编译成动态库文件。（NDK 的使用在上一篇文档中有详细的介绍，这里就不再说明）<br>在MainActivity.java 中调用C 语言，代码清单如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.loadLibrary(<span class="string">"calljava"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> DataProvider().callCMethod();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click2</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">        String result = <span class="keyword">new</span> DataProvider().callCMethod2(<span class="string">"ddd"</span>);</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, result, <span class="number">1</span>).show();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click3</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">        callCMethod3();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click4</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> DataProvider().callCMethod4();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">callCMethod3</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>布局文件比较简单这里就不再给出。</p>
+<h1 id="7-短信接收广播之锁屏用C-实现JNI"><a href="#7-短信接收广播之锁屏用C-实现JNI" class="headerlink" title="7. 短信接收广播之锁屏用C++实现JNI"></a><strong>7. 短信接收广播之锁屏用C++实现JNI</strong></h1><p>C++语言是面向对象的编程语言，源于C 语言，部分语法通用。本章节中主要介绍如何使用C++完成<br>简单的JNI 开发。<br>创建一个新Android 工程《cpp 实现jni》，创建jni 包，在该包下创建JNI.java 文件，在该类中写naive方法。因为我们是C++项目，因此需要给当前工程添加native Support。右键点击项目，在弹出的对话框中选择Android Tools，然后选择Add native Support，弹出如下对话框：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-2f651be5988f3d62.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>这个名字是C++源文件名，因为没有实际的业务意义一次我们这里就随便输入一个了。<br>在工程中创建com.itheima.cppjni.jni 包，在该包下创建JNI.java，JNI.java 代码清单如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JNI</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">helloFormCPP</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用javah 工具生成头文件，并将生成的头文件拷贝到工程根目录下的jni 目录中。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-7a40323f07500843.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>为了让编译器提示C++语言，我们需要给工程添加C++库。<br>右键点击工程，选择Properties，在弹出的对话框中选择C/C++ General-&gt;Paths And Symbols，弹出如下对话框：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-d18ef77f8b64bf36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>点击图中红色框中的Add 按钮，在弹出的对话框（如下图）中点击File system,然后选择ndk 安装目录，选择如下目录：D:\software\ndkr9\android-ndk-r9b\platforms\android-19\arch-arm\usr\include</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-7f57a3dc84aadeb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni24.png"></p>
+<p>然后点击OK。</p>
+<p>Tips：上面目录中红色的是本人的ndk 所在目录，大家找到自己的ndk 所在目录即可。然后随便选择一个platform 即可，但是推荐大家选择一个高版本的平台。在gaga.cpp 中引入上面生成的头文件。同时编辑gaga.cpp，代码清单如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"com_itheima_cppjni_jni_JNI.h"</span></span></div><div class="line"><span class="function">JNIEXPORT jstring JNICALL <span class="title">Java_com_itheima_cppjni_jni_JNI_helloFromCPP</span></span></div><div class="line"><span class="params">(JNIEnv * env, jobject obj)</span>&#123;</div><div class="line"><span class="keyword">return</span> env-&gt;NewStringUTF(<span class="string">"gaga from cpp"</span>);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>编写MainActivity.java,在该方法中加载动态库<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.loadLibrary(<span class="string">"gaga"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View view)</span></span>&#123;</div><div class="line">        JNI jni = <span class="keyword">new</span> JNI();</div><div class="line">        String helloFromCPP = jni.helloFromCPP();</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, helloFromCPP, <span class="number">1</span>).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将上面工程部署到一个arm 架构的模拟器上。在部署的时候观察控制台，发现控制台输出如下信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">**** Build of configuration Default for project cpp 代码jni 开发****</div><div class="line">D:\software\ndkr9\android-ndk-r9b\ndk-build.cmd all</div><div class="line">C:\Users\thinkpad\workspace\cpp 代码jni 开发&gt;rem This is a Windows cmd.exe script used to</div><div class="line">invoke the NDK-specific GNU Make executable</div><div class="line">C:\Users\thinkpad\workspace\cpp 代码jni 开发&gt;call</div><div class="line">&quot;D:\software\ndkr9\android-ndk-r9b\find-win-host.cmd&quot; NDK_WIN_HOST</div><div class="line">Android NDK: WARNING: APP_PLATFORM android-19 is larger than android:minSdkVersion 8</div><div class="line">in ./AndroidManifest.xml</div><div class="line">[armeabi] Compile++ thumb: gaga &lt;= gaga.cpp</div><div class="line"> [armeabi] StaticLibrary : libstdc++.a</div><div class="line"> [armeabi] SharedLibrary : libgaga.so</div><div class="line"> [armeabi] Install : libgaga.so =&gt; libs/armeabi/libgaga.so</div><div class="line"> **** Build Finished ****</div></pre></td></tr></table></figure></p>
+<p>Tips：通过控制台，我们发现当我们的工程添加本地支持以后，当我们在部署的时候eclipse 会自动的完成动态库的编译工作。而且我们还发现在生成动态之前先生成了libstdc++.a 静态库然后才生成了动态库。上面代码运行效果如下图所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-5677047a8ebcc4d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h1 id="8-案例-锅炉压力监测"><a href="#8-案例-锅炉压力监测" class="headerlink" title="8. 案例-锅炉压力监测"></a><strong>8. 案例-锅炉压力监测</strong></h1><p>需求：硬件设备可以监测锅炉的压力，监测代码逻辑是用C 语言编写。客户端用java 代码每一秒调用一次C 语言，以获取锅炉的压力值，然后将锅炉的压力值以动态柱形图的形式显示在手机客户端。</p>
+<p>Tips：分析上面的需求，我们需要使用jni 技术让Java 和C 代码通信。在C 语言端我们可以调用随机函数模拟锅炉压力的动态变化。在Java 端，我们可以自定义一个View 对象显示我们的锅炉压力。<br>创建一个Android 工程《JNI 锅炉压力检测》，在该工程中创建jni 目录，将Android.mk、jni.h 从其他工程中拷贝到该目录下。<br>在jni 目录下创建一个C 源文件pressure.c，代码清单如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="comment">//定义一个返回值为int 型的函数，返回一个100 以内的函数值rand()是C 语言的一个随机函数</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getPressure</span><span class="params">()</span></span>&#123;</div><div class="line"><span class="keyword">return</span> rand()%<span class="number">100</span>;</div><div class="line">&#125;</div><div class="line"><span class="function">jint <span class="title">Java_com_itheima_jniPressure_MainActivity_getPressure</span><span class="params">()</span></span>&#123;</div><div class="line"><span class="keyword">return</span> getPressure();</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>将pressure.c 编译成动态库文件，在MainActivity 的同一个包目录下创建一个自定义控件类MyView 继承View 类。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> top = <span class="number">100</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line">    &#125;</div><div class="line">    Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyView</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        paint.setColor(Color.RED);</div><div class="line">        paint.setTextSize(<span class="number">18</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 绘制一个矩形区域</div><div class="line">         * 第一、二、三、四个参数分别代表绘图区域离画布左、上、右、下的距离。这四个参数确定了矩形的大小也确定了</div><div class="line">         */</div><div class="line">        canvas.drawRect(<span class="number">60</span>, top, <span class="number">90</span>, <span class="number">150</span>, paint);</div><div class="line">        canvas.drawText(<span class="string">"当前压力值："</span>+(<span class="number">150</span>-top),<span class="number">60</span>, <span class="number">170</span>, paint );</div><div class="line">        <span class="keyword">super</span>.onDraw(canvas);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//根据压力转换成绘图区域的top 值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPressure</span><span class="params">(<span class="keyword">int</span> pressure)</span></span>&#123;</div><div class="line">        top = <span class="number">150</span>-pressure;</div><div class="line">        <span class="keyword">if</span> (pressure&lt;<span class="number">30</span>) &#123;</div><div class="line">            paint.setColor(Color.GREEN);</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (pressure&lt;<span class="number">60</span>) &#123;</div><div class="line">            paint.setColor(Color.YELLOW);</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            paint.setColor(Color.RED);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>编写MainActivity.java 代码，在该代码中实现Java 端的核心方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="comment">//加载动态库</span></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.loadLibrary(<span class="string">"pressure"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//声明一个Timer 和TimerTask,用于定时任务的处理</span></div><div class="line">    <span class="keyword">private</span> Timer     timer;</div><div class="line">    <span class="keyword">private</span> TimerTask task;</div><div class="line">    <span class="keyword">private</span> MyView    view;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        <span class="comment">//创建自定义控件对象</span></div><div class="line">        view = <span class="keyword">new</span> MyView(<span class="keyword">this</span>);</div><div class="line">        <span class="comment">//将自定义控件对象作为显示对象，而没有使用布局文件</span></div><div class="line">        setContentView(view);</div><div class="line">        <span class="comment">//创建定时任务</span></div><div class="line">        timer = <span class="keyword">new</span> Timer();</div><div class="line">        task = <span class="keyword">new</span> TimerTask() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                view.setPressure(getPressure());</div><div class="line">                <span class="comment">//通过子线程通知控件重绘</span></div><div class="line">                view.postInvalidate();</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">//每500 毫秒执行一次，第二个参数是延时执行，这里为0 也就是第一次会立即执行</span></div><div class="line">        timer.schedule(task, <span class="number">0</span>, <span class="number">500</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//调用native 方法，获取压力值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">getPressure</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将上面工程部署到arm 架构的模拟器上。运行结果如下图所示。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-c1e56491db89df31.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<h1 id="9-案例-监听应用程序的卸载"><a href="#9-案例-监听应用程序的卸载" class="headerlink" title="9. 案例-监听应用程序的卸载"></a><strong>9. 案例-监听应用程序的卸载</strong></h1><p>需求：当我们的apk 安装在Android 手机上后，我们可以在其后台开启个C 语言编写的死循环，C 语言编程的程序跟我们的应用不在同一个进程中，因此当我们的应用软件被卸载的时候，C 语言可以监测到。<br>监测原理就是访问/data/data/{包名}文件是否存在，如果不存在显然是被删除了。</p>
+<p>Tips：考虑到我们上面的案例跟这个案例使用的知识点差不多，都是使用Java 语言调用C 语言。因此这里就不再一步一步的演示如何创建工程。这里只给出核心的C 语言代码。本人工程目录结构如下所示：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3981391-56a6c7ed55606ca5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni"></p>
+<p>这里只给出listen.c 源文件清单，核心方法是这个文件实现的。在MainActivity.java 中加载该动态库，并在onCreate 方法中调用我们的C 语言函数即可。listen.c 代码清单如下所示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">#include &lt;jni.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;fcntl.h&gt;</div><div class="line">#include &lt;sys/inotify.h&gt;</div><div class="line">#include &lt;sys/stat.h&gt;</div><div class="line">#include &lt;android/log.h&gt;</div><div class="line">#define LOG_TAG "System.out"</div><div class="line">#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)</div><div class="line">#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)</div><div class="line">void Java_com_itheima_jniuninstall_MainActivity_listen(</div><div class="line">        JNIEnv * env, jobject obj) &#123;</div><div class="line">    pid_t pid = fork(); //叉子</div><div class="line">    if (pid == 0) &#123; //当前是分叉出来的进程。</div><div class="line">        int isStop = 1;</div><div class="line">        while (isStop) &#123;</div><div class="line">            //监视当前应用程序的包名文件夹是否存在如果不存在了就是被卸载了。</div><div class="line">            FILE* file; //文件的指针</div><div class="line">            file = fopen("/data/data/com.itheima.jniuninstall", "r");</div><div class="line">            if (file == NULL) &#123;</div><div class="line">                //被卸载了。</div><div class="line">                LOGI("uninstalled\n");</div><div class="line">                //开启一个网页了。</div><div class="line">                // int execlp(char *pathname, char *arg0, arg1, .., NULL);</div><div class="line">                execlp("am","am","start","-a","android.intent.action.VIEW","-d","http://www.baid.</div><div class="line">                        com",NULL);</div><div class="line">                        isStop = 0;</div><div class="line">            &#125; else &#123;</div><div class="line">                //没有被卸载</div><div class="line">                LOGI("haha huode henhao \n");</div><div class="line">            &#125;</div><div class="line">            //让线程休眠2 秒在C 语言中是秒为单位的不是毫秒</div><div class="line">            sleep(2);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Tips：上面的execlp 函数用于调用本地系统（Android 系统）命令打开一个浏览器，访问一个指定的URL。但是经过我的测试发现在低版本模拟器（2.3）上该功能可是使用但是在高版本模拟器（4.3）上不可以使用。</p>
+<h1 id="10-安卓逆向助手"><a href="#10-安卓逆向助手" class="headerlink" title="10. 安卓逆向助手"></a><strong>10. 安卓逆向助手</strong></h1><p>有一款叫安卓逆向助手软件反编译apk 十分方便。这里给大家介绍的反编译方法就是基于这款软件的。<a href="http://pan.baidu.com/s/1eQkvlvW" target="_blank" rel="external">安卓逆向助手下载地址</a></p>
+<p>Android逆向助手是一功能强大的逆向辅助软件。该软件可以帮助用户来进行apk反编译打包签名；dex/jar互转替换提取修复；so反编译；xml、txt加密；字符串编码等等，操作简单，只需要直接将文件拖放到源和目标文件。</p>
+<p><img src="http://img.blog.csdn.net/20170307190230310?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<p>将下载好的rar 包解压缩以后目录结构如下（内置的广告被我删除后的）</p>
+<p>Tips：lib 目录存放都是用java 写的核心反编译逻辑，必须跟exe 文件放在同一个目录下。</p>
+<p>打开Android 逆向助手.exe，如下图所示：</p>
+<p><img src="http://img.blog.csdn.net/20170307190314498?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<p>选择源文件，并且选择（也是默认的选择）反编译apk，我们找到mtxx.apk 的路径，然后点击操作。<br>在mtxx.apk 目录下生成了一个mtxx 文件夹，打开该文件，目录结构如下图所示：</p>
+<p><img src="http://img.blog.csdn.net/20170307190344707?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<p>在上面操作后打开lib 目录可以找到美图秀秀的动态库文件，但是我们还需要找到其java 代码。显然<br>美图秀秀用smali 算法反编译了。那么我们接着下一步。</p>
+<p><img src="http://img.blog.csdn.net/20170307190414333?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<p>在Android 逆向助手.exe 中打开源文件，选择提取dex 点击执行。</p>
+<p><img src="http://img.blog.csdn.net/20170307190552938?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<p>这时候在目标文件夹下生成了dex 文件</p>
+<p><img src="http://img.blog.csdn.net/20170307190623423?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<p>最后在Android 逆向助手.exe 中选择dex 转jar 选项。在源文件中选择上一步生成的classes.dex 文件，然后点击执行（这个过程大概需要几秒的等待时间）。这时候该软件会自动将我们生成的jar 文件用jd-gui工具打开。打开效果如下所示：</p>
+<p><img src="http://img.blog.csdn.net/20170307190742752?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="安卓逆向助手"></p>
+<h1 id="11-jadx"><a href="#11-jadx" class="headerlink" title="11. jadx"></a><strong>11. jadx</strong></h1><p>jadx是新一代反编译大杀器，<a href="https://github.com/skylot/jadx" target="_blank" rel="external">github地址</a>。Android开发(/学习)有时候需要用到反编译工具，Window上有很多工具，而Mac上则不多，这里稍微介绍一下Mac上可用的反编译工具Jadx.</p>
+<h2 id="11-1-准备"><a href="#11-1-准备" class="headerlink" title="11.1 准备"></a><strong>11.1 准备</strong></h2><p>clone 仓库，编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir jadx</div><div class="line">git clone https://github.com/skylot/jadx.git</div><div class="line">cd jadx</div><div class="line">./gradlew dist #这个需要稍微等待一下</div></pre></td></tr></table></figure></p>
+<p>开始反编译，等完毕后，可以开始了，我就介绍个最简单最常用的用法</p>
+<p>把apk改成zip，解压zip获取class.dex文件，将class.dex文件放到jadx目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd build/jadx/</div><div class="line">bin/jadx -d out class.dex  # 反编译后放入out文件夹下(如果out不存在它会自动创建)</div><div class="line">#or</div><div class="line">bin/jadx-gui class.dex  # 会反编译，并且使用gui打开</div></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20170307190931643?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="jadx"><br>OK，就这样，后续还可以配置环境变量，更加方便</p>
+<h1 id="12-更多Android反编译工具"><a href="#12-更多Android反编译工具" class="headerlink" title="12. 更多Android反编译工具"></a>12. 更多Android反编译工具</h1><h2 id="12-1-Classyshark"><a href="#12-1-Classyshark" class="headerlink" title="12.1 Classyshark"></a><a href="https://github.com/google/android-classyshark" target="_blank" rel="external">12.1 Classyshark</a></h2><p>轻松查看apk内部每个包的方法数，用了哪些开源库，同样拿知乎开刀做例子<br><img src="http://mmbiz.qpic.cn/mmbiz_png/ujaEPeJyrxuNRTeFDkIah7qODoDo8NcGAibsUVf5O06NqT1hIwycIazPwj1ialxvic3iaMOzhF05yRibO6qiaNGI045w/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt=""></p>
+<h2 id="12-2-smalidea"><a href="#12-2-smalidea" class="headerlink" title="12.2 smalidea"></a><a href="https://github.com/JesusFreke/smali/wiki/smalidea" target="_blank" rel="external">12.2 smalidea</a></h2><p>smali代码调试插件，你以为没有拿到安卓Java源码就不能调试了吗？图样图森破了吧<br><img src="http://mmbiz.qpic.cn/mmbiz_png/ujaEPeJyrxuNRTeFDkIah7qODoDo8NcGXSuX43NWccCGmVZxNbfEgL75EgY9nYwYJqNNDTeE04RHrHnvlRf2FA/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1" alt=""></p>
+<h2 id="12-3IDA-Pro"><a href="#12-3IDA-Pro" class="headerlink" title="12.3IDA Pro"></a><a href="https://www.hex-rays.com/products/ida/" target="_blank" rel="external">12.3IDA Pro</a></h2><p>IDA Pro，逆向大利器，不管你是smali还是so文件，照样动态调试你</p>
+<h2 id="12-4-Android-Killer"><a href="#12-4-Android-Killer" class="headerlink" title="12.4 Android Killer"></a>12.4 Android Killer</h2><p><a href="http://www.pd521.com/thread-136-1-1.html" target="_blank" rel="external">下载地址1</a> <a href="https://pan.baidu.com/share/home?uk=4099707276#category/type=6" target="_blank" rel="external">下载地址2</a> <a href="http://www.pd521.com/thread-509-1-1.html" target="_blank" rel="external">使用指南</a><br>集Apk反编译、Apk打包、Apk签名，编码互转， ADB通信（应用安装-卸载-运行-设备文件管理）等特色功能于一 身，支持logcat日志输出，语法高亮， 基于关键字（支持单行代码或多行代码段）项目内搜索， 可自定义外部工具；吸收融汇多种工具功能与特点， 打造一站 式逆向工具操作体验，大大简化了用户在 安卓应用/游戏修改过程中的各类繁琐工作。</p>
+<h2 id="12-5-SmaliViewer"><a href="#12-5-SmaliViewer" class="headerlink" title="12.5 SmaliViewer"></a>12.5 SmaliViewer</h2><p><a href="http://blog.avlyun.com/wp-content/uploads/2014/04/SmaliViewer.zip" target="_blank" rel="external">下载地址</a> <a href="http://blog.avlyun.com/show/%E3%80%8Asv%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97%E3%80%8B/" target="_blank" rel="external">使用指南</a><br>是一款免费的APK分析软件，无论从分析的深度还是广度来看，都是一款能够满足用户需求的产品，使您在APK分析的过程中，更加得心应手。</p>
+<h2 id="12-6-Enjarify"><a href="#12-6-Enjarify" class="headerlink" title="12.6 Enjarify"></a>12.6 Enjarify</h2><p>Enjarify 是一个用 Python 写的， Google 官方开源的可以将 Dalvik 字节码转换为 Java 字节码的工具。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jni/" rel="tag"># jni</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/" rel="next" title="Uri、URL、UriMatcher、ContentUris详解">
+                <i class="fa fa-chevron-left"></i> Uri、URL、UriMatcher、ContentUris详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/JNI与底层调用1/" rel="prev" title="JNI与底层调用1">
+                JNI与底层调用1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-掌握如何使用广播接收者拦截电话和短信"><span class="nav-number">1.</span> <span class="nav-text">1. 掌握如何使用广播接收者拦截电话和短信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-JNI-开发中常见错误"><span class="nav-number">2.</span> <span class="nav-text">2. JNI 开发中常见错误</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-动态库名称写错，或者不存在"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 动态库名称写错，或者不存在</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Android-mk-配置文件写错"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Android.mk 配置文件写错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-目标文件名画蛇添足导致的错误"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 目标文件名画蛇添足导致的错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-源文件名写错"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 源文件名写错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-平台使用错误"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 平台使用错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-C-语言中被Java-调用的方法名写错"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 C 语言中被Java 调用的方法名写错</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-自动生成JNI-头文件"><span class="nav-number">3.</span> <span class="nav-text">3. 自动生成JNI 头文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-JNI-的值传递"><span class="nav-number">4.</span> <span class="nav-text">4. JNI 的值传递</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-让C-语言输出Log-日志"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 让C 语言输出Log 日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-案例-调用美图秀秀的动态库"><span class="nav-number">5.</span> <span class="nav-text">5. 案例-调用美图秀秀的动态库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-C-语言调用Java-代码"><span class="nav-number">6.</span> <span class="nav-text">6. C 语言调用Java 代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-短信接收广播之锁屏用C-实现JNI"><span class="nav-number">7.</span> <span class="nav-text">7. 短信接收广播之锁屏用C++实现JNI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-案例-锅炉压力监测"><span class="nav-number">8.</span> <span class="nav-text">8. 案例-锅炉压力监测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-案例-监听应用程序的卸载"><span class="nav-number">9.</span> <span class="nav-text">9. 案例-监听应用程序的卸载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-安卓逆向助手"><span class="nav-number">10.</span> <span class="nav-text">10. 安卓逆向助手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-jadx"><span class="nav-number">11.</span> <span class="nav-text">11. jadx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-准备"><span class="nav-number">11.1.</span> <span class="nav-text">11.1 准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-更多Android反编译工具"><span class="nav-number">12.</span> <span class="nav-text">12. 更多Android反编译工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-Classyshark"><span class="nav-number">12.1.</span> <span class="nav-text">12.1 Classyshark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-smalidea"><span class="nav-number">12.2.</span> <span class="nav-text">12.2 smalidea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3IDA-Pro"><span class="nav-number">12.3.</span> <span class="nav-text">12.3IDA Pro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-4-Android-Killer"><span class="nav-number">12.4.</span> <span class="nav-text">12.4 Android Killer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-5-SmaliViewer"><span class="nav-number">12.5.</span> <span class="nav-text">12.5 SmaliViewer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-6-Enjarify"><span class="nav-number">12.6.</span> <span class="nav-text">12.6 Enjarify</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/JNI与底层调用2/';
+          this.page.identifier = '2017/05/01/android/JNI与底层调用2/';
+          this.page.title = 'JNI与底层调用2';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

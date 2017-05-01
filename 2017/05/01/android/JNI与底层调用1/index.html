@@ -1,0 +1,1472 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jni," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. JNI 简介1.1 什么是JNIJava Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。 Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就">
+<meta name="keywords" content="jni">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNI与底层调用1">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/JNI与底层调用1/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. JNI 简介1.1 什么是JNIJava Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。 Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/JNI与底层调用1/img/jni13.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk2.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.1.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.2.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.3.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.4.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.5.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.6.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.7.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk1.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk引用类型.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.8.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.9.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.10.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.11.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.12.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.13.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.14.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/ndk3.15.png">
+<meta property="og:updated_time" content="2017-05-01T04:45:47.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JNI与底层调用1">
+<meta name="twitter:description" content="1. JNI 简介1.1 什么是JNIJava Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。 Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/01/android/JNI与底层调用1/img/jni13.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/JNI与底层调用1/"/>
+
+
+
+
+
+  <title>JNI与底层调用1 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/JNI与底层调用1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JNI与底层调用1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/JNI与底层调用1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/JNI与底层调用1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-JNI-简介"><a href="#1-JNI-简介" class="headerlink" title="1. JNI 简介"></a>1. JNI 简介</h1><h2 id="1-1-什么是JNI"><a href="#1-1-什么是JNI" class="headerlink" title="1.1 什么是JNI"></a>1.1 什么是JNI</h2><p>Java Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。</p>
+<p>Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就是本地语言，android底层是linux linux是c/c++开发的 所以对于android来说 c/c++就是本地语言。JNI 可以看做是一个翻译 实现JAVA语言和本地语言之间的相互调用</p>
+<h2 id="1-2-为什么用JNI"><a href="#1-2-为什么用JNI" class="headerlink" title="1.2 为什么用JNI"></a>1.2 为什么用JNI</h2><ul>
+<li>JNI 扩展了Java 虚拟机的能力,因为Java 不能直接和硬件交互, 不能开发驱动</li>
+<li>Java 代码效率一般要低于C 代码，而Native code 效率高,因此在数学运算,实时渲染的游戏上以及<br>音视频处理上都需要用Java 调用C 语言</li>
+<li>复用C/C++代码，C 语言经过几十年的发展，已经形成了强大的类库(比如文件压缩，人脸识别opencv，7zip，ffmpeg 等)，这些类库我们没必要用java 语言重新实现一遍，通过JNI 直接调用这些类库即可</li>
+<li>特殊的业务场景，比如电视、车载系统、微波炉等跟硬件直接相关的开发</li>
+<li>java代码 不可以直接操作硬件 硬件的驱动基本都是C代码写的 如果想操作硬件必须得让java代码可以调用C，这个时候JNI就发挥作用了 可以扩展JAVA代码的性能</li>
+<li>java代码安全性比较差 java-&gt;,class-&gt;. C安全性相对高一些 C编译之后直接生成机器码 机器码可以反汇编 汇编代码可以猜出C的源代码 伪代码 有些时候跟源代码有区别 比如登录先关 跟钱打交道的应用 可以通过JNI把加密的业务逻辑放到C里面实现</li>
+<li>Java特点 跨平台 一处编译到处运行 通过虚拟机来实现的 java是解释型语言 效率相对比较低在要求效率的地方 java性能会差一些 大型3d游戏 c/c++ 音视频解码 JNI可以提升java的效率 复式投注 需要效率的时候可以通过JNI来调用C/C++来实现</li>
+<li>c1972年 c++ java 1995年 ffmpeg音视频解码 opencv 图像处理 人脸识别 使用JNI可以让java代码调用 c/c++写的优秀开源项目，学习JNI目的是满足自己项目的需求</li>
+</ul>
+<a id="more"></a>
+<h1 id="2-NDK-简介"><a href="#2-NDK-简介" class="headerlink" title="2. NDK 简介"></a>2. NDK 简介</h1><h2 id="2-1-NDK-产生的背景"><a href="#2-1-NDK-产生的背景" class="headerlink" title="2.1 NDK 产生的背景"></a>2.1 NDK 产生的背景</h2><p>Android 平台从诞生起，就已经支持C、C++开发。众所周知，Android 的SDK 基于Java 实现，这意味着基于Android SDK 进行开发的第三方应用都必须使用Java 语言。但这并不等同于“第三方应用只能使用Java”。在Android SDK 首次发布时，Google 就宣称其虚拟机Dalvik 支持JNI 编程方式，也就是第三方应用完全可以通过JNI 调用自己的C 动态库，即在Android 平台上，“Java+C”的编程方式是一直都可以实现的</p>
+<p>不过，Google 也表示，使用原生SDK 编程相比Dalvik 虚拟机也有一些劣势，Android SDK 文档里，找不到任何JNI 方面的帮助。即使第三方应用开发者使用JNI 完成了自己的C 动态链接库（so）开发，但是so 如何和应用程序一起打包成apk 并发布？这里面也存在技术障碍。比如程序更加复杂，兼容性难以保障，无法访问Framework API，Debug 难度更大等。开发者需要自行斟酌使用</p>
+<p>于是NDK 就应运而生了。NDK 全称是Native Development Kit</p>
+<p>NDK 的发布，使“Java+C”的开发方式终于转正，成为官方支持的开发方式。NDK 将是Android 平<br>台支持C 开发的开端</p>
+<h2 id="2-2-为什么使用NDK"><a href="#2-2-为什么使用NDK" class="headerlink" title="2.2 为什么使用NDK"></a>2.2 为什么使用NDK</h2><ul>
+<li>代码的保护。由于apk 的java 层代码很容易被反编译，而C/C++库反编译难度较大</li>
+<li>可以方便地使用现存的开源库。大部分现存的开源库都是用C/C++代码编写的</li>
+<li>提高程序的执行效率。将要求高性能的应用逻辑使用C 开发，从而提高应用程序的执行效率</li>
+<li>便于移植。用C/C++写得库可以方便在其他的嵌入式平台上再次使用</li>
+</ul>
+<h2 id="2-3-NDK-简介"><a href="#2-3-NDK-简介" class="headerlink" title="2.3 NDK 简介"></a>2.3 NDK 简介</h2><h3 id="2-3-1-NDK-是一系列工具的集合"><a href="#2-3-1-NDK-是一系列工具的集合" class="headerlink" title="2.3.1 NDK 是一系列工具的集合"></a>2.3.1 NDK 是一系列工具的集合</h3><p>NDK 提供了一系列的工具，帮助开发者快速开发C（或C++）的动态库，并能自动将so 和java 应用<br>一起打包成apk。NDK 集成了交叉编译器，并提供了相应的mk 文件隔离CPU、平台、ABI 等差异，开发人员只需要简单修改mk 文件（指出“哪些文件需要编译”、“编译特性要求”等），就可以创建出so</p>
+<h3 id="2-3-2-NDK-提供了一份稳定、功能有限的API-头文件声明"><a href="#2-3-2-NDK-提供了一份稳定、功能有限的API-头文件声明" class="headerlink" title="2.3.2 NDK 提供了一份稳定、功能有限的API 头文件声明"></a>2.3.2 NDK 提供了一份稳定、功能有限的API 头文件声明</h3><p>Google 明确声明该API 是稳定的，在后续所有版本中都稳定支持当前发布的API。从该版本的NDK<br>中看出，这些API 支持的功能非常有限，包含有：C 标准库（libc）、标准数学库（libm）、压缩库（libz）、Log 库（liblog）。</p>
+<h1 id="3-NDK-的安装"><a href="#3-NDK-的安装" class="headerlink" title="3. NDK 的安装"></a>3. NDK 的安装</h1><h2 id="3-1-NDK-的下载"><a href="#3-1-NDK-的下载" class="headerlink" title="3.1 NDK 的下载"></a>3.1 NDK 的下载</h2><p><a href="https://developer.android.google.cn/ndk/downloads/index.html" target="_blank" rel="external">NDK 的官方下载地址</a></p>
+<p><img src="img/jni13.png" alt=""></p>
+<h2 id="3-2-将NDK-解压到一个不包含空格和中文的目录下"><a href="#3-2-将NDK-解压到一个不包含空格和中文的目录下" class="headerlink" title="3.2 将NDK 解压到一个不包含空格和中文的目录下"></a>3.2 将NDK 解压到一个不包含空格和中文的目录下</h2><p>本人将NDK 解压在D:\software\ndkr9\android-ndk-r9b 中</p>
+<h2 id="3-3-NDK-目录结构说明"><a href="#3-3-NDK-目录结构说明" class="headerlink" title="3.3 NDK 目录结构说明"></a>3.3 NDK 目录结构说明</h2><p>自定好组合控件之后，之前的activity_setting.xml 中的代码就可以进行简化，具体如下所示：</p>
+<p><img src="../assets/ndk2.png" alt=""></p>
+<ul>
+<li>build：该目录存放的使用NDK 的mk 脚本，mk 脚本指定了编译参数</li>
+<li>docs：该目录存放的是NDK 的使用帮助文档</li>
+<li>platforms：这里面存放的是与各个Android 版本相关的平台（x86，arm，mips）相关C 语言库和头文件</li>
+<li>prebuilt：预编译工作目录</li>
+<li>samples：存放的是演示程序</li>
+<li>sources：存放的是NDK 工具链的C 语言源码</li>
+<li>tests：测试相关的文件</li>
+<li>toolchains：工具链，存放了三种架构的静态库等文件</li>
+<li>ndk-build.cmd：Window 平台使用NDK 的命令</li>
+<li>ndk-build：Linux 平台使用NDK 的命令</li>
+</ul>
+<h1 id="4-JNI-入门"><a href="#4-JNI-入门" class="headerlink" title="4. JNI 入门"></a>4. JNI 入门</h1><p>下面通过一个简单的JNI 案例来演示如何使用JNI 编程。</p>
+<p>1）创建一个新的Android 工程《JNI 入门》，工程的最终目录结构如下图所示。</p>
+<p><img src="../assets/ndk3.png" alt=""></p>
+<p>2）在MainActivity.java 类中定义一个native 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义一个native 方法，意思是该方法的具体实现交给C 语言实现</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">helloC</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
+<p>3）在工程跟目录下创建一个文件夹jni，该目录名称是约定（约定优于配置）好的，不能是其他名<br>字。<br>4）在jni 目录下创建hello.c 源文件，文件名可以按照见名知意的规则来创建。hello.c 代码清单如下。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;//引入头文件</span></span></div><div class="line"> <span class="comment">//引入jni.h jni.h 文件里面定义了jni 的规范，jni.h 在ndk 的目录中找到，然后放到当前工程中的jni目录下即可</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="comment">//定义在MainActivity.java 类中的helloC 对应的C 语言函数</span></div><div class="line"><span class="function">jstring <span class="title">Java_com_itheima_jnihello_MainActivity_helloC</span><span class="params">(JNIEnv* env, jobject obj)</span> </span>&#123;</div><div class="line"><span class="keyword">char</span>* str = <span class="string">"hello from C"</span>;</div><div class="line"><span class="comment">//调用jni.h 中定义的创建字符串函数</span></div><div class="line">jstring <span class="built_in">string</span> = (*(*env)).NewStringUTF(env, str);</div><div class="line"><span class="keyword">return</span> <span class="built_in">string</span>;</div></pre></td></tr></table></figure>
+<p>Tips：上面的代码虽然简单但是关于jni.h 头文件和方法名必须单独说明。</p>
+<ul>
+<li>jni.h 头文件位于NDK 安装目录下/platforms/android-*/(某平台)/usr/include 目录中，如下图</li>
+</ul>
+<p><img src="../assets/ndk3.1.png" alt=""></p>
+<p>上面的某平台指CPU 的三种架构如下图。我们选择任意一架构皆可，但是对于手机来说CPU 用arm<br>架构的最多，x86 次之，mips 架构最少。</p>
+<p><img src="../assets/ndk3.2.png" alt=""></p>
+<ul>
+<li>JNI 中C 源文件方法名的命名规则</li>
+</ul>
+<p>这里的命名规则指用于跟java 文件中native 方法对应的C 语言方法，而C 语言中的其他方法命名只<br>要符合C 语言规则就行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">jstring <span class="title">Java_com_itheima_jnihello_MainActivity_helloC</span><span class="params">(JNIEnv* env, jobject obj)</span></span></div></pre></td></tr></table></figure>
+<p>jstring 是方法返回值类型，我们可以把jstring 看成是java 中String 跟C 语言中char*类型的一个中间转换类型，java 跟C 语言的数据类型是不一样的，他们之间要想互相调用就必须通过一种中介来实现，这个中介就是在jni.h 头文件中定义的。关于更多的转换类型，在本文档的第2 章会有更详细的说明。</p>
+<p>方法名第一个字母必须是Java，首单词大写，然后下划线<em>，然后是将该方法所在的包、类、方法用“</em>”连接起来,比如com.itheima.jnihello.MainActivity 类中的helloC 方法，转变成C 语言中的方法名为Java_com_itheima_jnihello_MainActivity_helloC。</p>
+<p>方法的形参有两个是必须的也就是不管java 中的方法是否有形参，但是C 语言中对应的方法必须有<br>JNIEnv* env,和jobject obj，如果java 方法中还用其他形参，那么在C 语言中严格按照顺序排在jobject obj参数的后面即可。</p>
+<p>上面的env 代表指向JVM 的指针，obj 是调用该方法的java 对象。</p>
+<p>5）使用NDK 工具将hello.c 编译成hello.so 文件<br>为了方便直接在控制台中使用NDK 工具的ndk-build.cmd 命令，我们首先将ndk-build.cmd 所在的目录设置成系统环境变量。环境变量配置好以后，在命令行中输入ndk-build.cmd 会有如下提示：</p>
+<p><img src="../assets/ndk3.3.png" alt=""></p>
+<p>将当前目录切换到hello.c 所在的工程目录，这时候如果直接输入ndk-build.cmd 那么会出现如下异常：</p>
+<p><img src="../assets/ndk3.4.png" alt=""></p>
+<p>出现这种错误时因为我们并没有告诉ndk 我们要将那个C 语言源代码编译成目标文件。为了告诉ndk</p>
+<p>要将那个C 源文件编译成目标文件，我们需要在工程中的jni 目录中添加Android.mk 配置文件。</p>
+<p>6）在当前工程的jni 目录下添加Android.mk 配置文件，该配置文件可以从ndk 安装目录的实例代码中拷贝，然后修改。</p>
+<p>Android.mk 文件清单如下，我们只需要修改LOCAL_MODULE 和LOCAL_SRC_FILES 两个参数即可。LOCAL_MODULE 参数是指定编译后的目标文件的名称，其实编译好的目标文件名为libhello.so，LOCAL_SRC_FILES 指定了要编译的源文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH := $(call my-dir)</div><div class="line">include $(CLEAR_VARS)</div><div class="line">LOCAL_MODULE := hello</div><div class="line">LOCAL_SRC_FILES := hello.c</div><div class="line">include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure>
+<p>7）在cmd 中，将当前目录切换到hello.c 所在目录，然后重新执行ndk-build.cmd 命令，这次成功编译，cmd 显示效果如下图所示。</p>
+<p><img src="../assets/ndk3.5.png" alt=""></p>
+<p>查看项目目录结构，发现在libs 目录中多了两个文件夹armeabi 和x86，这两个文件夹下分别包含了<br>一个libhello.so 动态链接库。这也代表着当前工程中的动态库支持arm 架构和x86 架构的cpu。</p>
+<p><img src="../assets/ndk3.6.png" alt=""></p>
+<p>Tips：可能你的并没有同时生成这两个文件，是因为我的工程中引入了Application.mk 文件，因此你需要引入该文件。</p>
+<p>Application.mk 文件清单：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Build both ARMv5TE and ARMv7-A machine code.</div><div class="line">APP_ABI := armeabi x86</div></pre></td></tr></table></figure></p>
+<p>8）该清单其实只有一行内容，第一行是注释。APP_ABI 参数指定要生成的目标文件支持的平台都有哪些，默认是armeabi 如果想支持多个平台只需要空一格然后写出其他平台名字即可。在MainActivity.java 中调用C 语言</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="comment">//加载libhello.so 动态库，但是我们加载的时候必须去掉lib 和后缀</span></div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.loadLibrary(<span class="string">"hello"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//定义一个native 方法，意思是该方法的具体实现交给C 语言实现</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">helloC</span><span class="params">()</span></span>;</div><div class="line">    <span class="comment">//点击按钮调用C 语言方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View view)</span></span>&#123;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, helloC(), <span class="number">1</span>).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行上面工程，效果如下：</p>
+<p><img src="../assets/ndk3.7.png" alt=""><br>Tips：如果我们编译的arm 平台的so 文件，但是却部署到了x86 平台的模拟器上，那么运行的时候会报找不到libhello.so 的异常。</p>
+<h1 id="5-JNI-规范"><a href="#5-JNI-规范" class="headerlink" title="5.  JNI 规范"></a>5.  JNI 规范</h1><h2 id="5-1-JNI-数据类型和数据结构"><a href="#5-1-JNI-数据类型和数据结构" class="headerlink" title="5.1 JNI 数据类型和数据结构"></a>5.1 JNI 数据类型和数据结构</h2><p>1）基本数据类型<br>JNI 基本类型和本地等效类型的对应表格如下：</p>
+<p><img src="../assets/ndk1.png" alt=""></p>
+<p>2）引用类型，JNI 还包含了很多对应于不同Java 对象的引用类型，JNI 引用类型的组织层次如下图所示：</p>
+<p><img src="../assets/ndk引用类型.png" alt=""></p>
+<h2 id="5-2-JNI-接口函数命名方式"><a href="#5-2-JNI-接口函数命名方式" class="headerlink" title="5.2 JNI 接口函数命名方式"></a>5.2 JNI 接口函数命名方式</h2><p>设置向导二SetUpActivity2.java 的代码逻辑如下所示，设置向导二的图形化界面如2-20 所示。</p>
+<h3 id="5-2-1-类型签名"><a href="#5-2-1-类型签名" class="headerlink" title="5.2.1 类型签名"></a>5.2.1 类型签名</h3><p>Java 虚拟机的类型签名如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型签名</th>
+<th style="text-align:left">Java 类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Z</td>
+<td style="text-align:left">boolean</td>
+</tr>
+<tr>
+<td style="text-align:left">B</td>
+<td style="text-align:left">byte</td>
+</tr>
+<tr>
+<td style="text-align:left">C</td>
+<td style="text-align:left">char</td>
+</tr>
+<tr>
+<td style="text-align:left">S</td>
+<td style="text-align:left">short</td>
+</tr>
+<tr>
+<td style="text-align:left">I</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:left">J</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">F</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">D</td>
+<td style="text-align:left">double</td>
+</tr>
+<tr>
+<td style="text-align:left">Lfully-qulitied-class;</td>
+<td style="text-align:left">全限定类</td>
+</tr>
+<tr>
+<td style="text-align:left">[type type[]</td>
+<td style="text-align:left">数组</td>
+</tr>
+<tr>
+<td style="text-align:left">(argtypes)rettype</td>
+<td style="text-align:left">方法类型</td>
+</tr>
+</tbody>
+</table>
+<p>例如，Java 方法int feet(int n, String s,int [] arr)的类型签名如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">（ILJava/lang/String;[I）I</div></pre></td></tr></table></figure>
+<p>圆括号里面为参数，I 表示第一个参数int 型，LJava/lang/String;表示第二个参数为全限定Java.lang.String类型，[I 表示第三个参数为int 型的数组，圆括号后面为返回值类型，I 表示返回值为int 型。</p>
+<h3 id="5-2-2-一般函数的JNI-接口函数命名方式"><a href="#5-2-2-一般函数的JNI-接口函数命名方式" class="headerlink" title="5.2.2 一般函数的JNI 接口函数命名方式"></a>5.2.2 一般函数的JNI 接口函数命名方式</h3><p>一般JNI 接口函数命名如下：Java<em>包名</em>类名_方法名。</p>
+<p>例如：某工程下com/itheima 包下MainActivity 类的int getIntFromC()方法的C 语言实现函数命名如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">jint <span class="title">Java_com_itheima_MainActivity_getIntFromC</span><span class="params">(JNIEnv* env,jobject obj)</span></span></div></pre></td></tr></table></figure></p>
+<p>其中，包名所包含的“/”应全部以下划线替代，其本地实现的参数和返回值也应转换为JNI 类型。</p>
+<h3 id="5-2-3-重载函数的JNI-接口函数命名方式"><a href="#5-2-3-重载函数的JNI-接口函数命名方式" class="headerlink" title="5.2.3 重载函数的JNI 接口函数命名方式"></a>5.2.3 重载函数的JNI 接口函数命名方式</h3><p>重载函数的JNI 实现在一般函数的JNI 实现之外，还应添加上类型签名以作为同名函数之间的区别，<br>其接口函数命名如下：Java<em>包名</em>类名<em>方法名</em>参数签名。</p>
+<p>例如：某工程下com/itheima 包下MainActivity 类的int getIntFromC(int n, String s,int [] arr)方法的C 语言实现函数命名如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function">jint <span class="title">Java_com_itheima_MainActivity_getIntFromC_ILJava_lang_String23I</span></span></div><div class="line"><span class="params">(JNIEnv* env, jobject obj, jint n, jstring s, jintarray arr)</span></div></pre></td></tr></table></figure>
+<p>JNI 在函数命名时采用名字扰乱方案，以保证所有的Unicode 字符都能转换为有效的C 函数名，所有的“/”,无论是包名中的还是全限定类名中的，均使用“_”代替，用_0,„,_9 来代替转义字符，如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">转义字符序列</th>
+<th style="text-align:left">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">_0XXXX</td>
+<td style="text-align:left">Unicode 字符XXXX</td>
+</tr>
+<tr>
+<td style="text-align:left">_1</td>
+<td style="text-align:left">字符“_”</td>
+</tr>
+<tr>
+<td style="text-align:left">_2</td>
+<td style="text-align:left">签名中的字符“；”</td>
+</tr>
+<tr>
+<td style="text-align:left">_3</td>
+<td style="text-align:left">签名中的字符“[”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-3-JNI-函数与API"><a href="#5-3-JNI-函数与API" class="headerlink" title="5.3 JNI 函数与API"></a>5.3 JNI 函数与API</h2><p>设置向导三SetUpActivity3.java 的代码逻辑如下所示，设置向导三的图形化界面如2-21 所示。<br>在本文档中我们所主要需要关心的是C/C++数据类型与JNI 本地类型之间的转化过程，这个过程某些<br>数据的转换需要使用JNIEnv 对象的一系列方法来完成。</p>
+<h3 id="5-3-1-jstring-转换为C-风格字符串"><a href="#5-3-1-jstring-转换为C-风格字符串" class="headerlink" title="5.3.1 jstring 转换为C 风格字符串"></a>5.3.1 jstring 转换为C 风格字符串</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span>* test = (<span class="keyword">char</span>)(env)-&gt;GetStringUTFChars(env,jstring,<span class="literal">NULL</span>);</div></pre></td></tr></table></figure>
+<p>使用完毕后，应调用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(*env)-&gt;ReleaseStringUTFChars(env, jstring, test);</div></pre></td></tr></table></figure>
+<p>释放资源。</p>
+<h3 id="5-3-2-C-风格字符串转换为jstring"><a href="#5-3-2-C-风格字符串转换为jstring" class="headerlink" title="5.3.2 C 风格字符串转换为jstring"></a>5.3.2 C 风格字符串转换为jstring</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> charStr[<span class="number">50</span>];</div><div class="line">jstring jstr;</div><div class="line">jstr = env -&gt; NewStringUTF(charStr);</div></pre></td></tr></table></figure>
+<h3 id="5-3-3-C-语言中获取的一段char-的buffer-传递给Java"><a href="#5-3-3-C-语言中获取的一段char-的buffer-传递给Java" class="headerlink" title="5.3.3 C 语言中获取的一段char*的buffer 传递给Java"></a>5.3.3 C 语言中获取的一段char*的buffer 传递给Java</h3><p>在jni 中new 一个byte 数组，然后使用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(*env)-&gt;SetByteArrayRegion(env, bytearray, <span class="number">0</span>, len, buffer)</div></pre></td></tr></table></figure>
+<p>操作将buffer 拷贝到数组中。这种方式主要是针对buffer 中存在“\0”的情况，如果以C 风格字符串的方式读入，就会损失“\0”之后的字符。</p>
+<h3 id="5-3-4-数组操作"><a href="#5-3-4-数组操作" class="headerlink" title="5.3.4 数组操作"></a>5.3.4 数组操作</h3><table>
+<thead>
+<tr>
+<th>JNI 函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetArrayLength</td>
+<td>返回数组中的元素数</td>
+</tr>
+<tr>
+<td>NewObjectArray</td>
+<td>创建一个指定长度的原始数据类型数组</td>
+</tr>
+<tr>
+<td>GetObjectArrayElement</td>
+<td>返回Object 数组的元素</td>
+</tr>
+<tr>
+<td>SetObjectArrayElement</td>
+<td>设置Object 数组的元素</td>
+</tr>
+<tr>
+<td>GetObjectArrayRegion</td>
+<td>将原始数据类型数组中的内容拷贝到预先分配好的内存缓存中</td>
+</tr>
+<tr>
+<td>SetObjectArrayRegion</td>
+<td>设置缓存中数组的值</td>
+</tr>
+<tr>
+<td>ReleaseObjectArrayRegion</td>
+<td>释放GetObjectArrayRegion 分配的内存</td>
+</tr>
+</tbody>
+</table>
+<p>Tips：对int，char 等基本数据类型的数组操作，将相关Object 名称替换为对应基本数据类型名称即<br>为相关函数。</p>
+<p>数组操作的方法选择基于使用者的需求而定，如果使用者需要在内存中拷贝数组并对其进行操作那么一般使用GetObjectArrayRegion 和SetObjectArrayRegion 函数，否则一般使用SetObjectArrayElement 和GetObjectArrayElement 函数。</p>
+<h1 id="6-案例-银行登录系统"><a href="#6-案例-银行登录系统" class="headerlink" title="6. 案例-银行登录系统"></a>6. 案例-银行登录系统</h1><p>需求：假设银行的登陆模块是用C 语言来编写的，但是我们的Android 应用想登陆银行系统，那么就<br>需要通过JNI 来实现了。</p>
+<p>创建一个新Android 工程《建行客户端》，工程目录结构如下图。</p>
+<p><img src="../assets/ndk3.8.png" alt=""></p>
+<p>在工程中创建jni 文件夹，然后将jni.h、Android.mk、Application.mk 从JNI 入门工程拷贝进去。<br>在jni 目录下创建login.c 文件，在该文件中实现登录业务逻辑。代码清单如下。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="comment">//系统在查找投文件的时候""中的文件会去本地搜索，&lt;&gt;中的文件会去系统目录中搜索，因为jni.h 在当前目录中</span></div><div class="line">所以用<span class="string">""</span>将jni.h 引起来，可以加快搜索速度</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">"jni.h"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">login</span><span class="params">(<span class="keyword">int</span> card,<span class="keyword">int</span> pwd)</span></span>&#123;</div><div class="line">    <span class="comment">//真实的业务逻辑要复杂的多，这里只简单的返回银行卡号和密码号</span></div><div class="line">    <span class="keyword">return</span> card+pwd;</div><div class="line">&#125;</div><div class="line"><span class="function">jint <span class="title">Java_com_itheima_ccb_MainActivity_login</span><span class="params">(JNIEnv* env,jobject obj,jint card,jint</span></span></div><div class="line">        pwd)&#123;</div><div class="line">    <span class="keyword">return</span> login(card,pwd);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是用ndk 工具，将login.c 编译成动态库文件。编译前修改Android.mk 文件的LOCAL_SRC_FILES := login.c</p>
+<p><img src="../assets/ndk3.9.png" alt=""></p>
+<p>编写在MainActivity.java 类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span>&#123;</div><div class="line">        System.loadLibrary(<span class="string">"login-jni"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">login</span><span class="params">(<span class="keyword">int</span> card,<span class="keyword">int</span> pwd)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(View view)</span></span>&#123;</div><div class="line">        EditText et_card = (EditText) findViewById(R.id.et_card);</div><div class="line">        EditText et_pwd = (EditText) findViewById(R.id.et_pwd);</div><div class="line">        <span class="keyword">int</span> card = Integer.valueOf(et_card.getText().toString());</div><div class="line">        <span class="keyword">int</span> pwd = Integer.valueOf(et_pwd.getText().toString());</div><div class="line">        <span class="keyword">int</span> result = login(card, pwd);</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">""</span>+result, <span class="number">1</span>).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>布局文件比较简单，这里就不再给出。运行上面的代码，运行结果如下：</p>
+<p><img src="../assets/ndk3.10.png" alt=""></p>
+<h1 id="7-CDT-插件的安装"><a href="#7-CDT-插件的安装" class="headerlink" title="7. CDT 插件的安装"></a>7. CDT 插件的安装</h1><h2 id="7-1-CDT-简介"><a href="#7-1-CDT-简介" class="headerlink" title="7.1 CDT 简介"></a>7.1 CDT 简介</h2><p>CDT 项目致力于为Eclipse 平台提供功能完全的C/C++ 集成开发环境（Integrated Development<br>Environment，IDE）。CDT 是完全用Java 实现的开放源码项目（根据Common Public License 特许的），它作为Eclipse SDK 平台的一组插件。这些插件将C/C++ 透视图添加到Eclipse 工作台（Workbench）中，现在后者可以用许多视图和向导以及高级编辑和调试支持来支持C/C++ 开发。</p>
+<h2 id="7-2-CDT-的下载"><a href="#7-2-CDT-的下载" class="headerlink" title="7.2 CDT 的下载"></a>7.2 CDT 的下载</h2><p>CDT 插件可以通过eclipse 的在线安装，但是受限于跨国家网络访问，一般不是很好用。因此这里我主要给大家说的是如何离线安装。</p>
+<p>下载CDT 离线安装包。针对不同版本eclipse 的cdt 安装包如下，大家可以从我的百度网盘上直接下载。考虑到我们大部分都用的最新的ADT 因此建议选择8.5.0 版本的CDT。</p>
+<ul>
+<li><a href="http://pan.baidu.com/s/1c0m1k0w" target="_blank" rel="external">cdt-8.5.0-for-Eclipse-Luna</a></li>
+<li><a href="http://pan.baidu.com/s/1kT21QOf" target="_blank" rel="external">cdt-8.3.0-for-Eclipse-Kepler</a></li>
+<li><a href="http://pan.baidu.com/s/1qWAzjBI" target="_blank" rel="external">cdt-8.1.2-for-Eclipse-Juno</a></li>
+</ul>
+<p>选择eclipse 的Help-&gt;Install New Software…，弹出如下对话框</p>
+<p><img src="../assets/ndk3.11.png" alt=""></p>
+<p>点击Add 按钮，在弹出的对话框中输入Name。在Location 栏如果输入一个http 地址是让eclipse<br>自动从网络上下载安装，这里我们点击Archive 按钮找到我们事先下载好的离线安装包。然后点击OK。</p>
+<p><img src="../assets/ndk3.12.png" alt=""></p>
+<p>将CDT 所有的插件勾选上，同时将最下面的联网检查更新去掉勾选，然后点击Next，直到Finish。</p>
+<p><img src="../assets/ndk3.13.png" alt=""></p>
+<p>安装好以后在File-&gt;New-&gt;Other 中会有C/C++选项，如下图。</p>
+<p><img src="../assets/ndk3.14.png" alt=""></p>
+<p>在Open Perspective 中也多了C/C++视图可选项，如下图。</p>
+<p><img src="../assets/ndk3.15.png" alt=""></p>
+<p>安装好以后，我们就可以在eclipse 中开发我们的C/C++工程了。不过对我们Android 开发人员来说用到的机会不是很多。就算是开发C/C++工程，大多数程序员也不会选择在eclipse 平台上进行开发。Eclipse更多的是专注于Java 语言项目的开发，比如JavaEE、Android。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jni/" rel="tag"># jni</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/JNI与底层调用2/" rel="next" title="JNI与底层调用2">
+                <i class="fa fa-chevron-left"></i> JNI与底层调用2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/C和C++在Android开发中的应用/" rel="prev" title="C和C++在Android开发中的应用">
+                C和C++在Android开发中的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-JNI-简介"><span class="nav-number">1.</span> <span class="nav-text">1. JNI 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-什么是JNI"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是JNI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-为什么用JNI"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 为什么用JNI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-NDK-简介"><span class="nav-number">2.</span> <span class="nav-text">2. NDK 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-NDK-产生的背景"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 NDK 产生的背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-为什么使用NDK"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 为什么使用NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-NDK-简介"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 NDK 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-NDK-是一系列工具的集合"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1 NDK 是一系列工具的集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-NDK-提供了一份稳定、功能有限的API-头文件声明"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.3.2 NDK 提供了一份稳定、功能有限的API 头文件声明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-NDK-的安装"><span class="nav-number">3.</span> <span class="nav-text">3. NDK 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-NDK-的下载"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 NDK 的下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-将NDK-解压到一个不包含空格和中文的目录下"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 将NDK 解压到一个不包含空格和中文的目录下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-NDK-目录结构说明"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 NDK 目录结构说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-JNI-入门"><span class="nav-number">4.</span> <span class="nav-text">4. JNI 入门</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-JNI-规范"><span class="nav-number">5.</span> <span class="nav-text">5.  JNI 规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-JNI-数据类型和数据结构"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 JNI 数据类型和数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-JNI-接口函数命名方式"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 JNI 接口函数命名方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1-类型签名"><span class="nav-number">5.2.1.</span> <span class="nav-text">5.2.1 类型签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-2-一般函数的JNI-接口函数命名方式"><span class="nav-number">5.2.2.</span> <span class="nav-text">5.2.2 一般函数的JNI 接口函数命名方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-3-重载函数的JNI-接口函数命名方式"><span class="nav-number">5.2.3.</span> <span class="nav-text">5.2.3 重载函数的JNI 接口函数命名方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-JNI-函数与API"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 JNI 函数与API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-jstring-转换为C-风格字符串"><span class="nav-number">5.3.1.</span> <span class="nav-text">5.3.1 jstring 转换为C 风格字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-C-风格字符串转换为jstring"><span class="nav-number">5.3.2.</span> <span class="nav-text">5.3.2 C 风格字符串转换为jstring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-3-C-语言中获取的一段char-的buffer-传递给Java"><span class="nav-number">5.3.3.</span> <span class="nav-text">5.3.3 C 语言中获取的一段char*的buffer 传递给Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-4-数组操作"><span class="nav-number">5.3.4.</span> <span class="nav-text">5.3.4 数组操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-案例-银行登录系统"><span class="nav-number">6.</span> <span class="nav-text">6. 案例-银行登录系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-CDT-插件的安装"><span class="nav-number">7.</span> <span class="nav-text">7. CDT 插件的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-CDT-简介"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 CDT 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-CDT-的下载"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 CDT 的下载</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/JNI与底层调用1/';
+          this.page.identifier = '2017/05/01/android/JNI与底层调用1/';
+          this.page.title = 'JNI与底层调用1';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

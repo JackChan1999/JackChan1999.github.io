@@ -1,0 +1,1253 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="广播," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 基本概念在Android 中，Broadcast 是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast 进行过滤接受并响应的一类组件，是Android 四大组件之一。 广播接收者（BroadcastReceiver）用于接收广播的，广播的发送是通过调用sendBroadcast（Intent），sendOrderedBroadc">
+<meta name="keywords" content="广播">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android四大组件之BroadCastReceiver">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/Android四大组件之BroadCastReceiver/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. 基本概念在Android 中，Broadcast 是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast 进行过滤接受并响应的一类组件，是Android 四大组件之一。 广播接收者（BroadcastReceiver）用于接收广播的，广播的发送是通过调用sendBroadcast（Intent），sendOrderedBroadc">
+<meta property="og:image" content="http://img.blog.csdn.net/20160911145040840">
+<meta property="og:image" content="http://img.blog.csdn.net/20160911145220509">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021123011029">
+<meta property="og:updated_time" content="2017-05-01T04:41:33.429Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android四大组件之BroadCastReceiver">
+<meta name="twitter:description" content="1. 基本概念在Android 中，Broadcast 是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast 进行过滤接受并响应的一类组件，是Android 四大组件之一。 广播接收者（BroadcastReceiver）用于接收广播的，广播的发送是通过调用sendBroadcast（Intent），sendOrderedBroadc">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160911145040840">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/Android四大组件之BroadCastReceiver/"/>
+
+
+
+
+
+  <title>Android四大组件之BroadCastReceiver | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Android四大组件之BroadCastReceiver/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android四大组件之BroadCastReceiver
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:35:34+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/Android四大组件之BroadCastReceiver/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/Android四大组件之BroadCastReceiver/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a><strong>1. 基本概念</strong></h1><p>在Android 中，Broadcast 是一种广泛运用的在应用程序之间传输信息的机制。而BroadcastReceiver 是对发送出来的Broadcast 进行过滤接受并响应的一类组件，是Android 四大组件之一。</p>
+<p>广播接收者（BroadcastReceiver）用于接收广播的，广播的发送是通过调用sendBroadcast（Intent），sendOrderedBroadcast（Intent）来实现的。通常一个广播可以被多个广播接收者所接收。</p>
+<p>广播被分为两种不同的类型：“普通广播（Normal Broadcasts）”也叫无序广播和“有序广播（OrderedBroadcasts）”。</p>
+<p>1、普通广播是完全异步（就是不会被某个广播接收者终止）的，可以在同一时刻（逻辑上）被所有接收者接收到（其实被接收者接收到也是由顺序的，接收者配置的优先级越高，越先接收到，也就是说广<br>播接收者的优先级对于无序广播也是有用的），消息传递的效率比较高，但缺点是：接收者不能将处理结果传递给下一个接收者，并且无法终止广播的传播。</p>
+<p>2、有序广播是按照接收者声明的优先级别，被接收者依次接收广播。如：A 接收者的级别高于B，B的级别高于C，那么，广播先传给A，再传给B，最后传给C 。在传递的过程中如果有某个接收者终止（abortBroadCast）了该广播，那么后面的接收者就接收不到该广播。</p>
+<p>3、广播接收者属于四大组件之一，因此通常需要AndroidManifest.xml 中进行注册，优先级别声明在intent-filter 元素的android:priority 属性中，数越大优先级别越高，取值范围:-1000 到1000，优先级别也可以调用IntentFilter 对象的setPriority()进行设置。</p>
+<p>4、有序广播的接收者可以终止广播的传播，广播的传播一旦终止，后面的接收者就无法接收到广播，有序广播的接收者可以将数据传递给下一个接收者，如：A 得到广播后，可以往它的结果对象中存入数据，当广播传给B 时，B 可以从A 的结果对象中得到A 存入的数据。</p>
+<p>5、Context.sendBroadcast() 发送的是普通广播，所有订阅者都有机会获得并进行处理。</p>
+<p>6、Context.sendOrderedBroadcast() 发送的是有序广播，系统会根据接收者声明的优先级别按顺序逐个执行接收者，前面的接收者有权终止广播(BroadcastReceiver.abortBroadcast())，如果广播被前面的接收者终<br>止， 后面的接收者就再也无法获取到广播。对于有序广播， 前面的接收者可以将数据通过setResultExtras(Bundle)方法存放进结果对象，然后传给下一个接收者，下一个接收者通过代码：Bundle bundle = getResultExtras(true))可以获取上一个接收者存入在结果对象中的据。</p>
+<a id="more"></a>
+<h1 id="2-Android-系统常见的广播"><a href="#2-Android-系统常见的广播" class="headerlink" title="2. Android 系统常见的广播"></a><strong>2. Android 系统常见的广播</strong></h1><p>Android 为了将系统运行时的各种“事件”通知给其他应用（或者说通知给我们程序员，让我们程序员好做出相应的反应。举个生活中的例子：比如我们坐火车，当前方到达某站的时候，火车乘务员会给所有乘客发送即将到站的广播，这样乘客收到广播后就可以提前准备下车），因此内置了多种广播，比如：系统电量的改变、屏幕的锁屏、网络状态的改变、接收到新的短信、拨打电话事件、sdcard 的挂载和移除、应用的安装和卸载等等。比如我们开发的在线播放视频类的APP，那么我们就有必要监听网络转态改变的事件广播，如果用户的网络状态从wifi 改变为了4G 上网，那么应该提示用户是否使用4G 网络继续播放视频，如果不提示用户，那么就可能导致用户流量被大量使用，一会儿功夫，用户可能就要停机了。</p>
+<p>接下来我们会用4 个案例来演示广播接收者的使用。</p>
+<h2 id="2-1-案例-IP-拨号器"><a href="#2-1-案例-IP-拨号器" class="headerlink" title="2.1 案例-IP 拨号器"></a><strong>2.1 案例-IP 拨号器</strong></h2><p><strong>需求分析</strong></p>
+<p>什么是IP 拨号服务？我们为什么要用IP 服务？所谓的IP 拨号就是通过接入数据网络来传播语音信息。IP 拨号的目的在于转接至其他频道，减少话费等用处。移动17951，联通17911，打长途时在电话号码前加上这个就便宜了，如果你的手机上有这个键的话，那么打电话时输入长途电话号码后，直接按那个键就拨出去了，它会自动加上IP。通俗的说就是打长途便宜。</p>
+<p>例如手机拨打长途电话：<br>移动拨区号+电话号=0.25/分市话+0.7/分长途=0.95/分；<br>移动拨17951+区号+电话号=0.25/分市话+0.3/分长途=0.55/分。</p>
+<p><img src="http://img.blog.csdn.net/20160911145040840" alt="BroadcastReceiver"></p>
+<p>了解了IP 拨号的用途之后，接下来，我们通过程序在用户拨出去的号码前自动加上一个IP 号码，为用户省钱。</p>
+<p>之所以能实现这样的功能，是因为拨号的时候Android 系统会发送一个有序广播，该广播中携带了用户拨打的号码，我们通过注册广播接收者就可以获取到该广播，同时将该广播中的数据进行修改。从而实现了用户号码自动加IP 号的功能。</p>
+<p>为了能让用户自己决定IP 号码，我们需要一个界面（如图1-2），让那个用户输入IP 号码，然后将该IP 号码保存到SharedPreferences 中。</p>
+<p><img src="http://img.blog.csdn.net/20160911145220509" alt="IP 拨号器界面"></p>
+<p><strong>布局文件如下</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">              <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">              <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">EditText</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/et_ip"</span></div><div class="line">        <span class="attr">android:hint</span>=<span class="string">"请输入IP 号码，默认17951"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"saveIP"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"保存"</span></div><div class="line">        /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>实现代码</strong><br>在该案例中总共用到了两个类一个是MainActivity.java 负责让用户输入IP 号码，另外一个是自定义的广播接收者IPCallerReceiver 负责监听用户的拨打电话事件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.content.SharedPreferences;</div><div class="line"><span class="keyword">import</span> android.text.TextUtils;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.widget.EditText;</div><div class="line"><span class="keyword">import</span> android.widget.Toast;</div><div class="line"></div><div class="line"><span class="comment">//保存用户的IP 号码</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> EditText          et_ip;</div><div class="line">    <span class="keyword">private</span> SharedPreferences sp;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        <span class="comment">//文本编辑控件</span></div><div class="line">        et_ip = (EditText) findViewById(R.id.et_ip);</div><div class="line">        <span class="comment">//获取sp 对象</span></div><div class="line">        sp = getSharedPreferences(<span class="string">"config"</span>, MODE_PRIVATE);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//保存IP 号码</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveIP</span><span class="params">(View view)</span></span>&#123;</div><div class="line">        String ipNum = et_ip.getText().toString().trim();</div><div class="line">        <span class="comment">//如果为空则保存默认值</span></div><div class="line">        <span class="keyword">if</span> (TextUtils.isEmpty(ipNum)) &#123;</div><div class="line">            sp.edit().putString(<span class="string">"ip"</span>, <span class="string">"17951"</span>).commit();</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            sp.edit().putString(<span class="string">"ip"</span>, ipNum).commit();</div><div class="line">        &#125;</div><div class="line">        Toast.makeText(<span class="keyword">this</span>, <span class="string">"IP 号码保存成功"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编写自定义广播接收者需要自定义一个类然后继承系统提供的BroadCastReceiver 类，然后覆写抽象方法onReceive。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.itheima.android.ipcaller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.BroadcastReceiver;</div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.content.Intent;</div><div class="line"><span class="keyword">import</span> android.content.SharedPreferences;</div><div class="line"><span class="keyword">import</span> android.text.TextUtils;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"></div><div class="line"><span class="comment">//自定义广播接收者</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IPCallerReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">//获取数据</span></div><div class="line">        String resultData = getResultData();</div><div class="line">        Log.d(<span class="string">"tag"</span>, <span class="string">"接收到广播："</span>+resultData);</div><div class="line">        <span class="comment">//从SharedPreferences 中获取用户保存的IP 号码</span></div><div class="line">        SharedPreferences sp =</div><div class="line">                context.getSharedPreferences(<span class="string">"config"</span>, Context.MODE_PRIVATE);</div><div class="line">        String ipNum = sp.getString(<span class="string">"ip"</span>, <span class="string">"17951"</span>);</div><div class="line">        <span class="keyword">if</span> (!TextUtils.isEmpty(ipNum)) &#123;</div><div class="line">            <span class="comment">//修改数据</span></div><div class="line">            resultData = ipNum+resultData;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//将修改后的数据设置出去</span></div><div class="line">        setResultData(resultData);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>在清单文件中进行注册</strong></p>
+<p>广播是Android 四大组件之一，因此需要在AndroidManifest.xml 中进行注册。同时监听用户的拨打电话行为也属于侵犯用户隐私的行为，因此需要添加权限。</p>
+<p><strong>注册广播</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">"com.itheima.android.ipcaller.IPCallerReceiver"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span> &gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.NEW_OUTGOING_CALL"</span>&gt;</span><span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>大家可以发现广播接收者的注册也需要通过intent-filter 来监听特定的广播，如果是监听Android 系统的，那么在action 中就需要配置系统提供的常量。如果监听自定义发送的广播，那么就需要配置自定义广播设置的action。</p>
+<p><strong>声明权限</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.PROCESS_OUTGOING_CALLS"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-2-案例-短信监听器"><a href="#2-2-案例-短信监听器" class="headerlink" title="2.2 案例-短信监听器"></a><strong>2.2 案例-短信监听器</strong></h2><p>系统接收到短信时会将该事件以有序广播（部分自定义的ROM 可能已经修改了这个策略，比如：小米的MIUI 系统） 的形式发送出去， 因此我们只需要自定义一个BroadCastReceiver 监听该广播（android.provider.Telephony.SMS_RECEIVED）即可监听到短信的到来。由于该广播是有序的，因此如果将我们自定义的BroadCastReceiver 配置了较高的优先级，那么我们就能先于系统短信app 接收到该广播，<br>然后终止该广播，从而就实现了短信拦截功能。</p>
+<p>通过该案例我们可以学到：</p>
+<ul>
+<li>什么是有序广播？</li>
+<li>如何终止有序广播</li>
+<li>如何从广播中获取短信</li>
+<li>广播的优先级概念</li>
+</ul>
+<p>在该案例中我们要做一个类似短信黑名单的应用，主界面提供一个EditText 和一个Button，让用户输入一个“黑名单”，点击保存之后，如果该号码发短信过来，那么我们的应用就将其拦截</p>
+<p><img src="http://img.blog.csdn.net/20161021123011029" alt="BroadcastReceiver"></p>
+<h2 id="2-3-案例-监听应用的安装和卸载"><a href="#2-3-案例-监听应用的安装和卸载" class="headerlink" title="2.3 案例-监听应用的安装和卸载"></a><strong>2.3 案例-监听应用的安装和卸载</strong></h2><p>在Android 系统中，安装应用和卸载应用事件也都会发送特定的广播，我们可以通过监听这些广播间接获取到用户新安装了什么软件，卸载了哪些软件，进而可以统计用户的偏好，或统计某个软件的存留率。</p>
+<p>需求很简单，监听应用的安装和卸载，并将其报名打印出来即可。<br>该应用不需要界面，代码也很简单，只需要一个自定义广播接收这就可以了。</p>
+<h1 id="3-发送无序广播"><a href="#3-发送无序广播" class="headerlink" title="3. 发送无序广播"></a><strong>3. 发送无序广播</strong></h1><h1 id="4-发送有序广播"><a href="#4-发送有序广播" class="headerlink" title="4. 发送有序广播"></a><strong>4. 发送有序广播</strong></h1><h1 id="5-特殊的广播接收者-锁屏与解屏"><a href="#5-特殊的广播接收者-锁屏与解屏" class="headerlink" title="5. 特殊的广播接收者-锁屏与解屏"></a><strong>5. 特殊的广播接收者-锁屏与解屏</strong></h1><h1 id="拦截短信的广播"><a href="#拦截短信的广播" class="headerlink" title="拦截短信的广播"></a>拦截短信的广播</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">InnerSmsReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"InnerSmsReceiver"</span>);</div><div class="line">        <span class="comment">// 获取到短信</span></div><div class="line">        Object[] objects = (Object[]) intent.getExtras().get(<span class="string">"pdus"</span>);</div><div class="line">        <span class="keyword">for</span> (Object obj : objects) &#123;</div><div class="line">            SmsMessage smsMessage = SmsMessage.createFromPdu((<span class="keyword">byte</span>[]) obj);</div><div class="line">            <span class="comment">// 获取到短信内容</span></div><div class="line">            String body = smsMessage.getMessageBody();</div><div class="line">            <span class="comment">// 获取到电话号码</span></div><div class="line">            String phone = smsMessage.getDisplayOriginatingAddress();</div><div class="line">            <span class="comment">// 根据电话号码查询拦截的模式</span></div><div class="line">            String mode = dao.findNumberMode(phone);</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 黑名单的拦截模式1 全部拦截(电话拦截+ 短信拦截) 2 电话拦截3 短信拦截</div><div class="line">             */</div><div class="line">            <span class="keyword">if</span> (<span class="string">"1"</span>.equals(mode) || <span class="string">"3"</span>.equals(mode)) &#123;</div><div class="line">                System.out.println(<span class="string">"被哥拦截了"</span>);</div><div class="line">                <span class="comment">//往短信拦截数据库里面添加数据</span></div><div class="line">                abortBroadcast();</div><div class="line">            &#125;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 根据内容拦截(智能拦截)</div><div class="line">             */</div><div class="line">            <span class="keyword">if</span> (body.contains(<span class="string">"xue sheng mei"</span>)) &#123;</div><div class="line">                System.out.println(<span class="string">"学生妹被拦截了"</span>);</div><div class="line">                abortBroadcast();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="注册静态广播"><a href="#注册静态广播" class="headerlink" title="注册静态广播"></a>注册静态广播</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">receiver = <span class="keyword">new</span> InnerSmsReceiver();</div><div class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>);</div><div class="line"><span class="comment">// 设置优先级</span></div><div class="line">filter.setPriority(<span class="number">2147483647</span>);</div><div class="line"><span class="comment">// 注册一个短信监听的广播</span></div><div class="line">registerReceiver(receiver, filter);</div></pre></td></tr></table></figure>
+<h1 id="反注册广播，防止内存泄露"><a href="#反注册广播，防止内存泄露" class="headerlink" title="反注册广播，防止内存泄露"></a>反注册广播，防止内存泄露</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onDestroy();</div><div class="line">    <span class="comment">// 反注册</span></div><div class="line">    unregisterReceiver(receiver);</div><div class="line">    receiver = <span class="keyword">null</span>;</div><div class="line">    <span class="comment">// 当不用了。设置为null</span></div><div class="line">    mTelephonyManager.listen(listener, PhoneStateListener.LISTEN_NONE);</div><div class="line">    listener = <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="注册广播并设置优先级"><a href="#注册广播并设置优先级" class="headerlink" title="注册广播并设置优先级"></a>注册广播并设置优先级</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 拦截黑名单信息--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">receiver</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"com.itheima.mobilesafe_sh2.receiver.InnerSmsReceiver "</span> &gt;</div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"1000"</span> &gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.provider.Telephony.SMS_RECEIVED"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="案例1：IP拨号器"><a href="#案例1：IP拨号器" class="headerlink" title="案例1：IP拨号器"></a>案例1：IP拨号器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//接收到广播时就会调用</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">//添加IP线路</span></div><div class="line">        <span class="comment">//在打电话广播中，会携带拨打的电话的号码，通过以下代码获取到</span></div><div class="line">        String number = getResultData();</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(number.startsWith(<span class="string">"0"</span>))&#123;</div><div class="line">            SharedPreferences sp = context.getSharedPreferences(<span class="string">"ip"</span>, Context.MODE_PRIVATE);</div><div class="line">            String ipNumber = sp.getString(<span class="string">"ipNumber"</span>, <span class="string">""</span>);</div><div class="line"></div><div class="line">            <span class="comment">//把IP线路号码添加至用户拨打号码的前面</span></div><div class="line">            number = ipNumber + number;</div><div class="line"></div><div class="line">            <span class="comment">//把新的号码重新放入广播中</span></div><div class="line">            setResultData(number);</div><div class="line"></div><div class="line">            abortBroadcast();</div><div class="line">        &#125;        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span></span>&#123;</div><div class="line">        EditText et = (EditText) findViewById(R.id.et);</div><div class="line">        SharedPreferences sp = getSharedPreferences(<span class="string">"ip"</span>, MODE_PRIVATE);</div><div class="line">        sp.edit().putString(<span class="string">"ipNumber"</span>, et.getText().toString()).commit();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="案例2：短信防火墙"><a href="#案例2：短信防火墙" class="headerlink" title="案例2：短信防火墙"></a>案例2：短信防火墙</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">//拿到短信的信息</span></div><div class="line">        <span class="comment">//短信内容封装在intent中</span></div><div class="line">        Bundle bundle = intent.getExtras();</div><div class="line">        <span class="comment">//以pdus为键，取出一个object数组，数组中的每一个元素，都是一条短信</span></div><div class="line">        Object[] objects = (Object[]) bundle.get(<span class="string">"pdus"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//拿到广播中的所有短信</span></div><div class="line">        <span class="keyword">for</span> (Object object : objects) &#123;</div><div class="line">            <span class="comment">//通过pdu来构造短信</span></div><div class="line">            SmsMessage sms = SmsMessage.createFromPdu((<span class="keyword">byte</span>[])object);</div><div class="line">            <span class="keyword">if</span>(sms.getOriginatingAddress().equals(<span class="string">"138438"</span>))&#123;</div><div class="line">                <span class="comment">//阻止其他广播接收者收到这条广播</span></div><div class="line">                abortBroadcast();</div><div class="line"><span class="comment">//              SmsManager.getDefault().sendTextMessage(sms.getOriginatingAddress(), null, "你是个好人", null, null);</span></div><div class="line">            &#125;</div><div class="line"><span class="comment">//          System.out.println(sms.getMessageBody());            </span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="案例3：监听SD卡状态"><a href="#案例3：监听SD卡状态" class="headerlink" title="案例3：监听SD卡状态"></a>案例3：监听SD卡状态</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SDStatusReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">//判断收到的到底是什么广播</span></div><div class="line">        String action = intent.getAction();</div><div class="line">        <span class="keyword">if</span>(<span class="string">"android.intent.action.MEDIA_MOUNTED"</span>.equals(action))&#123;</div><div class="line">            Toast.makeText(context, <span class="string">"SD卡可用"</span>, <span class="number">0</span>).show();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"android.intent.action.MEDIA_REMOVED"</span>.equals(action))&#123;</div><div class="line">            Toast.makeText(context, <span class="string">"SD卡拔出"</span>, <span class="number">0</span>).show();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"android.intent.action.MEDIA_UNMOUNTED"</span>.equals(action))&#123;</div><div class="line">            Toast.makeText(context, <span class="string">"SD卡不可用"</span>, <span class="number">0</span>).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="案例4：手机勒索软件"><a href="#案例4：手机勒索软件" class="headerlink" title="案例4：手机勒索软件"></a>案例4：手机勒索软件</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BootReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">// 启动Activity，实现开机自动启动勒索软件</span></div><div class="line">        Intent it = <span class="keyword">new</span> Intent(context, MainActivity.class);</div><div class="line">        <span class="comment">//创建任务栈存放启动的Activity</span></div><div class="line">        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">        context.startActivity(it);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="案例5：监控应用的状态"><a href="#案例5：监控应用的状态" class="headerlink" title="案例5：监控应用的状态"></a>案例5：监控应用的状态</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">APPStatusReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        String action = intent.getAction();</div><div class="line">        Uri uri = intent.getData();</div><div class="line">        <span class="keyword">if</span>(<span class="string">"android.intent.action.PACKAGE_ADDED"</span>.equals(action))&#123;</div><div class="line">            Toast.makeText(context, uri.toString() + <span class="string">"被安装了"</span>, <span class="number">0</span>).show();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="string">"android.intent.action.PACKAGE_REPLACED"</span>.equals(action))&#123;</div><div class="line">            Toast.makeText(context, uri.toString() + <span class="string">"被升级了"</span>, <span class="number">0</span>).show();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="string">"android.intent.action.PACKAGE_REMOVED"</span>.equals(action))&#123;</div><div class="line">            Toast.makeText(context, uri.toString() + <span class="string">"被卸载了"</span>, <span class="number">0</span>).show();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="案例6：发送自定义广播"><a href="#案例6：发送自定义广播" class="headerlink" title="案例6：发送自定义广播"></a>案例6：发送自定义广播</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span></span>&#123;</div><div class="line">        <span class="comment">//发送自定义广播</span></div><div class="line">        Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">        <span class="comment">//广播中的action也是自定义的</span></div><div class="line">        intent.setAction(<span class="string">"com.itheima.zdy"</span>);</div><div class="line">        sendBroadcast(intent);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/广播/" rel="tag"># 广播</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/Android四大组件之ContentProvider/" rel="next" title="Android四大组件之ContentProvider">
+                <i class="fa fa-chevron-left"></i> Android四大组件之ContentProvider
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/Android应用开发-快速入门/" rel="prev" title="Android应用开发-快速入门">
+                Android应用开发-快速入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-基本概念"><span class="nav-number">1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Android-系统常见的广播"><span class="nav-number">2.</span> <span class="nav-text">2. Android 系统常见的广播</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-案例-IP-拨号器"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 案例-IP 拨号器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-案例-短信监听器"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 案例-短信监听器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-案例-监听应用的安装和卸载"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 案例-监听应用的安装和卸载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-发送无序广播"><span class="nav-number">3.</span> <span class="nav-text">3. 发送无序广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-发送有序广播"><span class="nav-number">4.</span> <span class="nav-text">4. 发送有序广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-特殊的广播接收者-锁屏与解屏"><span class="nav-number">5.</span> <span class="nav-text">5. 特殊的广播接收者-锁屏与解屏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#拦截短信的广播"><span class="nav-number">6.</span> <span class="nav-text">拦截短信的广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册静态广播"><span class="nav-number">7.</span> <span class="nav-text">注册静态广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反注册广播，防止内存泄露"><span class="nav-number">8.</span> <span class="nav-text">反注册广播，防止内存泄露</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注册广播并设置优先级"><span class="nav-number">9.</span> <span class="nav-text">注册广播并设置优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例1：IP拨号器"><span class="nav-number">10.</span> <span class="nav-text">案例1：IP拨号器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例2：短信防火墙"><span class="nav-number">11.</span> <span class="nav-text">案例2：短信防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例3：监听SD卡状态"><span class="nav-number">12.</span> <span class="nav-text">案例3：监听SD卡状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例4：手机勒索软件"><span class="nav-number">13.</span> <span class="nav-text">案例4：手机勒索软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例5：监控应用的状态"><span class="nav-number">14.</span> <span class="nav-text">案例5：监控应用的状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例6：发送自定义广播"><span class="nav-number">15.</span> <span class="nav-text">案例6：发送自定义广播</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/Android四大组件之BroadCastReceiver/';
+          this.page.identifier = '2017/05/01/android/Android四大组件之BroadCastReceiver/';
+          this.page.title = 'Android四大组件之BroadCastReceiver';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

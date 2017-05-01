@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/Cookie和Session/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Android下的Linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/javaweb/Cookie和Session/" itemprop="url">
-                  Cookie和Session
+                <a class="post-title-link" href="/2017/05/01/android/Android下的Linux/" itemprop="url">
+                  Android下的Linux
                 </a>
               
             
@@ -326,7 +326,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:22:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:40:29+08:00">
                 2017-05-01
               </time>
             
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index">
-                    <span itemprop="name">javaweb</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/javaweb/Cookie和Session/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/android/Android下的Linux/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/javaweb/Cookie和Session/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/android/Android下的Linux/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,504 +395,55 @@
 
       
         
-          
-            <p><img src="http://img.blog.csdn.net/20161107212441810" alt="Cookie和Session"></p>
-<h1 id="1-会话跟踪技术"><a href="#1-会话跟踪技术" class="headerlink" title="1. 会话跟踪技术"></a>1. 会话跟踪技术</h1><h2 id="1-1-什么是会话跟踪技术"><a href="#1-1-什么是会话跟踪技术" class="headerlink" title="1.1 什么是会话跟踪技术"></a><strong>1.1 什么是会话跟踪技术</strong></h2><p>我们需要先了解一下什么是会话！可以把会话理解为客户端与服务器之间的一次会晤，在一次会晤中可能会包含多次请求和响应。例如你给10086打个电话，你就是客户端，而10086服务人员就是服务器了。从双方接通电话那一刻起，会话就开始了，到某一方挂断电话表示会话结束。在通话过程中，你会向10086发出多个请求，那么这多个请求都在一个会话中。</p>
-<p>在JavaWeb中，客户向某一服务器发出第一个请求开始，会话就开始了，直到客户关闭了浏览器会话结束。</p>
-<p>在一个会话的多个请求中共享数据，这就是会话跟踪技术。例如在一个会话中的请求如下：</p>
+          <h1 id="1-Android目录结构"><a href="#1-Android目录结构" class="headerlink" title="1. Android目录结构"></a>1. Android目录结构</h1><p><img src="http://img.blog.csdn.net/20170219120525625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="android"></p>
 <ul>
-<li>请求银行主页</li>
-<li>请求登录（请求参数是用户名和密码）</li>
-<li>请求转账（请求参数与转账相关的数据）</li>
-<li>请求信誉卡还款（请求参数与还款相关的数据）</li>
-</ul>
-<p>在这个会话中当前用户信息必须在这个会话中共享的，因为登录的是张三，那么在转账和还款时一定是相对张三的转账和还款！这就说明我们必须在一个会话过程中有共享数据的能力</p>
-<h2 id="1-2-会话路径技术使用Cookie或Session完成"><a href="#1-2-会话路径技术使用Cookie或Session完成" class="headerlink" title="1.2 会话路径技术使用Cookie或Session完成"></a><strong>1.2 会话路径技术使用Cookie或Session完成</strong></h2><p>我们知道HTTP协议是无状态协议，也就是说每个请求都是独立的！无法记录前一次请求的状态。但HTTP协议中可以使用Cookie来完成会话跟踪！</p>
-<p>在JavaWeb中，使用Session来完成会话跟踪，Session底层依赖Cookie技术</p>
-<h1 id="2-Cookie"><a href="#2-Cookie" class="headerlink" title="2. Cookie"></a>2. Cookie</h1><h2 id="2-1-什么叫Cookie"><a href="#2-1-什么叫Cookie" class="headerlink" title="2.1 什么叫Cookie"></a><strong>2.1 什么叫Cookie</strong></h2><p>Cookie翻译成中文是小甜点，小饼干的意思。在HTTP中它表示服务器送给客户端浏览器的小甜点。其实Cookie就是一个键和一个值构成的，随着服务器端的响应发送给客户端浏览器。然后客户端浏览器会把Cookie保存起来，当下一次再访问服务器时把Cookie再发送给服务器。</p>
+<li><p>data</p>
 <ul>
-<li>Cookie是HTTP协议的规范之一，它是服务器和客户端之间传输的小数据</li>
-<li>首先由服务器通过响应头把Cookie传输给客户端，客户端会将Cookie保存起来</li>
-<li>当客户端再次请求同一服务器时，客户端会在请求头中添加该服务器保存的Cookie，发送给服务器</li>
-<li>Cookie就是服务器保存在客户端的数据</li>
-<li>Cookie就是一个键值对</li>
+<li>app：用户安装的应用</li>
+<li>data：应用的专属文件夹</li>
+<li>system：系统的配置信息，注册表文件</li>
+<li>anr：anr异常的记录信息</li>
 </ul>
-<p><img src="http://img.blog.csdn.net/20161028011200406" alt="cookie"></p>
-<p>Cookie是由服务器创建，然后通过响应发送给客户端的一个键值对。客户端会保存Cookie，并会标注出Cookie的来源（哪个服务器的Cookie）。当客户端向服务器发出请求时会把所有这个服务器Cookie包含在请求中发送给服务器，这样服务器就可以识别客户端了！</p>
-<p>Cookie类的常用方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">方法声明</th>
-<th style="text-align:left">功能描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Cookie(String name, String value)</td>
-<td style="text-align:left">构造方法</td>
-</tr>
-<tr>
-<td style="text-align:left">getName()</td>
-<td style="text-align:left">获取Cookie的名称</td>
-</tr>
-<tr>
-<td style="text-align:left">setValue()</td>
-<td style="text-align:left">设置Cookie的值</td>
-</tr>
-<tr>
-<td style="text-align:left">getValue()</td>
-<td style="text-align:left">获取Cookie的值</td>
-</tr>
-<tr>
-<td style="text-align:left">setPath()</td>
-<td style="text-align:left">设置Cookie项的有效目录路径</td>
-</tr>
-<tr>
-<td style="text-align:left">getPath()</td>
-<td style="text-align:left">获取Cookie的路径</td>
-</tr>
-<tr>
-<td style="text-align:left">setDomain()</td>
-<td style="text-align:left">设置Cookie的有效域</td>
-</tr>
-<tr>
-<td style="text-align:left">setMaxAge()</td>
-<td style="text-align:left">设置Cookie在浏览器上保持的时间，以秒为单位</td>
-</tr>
-<tr>
-<td style="text-align:left">getMaxAge()</td>
-<td style="text-align:left">获取Cookie在浏览器上保持的秒数</td>
-</tr>
-<tr>
-<td style="text-align:left">setVersion()</td>
-<td style="text-align:left">设置Cookie采用的协议版本</td>
-</tr>
-<tr>
-<td style="text-align:left">getVersion()</td>
-<td style="text-align:left">获取Cookie采用的协议版本</td>
-</tr>
-<tr>
-<td style="text-align:left">setComment()</td>
-<td style="text-align:left">设置Cookie的注解部分</td>
-</tr>
-<tr>
-<td style="text-align:left">getComment()</td>
-<td style="text-align:left">获取Cookie的注解</td>
-</tr>
-<tr>
-<td style="text-align:left">setSecure()</td>
-<td style="text-align:left">设置Cookie是否使用安全的协议传送</td>
-</tr>
-<tr>
-<td style="text-align:left">getSecure()</td>
-<td style="text-align:left">获取Cookie是否使用安全的协议传送</td>
-</tr>
-</tbody>
-</table>
-<h2 id="2-2-Cookie的用途"><a href="#2-2-Cookie的用途" class="headerlink" title="2.2 Cookie的用途"></a><strong>2.2 Cookie的用途</strong></h2><ul>
-<li>服务器使用Cookie来跟踪客户端状态！</li>
-<li>保存购物车(购物车中的商品不能使用request保存，因为它是一个用户向服务器发送的多个请求信息)</li>
-<li>显示上次登录名(也是一个用户多个请求)</li>
-</ul>
-<h2 id="2-3-Cookie规范"><a href="#2-3-Cookie规范" class="headerlink" title="2.3 Cookie规范"></a><strong>2.3 Cookie规范</strong></h2><ul>
-<li>Cookie通过请求头和响应头在服务器与客户端之间传输</li>
-<li>Cookie大小上限为4KB</li>
-<li>一个服务器最多在客户端浏览器上保存20个Cookie</li>
-<li>一个浏览器最多保存300个Cookie</li>
-</ul>
-<p>上面的数据只是HTTP的Cookie规范，但在浏览器大战的今天，一些浏览器为了打败对手，为了展现自己的能力起见，可能对Cookie规范“扩展”了一些，例如每个Cookie的大小为8KB，最多可保存500个Cookie等！但也不会出现把你硬盘占满的可能！</p>
-<p>注意，不同浏览器之间是不共享Cookie的。也就是说在你使用IE访问服务器时，服务器会把Cookie发给IE，然后由IE保存起来，当你在使用FireFox访问服务器时，不可能把IE保存的Cookie发送给服务器。</p>
-<h2 id="2-4-Cookie与HTTP头"><a href="#2-4-Cookie与HTTP头" class="headerlink" title="2.4 Cookie与HTTP头"></a><strong>2.4 Cookie与HTTP头</strong></h2><p>Cookie是通过HTTP请求和响应头在客户端和服务器端传递的：</p>
-<ul>
-<li>Cookie：请求头，客户端发送给服务器端</li>
-<li>格式：Cookie: a=A; b=B; c=C。即多个Cookie用分号离开</li>
-<li>Set-Cookie：响应头，服务器端发送给客户端</li>
-<li>一个Cookie对象一个Set-Cookie：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: a=A</div><div class="line">Set-Cookie: b=B</div><div class="line">Set-Cookie: c=C</div></pre></td></tr></table></figure>
-<h2 id="2-5-Cookie的覆盖"><a href="#2-5-Cookie的覆盖" class="headerlink" title="2.5 Cookie的覆盖"></a><strong>2.5 Cookie的覆盖</strong></h2><p>如果服务器端发送重复的Cookie那么会覆盖原有的Cookie，例如客户端的第一个请求服务器端发送的Cookie是：Set-Cookie: a=A；第二请求服务器端发送的是：Set-Cookie: a=AA，那么客户端只留下一个Cookie，即：a=AA</p>
-<h2 id="2-6-Cookie第一例"><a href="#2-6-Cookie第一例" class="headerlink" title="2.6 Cookie第一例"></a><strong>2.6 Cookie第一例</strong></h2><p>我们这个案例是，客户端访问AServlet，AServlet在响应中添加Cookie，浏览器会自动保存Cookie。然后客户端访问BServlet，这时浏览器会自动在请求中带上Cookie，BServlet获取请求中的Cookie打印出来</p>
-<p><img src="http://img.blog.csdn.net/20161028012346319" alt="cookie"></p>
-<p>AServlet.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.itcast.servlet;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.util.UUID;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 给客户端发送Cookie</div><div class="line"> * <span class="doctag">@author</span> Administrator</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line"></div><div class="line">		String id = UUID.randomUUID().toString();<span class="comment">//生成一个随机字符串</span></div><div class="line">		Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"id"</span>, id);<span class="comment">//创建Cookie对象，指定名字和值</span></div><div class="line">		response.addCookie(cookie);<span class="comment">//在响应中添加Cookie对象</span></div><div class="line">		response.getWriter().print(<span class="string">"已经给你发送了ID"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>BServlet.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> cn.itcast.servlet;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.Cookie;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 获取客户端请求中的Cookie</div><div class="line"> * <span class="doctag">@author</span> Administrator</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line"></div><div class="line">		Cookie[] cs = request.getCookies();<span class="comment">//获取请求中的Cookie</span></div><div class="line">		<span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;<span class="comment">//如果请求中存在Cookie</span></div><div class="line">			<span class="keyword">for</span>(Cookie c : cs) &#123;<span class="comment">//遍历所有Cookie</span></div><div class="line">				<span class="keyword">if</span>(c.getName().equals(<span class="string">"id"</span>)) &#123;<span class="comment">//获取Cookie名字，如果Cookie名字是id</span></div><div class="line">					response.getWriter().print(<span class="string">"您的ID是："</span> + c.getValue());<span class="comment">//打印Cookie值</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>##<strong>2.7 Cookie的生命</strong></p>
-<p>###<strong>2.7.1 什么是Cookie的生命</strong><br>Cookie不只是有name和value，Cookie还是生命。所谓生命就是Cookie在客户端的有效时间，可以通过setMaxAge(int)来设置Cookie的有效时间</p>
-<ul>
-<li><p>cookie.setMaxAge(-1)：cookie的maxAge属性的默认值就是-1，表示只在浏览器内存中存活。一旦关闭浏览器窗口，那么cookie就会消失</p>
 </li>
-<li><p>cookie.setMaxAge(60*60)：表示cookie对象可存活1小时。当生命大于0时，浏览器会把Cookie保存到硬盘上，就算关闭浏览器，就算重启客户端电脑，cookie也会存活1小时</p>
+<li><p>dev：devices的缩写</p>
+<ul>
+<li>存放设备所对应的文件</li>
+</ul>
 </li>
-<li><p>cookie.setMaxAge(0)：cookie生命等于0是一个特殊的值，它表示cookie被作废！也就是说，如果原来浏览器已经保存了这个Cookie，那么可以通过Cookie的setMaxAge(0)来删除这个Cookie。无论是在浏览器内存中，还是在客户端硬盘上都会删除这个Cookie</p>
+<li><p>mnt：mount的缩写</p>
+<ul>
+<li>挂载在系统上的设备：sdcard，u盘</li>
+</ul>
+</li>
+<li><p>proc：硬件配置，状态信息</p>
+<ul>
+<li>cpuinfo、meminfo</li>
+</ul>
+</li>
+<li><p>sbin：system bin</p>
+<ul>
+<li>系统重要的二进制执行文件</li>
+<li>adbd：服务器的adb进程</li>
+</ul>
+</li>
+<li><p>system：</p>
+<ul>
+<li>app：存放系统应用，默认不能删除</li>
+<li>bin：Android中可执行的linux指令文件</li>
+<li>etc：host：主机名和ip地址的映射</li>
+<li>fonts：Android中自带的字体</li>
+<li>framework：存放谷歌提供的java api</li>
+<li>lib：核心功能的类库，C/C++文件</li>
+<li>media/audio：存放Android的音效文件</li>
+<li>tts：语音发声引擎，默认不支持中文</li>
+<li>usr：用户设备的配置信息，键盘编码和按键编码的映射</li>
+<li>xbin：是专为开发人员准备的二进制指令</li>
+</ul>
 </li>
 </ul>
-<p>###<strong>2.7.2 浏览器查看Cookie</strong><br>下面是浏览器查看Cookie的方式：</p>
-<p>IE查看Cookie文件的路径：C:\Documents and Settings\Administrator\Cookies</p>
-<p>FireFox查看Cookie</p>
-<p><img src="http://img.blog.csdn.net/20161028012420164" alt="cookie"></p>
-<p>Google查看Cookie</p>
-<p><img src="http://img.blog.csdn.net/20161028012533088" alt="cookie"></p>
-<p><img src="http://img.blog.csdn.net/20161028012543401" alt="cookie"></p>
-<p><img src="http://img.blog.csdn.net/20161028012553666" alt="cookie"></p>
-<p><img src="http://img.blog.csdn.net/20161028012603104" alt="cookie"></p>
-<p>###<strong>2.7.3 案例：显示上次访问时间</strong></p>
-<ul>
-<li>创建Cookie，名为lasttime，值为当前时间，添加到response中</li>
-<li>在AServlet中获取请求中名为lasttime的Cookie</li>
-<li>如果不存在输出“您是第一次访问本站”，如果存在输出“您上一次访问本站的时间是xxx”</li>
-</ul>
-<p>AServlet.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line"></div><div class="line">		Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"lasttime"</span>, <span class="keyword">new</span> Date().toString());</div><div class="line">		cookie.setMaxAge(<span class="number">60</span> * <span class="number">60</span>);</div><div class="line">		response.addCookie(cookie);</div><div class="line"></div><div class="line">		Cookie[] cs = request.getCookies();</div><div class="line">		String s = <span class="string">"您是首次访问本站！"</span>;</div><div class="line">		<span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">for</span>(Cookie c : cs) &#123;</div><div class="line">				<span class="keyword">if</span>(c.getName().equals(<span class="string">"lasttime"</span>)) &#123;</div><div class="line">					s = <span class="string">"您上次的访问时间是："</span> + c.getValue();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		response.getWriter().print(s);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="3-Cookie的path"><a href="#3-Cookie的path" class="headerlink" title="3. Cookie的path"></a><strong>3. Cookie的path</strong></h1><h2 id="3-1-什么是Cookie的路径"><a href="#3-1-什么是Cookie的路径" class="headerlink" title="3.1 什么是Cookie的路径"></a><strong>3.1 什么是Cookie的路径</strong></h2><p>现在有WEB应用A，向客户端发送了10个Cookie，这就说明客户端无论访问应用A的哪个Servlet都会把这10个Cookie包含在请求中！但是也许只有AServlet需要读取请求中的Cookie，而其他Servlet根本就不会获取请求中的Cookie。这说明客户端浏览器有时发送这些Cookie是多余的！</p>
-<p>可以通过设置Cookie的path来指定浏览器，在访问什么样的路径时，包含什么样的Cookie</p>
-<h2 id="3-2-Cookie路径与请求路径的关系"><a href="#3-2-Cookie路径与请求路径的关系" class="headerlink" title="3.2 Cookie路径与请求路径的关系"></a><strong>3.2 Cookie路径与请求路径的关系</strong></h2><p>下面我们来看看Cookie路径的作用：<br>下面是客户端浏览器保存的3个Cookie的路径：</p>
-<p>a:　/cookietest<br>b:　/cookietest/servlet<br>c:　/cookietest/jsp</p>
-<p>下面是浏览器请求的URL：</p>
-<p>A:　<a href="http://localhost:8080/cookietest/AServlet" target="_blank" rel="external">http://localhost:8080/cookietest/AServlet</a><br>B:　<a href="http://localhost:8080/cookietest/servlet/BServlet" target="_blank" rel="external">http://localhost:8080/cookietest/servlet/BServlet</a><br>C:　<a href="http://localhost:8080/cookietest/jsp/CServlet" target="_blank" rel="external">http://localhost:8080/cookietest/jsp/CServlet</a></p>
-<ul>
-<li>请求A时，会在请求中包含a</li>
-<li>请求B时，会在请求中包含a、b</li>
-<li>请求C时，会在请求中包含a、c</li>
-</ul>
-<p>也就是说，请求路径如果包含了Cookie路径，那么会在请求中包含这个Cookie，否则不会请求中不会包含这个Cookie</p>
-<ul>
-<li>A请求的URL包含了“/cookietest”，所以会在请求中包含路径为“/cookietest”的Cookie</li>
-<li>B请求的URL包含了“/cookietest”，以及“/cookietest/servlet”，所以请求中包含路径为“/cookietest”和“/cookietest/servlet”两个Cookie</li>
-<li>C请求的URL包含了“/cookietest”，以及“/cookietest/jsp”，所以请求中包含路径为“/cookietest”和“/cookietest/jsp”两个Cookie</li>
-</ul>
-<h2 id="3-3-设置Cookie的路径"><a href="#3-3-设置Cookie的路径" class="headerlink" title="3.3 设置Cookie的路径"></a><strong>3.3 设置Cookie的路径</strong></h2><p>设置Cookie的路径需要使用setPath()方法，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cookie.setPath(“/cookietest/servlet”);</div></pre></td></tr></table></figure></p>
-<p>如果没有设置Cookie的路径，那么Cookie路径的默认值为当前访问资源所在路径，例如：</p>
-<ul>
-<li>访问 <a href="http://localhost:8080/cookietest/AServlet" target="_blank" rel="external">http://localhost:8080/cookietest/AServlet</a> 时添加的Cookie默认路径为/cookietest</li>
-<li>访问 <a href="http://localhost:8080/cookietest/servlet/BServlet" target="_blank" rel="external">http://localhost:8080/cookietest/servlet/BServlet</a> 时添加的Cookie默认路径为/cookietest/servlet</li>
-<li>访问 <a href="http://localhost:8080/cookietest/jsp/BServlet" target="_blank" rel="external">http://localhost:8080/cookietest/jsp/BServlet</a> 时添加的Cookie默认路径为/cookietest/jsp</li>
-</ul>
-<h1 id="4-Cookie的domain"><a href="#4-Cookie的domain" class="headerlink" title="4. Cookie的domain"></a><strong>4. Cookie的domain</strong></h1><p>Cookie的domain属性可以让网站中二级域共享Cookie，次要！<br>百度你是了解的对吧！</p>
-<p><a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a><br><a href="http://zhidao.baidu.com" target="_blank" rel="external">http://zhidao.baidu.com</a><br><a href="http://news.baidu.com" target="_blank" rel="external">http://news.baidu.com</a><br><a href="http://tieba.baidu.com" target="_blank" rel="external">http://tieba.baidu.com</a></p>
-<p>现在我希望在这些主机之间共享Cookie（例如在www.baidu.com中响应的cookie，可以在news.baidu.com请求中包含）。很明显，现在不是路径的问题了，而是主机的问题，即域名的问题。处理这一问题其实很简单，只需要下面两步：</p>
-<ul>
-<li>设置Cookie的path为“/”：c.setPath(“/”)；</li>
-<li>设置Cookie的domain为“.baidu.com”：c.setDomain(“.baidu.com”)</li>
-</ul>
-<p>当domain为“.baidu.com”时，无论前缀是什么，都会共享Cookie的。但是现在我们需要设置两个虚拟主机：www.baidu.com和news.baidu.com</p>
-<p>第一步：设置windows的DNS路径解析</p>
-<p>找到C:\WINDOWS\system32\drivers\etc\hosts文件，添加如下内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">127.0.0.1       localhost</div><div class="line">127.0.0.1       www.baidu.com</div><div class="line">127.0.0.1       news.baidu.com</div></pre></td></tr></table></figure>
-<p>第二步：设置Tomcat虚拟主机</p>
-<p>找到server.xml文件，添加&lt;Host&gt;元素，内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"www.baidu.com"</span>  <span class="attr">appBase</span>=<span class="string">"F:\webapps\www"</span></span></div><div class="line">      <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span></div><div class="line">      <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>/&gt;</div><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"news.baidu.com"</span>  <span class="attr">appBase</span>=<span class="string">"F:\webapps\news"</span></span></div><div class="line">      <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span></div><div class="line">      <span class="attr">xmlValidation</span>=<span class="string">"false"</span> <span class="attr">xmlNamespaceAware</span>=<span class="string">"false"</span>/&gt;</div></pre></td></tr></table></figure></p>
-<p>第三步：创建A项目，创建AServlet，设置Cookie。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"id"</span>, <span class="string">"baidu"</span>);</div><div class="line">c.setPath(<span class="string">"/"</span>);</div><div class="line">c.setDomain(<span class="string">".baidu.com"</span>);</div><div class="line">c.setMaxAge(<span class="number">60</span>*<span class="number">60</span>);</div><div class="line">response.addCookie(c);</div><div class="line">response.getWriter().print(<span class="string">"OK"</span>);</div></pre></td></tr></table></figure>
-<p>把A项目的WebRoot目录复制到F:\webapps\www目录下，并把WebRoot目录的名字修改为ROOT</p>
-<p>第四步：创建B项目，创建BServlet，获取Cookie，并打印出来。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Cookie[] cs = request.getCookies();</div><div class="line"><span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</div><div class="line">  <span class="keyword">for</span>(Cookie c : cs) &#123;</div><div class="line">    String s = c.getName() + <span class="string">": "</span> + c.getValue() + <span class="string">"&lt;br/&gt;"</span>;</div><div class="line">    response.getWriter().print(s);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>把B项目的WebRoot目录复制到F:\webapps\news目录下，并把WebRoot目录的名字修改为ROOT。</p>
-<p>第五步：访问www.baidu.com\AServlet，然后再访问news.baidu.com\BServlet</p>
-<h1 id="5-Cookie中保存中文"><a href="#5-Cookie中保存中文" class="headerlink" title="5. Cookie中保存中文"></a><strong>5. Cookie中保存中文</strong></h1><p>Cookie的name和value都不能使用中文，如果希望在Cookie中使用中文，那么需要先对中文进行URL编码，然后把编码后的字符串放到Cookie中</p>
-<p>向客户端响应中添加Cookie<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String name = URLEncoder.encode(<span class="string">"姓名"</span>, <span class="string">"UTF-8"</span>);</div><div class="line">String value = URLEncoder.encode(<span class="string">"张三"</span>, <span class="string">"UTF-8"</span>);</div><div class="line">Cookie c = <span class="keyword">new</span> Cookie(name, value);</div><div class="line">c.setMaxAge(<span class="number">3600</span>);</div><div class="line">response.addCookie(c);</div></pre></td></tr></table></figure></p>
-<p>从客户端请求中获取Cookie<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line">		Cookie[] cs = request.getCookies();</div><div class="line">		<span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">for</span>(Cookie c : cs) &#123;</div><div class="line">				String name = URLDecoder.decode(c.getName(), <span class="string">"UTF-8"</span>);</div><div class="line">				String value = URLDecoder.decode(c.getValue(), <span class="string">"UTF-8"</span>);</div><div class="line">				String s = name + <span class="string">": "</span> + value + <span class="string">"&lt;br/&gt;"</span>;</div><div class="line">				response.getWriter().print(s);</div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="6-显示曾经浏览过的商品"><a href="#6-显示曾经浏览过的商品" class="headerlink" title="6. 显示曾经浏览过的商品"></a><strong>6. 显示曾经浏览过的商品</strong></h1><p>index.jsp</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">  &lt;h1&gt;商品列表&lt;/h1&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=ThinkPad"&gt;ThinkPad&lt;/a&gt;&lt;br/&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=Lenovo"&gt;Lenovo&lt;/a&gt;&lt;br/&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=Apple"&gt;Apple&lt;/a&gt;&lt;br/&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=HP"&gt;HP&lt;/a&gt;&lt;br/&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=SONY"&gt;SONY&lt;/a&gt;&lt;br/&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=ACER"&gt;ACER&lt;/a&gt;&lt;br/&gt;</div><div class="line">  &lt;a href="/day06_3/GoodServlet?name=DELL"&gt;DELL&lt;/a&gt;&lt;br/&gt;</div><div class="line"></div><div class="line">  &lt;hr/&gt;</div><div class="line">  您浏览过的商品：</div><div class="line">  &lt;%</div><div class="line">  	Cookie[] cs = request.getCookies();</div><div class="line">  	if(cs != null) &#123;</div><div class="line">  		for(Cookie c : cs) &#123;</div><div class="line">  			if(c.getName().equals("goods")) &#123;</div><div class="line">  				out.print(c.getValue());</div><div class="line">  			&#125;</div><div class="line">  		&#125;</div><div class="line">  	&#125;</div><div class="line">  %&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
-<p>GoodServlet<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoodServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		String goodName = request.getParameter(<span class="string">"name"</span>);</div><div class="line">		String goods = CookieUtils.getCookValue(request, <span class="string">"goods"</span>);</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(goods != <span class="keyword">null</span>) &#123;</div><div class="line">			String[] arr = goods.split(<span class="string">", "</span>);</div><div class="line">			Set&lt;String&gt; goodSet = <span class="keyword">new</span> LinkedHashSet(Arrays.asList(arr));</div><div class="line">			goodSet.add(goodName);</div><div class="line">			goods = goodSet.toString();</div><div class="line">			goods = goods.substring(<span class="number">1</span>, goods.length() - <span class="number">1</span>);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			goods = goodName;</div><div class="line">		&#125;</div><div class="line">		Cookie cookie = <span class="keyword">new</span> Cookie(<span class="string">"goods"</span>, goods);</div><div class="line">		cookie.setMaxAge(<span class="number">1</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span>);</div><div class="line">		response.addCookie(cookie);</div><div class="line"></div><div class="line">		response.sendRedirect(<span class="string">"/day06_3/index.jsp"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>CookieUtils<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CookieUtils</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getCookValue</span><span class="params">(HttpServletRequest request, String name)</span> </span>&#123;</div><div class="line">		Cookie[] cs = request.getCookies();</div><div class="line">		<span class="keyword">if</span>(cs == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span>(Cookie c : cs) &#123;</div><div class="line">			<span class="keyword">if</span>(c.getName().equals(name)) &#123;</div><div class="line">				<span class="keyword">return</span> c.getValue();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="7-HttpSession"><a href="#7-HttpSession" class="headerlink" title="7. HttpSession"></a>7. HttpSession</h1><h2 id="7-1-HttpSession概述"><a href="#7-1-HttpSession概述" class="headerlink" title="7.1 HttpSession概述"></a><strong>7.1 HttpSession概述</strong></h2><h3 id="7-1-1-什么是HttpSesssion"><a href="#7-1-1-什么是HttpSesssion" class="headerlink" title="7.1.1 什么是HttpSesssion"></a><strong>7.1.1 什么是HttpSesssion</strong></h3><p>javax.servlet.http.HttpSession接口表示一个会话，我们可以把一个会话内需要共享的数据保存到HttSession对象中！</p>
-<h3 id="7-1-2-获取HttpSession对象"><a href="#7-1-2-获取HttpSession对象" class="headerlink" title="7.1.2 获取HttpSession对象"></a><strong>7.1.2 获取HttpSession对象</strong></h3><ul>
-<li><p>HttpSession request.getSesssion()：如果当前会话已经有了session对象那么直接返回，如果当前会话还不存在会话，那么创建Session并返回</p>
-</li>
-<li><p>HttpSession request.getSession(boolean)：当参数为true时，与requeset.getSession()相同。如果参数为false，那么如果当前会话中存在Session则返回，不存在返回null</p>
-</li>
-</ul>
-<p>###<strong>7.1.3 HttpSession是域对象</strong></p>
-<p>我们已经学习过HttpServletRequest、ServletContext，它们都是域对象，现在我们又学习了一个HttpSession，它也是域对象。它们三个是Servlet中可以使用的域对象，而JSP中可以多使用一个域对象，明天我们再讲解JSP的第四个域对象</p>
-<ul>
-<li><p>HttpServletRequest：一个请求创建一个request对象，所以在同一个请求中可以共享request，例如一个请求从AServlet转发到BServlet，那么AServlet和BServlet可以共享request域中的数据</p>
-</li>
-<li><p>ServletContext：一个应用只创建一个ServletContext对象，所以在ServletContext中的数据可以在整个应用中共享，只要不启动服务器，那么ServletContext中的数据就可以共享</p>
-</li>
-<li><p>HttpSession：一个会话创建一个HttpSession对象，同一会话中的多个请求中可以共享session中的数据</p>
-</li>
-</ul>
-<p>下面是session的域方法：</p>
-<ul>
-<li>void setAttribute(String name, Object value)</li>
-</ul>
-<p>用来存储一个对象，也可以称之为存储一个域属性，例如：session.setAttribute(“xxx”, “XXX”)，在session中保存了一个域属性，域属性名称为xxx，域属性的值为XXX。请注意，如果多次调用该方法，并且使用相同的name，那么会覆盖上一次的值，这一特性与Map相同</p>
-<ul>
-<li>Object getAttribute(String name)</li>
-</ul>
-<p>用来获取session中的数据，当前在获取之前需要先去存储才行，例如：String value = (String) session.getAttribute(“xxx”);，获取名为xxx的域属性</p>
-<ul>
-<li>void removeAttribute(String name)：</li>
-</ul>
-<p>用来移除HttpSession中的域属性，如果参数name指定的域属性不存在，那么本方法什么都不做</p>
-<ul>
-<li>Enumeration getAttributeNames()：获取所有域属性的名称</li>
-</ul>
-<h2 id="7-2-登录案例"><a href="#7-2-登录案例" class="headerlink" title="7.2 登录案例"></a><strong>7.2 登录案例</strong></h2><p><img src="http://img.blog.csdn.net/20161028232631839" alt="session"></p>
-<p>需要的页面：</p>
-<ul>
-<li>login.jsp：登录页面，提供登录表单</li>
-<li>index1.jsp：主页，显示当前用户名称，如果没有登录，显示您还没登录</li>
-<li>index2.jsp：主页，显示当前用户名称，如果没有登录，显示您还没登录</li>
-</ul>
-<p>Servlet：</p>
-<ul>
-<li>LoginServlet：在login.jsp页面提交表单时，请求本Servlet。在本Servlet中获取用户名、密码进行校验，如果用户名、密码错误，显示“用户名或密码错误”，如果正确保存用户名session中，然后重定向到index1.jsp</li>
-</ul>
-<p>当用户没有登录时访问index1.jsp或index2.jsp，显示“您还没有登录”。如果用户在login.jsp登录成功后到达index1.jsp页面会显示当前用户名，而且不用再次登录去访问index2.jsp也会显示用户名。因为多次请求在一个会话范围，index1.jsp和index2.jsp都会到session中获取用户名，session对象在一个会话中是相同的，所以都可以获取到用户名！</p>
-<p>login.jsp<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;</div><div class="line"></div><div class="line">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;login.jsp&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line"></div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;h1&gt;login.jsp&lt;/h1&gt;</div><div class="line">    &lt;hr/&gt;</div><div class="line">    &lt;form action="/day06_4/LoginServlet" method="post"&gt;</div><div class="line">    	用户名：&lt;input type="text" name="username" /&gt;&lt;br/&gt;</div><div class="line">        &lt;input type="submit" value="Submit"/&gt;</div><div class="line">    &lt;/form&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<p>index1.jsp<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;</div><div class="line"></div><div class="line">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;index1.jsp&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line"></div><div class="line">  &lt;body&gt;</div><div class="line">&lt;h1&gt;index1.jsp&lt;/h1&gt;</div><div class="line">&lt;%</div><div class="line">	String username = (String)session.getAttribute("username");</div><div class="line">	if(username == null) &#123;</div><div class="line">		out.print("您还没有登录！");</div><div class="line">	&#125; else &#123;</div><div class="line">		out.print("用户名：" + username);</div><div class="line">	&#125;</div><div class="line">%&gt;</div><div class="line">&lt;hr/&gt;</div><div class="line">&lt;a href="/day06_4/index2.jsp"&gt;index2&lt;/a&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<p>index2.jsp<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%&gt;</div><div class="line"></div><div class="line">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</div><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;index2.jsp&lt;/title&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line"></div><div class="line">  &lt;body&gt;</div><div class="line">&lt;h1&gt;index2.jsp&lt;/h1&gt;</div><div class="line">&lt;%</div><div class="line">	String username = (String)session.getAttribute("username");</div><div class="line">	if(username == null) &#123;</div><div class="line">		out.print("您还没有登录！");</div><div class="line">	&#125; else &#123;</div><div class="line">		out.print("用户名：" + username);</div><div class="line">	&#125;</div><div class="line">%&gt;</div><div class="line">&lt;hr/&gt;</div><div class="line">&lt;a href="/day06_4/index1.jsp"&gt;index1&lt;/a&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
-<p>LoginServlet<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		request.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line"></div><div class="line">		String username = request.getParameter(<span class="string">"username"</span>);</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(username.equalsIgnoreCase(<span class="string">"itcast"</span>)) &#123;</div><div class="line">			response.getWriter().print(<span class="string">"用户名或密码错误！"</span>);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			HttpSession session = request.getSession();</div><div class="line">			session.setAttribute(<span class="string">"username"</span>, username);</div><div class="line">			response.sendRedirect(<span class="string">"/day06_4/index1.jsp"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="7-3-Session的实现原理"><a href="#7-3-Session的实现原理" class="headerlink" title="7.3 Session的实现原理"></a><strong>7.3 Session的实现原理</strong></h2><p>session底层是依赖Cookie的！我们来理解一下session的原理吧！</p>
-<p>当我首次去银行时，因为还没有账号，所以需要开一个账号，我获得的是银行卡，而银行这边的数据库中留下了我的账号，我的钱是保存在银行的账号中，而我带走的是我的卡号</p>
-<p>当我再次去银行时，只需要带上我的卡，而无需再次开一个账号了。只要带上我的卡，那么我在银行操作的一定是我的账号</p>
-<p>当首次使用session时，服务器端要创建session，session是保存在服务器端，而给客户端的session的id（一个cookie中保存了sessionId）。客户端带走的是sessionId，而数据是保存在session中</p>
-<p>当客户端再次访问服务器时，在请求中会带上sessionId，而服务器会通过sessionId找到对应的session，而无需再创建新的session</p>
-<p><img src="http://img.blog.csdn.net/20161028012710334" alt="session"></p>
-<p><img src="http://img.blog.csdn.net/20161028232400679" alt="session"></p>
-<p>session是依赖Cookie实现的。session是服务器端对象</p>
-<p>当用户第一次使用session时（表示第一次请求服务器），服务器会创建session，并创建一个Cookie，在Cookie中保存了session的id，发送给客户端。这样客户端就有了自己session的id了。但这个Cookie只在浏览器内存中存在，也就是说，在关闭浏览器窗口后，Cookie就会丢失，也就丢失了sessionId。</p>
-<p>每一个session都有一个32位长的字符串用来作id，id是它的身份证号码</p>
-<p>当用户第二次访问服务器时，会在请求中把保存了sessionId的Cookie发送给服务器，服务器通过sessionId查找session对象，然后给使用。也就是说，只要浏览器容器不关闭，无论访问服务器多少次，使用的都是同一个session对象。这样也就可以让多个请求共享同一个session了。</p>
-<p>当用户关闭了浏览器窗口后，再打开浏览器访问服务器，这时请求中没有了sessionId，那么服务器会创建一个session，再把sessionId通过Cookie保存到浏览器中，也是一个新的会话开始了。原来的session会因为长时间无法访问而失效。</p>
-<p>当用户打开某个服务器页面长时间没动作时，这样session会超时失效，当用户再有活动时，服务器通过用户提供的sessionId已经找不到session对象了，那么服务器还是会创建一个新的session对象，再把新的sessionId保存到客户端。这也是一个新的会话开始了。</p>
-<h2 id="7-4-Session与浏览器"><a href="#7-4-Session与浏览器" class="headerlink" title="7.4 Session与浏览器"></a><strong>7.4 Session与浏览器</strong></h2><p>session保存在服务器，而sessionId通过Cookie发送给客户端，但这个Cookie的生命不为-1，即只在浏览器内存中存在，也就是说如果用户关闭了浏览器，那么这个Cookie就丢失了</p>
-<p>当用户再次打开浏览器访问服务器时，就不会有sessionId发送给服务器，那么服务器会认为你没有session，所以服务器会创建一个session，并在响应中把sessionId保存到Cookie中发送给客户端</p>
-<p>你可能会说，那原来的session对象会怎样？当一个session长时间没人使用的话，服务器会把session删除了！这个时长在Tomcat中配置是30分钟，可以在${CATALANA}/conf/web.xml找到这个配置，当然你也可以在自己的web.xml中覆盖这个配置！</p>
-<p>web.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>30<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>session失效时间也说明一个问题！如果你打开网站的一个页面开始长时间不动，超出了30分钟后，再去点击链接或提交表单时你会发现，你的session已经丢失了</p>
-<h2 id="7-5-Session其他常用API"><a href="#7-5-Session其他常用API" class="headerlink" title="7.5 Session其他常用API"></a><strong>7.5 Session其他常用API</strong></h2><table>
-<thead>
-<tr>
-<th style="text-align:left">返回值</th>
-<th>方法</th>
-<th style="text-align:left">功能描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">String</td>
-<td>getId()</td>
-<td style="text-align:left">获取sessionId</td>
-</tr>
-<tr>
-<td style="text-align:left">int</td>
-<td>getMaxInactiveInterval()</td>
-<td style="text-align:left">获取session可以的最大不活动时间（秒），默认为30分钟。当session在30分钟内没有使用，那么Tomcat会在session池中移除这个session</td>
-</tr>
-<tr>
-<td style="text-align:left">void</td>
-<td>setMaxInactiveInterval()</td>
-<td style="text-align:left">设置session允许的最大不活动时间（秒），如果设置为1秒，那么只要session在1秒内不被使用，那么session就会被移除</td>
-</tr>
-<tr>
-<td style="text-align:left">long</td>
-<td>getCreationTime()</td>
-<td style="text-align:left">返回session的创建时间，返回值为当前时间的毫秒值</td>
-</tr>
-<tr>
-<td style="text-align:left">long</td>
-<td>getLastAccessedTime()</td>
-<td style="text-align:left">返回session的最后活动时间，返回值为当前时间的毫秒值</td>
-</tr>
-<tr>
-<td style="text-align:left">void</td>
-<td>invalidate()</td>
-<td style="text-align:left">让session失效！调用这个方法会被session失效，当session失效后，客户端再次请求，服务器会给客户端创建一个新的session，并在响应中给客户端新session的sessionId</td>
-</tr>
-<tr>
-<td style="text-align:left">boolean</td>
-<td>isNew()</td>
-<td style="text-align:left">查看session是否为新。当客户端第一次请求时，服务器为客户端创建session，但这时服务器还没有响应客户端，也就是还没有把sessionId响应给客户端时，这时session的状态为新</td>
-</tr>
-</tbody>
-</table>
-<h2 id="7-6-URL重写"><a href="#7-6-URL重写" class="headerlink" title="7.6 URL重写"></a><strong>7.6 URL重写</strong></h2><p>我们知道session依赖Cookie，那么session为什么依赖Cookie呢？因为服务器需要在每次请求中获取sessionId，然后找到客户端的session对象。那么如果客户端浏览器关闭了Cookie呢？那么session是不是就会不存在了呢？</p>
-<p>其实还有一种方法让服务器收到的每个请求中都带有sessioinId，那就是URL重写！在每个页面中的每个链接和表单中都添加名为jsessionid的参数，值为当前sessionid。当用户点击链接或提交表单时服务器也可以通过获取jsessionid这个参数来得到客户端的sessionId，找到sessoin对象。</p>
-<p>index.jsp<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  &lt;body&gt;</div><div class="line">&lt;h1&gt;URL重写&lt;/h1&gt;</div><div class="line">&lt;a href='/day06_5/index.jsp;jsessionid=&lt;%=session.getId() %&gt;' &gt;主页&lt;/a&gt;</div><div class="line"></div><div class="line">&lt;form action='/day06_5/index.jsp;jsessionid=&lt;%=session.getId() %&gt;' method="post"&gt;</div><div class="line">	&lt;input type="submit" value="提交"/&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">  &lt;/body&gt;</div></pre></td></tr></table></figure></p>
-<p>也可以使用response.encodeURL()对每个请求的URL处理，这个方法会自动追加jsessionid参数，与上面我们手动添加是一样的效果。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'&lt;%=response.encodeURL("/day06_5/index.jsp") %&gt;'</span> &gt;</span>主页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">'&lt;%=response.encodeURL("/day06_5/index.jsp") %&gt;'</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>使用response.encodeURL()更加“智能”，它会判断客户端浏览器是否禁用了Cookie，如果禁用了，那么这个方法在URL后面追加jsessionid，否则不会追加。</p>
-<h1 id="8-案例：一次性图片验证码"><a href="#8-案例：一次性图片验证码" class="headerlink" title="8. 案例：一次性图片验证码"></a><strong>8. 案例：一次性图片验证码</strong></h1><h2 id="8-1-验证码有啥用"><a href="#8-1-验证码有啥用" class="headerlink" title="8.1 验证码有啥用"></a><strong>8.1 验证码有啥用</strong></h2><p>在我们注册时，如果没有验证码的话，我们可以使用URLConnection来写一段代码发出注册请求。甚至可以使用while(true)来注册！那么服务器就废了！</p>
-<p>验证码可以去识别发出请求的是人还是程序！当然，如果聪明的程序可以去分析验证码图片！但分析图片也不是一件容易的事，因为一般验证码图片都会带有干扰线，人都看不清，那么程序一定分析不出来。</p>
-<h2 id="8-2-VerifyCode类"><a href="#8-2-VerifyCode类" class="headerlink" title="8.2 VerifyCode类"></a><strong>8.2 VerifyCode类</strong></h2><p>现在我们已经有了cn.itcast.utils.VerifyCode类，这个类可以生成验证码图片！下面来看一个小例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		<span class="comment">// 创建验证码类</span></div><div class="line">		VerifyCode vc = <span class="keyword">new</span> VerifyCode();</div><div class="line">		<span class="comment">// 获取随机图片</span></div><div class="line">		BufferedImage image = vc.getImage();</div><div class="line">		<span class="comment">// 获取刚刚生成的随机图片上的文本</span></div><div class="line">		String text = vc.getText();</div><div class="line">		System.out.println(text);</div><div class="line">		<span class="comment">// 保存图片</span></div><div class="line">		FileOutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="string">"F:/xxx.jpg"</span>);</div><div class="line">		VerifyCode.output(image, out);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="8-3-在页面中显示动态图片"><a href="#8-3-在页面中显示动态图片" class="headerlink" title="8.3 在页面中显示动态图片"></a><strong>8.3 在页面中显示动态图片</strong></h2><p>我们需要写一个VerifyCodeServlet，在这个Servlet中我们生成动态图片，然后它图片写入到response.getOutputStream()流中！然后让页面的&lt;img&gt;元素指定这个VerifyCodServlet即可<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">VerifyCodeServlet</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VerifyCodeServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		VerifyCode vc = <span class="keyword">new</span> VerifyCode();</div><div class="line">		BufferedImage image = vc.getImage();</div><div class="line">		String text = vc.getText();</div><div class="line">		System.out.println(<span class="string">"text:"</span> + text);</div><div class="line">		VerifyCode.output(image, response.getOutputStream());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>index.jsp<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    	function _change() &#123;</div><div class="line">    		var imgEle = document.getElementById("vCode");</div><div class="line">    		imgEle.src = "/day06_6/VerifyCodeServlet?" + new Date().getTime();</div><div class="line">    	&#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">...  </div><div class="line">  &lt;body&gt;</div><div class="line">    &lt;h1&gt;验证码&lt;/h1&gt;</div><div class="line">    &lt;img id="vCode" src="/day06_6/VerifyCodeServlet"/&gt;</div><div class="line">    &lt;a href="javascript:_change()"&gt;看不清，换一张&lt;/a&gt;</div><div class="line">  &lt;/body&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="8-4-在注册页面中使用验证码"><a href="#8-4-在注册页面中使用验证码" class="headerlink" title="8.4 在注册页面中使用验证码"></a><strong>8.4 在注册页面中使用验证码</strong></h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/day06_6/RegistServlet"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></div><div class="line">   	用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">   	验证码：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"code"</span> <span class="attr">size</span>=<span class="string">"3"</span>/&gt;</span></div><div class="line">   	<span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"vCode"</span> <span class="attr">src</span>=<span class="string">"/day06_6/VerifyCodeServlet"</span>/&gt;</span></div><div class="line">   	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:_change()"</span>&gt;</span>看不清，换一张<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">   	<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span>/&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="8-5-RegistServlet"><a href="#8-5-RegistServlet" class="headerlink" title="8.5 RegistServlet"></a><strong>8.5 RegistServlet</strong></h2><p>修改VerifyCodeServlet<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VerifyCodeServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		VerifyCode vc = <span class="keyword">new</span> VerifyCode();</div><div class="line">		BufferedImage image = vc.getImage();</div><div class="line">		request.getSession().setAttribute(<span class="string">"vCode"</span>, vc.getText());</div><div class="line">		VerifyCode.output(image, response.getOutputStream());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>RegistServlet<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RegistServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		request.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line"></div><div class="line">		String username = request.getParameter(<span class="string">"username"</span>);</div><div class="line">		String vCode = request.getParameter(<span class="string">"code"</span>);</div><div class="line"></div><div class="line">		String sessionVerifyCode = (String)request.getSession().getAttribute(<span class="string">"vCode"</span>);</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(vCode.equalsIgnoreCase(sessionVerifyCode)) &#123;</div><div class="line">			response.getWriter().print(username + <span class="string">", 恭喜！注册成功！"</span>);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			response.getWriter().print(<span class="string">"验证码错误！"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="8-6-总结验证码案例"><a href="#8-6-总结验证码案例" class="headerlink" title="8.6 总结验证码案例"></a><strong>8.6 总结验证码案例</strong></h2><p><strong>VerifyCodeServlet：</strong></p>
-<ul>
-<li>生成验证码：VerifyCode vc = new VerifyCode(); BufferedImage image = vc.getImage()</li>
-<li>在session中保存验证码文本：request.getSession.getAttribute(“vCode”, vc.getText())</li>
-<li>把验证码输出到页面：VerifyCode.output(image, response.getOutputStream)</li>
-</ul>
-<p><strong>regist.jsp：</strong></p>
-<ul>
-<li>表单中包含username和code字段</li>
-<li>在表单中给出&lt;img&gt;指向VerifyCodeServlet，用来在页面中显示验证码图片</li>
-<li>提供“看不清，换一张”链接，指向_change()函数</li>
-<li>提交到RegistServlet</li>
-</ul>
-<p><strong>RegistServlet：</strong></p>
-<ul>
-<li>获取表单中的username和code</li>
-<li>获取session中的vCode</li>
-<li>比较code和vCode是否相同</li>
-<li>相同说明用户输入的验证码正确，否则输入验证码错误</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/JavaMail/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/01/javaweb/JavaMail/" itemprop="url">
-                  JavaMail邮件开发
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:24+08:00">
-                2017-05-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index">
-                    <span itemprop="name">javaweb</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/01/javaweb/JavaMail/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/javaweb/JavaMail/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://img.blog.csdn.net/20161105094658308" alt="javamail"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/javaweb/JavaMail/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/android/Android下的Linux/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -938,7 +489,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/上传下载文件/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Linux常用指令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -960,8 +511,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/javaweb/上传下载文件/" itemprop="url">
-                  上传下载文件
+                <a class="post-title-link" href="/2017/05/01/android/Linux常用指令/" itemprop="url">
+                  Linux常用指令
                 </a>
               
             
@@ -977,7 +528,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:12+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:40:29+08:00">
                 2017-05-01
               </time>
             
@@ -1000,8 +551,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index">
-                    <span itemprop="name">javaweb</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -1018,9 +569,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/javaweb/上传下载文件/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/android/Linux常用指令/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/javaweb/上传下载文件/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/android/Linux常用指令/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1046,19 +597,10 @@
 
       
         
-          <p><img src="http://img.blog.csdn.net/20161108133047365" alt="上传下载文件"></p>
-<h1 id="1-文件上传概述"><a href="#1-文件上传概述" class="headerlink" title="1. 文件上传概述"></a>1. 文件上传概述</h1><h2 id="1-1-文件上传的作用"><a href="#1-1-文件上传的作用" class="headerlink" title="1.1 文件上传的作用"></a><strong>1.1 文件上传的作用</strong></h2><p>例如网络硬盘！就是用来上传下载文件的。<br>在智联招聘上填写一个完整的简历还需要上传照片呢。</p>
-<h2 id="1-2-文件上传对页面的要求"><a href="#1-2-文件上传对页面的要求" class="headerlink" title="1.2 文件上传对页面的要求"></a><strong>1.2 文件上传对页面的要求</strong></h2><p>上传文件的要求比较多，需要记一下：</p>
-<ul>
-<li>必须使用表单，而不能是超链接</li>
-<li>表单的method必须是POST，而不能是GET</li>
-<li>表单的enctype必须是multipart/form-data</li>
-<li>在表单中添加file表单字段，即&lt;input type=”file” name=”xxx”/&gt;</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"$&#123;pageContext.request.contextPath &#125;/FileUploadServlet"</span></span></div><div class="line">      <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</div><div class="line"></div><div class="line">     用户名：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">     文件1：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file1"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">     文件2：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file2"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>/&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+          <h1 id="Linux常用指令"><a href="#Linux常用指令" class="headerlink" title="Linux常用指令"></a>Linux常用指令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div></pre></td><td class="code"><pre><div class="line">1. 查看目录下有什么文件/目录</div><div class="line">    &gt; ls            //list列出目录的文件信息</div><div class="line">    &gt; ls  -l 或ll   //list -list以“详细信息”查看目录文件</div><div class="line">    &gt; ls  -a        //list  -all查看目录“全部”(包括隐藏文件)文件</div><div class="line">    &gt; ls  -al       //list  -all list 查看目录“全部”(包括隐藏文件)文件,以“详细信息”展示</div><div class="line">    &gt; ls  目录      //查看指定目录下有什么文件</div><div class="line">    &gt; ls -i         //查看文件索引号码</div><div class="line"></div><div class="line">2. 进行目录切换</div><div class="line">    &gt; cd  dirname       //进行目录切换</div><div class="line">    &gt; cd  ..            //向上级目录切换</div><div class="line">    &gt; cd  ~    或 cd     //直接切换到当前用户对应的家目录</div><div class="line"></div><div class="line">3. 查看完整的操作位置</div><div class="line">    &gt; pwd</div><div class="line"></div><div class="line">4. 用户切换</div><div class="line">    &gt; su -  或  su - root       //向root用户切换</div><div class="line">    &gt; exit          //退回到原用户</div><div class="line"></div><div class="line">    &gt; su 用户名     //普通用户切换</div><div class="line"></div><div class="line">    多次使用su指令，会造成用户的“叠加”：</div><div class="line">    (su和exit最好匹配使用)</div><div class="line">    jinnan---&gt;root---&gt;jinnan---&gt;root---&gt;jinnan</div><div class="line"></div><div class="line">5. 查看当前用户是谁</div><div class="line">    &gt; whoami</div><div class="line"></div><div class="line">6. 图形界面 与 命令界面 切换</div><div class="line">    root用户可以切换</div><div class="line">    &gt;# init 3</div><div class="line">    &gt;# init 5</div><div class="line"></div><div class="line">7. 查看一个指令对应的执行程序文件在哪</div><div class="line">    &gt; which  指令</div><div class="line"></div><div class="line"></div><div class="line">8. 目录相关操作</div><div class="line">    1) 创建目录 make directory</div><div class="line">    &gt; mkdir  目录名字</div><div class="line">    &gt; mkdir -p newdir/newdir/newdir       //递归方式创建多个连续目录</div><div class="line"></div><div class="line">      //新的多级目录数目如果大于等于2个，就要使用-p参数</div><div class="line">      mkdir      dir/newdir                //不用-p参数</div><div class="line">      mkdir  -p  dir/newdir/newdir         //使用-p参数</div><div class="line">      mkdir  -p  newdir/newdir/newdir      //使用-p参数</div><div class="line"></div><div class="line">    2) 移动目录(文件和目录)  move</div><div class="line">    &gt; mv  dir1  dir2            //把dir1移动到dir2目录下</div><div class="line">    &gt; mv  dir1/dir2  dir3       //把dir2移动到dir3目录下</div><div class="line">    &gt; mv  dir1/dir2  dir3/dir4  //把dir2移动到dir4目录下</div><div class="line">    &gt; mv  dir1/dir2  ./         //把dir2移动到当前目录下</div><div class="line"></div><div class="line">    3) 改名字  (文件和目录)</div><div class="line">    &gt; mv  dir1  newdir          //修改dir1的名字为newdir</div><div class="line"></div><div class="line">    mv是“移动” 和 “改名字” 合并的指令</div><div class="line">    &gt; mv  dir1  ./newdir            //dir1移动到当前目录下 并改名字为newdir</div><div class="line">    &gt; mv  dir1/dir2  dir3           //dir2移动到dir3目录下， 并改名字为“原名”</div><div class="line">    &gt; mv  dir1/dir2  dir3/newdir    //dir2移动到dir3目录下，并改名字为“newdir”</div><div class="line">    &gt; mv  dir1/dir2  dir3/dir4      //dir2移动到dir4目录下， 并改名字为“原名”</div><div class="line">    &gt; mv  dir1/dir2  dir3/dir4/newdir   //dir2移动到dir4目录下， 并改名字为“newdir”</div><div class="line"></div><div class="line">    4) 复制(改名字)(文件和目录) copy</div><div class="line">    ① 文件的复制</div><div class="line">    &gt; cp  file1  dir/newfile2         //file1被复制一份到dir目录下，并改名字为“newfile2”</div><div class="line">    &gt; cp  file1  dir               //file1被复制一份到dir目录下，并改名字为“原名”</div><div class="line">    &gt; cp  dir1/filea  dir2/newfile  //filea被复制一份到dir2目录下，并改名字为“newfile”</div><div class="line">    ② 目录的复制(需要设置-r[recursive递归]参数，无视目录的层次)</div><div class="line">    &gt; cp -r dir1   dir2             //dir1被复制到dir2目录下,并改名字为&quot;原名&quot;</div><div class="line">    &gt; cp -r  dir1/dir2  dir3/newdir  //dir2被复制到dir3目录下,并改名字为&quot;newdir&quot;</div><div class="line">    &gt; cp -r  dir1/dir2  dir3/dir4   //dir2被复制到dir4目录下,并改名字为&quot;原名&quot;</div><div class="line">    &gt; cp -r  dir1/dir2  dir3/dir4/newdir   //dir2被复制到dir4目录下,并改名字为&quot;newdir&quot;</div><div class="line">    &gt; cp -r  dir1  ../../newdir     //dir1被复制到上两级目录下,并改名字为&quot;newdir&quot;</div><div class="line"></div><div class="line">    ⑤ 删除(文件和目录)remove</div><div class="line">    &gt; rm  文件</div><div class="line">    &gt; rm -r  目录           //-r[recursive递归]递归方式删除目录</div><div class="line">    &gt; rm -rf  文件/目录     //-r force  递归强制方式删除文件</div><div class="line">                            force强制，不需要额外的提示</div><div class="line">      rm  -rf  /</div><div class="line"></div><div class="line">9. 文件操作</div><div class="line">    1) 查看文件内容</div><div class="line">        cat  filename       //打印文件内容到输出终端</div><div class="line">        more  filename      //通过敲回车方式逐行查看文件的各个行内容</div><div class="line">                            //默认从第一行开始查看</div><div class="line">                            //不支持回看</div><div class="line">                            //q 退出查看</div><div class="line"></div><div class="line">        less                //通过“上下左右”键查看文件的各个部分内容</div><div class="line">                            //支持回看</div><div class="line">                            //q 退出查看</div><div class="line"></div><div class="line">        head -n filename    //查看文件的前n行内容</div><div class="line">        tail -n filename    //查看文件的最末尾n行内容</div><div class="line"></div><div class="line">        wc filename         //查看文件的行数</div><div class="line"></div><div class="line">    2) 创建文件</div><div class="line">        &gt; touch  dir1/filename</div><div class="line">        &gt; touch  filename</div><div class="line">    3) 给文件追加内容</div><div class="line">        &gt; echo 内容 &gt; 文件名称      //把“内容”以[覆盖写]方式追加给“文件”</div><div class="line">        &gt; echo 内容 &gt;&gt;  文件名称    //把“内容”以[追加]形式写给“文件”</div><div class="line">        (如果文件不存在会创建文件)</div><div class="line"></div><div class="line">10. 用户操作</div><div class="line">    配置文件：/etc/passwd</div><div class="line">    1) 创建用户 user add</div><div class="line">    &gt;# useradd</div><div class="line">    &gt;# useradd  liming          //创建liming用户，同时会创建一个同名的组出来</div><div class="line">    &gt;# useradd  -g 组别编号  username   //把用户的组别设置好，避免创建同名的组出来</div><div class="line">    &gt;# useradd  -g 组编号  -u 用户编号  -d 家目录   username</div><div class="line"></div><div class="line">    2) 修改用户 user modify</div><div class="line">    &gt;# usermod  -g 组编号  -u 用户编号  -d 家目录  -l 新名字  username</div><div class="line">    (修改家目录时需要手动创建之)</div><div class="line"></div><div class="line">    3) 删除用户 user delete</div><div class="line">    &gt;# userdel  username</div><div class="line">    &gt;# userdel -r  username    //删除用户同时删除其家目录</div><div class="line"></div><div class="line"></div><div class="line">    4) 给用户设置密码，使其登录系统</div><div class="line">    &gt; passwd  用户名</div><div class="line"></div><div class="line">11. 组别操作</div><div class="line">    配置文件： /etc/group</div><div class="line">    1) 创建组 group add</div><div class="line">    &gt;# groupadd  music</div><div class="line">    &gt;# groupadd  movie</div><div class="line">    &gt;# groupadd  php</div><div class="line"></div><div class="line">    2) 修改组 group modify</div><div class="line">    &gt;# groupmod  -g gid  -n 新名字  groupname</div><div class="line"></div><div class="line">    3) 删除组 group delete</div><div class="line">    &gt;# groupdel  groupname    //组下边如果有用户存在，就禁止删除</div><div class="line"></div><div class="line">12. 查看指令可设置的参数</div><div class="line">    &gt; man 指令</div><div class="line"></div><div class="line">13. 给文件设置权限</div><div class="line">    1) 字母相对方式设置权限</div><div class="line">    //  针对一个组别设置权限，其他组别权限没有变化，称为“相对方式”权限设置</div><div class="line">    chmod指令</div><div class="line">    chmod u+rwx  filename  //给filename文件的主人增加“读、写、执行”权限</div><div class="line">    chmod g-rx  filename   //给filename文件的同组用户 删除“读、执行”权限</div><div class="line"></div><div class="line">    chmod u+/-rwx,g+/-rwx,o+/-rwx  filename</div><div class="line">    说明：</div><div class="line">    ① 每个单元&quot;+&quot;  &quot;-&quot;只能使用一个</div><div class="line">    ② 可以同时给一个组或多个组设置权限，组别之间使用&quot;,&quot;分割</div><div class="line">    ③ 每个单元的权限可以是&quot;rwx&quot;中的一个或多个</div><div class="line">    &gt;chmod u+w,g-rx,o+rw  filename   //给filename文件主人增加写权限，同组删除读、执行权限，其他组增加读、写权限</div><div class="line">    &gt;chmod u+w,u-x  filename     //给filename文件主人“增加写权限”同时“删除执行权限”</div><div class="line"></div><div class="line">    chmod +/-rwx  filename  //无视具体组别，统一给全部的组设置权限</div><div class="line">    &gt;chmod +rw  filename    //给filename全部用户增加“读、写”权限</div><div class="line"></div><div class="line">    2) 数字绝对方式设置权限</div><div class="line">    r读:4      w写:2      x执行:1</div><div class="line">    0: 没有权限</div><div class="line">    1：执行</div><div class="line">    2：写</div><div class="line">    3：写、执行</div><div class="line">    4：读</div><div class="line">    5：读、执行</div><div class="line">    6：读、写</div><div class="line">    7：读、写、执行</div><div class="line"></div><div class="line">    chmod  ABC  filename    //ABC分别代表主人、同组、其他组用户的数字权限</div><div class="line">    &gt;chmod 753  filename    //主人读、写、执行；同组读、执行；其他组写、执行</div><div class="line"></div><div class="line">    问：字母相对 和 数字绝对 方式权限设置取舍？</div><div class="line">    答：修改的权限相对“比较少”的时候使用“字母”方式</div><div class="line">        相反，权限变动“非常多”的时候就使用“数字”方式</div><div class="line"></div><div class="line"></div><div class="line">14. 在文件中查找内容</div><div class="line">    grep  被搜寻内容   文件</div><div class="line">    &gt; grep  hello   passwd      //在passwd文件中搜索hello内容</div><div class="line">                                //会把hello所在行的内容都打印到终端显示</div><div class="line"></div><div class="line">15. 计算文件占据磁盘空间大小</div><div class="line">    &gt; du  -h  文件(目录)</div><div class="line"></div><div class="line"></div><div class="line">16. 文件查找</div><div class="line">    find  查找目录  选项 选项值  选项 选项值 ...</div><div class="line"></div><div class="line">    1) -name选项 根据名字进行查找</div><div class="line">        &gt; find  /  -name  passwd[完整名称]      //&quot;递归遍历&quot;系统全部目录，寻找名称等于&quot;passwd&quot;的文件</div><div class="line">        &gt; find  /  -name  &quot;pas*&quot;[模糊查找]      //在系统全部目录，模糊查找一个名字是“pas”开始的文件</div><div class="line">        &gt; find  /  -name  &quot;*er*&quot;                //文件名字有出现“er”字样即可，不要位置</div><div class="line">    2) 限制查找的目录层次 -maxdepth  -mindepth</div><div class="line">       -maxdepth 限制查找的最深目录</div><div class="line">       -mindepth 限制查找的最浅目录</div><div class="line">       &gt; find  /  -maxdepth 4 -name passwd</div><div class="line">       &gt; find  /  -maxdepth 4 -mindepth 3 -name passwd</div><div class="line">    3) 根据大小为条件进行文件查找</div><div class="line">        -size  +/-数字</div><div class="line">                +号表示大小大于某个范围</div><div class="line">                -号表示大小小于某个范围</div><div class="line">        大小单位：</div><div class="line">            -size  5    //单位是“512字节”  5*512字节</div><div class="line">            -size  10c  //单位是“字节”     10字节</div><div class="line">            -size  3k   //单位是“千字节”   3*1024字节</div><div class="line">            -size  6M   //单位是“1024*千字节”   6M兆字节</div><div class="line">        &gt; find  ./  -size  14c     //在当前目录查找大小等于14字节的文件</div><div class="line">        &gt; find  /  -size +50M       //在系统全部目录里边查找大小大于50M的文件</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/javaweb/上传下载文件/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/android/Linux常用指令/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1104,7 +646,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/酷炫的文件上传技术/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -1126,8 +668,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/javaweb/酷炫的文件上传技术/" itemprop="url">
-                  酷炫的文件上传技术
+                <a class="post-title-link" href="/2017/05/01/android/C和C++在Android开发中的应用/" itemprop="url">
+                  C和C++在Android开发中的应用
                 </a>
               
             
@@ -1143,7 +685,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:12+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
                 2017-05-01
               </time>
             
@@ -1166,8 +708,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index">
-                    <span itemprop="name">javaweb</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -1184,9 +726,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/javaweb/酷炫的文件上传技术/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/android/C和C++在Android开发中的应用/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/javaweb/酷炫的文件上传技术/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/android/C和C++在Android开发中的应用/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1212,18 +754,18 @@
 
       
         
-          <h1 id="1-JavaWeb：上传下载文件"><a href="#1-JavaWeb：上传下载文件" class="headerlink" title="1. JavaWeb：上传下载文件"></a><strong>1. JavaWeb：上传下载文件</strong></h1><p> <a href="http://blog.csdn.net/axi295309066/article/details/52984462" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/52984462</a></p>
-<h1 id="2-课程概述"><a href="#2-课程概述" class="headerlink" title="2. 课程概述"></a><strong>2. 课程概述</strong></h1><p>在Web应用系统开发中，文件上传功能是非常常用的功能，今天来主要讲讲JavaWeb中的文件上传功能的相关技术实现，并且随着互联网技术的飞速发展，用户对网站的体验要求越来越高，在文件上传功能的技术上也出现许多创新点，例如异步上传文件，拖拽式上传，黏贴上传，上传进度监控，文件缩略图，大文件断点续传，大文件秒传等等。</p>
-<p>本课程需要的基础知识：</p>
+          <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><h2 id="1-1-Android-SDK介绍"><a href="#1-1-Android-SDK介绍" class="headerlink" title="1.1 Android SDK介绍"></a>1.1 Android SDK介绍</h2><p>Android是基于Linux内核的一个手机操作系统，谷歌提供了开发包（Android SDK），程序员可以通过开发包开发Android App(应用程序)。Android SDK提供Java语言接口，因此Android应用是使用Java开发的。</p>
+<h2 id="1-2-使用纯Java开发App的缺点"><a href="#1-2-使用纯Java开发App的缺点" class="headerlink" title="1.2 使用纯Java开发App的缺点"></a>1.2 使用纯Java开发App的缺点</h2><p>在某些场合下，使用纯Java开发Android应用程序不完美，比如：</p>
 <ul>
-<li>了解基本的Http协议内容</li>
-<li>基本IO流操作技术</li>
-<li>Servlet基础知识</li>
-<li>javascript/jQuery技术基础知识</li>
+<li>有高性能算法，Java语言无法满足</li>
+<li>有跨平台需求，希望将App移植到iOS</li>
+<li>已有代码的重用</li>
 </ul>
+<h2 id="1-3-引入NDK"><a href="#1-3-引入NDK" class="headerlink" title="1.3 引入NDK"></a>1.3 引入NDK</h2><p>早在Android 1.6(2009年)时，google就提供了NDK（native development kit），NDK包括了一套Android的交叉编译环境和开发库，利用它可以编写C/C++程序，并编译成Android环境下使用的动态库，Java代码通过Jni规范，调用C/C++写的动态库。</p>
+<p>目前最新的Android Studio 2.2中，集成了C/C++开发环境，开发人员在使用C/C++更加简单了。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/javaweb/酷炫的文件上传技术/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/android/C和C++在Android开发中的应用/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1269,7 +811,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/用JDBC操作数据库/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/JNI与底层调用1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -1291,8 +833,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/javaweb/用JDBC操作数据库/" itemprop="url">
-                  用JDBC操作数据库
+                <a class="post-title-link" href="/2017/05/01/android/JNI与底层调用1/" itemprop="url">
+                  JNI与底层调用1
                 </a>
               
             
@@ -1308,7 +850,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
                 2017-05-01
               </time>
             
@@ -1331,8 +873,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javaweb/" itemprop="url" rel="index">
-                    <span itemprop="name">javaweb</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -1349,9 +891,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/javaweb/用JDBC操作数据库/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/android/JNI与底层调用1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/javaweb/用JDBC操作数据库/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/android/JNI与底层调用1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1377,10 +919,179 @@
 
       
         
-          <p><img src="http://img.blog.csdn.net/20161104231415000" alt="jdbc"></p>
+          <h1 id="1-JNI-简介"><a href="#1-JNI-简介" class="headerlink" title="1. JNI 简介"></a>1. JNI 简介</h1><h2 id="1-1-什么是JNI"><a href="#1-1-什么是JNI" class="headerlink" title="1.1 什么是JNI"></a>1.1 什么是JNI</h2><p>Java Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。</p>
+<p>Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就是本地语言，android底层是linux linux是c/c++开发的 所以对于android来说 c/c++就是本地语言。JNI 可以看做是一个翻译 实现JAVA语言和本地语言之间的相互调用</p>
+<h2 id="1-2-为什么用JNI"><a href="#1-2-为什么用JNI" class="headerlink" title="1.2 为什么用JNI"></a>1.2 为什么用JNI</h2><ul>
+<li>JNI 扩展了Java 虚拟机的能力,因为Java 不能直接和硬件交互, 不能开发驱动</li>
+<li>Java 代码效率一般要低于C 代码，而Native code 效率高,因此在数学运算,实时渲染的游戏上以及<br>音视频处理上都需要用Java 调用C 语言</li>
+<li>复用C/C++代码，C 语言经过几十年的发展，已经形成了强大的类库(比如文件压缩，人脸识别opencv，7zip，ffmpeg 等)，这些类库我们没必要用java 语言重新实现一遍，通过JNI 直接调用这些类库即可</li>
+<li>特殊的业务场景，比如电视、车载系统、微波炉等跟硬件直接相关的开发</li>
+<li>java代码 不可以直接操作硬件 硬件的驱动基本都是C代码写的 如果想操作硬件必须得让java代码可以调用C，这个时候JNI就发挥作用了 可以扩展JAVA代码的性能</li>
+<li>java代码安全性比较差 java-&gt;,class-&gt;. C安全性相对高一些 C编译之后直接生成机器码 机器码可以反汇编 汇编代码可以猜出C的源代码 伪代码 有些时候跟源代码有区别 比如登录先关 跟钱打交道的应用 可以通过JNI把加密的业务逻辑放到C里面实现</li>
+<li>Java特点 跨平台 一处编译到处运行 通过虚拟机来实现的 java是解释型语言 效率相对比较低在要求效率的地方 java性能会差一些 大型3d游戏 c/c++ 音视频解码 JNI可以提升java的效率 复式投注 需要效率的时候可以通过JNI来调用C/C++来实现</li>
+<li>c1972年 c++ java 1995年 ffmpeg音视频解码 opencv 图像处理 人脸识别 使用JNI可以让java代码调用 c/c++写的优秀开源项目，学习JNI目的是满足自己项目的需求</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/javaweb/用JDBC操作数据库/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/android/JNI与底层调用1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/JNI与底层调用2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/01/android/JNI与底层调用2/" itemprop="url">
+                  JNI与底层调用2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/JNI与底层调用2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/JNI与底层调用2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>JNI与底层调用1：<a href="http://blog.csdn.net/axi295309066/article/details/60758515" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/60758515</a><br>JNI与底层调用2：<a href="http://blog.csdn.net/axi295309066/article/details/60778076" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/60778076</a><br>C/C++在Android开发中的应用：<a href="http://blog.csdn.net/axi295309066/article/details/60954771" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/60954771</a></p>
+<h1 id="1-掌握如何使用广播接收者拦截电话和短信"><a href="#1-掌握如何使用广播接收者拦截电话和短信" class="headerlink" title="1. 掌握如何使用广播接收者拦截电话和短信"></a><strong>1. 掌握如何使用广播接收者拦截电话和短信</strong></h1><p>在日常生活中，当手机丢失后，我们可以启动一系列的措施来获取丢失手机的位置信息，或者清楚丢失手机的数据来防止隐私数据泄露，本章就针对这些防盗保护措施进行讲解。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/01/android/JNI与底层调用2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1421,7 +1132,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1466,7 +1177,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1488,7 +1199,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

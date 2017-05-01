@@ -1,0 +1,1257 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jni," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 前言1.1 Android SDK介绍Android是基于Linux内核的一个手机操作系统，谷歌提供了开发包（Android SDK），程序员可以通过开发包开发Android App(应用程序)。Android SDK提供Java语言接口，因此Android应用是使用Java开发的。 1.2 使用纯Java开发App的缺点在某些场合下，使用纯Java开发Android应用程序不完美，比如：">
+<meta name="keywords" content="jni">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C和C++在Android开发中的应用">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. 前言1.1 Android SDK介绍Android是基于Linux内核的一个手机操作系统，谷歌提供了开发包（Android SDK），程序员可以通过开发包开发Android App(应用程序)。Android SDK提供Java语言接口，因此Android应用是使用Java开发的。 1.2 使用纯Java开发App的缺点在某些场合下，使用纯Java开发Android应用程序不完美，比如：">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni14.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni13.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni4.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni5.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni3.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni1.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni2.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni8.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni6.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni7.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni11.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni15.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni9.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni10.png">
+<meta property="og:updated_time" content="2017-05-01T04:45:07.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C和C++在Android开发中的应用">
+<meta name="twitter:description" content="1. 前言1.1 Android SDK介绍Android是基于Linux内核的一个手机操作系统，谷歌提供了开发包（Android SDK），程序员可以通过开发包开发Android App(应用程序)。Android SDK提供Java语言接口，因此Android应用是使用Java开发的。 1.2 使用纯Java开发App的缺点在某些场合下，使用纯Java开发Android应用程序不完美，比如：">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/img/jni14.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/"/>
+
+
+
+
+
+  <title>C和C++在Android开发中的应用 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C和C++在Android开发中的应用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/C和C++在Android开发中的应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/C和C++在Android开发中的应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><h2 id="1-1-Android-SDK介绍"><a href="#1-1-Android-SDK介绍" class="headerlink" title="1.1 Android SDK介绍"></a>1.1 Android SDK介绍</h2><p>Android是基于Linux内核的一个手机操作系统，谷歌提供了开发包（Android SDK），程序员可以通过开发包开发Android App(应用程序)。Android SDK提供Java语言接口，因此Android应用是使用Java开发的。</p>
+<h2 id="1-2-使用纯Java开发App的缺点"><a href="#1-2-使用纯Java开发App的缺点" class="headerlink" title="1.2 使用纯Java开发App的缺点"></a>1.2 使用纯Java开发App的缺点</h2><p>在某些场合下，使用纯Java开发Android应用程序不完美，比如：</p>
+<ul>
+<li>有高性能算法，Java语言无法满足</li>
+<li>有跨平台需求，希望将App移植到iOS</li>
+<li>已有代码的重用</li>
+</ul>
+<h2 id="1-3-引入NDK"><a href="#1-3-引入NDK" class="headerlink" title="1.3 引入NDK"></a>1.3 引入NDK</h2><p>早在Android 1.6(2009年)时，google就提供了NDK（native development kit），NDK包括了一套Android的交叉编译环境和开发库，利用它可以编写C/C++程序，并编译成Android环境下使用的动态库，Java代码通过Jni规范，调用C/C++写的动态库。</p>
+<p>目前最新的Android Studio 2.2中，集成了C/C++开发环境，开发人员在使用C/C++更加简单了。</p>
+<a id="more"></a>
+<h1 id="2-课程内容"><a href="#2-课程内容" class="headerlink" title="2. 课程内容"></a>2. 课程内容</h1><h2 id="NDK中文官方开发技术文档地址"><a href="#NDK中文官方开发技术文档地址" class="headerlink" title="NDK中文官方开发技术文档地址"></a><a href="https://developer.android.google.cn/ndk/index.html" target="_blank" rel="external">NDK中文官方开发技术文档地址</a></h2><p><img src="img/jni14.png" alt=""></p>
+<h2 id="下载配置NDK"><a href="#下载配置NDK" class="headerlink" title="下载配置NDK"></a>下载配置NDK</h2><p><a href="https://developer.android.google.cn/ndk/downloads/index.html" target="_blank" rel="external">NDK下载地址</a></p>
+<p><img src="img/jni13.png" alt=""></p>
+<p>配置NDK</p>
+<p><img src="img/jni4.png" alt=""></p>
+<p><img src="img/jni5.png" alt=""></p>
+<p>如果不配置NDK路径，会报NDK没有配置错误</p>
+<p><img src="img/jni3.png" alt=""></p>
+<h2 id="JNI开发HelloWorld"><a href="#JNI开发HelloWorld" class="headerlink" title="JNI开发HelloWorld"></a>JNI开发HelloWorld</h2><p>把 Include C++ support的勾打上</p>
+<p><img src="img/jni1.png" alt=""></p>
+<p>选择C++11和Toolchain Default均可，C++11有更多的新特性和功能</p>
+<p><img src="img/jni2.png" alt=""></p>
+<p>点击Finish后，进入工程目录，如图所示，除了java文件夹外多了一个cpp文件夹，cpp就是存放c和c++代码的文件夹</p>
+<p><img src="img/jni8.png" alt=""></p>
+<h2 id="配置NDK开发环境中遇到的坑"><a href="#配置NDK开发环境中遇到的坑" class="headerlink" title="配置NDK开发环境中遇到的坑"></a>配置NDK开发环境中遇到的坑</h2><p>Failed to find CMake</p>
+<p><img src="img/jni6.png" alt=""></p>
+<p>什么，CMake是什么鬼，原来，在Android Studio 2.2 后，NDK开发更加人性化了，使用了<a href="https://cmake.org/" target="_blank" rel="external"><strong>CMake</strong></a>，一款外部构建工具，可与 Gradle 搭配使用来构建原生库。如果您只计划使用 ndk-build，则不需要此组件。还有<a href="http://lldb.llvm.org/" target="_blank" rel="external"><strong>LLDB</strong></a>，一种调试程序，Android Studio 使用它来<a href="https://developer.android.google.cn/studio/debug/index.html" target="_blank" rel="external">调试原生代码</a>。</p>
+<p>点击Install CMake and sync project，提示如下错误</p>
+<p><img src="img/jni7.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Gradle sync failed: Failed to find CMake.</div><div class="line">Install from Android Studio under File/Settings/Appearance &amp; Behavior/System Settings/Android SDK/SDK Tools/CMake.</div><div class="line">Expected CMake executable at D:\android-sdk\cmake\bin\cmake.exe.</div><div class="line">Consult IDE log for more details (Help | Show Log)</div></pre></td></tr></table></figure>
+<p>原来是我使用了代理，因为之前Google的链接需要翻墙才能够使用，所以配置了某代理，但是该代理不管用，在设置中把代理去掉即可。在Google在中国开了发布会后，Google的链接可以使用了，Android开发官网也可以上了，而且翻译了大量的技术文档，方便了英语不太好的同学</p>
+<p><img src="img/jni11.png" alt=""></p>
+<p>打开 SDK Manager，安装上CMake和LLDB</p>
+<p><img src="img/jni15.png" alt=""></p>
+<p><img src="img/jni9.png" alt=""></p>
+<p><img src="img/jni10.png" alt=""></p>
+<p>更多更详细的NDK开发文档，请看Android官方中文文档<a href="https://developer.android.google.cn/studio/projects/add-native-code.html" target="_blank" rel="external">向您的项目添加 C 和 C++ 代码</a></p>
+<h2 id="2-3-Android-Java代码调用C-代码"><a href="#2-3-Android-Java代码调用C-代码" class="headerlink" title="2.3 Android Java代码调用C++代码"></a>2.3 Android Java代码调用C++代码</h2><p>Java部分代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Jni</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span>  &#123;</div><div class="line">        System.loadLibrary(<span class="string">"bc-lib"</span>); <span class="comment">// libbc-lib.so</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Jni obj = <span class="keyword">new</span> Jni();</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Jni</span><span class="params">()</span></span>&#123;&#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Jni <span class="title">instance</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> obj;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="comment">// native接口</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">Login</span><span class="params">(String username, String password, String type)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">Reg</span><span class="params">(String username, String password, String mobile, String email, String id)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">LocationChange</span><span class="params">(<span class="keyword">double</span> lng, <span class="keyword">double</span> lat)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">StartOrder</span><span class="params">(<span class="keyword">double</span> lng1, <span class="keyword">double</span> lat1, <span class="keyword">double</span> lng2, <span class="keyword">double</span> lat2)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>C++部分代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function">JNIEXPORT jboolean JNICALL <span class="title">Java_cn_xueguoliang_hc_Jni_Login</span></span></div><div class="line">        <span class="params">(JNIEnv *env, jobject <span class="comment">/* Jni object */</span>, jstring jUsername, jstring jPassword, jstring type)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> (jboolean)User::instance()-&gt;Login(j2c(env, jUsername), j2c(env, jPassword),</div><div class="line">    j2c(env, type));</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function">JNIEXPORT jboolean JNICALL <span class="title">Java_cn_xueguoliang_hc_Jni_Reg</span></span></div><div class="line">        <span class="params">(JNIEnv *env, jobject <span class="comment">/* Jni object */</span>,</span></div><div class="line">         jstring jUsername, jstring jPassword, jstring mobile, jstring email, jstring id)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> (jboolean)User::instance()-&gt;Reg(</div><div class="line">            j2c(env, jUsername),</div><div class="line">            j2c(env, jPassword),</div><div class="line">            j2c(env, mobile),</div><div class="line">            j2c(env, email),</div><div class="line">            j2c(env, id));</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function">JNIEXPORT jboolean JNICALL <span class="title">Java_cn_xueguoliang_hc_Jni_LocationChange</span></span></div><div class="line">        <span class="params">(JNIEnv *, jobject, jdouble lng, jdouble lat)</span></div><div class="line">&#123;</div><div class="line">    User::instance()-&gt;LocationChange(lng, lat);</div><div class="line">    <span class="keyword">return</span> (jboolean)<span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"> </div><div class="line"> </div><div class="line"><span class="function">JNIEXPORT jboolean JNICALL <span class="title">Java_cn_xueguoliang_hc_Jni_StartOrder</span></span></div><div class="line">        <span class="params">(JNIEnv *, jobject, jdouble lng1, jdouble lat1, jdouble lng2, jdouble lat2)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> (jboolean)Order::instance()-&gt;start(lng1, lat1, lng2, lat2);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-4-C-代码调用Java代码"><a href="#2-4-C-代码调用Java代码" class="headerlink" title="2.4 C++代码调用Java代码"></a>2.4 C++代码调用Java代码</h2><p>Java代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Jni</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        System.loadLibrary(<span class="string">"native-lib"</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Jni obj = <span class="keyword">new</span> Jni();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Jni <span class="title">instance</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> obj;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">HelloWorld</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">callByCpp</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        Log.e(<span class="string">"JniCallback"</span>, <span class="string">"hello java"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>C++代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span></div><div class="line"><span class="function"><span class="keyword">void</span></span></div><div class="line"><span class="title">Java_com_example_xueguoliang_test_Jni_HelloWorld</span><span class="params">(</span></div><div class="line">        JNIEnv* env,</div><div class="line">        jobject  This ) &#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> hello = <span class="string">"Hello from C++"</span>;</div><div class="line"> </div><div class="line">    jclass jniClass = env-&gt;FindClass(<span class="string">"com/example/xueguoliang/test/Jni"</span>);</div><div class="line">    jmethodID jmethodID1 = env-&gt;GetMethodID(jniClass, <span class="string">"callByCpp"</span>, <span class="string">"()V"</span>);</div><div class="line">    env-&gt;CallVoidMethod(This, jmethodID1);</div><div class="line"> </div><div class="line">    <span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-5-Java和C-字符串转换"><a href="#2-5-Java和C-字符串转换" class="headerlink" title="2.5 Java和C++字符串转换"></a>2.5 Java和C++字符串转换</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function">jstring <span class="title">c2j</span><span class="params">(JNIEnv* env, <span class="built_in">string</span> cstr)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(cstr.c_str());</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">j2c</span><span class="params">(JNIEnv* env, jstring jstr)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">string</span> ret;</div><div class="line">    jclass stringClass = env-&gt;FindClass(<span class="string">"java/lang/String"</span>);</div><div class="line">    jmethodID getBytes = env-&gt;GetMethodID(stringClass, <span class="string">"getBytes"</span>, <span class="string">"(Ljava/lang/String;)[B"</span>);</div><div class="line"> </div><div class="line">    <span class="comment">// 把参数用到的字符串转化成java的字符</span></div><div class="line">    jstring arg = c2j(env, <span class="string">"utf-8"</span>);</div><div class="line"> </div><div class="line">    jbyteArray jbytes = (jbyteArray)env-&gt;CallObjectMethod(jstr, getBytes, arg);</div><div class="line"> </div><div class="line">    <span class="comment">// 从jbytes中，提取UTF8格式的内容</span></div><div class="line">    jsize byteLen = env-&gt;GetArrayLength(jbytes);</div><div class="line">    jbyte* JBuffer = env-&gt;GetByteArrayElements(jbytes, JNI_FALSE);</div><div class="line"> </div><div class="line">    <span class="comment">// 将内容拷贝到C++内存中</span></div><div class="line">    <span class="keyword">if</span>(byteLen &gt; <span class="number">0</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">char</span>* buf = (<span class="keyword">char</span>*)JBuffer;</div><div class="line">        <span class="built_in">std</span>::copy(buf, buf+byteLen, back_inserter(ret));</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="comment">// 释放</span></div><div class="line">    env-&gt;ReleaseByteArrayElements(jbytes, JBuffer, <span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-6-javah和javap"><a href="#2-6-javah和javap" class="headerlink" title="2.6 javah和javap"></a>2.6 javah和javap</h2><p>javah用于生成native接口定义，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javah -d ../cpp/ com.example.xueguoliang.test.Jni</div></pre></td></tr></table></figure>
+<p>javap用于生成java函数的签名，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javap -s Jni</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jni/" rel="tag"># jni</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/JNI与底层调用1/" rel="next" title="JNI与底层调用1">
+                <i class="fa fa-chevron-left"></i> JNI与底层调用1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/Linux常用指令/" rel="prev" title="Linux常用指令">
+                Linux常用指令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1. 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-Android-SDK介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 Android SDK介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-使用纯Java开发App的缺点"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 使用纯Java开发App的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-引入NDK"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 引入NDK</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-课程内容"><span class="nav-number">2.</span> <span class="nav-text">2. 课程内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NDK中文官方开发技术文档地址"><span class="nav-number">2.1.</span> <span class="nav-text">NDK中文官方开发技术文档地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载配置NDK"><span class="nav-number">2.2.</span> <span class="nav-text">下载配置NDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JNI开发HelloWorld"><span class="nav-number">2.3.</span> <span class="nav-text">JNI开发HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NDK开发环境中遇到的坑"><span class="nav-number">2.4.</span> <span class="nav-text">配置NDK开发环境中遇到的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Android-Java代码调用C-代码"><span class="nav-number">2.5.</span> <span class="nav-text">2.3 Android Java代码调用C++代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-C-代码调用Java代码"><span class="nav-number">2.6.</span> <span class="nav-text">2.4 C++代码调用Java代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-Java和C-字符串转换"><span class="nav-number">2.7.</span> <span class="nav-text">2.5 Java和C++字符串转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-javah和javap"><span class="nav-number">2.8.</span> <span class="nav-text">2.6 javah和javap</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/C和C++在Android开发中的应用/';
+          this.page.identifier = '2017/05/01/android/C和C++在Android开发中的应用/';
+          this.page.title = 'C和C++在Android开发中的应用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

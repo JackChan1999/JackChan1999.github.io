@@ -1,0 +1,1222 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自定义控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 项目概述观察如图2-4 的完整项目中的效果界面，点击标题栏的左上角会弹出侧边栏，再次点击时会关闭侧边栏，这种效果在很多手机应用中使用，因此，我们有必要学会如何自定义一个具有侧边栏效果的控件。">
+<meta name="keywords" content="自定义控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义控件：SlidingMenu，侧边栏，侧滑菜单">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. 项目概述观察如图2-4 的完整项目中的效果界面，点击标题栏的左上角会弹出侧边栏，再次点击时会关闭侧边栏，这种效果在很多手机应用中使用，因此，我们有必要学会如何自定义一个具有侧边栏效果的控件。">
+<meta property="og:image" content="http://img.blog.csdn.net/20170301144455343?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170301144521703?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170217141057409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170217141111461?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170217141155067?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170301144639474?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170301144655814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170301144723490?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-05-01T04:54:54.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义控件：SlidingMenu，侧边栏，侧滑菜单">
+<meta name="twitter:description" content="1. 项目概述观察如图2-4 的完整项目中的效果界面，点击标题栏的左上角会弹出侧边栏，再次点击时会关闭侧边栏，这种效果在很多手机应用中使用，因此，我们有必要学会如何自定义一个具有侧边栏效果的控件。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170301144455343?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/"/>
+
+
+
+
+
+  <title>自定义控件：SlidingMenu，侧边栏，侧滑菜单 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自定义控件：SlidingMenu，侧边栏，侧滑菜单
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:37:58+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-项目概述"><a href="#1-项目概述" class="headerlink" title="1. 项目概述"></a><strong>1. 项目概述</strong></h1><p>观察如图2-4 的完整项目中的效果界面，点击标题栏的左上角会弹出侧边栏，再次点击时会关闭侧边栏，这种效果在很多手机应用中使用，因此，我们有必要学会如何自定义一个具有侧边栏效果的控件。</p>
+<p><img src="http://img.blog.csdn.net/20170301144455343?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170301144521703?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></p>
+<a id="more"></a>
+<h1 id="2-布局界面UI"><a href="#2-布局界面UI" class="headerlink" title="2. 布局界面UI"></a><strong>2. 布局界面UI</strong></h1><p>在本章中，主界面为MainActivity.java，具体代码如文件所示：res/layout/activity_main.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">                <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</div><div class="line">    <span class="tag">&lt;<span class="name">com.itheima.slidmenudemo.view.SlidMenu</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/slidmenu"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</div><div class="line">        <span class="comment">&lt;!-- 当前为左边菜单界面索引为0 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">include</span> <span class="attr">layout</span>=<span class="string">"@layout/slidmenu_left"</span> /&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 当前为主界面索引为1 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">include</span> <span class="attr">layout</span>=<span class="string">"@layout/slidmenu_main"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">com.itheima.slidmenudemo.view.SlidMenu</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其中，slidmenu_left.xml 是侧边栏的布局文件，具体代码如文件【2-7】所示：【文件2-7】res/layout/slidmenu_left.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">ScrollView</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"240dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"240dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"@drawable/menu_bg"</span> &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">ImageButton</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"新闻"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"#33000000"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_news"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">ImageButton</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"订阅"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_read"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"本地"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_local"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"跟帖"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_ties"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"图片"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_pics"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"话题"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_ugc"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"投票"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_vote"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">style</span>=<span class="string">"@style/tab_style"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"聚合阅读"</span></div><div class="line">            <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/tab_focus"</span> /&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ScrollView</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面的代码中我们在styles.xml 文件中定义了一个样式tab_style，它是用来修饰左边侧栏中每一个条目，详细代码如下所示。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- tab 菜单界面的样式--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"tab_style"</span>&gt;</span><span class="xml"></span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:padding"</span>&gt;</span>5dp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:gravity"</span>&gt;</span>center_vertical<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:drawablePadding"</span>&gt;</span>5dp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:layout_width"</span>&gt;</span>match_parent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:layout_height"</span>&gt;</span>wrap_content<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textSize"</span>&gt;</span>18sp<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:background"</span>&gt;</span>@drawable/tab_bg<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:textColor"</span>&gt;</span>#ffffff<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:onClick"</span>&gt;</span>clickTab<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:focusable"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:clickable"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>主界面的右边slidmenu_main.xml 布局文件的代码如文件【2-8】所示。【文件2-8】res/layout/slidmenu_left.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">              <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span> &gt;</div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"@drawable/top_bar_bg"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span> &gt;</div><div class="line">        <span class="tag">&lt;<span class="name">ImageButton</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/main_back"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"@null"</span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@drawable/main_back"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">View</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"1dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_margin</span>=<span class="string">"5dp"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"@drawable/top_bar_divider"</span> /&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_gravity</span>=<span class="string">"center_vertical"</span></div><div class="line">            <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"黑马新闻"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"24sp"</span> /&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"钓鱼岛是中国的！！！！\nXXX 是世界的"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"#000"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"24sp"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="3-主界面业务逻辑"><a href="#3-主界面业务逻辑" class="headerlink" title="3. 主界面业务逻辑"></a><strong>3. 主界面业务逻辑</strong></h1><p>自定好控件之后，MainActivity,java 主界面的业务逻辑如下所示。activity_setting.xml 如文件【2-9】所示：【文件2-9】res/layout/setup_password_dialog.xml</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        ImageButton main_back = (ImageButton) findViewById(R.id.main_back);</div><div class="line">        <span class="keyword">final</span> SlidMenu slidmenu = (SlidMenu) findViewById(R.id.slidmenu);</div><div class="line">        main_back.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">                <span class="keyword">boolean</span> currentView = slidmenu.isMenuShow();</div><div class="line">                <span class="keyword">if</span>(currentView)&#123;<span class="comment">//当前菜单界面显示，就隐藏</span></div><div class="line">                    slidmenu.hideMenu();</div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    slidmenu.showMenu();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clickTab</span><span class="params">(View v)</span></span>&#123;</div><div class="line">        TextView tv = (TextView) v;</div><div class="line">        Toast.makeText(getApplicationContext(), tv.getText(), <span class="number">0</span>).show();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>侧边栏在项目会经常用到，这里我们将自定义一个侧边栏，具体代码如文件【2-10】所示。【文件2-10】com/itheima/slidmenudemo/view/SlidMenu.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SlidMenu</span> <span class="keyword">extends</span> <span class="title">ViewGroup</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> downX;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> MAIN_VIEW = <span class="number">0</span>;<span class="comment">// 主界面</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> MENU_VIEW = <span class="number">1</span>;<span class="comment">// 左边菜单界面</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> currentView = MAIN_VIEW;<span class="comment">// 记录当前界面，默认为主界面</span></div><div class="line">    <span class="keyword">private</span> Scroller scroller;<span class="comment">// 用来模拟数据</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>      touchSlop;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SlidMenu</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SlidMenu</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"deprecation"</span>)</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        scroller = <span class="keyword">new</span> Scroller(getContext());</div><div class="line">        touchSlop = ViewConfiguration.getTouchSlop();<span class="comment">// 系统默认你进行了一个滑动操作的固定值</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * widthMeasureSpec 屏幕的宽度heightMeasureSpec 屏幕的高度</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">        <span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">        <span class="comment">// 测量主界面</span></div><div class="line">        View mainView = getChildAt(<span class="number">1</span>);<span class="comment">// 主界面</span></div><div class="line">        <span class="comment">// 主界面宽高：屏幕的宽度屏幕的高度</span></div><div class="line">        mainView.measure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">        <span class="comment">// 测量左边菜单界面和主界面的宽高</span></div><div class="line">        View menuView = getChildAt(<span class="number">0</span>);<span class="comment">// 左边菜单界面</span></div><div class="line">        menuView.measure(menuView.getLayoutParams().width, heightMeasureSpec);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// viewgroup 的排版方法</span></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * int l 左边0 int t 上边0 int r 右边屏幕的宽度int b 下边屏幕的高度</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> l, <span class="keyword">int</span> t, <span class="keyword">int</span> r, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">        <span class="comment">// 排版主界面左边0， 高度0， 右边屏幕宽度，下边屏幕高度</span></div><div class="line">        View mainView = getChildAt(<span class="number">1</span>);</div><div class="line">        mainView.layout(l, t, r, b);</div><div class="line">        <span class="comment">// 排版左边菜单界面左边-左边菜单界面的宽度， 高度0 ，右边0， 下边屏幕高度</span></div><div class="line">        View menuView = getChildAt(<span class="number">0</span>);</div><div class="line">        menuView.layout(-menuView.getMeasuredWidth(), t, <span class="number">0</span>, b);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 按下的点： downX = 100</span></div><div class="line">    <span class="comment">// 移动过后的点： moveX = 150</span></div><div class="line">    <span class="comment">// 间距diffX = -50 =100 -150 = downX - moveX;</span></div><div class="line">    <span class="comment">// scrollby(diffX,0)</span></div><div class="line">    <span class="comment">// downX = moveX = 150</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">        <span class="keyword">switch</span> (event.getAction()) &#123;</div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">                downX = (<span class="keyword">int</span>) event.getX();</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line"></div><div class="line">                <span class="keyword">int</span> moveX = (<span class="keyword">int</span>) event.getX();</div><div class="line">                <span class="comment">// 计算间距</span></div><div class="line">                <span class="keyword">int</span> diffX = downX - moveX;</div><div class="line">                <span class="keyword">int</span> scrollX = getScrollX();<span class="comment">// 获得当前界面的左上角的X 值</span></div><div class="line">                <span class="comment">// 屏幕将要移动到的X 值</span></div><div class="line">                <span class="keyword">int</span> dff = scrollX + diffX;</div><div class="line">                <span class="keyword">if</span> (dff &lt; -getChildAt(<span class="number">0</span>).getMeasuredWidth()) &#123;<span class="comment">// 设置左边界</span></div><div class="line">                    scrollTo(-getChildAt(<span class="number">0</span>).getMeasuredWidth(), <span class="number">0</span>);</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dff &gt; <span class="number">0</span>) &#123;<span class="comment">// 设置右边界</span></div><div class="line">                    scrollTo(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;<span class="comment">// 如果不超过边界值，就要根据屏幕左上角的点的X 值，来计算位置</span></div><div class="line">                    scrollBy(diffX, <span class="number">0</span>);</div><div class="line">                &#125;</div><div class="line">                downX = moveX;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">                <span class="keyword">int</span> center = -getChildAt(<span class="number">0</span>).getMeasuredWidth() / <span class="number">2</span>;</div><div class="line">                <span class="keyword">if</span> (getScrollX() &gt; center) &#123;</div><div class="line">                    System.out.println(<span class="string">"显示主界面"</span>);</div><div class="line">                    currentView = MAIN_VIEW;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    System.out.println(<span class="string">"显示左边菜单界面"</span>);</div><div class="line">                    currentView = MENU_VIEW;</div><div class="line">                &#125;</div><div class="line">                switchView();</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;<span class="comment">// 由我们自己来处理触摸事件</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 根据当前状态值来切换切面</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">switchView</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> startX = getScrollX();</div><div class="line">        <span class="keyword">int</span> dx = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span> (currentView == MAIN_VIEW) &#123;</div><div class="line">            <span class="comment">// scrollTo(0, 0);</span></div><div class="line">            dx = <span class="number">0</span> - startX;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// scrollTo(-getChildAt(0).getMeasuredWidth(), 0);</span></div><div class="line">            dx = -getChildAt(<span class="number">0</span>).getMeasuredWidth() - startX;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> duration = Math.abs(dx) * <span class="number">10</span>;</div><div class="line">        <span class="keyword">if</span> (duration &gt; <span class="number">1000</span>) &#123;</div><div class="line"></div><div class="line">            duration = <span class="number">1000</span>;</div><div class="line">        &#125;</div><div class="line">        scroller.startScroll(startX, <span class="number">0</span>, dx, <span class="number">0</span>, duration);</div><div class="line">        invalidate();</div><div class="line">        <span class="comment">// scrollTo(scroller.getCurrX(), 0);</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (scroller.computeScrollOffset()) &#123;</div><div class="line">            <span class="keyword">int</span> currX = scroller.getCurrX();</div><div class="line">            scrollTo(currX, <span class="number">0</span>);</div><div class="line">            invalidate();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 判断当前是否是菜单界面,true 就是菜单界面</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMenuShow</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> currentView == MENU_VIEW;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 隐藏菜单界面</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hideMenu</span><span class="params">()</span> </span>&#123;</div><div class="line">        currentView = MAIN_VIEW;</div><div class="line">        switchView();</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 显示菜单界面</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showMenu</span><span class="params">()</span> </span>&#123;</div><div class="line">        currentView = MENU_VIEW;</div><div class="line">        switchView();</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">        <span class="keyword">switch</span> (ev.getAction()) &#123;</div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">                downX = (<span class="keyword">int</span>) ev.getX();</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">                <span class="keyword">int</span> moveX = (<span class="keyword">int</span>) ev.getX();</div><div class="line">                <span class="keyword">int</span> diff = moveX - downX;</div><div class="line">                <span class="keyword">if</span> (Math.abs(diff) &gt; touchSlop) &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">                <span class="keyword">break</span>;</div><div class="line"></div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onInterceptTouchEvent(ev);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>自定义好侧边栏之后，运行程序，效果图如图2-5 所示。</p>
+<p><img src="http://img.blog.csdn.net/20170217141057409?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170217141111461?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170217141155067?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></p>
+<h1 id="4-ViewDragHelper实现SlidingMenu"><a href="#4-ViewDragHelper实现SlidingMenu" class="headerlink" title="4. ViewDragHelper实现SlidingMenu"></a><strong>4. ViewDragHelper实现SlidingMenu</strong></h1><p><img src="http://img.blog.csdn.net/20170301144639474?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170301144655814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170301144723490?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.github.slidingmenu.viewdraghelper;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.graphics.Color;</div><div class="line"><span class="keyword">import</span> android.support.v4.view.ViewCompat;</div><div class="line"><span class="keyword">import</span> android.support.v4.widget.ViewDragHelper;</div><div class="line"><span class="keyword">import</span> android.support.v4.widget.ViewDragHelper.Callback;</div><div class="line"><span class="keyword">import</span> android.util.AttributeSet;</div><div class="line"><span class="keyword">import</span> android.util.Log;</div><div class="line"><span class="keyword">import</span> android.view.MotionEvent;</div><div class="line"><span class="keyword">import</span> android.view.View;</div><div class="line"><span class="keyword">import</span> android.widget.FrameLayout;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SlideMenu2</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> String TAG = SlideMenu2.class.getSimpleName();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">SlideMenu2</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(context, attrs);</div><div class="line">		init();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> ViewDragHelper viewDragHelper;</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">		viewDragHelper = ViewDragHelper.create(<span class="keyword">this</span>, callback);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> View menuView,mainView;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> menuWidth,menuHeight,mainWidth;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> dragRange;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onFinishInflate</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.onFinishInflate();</div><div class="line">		<span class="keyword">if</span>(getChildCount()&lt;<span class="number">2</span>)&#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Your layout must has 2 children or more!"</span>);</div><div class="line">		&#125;</div><div class="line">		menuView = getChildAt(<span class="number">0</span>);</div><div class="line">		mainView = getChildAt(<span class="number">1</span>);</div><div class="line">		setBackgroundColor(Color.BLACK);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"><span class="comment">//	@Override</span></div><div class="line"><span class="comment">//	protected void onLayout(boolean changed, int left, int top, int right,</span></div><div class="line"><span class="comment">//			int bottom) &#123;</span></div><div class="line"><span class="comment">//		super.onLayout(changed, left, top, right, bottom);</span></div><div class="line"><span class="comment">//		menuView.layout(left, top, right, bottom);</span></div><div class="line"><span class="comment">//		mainView.layout(left, top, right, bottom);</span></div><div class="line"><span class="comment">//	&#125;</span></div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">		menuWidth = menuView.getMeasuredWidth();</div><div class="line">		menuHeight = menuView.getMeasuredHeight();</div><div class="line">		mainWidth = mainView.getMeasuredWidth();</div><div class="line">		dragRange = (<span class="keyword">int</span>) (menuWidth * <span class="number">0.6</span>);</div><div class="line"><span class="comment">//		ViewHelper.setScaleX(menuView, 0.5f);</span></div><div class="line"><span class="comment">//		ViewHelper.setScaleY(menuView, 0.5f);</span></div><div class="line"><span class="comment">//		ViewHelper.setTranslationX(menuView, -dragRange/2);</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> lastX,lastY;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> x = (<span class="keyword">int</span>) ev.getX();</div><div class="line">		<span class="keyword">int</span> y = (<span class="keyword">int</span>) ev.getY();</div><div class="line">		<span class="keyword">if</span>(mStatus==Status.Open &amp;&amp; viewDragHelper.isViewUnder(mainView, x, y))&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line"><span class="comment">//		Log.e(TAG, "onInterceptTouchEvent : "+);</span></div><div class="line">		<span class="keyword">if</span>(viewDragHelper.isViewUnder(mainView, x, y))&#123;</div><div class="line">			<span class="keyword">switch</span> (ev.getAction()) &#123;</div><div class="line">			<span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">				<span class="keyword">int</span> deltaX = x - lastX;</div><div class="line">				<span class="keyword">int</span> deltaY = y - lastY;</div><div class="line">				<span class="keyword">if</span>(Math.abs(deltaX)&gt;Math.abs(deltaY)*<span class="number">2</span>) &#123;</div><div class="line"><span class="comment">//					Log.e(TAG, "移动斜角太大，拦截事件");</span></div><div class="line">					viewDragHelper.cancel();</div><div class="line">					<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">				lastX = <span class="number">0</span>;</div><div class="line">				lastY = <span class="number">0</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			lastX = x;</div><div class="line">			lastY = y;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> viewDragHelper.shouldInterceptTouchEvent(ev);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> x = (<span class="keyword">int</span>) event.getX();</div><div class="line">		<span class="keyword">int</span> y = (<span class="keyword">int</span>) event.getY();</div><div class="line">		<span class="keyword">if</span>(mStatus==Status.Open &amp;&amp; viewDragHelper.isViewUnder(mainView, x, y))&#123;</div><div class="line">			<span class="keyword">if</span>(event.getAction()==MotionEvent.ACTION_UP)&#123;</div><div class="line">				Log.e(TAG, <span class="string">"抬起"</span>);</div><div class="line">				close();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		viewDragHelper.processTouchEvent(event);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> Callback callback = <span class="keyword">new</span> Callback() &#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryCaptureView</span><span class="params">(View child, <span class="keyword">int</span> pointerId)</span> </span>&#123;</div><div class="line">			<span class="keyword">return</span> child==menuView || child==mainView;</div><div class="line">		&#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewDragStateChanged</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>.onViewDragStateChanged(state);</div><div class="line">		&#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewPositionChanged</span><span class="params">(View changedView, <span class="keyword">int</span> left, <span class="keyword">int</span> top,</span></span></div><div class="line">				<span class="keyword">int</span> dx, <span class="keyword">int</span> dy) &#123;</div><div class="line">			<span class="keyword">super</span>.onViewPositionChanged(changedView, left, top, dx, dy);</div><div class="line"><span class="comment">//			Log.e(TAG, "onViewPositionChanged   dx: "+dx);</span></div><div class="line">			<span class="keyword">if</span>(changedView==menuView)&#123;</div><div class="line">				menuView.layout(<span class="number">0</span>, <span class="number">0</span>, menuWidth, menuHeight);</div><div class="line">				<span class="keyword">if</span>(mainView.getLeft()&gt;dragRange)&#123;</div><div class="line">					mainView.layout(dragRange, <span class="number">0</span>, dragRange+mainWidth, mainView.getBottom());</div><div class="line">				&#125;<span class="keyword">else</span> &#123;</div><div class="line">					mainView.layout(mainView.getLeft()+dx, <span class="number">0</span>, mainView.getRight()+dx, mainView.getBottom());</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="keyword">float</span> percent = mainView.getLeft()/(<span class="keyword">float</span>)dragRange;</div><div class="line">			excuteAnimation(percent);</div><div class="line">			</div><div class="line">			</div><div class="line">			<span class="keyword">if</span>(mainView.getLeft()==<span class="number">0</span> &amp;&amp; mStatus != Status.Close)&#123;</div><div class="line">				mStatus = Status.Close;</div><div class="line">				<span class="keyword">if</span>(onDragStatusChangeListener!=<span class="keyword">null</span> )&#123;</div><div class="line">					onDragStatusChangeListener.onClose();</div><div class="line">				&#125;</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span> (mainView.getLeft()==dragRange &amp;&amp; mStatus != Status.Open) &#123;</div><div class="line">				mStatus = Status.Open;</div><div class="line">				<span class="keyword">if</span>(onDragStatusChangeListener!=<span class="keyword">null</span> )&#123;</div><div class="line">					onDragStatusChangeListener.onOpen();</div><div class="line">				&#125;</div><div class="line">			&#125;<span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">if</span>(onDragStatusChangeListener!=<span class="keyword">null</span>)&#123;</div><div class="line">					onDragStatusChangeListener.onDragging(percent);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">excuteAnimation</span><span class="params">(<span class="keyword">float</span> percent)</span> </span>&#123;</div><div class="line">			menuView.setScaleX(<span class="number">0.5f</span> + <span class="number">0.5f</span> * percent);</div><div class="line">			menuView.setScaleY(<span class="number">0.5f</span> + <span class="number">0.5f</span> * percent);</div><div class="line"></div><div class="line">			mainView.setScaleX(<span class="number">1</span> - percent * <span class="number">0.2f</span>);</div><div class="line">			mainView.setScaleY( <span class="number">1</span> - percent * <span class="number">0.2f</span>);</div><div class="line"></div><div class="line">			menuView.setTranslationX( -dragRange / <span class="number">2</span> + dragRange / <span class="number">2</span> * percent);</div><div class="line"></div><div class="line">			menuView.setAlpha(percent);</div><div class="line"></div><div class="line">			getBackground().setAlpha((<span class="keyword">int</span>) ((<span class="number">1</span> - percent) * <span class="number">255</span>));</div><div class="line">		&#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewCaptured</span><span class="params">(View capturedChild, <span class="keyword">int</span> activePointerId)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>.onViewCaptured(capturedChild, activePointerId);</div><div class="line">		&#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewReleased</span><span class="params">(View releasedChild, <span class="keyword">float</span> xvel, <span class="keyword">float</span> yvel)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>.onViewReleased(releasedChild, xvel, yvel);</div><div class="line"><span class="comment">//			Log.e(TAG, "onViewReleased ："+(releasedChild==mainView));</span></div><div class="line">			<span class="keyword">if</span>(mainView.getLeft()&gt;dragRange/<span class="number">2</span>)&#123;</div><div class="line">				open();</div><div class="line">			&#125;<span class="keyword">else</span> &#123;</div><div class="line">				close();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getViewHorizontalDragRange</span><span class="params">(View child)</span> </span>&#123;</div><div class="line">			<span class="keyword">return</span> menuWidth;</div><div class="line">		&#125;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">clampViewPositionHorizontal</span><span class="params">(View child, <span class="keyword">int</span> left, <span class="keyword">int</span> dx)</span> </span>&#123;</div><div class="line">			<span class="keyword">if</span>(child==mainView)&#123;</div><div class="line">				<span class="keyword">if</span>(left&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">				<span class="keyword">if</span>(left&gt;dragRange) <span class="keyword">return</span> dragRange;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span>(child==menuView)&#123;</div><div class="line">				mainView.layout(mainView.getLeft()+dx, <span class="number">0</span>, mainView.getRight()+dx, mainView.getBottom());</div><div class="line">				menuView.layout(<span class="number">0</span>, <span class="number">0</span>, menuWidth, menuHeight);</div><div class="line">				<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> left;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>&#123;</div><div class="line">		viewDragHelper.smoothSlideViewTo(mainView, dragRange, <span class="number">0</span>);</div><div class="line">		ViewCompat.postInvalidateOnAnimation(SlideMenu2.<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>&#123;</div><div class="line">		viewDragHelper.smoothSlideViewTo(mainView, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">		ViewCompat.postInvalidateOnAnimation(SlideMenu2.<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(viewDragHelper.continueSettling(<span class="keyword">true</span>))&#123;</div><div class="line">			ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> OnDragStatusChangeListener <span class="title">getOnDragStatusChangeListener</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> onDragStatusChangeListener;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnDragStatusChangeListener</span><span class="params">(OnDragStatusChangeListener onDragStatusChangeListener)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.onDragStatusChangeListener = onDragStatusChangeListener;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> Status mStatus = Status.Close;;</div><div class="line">	<span class="keyword">public</span> <span class="keyword">enum</span> Status&#123;</div><div class="line">		Open,Close</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> OnDragStatusChangeListener onDragStatusChangeListener;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnDragStatusChangeListener</span></span>&#123;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onOpen</span><span class="params">()</span></span>;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onClose</span><span class="params">()</span></span>;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onDragging</span><span class="params">(<span class="keyword">float</span> dragProgress)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码：<a href="https://github.com/JackChen1999/SlidingMenu" target="_blank" rel="external">https://github.com/JackChen1999/SlidingMenu</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义控件/" rel="tag"># 自定义控件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/Oauth机制/" rel="next" title="Oauth机制">
+                <i class="fa fa-chevron-left"></i> Oauth机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/自定义控件：快速索引/" rel="prev" title="自定义控件：快速索引">
+                自定义控件：快速索引 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-项目概述"><span class="nav-number">1.</span> <span class="nav-text">1. 项目概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-布局界面UI"><span class="nav-number">2.</span> <span class="nav-text">2. 布局界面UI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-主界面业务逻辑"><span class="nav-number">3.</span> <span class="nav-text">3. 主界面业务逻辑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-ViewDragHelper实现SlidingMenu"><span class="nav-number">4.</span> <span class="nav-text">4. ViewDragHelper实现SlidingMenu</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/';
+          this.page.identifier = '2017/05/01/android/自定义控件：SlidingMenu，侧边栏，侧滑菜单/';
+          this.page.title = '自定义控件：SlidingMenu，侧边栏，侧滑菜单';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

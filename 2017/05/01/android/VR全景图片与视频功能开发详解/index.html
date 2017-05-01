@@ -1,0 +1,1278 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vr," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="keywords" content="vr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VR全景图片与视频功能开发详解">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/VR全景图片与视频功能开发详解/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310155129830?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310155258082?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310155534038?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310155638102?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310155759747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310155916856?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310000634587?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310000825855?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310001653293?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310001751863?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310001154807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310001243953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-05-01T04:50:55.476Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VR全景图片与视频功能开发详解">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170310155129830?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/VR全景图片与视频功能开发详解/"/>
+
+
+
+
+
+  <title>VR全景图片与视频功能开发详解 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/VR全景图片与视频功能开发详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                VR全景图片与视频功能开发详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:37:13+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/VR全景图片与视频功能开发详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/VR全景图片与视频功能开发详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.blog.csdn.net/20170310155129830?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170310155258082?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170310155534038?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></p>
+<p><img src="http://img.blog.csdn.net/20170310155638102?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170310155759747?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170310155916856?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> </p>
+<a id="more"></a>
+<h1 id="1-VR开发概述"><a href="#1-VR开发概述" class="headerlink" title="1. VR开发概述"></a><strong>1. VR开发概述</strong></h1><p>时下关于“谷歌、Android与VR”的各种言论纷飞。VR群里有人在争论Android VR是不是一体机，是不是类似Android Wear、为VR打造的全新平台，是不是改良后的Android N。</p>
+<p>随着vr设备的流行开来，各大招聘平台上也发布了不少关于andorid vr开发相关的Android工程师岗位，从这点来说掌握vr在项目中的实际应用要点，有助于大家为自己的开发经验上增加前沿技术的积累。</p>
+<p>经过研发市面上的主流vr app 的功能，抽取并整合项目中的vr开发知识点，希望大家掌握后，在企业相关vr app游刃有余。</p>
+<h2 id="1-1-下载google-vr-sdk-并搭建开发环境"><a href="#1-1-下载google-vr-sdk-并搭建开发环境" class="headerlink" title="1.1 下载google vr sdk 并搭建开发环境"></a><strong>1.1 下载google vr sdk 并搭建开发环境</strong></h2><ul>
+<li>带大家去github上搜索并下载google vr sdk</li>
+<li>介绍sdk的组成部分与应用范围</li>
+<li>搭建一个基本android vr app的开发环境</li>
+</ul>
+<h2 id="1-2-CardBorad应用核心功能"><a href="#1-2-CardBorad应用核心功能" class="headerlink" title="1.2 CardBorad应用核心功能"></a><strong>1.2 CardBorad应用核心功能</strong></h2><ul>
+<li>带大家查找本地vr 全景图片资源</li>
+<li>介绍vr全景图与普通图片的不同点</li>
+<li>使用rv列表进行展示</li>
+<li>使用VrPanoramaView控件进行本地全景图片的展示</li>
+</ul>
+<h2 id="1-3-UtoVR应用核心功能"><a href="#1-3-UtoVR应用核心功能" class="headerlink" title="1.3 UtoVR应用核心功能"></a><strong>1.3 UtoVR应用核心功能</strong></h2><ul>
+<li>带大家通过网络请求获取vr视频的json数据</li>
+<li>使用 Gson解析得到javaBean数据</li>
+<li>使用VrVideoView控件进行网络全景视图的展示</li>
+</ul>
+<p>以上这些功能是现流行的在线vr视频，vr图片相关app的核心功能。例如.vr管家应用，3d播播，discovery VR ，看房 vr等等热门应用。</p>
+<h2 id="1-4-知识点"><a href="#1-4-知识点" class="headerlink" title="1.4 知识点"></a><strong>1.4 知识点</strong></h2><ul>
+<li>http网络请求技术</li>
+<li>Gson解析技术与gsonformat插件</li>
+<li>RecyclerView与cardView</li>
+<li>Glider流行图片加载框架</li>
+<li>VrPanoramaView</li>
+<li>VrVideoView</li>
+</ul>
+<h2 id="1-5-好玩好用的VR"><a href="#1-5-好玩好用的VR" class="headerlink" title="1.5 好玩好用的VR"></a><strong>1.5 好玩好用的VR</strong></h2><p><a href="http://pcedu.pconline.com.cn/784/7846182.html" target="_blank" rel="external">成本其实很便宜！教你用手机体验VR魅力</a></p>
+<ul>
+<li>17块钱！把手机改造为VR眼镜</li>
+<li>好玩好用的VR APP推荐</li>
+</ul>
+<h1 id="2-全景图片显示"><a href="#2-全景图片显示" class="headerlink" title="2. 全景图片显示"></a><strong>2. 全景图片显示</strong></h1><p><img src="http://img.blog.csdn.net/20170310000634587?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170310000825855?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></p>
+<h2 id="2-1-搭建vr全景图片的开发环境"><a href="#2-1-搭建vr全景图片的开发环境" class="headerlink" title="2.1 搭建vr全景图片的开发环境"></a><strong>2.1 搭建vr全景图片的开发环境</strong></h2><p>VR开发需要gvr-android-sdk，<a href="https://github.com/googlevr/gvr-android-sdk" target="_blank" rel="external">GitHub下载地址</a></p>
+<p><img src="http://img.blog.csdn.net/20170310001653293?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="gvr-android-sdk"></p>
+<p><a href="https://developers.google.cn/vr/android/" target="_blank" rel="external">VR开发Google官方技术文档</a></p>
+<p><img src="http://img.blog.csdn.net/20170310001751863?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="VR开发技术文档"></p>
+<h3 id="2-1-1-导入全景图相关的三个开发库"><a href="#2-1-1-导入全景图相关的三个开发库" class="headerlink" title="2.1.1 导入全景图相关的三个开发库"></a><strong>2.1.1 导入全景图相关的三个开发库</strong></h3><p>common，commonwidget，panowidget<br>PS：最新的SDK已经没有这三个文件夹了，使用下一步的依赖库即可</p>
+<h3 id="2-1-2-依赖该库"><a href="#2-1-2-依赖该库" class="headerlink" title="2.1.2 依赖该库"></a><strong>2.1.2 依赖该库</strong></h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.google.vr:sdk-panowidget:1.30.0'</span></div><div class="line"><span class="comment">//compile project(':common')</span></div><div class="line"><span class="comment">//compile project(':commonwidget')</span></div><div class="line"><span class="comment">//compile project(':panowidget')</span></div><div class="line"><span class="comment">//google的一套序列化数据结构开发库</span></div><div class="line"><span class="comment">//compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'</span></div></pre></td></tr></table></figure>
+<h3 id="2-1-3-准备全景图片测试资源"><a href="#2-1-3-准备全景图片测试资源" class="headerlink" title="2.1.3 准备全景图片测试资源"></a><strong>2.1.3 准备全景图片测试资源</strong></h3><p>放在assets目录 例:assets/a.jpg(全景图与普通图片的不同 大，立体)</p>
+<h3 id="2-1-4-功能清单配置"><a href="#2-1-4-功能清单配置" class="headerlink" title="2.1.4 功能清单配置"></a><strong>2.1.4 功能清单配置</strong></h3><p>android:largeHeap=”true” 全景图片比较耗资源</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span></span></div><div class="line">    <span class="attr">android:largeHeap</span>=<span class="string">"true"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-2-布局全景控件显示加载后的全景图片"><a href="#2-2-布局全景控件显示加载后的全景图片" class="headerlink" title="2.2 布局全景控件显示加载后的全景图片"></a><strong>2.2 布局全景控件显示加载后的全景图片</strong></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.google.vr.sdk.widgets.pano.VrPanoramaView</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/vr_pv"</span> /&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> VrPanoramaView vrPanoramaView;</div><div class="line">    <span class="keyword">private</span> ImageTask imageTask;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        <span class="comment">//全景图片的浏览功能</span></div><div class="line">        <span class="comment">//步骤一。下载github上google开源 vr-sdk</span></div><div class="line">        <span class="comment">//1.1.导入到我们的工作空间 common,commonwidget  panowidget</span></div><div class="line">        <span class="comment">//1.2.依赖到我们的项目中</span></div><div class="line">        <span class="comment">//1.3.依赖sdk中找不到的api</span></div><div class="line">        <span class="comment">//1.4.准备一些测试素材 放置在assets目录下面 例:assets/a.jpg</span></div><div class="line">        <span class="comment">//1.5.开启内存设置  android:largeHeap="true"尽可能使应用使用最大内存</span></div></pre></td></tr></table></figure>
+<h3 id="2-2-1-布局查找控件"><a href="#2-2-1-布局查找控件" class="headerlink" title="2.2.1 布局查找控件"></a><strong>2.2.1 布局查找控件</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//步骤二。布局全景控件显示加载后的全景图片</span></div><div class="line"><span class="comment">//2.1.布局查找控件</span></div><div class="line">vrPanoramaView = (VrPanoramaView) findViewById(R.id.vr_pv);</div></pre></td></tr></table></figure>
+<h3 id="2-2-2-设置初始化参数"><a href="#2-2-2-设置初始化参数" class="headerlink" title="2.2.2 设置初始化参数"></a><strong>2.2.2 设置初始化参数</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//2.2.设置初始化参数</span></div><div class="line">vrPanoramaView.setDisplayMode(VrWidgetView.DisplayMode.FULLSCREEN_STEREO);</div><div class="line"><span class="comment">//删除不需要连接，信息图标</span></div><div class="line">vrPanoramaView.setInfoButtonEnabled(<span class="keyword">false</span>);</div><div class="line"><span class="comment">//隐藏全屏按钮</span></div><div class="line">vrPanoramaView.setFullscreenButtonEnabled(<span class="keyword">false</span>);</div></pre></td></tr></table></figure>
+<h3 id="2-2-3-创建异步任务加载图片"><a href="#2-2-3-创建异步任务加载图片" class="headerlink" title="2.2.3 创建异步任务加载图片"></a><strong>2.2.3 创建异步任务加载图片</strong></h3><p>Bitmap是图片在内存中的表示对象，全景图也可加载成bitmap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//2.3.创建异步任务加载图片 Bitmap是图片在内存中的表示对象，全景图也可加载成bitmap</span></div><div class="line">    imageTask = <span class="keyword">new</span> ImageTask();</div><div class="line">    imageTask.execute();</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Void</span>, <span class="title">Bitmap</span>&gt; </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;</div><div class="line">        <span class="comment">//2.4.从资产目录打开一个流</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            InputStream inputStream = getAssets().open(<span class="string">"a.jpg"</span>);</div><div class="line">            <span class="comment">//2.5.使用BitmapFactory转换成Bitmap</span></div><div class="line">            Bitmap bitmap = BitmapFactory.decodeStream(inputStream);</div><div class="line">            <span class="keyword">return</span> bitmap;</div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//2.6任务执行完后,可获取Bitmap图片</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap bitmap)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPostExecute(bitmap);</div><div class="line">        <span class="keyword">if</span> (bitmap != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">//loadImageFromBitmap加载bitmap到显示控件 参1.bitmap 参2 显示参数的封装</span></div><div class="line">            VrPanoramaView.Options options = <span class="keyword">new</span> VrPanoramaView.Options();</div><div class="line">            <span class="comment">//加载立体图片，上部分显示在左眼，下部分显示在右眼</span></div><div class="line">            options.inputType = VrPanoramaView.Options.TYPE_STEREO_OVER_UNDER;</div><div class="line">            <span class="keyword">if</span> (listener == <span class="keyword">null</span>) &#123;</div><div class="line">                listener = <span class="keyword">new</span> VrPanoramaEventListener() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadError</span><span class="params">(String errorMessage)</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onLoadError(errorMessage);</div><div class="line">                        <span class="comment">//处理加载失败的情况</span></div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"错误消息:"</span> + errorMessage, Toast.LENGTH_SHORT).show();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadSuccess</span><span class="params">()</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onLoadSuccess();</div><div class="line">                        <span class="comment">//成功的情况提示下现在要进行全景图片的展示</span></div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"进入vr:"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">                    &#125;</div><div class="line">                &#125;;</div><div class="line">                <span class="comment">// 增加加载出错的业务逻辑处理</span></div><div class="line">                vrPanoramaView.setEventListener(listener);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//2.7.让控件加载bitmap对象</span></div><div class="line">            vrPanoramaView.loadImageFromBitmap(bitmap, options);</div><div class="line">            <span class="comment">//2.8.如果loadImageFromBitmap加载失败需要提示用户相关信息则需要添加事件监听器listener</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">private</span> VrPanoramaEventListener listener;</div></pre></td></tr></table></figure>
+<h2 id="2-3-VrPanoramaView控件退到后台，回到屏幕，销毁处理细节"><a href="#2-3-VrPanoramaView控件退到后台，回到屏幕，销毁处理细节" class="headerlink" title="2.3 VrPanoramaView控件退到后台，回到屏幕，销毁处理细节"></a><strong>2.3 VrPanoramaView控件退到后台，回到屏幕，销毁处理细节</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//步骤三。VrPanoramaView控件退到后台，回到屏幕，销毁处理细节</span></div><div class="line">    <span class="comment">//3.1.退到后台.暂停显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="keyword">if</span> (vrPanoramaView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrPanoramaView.pauseRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//3.2.回到屏幕,恢复显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        <span class="keyword">if</span> (vrPanoramaView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrPanoramaView.resumeRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//3.3.退出界面停止显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (vrPanoramaView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrPanoramaView.shutdown();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (imageTask != <span class="keyword">null</span> &amp;&amp; !imageTask.isCancelled()) &#123;<span class="comment">//销毁任务</span></div><div class="line">            imageTask.cancel(<span class="keyword">true</span>);</div><div class="line">            imageTask = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.itheima.demovrimagevideo2;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.graphics.Bitmap;</div><div class="line"><span class="keyword">import</span> android.graphics.BitmapFactory;</div><div class="line"><span class="keyword">import</span> android.os.AsyncTask;</div><div class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.widget.Toast;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.vr.sdk.widgets.common.VrWidgetView;</div><div class="line"><span class="keyword">import</span> com.google.vr.sdk.widgets.pano.VrPanoramaEventListener;</div><div class="line"><span class="keyword">import</span> com.google.vr.sdk.widgets.pano.VrPanoramaView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> VrPanoramaView vrPanoramaView;</div><div class="line">    <span class="keyword">private</span> ImageTask imageTask;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        <span class="comment">//全景图片的浏览功能</span></div><div class="line">        <span class="comment">//步骤一。下载github上google开源 vr-sdk</span></div><div class="line">        <span class="comment">//1.1.导入到我们的工作空间 common,commonwidget  panowidget</span></div><div class="line">        <span class="comment">//1.2.依赖到我们的项目中</span></div><div class="line">        <span class="comment">//1.3.依赖sdk中找不到的api</span></div><div class="line">        <span class="comment">//1.4.准备一些测试素材 放置在assets目录下面 例:assets/a.jpg</span></div><div class="line">        <span class="comment">//1.5.开启内存设置  android:largeHeap="true"尽可能使应用使用最大内存</span></div><div class="line">        <span class="comment">//步骤二。将全景图片加载到内存中，再显示在控件</span></div><div class="line">        <span class="comment">//2.1.布局全景图片显示控件</span></div><div class="line">        vrPanoramaView = (VrPanoramaView) findViewById(R.id.vr_pano);</div><div class="line">        <span class="comment">//删除不需要连接</span></div><div class="line">        vrPanoramaView.setInfoButtonEnabled(<span class="keyword">false</span>);</div><div class="line">        <span class="comment">//隐藏全屏按钮</span></div><div class="line">        vrPanoramaView.setFullscreenButtonEnabled(<span class="keyword">false</span>);</div><div class="line">        <span class="comment">//2.2.所有的图片在内存表示成Bitmap</span></div><div class="line">        imageTask = <span class="keyword">new</span> ImageTask();</div><div class="line">        imageTask.execute();</div><div class="line">        <span class="comment">//vrPanoramaView.loadImageFromBitmap(bitmap);</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//2.3.AsyncTask异步加载</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Void</span>, <span class="title">Bitmap</span>&gt; </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                InputStream inputStream = getAssets().open(<span class="string">"a.jpg"</span>);</div><div class="line">                <span class="comment">//2.4.使用BitmapFactory 可以sd ,byte[] inputstream--&gt;Bitmap</span></div><div class="line">                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);</div><div class="line">                <span class="keyword">return</span> bitmap;</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Bitmap bitmap)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onPostExecute(bitmap);</div><div class="line">            <span class="keyword">if</span> (bitmap != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="comment">//loadImageFromBitmap加载bitmap到显示控件 参1.bitmap 参2 显示参数的封装</span></div><div class="line">                VrPanoramaView.Options option = <span class="keyword">new</span> VrPanoramaView.Options();</div><div class="line">                <span class="comment">//立体图片:上半张显示在左眼，下半张显示在右眼</span></div><div class="line">                option.inputType = VrPanoramaView.Options.TYPE_STEREO_OVER_UNDER;</div><div class="line">                VrPanoramaEventListener listener=<span class="keyword">new</span> VrPanoramaEventListener()&#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadSuccess</span><span class="params">()</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onLoadSuccess();</div><div class="line">                        <span class="comment">//成功的情况提示下现在要进行全景图片的展示</span></div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"进入vr图片"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">                    &#125;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadError</span><span class="params">(String errorMessage)</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onLoadError(errorMessage);</div><div class="line">                        <span class="comment">//处理加载失败的情况</span></div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"E:"</span>+errorMessage, Toast.LENGTH_SHORT).show();</div><div class="line">                    &#125;</div><div class="line">                &#125;;</div><div class="line">                <span class="comment">//2.5.增加加载出错的业务逻辑处理</span></div><div class="line">                vrPanoramaView.setEventListener(listener);</div><div class="line">                <span class="comment">//2.6.全屏展示</span></div><div class="line">                vrPanoramaView.setDisplayMode(VrWidgetView.DisplayMode.FULLSCREEN_MONO);</div><div class="line">                <span class="comment">//2.4.加载bitmap到控件上显示</span></div><div class="line">                vrPanoramaView.loadImageFromBitmap(bitmap, option);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//步骤三。优化程序细节 ，页面退到后台,暂停显示 ，页面显示在屏幕 恢复显示。销毁页面,释放全景图片</span></div><div class="line"></div><div class="line">    <span class="comment">//3.1 页面退到后台,暂停显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="keyword">if</span>(vrPanoramaView!=<span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            vrPanoramaView.pauseRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//3.2 页面显示在屏幕 恢复显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        <span class="keyword">if</span>(vrPanoramaView!=<span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            vrPanoramaView.resumeRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//3.3.销毁页面,释放全景图片</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        <span class="keyword">if</span> (vrPanoramaView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrPanoramaView.shutdown();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (imageTask != <span class="keyword">null</span> &amp;&amp; !imageTask.isCancelled()) &#123;</div><div class="line">            imageTask.cancel(<span class="keyword">true</span>);</div><div class="line">            imageTask = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="3-全景视频显示开发"><a href="#3-全景视频显示开发" class="headerlink" title="3. 全景视频显示开发"></a><strong>3. 全景视频显示开发</strong></h1><p><img src="http://img.blog.csdn.net/20170310001154807?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"> <img src="http://img.blog.csdn.net/20170310001243953?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" width="300"></p>
+<h2 id="3-1-vr视频环境搭建"><a href="#3-1-vr视频环境搭建" class="headerlink" title="3.1 vr视频环境搭建"></a><strong>3.1 vr视频环境搭建</strong></h2><ul>
+<li>导入需要的三个库 common,comonwidget.videowiget</li>
+<li>依赖这三个库</li>
+<li>准备显示使用到全景视频 assets目录下面 例:assets/b.mp4</li>
+<li>配置大内存选项   android:largeHeap=”true” 可以使用最大内存<h3 id="3-1-1-导入vr-sdk-中的相关库"><a href="#3-1-1-导入vr-sdk-中的相关库" class="headerlink" title="3.1.1 导入vr sdk 中的相关库"></a><strong>3.1.1 导入vr sdk 中的相关库</strong></h3></li>
+</ul>
+<p>common，commonwidget，videowidget<br>PS：最新的SDK已经没有这三个文件夹了，使用下一步的依赖库即可</p>
+<h3 id="3-1-2-依赖以上三个库"><a href="#3-1-2-依赖以上三个库" class="headerlink" title="3.1.2 依赖以上三个库"></a><strong>3.1.2 依赖以上三个库</strong></h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="string">'com.google.vr:sdk-videowidget:1.30.0'</span></div><div class="line"><span class="comment">//compile project(':common')</span></div><div class="line"><span class="comment">//compile project(':commonwidget')</span></div><div class="line"><span class="comment">//compile project(':videowidget')</span></div><div class="line"><span class="comment">// 出现类未定义错误的缺少库</span></div><div class="line"><span class="comment">//compile 'com.google.android.exoplayer:exoplayer:r1.5.10'</span></div><div class="line"><span class="comment">//compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'</span></div></pre></td></tr></table></figure>
+<h3 id="3-1-3-打开内存设置-android-largeHeap-”true”"><a href="#3-1-3-打开内存设置-android-largeHeap-”true”" class="headerlink" title="3.1.3 打开内存设置  android:largeHeap=”true”"></a><strong>3.1.3 打开内存设置  android:largeHeap=”true”</strong></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">android:largeHeap</span>=<span class="string">"true"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="3-1-4-准备测试使用的全景视频"><a href="#3-1-4-准备测试使用的全景视频" class="headerlink" title="3.1.4 准备测试使用的全景视频"></a><strong>3.1.4 准备测试使用的全景视频</strong></h3><p>放置在assets目录 例:assets/congo_2048.mp4</p>
+<h2 id="3-2-布局视频控件，并加载视频内容"><a href="#3-2-布局视频控件，并加载视频内容" class="headerlink" title="3.2 布局视频控件，并加载视频内容"></a><strong>3.2 布局视频控件，并加载视频内容</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> VrVideoView vrVideoView;</div><div class="line">    <span class="keyword">private</span> VideoTask videoTask;</div><div class="line">    <span class="keyword">private</span> SeekBar seekBar;</div><div class="line">    <span class="keyword">private</span> TextView text;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        <span class="comment">//步骤一。搭建vr全景视频的开发环境</span></div><div class="line">        <span class="comment">//1.1.导入需要的三个库 common,comonwidget.videowiget</span></div><div class="line">        <span class="comment">//1.2.依赖这三个库</span></div><div class="line">        <span class="comment">//1.3.准备显示使用到全景视频 assets目录下面 例:assets/b.mp4</span></div><div class="line">        <span class="comment">//1.4.配置大内存选项   android:largeHeap="true" 可以使用最大内存</span></div><div class="line">        <span class="comment">//步骤二。布局视频控件，并加载视频内容</span></div><div class="line">        <span class="comment">//2.1布局控件</span></div><div class="line">        <span class="comment">//2.2查找控件</span></div><div class="line">        vrVideoView = (VrVideoView) findViewById(R.id.vr_vv);</div><div class="line">        <span class="comment">//2.3加载视频数据</span></div><div class="line">        videoTask = <span class="keyword">new</span> VideoTask();</div><div class="line">        videoTask.execute(<span class="string">"congo_2048.mp4"</span>);</div><div class="line">    &#125;</div><div class="line">	<span class="comment">// 创建异步任务防止占用主线程</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">VideoTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Void</span>, <span class="title">Void</span>&gt; </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(String... params)</span> </span>&#123;</div><div class="line">           <span class="comment">// 把文件名取出来进行加载  视频资源来自asssets</span></div><div class="line">            VrVideoView.Options options = <span class="keyword">new</span> VrVideoView.Options();</div><div class="line">            <span class="comment">//2.4.输入模式</span></div><div class="line">            <span class="comment">//立体模式</span></div><div class="line">            options.inputType = VrVideoView.Options.TYPE_STEREO_OVER_UNDER;</div><div class="line">            <span class="comment">//2.5.设置视频来源</span></div><div class="line">            <span class="comment">//处理视频加载的格式(sd卡或者assets)</span></div><div class="line">            <span class="comment">//options.inputFormat = VrVideoView.Options.FORMAT_DEFAULT;</span></div><div class="line">            <span class="comment">//FORMAT_DEFAULT 视频资源来自assetss/sd</span></div><div class="line">            <span class="comment">//FORMAT_HLS 视频来自网络流媒 直播</span></div><div class="line">            <span class="comment">//处理视频加载的格式 流媒体直播格式</span></div><div class="line">            options.inputFormat=VrVideoView.Options.FORMAT_HLS;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="comment">//2.8 如果资源有问题，不能正常播放需要处理下界面提示</span></div><div class="line">                <span class="keyword">if</span> (listener == <span class="keyword">null</span>) &#123;</div><div class="line">                    listener = <span class="keyword">new</span> VrVideoEventListener() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadSuccess</span><span class="params">()</span> </span>&#123;</div><div class="line">                            <span class="keyword">super</span>.onLoadSuccess();</div><div class="line">                            <span class="comment">//获取当前总时长</span></div><div class="line">                            <span class="keyword">long</span> max=vrVideoView.getDuration();</div><div class="line">                            seekBar.setMax((<span class="keyword">int</span>) max);</div><div class="line">                            seekBar.setProgress(<span class="number">0</span>);</div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"准备播放vr"</span>, Toast.LENGTH_SHORT).show();</div><div class="line"></div><div class="line">                        &#125;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNewFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">                            <span class="keyword">super</span>.onNewFrame();</div><div class="line">                            <span class="comment">//获取当前播放位置</span></div><div class="line">                            <span class="keyword">long</span> currentPosition = vrVideoView.getCurrentPosition();</div><div class="line">                            <span class="comment">//设置当前进度</span></div><div class="line">                            seekBar.setProgress((<span class="keyword">int</span>) currentPosition);</div><div class="line">                            <span class="comment">//时间值</span></div><div class="line">                            String total=String.format(<span class="string">"%.2f"</span>,vrVideoView.getDuration()/<span class="number">1000f</span>);</div><div class="line">                            String curr=String.format(<span class="string">"%.2f"</span>,vrVideoView.getCurrentPosition()/<span class="number">1000f</span>);</div><div class="line">                            text.setText(<span class="string">"播放进度"</span>+curr+<span class="string">":"</span>+total);</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">private</span> <span class="keyword">boolean</span> isPause=<span class="keyword">true</span>;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompletion</span><span class="params">()</span> </span>&#123;</div><div class="line">                            <span class="keyword">super</span>.onCompletion();</div><div class="line">                            seekBar.setProgress(<span class="number">0</span>);</div><div class="line">                            vrVideoView.seekTo(<span class="number">0</span>);<span class="comment">//重回0位置</span></div><div class="line">                            vrVideoView.pauseVideo();<span class="comment">//暂停播放</span></div><div class="line">                            isPause=<span class="keyword">true</span>;<span class="comment">//保存暂停状态</span></div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">()</span> </span>&#123;</div><div class="line">                            <span class="keyword">super</span>.onClick();</div><div class="line">                            <span class="keyword">if</span> (isPause) &#123;<span class="comment">//播放</span></div><div class="line">                                vrVideoView.playVideo();</div><div class="line">                                isPause=<span class="keyword">false</span>;</div><div class="line">                            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                                vrVideoView.pauseVideo();</div><div class="line">                                isPause=<span class="keyword">true</span>;</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line"></div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadError</span><span class="params">(String errorMessage)</span> </span>&#123;</div><div class="line">                            <span class="keyword">super</span>.onLoadError(errorMessage);</div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"加载失败"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">                        &#125;</div><div class="line">                    &#125;;</div><div class="line">                    vrVideoView.setEventListener(listener);</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//2.7加载视频资源</span></div><div class="line">                <span class="comment">//vrVideoView.loadVideoFromAsset(params[0], options);</span></div><div class="line">                String url=<span class="string">"http://youkesvideo.oss-cn-hangzhou.aliyuncs.com/movie2/2016/10/11/%E6%B9%84%E5%85%AC%E6%B2%B3%E8%A1%8C%E5%8A%A8.Operation.Mekong.2016.TC720P.X264.AAC.Mandarin.CHS.Mp4Ba.mp4"</span>;</div><div class="line">                vrVideoView.loadVideo(Uri.parse(url),options);</div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> VrVideoEventListener listener;</div></pre></td></tr></table></figure>
+<h2 id="3-3-处理页面退到后台，回到屏幕-页面销毁"><a href="#3-3-处理页面退到后台，回到屏幕-页面销毁" class="headerlink" title="3.3 处理页面退到后台，回到屏幕,页面销毁"></a><strong>3.3 处理页面退到后台，回到屏幕,页面销毁</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">//步骤三。处理页面退到后台，回到屏幕,页面销毁。</span></div><div class="line"></div><div class="line">    <span class="comment">//3.1.页面退到后台暂停视频</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="keyword">if</span> (vrVideoView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrVideoView.pauseRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//3.2.页面回到屏幕继续播放</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        <span class="keyword">if</span> (vrVideoView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrVideoView.resumeRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//3.3.页面销毁</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        <span class="keyword">if</span> (vrVideoView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrVideoView.shutdown();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (videoTask != <span class="keyword">null</span> &amp;&amp; !videoTask.isCancelled()) &#123;</div><div class="line">            videoTask.cancel(<span class="keyword">false</span>);</div><div class="line">            videoTask = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-4-添加进度条相关事件"><a href="#3-4-添加进度条相关事件" class="headerlink" title="3.4 添加进度条相关事件"></a><strong>3.4 添加进度条相关事件</strong></h2><h3 id="3-4-1布局查找出控件"><a href="#3-4-1布局查找出控件" class="headerlink" title="3.4.1布局查找出控件"></a><strong>3.4.1布局查找出控件</strong></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">SeekBar</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/seek_bar"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span> /&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#AEAEAE"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"#FFFFFF"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"22sp"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"00:00"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">seekBar = (SeekBar) findViewById(R.id.seek_bar);</div><div class="line">text = (TextView) findViewById(R.id.text);</div></pre></td></tr></table></figure>
+<h3 id="3-4-2-加载成功设置最大值"><a href="#3-4-2-加载成功设置最大值" class="headerlink" title="3.4.2.加载成功设置最大值"></a>3.4.2.加载成功设置最大值</h3><p>在VrVideoEventListener中的onLoadSuccess处理</p>
+<h3 id="3-4-3-在播放过程中不断更新"><a href="#3-4-3-在播放过程中不断更新" class="headerlink" title="3.4.3.在播放过程中不断更新"></a>3.4.3.在播放过程中不断更新</h3><p>进度值 onNewFrame 每播放一个画面就调用该方法一次</p>
+<h3 id="3-4-4-同步理新文本时间值"><a href="#3-4-4-同步理新文本时间值" class="headerlink" title="3.4.4.同步理新文本时间值"></a>3.4.4.同步理新文本时间值</h3><p>在VrVideoEventListener中的onNewFrame处理</p>
+<h3 id="3-4-5-播放完成重新播放"><a href="#3-4-5-播放完成重新播放" class="headerlink" title="3.4.5.播放完成重新播放"></a>3.4.5.播放完成重新播放</h3><p>在VrVideoEventListener中的onCompletion处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.itheima.appvideo;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.os.AsyncTask;</div><div class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.widget.SeekBar;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"><span class="keyword">import</span> android.widget.Toast;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.google.vr.sdk.widgets.common.VrWidgetView;</div><div class="line"><span class="keyword">import</span> com.google.vr.sdk.widgets.video.VrVideoEventListener;</div><div class="line"><span class="keyword">import</span> com.google.vr.sdk.widgets.video.VrVideoView;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> VrVideoView vrVideoView;</div><div class="line">    <span class="keyword">private</span> VideoTask task;</div><div class="line">    <span class="keyword">private</span> SeekBar seekBar;</div><div class="line">    <span class="keyword">private</span> TextView timeText;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        <span class="comment">//步骤一。搭建vr全景视频的开发环境</span></div><div class="line">        <span class="comment">//1.1.导入需要的三个库 common,comonwidget.videowiget</span></div><div class="line">        <span class="comment">//1.2.依赖这三个库</span></div><div class="line">        <span class="comment">//1.3.准备显示使用到全景视频 assets目录下面 例:assets/b.mp4</span></div><div class="line">        <span class="comment">//1.4.配置大内存选项   android:largeHeap="true" 可以使用最大内存</span></div><div class="line">        <span class="comment">//步骤二。加载视频到内存中，再使用控件显示</span></div><div class="line">        <span class="comment">//2.1 布局全景视频控件</span></div><div class="line">        vrVideoView = (VrVideoView) findViewById(R.id.vr_video_view);</div><div class="line">        <span class="comment">//2.2加载全景视频</span></div><div class="line">        task = <span class="keyword">new</span> VideoTask();</div><div class="line">        task.execute(<span class="string">"b.mp4"</span>);</div><div class="line">        seekBar = (SeekBar) findViewById(R.id.seekbar);</div><div class="line">        timeText = (TextView) findViewById(R.id.time);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//2.2.1创建异步任务防止占用主线程</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">VideoTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Void</span>, <span class="title">Void</span>&gt; </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(String... params)</span> </span>&#123;</div><div class="line">            <span class="comment">//2.2.2.把文件名取出来进行加载  视频资源来自asssets</span></div><div class="line">            VrVideoView.Options options = <span class="keyword">new</span> VrVideoView.Options();</div><div class="line">            <span class="comment">//立体的视频资源:上半画面显示在左眼，下半画面显示右眼</span></div><div class="line">            options.inputType = VrVideoView.Options.TYPE_STEREO_OVER_UNDER;</div><div class="line">            <span class="comment">//FORMAT_DEFAULT 视频资源来自assetss/sd</span></div><div class="line">            <span class="comment">//FORMAT_HLS 视频来自网络流媒 直播</span></div><div class="line">            options.inputFormat = VrVideoView.Options.FORMAT_DEFAULT;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="comment">//步骤四.编写进度显示 业务逻辑</span></div><div class="line">                VrVideoEventListener listener = <span class="keyword">new</span> VrVideoEventListener() &#123;</div><div class="line">                    <span class="comment">//4.1.加载成功</span></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadSuccess</span><span class="params">()</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onLoadSuccess();</div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"准备放3d视频"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">                        upProgress();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="comment">//4.2加载失败的提示</span></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLoadError</span><span class="params">(String errorMessage)</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onLoadError(errorMessage);</div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"视频加载失败"</span> + errorMessage, Toast.LENGTH_SHORT).show();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="comment">//4.3.显示播放时长与播放进度</span></div><div class="line">                    <span class="comment">//4.3.1.布局显示控件SeekBar 与TextView</span></div><div class="line">                    <span class="comment">//4.3.2.查找出来</span></div><div class="line">                    <span class="comment">//4.3.3.在onLoadSuccess里面获取视频时长 视频播放位置</span></div><div class="line">                    <span class="comment">//4.3.4.在onNewFrame  不断获取最新的进度值来更新界面</span></div><div class="line">                    <span class="meta">@Override</span><span class="comment">//播放了一个画面,onNewFrame就被调用次</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNewFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onNewFrame();</div><div class="line">                        upProgress();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="keyword">private</span> <span class="keyword">boolean</span> isPause = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">                    <span class="comment">//4.4.处理播放完成</span></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompletion</span><span class="params">()</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onCompletion();</div><div class="line">                        vrVideoView.seekTo(<span class="number">0</span>);</div><div class="line">                        vrVideoView.pauseVideo();</div><div class="line">                        isPause = <span class="keyword">true</span>;</div><div class="line">                        upProgress();</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    <span class="comment">//4.5.点击业务</span></div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">()</span> </span>&#123;</div><div class="line">                        <span class="keyword">super</span>.onClick();</div><div class="line">                        <span class="keyword">if</span> (isPause) &#123;</div><div class="line">                            isPause = <span class="keyword">false</span>;</div><div class="line">                            vrVideoView.playVideo();</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            isPause = <span class="keyword">true</span>;</div><div class="line">                            vrVideoView.pauseVideo();</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;;</div><div class="line">                vrVideoView.setEventListener(listener);</div><div class="line">                vrVideoView.loadVideoFromAsset(params[<span class="number">0</span>], options);<span class="comment">//参1文件名 参2 设置参数</span></div><div class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">upProgress</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">long</span> max = vrVideoView.getDuration();</div><div class="line">            <span class="keyword">long</span> currPosition = vrVideoView.getCurrentPosition();</div><div class="line">            seekBar.setMax((<span class="keyword">int</span>) max);</div><div class="line">            seekBar.setProgress((<span class="keyword">int</span>) currPosition);</div><div class="line">            timeText.setText(String.format(<span class="string">"%.2f"</span>, currPosition / <span class="number">1000f</span>) + <span class="string">"/"</span> + String.format(<span class="string">"%.2f"</span>, max / <span class="number">1000f</span>));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//步骤三。程序优化 页面退到后台，暂停  页面回到屏幕继续播放  页面销毁 关闭</span></div><div class="line"></div><div class="line">    <span class="comment">//3.1. 页面退到后台，暂停</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="keyword">if</span> (vrVideoView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrVideoView.pauseRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//3.2 页面回到屏幕继续播放</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        <span class="keyword">if</span> (vrVideoView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrVideoView.resumeRendering();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//3.3. 页面销毁 关闭销毁</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        <span class="keyword">if</span> (vrVideoView != <span class="keyword">null</span>) &#123;</div><div class="line">            vrVideoView.shutdown();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (task != <span class="keyword">null</span> &amp;&amp; !task.isCancelled()) &#123;</div><div class="line">            task.cancel(<span class="keyword">true</span>);</div><div class="line">            task = <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>GitHub：<a href="https://github.com/JackChen1999/GoogleVR" target="_blank" rel="external">https://github.com/JackChen1999/GoogleVR</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vr/" rel="tag"># vr</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/Android应用开发-快速入门/" rel="next" title="Android应用开发-快速入门">
+                <i class="fa fa-chevron-left"></i> Android应用开发-快速入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/Oauth机制/" rel="prev" title="Oauth机制">
+                Oauth机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-VR开发概述"><span class="nav-number">1.</span> <span class="nav-text">1. VR开发概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-下载google-vr-sdk-并搭建开发环境"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 下载google vr sdk 并搭建开发环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-CardBorad应用核心功能"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 CardBorad应用核心功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-UtoVR应用核心功能"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 UtoVR应用核心功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-知识点"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-好玩好用的VR"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 好玩好用的VR</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-全景图片显示"><span class="nav-number">2.</span> <span class="nav-text">2. 全景图片显示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-搭建vr全景图片的开发环境"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 搭建vr全景图片的开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-导入全景图相关的三个开发库"><span class="nav-number">2.1.1.</span> <span class="nav-text">2.1.1 导入全景图相关的三个开发库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-依赖该库"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.1.2 依赖该库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-准备全景图片测试资源"><span class="nav-number">2.1.3.</span> <span class="nav-text">2.1.3 准备全景图片测试资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-4-功能清单配置"><span class="nav-number">2.1.4.</span> <span class="nav-text">2.1.4 功能清单配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-布局全景控件显示加载后的全景图片"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 布局全景控件显示加载后的全景图片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-布局查找控件"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1 布局查找控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-设置初始化参数"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2 设置初始化参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3-创建异步任务加载图片"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3 创建异步任务加载图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-VrPanoramaView控件退到后台，回到屏幕，销毁处理细节"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 VrPanoramaView控件退到后台，回到屏幕，销毁处理细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-全景视频显示开发"><span class="nav-number">3.</span> <span class="nav-text">3. 全景视频显示开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-vr视频环境搭建"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 vr视频环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-导入vr-sdk-中的相关库"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 导入vr sdk 中的相关库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-依赖以上三个库"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 依赖以上三个库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-打开内存设置-android-largeHeap-”true”"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.3 打开内存设置  android:largeHeap=”true”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-准备测试使用的全景视频"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.4 准备测试使用的全景视频</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-布局视频控件，并加载视频内容"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 布局视频控件，并加载视频内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-处理页面退到后台，回到屏幕-页面销毁"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 处理页面退到后台，回到屏幕,页面销毁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-添加进度条相关事件"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 添加进度条相关事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1布局查找出控件"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1布局查找出控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-加载成功设置最大值"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2.加载成功设置最大值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-在播放过程中不断更新"><span class="nav-number">3.4.3.</span> <span class="nav-text">3.4.3.在播放过程中不断更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-4-同步理新文本时间值"><span class="nav-number">3.4.4.</span> <span class="nav-text">3.4.4.同步理新文本时间值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-5-播放完成重新播放"><span class="nav-number">3.4.5.</span> <span class="nav-text">3.4.5.播放完成重新播放</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/VR全景图片与视频功能开发详解/';
+          this.page.identifier = '2017/05/01/android/VR全景图片与视频功能开发详解/';
+          this.page.title = 'VR全景图片与视频功能开发详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

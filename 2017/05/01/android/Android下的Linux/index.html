@@ -1,0 +1,1365 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="linux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. Android目录结构  data  app：用户安装的应用 data：应用的专属文件夹 system：系统的配置信息，注册表文件 anr：anr异常的记录信息   dev：devices的缩写  存放设备所对应的文件   mnt：mount的缩写  挂载在系统上的设备：sdcard，u盘   proc：硬件配置，状态信息  cpuinfo、meminfo   sbin：system bin">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android下的Linux">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/Android下的Linux/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. Android目录结构  data  app：用户安装的应用 data：应用的专属文件夹 system：系统的配置信息，注册表文件 anr：anr异常的记录信息   dev：devices的缩写  存放设备所对应的文件   mnt：mount的缩写  挂载在系统上的设备：sdcard，u盘   proc：硬件配置，状态信息  cpuinfo、meminfo   sbin：system bin">
+<meta property="og:image" content="http://img.blog.csdn.net/20170219120525625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-05-01T04:43:26.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android下的Linux">
+<meta name="twitter:description" content="1. Android目录结构  data  app：用户安装的应用 data：应用的专属文件夹 system：系统的配置信息，注册表文件 anr：anr异常的记录信息   dev：devices的缩写  存放设备所对应的文件   mnt：mount的缩写  挂载在系统上的设备：sdcard，u盘   proc：硬件配置，状态信息  cpuinfo、meminfo   sbin：system bin">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170219120525625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/Android下的Linux/"/>
+
+
+
+
+
+  <title>Android下的Linux | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Android下的Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android下的Linux
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:40:29+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/Android下的Linux/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/Android下的Linux/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Android目录结构"><a href="#1-Android目录结构" class="headerlink" title="1. Android目录结构"></a>1. Android目录结构</h1><p><img src="http://img.blog.csdn.net/20170219120525625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="android"></p>
+<ul>
+<li><p>data</p>
+<ul>
+<li>app：用户安装的应用</li>
+<li>data：应用的专属文件夹</li>
+<li>system：系统的配置信息，注册表文件</li>
+<li>anr：anr异常的记录信息</li>
+</ul>
+</li>
+<li><p>dev：devices的缩写</p>
+<ul>
+<li>存放设备所对应的文件</li>
+</ul>
+</li>
+<li><p>mnt：mount的缩写</p>
+<ul>
+<li>挂载在系统上的设备：sdcard，u盘</li>
+</ul>
+</li>
+<li><p>proc：硬件配置，状态信息</p>
+<ul>
+<li>cpuinfo、meminfo</li>
+</ul>
+</li>
+<li><p>sbin：system bin</p>
+<ul>
+<li>系统重要的二进制执行文件</li>
+<li>adbd：服务器的adb进程</li>
+</ul>
+</li>
+<li><p>system：</p>
+<ul>
+<li>app：存放系统应用，默认不能删除</li>
+<li>bin：Android中可执行的linux指令文件</li>
+<li>etc：host：主机名和ip地址的映射</li>
+<li>fonts：Android中自带的字体</li>
+<li>framework：存放谷歌提供的java api</li>
+<li>lib：核心功能的类库，C/C++文件</li>
+<li>media/audio：存放Android的音效文件</li>
+<li>tts：语音发声引擎，默认不支持中文</li>
+<li>usr：用户设备的配置信息，键盘编码和按键编码的映射</li>
+<li>xbin：是专为开发人员准备的二进制指令</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h1 id="2-Android下的Linux指令"><a href="#2-Android下的Linux指令" class="headerlink" title="2. Android下的Linux指令"></a>2. Android下的Linux指令</h1><ul>
+<li>su：superuser<ul>
+<li>切换到超级用户</li>
+</ul>
+</li>
+<li>rm：remove，删除文件<ul>
+<li>rm 文件名</li>
+</ul>
+</li>
+<li>ls：列出目录下的所有文件和文件夹<ul>
+<li>ls -l：查看文件的详细信息</li>
+<li>ls -a：查看隐藏文件</li>
+</ul>
+</li>
+<li>cd：切换到某个目录</li>
+<li>cat：查看文件内容<ul>
+<li>cat 文件名</li>
+<li>不要cat二进制可执行文件</li>
+</ul>
+</li>
+<li>mv：move 修改文件名<ul>
+<li>mv 原文件名 新文件名</li>
+</ul>
+</li>
+<li>mkdir：创建文件夹<ul>
+<li>mkdir 文件夹名字</li>
+</ul>
+</li>
+<li>rmdir：删除文件夹<ul>
+<li>rmdir 文件夹名字</li>
+</ul>
+</li>
+<li>touch：创建新文件<ul>
+<li>touch 文件名</li>
+</ul>
+</li>
+<li>chmod：change mode，切换文件访问权限<ul>
+<li>chmod 777 文件名</li>
+</ul>
+</li>
+<li>echo：回显数据；重定向数据<ul>
+<li>echo 数据 &gt; 文件名</li>
+</ul>
+</li>
+<li>sleep：睡眠几秒</li>
+<li>df：显示指定目录的容量</li>
+<li>id：打印当前用户的id<ul>
+<li>uid=0：root</li>
+<li>uid=1000：system</li>
+<li>uid=2000：shell</li>
+<li>uid=10000+：一般应用程序的id</li>
+</ul>
+</li>
+<li>ps：列出系统中运行的所有进程</li>
+<li>kill：杀死指定pid的进程<ul>
+<li>kill pid</li>
+</ul>
+</li>
+<li>chown：change owner，修改拥有者<ul>
+<li>chown 0.0 文件名</li>
+</ul>
+</li>
+<li>mount：挂载文件系统<ul>
+<li>mount -o remount rw /：挂载当前目录为可读可写权限</li>
+<li>mount -o remount rw /system：重新挂载指定目录</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-Android中特有的指令"><a href="#3-Android中特有的指令" class="headerlink" title="3. Android中特有的指令"></a>3. Android中特有的指令</h1><ul>
+<li><p>am：ActivityManager，可以进行跟activity相关的操作</p>
+<ul>
+<li>am start -n com.itheima.createfile/com.itheima.createfile.MainActivity：开启指定Activity</li>
+<li>am kill com.itheima.createfile：结束非前台进程</li>
+<li>am force-stop com.itheima.createfile：结束进程</li>
+</ul>
+</li>
+<li><p>pm：PackageManager</p>
+<ul>
+<li>pm disable 包名：冻结指定应用</li>
+<li>pm enable 包名：解冻指定应用</li>
+</ul>
+</li>
+<li><p>monkey -p com.itheima.createfile 1000：自动点击指定应用1000次</p>
+</li>
+</ul>
+<h1 id="4-刷模拟器，rom写文件（su）"><a href="#4-刷模拟器，rom写文件（su）" class="headerlink" title="4. 刷模拟器，rom写文件（su）"></a>4. 刷模拟器，rom写文件（su）</h1><ul>
+<li>如果想让真实手机运行这些指令，手机必须要有root权限</li>
+<li>刷root原理：把su二进制文件拷贝到/system/bin或者/system/xbin</li>
+<li>Android刷root软件，工作的原理全部都是利用系统的漏洞实现</li>
+<li>rom：可以理解为android系统的安装文件</li>
+<li>把su文件和superuser.apk写入img文件</li>
+<li>执行su指令</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Runtime.getRuntime().exec(<span class="string">"su"</span>);</div></pre></td></tr></table></figure>
+<h1 id="5-小案例：冻结解冻应用"><a href="#5-小案例：冻结解冻应用" class="headerlink" title="5. 小案例：冻结解冻应用"></a>5. 小案例：冻结解冻应用</h1><ul>
+<li>冻结和解冻指定的应用</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">RootTools.sendShell(<span class="string">"pm disable "</span> + <span class="keyword">package</span>, <span class="number">300000</span>);</div><div class="line">RootTools.sendShell(<span class="string">"pm enable "</span> + <span class="keyword">package</span>, <span class="number">300000</span>);</div></pre></td></tr></table></figure>
+<h1 id="6-小案例：零权限读取用户隐私数据"><a href="#6-小案例：零权限读取用户隐私数据" class="headerlink" title="6. 小案例：零权限读取用户隐私数据"></a>6. 小案例：零权限读取用户隐私数据</h1><ul>
+<li>直接修改短信数据库访问权限</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RootTools.sendShell(<span class="string">"chmod 777 data/data/com.android.providers.telephony/databases/mmssms.db"</span>, <span class="number">300000</span>);</div><div class="line">SQLiteDatabase db = SQLiteDatabase.openDatabase(<span class="string">"data/data/com.android.providers.telephony/databases/mmssms.db"</span>,</div><div class="line">                                                    <span class="keyword">null</span>, SQLiteDatabase.OPEN_READONLY);</div><div class="line">Cursor cursor = db.query(<span class="string">"sms"</span>, <span class="keyword">new</span> String[]&#123;<span class="string">"body"</span>, <span class="string">"address"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"><span class="keyword">while</span>(cursor.moveToNext())&#123;</div><div class="line">    String body = cursor.getString(<span class="number">0</span>);</div><div class="line">    String address = cursor.getString(<span class="number">1</span>);</div><div class="line">    System.out.println(body + <span class="string">";"</span> + address);</div><div class="line">&#125;</div><div class="line">RootTools.sendShell(<span class="string">"chmod 660 data/data/com.android.providers.telephony/databases/mmssms.db"</span>, <span class="number">300000</span>);</div></pre></td></tr></table></figure>
+<h1 id="7-静默安装"><a href="#7-静默安装" class="headerlink" title="7. 静默安装"></a>7. 静默安装</h1><ul>
+<li>为什么有静默安装的需求<ul>
+<li>正规应用。电子市场，方便用户静默安装</li>
+<li>流氓软件。后台偷偷下载安装。</li>
+</ul>
+</li>
+<li>自动下载应用，然后静默安装</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//静默安装</span></div><div class="line">RootTools.sendShell(<span class="string">"pm install sdcard/flowstat.apk"</span>, <span class="number">30000</span>);</div><div class="line"><span class="comment">//打开</span></div><div class="line">RootTools.sendShell(<span class="string">"am start -n com.jijian.flowstat/com.jijian.flowstat.TrafficWidgetSetting"</span>, <span class="number">30000</span>);</div><div class="line"><span class="comment">//卸载应用</span></div><div class="line">RootTools.sendShell(<span class="string">"pm uninstall com.jijian.flowstat"</span>, <span class="number">30000</span>);</div><div class="line"><span class="comment">//删除下载的apk包</span></div><div class="line">RootTools.sendShell(<span class="string">"rm sdcard/flowstat.apk"</span>, <span class="number">30000</span>);</div></pre></td></tr></table></figure>
+<h1 id="8-修改字体"><a href="#8-修改字体" class="headerlink" title="8. 修改字体"></a>8. 修改字体</h1><ul>
+<li>把ttf文件刷进img中</li>
+<li>Android系统默认的中文字体为DroidSansFallBack.ttf</li>
+<li>用你想使用的字体ttf文件替换掉这个文件即可</li>
+</ul>
+<h1 id="9-修改开机动画"><a href="#9-修改开机动画" class="headerlink" title="9. 修改开机动画"></a>9. 修改开机动画</h1><ul>
+<li>从真机中得到bootanimation.zip</li>
+<li>把bootanimation.zip放入system/media目录下</li>
+</ul>
+<h1 id="10-删除锁屏密码"><a href="#10-删除锁屏密码" class="headerlink" title="10. 删除锁屏密码"></a>10. 删除锁屏密码</h1><ul>
+<li>删除data/system下的key文件<ul>
+<li>文本密码为password.key</li>
+<li>手势密码为gesture.key</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/Linux常用指令/" rel="next" title="Linux常用指令">
+                <i class="fa fa-chevron-left"></i> Linux常用指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Android目录结构"><span class="nav-number">1.</span> <span class="nav-text">1. Android目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Android下的Linux指令"><span class="nav-number">2.</span> <span class="nav-text">2. Android下的Linux指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Android中特有的指令"><span class="nav-number">3.</span> <span class="nav-text">3. Android中特有的指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-刷模拟器，rom写文件（su）"><span class="nav-number">4.</span> <span class="nav-text">4. 刷模拟器，rom写文件（su）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-小案例：冻结解冻应用"><span class="nav-number">5.</span> <span class="nav-text">5. 小案例：冻结解冻应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-小案例：零权限读取用户隐私数据"><span class="nav-number">6.</span> <span class="nav-text">6. 小案例：零权限读取用户隐私数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-静默安装"><span class="nav-number">7.</span> <span class="nav-text">7. 静默安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-修改字体"><span class="nav-number">8.</span> <span class="nav-text">8. 修改字体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-修改开机动画"><span class="nav-number">9.</span> <span class="nav-text">9. 修改开机动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-删除锁屏密码"><span class="nav-number">10.</span> <span class="nav-text">10. 删除锁屏密码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/Android下的Linux/';
+          this.page.identifier = '2017/05/01/android/Android下的Linux/';
+          this.page.title = 'Android下的Linux';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

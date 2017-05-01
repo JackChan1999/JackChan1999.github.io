@@ -1,0 +1,1341 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="url," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. URI：统一资源标识符URI是统一资源标识符，是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义。由是三个组成部分：访问资源的命名机制、存放资源的主机名、资源自身的名称，由路径表示。">
+<meta name="keywords" content="url">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Uri、URL、UriMatcher、ContentUris详解">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. URI：统一资源标识符URI是统一资源标识符，是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义。由是三个组成部分：访问资源的命名机制、存放资源的主机名、资源自身的名称，由路径表示。">
+<meta property="og:image" content="http://img.blog.csdn.net/20161019100615837">
+<meta property="og:image" content="http://img.blog.csdn.net/20161105201213875">
+<meta property="og:updated_time" content="2017-05-01T04:50:08.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Uri、URL、UriMatcher、ContentUris详解">
+<meta name="twitter:description" content="1. URI：统一资源标识符URI是统一资源标识符，是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义。由是三个组成部分：访问资源的命名机制、存放资源的主机名、资源自身的名称，由路径表示。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161019100615837">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/"/>
+
+
+
+
+
+  <title>Uri、URL、UriMatcher、ContentUris详解 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Uri、URL、UriMatcher、ContentUris详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:38:58+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-URI：统一资源标识符"><a href="#1-URI：统一资源标识符" class="headerlink" title="1. URI：统一资源标识符"></a><strong>1. URI：统一资源标识符</strong></h1><p>URI是统一资源标识符，是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义。由是三个组成部分：访问资源的命名机制、存放资源的主机名、资源自身的名称，由路径表示。</p>
+<a id="more"></a>
+<h2 id="1-1-URI的使用方法"><a href="#1-1-URI的使用方法" class="headerlink" title="1.1 URI的使用方法"></a><strong>1.1 URI的使用方法</strong></h2><p><img src="http://img.blog.csdn.net/20161019100615837" alt="url"></p>
+<ul>
+<li><p><strong>schema</strong>：用来说明一个ContentProvider 控制哪些数据。”content://“</p>
+</li>
+<li><p><strong>authority</strong>：主机名或授权，它定义了是哪个ContentProvider 提供这些数据</p>
+</li>
+<li><p><strong>path</strong>：路径，URI 下的某一个Item。</p>
+</li>
+<li><p><strong>ID</strong>：通常定义Uri 时使用”#”号占位符代替, 使用时替换成对应的数字<br>content://com.itheima.provider/person/#：#表示数据id（#代表任意数字）<br>content://com.itheima.provider/person/<em>：</em>来匹配任意文本。</p>
+</li>
+</ul>
+<p>为系统的每一个资源给其一个名字，比方说通话记录。</p>
+<p>1、每一个ContentProvider都拥有一个公共的URI，这个URI用于表示这个ContentProvider所提供的数据。 </p>
+<p>2、Android所提供的ContentProvider都存放在android.provider包中。 将其分为A，B，C，D 4个部分：</p>
+<ul>
+<li><p>A：<strong>标准前缀</strong>，用来说明一个Content Provider控制这些数据，无法改变的；”content://“</p>
+</li>
+<li><p>B：<strong>URI 的标识</strong>，它定义了是哪个Content Provider提供这些数据。对于第三方应用程序，为了保证URI标识的唯一性，它必须是一个完整的、小写的 类名。这个标识在 元素的 authorities属性中说明：一般是定义该ContentProvider的包.类的名称;”content://hx.android.text.myprovider”</p>
+</li>
+<li><p>C：<strong>路径</strong>，不知道是不是路径，通俗的讲就是你要操作的数据库中表的名字，或者你也可以自己定义，记得在使用的时候保持一致就ok了；”content://hx.android.text.myprovider/tablename”</p>
+</li>
+<li><p>D：如果URI中包含表示需要获取的记录的ID；则就返回该id对应的数据，如果没有ID，就表示返回全部； “content://hx.android.text.myprovider/tablename/#” #表示数据id</p>
+</li>
+</ul>
+<p>通用资源标志符（Universal Resource Identifier, 简称”URI”）。<br>Uri代表要操作的数据，Android上可用的每种资源 - 图像、视频片段等都可以用Uri来表示。</p>
+<p>URI一般由三部分组成：</p>
+<ul>
+<li>访问资源的命名机制。 </li>
+<li>存放资源的主机名。 </li>
+<li>资源自身的名称，由路径表示。</li>
+</ul>
+<p>Android的Uri由以下三部分组成： “content://“、数据的路径、标示ID(可选)举些例子，如： </p>
+<ul>
+<li>所有联系人的Uri： content://contacts/people</li>
+<li>某个联系人的Uri: content://contacts/people/5</li>
+<li>所有图片Uri: content://media/external</li>
+<li>某个图片的Uri：content://media/external/images/media/4</li>
+</ul>
+<h2 id="1-2-URI常用方法"><a href="#1-2-URI常用方法" class="headerlink" title="1.2 URI常用方法"></a>1.2 URI常用方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>withAppendedPath()</td>
+<td>追加路径</td>
+</tr>
+<tr>
+<td>encode()</td>
+<td></td>
+</tr>
+<tr>
+<td>fromFile()</td>
+<td>从一个文件新建一个uri</td>
+</tr>
+<tr>
+<td>parse()</td>
+<td>解析uri</td>
+</tr>
+<tr>
+<td>getScheme()</td>
+<td>获取uri中的schema部分</td>
+</tr>
+<tr>
+<td>getLastPathSegment()</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>我们很经常需要解析Uri，并从Uri中获取数据。<br>Android系统提供了两个用于操作Uri的工具类，分别为UriMatcher 和ContentUris 。</p>
+<p>虽然这两类不是非常重要，但是掌握它们的使用，会便于我们的开发工作。下面就一起看一下这两个类的作用。</p>
+<h1 id="2-UriMatcher"><a href="#2-UriMatcher" class="headerlink" title="2. UriMatcher"></a><strong>2. UriMatcher</strong></h1><p>UriMatcher 类主要用于匹配Uri。使用方法如下<br>首先第一步，初始化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UriMatcher matcher = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);</div></pre></td></tr></table></figure>
+<p>第二步注册需要的Uri:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">matcher.addURI(<span class="string">"com.yfz.Lesson"</span>, <span class="string">"people"</span>, PEOPLE);  </div><div class="line">matcher.addURI(<span class="string">"com.yfz.Lesson"</span>, <span class="string">"person/#"</span>, PEOPLE_ID);</div></pre></td></tr></table></figure>
+<p>第三部，与已经注册的Uri进行匹配:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"content://"</span> + <span class="string">"com.yfz.Lesson"</span> + <span class="string">"/people"</span>);  </div><div class="line"><span class="keyword">int</span> match = matcher.match(uri);  </div><div class="line">       <span class="keyword">switch</span> (match)  </div><div class="line">       &#123;  </div><div class="line">           <span class="keyword">case</span> PEOPLE:  </div><div class="line">               <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/people"</span>;  </div><div class="line">           <span class="keyword">case</span> PEOPLE_ID:  </div><div class="line">               <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/people"</span>;  </div><div class="line">           <span class="keyword">default</span>:  </div><div class="line">               <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">       &#125;  </div><div class="line">Uri uri = Uri.parse(<span class="string">"content://"</span> + <span class="string">"com.yfz.Lesson"</span> + <span class="string">"/people"</span>);</div><div class="line"><span class="keyword">int</span> match = matcher.match(uri);</div><div class="line">       <span class="keyword">switch</span> (match)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">case</span> PEOPLE:</div><div class="line">               <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/people"</span>;</div><div class="line">           <span class="keyword">case</span> PEOPLE_ID:</div><div class="line">               <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/people"</span>;</div><div class="line">           <span class="keyword">default</span>:</div><div class="line">               <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+<p>match方法匹配后会返回一个匹配码Code，即在使用注册方法addURI时传入的第三个参数。上述方法会返回”vnd.android.cursor.dir/person”.</p>
+<p>总结: </p>
+<ul>
+<li>常量 UriMatcher.NO_MATCH 表示不匹配任何路径的返回码</li>
+<li># 号为通配符</li>
+<li>* 号为任意字符</li>
+</ul>
+<p>另外说一下，官方SDK说明中关于Uri的注册是这样写的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> UriMatcher sURIMatcher = <span class="keyword">new</span> UriMatcher();  </div><div class="line"><span class="keyword">static</span>  </div><div class="line">&#123;  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/people"</span>, PEOPLE);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/people/#"</span>, PEOPLE_ID);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/people/#/phones"</span>, PEOPLE_PHONES);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/people/#/phones/#"</span>, PEOPLE_PHONES_ID);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/people/#/contact_methods"</span>, PEOPLE_CONTACTMETHODS);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/people/#/contact_methods/#"</span>, PEOPLE_CONTACTMETHODS_ID);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/deleted_people"</span>, DELETED_PEOPLE);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/phones"</span>, PHONES);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/phones/filter/*"</span>, PHONES_FILTER);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/phones/#"</span>, PHONES_ID);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/contact_methods"</span>, CONTACTMETHODS);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"contacts"</span>, <span class="string">"/contact_methods/#"</span>, CONTACTMETHODS_ID);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"call_log"</span>, <span class="string">"/calls"</span>, CALLS);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"call_log"</span>, <span class="string">"/calls/filter/*"</span>, CALLS_FILTER);  </div><div class="line">    sURIMatcher.addURI(<span class="string">"call_log"</span>, <span class="string">"/calls/#"</span>, CALLS_ID);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个说明估计已经是Google官方没有更新，首先是初始化方法，没有传参，那么现在初始化时，实际是必须传参的。 可以看一下Android2.2的源码，无参数的构造方法已经是private的了。</p>
+<p>另外就是addURI这个方法，第二个参数开始时不需要”/“， 否则是无法匹配成功的。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>addURI(String authority, String path, int code)</td>
+<td>code：表示匹配成功以后的返回值</td>
+</tr>
+<tr>
+<td>match()</td>
+<td>匹配uri</td>
+</tr>
+</tbody>
+</table>
+<h1 id="3-ContentUris"><a href="#3-ContentUris" class="headerlink" title="3. ContentUris"></a><strong>3. ContentUris</strong></h1><p>ContentUris 类用于获取Uri路径后面的ID部分</p>
+<p>1、为路径加上ID: withAppendedId(uri, id)<br>比如有这样一个Uri</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"content://com.yfz.Lesson/people"</span>)</div></pre></td></tr></table></figure>
+<p>通过withAppendedId方法，为该Uri加上ID</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uri resultUri = ContentUris.withAppendedId(uri, <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<p>最后resultUri为: content://com.yfz.Lesson/people/10</p>
+<p>2、从路径中获取ID: parseId(uri)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Uri uri = Uri.parse(<span class="string">"content://com.yfz.Lesson/people/10"</span>)  </div><div class="line"><span class="keyword">long</span> personid = ContentUris.parseId(uri);</div></pre></td></tr></table></figure>
+<p>最后personid 为 :10</p>
+<p>附上实验的代码： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lesson_14</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;        </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTHORITY = <span class="string">"com.yfz.Lesson"</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PEOPLE = <span class="number">1</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PEOPLE_ID = <span class="number">2</span>;        </div><div class="line">    <span class="comment">//NO_MATCH表示不匹配任何路径的返回码   </span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> UriMatcher sURIMatcher = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);  </div><div class="line">    <span class="keyword">static</span>  </div><div class="line">    &#123;  </div><div class="line">        sURIMatcher.addURI(AUTHORITY, <span class="string">"people"</span>, PEOPLE);            </div><div class="line">        <span class="comment">//这里的#代表匹配任意数字，另外还可以用*来匹配任意文本   </span></div><div class="line">        sURIMatcher.addURI(AUTHORITY, <span class="string">"people/#"</span>, PEOPLE_ID);  </div><div class="line">    &#125;        </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </div><div class="line">        Logger.d(<span class="string">"------ Start Activity !!! ------"</span>);            </div><div class="line">        Uri uri1 = Uri.parse(<span class="string">"content://"</span> + AUTHORITY + <span class="string">"/people"</span>);  </div><div class="line">        Logger.e(<span class="string">"Uri:"</span> + uri1);  </div><div class="line">        Logger.d(<span class="string">"Match 1"</span> + getType(uri1));            </div><div class="line">        Uri uri2 = Uri.parse(<span class="string">"content://"</span> + AUTHORITY + <span class="string">"/people"</span> + <span class="string">"/2"</span>);   </div><div class="line">        Logger.e(<span class="string">"Uri:"</span> + uri2);  </div><div class="line">        Logger.d(<span class="string">"Match 2"</span> + getType(uri2));  </div><div class="line">        <span class="comment">//拼接Uri   </span></div><div class="line">        Uri cUri = ContentUris.withAppendedId(uri1, <span class="number">15</span>);  </div><div class="line">        Logger.e(<span class="string">"Uri:"</span> + cUri);  </div><div class="line">        <span class="comment">//获取ID   </span></div><div class="line">        <span class="keyword">long</span> id = ContentUris.parseId(cUri);  </div><div class="line">        Logger.d(<span class="string">"Uri ID: "</span> + id);  </div><div class="line">    &#125;        </div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getType</span><span class="params">(Uri uri)</span> </span>&#123;  </div><div class="line">        <span class="keyword">int</span> match = sURIMatcher.match(uri);  </div><div class="line">        <span class="keyword">switch</span> (match)  </div><div class="line">        &#123;  </div><div class="line">            <span class="keyword">case</span> PEOPLE:  </div><div class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/person"</span>;  </div><div class="line">            <span class="keyword">case</span> PEOPLE_ID:  </div><div class="line">                <span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/person"</span>;  </div><div class="line">            <span class="keyword">default</span>:  </div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ContentUris 是解析Uri 的一个工具类，可以将Uri 中的id 给解析出来</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parseId(uri)</td>
+<td>获取path中的数据</td>
+</tr>
+<tr>
+<td>withAppendedId(uri, id)</td>
+<td>使用ContentUris工具类将id追加到uri中，返回给客户</td>
+</tr>
+</tbody>
+</table>
+<h1 id="4-URL：统一资源定位符"><a href="#4-URL：统一资源定位符" class="headerlink" title="4. URL：统一资源定位符"></a><strong>4. URL：统一资源定位符</strong></h1><p>统一资源定位符也就是说根据URL能够定位到网络上的某个资源，它是指向互联网“资源”的指针。是对可以从互联网上得到的资源的位置和访问方法的一种简洁的表示，是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。</p>
+<p>每个URL都是URI，但不一定每个URI都是URL。这是因为URI还包括一个子类，即统一资源名称（URN），它命名资源但不指定如何定位资源。</p>
+<p>比如百度URL即是<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a></p>
+<p><img src="http://img.blog.csdn.net/20161105201213875" alt="url"></p>
+<h1 id="5-URI、URL-和-URN"><a href="#5-URI、URL-和-URN" class="headerlink" title="5. URI、URL 和 URN"></a><strong>5. URI、URL 和 URN</strong></h1><p>URI 是统一资源标识符，而 URL 是统一资源定位符。因此，笼统地说，每个 URL 都是 URI，但不一定每个 URI 都是 URL。这是因为 URI 还包括一个子类，即统一资源名称 (URN)，它命名资源但不指定如何定位资源。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/url/" rel="tag"># url</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/即时通讯：XMPP基础/" rel="next" title="即时通讯：XMPP基础">
+                <i class="fa fa-chevron-left"></i> 即时通讯：XMPP基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/JNI与底层调用2/" rel="prev" title="JNI与底层调用2">
+                JNI与底层调用2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-URI：统一资源标识符"><span class="nav-number">1.</span> <span class="nav-text">1. URI：统一资源标识符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-URI的使用方法"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 URI的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-URI常用方法"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 URI常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-UriMatcher"><span class="nav-number">2.</span> <span class="nav-text">2. UriMatcher</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-ContentUris"><span class="nav-number">3.</span> <span class="nav-text">3. ContentUris</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-URL：统一资源定位符"><span class="nav-number">4.</span> <span class="nav-text">4. URL：统一资源定位符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-URI、URL-和-URN"><span class="nav-number">5.</span> <span class="nav-text">5. URI、URL 和 URN</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/';
+          this.page.identifier = '2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/';
+          this.page.title = 'Uri、URL、UriMatcher、ContentUris详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

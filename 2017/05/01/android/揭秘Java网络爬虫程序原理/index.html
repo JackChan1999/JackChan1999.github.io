@@ -1,0 +1,1311 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="网络爬虫," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="随着互联网+时代的来临，越来越多的互联网企业层出不穷，涉及游戏、视频、新闻、社交、电商、房产、旅游等众多行业。如今互联网成为大量信息的载体，如何有效地从中提取有价值的信息并利用这些信息成为一个巨大的挑战 爬虫，一个可怕的怪物，从百度、Google等搜索引擎公司诞生开始便有了它的身影，如今移动互联网时代爬虫更是猖狂，每个网站似乎都被它光顾过，只是你看不到，不过你放心它不干坏事，你能在网上迅速搜索到你">
+<meta name="keywords" content="网络爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="揭秘Java网络爬虫程序原理">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/揭秘Java网络爬虫程序原理/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="随着互联网+时代的来临，越来越多的互联网企业层出不穷，涉及游戏、视频、新闻、社交、电商、房产、旅游等众多行业。如今互联网成为大量信息的载体，如何有效地从中提取有价值的信息并利用这些信息成为一个巨大的挑战 爬虫，一个可怕的怪物，从百度、Google等搜索引擎公司诞生开始便有了它的身影，如今移动互联网时代爬虫更是猖狂，每个网站似乎都被它光顾过，只是你看不到，不过你放心它不干坏事，你能在网上迅速搜索到你">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/01_爬虫简介.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/02_搜索引擎原理.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/03_数据分析.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/网络爬虫框架.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/httpclient.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast8.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast1.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast3.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast4.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast5.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast2.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast6.png">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/android/assets/itcast7.png">
+<meta property="og:updated_time" content="2017-05-01T04:54:10.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="揭秘Java网络爬虫程序原理">
+<meta name="twitter:description" content="随着互联网+时代的来临，越来越多的互联网企业层出不穷，涉及游戏、视频、新闻、社交、电商、房产、旅游等众多行业。如今互联网成为大量信息的载体，如何有效地从中提取有价值的信息并利用这些信息成为一个巨大的挑战 爬虫，一个可怕的怪物，从百度、Google等搜索引擎公司诞生开始便有了它的身影，如今移动互联网时代爬虫更是猖狂，每个网站似乎都被它光顾过，只是你看不到，不过你放心它不干坏事，你能在网上迅速搜索到你">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/01/android/assets/01_爬虫简介.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/揭秘Java网络爬虫程序原理/"/>
+
+
+
+
+
+  <title>揭秘Java网络爬虫程序原理 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/揭秘Java网络爬虫程序原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                揭秘Java网络爬虫程序原理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:38:21+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/揭秘Java网络爬虫程序原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/揭秘Java网络爬虫程序原理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>随着互联网+时代的来临，越来越多的互联网企业层出不穷，涉及游戏、视频、新闻、社交、电商、房产、旅游等众多行业。如今互联网成为大量信息的载体，如何有效地从中提取有价值的信息并利用这些信息成为一个巨大的挑战</p>
+<p>爬虫，一个可怕的怪物，从百度、Google等搜索引擎公司诞生开始便有了它的身影，如今移动互联网时代爬虫更是猖狂，每个网站似乎都被它光顾过，只是你看不到，不过你放心它不干坏事，你能在网上迅速搜索到你到的信息应该都是它的功劳，它每天会默默无闻的采集互联网上的丰富信息供大家查询共享。Java作为互联网开发的主流语言，广泛应用于互联网领域，本课程使用java技术为大家讲解如何编写爬虫程序爬取网络上有价值的数据信息。</p>
+<a id="more"></a>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><ul>
+<li>爬虫的架构解析</li>
+<li>爬虫基本原理分析</li>
+<li>编写爬虫程序</li>
+<li>爬虫在电商中的应用</li>
+</ul>
+<h1 id="1-爬虫简介"><a href="#1-爬虫简介" class="headerlink" title="1. 爬虫简介"></a>1. 爬虫简介</h1><p>我们访问某一个网页的时候，在地址栏输入网址，按回车，该网站的服务器就会返回一个HTML文件给我们，浏览器解析返回的数据，展示在UI上。同样爬虫程序也是模仿人的操作，给网站发送一个请求，网站会给爬虫程序返回一个HTML文件，爬虫程序再根据返回的数据进行抓取分析</p>
+<p><img src="../assets/01_爬虫简介.png" alt="爬虫简介"></p>
+<h2 id="1-1-爬虫概论"><a href="#1-1-爬虫概论" class="headerlink" title="1.1 爬虫概论"></a>1.1 爬虫概论</h2><p>网络爬虫（Web crawler）也叫网络蜘蛛（Web spide）自动检索工具（automatic indexer），是一种”自动化浏览网络“的程序，或者说是一种网络机器人。</p>
+<p>爬虫被广泛用于互联网搜索引擎或其他类似网站，以获取或更新这些网站的内容和检索方式。它们可以自动采集所有其能够访问到的页面内容，以供搜索引擎做进一步处理（分检整理下载的页面），而使得用户能更快的检索到他们需要的信息。</p>
+<p>通俗的讲，就是把你手动打开窗口，输入数据等等操作用程序代替。用程序替你获取你想要的信息，这就是网络爬虫</p>
+<h2 id="1-2-爬虫应用"><a href="#1-2-爬虫应用" class="headerlink" title="1.2 爬虫应用"></a>1.2 爬虫应用</h2><h3 id="1-2-1-搜索引擎"><a href="#1-2-1-搜索引擎" class="headerlink" title="1.2.1 搜索引擎"></a>1.2.1 搜索引擎</h3><p>爬虫程序可以为搜索引擎系统爬取网络资源，用户可以通过搜索引擎搜索网络上一切所需要的资源。搜索引擎是一套非常庞大且精密的算法系统，搜索的准确性，高效性等都对搜索系统有很高的要求。</p>
+<p><img src="../assets/02_搜索引擎原理.png" alt="搜索引擎原理"></p>
+<h3 id="1-2-2-数据挖掘"><a href="#1-2-2-数据挖掘" class="headerlink" title="1.2.2 数据挖掘"></a>1.2.2 数据挖掘</h3><p><img src="../assets/03_数据分析.png" alt="数据分析"></p>
+<p>爬虫除了用来做搜索外，还可以做非常多的工作，可以说爬虫现在在互联网项目中应用的非常广泛。<br>互联网项目通过爬取相关数据主要进行数据分析，获取价值数据。那么爬虫具体可以做那么分析，下面可以简单做一个简单了解：</p>
+<ul>
+<li>股票分析—预测股市</li>
+<li>社会学方面统计预测<ul>
+<li>情绪地图</li>
+<li>饮食分布图</li>
+<li>票房分析预测</li>
+<li>机场实时流量</li>
+<li>公交系统实时线路</li>
+<li>火车票实时销售统计</li>
+</ul>
+</li>
+<li>App下载量分析</li>
+</ul>
+<h2 id="1-3-爬虫原理"><a href="#1-3-爬虫原理" class="headerlink" title="1.3 爬虫原理"></a>1.3 爬虫原理</h2><h3 id="1-3-1-爬虫目的"><a href="#1-3-1-爬虫目的" class="headerlink" title="1.3.1 爬虫目的"></a>1.3.1 爬虫目的</h3><p>一般来讲对我们而言需要抓取的是某个网站或者某个应用的内容，提取有用的价值，进行数据分析。</p>
+<h3 id="1-3-2-爬虫框架设计"><a href="#1-3-2-爬虫框架设计" class="headerlink" title="1.3.2 爬虫框架设计"></a>1.3.2 爬虫框架设计</h3><p>为了开发的方便，也可以使用爬虫框架来开发项目中的爬虫；一个通用的网络爬虫的框架如图所示：</p>
+<p><img src="../assets/网络爬虫框架.png" alt=""></p>
+<p>网络爬虫的基本工作流程如下：</p>
+<ol>
+<li>首先选取一部分精心挑选的种子URL</li>
+<li>将这些URL放入待抓取URL队列</li>
+<li>从待抓取URL队列中取出待抓取在URL，解析DNS，并且得到主机的ip，并将URL对应的网页下载下来，存储进已下载网页库中。此外，将这些URL放进已抓取URL队列</li>
+<li>分析已抓取URL队列中的URL，分析其中的其他URL，并且将URL放入待抓取URL队列，从而进入下一个循环</li>
+</ol>
+<h1 id="2-Java爬虫框架"><a href="#2-Java爬虫框架" class="headerlink" title="2. Java爬虫框架"></a>2. Java爬虫框架</h1><h2 id="2-1-Nutch"><a href="#2-1-Nutch" class="headerlink" title="2.1 Nutch"></a>2.1 Nutch</h2><p>Nutch属于分布式爬虫，爬虫使用分布式，主要是解决两个问题：1)海量URL管理；2)网速。如果要做搜索引擎，Nutch1.x是一个非常好的选择。Nutch1.x和solr或者es配合，就可以构成一套非常强大的搜索引擎，否则尽量不要选择Nutch作为爬虫。用Nutch进行爬虫的二次开发，爬虫的编写和调试所需的时间，往往是单机爬虫所需的十倍时间不止。</p>
+<h2 id="2-2-Heritrix"><a href="#2-2-Heritrix" class="headerlink" title="2.2 Heritrix"></a>2.2 Heritrix</h2><p>Heritrix 是个“Archival Crawler”——来获取完整的、精确的、站点内容的深度复制。包括获取图像以及其他非文本内容。抓取并存储相关的内容。对内容来者不拒，不对页面进行内容上的修改。重新爬行对相同的URL不针对先前的进行替换。爬虫主要通过Web用户界面启动、监控和调整，允许弹性的定义要获取的url。</p>
+<h2 id="2-3-crawler4j"><a href="#2-3-crawler4j" class="headerlink" title="2.3 crawler4j"></a>2.3 crawler4j</h2><p>crawler4j是Java实现的开源网络爬虫。提供了简单易用的接口，可以在几分钟内创建一个多线程网络爬虫。</p>
+<h2 id="2-4-WebCollector"><a href="#2-4-WebCollector" class="headerlink" title="2.4 WebCollector"></a>2.4 WebCollector</h2><p>WebCollector使用了Nutch的爬取逻辑（分层广度遍历），Crawler4j的的用户接口（覆盖visit方法，定义用户操作）,以及一套自己的插件机制，设计了一套爬虫内核。</p>
+<h2 id="2-5-WebMagic"><a href="#2-5-WebMagic" class="headerlink" title="2.5 WebMagic"></a>2.5 WebMagic</h2><p>WebMagic项目代码分为核心和扩展两部分。核心部分(webmagic-core)是一个精简的、模块化的爬虫实现，而扩展部分则包括一些便利的、实用性的功能。WebMagic的架构设计参照了Scrapy，目标是尽量的模块化，并体现爬虫的功能特点。</p>
+<h1 id="3-HttpClient-amp-Jsoup"><a href="#3-HttpClient-amp-Jsoup" class="headerlink" title="3. HttpClient&amp;Jsoup"></a>3. HttpClient&amp;Jsoup</h1><p>爬虫实现的技术有很多，对于java语言来说，有很多的选择，可以是很多开源的爬虫框架，也可以使用基本httpClient,Jsoup来爬取网页</p>
+<h2 id="3-1-HttpClient简介"><a href="#3-1-HttpClient简介" class="headerlink" title="3.1 HttpClient简介"></a>3.1 HttpClient简介</h2><p>HttpClient 是 apache 组织下面的一个用于处理 HTTP 请求和响应的开源工具。它不是一个浏览器，也不处理客户端缓存等浏览器的功能。它只是一个类库！它在 JDK 的基本类库基础上做了更好的封装。</p>
+<p>HttpClient 项目依赖于 HttpCore（处理核心的 HTTP 协议）、commons-codec（处理与编码有关的问题的项目）和 commons-logging（处理与日志记录有关问题的项目）。如果你希望能够通过 HttpClient 向服务器上传文件等与 multipart 编码类型有关的请求，以及其它复杂的MIME 类型，那么，你需要另外一个依赖包：HttpMime（它是专门处理与 MIME 类型有关问题的项目），在下载的 HttpClient 包中（<a href="http://hc.apache.org/downloads.cgi" target="_blank" rel="external">下载地址</a>）已经包含了 HttpMime</p>
+<p>项目中使用的 HttpClient 版本为：4.0.1GA，httpClient需要有以下依赖包：</p>
+<ul>
+<li>httpclient-4.0.1.jar</li>
+<li>httpcore-4.0.1.jar</li>
+<li>httpmime-4.0.1.jar</li>
+</ul>
+<p>又依赖于 mime4j（apache-mime4j-0.6.jar）</p>
+<ul>
+<li>commons-codec-1.4.jar</li>
+<li>commons-logging-1.1.1.jar</li>
+<li>commons-io-1.4.jar – 为了更方便处理与 IO 有关的需求</li>
+</ul>
+<p><img src="../assets/httpclient.png" alt=""></p>
+<p>##3.2 HttpClient抓取网页流程</p>
+<p>使用HttpClient发送请求、接收响应很简单，一般需要如下几步：</p>
+<ol>
+<li>创建HttpClient对象。</li>
+<li>创建请求方法的实例，并指定请求URL。如果需要发送GET请求，创建HttpGet对象；如果需要发送POST请求，创建HttpPost对象。</li>
+<li>如果需要发送请求参数，可调用HttpGet、HttpPost共同的setParams(HetpParams params)方法来添加请求参数；对于HttpPost对象而言，也可调用setEntity(HttpEntity entity)方法来设置请求参数。</li>
+<li>调用HttpClient对象的execute(HttpUriRequest request)发送请求，该方法返回一个HttpResponse。</li>
+<li>调用HttpResponse的getAllHeaders()、getHeaders(String name)等方法可获取服务器的响应头；调用HttpResponse的getEntity()方法可获取HttpEntity对象，该对象包装了服务器的响应内容。程序可通过该对象获取服务器的响应内容。</li>
+<li>释放连接。无论执行方法是否成功，都必须释放连接。</li>
+</ol>
+<h2 id="3-3-简单抓取代码"><a href="#3-3-简单抓取代码" class="headerlink" title="3.3 简单抓取代码"></a>3.3 简单抓取代码</h2><p>用HttpClient发送请求，请求头不带cookie，用EntityUtils解析响应结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHttpClient</span> </span>&#123;</div><div class="line">	<span class="comment">/***</span></div><div class="line">	 * 需求：使用httpClient爬取传智播客官方网站数据</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> args</div><div class="line">	 * <span class="doctag">@throws</span> Exception</div><div class="line">	 * <span class="doctag">@throws</span> ClientProtocolException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 创建HttpClient对象</span></div><div class="line">		HttpClient hClient = <span class="keyword">new</span> DefaultHttpClient();</div><div class="line"></div><div class="line">		<span class="comment">// 设置响应时间，设置传智源码时间，设置代理服务器(不使用本机的IP爬取，以防止被服务器识别从而IP加入黑名单)</span></div><div class="line">		hClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, <span class="number">10000</span>)</div><div class="line">				.setParameter(CoreConnectionPNames.SO_TIMEOUT, <span class="number">10000</span>)</div><div class="line">				.setParameter(ConnRouteParams.DEFAULT_PROXY, <span class="keyword">new</span> HttpHost(<span class="string">"111.155.124.67"</span>, <span class="number">8123</span>));</div><div class="line"></div><div class="line">		<span class="comment">// 爬虫URL大部分都是get请求，创建get请求对象</span></div><div class="line">		HttpGet hget = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.itcast.cn/"</span>);</div><div class="line">		<span class="comment">// 向传智播客官方网站发送请求，获取网页源码</span></div><div class="line">		HttpResponse response = hClient.execute(hget);</div><div class="line">		<span class="comment">// EntityUtils工具类把网页实体转换成字符串</span></div><div class="line">		String content = EntityUtils.toString(response.getEntity(), <span class="string">"utf-8"</span>);</div><div class="line">		System.out.println(content);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解析结果</p>
+<p><img src="../assets/itcast8.png" alt=""></p>
+<p>用HttpClient发送请求，请求头带cookie，用EntityUtils解析响应结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用httpClient发送请求，使用Jsoup分析网页</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    <span class="comment">//创建httpClient客户端</span></div><div class="line">    HttpClient hClient = <span class="keyword">new</span> DefaultHttpClient();</div><div class="line">    <span class="comment">//创建http发送请求对象，Httpget</span></div><div class="line">    HttpGet hget = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.itcast.cn"</span>);</div><div class="line">    <span class="comment">//设置请求头</span></div><div class="line">    hget.setHeader(<span class="string">"Cookie"</span>, <span class="string">"login_sid_t=f39c57f474a4fbffeeac8b0d727c7310; "</span> +</div><div class="line">            <span class="string">"YF-Ugrow-G0=169004153682ef91866609488943c77f; "</span> +</div><div class="line">            <span class="string">"YF-V5-G0=cd5d86283b86b0d506628aedd6f8896e; WBStorage=7754ff192036c629|undefined;"</span> +</div><div class="line">            <span class="string">" _s_tentry=-; YF-Page-G0=074bd03ae4e08433ef66c71c2777fd84; "</span> +</div><div class="line">            <span class="string">"Apache=1025338456965.9829.1478277156276; "</span> +</div><div class="line">            <span class="string">"SINAGLOBAL=1025338456965.9829.1478277156276; "</span> +</div><div class="line">            <span class="string">"ULV=1478277156293:1:1:1:1025338456965.9829.1478277156276:; "</span> +</div><div class="line">            <span class="string">"SUB=_2AkMvQDcef8NhqwJRmP4Uzm7mbYxwzA_EieLBAH7sJRMxHRl"</span> +</div><div class="line">            <span class="string">"-yj9jqmwNtRBn0SIxPIgzk6P4Umq_twX_A70bVg..; "</span> +</div><div class="line">            <span class="string">"SUBP=0033WrSXqPxfM72-Ws9jqgMF55529P9D9W5J2ZDKK_Q-h8ni.aX3E1Ci"</span>);</div><div class="line">    hget.setHeader(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 "</span> +</div><div class="line">            <span class="string">"(KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"</span>);</div><div class="line">    <span class="comment">//设置连接超时，传递响应超时</span></div><div class="line">    hClient.getParams()</div><div class="line">            .setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, <span class="number">10000</span>)</div><div class="line">            .setParameter(CoreConnectionPNames.SO_TIMEOUT, <span class="number">10000</span>)</div><div class="line">            .setParameter(ConnRouteParams.DEFAULT_PROXY, <span class="keyword">new</span> HttpHost(<span class="string">"121.31.71.63"</span>, <span class="number">80</span>));</div><div class="line">    <span class="comment">//发送请求</span></div><div class="line">    HttpResponse response = hClient.execute(hget);</div><div class="line">    <span class="comment">//获取网页内容</span></div><div class="line">    String content = EntityUtils.toString(response.getEntity(), <span class="string">"utf-8"</span>);</div><div class="line">    System.out.println(content);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="4-Jsoup简介"><a href="#4-Jsoup简介" class="headerlink" title="4. Jsoup简介"></a>4. Jsoup简介</h1><p>jsoup 是一款Java 的HTML解析器，可直接解析某个URL地址、HTML文本内容。它提供了一套非常省力的API，可通过DOM，CSS以及类似于jQuery的操作方法来取出和操作数据</p>
+<p>通常在写爬虫程序时，httpClient结合Jsoup共同使用即可实现完美的爬虫系统。httpClient负责模拟浏览器发送请求，Jsoup负责解析httpClient请求返回的HTML页面，解析获取需要的数据</p>
+<h2 id="4-1-Jsoup获取网页流程"><a href="#4-1-Jsoup获取网页流程" class="headerlink" title="4.1 Jsoup获取网页流程"></a>4.1 Jsoup获取网页流程</h2><ol>
+<li>从一个 URL，文件或字符串中解析 HTML</li>
+<li>使用 DOM 或 CSS 选择器来查找、取出数据</li>
+<li>可操作 HTML 元素、属性、文本</li>
+</ol>
+<h2 id="4-2-Jsoup获取网页代码"><a href="#4-2-Jsoup获取网页代码" class="headerlink" title="4.2 Jsoup获取网页代码"></a>4.2 Jsoup获取网页代码</h2><p>用Jsoup抓取传智播客官网左侧的数据，如图所示</p>
+<p><img src="../assets/itcast1.png" alt=""></p>
+<p>用谷歌浏览器开发者工具（F12）打开查看源码如下图，从中可以看到ul标签的class选择器为nav_txt</p>
+<p><img src="../assets/itcast3.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpClientJsoup</span> </span>&#123;</div><div class="line">	<span class="comment">/***</span></div><div class="line">	 * 需求：使用httpClient爬取传智播客官方网站数据</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> args</div><div class="line">	 * <span class="doctag">@throws</span> Exception</div><div class="line">	 * <span class="doctag">@throws</span> ClientProtocolException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// 创建HttpClient对象</span></div><div class="line">		HttpClient hClient = <span class="keyword">new</span> DefaultHttpClient();</div><div class="line"></div><div class="line">		<span class="comment">// 设置响应时间，设置传智源码时间，设置代理服务器</span></div><div class="line">		<span class="comment">/*hClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000)</span></div><div class="line">				.setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000)</div><div class="line">				.setParameter(ConnRouteParams.DEFAULT_PROXY, new HttpHost("111.155.124.67", 8123));*/</div><div class="line"></div><div class="line">		<span class="comment">// 爬虫URL大部分都是get请求，创建get请求对象</span></div><div class="line">		HttpGet hget = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.itcast.cn/"</span>);</div><div class="line">		hget.setHeader(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 "</span> +</div><div class="line">	            <span class="string">"(KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"</span>);</div><div class="line">		<span class="comment">// 向传智播客官方网站发送请求，获取网页源码</span></div><div class="line">		HttpResponse response = hClient.execute(hget);</div><div class="line">		<span class="comment">// EntityUtils工具类把网页实体转换成字符串</span></div><div class="line">		String content = EntityUtils.toString(response.getEntity(), <span class="string">"utf-8"</span>);</div><div class="line">		<span class="comment">// 使用Jsoup解析网页内容</span></div><div class="line">		Document document = Jsoup.parse(content);</div><div class="line">		<span class="comment">// 获取文档标题</span></div><div class="line">		String title = document.title();</div><div class="line">		System.out.println(title);</div><div class="line">		</div><div class="line">		Elements elements = document.select(<span class="string">"ul.nav_txt a"</span>);</div><div class="line">		System.out.println(elements);</div><div class="line">		<span class="keyword">for</span>(Element element : elements)&#123;</div><div class="line">			System.out.println(element.text() + <span class="string">":"</span> + element.attr(<span class="string">"href"</span>));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解析结果</p>
+<p><img src="../assets/itcast4.png" alt=""></p>
+<p>使用jsoup向服务器发送请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyJsoup</span> </span>&#123;</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 需求：使用Jsoup解析网页源码</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		<span class="comment">// 使用jsoup向服务器发送请求</span></div><div class="line">		Document doc = Jsoup.connect(<span class="string">"http://www.itcast.cn"</span>).get();</div><div class="line">		<span class="comment">// Jsoup使用类型css,Jquery选择器方式获取元素节点</span></div><div class="line">		<span class="comment">// Elements elements = doc.getElementsByTag("a");</span></div><div class="line">		<span class="comment">// System.out.println(elements.text());</span></div><div class="line">		Elements elements = doc.select(<span class="string">"ul.nav_txt a"</span>);</div><div class="line">		<span class="comment">// 循环元素</span></div><div class="line">		<span class="keyword">for</span> (Element element : elements) &#123;</div><div class="line">			System.out.println(element.text() + <span class="string">":"</span> + element.attr(<span class="string">"href"</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解析结果</p>
+<p><img src="../assets/itcast5.png" alt=""></p>
+<h1 id="5-综合应用"><a href="#5-综合应用" class="headerlink" title="5. 综合应用"></a>5. 综合应用</h1><p>解析下图中红色框的内容，HttpClient发送请求，Jsoup解析结果</p>
+<p><img src="../assets/itcast2.png" alt=""></p>
+<p>点击开发者工具的第一个图标，移动鼠标到网页的目标位置，即可定位到该目标的网页源码位置</p>
+<p><img src="../assets/itcast6.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.github.webcrawder;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.http.HttpResponse;</div><div class="line"><span class="keyword">import</span> org.apache.http.client.ClientProtocolException;</div><div class="line"><span class="keyword">import</span> org.apache.http.client.HttpClient;</div><div class="line"><span class="keyword">import</span> org.apache.http.client.methods.HttpGet;</div><div class="line"><span class="keyword">import</span> org.apache.http.impl.client.DefaultHttpClient;</div><div class="line"><span class="keyword">import</span> org.apache.http.util.EntityUtils;</div><div class="line"><span class="keyword">import</span> org.jsoup.Jsoup;</div><div class="line"><span class="keyword">import</span> org.jsoup.nodes.Document;</div><div class="line"><span class="keyword">import</span> org.jsoup.select.Elements;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrawderDemo</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClientProtocolException, IOException </span>&#123;</div><div class="line">		<span class="comment">// 创建httpClient客户端</span></div><div class="line">		HttpClient hClient = <span class="keyword">new</span> DefaultHttpClient();</div><div class="line">		<span class="comment">// 创建http发送请求对象，Httpget</span></div><div class="line">		HttpGet hget = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.itcast.cn"</span>);</div><div class="line">		<span class="comment">// 发送请求</span></div><div class="line">		HttpResponse response = hClient.execute(hget);</div><div class="line">		<span class="comment">// 获取网页内容</span></div><div class="line">		String content = EntityUtils.toString(response.getEntity(), <span class="string">"utf-8"</span>);</div><div class="line">		<span class="comment">// 使用Jsoup解析网页内容</span></div><div class="line">		Document document = Jsoup.parse(content);</div><div class="line">		<span class="comment">// 使用元素选择器选择网页的内容</span></div><div class="line">		Elements elements = document.select(<span class="string">"ul.nav_li a"</span>);</div><div class="line">		System.out.println(elements.text());</div><div class="line">		System.out.println(elements);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解析结果</p>
+<p><img src="../assets/itcast7.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用jsoup加载远程连接数据</span></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">myJsouptest</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    String userAgent = <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like "</span> +</div><div class="line">            <span class="string">"Gecko) Chrome/44.0.2403.157 Safari/537.36"</span>;</div><div class="line">    <span class="comment">//准备cookie信息</span></div><div class="line">    Map&lt;String, String&gt; maps = <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">    maps.put(<span class="string">"TC-Ugrow-G0"</span>, <span class="string">"968b70b7bcdc28ac97c8130dd353b55e"</span>);</div><div class="line">    maps.put(<span class="string">"SUB"</span>, <span class="string">"2AkMvfeeDf8NhqwJRmP0dzGvhZY5yywvEieLBAH7sJRMxHRl-yT9jqmAHtRAgR4BQZgBIE"</span> +</div><div class="line">            <span class="string">"-Xz-jsqjVftcUdtrA.."</span>);</div><div class="line">    maps.put(<span class="string">"SUBP"</span>, <span class="string">"0033WrSXqPxfM72-Ws9jqgMF55529P9D9WhBu3bohh6dYkXbY_GUs5d8"</span>);</div><div class="line">    <span class="comment">//获取网页dom对象</span></div><div class="line">    Document doc = Jsoup.connect(<span class="string">"http://www.itcast.cn/"</span>)</div><div class="line">            .userAgent(userAgent)</div><div class="line">            .cookies(maps).get();</div><div class="line">    <span class="comment">//获取文档标签</span></div><div class="line">    String title = doc.title();</div><div class="line">    System.out.println(title);</div><div class="line">    <span class="comment">//获取网页元素</span></div><div class="line">    Elements elements = doc.select(<span class="string">"div.qrcode-text"</span>);</div><div class="line">    System.out.println(elements.text());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="6-爬虫在电商网站应用"><a href="#6-爬虫在电商网站应用" class="headerlink" title="6.爬虫在电商网站应用"></a>6.爬虫在电商网站应用</h1>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络爬虫/" rel="tag"># 网络爬虫</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/自定义控件：侧滑面板/" rel="next" title="自定义控件：侧滑面板">
+                <i class="fa fa-chevron-left"></i> 自定义控件：侧滑面板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/Wireshark抓包实战/" rel="prev" title="Wireshark抓包实战">
+                Wireshark抓包实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">1.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-爬虫简介"><span class="nav-number">2.</span> <span class="nav-text">1. 爬虫简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-爬虫概论"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 爬虫概论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-爬虫应用"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 爬虫应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-搜索引擎"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1 搜索引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-数据挖掘"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2 数据挖掘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-爬虫原理"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 爬虫原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-爬虫目的"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1 爬虫目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-爬虫框架设计"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2 爬虫框架设计</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Java爬虫框架"><span class="nav-number">3.</span> <span class="nav-text">2. Java爬虫框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Nutch"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Nutch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Heritrix"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Heritrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-crawler4j"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 crawler4j</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-WebCollector"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 WebCollector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-WebMagic"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 WebMagic</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-HttpClient-amp-Jsoup"><span class="nav-number">4.</span> <span class="nav-text">3. HttpClient&Jsoup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-HttpClient简介"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 HttpClient简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-简单抓取代码"><span class="nav-number">4.2.</span> <span class="nav-text">3.3 简单抓取代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Jsoup简介"><span class="nav-number">5.</span> <span class="nav-text">4. Jsoup简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Jsoup获取网页流程"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Jsoup获取网页流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Jsoup获取网页代码"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 Jsoup获取网页代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-综合应用"><span class="nav-number">6.</span> <span class="nav-text">5. 综合应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-爬虫在电商网站应用"><span class="nav-number">7.</span> <span class="nav-text">6.爬虫在电商网站应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/揭秘Java网络爬虫程序原理/';
+          this.page.identifier = '2017/05/01/android/揭秘Java网络爬虫程序原理/';
+          this.page.title = '揭秘Java网络爬虫程序原理';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

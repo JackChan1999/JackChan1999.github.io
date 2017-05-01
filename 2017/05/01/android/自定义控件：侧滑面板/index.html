@@ -1,0 +1,1332 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自定义控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本篇博客讲解的是自定义View之侧滑面板，应用场景：QQ，知乎，效果图如下">
+<meta name="keywords" content="自定义控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义控件：侧滑面板">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/自定义控件：侧滑面板/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="本篇博客讲解的是自定义View之侧滑面板，应用场景：QQ，知乎，效果图如下">
+<meta property="og:image" content="http://img.blog.csdn.net/20160911235727896">
+<meta property="og:image" content="http://img.blog.csdn.net/20160911235054498">
+<meta property="og:image" content="http://img.blog.csdn.net/20160911235141249">
+<meta property="og:updated_time" content="2017-05-01T04:55:37.195Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自定义控件：侧滑面板">
+<meta name="twitter:description" content="本篇博客讲解的是自定义View之侧滑面板，应用场景：QQ，知乎，效果图如下">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160911235727896">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/自定义控件：侧滑面板/"/>
+
+
+
+
+
+  <title>自定义控件：侧滑面板 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/自定义控件：侧滑面板/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自定义控件：侧滑面板
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:37:58+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/自定义控件：侧滑面板/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/自定义控件：侧滑面板/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇博客讲解的是自定义View之侧滑面板，应用场景：QQ，知乎，效果图如下<br><img src="http://img.blog.csdn.net/20160911235727896" alt="侧滑面板"></p>
+<a id="more"></a>
+<p>##<strong>1. 内容摘要</strong></p>
+<ul>
+<li>了解ViewDragHelper 的产生及解决的问题</li>
+<li>掌握ViewDragHelper 的使用步骤</li>
+<li>掌握属性动画的使用</li>
+<li>掌握状态更新及事件回调的用法</li>
+</ul>
+<p>##<strong>2. 实现最简单的拖拽</strong></p>
+<p>###<strong>2.1 实现最简单的拖拽</strong><br>在创建DragLayout 时，继承FrameLayout,这里需要注意两个问题</p>
+<p>为什么不继承ViewGroup,因为继承ViewGroup 需要重写onMeasure()和实现onLayout()方法，自己实现子view 的测量和摆放，在这里我们不需要自己去做测量和摆放，而FrameLayout 已经对这两个方法进行了具体实现，所以继承FrameLayout 更加简单省事</p>
+<p>为什么不继承RelativeLayout,因为这里我们只需要层级关系，不需要相对关系，继承RelativeLayout界面效果是一样的，但RelativeLayout 对FrameLayout 多了相对关系的计算，效率会低一些，所以选择继承FrameLayout</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DragLayout</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(context);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(context, attrs);</div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>###<strong>2.2 串联构造方法</strong><br>DragLayout 实例化时需要做一些初始化操作，如果我们定义一个init()方法，则我们需要在三个构造方法中都调用init()方法，这样非常麻烦，我们可以通过串连三个构造方法的方式实现只调用一次init()方法这样无论是代码创建还是布局在xml 中都能调用到我们的初始化代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DragLayout</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span> </span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">            <span class="comment">//代码创建时调用</span></div><div class="line">            <span class="keyword">this</span>(context, <span class="keyword">null</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">            <span class="comment">//布局在xml 中，实例化时调用</span></div><div class="line">            <span class="keyword">this</span>(context, attrs, <span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line">            <span class="comment">//在这里初始化</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>###<strong>2.3 ViewDragHelper 简介</strong><br>我们要实现拖拽的效果，则需要自己去解析Touch 事件的ACTION_DOWN，ACTION_MOVE，ACTION_UP，相当的麻烦。所以Google 在2013 年的IO 大会上发布了ViewDragHelper 这个类，用来解决滑动拖拽问题，用这个类可以非常简单的实现view 的拖拽</p>
+<p>###<strong>2.4 创建ViewDragHelper</strong><br>由于eclipse 创建项目时，为我们添加的android-support-v4.jar 没有包含ViewDragHelper,我们需要将最新的android-support-v4.jar 拷贝到libs 下面，然后clean 一下工程。</p>
+<p>在这里我们需要关联android-support-v4.jar 的源码，通过配置文件的方法来关联源码</p>
+<p>在libs 下面创建一个android-support-v4.jar.properties 的文件<br><img src="http://img.blog.csdn.net/20160911235054498" alt="这里写图片描述"></p>
+<p>android-support-v4.jar.properties 中的内容为src = V4 包源码路径<br><img src="http://img.blog.csdn.net/20160911235141249" alt="这里写图片描述"></p>
+<p>我们只需要在第三个构造方法中实现ViewDragHelper 的实例即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line">        <span class="comment">// 在这里初始化</span></div><div class="line">        <span class="comment">// forParent 父类容器</span></div><div class="line">        <span class="comment">// sensitivity 敏感度，越大越敏感，1.0f 是默认值</span></div><div class="line">        <span class="comment">// Callback 回调事件</span></div><div class="line">        <span class="comment">//1.通静态方法创建拖拽辅助类</span></div><div class="line">        mViewDragHelper = ViewDragHelper.create(<span class="keyword">this</span>, <span class="number">1.0f</span>, mCallback);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>ViewDragHelper 三个参数的创建的方法源码中的mTouchSlop 表示触摸的最小敏感范围，越小越敏感即在界面拖动的瞬间变化量大于mTouchSlop 时才可以成功触发拖拽事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ViewDragHelper <span class="title">create</span><span class="params">(ViewGroup forParent, <span class="keyword">float</span> sensitivity, Callback cb)</span></span>&#123;</div><div class="line">   <span class="keyword">final</span> ViewDragHelper helper = create(forParent, cb);</div><div class="line">   helper.mTouchSlop = (<span class="keyword">int</span>) (helper.mTouchSlop * (<span class="number">1</span> / sensitivity));</div><div class="line">   <span class="keyword">return</span> helper;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###<strong>2.5 触摸事件转交</strong><br>ViewDragHelper 创建成功了，但它和DragLayout 并没有任何关系，我们需要让它们建立关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//2.转交触摸事件</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">   <span class="comment">//由ViewDragHelper 判断是否拦截</span></div><div class="line">   <span class="keyword">return</span> mViewDragHelper.shouldInterceptTouchEvent(event);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>重写onInterceptTouchEvent 方法，将触摸事件交给ViewDragHelper 判断是否拦截，这样它们就建立了关系，事件拦截后，还需要对拦截到的事件进行处理，注意返回值必须是true</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">           <span class="comment">//由ViewDragHelper 处理拦截的事件</span></div><div class="line">           mViewDragHelper.processTouchEvent(event);</div><div class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;&#125;</div><div class="line">       <span class="comment">//事件已被处理，所以需要返回true</span></div><div class="line">       <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">   &#125;;</div></pre></td></tr></table></figure>
+<p>###<strong>2.6 处理回调事件</strong><br>ViewDragHelper 在处理触摸事件时会通过传入的callback 给我们反馈，通过对回调方法的处理即可实现简单的拖拽</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//3.处理回调事件</span></div><div class="line">    ViewDragHelper.Callback mCallback = <span class="keyword">new</span> ViewDragHelper.Callback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="comment">//返回值决定了child 是否可以被拖拽</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryCaptureView</span><span class="params">(View child, <span class="keyword">int</span> pointerId)</span> </span>&#123;</div><div class="line">            <span class="comment">//child 被用户拖拽的孩子</span></div><div class="line">            <span class="comment">//pointerId 多点触摸的手指id</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="comment">//修正子view 水平方向上的位置，此时还没有真正的移动，返回值决定view 将移动到的位置</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">clampViewPositionHorizontal</span><span class="params">(View child, <span class="keyword">int</span> left, <span class="keyword">int</span> dx)</span> </span>&#123;</div><div class="line">            <span class="comment">//left 建议移动到的位置</span></div><div class="line">            <span class="keyword">return</span> left;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<p>###<strong>2.7 DragLayout 布局到xml 中</strong><br>给左面板和主面板设置不同的背景颜色便于拖拽时观察效果，运行工程，即可实现简单的拖拽<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.example.draglayout.widget.DragLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@drawable/bg"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#66ff0000"</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#00ff00"</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">com.example.draglayout.widget.DragLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>##<strong>3. 限定拖拽范围</strong><br>现在左面板和主面板可以任意拖动，本节要实现左面板不动，拖动时，主面板在一定范围内拖动</p>
+<h3 id="3-1-OnFinishInflate-介绍"><a href="#3-1-OnFinishInflate-介绍" class="headerlink" title="3.1 OnFinishInflate()介绍"></a><strong>3.1 OnFinishInflate()介绍</strong></h3><p>onFinishInflate()在控件inflate 完成时会被调用，可以在这个方法中查找子控件</p>
+<ul>
+<li>可以通过findViewById()的方式查找子控件</li>
+<li>可以通过子view 索引的方式查找子控件</li>
+</ul>
+<p>这里采用第二种方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onFinishInflate</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onFinishInflate();</div><div class="line">        <span class="comment">//增强代码的健壮性</span></div><div class="line">        <span class="keyword">if</span>(getChildCount() &lt; <span class="number">2</span>)&#123;</div><div class="line">            <span class="comment">//必须有两个子view</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Your viewgroup must have two children."</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(!(getChildAt(<span class="number">0</span>)instanceofViewGroup)||!(getChildAt(<span class="number">1</span>)<span class="keyword">instanceof</span> ViewGroup))&#123;</div><div class="line">            <span class="comment">//子view 必须是viewgroup 的子类</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"The child must an instance of viewgroup."</span>);</div><div class="line">        &#125;</div><div class="line">        mLeftContent = getChildAt(<span class="number">0</span>);</div><div class="line">        mMainContent = getChildAt(<span class="number">1</span>);</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<h3 id="3-2-获取控件宽高"><a href="#3-2-获取控件宽高" class="headerlink" title="3.2 获取控件宽高"></a><strong>3.2 获取控件宽高</strong></h3><p>在onMeasure()方法中可以获取到控件的宽高，也可以在onSizeChanged()方法中去获取宽高，onMeasure()方法调用后会检测宽高值有没有变化，有变化才调用onSizeChanged()方法，无变化则不调用，所以onSizeChanged()调用的次数比onMeasure()少，在这里我们在onSizeChanged()方法中去获取宽高，同时计算出拖拽范围为宽度的60%</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">        mWidth = getMeasuredWidth();</div><div class="line">        mHeight = getMeasuredHeight();</div><div class="line">        <span class="comment">//拖拽的范围</span></div><div class="line">        mRange = (<span class="keyword">int</span>) (mWidth * <span class="number">0.6f</span>);</div><div class="line">        System.out.println(<span class="string">"mWidth:"</span>+mWidth+<span class="string">" mHeight:"</span>+mHeight +<span class="string">" mRange:"</span>+mRange);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="3-3-限定主面板的拖动范围"><a href="#3-3-限定主面板的拖动范围" class="headerlink" title="3.3 限定主面板的拖动范围"></a><strong>3.3 限定主面板的拖动范围</strong></h3><p>对callback 中的其它几个方法进行重写</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//3.处理回调事件</span></div><div class="line">   ViewDragHelper.Callback mCallback = <span class="keyword">new</span> ViewDragHelper.Callback() &#123;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="comment">//返回值决定了child 是否可以被拖拽</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryCaptureView</span><span class="params">(View child, <span class="keyword">int</span> pointerId)</span> </span>&#123;</div><div class="line">           <span class="comment">//child 被用户拖拽的孩子</span></div><div class="line">           <span class="comment">//pointerId 多点触摸的手指id</span></div><div class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">       &#125;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getViewHorizontalDragRange</span><span class="params">(View child)</span> </span>&#123;</div><div class="line">           <span class="keyword">return</span> <span class="keyword">super</span>.getViewHorizontalDragRange(child);</div><div class="line">       &#125;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="comment">//修正子view 水平方向上的位置，此时还没有真正的移动，返回值决定view 将移动到的位置</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">clampViewPositionHorizontal</span><span class="params">(View child, <span class="keyword">int</span> left, <span class="keyword">int</span> dx)</span> </span>&#123;</div><div class="line">           <span class="comment">//left 建议移动到位置</span></div><div class="line">           <span class="keyword">return</span> left;</div><div class="line">       &#125;</div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewPositionChanged</span><span class="params">(View changedView, <span class="keyword">int</span> left, <span class="keyword">int</span> top,</span></span></div><div class="line">                                         <span class="keyword">int</span> dx, <span class="keyword">int</span> dy) &#123;</div><div class="line">           <span class="keyword">super</span>.onViewPositionChanged(changedView, left, top, dx, dy);</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       <span class="meta">@Override</span></div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewReleased</span><span class="params">(View releasedChild, <span class="keyword">float</span> xvel, <span class="keyword">float</span> yvel)</span> </span>&#123;</div><div class="line">           <span class="keyword">super</span>.onViewReleased(releasedChild, xvel, yvel);</div><div class="line">       &#125;</div><div class="line">   &#125;;</div></pre></td></tr></table></figure>
+<p>回调方法中的getViewHorizontalDragRange(View child)方法返回拖拽的范围，但不会真正限定这个范围，只要返回一个大于零的值即可。</p>
+<p>在ViewDragHelper 源码中，computeSettleDuration()会调用这个返回值来计算动画执行的时长，checkTouchSlop()方法会调用这个返回值检查左面板，主面板是否可以被滑动，所以需要返回一个大于0的值才能实现拖动。</p>
+<p>如果返回值为0，左面板，主面板中不能有子view 或子view 没有对touch 事件做处理，最后触摸还是会交给ViewDragHelper 处理，所以也能实现拖动</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="comment">//返回拖拽的范围，返回一个大于零的值，计算动画执行的时长，水平方向是否可以被滑开</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getViewVerticalDragRange</span><span class="params">(View child)</span> </span>&#123;</div><div class="line">       <span class="comment">//computeSettleDuration 计算动画执行的时长</span></div><div class="line">       <span class="comment">//checkTouchSlop 检查是否可以被滑动（没有孩子处理触摸事件，最后返回给DragLayout 处理）</span></div><div class="line">       <span class="keyword">return</span> mRange;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>限定主面板的拖拽范围，当建议的值left 小于0 时，让left 等于0，大于mRange 时等于mRange，然后再将left 返回</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="comment">// 修正子view 水平方向上的位置，此时还没有真正的移动，返回值决定view 将移动到的位置</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">clampViewPositionHorizontal</span><span class="params">(View child, <span class="keyword">int</span> left, <span class="keyword">int</span> dx)</span> </span>&#123;</div><div class="line">    <span class="comment">// child 被用户拖拽的孩子</span></div><div class="line">    <span class="comment">// left 建议移动到位置</span></div><div class="line">    <span class="comment">// dx 新的位置与旧的位置的差值</span></div><div class="line">    <span class="keyword">int</span> oldLeft = mMainContent.getLeft();</div><div class="line">    System.out.println(<span class="string">"clamp: left:"</span> + left + <span class="string">" oldLeft:"</span> + oldLeft</div><div class="line">            + <span class="string">" dx:"</span> + dx);</div><div class="line">    <span class="keyword">if</span> (child == mMainContent) &#123;</div><div class="line">        left = fixLeft(left);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> left;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 修正左边的位置，限定拖拽范围在0 到mRange 间变化</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> left</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">fixLeft</span><span class="params">(<span class="keyword">int</span> left)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (left &lt; <span class="number">0</span>) &#123;</div><div class="line">        left = <span class="number">0</span>;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (left &gt; mRange) &#123;</div><div class="line">        left = mRange;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> left;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当控件位置变化时会调用onViewPositionChanged()方法，可以在此方法中做伴随动画，状态更新，事件回调，left 表示最新的水平位置，dx 表示刚刚发生的水平变化量。</p>
+<p>此时左面板还可以任意拖动，为了实现拖动左面板时界面表现为拖动主面板，可以对changedView 进行判断，如果changedView 是左面板，则通过layout()把左面板放回到原来的位置，然后把变化量dx 累加给主面板，再通过layout()方法来移动主面板</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="comment">// 当控件位置变化时调用，可以做伴随动画，状态更新，事件回调</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewPositionChanged</span><span class="params">(View changedView, <span class="keyword">int</span> left, <span class="keyword">int</span> top,</span></span></div><div class="line">                                      <span class="keyword">int</span> dx, <span class="keyword">int</span> dy) &#123;</div><div class="line">        <span class="keyword">super</span>.onViewPositionChanged(changedView, left, top, dx, dy);</div><div class="line">        <span class="comment">// left 最新的水平位置</span></div><div class="line">        <span class="comment">// dx 刚刚发生的水平变化量</span></div><div class="line">        System.out.println(<span class="string">"onViewPositionChanged: left:"</span> + left + <span class="string">" dx:"</span></div><div class="line">                + dx);</div><div class="line">        <span class="keyword">if</span> (changedView == mLeftContent) &#123;</div><div class="line">            <span class="comment">// 如果滑动的是左面板</span></div><div class="line">            <span class="comment">// 1.放回到原来的位置</span></div><div class="line">            mLeftContent.layout(<span class="number">0</span>, <span class="number">0</span>, mWidth, mHeight);</div><div class="line">            <span class="comment">// 2.把变化量传递给主面板,主面板旧的值+变化量</span></div><div class="line">            <span class="keyword">int</span> newLeft = mMainContent.getLeft() + dx;</div><div class="line">            <span class="comment">// 需要修正左边值</span></div><div class="line">            newLeft = fixLeft(newLeft);</div><div class="line">            mMainContent.layout(newLeft, <span class="number">0</span>, newLeft + mWidth, mHeight);</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// offsetLeftAndRight 在低版本中没有重绘界面，手动调用重绘</span></div><div class="line">        invalidate();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>注意：由于onViewPositionChanged()方法调用前调用了offsetLeftAndRight()方法，此方法在低版本中没有重绘界面，并且在高版本中也有一个bug，最后一帧没有被绘制，所以需要手动调用一次invalidate()，否则在低版本中无法实现拖拽效果</p>
+<p>##4. 结束动画<br>拖拽过程中当手指抬起时，需要实现一个打开，关闭面板的动画，结束动画可以在 onViewReleased()方法实现</p>
+<h3 id="4-1-跳转的结束动画"><a href="#4-1-跳转的结束动画" class="headerlink" title="4.1 跳转的结束动画"></a><strong>4.1 跳转的结束动画</strong></h3><p>onViewReleased()方法在松手之后会被调用，此时可以做结束动画，结束动画只需要考虑需要打开的<br>情况，其它则为需要关闭情况</p>
+<ul>
+<li>当水平方向的速度等于 0，并且主面板此时左边的位置在拖拽范围中轴线的右边则需要执行打开动</li>
+</ul>
+<p>画，即 mMainContent.getLeft() &gt; mRange*0.5f</p>
+<ul>
+<li>当水平方向的速度大于 0 时，则需要执行打开动画</li>
+<li>其它情况则需要执行关闭动画</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//5.决定松手后要做的事件，结束动画</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewReleased</span><span class="params">(View releasedChild, <span class="keyword">float</span> xvel, <span class="keyword">float</span> yvel)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onViewReleased(releasedChild, xvel, yvel);</div><div class="line">        <span class="comment">//releasedChild 被释放的孩子</span></div><div class="line">        <span class="comment">//xvel 水平方向的速度,向左为-，向右为+</span></div><div class="line">        System.out.println(<span class="string">"onViewReleased: xvel:"</span>+xvel);</div><div class="line">        <span class="comment">//考虑开启的情况，其它情况则关闭的情况</span></div><div class="line">        <span class="keyword">if</span>(xvel == <span class="number">0</span> &amp;&amp; mMainContent.getLeft()&gt; mRange*<span class="number">0.5f</span>)&#123;</div><div class="line">            <span class="comment">//在允许滑动的范围的中轴线右边，则打开</span></div><div class="line">            open();</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xvel &gt; <span class="number">0</span>)&#123;</div><div class="line">            <span class="comment">//速度向右时，则打开</span></div><div class="line">            open();</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="comment">//关闭</span></div><div class="line">            close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>open()，close()创建为 DragLayout 的方法，这样方便外界调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接打开</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</div><div class="line">        mMainContent.layout(mRange, <span class="number">0</span>, mRange + mWidth, mHeight);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//直接关闭</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</div><div class="line">        mMainContent.layout(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> + mWidth, mHeight);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="4-2-平滑的结束动画"><a href="#4-2-平滑的结束动画" class="headerlink" title="4.2 平滑的结束动画"></a>4.2 平滑的结束动画</h3><p>首先实现平滑的打开动画，在这里需要用到 ViewDragHelper 提供的一个方法smoothSlideViewTo(child,finalLeft,finalTop),三个参数的意思分别是：</p>
+<ul>
+<li>child 需要平滑移动的 view</li>
+<li>finalLeft 需要移动到的终点左边位置</li>
+<li>finalTop 需要移动到的终点的上边位置</li>
+</ul>
+<p>smoothSlideViewTo()方法的返回值为 true，表示位置不是最终位置，需要重绘界面</p>
+<p>重载一个 open(boolean isSmooth)方法，用参数 isSmooth 标识是调用平滑动画还是跳转动画，open()方法则直接调用 open(true),默认为平滑动画</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</div><div class="line">        open(<span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(<span class="keyword">boolean</span> isSmooth)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> finalLeft = mRange;</div><div class="line">        <span class="keyword">if</span>(isSmooth)&#123;</div><div class="line">            <span class="comment">//触发一个平滑动画</span></div><div class="line">            <span class="keyword">if</span>(mViewDragHelper.smoothSlideViewTo(mMainContent, finalLeft, <span class="number">0</span>))&#123;</div><div class="line">                <span class="comment">//invalidate();可能会漏帧</span></div><div class="line">                ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">            &#125;;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="comment">//直接跳转</span></div><div class="line">            mMainContent.layout(finalLeft, <span class="number">0</span>, finalLeft + mWidth, mHeight);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>注意：smoothSlideViewTo()方法返回 true,需要重绘界面，此时不建议使用 invalidate(),因为在动画的过程中可能会丢帧，推荐使用 ViewCompat.postInvalidateOnAnimation(this),参数一定要传子 view 所在的容器，因为只有容器才知道子 view 的具体位置</p>
+<p>重绘命令调用后，还需要重写 computScroll()方法，重绘时，系统会在 draw()方法后调用 computScroll()，在该方法中调用 ViewDragHelper 的维持动画的方法<br>continueSettling(deferCallbacks)参数 deferCallbacks 表示是否延迟画下一帧，此处传入 true，返回值表示是否已经移动到最终位置，如果为 true，还没有移动到最终位置，需要重绘界面，这样 computeScroll()方法就会不断的调用，界面也就会不断的重绘，直到移动到最终位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="comment">//维持动画的执行，高频率调用</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.computeScroll();</div><div class="line">    <span class="comment">//调用完后会调用 draw()</span></div><div class="line">    <span class="keyword">if</span>(mViewDragHelper.continueSettling(<span class="keyword">true</span>))&#123;</div><div class="line">        <span class="comment">//参数传入 true，表示延迟画下一帧</span></div><div class="line">        <span class="comment">//mViewDragHelper.continueSettling(true)</span></div><div class="line">        ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>同样的道理，关闭的平滑动画只需要修改 finalLeft = 0 即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</div><div class="line">        close(<span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(<span class="keyword">boolean</span> isSmooth)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> finalLeft = <span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(isSmooth)&#123;</div><div class="line">            <span class="comment">//触发一个平滑动画</span></div><div class="line">            <span class="keyword">if</span>(mViewDragHelper.smoothSlideViewTo(mMainContent, finalLeft, <span class="number">0</span>))&#123;</div><div class="line">                <span class="comment">//invalidate();可能会漏帧</span></div><div class="line">                ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">            &#125;;</div><div class="line"></div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            mMainContent.layout(finalLeft, <span class="number">0</span>, finalLeft + mWidth, mHeight);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>##<strong>5. 伴随动画</strong></p>
+<h3 id="5-1-分解伴随动画"><a href="#5-1-分解伴随动画" class="headerlink" title="5.1 分解伴随动画"></a>5.1 分解伴随动画</h3><p> 伴随动画是拖拽的过程中，左面板，主面板会跟随拖拽百分比所做的动画，该动画需要在onViewPositionChanged()回调方法中实现</p>
+<ul>
+<li>左面板：缩放动画，平移动画，透明度动画</li>
+<li>主面板：缩放动画</li>
+<li>背景： 亮度变化</li>
+</ul>
+<h3 id="5-2-实现伴随动画"><a href="#5-2-实现伴随动画" class="headerlink" title="5.2 实现伴随动画"></a>5.2 实现伴随动画</h3><p>创建一个方法 dispatchDragEvent(),在 onViewPositionChanged()方法中调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewPositionChanged</span><span class="params">(View changedView, <span class="keyword">int</span> left, <span class="keyword">int</span> top,</span></span></div><div class="line">                                      <span class="keyword">int</span> dx, <span class="keyword">int</span> dy) &#123;</div><div class="line">        <span class="keyword">super</span>.onViewPositionChanged(changedView, left, top, dx, dy);</div><div class="line">        <span class="comment">//...此处代码省略</span></div><div class="line">        dispatchDragEvent();</div><div class="line">        invalidate();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>实现左面板的缩放动画</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchDragEvent</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">//0.0f-&gt;1.0f 获取动画的百分比，主面板左边的位置引起的一系列变化</span></div><div class="line">        <span class="keyword">float</span> percent = mMainContent.getLeft()*<span class="number">1.0f</span>/mRange;</div><div class="line">        System.out.println(<span class="string">"dispatchDragEvent: percent:"</span>+percent);</div><div class="line"></div><div class="line">        <span class="comment">//左面板：缩放动画，平移动画，透明度动画</span></div><div class="line">        <span class="comment">//0.0f -&gt;1.0f percent*0.5f =&gt; 0.0f -&gt; 0.5f</span></div><div class="line">        <span class="comment">//寻找规律-&gt;拷贝 FloatEvaluator.java 中的估值方法</span></div><div class="line">        <span class="comment">//percent*0.5f + 0.5f =&gt; 0.5f -&gt; 1.0f</span></div><div class="line">        <span class="comment">//percent*(1.0f -0.6f)+0.6f =&gt; 0.6f -&gt; 1.0f =&gt; start + percent(end - start)</span></div><div class="line"></div><div class="line">        <span class="comment">//兼容低版本引入 nineoldandroid.jar</span></div><div class="line">        <span class="comment">//用 ViewHelper 做属性动画</span></div><div class="line">        <span class="comment">//1.缩放动画</span></div><div class="line">        ViewHelper.setScaleX(mLeftContent, evaluate(percent, <span class="number">0.5f</span>, <span class="number">1.0f</span>));</div><div class="line">        ViewHelper.setScaleY(mLeftContent, evaluate(percent, <span class="number">0.5f</span>, <span class="number">1.0f</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//源码 FloatEvaluator.java 中拷贝的估值方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Float <span class="title">evaluate</span><span class="params">(<span class="keyword">float</span> fraction, Number startValue, Number endValue)</span> </span>&#123;</div><div class="line">        <span class="keyword">float</span> startFloat = startValue.floatValue();</div><div class="line">        <span class="keyword">return</span> startFloat + fraction * (endValue.floatValue() - startFloat);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>第 3 行通过主面板左边位置与拖拽范围的相除可以得到一个 0.0f -&gt;1.0f 的比例值，因为在整个拖拽过<br>程中，主面板左边位置的变化是引起一系列变化的原因</li>
+<li>第 7-10 行可以推出一个公式 start + percent(end - start),即通过 percent 的变化可以计算出 start 到 end 间<br>的任意值。源码 FloatEvaluator.java 中已经提供了这么一个方法，将其拷贝到代码中，即第 20-23 行</li>
+<li>第 12-16 行为了兼容低版本引入 nineoldandroid.jar 中的 ViewHelper 做属性动画</li>
+</ul>
+<p>同理可以实现其它伴随动画</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchDragEvent</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">//0.0f-&gt;1.0f 获取动画的百分比，主面板左边的位置引起的一系列变化</span></div><div class="line">        <span class="keyword">float</span> percent = mMainContent.getLeft()*<span class="number">1.0f</span>/mRange;</div><div class="line">        System.out.println(<span class="string">"dispatchDragEvent: percent:"</span>+percent);</div><div class="line">        <span class="comment">//左面板：缩放动画，平移动画，透明度动画</span></div><div class="line">        <span class="comment">//0.0f -&gt;1.0f percent*0.5f =&gt; 0.0f -&gt; 0.5f</span></div><div class="line">        <span class="comment">//寻找规律-&gt;拷贝 FloatEvaluator.java 中的估值方法</span></div><div class="line">        <span class="comment">//percent*0.5f + 0.5f =&gt; 0.5f -&gt; 1.0f</span></div><div class="line">        <span class="comment">//percent*(1.0f -0.6f)+0.6f =&gt; 0.6f -&gt; 1.0f =&gt; start + percent(end - start)</span></div><div class="line"></div><div class="line">        <span class="comment">//兼容低版本引入 nineoldandroid.jar</span></div><div class="line">        <span class="comment">//用 ViewHelper 做属性动画</span></div><div class="line">        <span class="comment">//1.缩放动画,从 50%-&gt;100%</span></div><div class="line">        ViewHelper.setScaleX(mLeftContent, evaluate(percent, <span class="number">0.5f</span>, <span class="number">1.0f</span>));</div><div class="line">        ViewHelper.setScaleY(mLeftContent, evaluate(percent, <span class="number">0.5f</span>, <span class="number">1.0f</span>));</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">//2.平移动画,从宽度一半在屏幕外-&gt;全部移到屏幕内</span></div><div class="line">        ViewHelper.setTranslationX(mLeftContent, evaluate(percent, -mWidth*<span class="number">0.5f</span>, <span class="number">0f</span>));</div><div class="line"></div><div class="line">        <span class="comment">//3.透明度动画,从 20%-&gt;100%</span></div><div class="line">        ViewHelper.setAlpha(mLeftContent, evaluate(percent, <span class="number">0.2f</span>, <span class="number">1.0f</span>));</div><div class="line"></div><div class="line">        <span class="comment">//主面板：缩放动画,从 100%-&gt;80%</span></div><div class="line">        ViewHelper.setScaleY(mMainContent, evaluate(percent, <span class="number">1.0f</span>, <span class="number">0.8f</span>));</div><div class="line"></div><div class="line">        <span class="comment">//背景亮度变化,PorterDuff.Mode.SRC_OVER 叠加模式，直接叠加在上面</span></div><div class="line">        getBackground().setColorFilter((Integer)</div><div class="line">                evaluateColor(percent, Color.BLACK,Color.TRANSPARENT), PorterDuff.Mode.SRC_OVER);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//源码 ArgbEvaluator.java 中拷贝的估值方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">evaluateColor</span><span class="params">(<span class="keyword">float</span> fraction, Object startValue, Object endValue)</span> </span>&#123;</div><div class="line">        <span class="comment">//api18 以上的代码才有透明度的过滤</span></div><div class="line">        <span class="keyword">int</span> startInt = (Integer) startValue;</div><div class="line">        <span class="keyword">int</span> startA = (startInt &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xff</span>;</div><div class="line">        <span class="keyword">int</span> startR = (startInt &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xff</span>;</div><div class="line">        <span class="keyword">int</span> startG = (startInt &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff</span>;</div><div class="line">        <span class="keyword">int</span> startB = startInt &amp; <span class="number">0xff</span>;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> endInt = (Integer) endValue;</div><div class="line">        <span class="keyword">int</span> endA = (endInt &gt;&gt; <span class="number">24</span>) &amp; <span class="number">0xff</span>;</div><div class="line">        <span class="keyword">int</span> endR = (endInt &gt;&gt; <span class="number">16</span>) &amp; <span class="number">0xff</span>;</div><div class="line">        <span class="keyword">int</span> endG = (endInt &gt;&gt; <span class="number">8</span>) &amp; <span class="number">0xff</span>;</div><div class="line">        <span class="keyword">int</span> endB = endInt &amp; <span class="number">0xff</span>;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)((startA + (<span class="keyword">int</span>)(fraction * (endA - startA))) &lt;&lt; <span class="number">24</span>) |</div><div class="line">                (<span class="keyword">int</span>)((startR + (<span class="keyword">int</span>)(fraction * (endR - startR))) &lt;&lt; <span class="number">16</span>) |</div><div class="line">                (<span class="keyword">int</span>)((startG + (<span class="keyword">int</span>)(fraction * (endG - startG))) &lt;&lt; <span class="number">8</span>) |</div><div class="line">                (<span class="keyword">int</span>)((startB + (<span class="keyword">int</span>)(fraction * (endB - startB))));</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>第 27 行叠加模式 PorterDuff.Mode.SRC_OVER 表示直接叠加在上面</li>
+<li>第 30-48 行 ArgbEvaluator.java 源码中拷贝的估值方法，api18 以上的代码才有透明度的过滤</li>
+</ul>
+<p>##<strong>6. 状态更新及事件回调</strong></p>
+<h3 id="6-1-状态分析"><a href="#6-1-状态分析" class="headerlink" title="6.1 状态分析"></a>6.1 状态分析</h3><p>拖拽的状态可以分为：</p>
+<ul>
+<li>打开状态</li>
+<li>关闭状态</li>
+<li>拖拽状态</li>
+</ul>
+<p>通过枚举定义这三种状态，且定义默认状态为关闭</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//默认状态为关闭</span></div><div class="line"><span class="keyword">private</span> Status status = Status.Close;</div><div class="line"><span class="comment">//提供 get()方法</span></div><div class="line"><span class="function"><span class="keyword">public</span> Status <span class="title">getStatus</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> status;</div><div class="line">&#125;</div><div class="line"><span class="comment">//状态的枚举值，有三种状态，打开，关闭，拖拽中</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Status&#123;</div><div class="line">    Open,Close,Draging;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="6-2-事件回调分析"><a href="#6-2-事件回调分析" class="headerlink" title="6.2 事件回调分析"></a>6.2 事件回调分析</h3><p>定义一个事件回调接口，事件回调和状态密切相关</p>
+<ul>
+<li>打开状态时回调 onOpen()方法</li>
+<li>关闭状态时回调 onClose()方法</li>
+</ul>
+<p>拖拽中回调 onDraging(float percent)方法，并将拖拽百分比传出去</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接收外界注册的接口类，以便回调接口方法</span></div><div class="line">    <span class="keyword">private</span> OnDragChangeListener onDragChangeListener;</div><div class="line">    <span class="comment">//提供 set()方法，让外界注册监听接口类</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnDragChangeListener</span><span class="params">(OnDragChangeListener onDragChangeListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.onDragChangeListener = onDragChangeListener;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//模仿 View 的 OnClickListener 的写法，定义一个内部的公开的接口</span></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnDragChangeListener</span></span>&#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 打开时调用</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOpen</span><span class="params">()</span></span>;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 关闭时调用</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClose</span><span class="params">()</span></span>;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 拖拽中调用</div><div class="line">         * <span class="doctag">@param</span> percent 当前拖拽的百分比</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraging</span><span class="params">(<span class="keyword">float</span> percent)</span></span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="6-3-实现状态更新及事件回调"><a href="#6-3-实现状态更新及事件回调" class="headerlink" title="6.3 实现状态更新及事件回调"></a>6.3 实现状态更新及事件回调</h3><p>通过拖拽百分比可以判断当前的状态，在 dispatchDragEvent()方法中实现状态更新及事件回调</p>
+<ul>
+<li>百分比为 0，则为关闭状态</li>
+<li>百分比为 1，则为打开状态</li>
+<li>其它百分比，则为拖拽状态</li>
+</ul>
+<p>事件回调需要先做空判断，拖拽状态调用频率高，直接调用即可，打开和关闭可以判断上次状态和当<br>前状态是否一致，不一致则调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispatchDragEvent</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">//0.0f-&gt;1.0f 获取动画的百分比，主面板左边的位置引起的一系列变化</span></div><div class="line">        <span class="keyword">float</span> percent = mMainContent.getLeft()*<span class="number">1.0f</span>/mRange;</div><div class="line">        System.out.println(<span class="string">"dispatchDragEvent: percent:"</span>+percent);</div><div class="line"></div><div class="line">        Status lastStatus = status;</div><div class="line">        <span class="comment">//更新状态，通过动画百分比判断</span></div><div class="line">        <span class="keyword">if</span>(percent ==<span class="number">0</span> )&#123;</div><div class="line">            status = Status.Close;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(percent == <span class="number">1</span>)&#123;</div><div class="line">            status = Status.Open;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            status = Status.Close;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(onDragChangeListener != <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="comment">//调用频率高，直接调用</span></div><div class="line">            onDragChangeListener.onDraging(percent);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(lastStatus != status &amp;&amp; onDragChangeListener != <span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(status == Status.Open)&#123;</div><div class="line">                <span class="comment">//最新状态是 open，说明刚才不是 open，则需要调用一下 onOpen 方法</span></div><div class="line">                onDragChangeListener.onOpen();</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(status == Status.Close)&#123;</div><div class="line">                <span class="comment">//最新状态是 close，说明刚才不是 close，则需要调用一下 onClose 方法</span></div><div class="line">                onDragChangeListener.onClose();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//左面板：缩放动画，平移动画，透明度动画</span></div><div class="line">        <span class="comment">//0.0f -&gt;1.0f percent*0.5f =&gt; 0.0f -&gt; 0.5f</span></div><div class="line">        <span class="comment">//寻找规律-&gt;拷贝 FloatEvaluator.java 中的估值方法</span></div><div class="line">        <span class="comment">//percent*0.5f + 0.5f =&gt; 0.5f -&gt; 1.0f</span></div><div class="line">        <span class="comment">//percent*(1.0f -0.6f)+0.6f =&gt; 0.6f -&gt; 1.0f =&gt; start + percent(end - start)</span></div><div class="line">        <span class="comment">//兼容低版本引入 nineoldandroid.jar</span></div><div class="line">        <span class="comment">//用 ViewHelper 做属性动画</span></div><div class="line">        <span class="comment">//1.缩放动画</span></div><div class="line">        ViewHelper.setScaleX(mLeftContent, evaluate(percent, <span class="number">0.5f</span>, <span class="number">1.0f</span>));</div><div class="line">        ViewHelper.setScaleY(mLeftContent, evaluate(percent, <span class="number">0.5f</span>, <span class="number">1.0f</span>));</div><div class="line">        <span class="comment">//2.平移动画</span></div><div class="line">        ViewHelper.setTranslationX(mLeftContent, evaluate(percent, -mWidth*<span class="number">0.5f</span>, <span class="number">0f</span>));</div><div class="line">        <span class="comment">//3.透明度动画</span></div><div class="line">        ViewHelper.setAlpha(mLeftContent, evaluate(percent, <span class="number">0.2f</span>, <span class="number">1.0f</span>));</div><div class="line">        <span class="comment">//主面板：缩放动画</span></div><div class="line">        ViewHelper.setScaleY(mMainContent, evaluate(percent, <span class="number">1.0f</span>, <span class="number">0.8f</span>));</div><div class="line">        <span class="comment">//背景亮度变化,如果没有设置背景会出问题，PorterDuff.Mode.SRC_OVER 叠加模式，直接叠加在上</span></div><div class="line">        面</div><div class="line">        getBackground().setColorFilter((Integer)</div><div class="line">                evaluateColor(percent, Color.BLACK,Color.TRANSPARENT), PorterDuff.Mode.SRC_OVER);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>##<strong>7. 触摸优化</strong></p>
+<h3 id="7-1-填充界面数据"><a href="#7-1-填充界面数据" class="headerlink" title="7.1 填充界面数据"></a>7.1 填充界面数据</h3><p>1．修改主界面 xml，左面板，主面板分别加入 ListView 及头像</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.example.draglayout.widget.DragLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/dl"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@drawable/bg"</span></div><div class="line">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span> &gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:paddingBottom</span>=<span class="string">"50dp"</span></div><div class="line">        <span class="attr">android:paddingLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:paddingRight</span>=<span class="string">"50dp"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">        <span class="attr">android:paddingTop</span>=<span class="string">"50dp"</span> &gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"50dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"50dp"</span></div><div class="line">            <span class="attr">android:contentDescription</span>=<span class="string">"@null"</span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@drawable/head"</span> /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ListView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/lv_left"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">ListView</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">com.example.draglayout.widget.MyLinearLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/ll_my"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#ffffff"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span> &gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"50dip"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"#18b6ef"</span></div><div class="line">            <span class="attr">android:gravity</span>=<span class="string">"center_vertical"</span> &gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/iv_header"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"30dp"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"30dp"</span></div><div class="line">                <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">                <span class="attr">android:contentDescription</span>=<span class="string">"@null"</span></div><div class="line">                <span class="attr">android:src</span>=<span class="string">"@drawable/head"</span> /&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ListView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/lv_main"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span> &gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">ListView</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">com.example.draglayout.widget.MyLinearLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">com.example.draglayout.widget.DragLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>2．ListView 数据源</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cheeses</span> </span>&#123;</div><div class="line">       <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] sCheeseStrings = &#123;</div><div class="line">               <span class="string">"Abbaye de Belloc"</span>, <span class="string">"Abbaye du Mont des Cats"</span>, <span class="string">"Abertam"</span>, <span class="string">"Abondance"</span>, <span class="string">"Ackawi"</span>,</div><div class="line">               <span class="string">"Acorn"</span>, <span class="string">"Adelost"</span>, <span class="string">"Affidelice au Chablis"</span>, <span class="string">"Afuega'l Pitu"</span>, <span class="string">"Airag"</span>, <span class="string">"Airedale"</span>,</div><div class="line">               <span class="string">"Xanadu"</span>, <span class="string">"Xynotyro"</span>, <span class="string">"Yarg Cornish"</span>, <span class="string">"Yarra Valley Pyramid"</span>, <span class="string">"Yorkshire Blue"</span>,</div><div class="line">               <span class="string">"Zamorano"</span>, <span class="string">"Zanetti Grana Padano"</span>, <span class="string">"Zanetti Parmigiano Reggiano"</span></div><div class="line">       &#125;;</div><div class="line"></div><div class="line">       <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] NAMES = <span class="keyword">new</span> String[]&#123;<span class="string">"宋江"</span>, <span class="string">"卢俊义"</span>, <span class="string">"吴用"</span>,</div><div class="line">               <span class="string">"公孙胜"</span>, <span class="string">"关胜"</span>, <span class="string">"林冲"</span>, <span class="string">"秦明"</span>, <span class="string">"呼延灼"</span>, <span class="string">"花荣"</span>, <span class="string">"柴进"</span>, <span class="string">"李应"</span>, <span class="string">"朱仝"</span>, <span class="string">"鲁智 深"</span>,</div><div class="line">               <span class="string">"武松"</span>, <span class="string">"董平"</span>, <span class="string">"张清"</span>, <span class="string">"杨志"</span>, <span class="string">"徐宁"</span>, <span class="string">"索超"</span>, <span class="string">"戴宗"</span>, <span class="string">"刘唐"</span>, <span class="string">"李逵"</span>, <span class="string">"史进"</span>, <span class="string">" 穆弘"</span>,</div><div class="line">               <span class="string">"雷横"</span>, <span class="string">"李俊"</span>, <span class="string">"阮小二"</span>, <span class="string">"张横"</span>, <span class="string">"阮小五"</span>, <span class="string">" 张顺"</span>, <span class="string">"阮小七"</span>, <span class="string">"杨雄"</span>, <span class="string">"石秀"</span>, <span class="string">" 解珍"</span>,</div><div class="line">               <span class="string">" 解宝"</span>, <span class="string">"燕青"</span>, <span class="string">"朱武"</span>, <span class="string">"黄信"</span>, <span class="string">"孙立"</span>, <span class="string">"宣赞"</span>, <span class="string">"郝思文"</span>, <span class="string">"韩滔"</span>, <span class="string">"彭玘"</span>, <span class="string">"单廷珪 "</span>,</div><div class="line">               <span class="string">"魏定国"</span>, <span class="string">"萧让"</span>, <span class="string">"裴宣"</span>, <span class="string">"欧鹏"</span>, <span class="string">"邓飞"</span>, <span class="string">" 燕顺"</span>, <span class="string">"杨林"</span>, <span class="string">"凌振"</span>, <span class="string">"蒋敬"</span>, <span class="string">"吕方 "</span>,</div><div class="line">               <span class="string">"郭 盛"</span>, <span class="string">"安道全"</span>, <span class="string">"皇甫端"</span>, <span class="string">"王英"</span>, <span class="string">"扈三娘"</span>, <span class="string">"鲍旭"</span>, <span class="string">"樊瑞"</span>, <span class="string">"孔明"</span>, <span class="string">"孔亮"</span>, <span class="string">" 项充"</span>,</div><div class="line">               <span class="string">"李衮"</span>, <span class="string">"金大坚"</span>, <span class="string">"马麟"</span>, <span class="string">"童威"</span>, <span class="string">"童猛"</span>, <span class="string">"孟康"</span>, <span class="string">"侯健"</span>, <span class="string">"陈达"</span>, <span class="string">"杨春"</span>, <span class="string">"郑天寿 "</span>,</div><div class="line">               <span class="string">"陶宗旺"</span>, <span class="string">"宋清"</span>, <span class="string">"乐和"</span>, <span class="string">"龚旺"</span>, <span class="string">"丁得孙"</span>, <span class="string">"穆春"</span>, <span class="string">"曹正"</span>, <span class="string">"宋万"</span>, <span class="string">"杜迁"</span>, <span class="string">"薛永 "</span>, <span class="string">" 施恩"</span>,</div><div class="line">               <span class="string">"周通"</span>, <span class="string">"李忠"</span>, <span class="string">"杜兴"</span>, <span class="string">"汤隆"</span>, <span class="string">"邹渊"</span>, <span class="string">"邹润"</span>, <span class="string">"朱富"</span>, <span class="string">"朱贵"</span>, <span class="string">"蔡福"</span>, <span class="string">"蔡庆"</span>, <span class="string">" 李立"</span>,</div><div class="line">               <span class="string">"李云"</span>, <span class="string">"焦挺"</span>, <span class="string">"石勇"</span>, <span class="string">"孙新"</span>, <span class="string">"顾大嫂"</span>, <span class="string">"张青"</span>, <span class="string">"孙二娘"</span>, <span class="string">" 王定六"</span>, <span class="string">"郁保四"</span>, <span class="string">" 白胜"</span>,</div><div class="line">               <span class="string">"时迁"</span>, <span class="string">"段景柱"</span>&#125;;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DragLayout</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"TAG"</span>;</div><div class="line">	<span class="keyword">private</span> View mLeftContent;</div><div class="line">	<span class="keyword">private</span> View mMainContent;</div><div class="line">	<span class="keyword">private</span> View mRightContent;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mWidth;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mHeight;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mRangeLeft;</div><div class="line">	<span class="keyword">private</span> ViewDragHelper mDragHelper;</div><div class="line">	<span class="keyword">private</span> Status mStatus = Status.Close;</div><div class="line">	<span class="keyword">private</span> Direction mDirction = Direction.Left;</div><div class="line">	<span class="keyword">private</span> OnDragListener mDragListener;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> mScaleEnable = <span class="keyword">true</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mRightWidth;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mRangeRight;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnDragListener</span> </span>&#123;</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onClose</span><span class="params">()</span></span>;</div><div class="line">		</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onStartOpen</span><span class="params">(Direction direction)</span></span>;</div><div class="line">		</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onOpen</span><span class="params">()</span></span>;</div><div class="line">		</div><div class="line">		<span class="function"><span class="keyword">void</span> <span class="title">onDrag</span><span class="params">(<span class="keyword">float</span> percent)</span></span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">enum</span> Status &#123;</div><div class="line">		Open, Close, Draging</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">enum</span> Direction &#123;</div><div class="line">		Left, Right, Default</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> Direction <span class="title">getDirction</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> mDirction;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDirction</span><span class="params">(Direction dirction)</span> </span>&#123;</div><div class="line">		mDirction = dirction;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>(context, <span class="keyword">null</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>(context, attrs, <span class="number">0</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DragLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line"></div><div class="line">		mDragHelper = ViewDragHelper.create(<span class="keyword">this</span>, mCallBack);</div><div class="line">		mGestureDetector = <span class="keyword">new</span> GestureDetectorCompat(context, mYGestureListener);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	SimpleOnGestureListener mYGestureListener = <span class="keyword">new</span> SimpleOnGestureListener() &#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onScroll</span><span class="params">(MotionEvent e1, MotionEvent e2,</span></span></div><div class="line">				<span class="keyword">float</span> distanceX, <span class="keyword">float</span> distanceY) &#123;</div><div class="line">			<span class="keyword">return</span> Math.abs(distanceX) &gt;= Math.abs(distanceY);</div><div class="line">		&#125;;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onFinishInflate</span><span class="params">()</span> </span>&#123;</div><div class="line">		Log.i(TAG, <span class="string">"--onFinishInflate"</span>);</div><div class="line">		mLeftContent = (View) getChildAt(<span class="number">0</span>);</div><div class="line">		mRightContent = getChildAt(<span class="number">1</span>);</div><div class="line">		mMainContent = (View) getChildAt(<span class="number">2</span>);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">		Log.i(TAG, <span class="string">"--onSizeChanged"</span>);</div><div class="line">		</div><div class="line">		mWidth = mMainContent.getMeasuredWidth();</div><div class="line">		mHeight = mMainContent.getMeasuredHeight();</div><div class="line">		</div><div class="line">		mRightWidth = mRightContent.getMeasuredWidth();</div><div class="line">		mRangeLeft = (<span class="keyword">int</span>) (mWidth * <span class="number">0.6f</span>);</div><div class="line">		mRangeRight = mRightWidth;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> mMainLeft = <span class="number">0</span>;</div><div class="line"></div><div class="line">	ViewDragHelper.Callback mCallBack = <span class="keyword">new</span> ViewDragHelper.Callback() &#123;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryCaptureView</span><span class="params">(View child, <span class="keyword">int</span> pointerId)</span> </span>&#123;</div><div class="line">			<span class="comment">// 1. 决定当前被拖拽的child是否拖的动。(抽象方法，必须重写)</span></div><div class="line">			Log.d(TAG, <span class="string">"tryCaptureView: "</span> + (child == mMainContent) + <span class="string">" : "</span></div><div class="line">					+ (child == mLeftContent) + <span class="string">" : "</span></div><div class="line">					+ (child == mRightContent));</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getViewHorizontalDragRange</span><span class="params">(View child)</span> </span>&#123;</div><div class="line">			<span class="comment">// 2. 决定拖拽的范围</span></div><div class="line">			<span class="keyword">return</span> mWidth;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">clampViewPositionHorizontal</span><span class="params">(View child, <span class="keyword">int</span> left, <span class="keyword">int</span> dx)</span> </span>&#123;</div><div class="line">			<span class="comment">// 3. 决定拖动时的位置，可在这里进行位置修正。（若想在此方向拖动，必须重写，因为默认返回0）</span></div><div class="line"></div><div class="line">			Log.d(TAG, <span class="string">"clampViewPositionHorizontal left: "</span> + left + <span class="string">" dx: "</span></div><div class="line">					+ dx + <span class="string">" mRange: "</span> + mRangeLeft);</div><div class="line"></div><div class="line">			<span class="keyword">return</span> clampResult(mMainLeft + dx, left);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewPositionChanged</span><span class="params">(View changedView, <span class="keyword">int</span> left, <span class="keyword">int</span> top,</span></span></div><div class="line">				<span class="keyword">int</span> dx, <span class="keyword">int</span> dy) &#123;</div><div class="line">			<span class="comment">// 4. 决定了当View被拖动时，希望同时引发的其他变化</span></div><div class="line">			Log.d(TAG, <span class="string">"onViewPositionChanged left: "</span> + left + <span class="string">" dx: "</span> + dx);</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (changedView == mMainContent) &#123;</div><div class="line">				mMainLeft = left;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				mMainLeft += dx;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			mMainLeft = clampResult(mMainLeft, mMainLeft);</div><div class="line">			</div><div class="line">			<span class="keyword">if</span>(changedView == mLeftContent || changedView == mRightContent)&#123;</div><div class="line">				layoutContent();</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			dispathDragEvent(mMainLeft);</div><div class="line">			invalidate();</div><div class="line">		&#125;;</div><div class="line"></div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * <span class="doctag">@param</span> releasedChild</div><div class="line">		 *            被释放的孩子</div><div class="line">		 * <span class="doctag">@param</span> xvel</div><div class="line">		 *            释放时X方向的速度</div><div class="line">		 * <span class="doctag">@param</span> yvel</div><div class="line">		 *            释放时Y方向的速度</div><div class="line">		 */</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewReleased</span><span class="params">(View releasedChild, <span class="keyword">float</span> xvel, <span class="keyword">float</span> yvel)</span> </span>&#123;</div><div class="line">			<span class="comment">// 5. 决定当childView被释放时，希望做的事情——执行打开/关闭动画，更新状态</span></div><div class="line"></div><div class="line">			<span class="keyword">boolean</span> scrollRight = xvel &gt; <span class="number">1.0f</span>;</div><div class="line">			<span class="keyword">boolean</span> scrollLeft = xvel &lt; -<span class="number">1.0f</span>;</div><div class="line">			<span class="keyword">if</span> (scrollRight || scrollLeft) &#123;</div><div class="line">				<span class="keyword">if</span> (scrollRight &amp;&amp; mDirction == Direction.Left) &#123;</div><div class="line">					open(<span class="keyword">true</span>, mDirction);</div><div class="line">				&#125; <span class="keyword">else</span> <span class="keyword">if</span> (scrollLeft &amp;&amp; mDirction == Direction.Right) &#123;</div><div class="line">					open(<span class="keyword">true</span>, mDirction);</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					close(<span class="keyword">true</span>);</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span> (releasedChild == mLeftContent &amp;&amp; mMainLeft &gt; mRangeLeft * <span class="number">0.7f</span>) &#123;</div><div class="line">				open(<span class="keyword">true</span>, mDirction);</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (releasedChild == mMainContent) &#123;</div><div class="line">				<span class="keyword">if</span> (mMainLeft &gt; mRangeLeft * <span class="number">0.3f</span>)</div><div class="line">					open(<span class="keyword">true</span>, mDirction);</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (-mMainLeft &gt; mRangeRight * <span class="number">0.3f</span>)</div><div class="line">					open(<span class="keyword">true</span>, mDirction);</div><div class="line">				<span class="keyword">else</span></div><div class="line">					close(<span class="keyword">true</span>);</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (releasedChild == mRightContent</div><div class="line">					&amp;&amp; -mMainLeft &gt; mRangeRight * <span class="number">0.7f</span>) &#123;</div><div class="line">				open(<span class="keyword">true</span>, mDirction);</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				close(<span class="keyword">true</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewDragStateChanged</span><span class="params">(<span class="keyword">int</span> state)</span> </span>&#123;</div><div class="line">			<span class="keyword">if</span> (mStatus == Status.Close &amp;&amp; state == ViewDragHelper.STATE_IDLE</div><div class="line">					&amp;&amp; mDirction == Direction.Right) &#123;</div><div class="line">				mDirction = Direction.Left;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onViewCaptured</span><span class="params">(View capturedChild, <span class="keyword">int</span> activePointerId)</span> </span>&#123;</div><div class="line">		&#125;;</div><div class="line"></div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">clampResult</span><span class="params">(<span class="keyword">int</span> tempValue, <span class="keyword">int</span> defaultValue)</span> </span>&#123;</div><div class="line">		Integer minLeft = <span class="keyword">null</span>;</div><div class="line">		Integer maxLeft = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (mDirction == Direction.Left) &#123;</div><div class="line">			minLeft = <span class="number">0</span>;</div><div class="line">			maxLeft = <span class="number">0</span> + mRangeLeft;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mDirction == Direction.Right) &#123;</div><div class="line">			minLeft = <span class="number">0</span> - mRangeRight;</div><div class="line">			maxLeft = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (minLeft != <span class="keyword">null</span> &amp;&amp; tempValue &lt; minLeft)</div><div class="line">			<span class="keyword">return</span> minLeft;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (maxLeft != <span class="keyword">null</span> &amp;&amp; tempValue &gt; maxLeft)</div><div class="line">			<span class="keyword">return</span> maxLeft;</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> defaultValue;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> GestureDetectorCompat mGestureDetector;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line"></div><div class="line">		Log.i(TAG, <span class="string">"--onMeasure"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> left, <span class="keyword">int</span> top, <span class="keyword">int</span> right,</span></span></div><div class="line">			<span class="keyword">int</span> bottom) &#123;</div><div class="line">		Log.i(TAG, <span class="string">"--onLayout"</span>);</div><div class="line">		layoutContent();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">layoutContent</span><span class="params">()</span> </span>&#123;</div><div class="line">		mLeftContent.layout(<span class="number">0</span>, <span class="number">0</span>, mWidth, mHeight);</div><div class="line">		mRightContent.layout(mWidth - mRightWidth, <span class="number">0</span>, mWidth, mHeight);</div><div class="line">		mMainContent.layout(mMainLeft, <span class="number">0</span>, mMainLeft + mWidth, mHeight);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (mDragHelper.continueSettling(<span class="keyword">true</span>)) &#123;</div><div class="line">			ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDragListener</span><span class="params">(OnDragListener mDragListener)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.mDragListener = mDragListener;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 处理其他同步动画</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> mainLeft</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">dispathDragEvent</span><span class="params">(<span class="keyword">int</span> mainLeft)</span> </span>&#123;</div><div class="line">		<span class="comment">// 注意转换成float</span></div><div class="line">		<span class="keyword">float</span> percent = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (mDirction == Direction.Left)</div><div class="line">			percent = mainLeft / (<span class="keyword">float</span>) mRangeLeft;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (mDirction == Direction.Right)</div><div class="line">			percent = Math.abs(mainLeft) / (<span class="keyword">float</span>) mRangeRight;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (mDragListener != <span class="keyword">null</span>) &#123;</div><div class="line">			mDragListener.onDrag(percent);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// 更新动画</span></div><div class="line">		<span class="keyword">if</span> (mScaleEnable) &#123;</div><div class="line">			animViews(percent);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 更新状态</span></div><div class="line">		Status lastStatus = mStatus;</div><div class="line">		<span class="keyword">if</span> (updateStatus() != lastStatus) &#123;</div><div class="line">			<span class="keyword">if</span>(lastStatus == Status.Close &amp;&amp; mStatus == Status.Draging)&#123;</div><div class="line">				mLeftContent.setVisibility(mDirction == Direction.Left ? View.VISIBLE : View.GONE);</div><div class="line">				mRightContent.setVisibility(mDirction == Direction.Right ? View.VISIBLE : View.GONE);</div><div class="line">				</div><div class="line">				<span class="keyword">if</span>(mDragListener != <span class="keyword">null</span>)&#123;</div><div class="line">					mDragListener.onStartOpen(mDirction);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="keyword">if</span> (mStatus == Status.Close) &#123;</div><div class="line">				<span class="keyword">if</span> (mDragListener != <span class="keyword">null</span>)</div><div class="line">					mDragListener.onClose();</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mStatus == Status.Open) &#123;</div><div class="line">				<span class="keyword">if</span> (mDragListener != <span class="keyword">null</span>)</div><div class="line">					mDragListener.onOpen();</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> Status <span class="title">updateStatus</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (mDirction == Direction.Left) &#123;</div><div class="line">			<span class="keyword">if</span> (mMainLeft == <span class="number">0</span>) &#123;</div><div class="line">				mStatus = Status.Close;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mMainLeft == mRangeLeft) &#123;</div><div class="line">				mStatus = Status.Open;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				mStatus = Status.Draging;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mDirction == Direction.Right) &#123;</div><div class="line">			<span class="keyword">if</span> (mMainLeft == <span class="number">0</span>) &#123;</div><div class="line">				mStatus = Status.Close;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mMainLeft == <span class="number">0</span> - mRangeRight) &#123;</div><div class="line">				mStatus = Status.Open;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				mStatus = Status.Draging;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> mStatus;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">animViews</span><span class="params">(<span class="keyword">float</span> percent)</span> </span>&#123;</div><div class="line">		Log.d(TAG, <span class="string">"percent: "</span> + percent);</div><div class="line">		animMainView(percent);</div><div class="line"></div><div class="line">		animBackView(percent);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">animBackView</span><span class="params">(<span class="keyword">float</span> percent)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (mDirction == Direction.Right) &#123;</div><div class="line">			<span class="comment">// 右边栏X, Y放大，向左移动, 逐渐显示</span></div><div class="line">			ViewHelper.setScaleX(mRightContent, <span class="number">0.5f</span> + <span class="number">0.5f</span> * percent);</div><div class="line">			ViewHelper.setScaleY(mRightContent, <span class="number">0.5f</span> + <span class="number">0.5f</span> * percent);</div><div class="line">			ViewHelper.setTranslationX(mRightContent,</div><div class="line">					evaluate(percent, mRightWidth + mRightWidth / <span class="number">2.0f</span>, <span class="number">0.0f</span>));</div><div class="line"></div><div class="line">			ViewHelper.setAlpha(mRightContent, percent);</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// 左边栏X, Y放大，向右移动, 逐渐显示</span></div><div class="line">			ViewHelper.setScaleX(mLeftContent, <span class="number">0.5f</span> + <span class="number">0.5f</span> * percent);</div><div class="line">			ViewHelper.setScaleY(mLeftContent, <span class="number">0.5f</span> + <span class="number">0.5f</span> * percent);</div><div class="line">			ViewHelper.setTranslationX(mLeftContent,</div><div class="line">					evaluate(percent, -mWidth / <span class="number">2f</span>, <span class="number">0.0f</span>));</div><div class="line">			ViewHelper.setAlpha(mLeftContent, percent);</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 背景逐渐变亮</span></div><div class="line">		getBackground().setColorFilter(</div><div class="line">				caculateValue(percent, Color.BLACK, Color.TRANSPARENT),</div><div class="line">				PorterDuff.Mode.SRC_OVER);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">animMainView</span><span class="params">(<span class="keyword">float</span> percent)</span> </span>&#123;</div><div class="line">		Float inverseP = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">if</span> (mDirction == Direction.Left) &#123;</div><div class="line">			inverseP = <span class="number">1</span> - percent * <span class="number">0.25f</span>;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mDirction == Direction.Right) &#123;</div><div class="line">			inverseP = <span class="number">1</span> - percent * <span class="number">0.25f</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">// 主界面X,Y缩小</span></div><div class="line">		<span class="keyword">if</span> (inverseP != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">if</span> (mDirction == Direction.Right) &#123;</div><div class="line">				ViewHelper.setPivotX(mMainContent, mWidth);</div><div class="line">				ViewHelper.setPivotY(mMainContent, mHeight / <span class="number">2.0f</span>);</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				ViewHelper.setPivotX(mMainContent, mWidth / <span class="number">2.0f</span>);</div><div class="line">				ViewHelper.setPivotY(mMainContent, mHeight / <span class="number">2.0f</span>);</div><div class="line">			&#125;</div><div class="line">			ViewHelper.setScaleX(mMainContent, inverseP);</div><div class="line">			ViewHelper.setScaleY(mMainContent, inverseP);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Float <span class="title">evaluate</span><span class="params">(<span class="keyword">float</span> fraction, Number startValue, Number endValue)</span> </span>&#123;</div><div class="line">		<span class="keyword">float</span> startFloat = startValue.floatValue();</div><div class="line">		<span class="keyword">return</span> startFloat + fraction * (endValue.floatValue() - startFloat);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">caculateValue</span><span class="params">(<span class="keyword">float</span> fraction, Object start, Object end)</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> startInt = (Integer) start;</div><div class="line">		<span class="keyword">int</span> startIntA = startInt &gt;&gt; <span class="number">24</span> &amp; <span class="number">0xff</span>;</div><div class="line">		<span class="keyword">int</span> startIntR = startInt &gt;&gt; <span class="number">16</span> &amp; <span class="number">0xff</span>;</div><div class="line">		<span class="keyword">int</span> startIntG = startInt &gt;&gt; <span class="number">8</span> &amp; <span class="number">0xff</span>;</div><div class="line">		<span class="keyword">int</span> startIntB = startInt &amp; <span class="number">0xff</span>;</div><div class="line"></div><div class="line">		<span class="keyword">int</span> endInt = (Integer) end;</div><div class="line">		<span class="keyword">int</span> endIntA = endInt &gt;&gt; <span class="number">24</span> &amp; <span class="number">0xff</span>;</div><div class="line">		<span class="keyword">int</span> endIntR = endInt &gt;&gt; <span class="number">16</span> &amp; <span class="number">0xff</span>;</div><div class="line">		<span class="keyword">int</span> endIntG = endInt &gt;&gt; <span class="number">8</span> &amp; <span class="number">0xff</span>;</div><div class="line">		<span class="keyword">int</span> endIntB = endInt &amp; <span class="number">0xff</span>;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> ((<span class="keyword">int</span>) (startIntA + (endIntA - startIntA) * fraction)) &lt;&lt; <span class="number">24</span></div><div class="line">				| ((<span class="keyword">int</span>) (startIntR + (endIntR - startIntR) * fraction)) &lt;&lt; <span class="number">16</span></div><div class="line">				| ((<span class="keyword">int</span>) (startIntG + (endIntG - startIntG) * fraction)) &lt;&lt; <span class="number">8</span></div><div class="line">				| ((<span class="keyword">int</span>) (startIntB + (endIntB - startIntB) * fraction));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"></div><div class="line">    <span class="keyword">float</span> mDownX;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> SwipeListAdapter adapter;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line"></div><div class="line">    	<span class="keyword">if</span>(getStatus() == Status.Close)&#123;</div><div class="line">	    	<span class="keyword">int</span> actionMasked = MotionEventCompat.getActionMasked(ev);</div><div class="line">	    	<span class="keyword">switch</span> (actionMasked) &#123;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">					mDownX = ev.getRawX();</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">	</div><div class="line">					<span class="keyword">if</span>(adapter.getUnClosedCount() &gt; <span class="number">0</span>)&#123;</div><div class="line">						<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">					&#125;</div><div class="line">					</div><div class="line">					<span class="keyword">float</span> delta = ev.getRawX() - mDownX;</div><div class="line">					<span class="keyword">if</span>(delta &lt; <span class="number">0</span>)&#123;</div><div class="line">						<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">					&#125;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				<span class="keyword">default</span>:</div><div class="line">					mDownX = <span class="number">0</span>;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">    	&#125;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> mDragHelper.shouldInterceptTouchEvent(ev)</div><div class="line">				&amp; mGestureDetector.onTouchEvent(ev);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>&#123;</div><div class="line">		close(<span class="keyword">true</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">(<span class="keyword">boolean</span> withAnim)</span> </span>&#123;</div><div class="line"></div><div class="line">		mMainLeft = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (withAnim) &#123;</div><div class="line">			<span class="keyword">if</span> (mDragHelper.smoothSlideViewTo(mMainContent, mMainLeft, <span class="number">0</span>)) &#123;</div><div class="line">				ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			layoutContent();</div><div class="line">			</div><div class="line">			dispathDragEvent(mMainLeft);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>&#123;</div><div class="line">		open(<span class="keyword">true</span>);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(<span class="keyword">boolean</span> withAnim)</span> </span>&#123;</div><div class="line">		open(withAnim, Direction.Left);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">(<span class="keyword">boolean</span> withAnim, Direction d)</span> </span>&#123;</div><div class="line">		mDirction = d;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (mDirction == Direction.Left)</div><div class="line">			mMainLeft = mRangeLeft;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (mDirction == Direction.Right)</div><div class="line">			mMainLeft = -mRangeRight;</div><div class="line"></div><div class="line">		<span class="keyword">if</span> (withAnim) &#123;</div><div class="line">			<span class="comment">// 引发动画的开始</span></div><div class="line">			<span class="keyword">if</span> (mDragHelper.smoothSlideViewTo(mMainContent, mMainLeft, <span class="number">0</span>)) &#123;</div><div class="line">				<span class="comment">// 需要在computeScroll中使用continueSettling方法才能将动画继续下去（因为ViewDragHelper使用了scroller）。</span></div><div class="line">				ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			layoutContent();</div><div class="line">			</div><div class="line">			dispathDragEvent(mMainLeft);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			mDragHelper.processTouchEvent(event);</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Status <span class="title">getStatus</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> mStatus;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">switchScaleEnable</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.mScaleEnable = !mScaleEnable;</div><div class="line">		<span class="keyword">if</span> (!mScaleEnable) &#123;</div><div class="line">			animBackView(<span class="number">1.0f</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdapterInterface</span><span class="params">(SwipeListAdapter adapter)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.adapter = adapter;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DragRelativeLayout</span> <span class="keyword">extends</span> <span class="title">RelativeLayout</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> DragLayout dl;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">DragRelativeLayout</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DragRelativeLayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DragRelativeLayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDragLayout</span><span class="params">(DragLayout dl)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.dl = dl;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (dl.getStatus() != Status.Close) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onInterceptTouchEvent(event);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (dl.getStatus() != Status.Close) &#123;</div><div class="line">			<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_UP) &#123;</div><div class="line">				dl.close(<span class="keyword">true</span>);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码：<a href="https://github.com/JackChen1999/DragLayout" target="_blank" rel="external">https://github.com/JackChen1999/DragLayout</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义控件/" rel="tag"># 自定义控件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/android/自定义控件：快速索引/" rel="next" title="自定义控件：快速索引">
+                <i class="fa fa-chevron-left"></i> 自定义控件：快速索引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/揭秘Java网络爬虫程序原理/" rel="prev" title="揭秘Java网络爬虫程序原理">
+                揭秘Java网络爬虫程序原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-OnFinishInflate-介绍"><span class="nav-number">1.</span> <span class="nav-text">3.1 OnFinishInflate()介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-获取控件宽高"><span class="nav-number">2.</span> <span class="nav-text">3.2 获取控件宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-限定主面板的拖动范围"><span class="nav-number">3.</span> <span class="nav-text">3.3 限定主面板的拖动范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-跳转的结束动画"><span class="nav-number">4.</span> <span class="nav-text">4.1 跳转的结束动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-平滑的结束动画"><span class="nav-number">5.</span> <span class="nav-text">4.2 平滑的结束动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-分解伴随动画"><span class="nav-number">6.</span> <span class="nav-text">5.1 分解伴随动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-实现伴随动画"><span class="nav-number">7.</span> <span class="nav-text">5.2 实现伴随动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-状态分析"><span class="nav-number">8.</span> <span class="nav-text">6.1 状态分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-事件回调分析"><span class="nav-number">9.</span> <span class="nav-text">6.2 事件回调分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-实现状态更新及事件回调"><span class="nav-number">10.</span> <span class="nav-text">6.3 实现状态更新及事件回调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-填充界面数据"><span class="nav-number">11.</span> <span class="nav-text">7.1 填充界面数据</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/自定义控件：侧滑面板/';
+          this.page.identifier = '2017/05/01/android/自定义控件：侧滑面板/';
+          this.page.title = '自定义控件：侧滑面板';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

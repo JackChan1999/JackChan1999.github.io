@@ -1,0 +1,1392 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="内容提供者," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 内容摘要 ContentProvider 基本概念 ContentProvider 的基本使用 操作系统短信 操作系统联系人 内容观察者ContentObserver 案例-短信窃听器 使用ContentObserver 监听自定义ContentProvider 的变化">
+<meta name="keywords" content="内容提供者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android四大组件之ContentProvider">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/android/Android四大组件之ContentProvider/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. 内容摘要 ContentProvider 基本概念 ContentProvider 的基本使用 操作系统短信 操作系统联系人 内容观察者ContentObserver 案例-短信窃听器 使用ContentObserver 监听自定义ContentProvider 的变化">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021114145924">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021114941420">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021115029794">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021120644176">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021121139574">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021121808634">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021122102336">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021122146760">
+<meta property="og:image" content="http://img.blog.csdn.net/20161021122448590">
+<meta property="og:updated_time" content="2017-05-01T04:42:29.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android四大组件之ContentProvider">
+<meta name="twitter:description" content="1. 内容摘要 ContentProvider 基本概念 ContentProvider 的基本使用 操作系统短信 操作系统联系人 内容观察者ContentObserver 案例-短信窃听器 使用ContentObserver 监听自定义ContentProvider 的变化">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161021114145924">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/android/Android四大组件之ContentProvider/"/>
+
+
+
+
+
+  <title>Android四大组件之ContentProvider | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Android四大组件之ContentProvider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android四大组件之ContentProvider
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:35:19+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/android/Android四大组件之ContentProvider/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/android/Android四大组件之ContentProvider/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-内容摘要"><a href="#1-内容摘要" class="headerlink" title="1. 内容摘要"></a><strong>1. 内容摘要</strong></h1><ul>
+<li>ContentProvider 基本概念</li>
+<li>ContentProvider 的基本使用</li>
+<li>操作系统短信</li>
+<li>操作系统联系人</li>
+<li>内容观察者ContentObserver</li>
+<li>案例-短信窃听器</li>
+<li>使用ContentObserver 监听自定义ContentProvider 的变化</li>
+</ul>
+<a id="more"></a>
+<h1 id="2-ContentProvider-基本概念"><a href="#2-ContentProvider-基本概念" class="headerlink" title="2. ContentProvider 基本概念"></a><strong>2. ContentProvider 基本概念</strong></h1><p>内容提供者ContentProvider，是Android 的四大组件之一。内容提供者是应用程序之间共享数据的接口。</p>
+<p>Android 系统将这种机制应用到方方面面，比如：联系人（通讯录应用程序）Provider 专为不同应用程序提供联系人数据；短信（短信应用程序）Provider 专为不同应用程序提供系统短信信息。</p>
+<p>当应用继承ContentProvider 类，并重写该类用于提供数据和存储数据的方法，就可以向其他应用共享其数据。虽然使用其他方法也可以对外共享数据，但数据访问方式会因数据存储的方式而不同，如：采用文件方式对外共享数据，需要进行文件操作读写数据；采用SharedPreferences 共享数据，需要使用SharedPreferences API 读写数据。而使用ContentProvider 共享数据的好处是统一了数据访问方式。</p>
+<p>官方对ContentProvider 的解释如下：</p>
+<blockquote>
+<p>Content providers manage access to a structured set of data. They encapsulate the data, and provide mechanisms for defining data security. Content providers are the standard interface that connects data in one process with code running in another process.</p>
+</blockquote>
+<p>内容提供者管理了对结构化数据（最常见的就是数据库中数据）的访问操作。内容提供者封装了这些数据并且提供了一种安全的访问机制。内容提供者是不同进程之间交互数据（数据库数据）的标准方式。</p>
+<p>用一张简易图演示内容提供者的工作原理，如下图所示</p>
+<p><img src="http://img.blog.csdn.net/20161021114145924" alt="这里写图片描述"></p>
+<p>该图中假设手机助手App 要获取系统的短信，系统的短信是存储在数据库中的，当然该数据库只能由系统短信App 内部代码直接访问。手机助手App 直接访问短信数据库是行不通的，这时候就可以借助内容提供者，系统短信App 已经写好了内容提供者，该内容提供者对外提供了短信数据。因此手机助手App直接去访问系统短信的内容提供者即可间接实现对短信数据库的访问</p>
+<h1 id="3-ContentProvider-基本使用"><a href="#3-ContentProvider-基本使用" class="headerlink" title="3. ContentProvider 基本使用"></a><strong>3. ContentProvider 基本使用</strong></h1><p>为了演示ContentProvider 的基本用法，在该节中我们将创建两个Android 工程：01-内容提供者A（简称AppA）和内容访问者B（简称AppB）。在AppA 中创建数据库user.db，该db 中有两张表，t_woman和t_man。AppA 通过内容提供者对外提供数据库中的数据。AppB 作为一个内容访问者，通过内容解析者（ContentResolver）实现对AppA 中的数据进行增删改查功能。</p>
+<h2 id="3-1-在AppA-中创建MySQLiteOpenHelper-类"><a href="#3-1-在AppA-中创建MySQLiteOpenHelper-类" class="headerlink" title="3.1 在AppA 中创建MySQLiteOpenHelper 类"></a><strong>3.1 在AppA 中创建MySQLiteOpenHelper 类</strong></h2><p>在该类中实现数据库和数据表的创建业务逻辑</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">package com.example.contentProviderA;</div><div class="line"></div><div class="line">    import android.content.Context;</div><div class="line">    import android.database.sqlite.SQLiteDatabase;</div><div class="line">    import android.database.sqlite.SQLiteDatabase.CursorFactory;</div><div class="line">    import android.database.sqlite.SQLiteOpenHelper;</div><div class="line">    //创建数据库user.db 同时初始化表t_woman 和t_man</div><div class="line">    public class MySQLiteOpenHelper extends SQLiteOpenHelper &#123;</div><div class="line"></div><div class="line">        //数据库名称</div><div class="line">        private static final String DB_NAME = "user.db";</div><div class="line">        //数据库版本号</div><div class="line">        private static final int VERSION = 1;</div><div class="line"></div><div class="line">        private MySQLiteOpenHelper(Context context, String name, CursorFactory factory,</div><div class="line">                                   int version) &#123;</div><div class="line">            super(context, name, factory, version);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public MySQLiteOpenHelper(Context context)&#123;</div><div class="line">            this(context, DB_NAME, null, VERSION);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onCreate(SQLiteDatabase db) &#123;</div><div class="line">            String sql_woman="create table t_woman(id integer primary key,</div><div class="line">            c_name varchar(10),c_phone varchar(20))";</div><div class="line">            String sql_man = "create table t_man(id integer primary key,</div><div class="line">            c_name varchar(10),c_phone varchar(20))";</div><div class="line">            db.execSQL(sql_woman);</div><div class="line">            db.execSQL(sql_man);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="3-2-使用测试类初始化user-db"><a href="#3-2-使用测试类初始化user-db" class="headerlink" title="3.2 使用测试类初始化user.db"></a><strong>3.2 使用测试类初始化user.db</strong></h2><p>为了让MySQLiteOpenHelper.java 中onCreate 方法被调用，我们可以采用一个测试类来实现，当然使用其他方法也是可行的。这里使用测试类初始化AppA 的数据库也是为了复习Android Junit Test的使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example.contentProviderA;</div><div class="line"></div><div class="line">    <span class="keyword">import</span> android.database.sqlite.SQLiteDatabase;</div><div class="line">    <span class="keyword">import</span> android.test.AndroidTestCase;</div><div class="line"></div><div class="line">    <span class="comment">//定义测试类，用于初始化user.db</span></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> <span class="keyword">extends</span> <span class="title">AndroidTestCase</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 在AndroidTestCase 类中可以直接使用getContext()方法获取到Context 对象</div><div class="line">             */</div><div class="line">            MySQLiteOpenHelper sqLiteOpenHelper = <span class="keyword">new</span> MySQLiteOpenHelper(getContext());</div><div class="line">            SQLiteDatabase writableDatabase = sqLiteOpenHelper.getWritableDatabase();</div><div class="line">            writableDatabase.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>在AndroidManifest.xml 中添加测试指令集和测试库。在application 节点外添加指令集</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">instrumentation</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"android.test.InstrumentationTestRunner"</span></div><div class="line">    <span class="attr">android:targetPackage</span>=<span class="string">"com.example.contentProviderA"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>在application 节点中添加测试库</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-library</span> <span class="attr">android:name</span>=<span class="string">"android.test.runner"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>万事俱备后一定记得运行一下该测试方法，看见如下绿条和数据库文件才行哦<br><img src="http://img.blog.csdn.net/20161021114941420" alt="这里写图片描述"></p>
+<p>数据库初始化完成</p>
+<p><img src="http://img.blog.csdn.net/20161021115029794" alt="这里写图片描述"></p>
+<h2 id="3-3-在AppA-中创建内容提供者"><a href="#3-3-在AppA-中创建内容提供者" class="headerlink" title="3.3 在AppA 中创建内容提供者"></a><strong>3.3 在AppA 中创建内容提供者</strong></h2><p>我们已经将user.db 创建好了，接下来我们创建一个内容提供者将user.db 中的数据提供出去</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyContentProvider</span> <span class="keyword">extends</span> <span class="title">ContentProvider</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">private</span> SQLiteDatabase database;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 创建一个Uri 匹配器，用于区分用户使用的uri 种类，比如区分用户到底想操作哪张表，</div><div class="line">         * 以及哪个表中的哪条数据</div><div class="line">         */</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> UriMatcher sURIMatcher =</div><div class="line">                <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);</div><div class="line"></div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> T_WOMAN = <span class="number">1</span>;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> T_MAN = <span class="number">2</span>;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> T_WOMAN_ID = <span class="number">3</span>;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 添加匹配项</div><div class="line">         */</div><div class="line">        <span class="keyword">static</span>&#123;</div><div class="line">            String authority = <span class="string">"com.itheima.provider"</span>;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 参数1：内容提供者的主机名，类似于我们隐式意图中intent-filter 中action，</div><div class="line">             * 用于区分内容提供者，</div><div class="line">             * 毕竟对于一个Android 系统来讲，可能内容提供者不止一个</div><div class="line">             * 参数2：表名或者表名/#，其中#用于指定表中数据的id</div><div class="line">             * 参数3：如果匹配成功了的返回值</div><div class="line">             */</div><div class="line">            sURIMatcher.addURI(authority, <span class="string">"t_woman"</span>, <span class="number">1</span>);</div><div class="line">            sURIMatcher.addURI(authority, <span class="string">"t_man"</span>, <span class="number">2</span>);</div><div class="line">            sURIMatcher.addURI(authority, <span class="string">"t_woman/#"</span>, <span class="number">3</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 执行删除方法</div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(Uri uri, String selection, String[] selectionArgs)</span> </span>&#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 获取用户传递进来的uri 的匹配码，如果匹配不成功在，则返回UriMatcher.NO_MATCH</div><div class="line">             */</div><div class="line">            <span class="keyword">int</span> match = sURIMatcher.match(uri);</div><div class="line">            <span class="keyword">switch</span> (match) &#123;</div><div class="line">                <span class="keyword">case</span> T_WOMAN:</div><div class="line">                    Log.d(<span class="string">"tag"</span>, <span class="string">"匹配t_woman 表"</span>);</div><div class="line">                    <span class="keyword">return</span> database.delete(<span class="string">"t_woman"</span>, selection, selectionArgs);</div><div class="line">                <span class="keyword">case</span> T_MAN:</div><div class="line">                    Log.d(<span class="string">"tag"</span>, <span class="string">"匹配t_man 表"</span>);</div><div class="line">                    <span class="keyword">return</span> database.delete(<span class="string">"t_man"</span>, selection, selectionArgs);</div><div class="line">                <span class="keyword">case</span> UriMatcher.NO_MATCH:</div><div class="line">                    Log.d(<span class="string">"tag"</span>, <span class="string">"没有匹配项"</span>);</div><div class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">                <span class="keyword">default</span>:</div><div class="line"></div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">(Uri uri)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 用于处理ContentResolver 发送的insert 请求，一般在该方法中执行数据库的插入操作</div><div class="line">         * <span class="doctag">@param</span> uri</div><div class="line">         * <span class="doctag">@param</span> values</div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri uri, ContentValues values)</span> </span>&#123;</div><div class="line">            <span class="keyword">int</span> match = sURIMatcher.match(uri);</div><div class="line">            <span class="keyword">switch</span> (match) &#123;</div><div class="line">                <span class="keyword">case</span> T_WOMAN:</div><div class="line">                    database.insert(<span class="string">"t_woman"</span>, <span class="keyword">null</span>, values);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> T_MAN:</div><div class="line">                    database.insert(<span class="string">"t_man"</span>, <span class="keyword">null</span>, values);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> UriMatcher.NO_MATCH:</div><div class="line">                    Log.d(<span class="string">"tag"</span>, <span class="string">"匹配不正确"</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">default</span>:</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> uri;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 在该内容提供者注册以后，当该应用第一次运行起来的时候该方法会被回调</div><div class="line">         * 用来做一些初始化工作，比如初始化数据库对象</div><div class="line">         * 如果初始化成功则返回true，否则返回false。</div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 在ContentProvider 中可以直接通过getContext()方法获取Context 对象</div><div class="line">             */</div><div class="line">            MySQLiteOpenHelper sqLiteOpenHelper =</div><div class="line">                    <span class="keyword">new</span> MySQLiteOpenHelper(getContext());</div><div class="line">            <span class="comment">//获取一个SQLiteDatabase 对象，并声明为成员变量，方便其他方法中使用</span></div><div class="line">            database = sqLiteOpenHelper.getWritableDatabase();</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 执行查询方法</div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(Uri uri, String[] projection, String selection,</span></span></div><div class="line">                            String[] selectionArgs, String sortOrder) &#123;</div><div class="line">            <span class="keyword">int</span> match = sURIMatcher.match(uri);</div><div class="line">            <span class="keyword">switch</span> (match) &#123;</div><div class="line">                <span class="keyword">case</span> T_MAN:</div><div class="line">                    <span class="keyword">return</span> database.query(<span class="string">"t_man"</span>, projection, selection,</div><div class="line">                            selectionArgs, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">                <span class="keyword">case</span> T_WOMAN:</div><div class="line">                    <span class="keyword">return</span> database.query(<span class="string">"t_woman"</span>, projection,</div><div class="line">                            selection, selectionArgs, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">                <span class="keyword">case</span> T_WOMAN_ID:</div><div class="line">                    <span class="comment">//ContentUris 是解析Uri 的一个工具类，可以将Uri 中的id 给解析出来</span></div><div class="line">                    <span class="keyword">long</span> id = ContentUris.parseId(uri);</div><div class="line">                    <span class="keyword">return</span> database.query(<span class="string">"t_woman"</span>, <span class="keyword">null</span>, <span class="string">"id=?"</span>,</div><div class="line">                            <span class="keyword">new</span> String[]&#123;id+<span class="string">""</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">                <span class="keyword">case</span> UriMatcher.NO_MATCH:</div><div class="line">                    Log.d(<span class="string">"tag"</span>, <span class="string">"匹配失败"</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">default</span>:</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 执行修改方法</div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Uri uri, ContentValues values, String selection,</span></span></div><div class="line">                          String[] selectionArgs) &#123;</div><div class="line">            <span class="keyword">int</span> match = sURIMatcher.match(uri);</div><div class="line">            <span class="keyword">switch</span> (match) &#123;</div><div class="line">                <span class="keyword">case</span> T_MAN:</div><div class="line">                    <span class="keyword">return</span> database.update(<span class="string">"t_man"</span>, values, selection, selectionArgs);</div><div class="line">                <span class="keyword">case</span> T_WOMAN:</div><div class="line">                    <span class="keyword">return</span> database.update(<span class="string">"t_woman"</span>, values, selection, selectionArgs);</div><div class="line">                <span class="keyword">case</span> UriMatcher.NO_MATCH:</div><div class="line">                    Log.d(<span class="string">"tag"</span>, <span class="string">"匹配失败"</span>);</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">default</span>:</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="3-4-在AndroidManifest-xml-中注册ContentProvider"><a href="#3-4-在AndroidManifest-xml-中注册ContentProvider" class="headerlink" title="3.4 在AndroidManifest.xml 中注册ContentProvider"></a>3.4 在AndroidManifest.xml 中注册ContentProvider</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">provider</span> </span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"com.example.contentProviderA.MyContentProvider"</span></div><div class="line">    <span class="attr">android:exported</span>=<span class="string">"true"</span></div><div class="line">    <span class="attr">android:authorities</span>=<span class="string">"com.itheima.provider"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>注意：exported 属性必须设置为true 才可以被其他应用访问到该内容提供者</p>
+<h2 id="3-5-创建工程02-内容访问者B"><a href="#3-5-创建工程02-内容访问者B" class="headerlink" title="3.5 创建工程02-内容访问者B"></a><strong>3.5 创建工程02-内容访问者B</strong></h2><p>在AppB 中直接使用MainActivity 类，布局文件如下</p>
+<p><img src="http://img.blog.csdn.net/20161021120644176" alt="这里写图片描述"><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"insert1"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"给woman 表插入数据"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"insert2"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"给man 表插入数据"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"delete1"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"删除woman 表的数据"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"update1"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"修改woman 表的数据"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"query1"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"查询woman 表的所有数据"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:onClick</span>=<span class="string">"query2"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"查询woman 表中的单条数据"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>MainActivity.java 代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * 点击界面不同的按钮实现对AppA 中不同的增删改查操作</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">private</span> ContentResolver contentResolver;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">            setContentView(R.layout.activity_main);</div><div class="line">            <span class="comment">//获取内容解析者（ContentResolver）</span></div><div class="line">            contentResolver = getContentResolver();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 往t_woman 表中插入一条数据</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert1</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 访问内容提供者的uri 的标准写法：</div><div class="line">             * 1.必须以content：//开头</div><div class="line">             * 2. 主机名必须跟内容提供者的authorities 属性一致</div><div class="line">             * 3. 主机名后面跟要操作的表名</div><div class="line">             */</div><div class="line">            Uri url = Uri.parse(<span class="string">"content://com.itheima.provider/t_woman"</span>);</div><div class="line">            ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">            values.put(<span class="string">"c_name"</span>, <span class="string">"lili"</span>);</div><div class="line">            values.put(<span class="string">"c_phone"</span>, <span class="string">"5554"</span>);</div><div class="line">            <span class="comment">//插入一条数据</span></div><div class="line">            contentResolver.insert(url, values);</div><div class="line">            <span class="comment">//再插入一条新数据</span></div><div class="line">            values.clear();</div><div class="line">            values.put(<span class="string">"c_name"</span>, <span class="string">"lucy"</span>);</div><div class="line">            values.put(<span class="string">"c_phone"</span>, <span class="string">"5556"</span>);</div><div class="line">            contentResolver.insert(url, values);</div><div class="line">            <span class="comment">//再插入一条数据</span></div><div class="line">            values.clear();</div><div class="line">            values.put(<span class="string">"c_name"</span>, <span class="string">"fengjie"</span>);</div><div class="line">            values.put(<span class="string">"c_phone"</span>, <span class="string">"5558"</span>);</div><div class="line">            contentResolver.insert(url, values);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 往t_man 表中插入数据</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert2</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            Uri url = Uri.parse(<span class="string">"content://com.itheima.provider/t_woman"</span>);</div><div class="line">            ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">            values.put(<span class="string">"c_name"</span>, <span class="string">"zhangsan"</span>);</div><div class="line">            values.put(<span class="string">"c_phone"</span>, <span class="string">"6500"</span>);</div><div class="line">            contentResolver.insert(url, values);</div><div class="line">            <span class="comment">//再插入一条新数据</span></div><div class="line">            values.clear();</div><div class="line">            values.put(<span class="string">"c_name"</span>, <span class="string">"lisi"</span>);</div><div class="line">            values.put(<span class="string">"c_phone"</span>, <span class="string">"6600"</span>);</div><div class="line">            contentResolver.insert(url, values);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 删除t_woman 表中姓名为lili 的数据</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete1</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            Uri url = Uri.parse(<span class="string">"content://com.itheima.provider/t_woman"</span>);</div><div class="line">            String where = <span class="string">"c_name=?"</span>;</div><div class="line">            String[] selectionArgs = <span class="keyword">new</span> String[]&#123;<span class="string">"lili"</span>&#125;;</div><div class="line">            contentResolver.delete(url, where, selectionArgs);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 删除t_man 表中姓名为zhangsan 的数据</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete2</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            Uri url = Uri.parse(<span class="string">"content://com.itheima.provider/t_man"</span>);</div><div class="line">            String where = <span class="string">"c_name=?"</span>;</div><div class="line">            String[] selectionArgs = <span class="keyword">new</span> String[]&#123;<span class="string">"zhangsan"</span>&#125;;</div><div class="line">            contentResolver.delete(url, where, selectionArgs);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 修改t_woman 表中姓名为lucy 的电话为110</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update1</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            Uri url = Uri.parse(<span class="string">"content://com.itheima.provider/t_woman"</span>);</div><div class="line">            String where = <span class="string">"c_name=?"</span>;</div><div class="line">            String[] selectionArgs = <span class="keyword">new</span> String[]&#123;<span class="string">"lucy"</span>&#125;;</div><div class="line">            ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">            values.put(<span class="string">"c_phone"</span>, <span class="string">"110"</span>);</div><div class="line">            contentResolver.update(url, values, where, selectionArgs);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 查询t_woman 表中的所有数据</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">query1</span><span class="params">(View view)</span> </span>&#123;</div><div class="line"></div><div class="line">            Uri uri = Uri.parse(<span class="string">"content://com.itheima.provider/t_woman"</span>);</div><div class="line"></div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 参数2：要查询的字段</div><div class="line">             * 参数3：where 表达式，null 代表查询所有</div><div class="line">             * 参数4：用于替换where 表达式中？号的真实值</div><div class="line">             * 参数5：排序规则</div><div class="line">             */</div><div class="line">            Cursor cursor = contentResolver.query(uri,</div><div class="line">                    <span class="keyword">new</span> String[]&#123;<span class="string">"id"</span>, <span class="string">"c_name"</span>, <span class="string">"c_phone"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">            <span class="keyword">while</span> (cursor.moveToNext()) &#123;</div><div class="line">                <span class="keyword">int</span> id = cursor.getInt(<span class="number">0</span>);</div><div class="line">                String name = cursor.getString(<span class="number">1</span>);</div><div class="line">                String phone = cursor.getString(<span class="number">2</span>);</div><div class="line">                Log.d(<span class="string">"tag"</span>, <span class="string">"id="</span> + id + <span class="string">",name="</span> + name + <span class="string">",phone="</span> + phone);</div><div class="line">            &#125;</div><div class="line">            cursor.close();</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/**</span></div><div class="line">         * 查询t_woman 表中id 为2 的数据</div><div class="line">         */</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">query2</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 该方法的需求的是查询id 为2 的数据，因此只需要在uri 的最后面添加上/id 即可。</div><div class="line">             */</div><div class="line">            Uri uri = Uri.parse(<span class="string">"content://com.itheima.provider/t_woman/2"</span>);</div><div class="line">            Cursor cursor = contentResolver.query(uri,</div><div class="line">                    <span class="keyword">new</span> String[]&#123;<span class="string">"id"</span>, <span class="string">"c_name"</span>, <span class="string">"c_phone"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">            <span class="keyword">while</span> (cursor.moveToNext()) &#123;</div><div class="line">                <span class="keyword">int</span> id = cursor.getInt(<span class="number">0</span>);</div><div class="line">                String name = cursor.getString(<span class="number">1</span>);</div><div class="line">                String phone = cursor.getString(<span class="number">2</span>);</div><div class="line">                Log.d(<span class="string">"tag"</span>, <span class="string">"id="</span> + id + <span class="string">",name="</span> + name + <span class="string">",phone="</span> + phone);</div><div class="line">            &#125;</div><div class="line">            cursor.close();</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="3-6-内容提供者Uri-的书写规范"><a href="#3-6-内容提供者Uri-的书写规范" class="headerlink" title="3.6 内容提供者Uri 的书写规范"></a><strong>3.6 内容提供者Uri 的书写规范</strong></h2><p><img src="http://img.blog.csdn.net/20161021121139574" alt="这里写图片描述"></p>
+<ul>
+<li>schema，用来说明一个ContentProvider 控制这些数据。”content://“</li>
+<li>Authority主机名或授权：它定义了是哪个ContentProvider 提供这些数据。</li>
+<li>path：路径，URI 下的某一个Item。</li>
+<li>ID：通常定义Uri 时使用”#”号占位符代替, 使用时替换成对应的数字</li>
+<li>content://com.itheima.provider/person/#：#表示数据id（#代表任意数字）</li>
+<li>content://com.itheima.provider/person/*：*来匹配任意文本。</li>
+</ul>
+<h1 id="4-操作系统短信"><a href="#4-操作系统短信" class="headerlink" title="4. 操作系统短信"></a><strong>4. 操作系统短信</strong></h1><p>使用内容提供者操作系统短信和操作系统联系人是我们企业开发中“经常”遇到的需求，而自定义内容提供者对外提供数据反而使用的场景并不多，除非我们开发的短信或者联系人应用</p>
+<h2 id="4-1-准备知识"><a href="#4-1-准备知识" class="headerlink" title="4.1 准备知识"></a>4.1 准备知识</h2><p>打开Android 系统源码，查看packages\providers\路径下的工程，这些就是Android 系统中的内容提供者，其中TelephonyProvider 就是短信的内容提供者文件<br><img src="http://img.blog.csdn.net/20161021121808634" alt="这里写图片描述"></p>
+<p>打开TelephonyProvider 下的src 文件，查看java 文件，其中的SmsProvider.java 即短信息内容提供者逻辑代码。UriMatcher 一般在静态代码块中进行初始化操作，查找静态代码块，找到的逻辑代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> UriMatcher sURLMatcher = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        URLMatcher.addURI(<span class="string">"sms"</span>, <span class="keyword">null</span>, SMS_ALL);</div><div class="line">        URLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"#"</span>, SMS_ALL_ID);</div><div class="line">        URLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"inbox"</span>, SMS_INBOX);</div><div class="line">        URLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"inbox/#"</span>, SMS_INBOX_ID);</div><div class="line">        URLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"sent"</span>, SMS_SENT);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"sent/#"</span>, SMS_SENT_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"draft"</span>, SMS_DRAFT);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"draft/#"</span>, SMS_DRAFT_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"outbox"</span>, SMS_OUTBOX);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"outbox/#"</span>, SMS_OUTBOX_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"undelivered"</span>, SMS_UNDELIVERED);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"failed"</span>, SMS_FAILED);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"failed/#"</span>, SMS_FAILED_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"queued"</span>, SMS_QUEUED);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"conversations"</span>, SMS_CONVERSATIONS);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"conversations/*"</span>, SMS_CONVERSATIONS_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"raw"</span>, SMS_RAW_MESSAGE);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"attachments"</span>, SMS_ATTACHMENT);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"attachments/#"</span>, SMS_ATTACHMENT_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"threadID"</span>, SMS_NEW_THREAD_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"threadID/*"</span>, SMS_QUERY_THREAD_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"status/#"</span>, SMS_STATUS_ID);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"sr_pending"</span>, SMS_STATUS_PENDING);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"icc"</span>, SMS_ALL_ICC);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"icc/#"</span>, SMS_ICC);</div><div class="line">        <span class="comment">//we keep these for not breaking old applications</span></div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"sim"</span>, SMS_ALL_ICC);</div><div class="line">        sURLMatcher.addURI(<span class="string">"sms"</span>, <span class="string">"sim/#"</span>, SMS_ICC);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>通过查找系统源码，可以确定短信息内容提供者的Uri 应该为:”content://sms”。查看Android 模拟器下的/data/data/com.android.providers.telephony/databases/目录，查看其mmssms.db文件。</p>
+<p><img src="http://img.blog.csdn.net/20161021122102336" alt="这里写图片描述"></p>
+<p>打开数据库，其中sms 表存储的就是短信的数据，其存储格式如下<br><img src="http://img.blog.csdn.net/20161021122146760" alt="这里写图片描述"></p>
+<p>其中，address 存储的是联系人号码，date 是发送日期，type 对应短信的类型（发送是1/接收是2）,body是短信的主体内容</p>
+<p>由于读取和插入系统短信数据库都涉及到可能侵犯用户隐私，因此创建的工程必须添加如下权限<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.READ_SMS"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.WRITE_SMS"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="4-2-查询系统短信"><a href="#4-2-查询系统短信" class="headerlink" title="4.2 查询系统短信"></a>4.2 查询系统短信</h2><p>创建Android 工程03-操作系统短信。布局文件十分简单，只有两个Button，点击不同的Button 分别触发短信的读取和短信的插入功能。因此布局文件不再给出。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//读取系统短信</div><div class="line">    public void readSms(View view)&#123;</div><div class="line">        Uri uri=Uri.parse("content://sms");</div><div class="line">        //contentResolver 在MainActivity 的onCreate 方法中获取</div><div class="line">        Cursor cursor = contentResolver.query(uri,</div><div class="line">                new String[]&#123;"address","date","body","type"&#125;, null, null, null);</div><div class="line"></div><div class="line">        while(cursor.moveToNext())&#123;</div><div class="line">            String address = cursor.getString(0);</div><div class="line">            String date = cursor.getString(1);</div><div class="line">            String body = cursor.getString(2);</div><div class="line">            String type = cursor.getString(3);</div><div class="line"></div><div class="line">            Log.d("tag", "address="+address+",body="+body+",type="+type+",</div><div class="line">                    date="+new Date(Long.valueOf(date)));</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20161021122448590" alt="内容提供者"></p>
+<h1 id="5-内容提供者"><a href="#5-内容提供者" class="headerlink" title="5. 内容提供者"></a>5. 内容提供者</h1><ul>
+<li>应用的数据库是不允许其他应用访问的</li>
+<li>内容提供者的作用就是让别的应用访问到你的数据库</li>
+<li>自定义内容提供者，继承ContentProvider类，重写增删改查方法，在方法中写增删改查数据库的代码，举例增方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">		public Uri insert(Uri uri, ContentValues values) &#123;</div><div class="line">			db.insert(&quot;person&quot;, null, values);</div><div class="line">			return uri;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在清单文件中定义内容提供者的标签，注意必须要有authorities属性，这是内容提供者的主机名，功能类似地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;provider android:name=&quot;com.itheima.contentprovider.PersonProvider&quot;</div><div class="line">android:authorities=&quot;com.itheima.person&quot;</div><div class="line">android:exported=&quot;true&quot;&gt;</div><div class="line">&lt;/provider&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个其他应用，访问自定义的内容提供者，实现对数据库的插入操作</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public void click(View v)&#123;</div><div class="line">  //得到内容分解器对象</div><div class="line">  ContentResolver cr = getContentResolver();</div><div class="line">  ContentValues cv = new ContentValues();</div><div class="line">  cv.put(&quot;name&quot;, &quot;小方&quot;);</div><div class="line">  cv.put(&quot;phone&quot;, 138856);</div><div class="line">  cv.put(&quot;money&quot;, 3000);</div><div class="line">  //url:内容提供者的主机名</div><div class="line">  cr.insert(Uri.parse(&quot;content://com.itheima.person&quot;), cv);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="6-UriMatcher"><a href="#6-UriMatcher" class="headerlink" title="6. UriMatcher"></a><strong>6. UriMatcher</strong></h1><ul>
+<li>用于判断一条uri跟指定的多条uri中的哪条匹配</li>
+<li>添加匹配规则</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//指定多条uri</div><div class="line">um.addURI(&quot;com.itheima.person&quot;, &quot;person&quot;, PERSON_CODE);</div><div class="line">um.addURI(&quot;com.itheima.person&quot;, &quot;company&quot;, COMPANY_CODE);</div><div class="line">//#号可以代表任意数字</div><div class="line">um.addURI(&quot;com.itheima.person&quot;, &quot;person/#&quot;, QUERY_ONE_PERSON_CODE);</div></pre></td></tr></table></figure>
+<ul>
+<li>通过Uri匹配器可以实现操作不同的表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri uri, ContentValues values)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span>(um.match(uri) == PERSON_CODE)&#123;</div><div class="line">    db.insert(<span class="string">"person"</span>, <span class="keyword">null</span>, values);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(um.match(uri) == COMPANY_CODE)&#123;</div><div class="line">    db.insert(<span class="string">"company"</span>, <span class="keyword">null</span>, values);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> uri;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>如果路径中带有数字，把数字提取出来的api</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">int id = (int) ContentUris.parseId(uri);</div></pre></td></tr></table></figure>
+<h1 id="7-短信数据库"><a href="#7-短信数据库" class="headerlink" title="7. 短信数据库"></a>7. 短信数据库</h1><ul>
+<li>只需要关注sms表</li>
+<li>只需要关注4个字段<ul>
+<li>body：短信内容</li>
+<li>address:短信的发件人或收件人号码（跟你聊天那哥们的号码）</li>
+<li>date：短信时间</li>
+<li>type：1为收到，2为发送</li>
+</ul>
+</li>
+<li>读取系统短信，首先查询源码获得短信数据库内容提供者的主机名和路径，然后</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ContentResolver cr = getContentResolver();</div><div class="line">Cursor c = cr.query(Uri.parse(<span class="string">"content://sms"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"body"</span>, <span class="string">"date"</span>, <span class="string">"address"</span>, <span class="string">"type"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line"><span class="keyword">while</span>(c.moveToNext())&#123;</div><div class="line">  String body = c.getString(<span class="number">0</span>);</div><div class="line">  String date = c.getString(<span class="number">1</span>);</div><div class="line">  String address = c.getString(<span class="number">2</span>);</div><div class="line">  String type = c.getString(<span class="number">3</span>);</div><div class="line">  System.out.println(body+<span class="string">";"</span> + date + <span class="string">";"</span> + address + <span class="string">";"</span> + type);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>插入系统短信</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ContentResolver cr = getContentResolver();</div><div class="line">ContentValues cv = <span class="keyword">new</span> ContentValues();</div><div class="line">cv.put(<span class="string">"body"</span>, <span class="string">"您尾号为XXXX的招行储蓄卡收到转账1,000,000人民币"</span>);</div><div class="line">cv.put(<span class="string">"address"</span>, <span class="number">95555</span>);</div><div class="line">cv.put(<span class="string">"type"</span>, <span class="number">1</span>);</div><div class="line">cv.put(<span class="string">"date"</span>, System.currentTimeMillis());</div><div class="line">cr.insert(Uri.parse(<span class="string">"content://sms"</span>), cv);</div></pre></td></tr></table></figure>
+<ul>
+<li>插入查询系统短信需要注册权限</li>
+</ul>
+<h1 id="8-联系人数据库"><a href="#8-联系人数据库" class="headerlink" title="8. 联系人数据库"></a>8. 联系人数据库</h1><ul>
+<li>raw_contacts表：<ul>
+<li>contact_id：联系人id</li>
+</ul>
+</li>
+<li>data表：联系人的具体信息，一个信息占一行<ul>
+<li>data1：信息的具体内容</li>
+<li>raw_contact_id：联系人id，描述信息属于哪个联系人</li>
+<li>mimetype_id：描述信息是属于什么类型</li>
+</ul>
+</li>
+<li>mimetypes表：通过mimetype_id到该表查看具体类型</li>
+</ul>
+<h2 id="8-1-读取联系人"><a href="#8-1-读取联系人" class="headerlink" title="8.1 读取联系人"></a>8.1 读取联系人</h2><ul>
+<li>先查询raw_contacts表拿到联系人id</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cursor cursor = cr.query(Uri.parse(<span class="string">"content://com.android.contacts/raw_contacts"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"contact_id"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>然后拿着联系人id去data表查询属于该联系人的信息</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cursor c = cr.query(Uri.parse(<span class="string">"content://com.android.contacts/data"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"data1"</span>, <span class="string">"mimetype"</span>&#125;, <span class="string">"raw_contact_id = ?"</span>, <span class="keyword">new</span> String[]&#123;contactId&#125;, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>得到data1字段的值，就是联系人的信息，通过mimetype判断是什么类型的信息</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(c.moveToNext())&#123;</div><div class="line">			String data1 = c.getString(<span class="number">0</span>);</div><div class="line">			String mimetype = c.getString(<span class="number">1</span>);</div><div class="line">			<span class="keyword">if</span>(<span class="string">"vnd.android.cursor.item/email_v2"</span>.equals(mimetype))&#123;</div><div class="line">				contact.setEmail(data1);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"vnd.android.cursor.item/name"</span>.equals(mimetype))&#123;</div><div class="line">				contact.setName(data1);</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"vnd.android.cursor.item/phone_v2"</span>.equals(mimetype))&#123;</div><div class="line">				contact.setPhone(data1);</div><div class="line">			&#125;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<h2 id="8-2-插入联系人"><a href="#8-2-插入联系人" class="headerlink" title="8.2 插入联系人"></a>8.2 插入联系人</h2><ul>
+<li>先查询raw_contacts表，确定新的联系人的id应该是多少</li>
+</ul>
+<ul>
+<li>把确定的联系人id插入raw_contacts表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cv.put(<span class="string">"contact_id"</span>, _id);	cr.insert(Uri.parse(<span class="string">"content://com.android.contacts/raw_contacts"</span>), cv);</div></pre></td></tr></table></figure>
+<ul>
+<li>在data表插入数据<ul>
+<li>插3个字段：data1、mimetype、raw_contact_id<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cv = <span class="keyword">new</span> ContentValues();</div><div class="line">cv.put(<span class="string">"data1"</span>, <span class="string">"赵六"</span>);</div><div class="line">cv.put(<span class="string">"mimetype"</span>, <span class="string">"vnd.android.cursor.item/name"</span>);</div><div class="line">cv.put(<span class="string">"raw_contact_id"</span>, _id);</div><div class="line">cr.insert(Uri.parse(<span class="string">"content://com.android.contacts/data"</span>), cv);</div><div class="line"></div><div class="line">cv = <span class="keyword">new</span> ContentValues();</div><div class="line">cv.put(<span class="string">"data1"</span>, <span class="string">"1596874"</span>);</div><div class="line">cv.put(<span class="string">"mimetype"</span>, <span class="string">"vnd.android.cursor.item/phone_v2"</span>);</div><div class="line">cv.put(<span class="string">"raw_contact_id"</span>, _id);</div><div class="line">cr.insert(Uri.parse(<span class="string">"content://com.android.contacts/data"</span>), cv);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-内容观察者"><a href="#9-内容观察者" class="headerlink" title="9. 内容观察者"></a>9. 内容观察者</h1><ul>
+<li>当数据库数据改变时，内容提供者会发出通知，在内容提供者的uri上注册一个内容观察者，就可以收到数据改变的通知</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">cr.registerContentObserver(Uri.parse(<span class="string">"content://sms"</span>), <span class="keyword">true</span>, <span class="keyword">new</span> MyObserver(<span class="keyword">new</span> Handler()));</div><div class="line">		</div><div class="line">		<span class="class"><span class="keyword">class</span> <span class="title">MyObserver</span> <span class="keyword">extends</span> <span class="title">ContentObserver</span></span>&#123;</div><div class="line"></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="title">MyObserver</span><span class="params">(Handler handler)</span> </span>&#123;</div><div class="line">				<span class="keyword">super</span>(handler);</div><div class="line">				<span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">			&#125;</div><div class="line">	</div><div class="line">			<span class="comment">//内容观察者收到数据库发生改变的通知时，会调用此方法</span></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChange</span><span class="params">(<span class="keyword">boolean</span> selfChange)</span> </span>&#123;</div><div class="line"></div><div class="line">			&#125;</div><div class="line">		</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在内容提供者中发通知的代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ContentResolver cr = getContext().getContentResolver();</div><div class="line"><span class="comment">//发出通知，所有注册在这个uri上的内容观察者都可以收到通知</span></div><div class="line">cr.notifyChange(uri, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<h1 id="10-ContentProvider"><a href="#10-ContentProvider" class="headerlink" title="10. ContentProvider"></a>10. ContentProvider</h1><ul>
+<li>四大组件之一</li>
+<li>内容提供者的作用：把私有数据暴露给其他应用，通常，是把私有数据库的数据暴露给其他应用</li>
+</ul>
+<h2 id="10-1-短信数据库"><a href="#10-1-短信数据库" class="headerlink" title="10.1 短信数据库"></a>10.1 短信数据库</h2><ul>
+<li>sms表<ul>
+<li>body：短信内容</li>
+<li>date：短信时间</li>
+<li>address：对方号码</li>
+<li>type：发送还是接收</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-2-联系人数据库"><a href="#10-2-联系人数据库" class="headerlink" title="10.2 联系人数据库"></a>10.2 联系人数据库</h2><ul>
+<li>raw_contacts表<ul>
+<li>contact_id：联系人id</li>
+</ul>
+</li>
+<li>data表：存放联系人的详细的信息，每行数据是单独的一条联系人信息<ul>
+<li>data1：联系人的具体的信息</li>
+<li>raw_contact_id：该行信息属于哪个联系人</li>
+<li>mimetype_id：该行信息属于什么类型</li>
+</ul>
+</li>
+<li>mimetypes表：mimetype_id对应的类型的字符串</li>
+</ul>
+<h1 id="11-内容提供者案例"><a href="#11-内容提供者案例" class="headerlink" title="11. 内容提供者案例"></a>11. 内容提供者案例</h1><h2 id="案例1：自定义内容提供者"><a href="#案例1：自定义内容提供者" class="headerlink" title="案例1：自定义内容提供者"></a><strong>案例1：自定义内容提供者</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonProvider</span> <span class="keyword">extends</span> <span class="title">ContentProvider</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> MyOpenHelper oh;</div><div class="line">	SQLiteDatabase db;</div><div class="line"></div><div class="line">	<span class="comment">//创建uri匹配器对象</span></div><div class="line">	<span class="keyword">static</span> UriMatcher um = <span class="keyword">new</span> UriMatcher(UriMatcher.NO_MATCH);</div><div class="line">	<span class="comment">//检测其他用户传入的uri与匹配器定义好的uri中，哪条匹配</span></div><div class="line">	<span class="keyword">static</span> &#123;</div><div class="line">		um.addURI(<span class="string">"com.itheima.people"</span>, <span class="string">"person"</span>, <span class="number">1</span>);<span class="comment">//content://com.itheima.people/person</span></div><div class="line">		um.addURI(<span class="string">"com.itheima.people"</span>, <span class="string">"teacher"</span>, <span class="number">2</span>);<span class="comment">//content://com.itheima.people/teacher</span></div><div class="line">		um.addURI(<span class="string">"com.itheima.people"</span>, <span class="string">"person/#"</span>, <span class="number">3</span>);<span class="comment">//content://com.itheima.people/person/4</span></div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">//内容提供者创建时调用</span></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</div><div class="line">		oh = <span class="keyword">new</span> MyOpenHelper(getContext());</div><div class="line">		db = oh.getWritableDatabase();</div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Cursor <span class="title">query</span><span class="params">(Uri uri, String[] projection, String selection,</span></span></div><div class="line">			String[] selectionArgs, String sortOrder) &#123;</div><div class="line">		Cursor cursor = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">if</span>(um.match(uri) == <span class="number">1</span>)&#123;</div><div class="line">			cursor = db.query(<span class="string">"person"</span>, projection, selection, selectionArgs, <span class="keyword">null</span>, <span class="keyword">null</span>, sortOrder, <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(um.match(uri) == <span class="number">2</span>)&#123;</div><div class="line">			cursor = db.query(<span class="string">"teacher"</span>, projection, selection, selectionArgs, <span class="keyword">null</span>, <span class="keyword">null</span>, sortOrder, <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(um.match(uri) == <span class="number">3</span>)&#123;</div><div class="line">			<span class="comment">//把uri末尾携带的数字取出来</span></div><div class="line">			<span class="keyword">long</span> id = ContentUris.parseId(uri);</div><div class="line">			cursor = db.query(<span class="string">"person"</span>, projection, <span class="string">"_id = ?"</span>, <span class="keyword">new</span> String[]&#123;id + <span class="string">""</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, sortOrder, <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"uri又有问题哟亲么么哒"</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> cursor;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">(Uri uri)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(um.match(uri) == <span class="number">1</span>)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="string">"vnd.android.cursor.dir/person"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(um.match(uri) == <span class="number">3</span>)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="string">"vnd.android.cursor.item/person"</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//此方法供其他应用调用，用于往people数据库里插数据</span></div><div class="line">	<span class="comment">//values：由其他应用传入，用于封装要插入的数据</span></div><div class="line">	<span class="comment">//uri:内容提供者的主机名，也就是地址</span></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Uri <span class="title">insert</span><span class="params">(Uri uri, ContentValues values)</span> </span>&#123;</div><div class="line">		<span class="comment">//使用uri匹配器匹配传入的uri</span></div><div class="line">		<span class="keyword">if</span>(um.match(uri) == <span class="number">1</span>)&#123;</div><div class="line">			db.insert(<span class="string">"person"</span>, <span class="keyword">null</span>, values);</div><div class="line">			</div><div class="line">			<span class="comment">//发送数据改变的通知</span></div><div class="line">			<span class="comment">//uri:通知发送到哪一个uri上，所有注册在这个uri上的内容观察者都可以收到这个通知</span></div><div class="line">			getContext().getContentResolver().notifyChange(uri, <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(um.match(uri) == <span class="number">2</span>)&#123;</div><div class="line">			db.insert(<span class="string">"teacher"</span>, <span class="keyword">null</span>, values);</div><div class="line">			</div><div class="line">			getContext().getContentResolver().notifyChange(uri, <span class="keyword">null</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span>&#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"uri有问题哟亲么么哒"</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> uri;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">delete</span><span class="params">(Uri uri, String selection, String[] selectionArgs)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> i = db.delete(<span class="string">"person"</span>, selection, selectionArgs);</div><div class="line">		<span class="keyword">return</span> i;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Uri uri, ContentValues values, String selection,</span></span></div><div class="line">			String[] selectionArgs) &#123;</div><div class="line">		<span class="keyword">int</span> i = db.update(<span class="string">"person"</span>, values, selection, selectionArgs);</div><div class="line">		<span class="keyword">return</span> i;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	<span class="comment">//通过内容提供者把数据插入people数据库</span></div><div class="line">    	<span class="comment">//拿到contentResolver</span></div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">    	values.put(<span class="string">"name"</span>, <span class="string">"赵帅哥"</span>);</div><div class="line"><span class="comment">//    	values.put("money", "13000");</span></div><div class="line">    	<span class="comment">//url:内容提供者的主机名</span></div><div class="line">    	<span class="comment">//values:要插入的数据</span></div><div class="line">    	cr.insert(Uri.parse(<span class="string">"content://com.itheima.people/teacher"</span>), values);</div><div class="line">    	</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	<span class="keyword">int</span> i = cr.delete(Uri.parse(<span class="string">"content://com.itheima.people"</span>), <span class="string">"name = ?"</span>, <span class="keyword">new</span> String[]&#123;<span class="string">"小志"</span>&#125;);</div><div class="line">    	System.out.println(i);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">    	values.put(<span class="string">"name"</span>, <span class="string">"sb志"</span>);</div><div class="line">    	<span class="keyword">int</span> i = cr.update(Uri.parse(<span class="string">"content://com.itheima.people"</span>), values, <span class="string">"name = ?"</span>, <span class="keyword">new</span> String[]&#123;<span class="string">"大志"</span>&#125;);</div><div class="line">    	System.out.println(i);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">select</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	Cursor cursor = cr.query(Uri.parse(<span class="string">"content://com.itheima.people/person/4"</span>), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">    	<span class="keyword">while</span>(cursor.moveToNext())&#123;</div><div class="line">    		String name = cursor.getString(<span class="number">1</span>);</div><div class="line">    		String money = cursor.getString(<span class="number">2</span>);</div><div class="line">    		System.out.println(name + <span class="string">";"</span> + money);</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="案例2：获取系统短信"><a href="#案例2：获取系统短信" class="headerlink" title="案例2：获取系统短信"></a><strong>案例2：获取系统短信</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">	List&lt;Message&gt; smsList;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        </div><div class="line">        smsList = <span class="keyword">new</span> ArrayList&lt;Message&gt;();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	<span class="comment">//访问内容提供者获取短信</span></div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	<span class="comment">//						短信内容提供者的主机名</span></div><div class="line">    	Cursor cursor = cr.query(Uri.parse(<span class="string">"content://sms"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"address"</span>, <span class="string">"date"</span>, <span class="string">"body"</span>, <span class="string">"type"</span>&#125;, </div><div class="line">    			<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">    	<span class="keyword">while</span>(cursor.moveToNext())&#123;</div><div class="line">    		String address = cursor.getString(<span class="number">0</span>);</div><div class="line">    		<span class="keyword">long</span> date = cursor.getLong(<span class="number">1</span>);</div><div class="line">    		String body = cursor.getString(<span class="number">2</span>);</div><div class="line">    		String type = cursor.getString(<span class="number">3</span>);</div><div class="line">    		Message sms = <span class="keyword">new</span> Message(body, type, address, date);</div><div class="line">    		smsList.add(sms);</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click2</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	XmlSerializer xs = Xml.newSerializer();</div><div class="line">    	File file = <span class="keyword">new</span> File(<span class="string">"sdcard/sms.xml"</span>);</div><div class="line">    	FileOutputStream fos;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			fos = <span class="keyword">new</span> FileOutputStream(file);</div><div class="line">			xs.setOutput(fos, <span class="string">"utf-8"</span>);</div><div class="line">			</div><div class="line">			xs.startDocument(<span class="string">"utf-8"</span>, <span class="keyword">true</span>);</div><div class="line">			xs.startTag(<span class="keyword">null</span>, <span class="string">"message"</span>);</div><div class="line">			</div><div class="line">			<span class="keyword">for</span> (Message sms : smsList) &#123;</div><div class="line">				xs.startTag(<span class="keyword">null</span>, <span class="string">"sms"</span>);</div><div class="line">				</div><div class="line">				xs.startTag(<span class="keyword">null</span>, <span class="string">"body"</span>);</div><div class="line">				xs.text(sms.getBody());</div><div class="line">				xs.endTag(<span class="keyword">null</span>, <span class="string">"body"</span>);</div><div class="line">				</div><div class="line">				xs.startTag(<span class="keyword">null</span>, <span class="string">"date"</span>);</div><div class="line">				xs.text(sms.getDate() + <span class="string">""</span>);</div><div class="line">				xs.endTag(<span class="keyword">null</span>, <span class="string">"date"</span>);</div><div class="line">				</div><div class="line">				xs.startTag(<span class="keyword">null</span>, <span class="string">"type"</span>);</div><div class="line">				xs.text(sms.getType());</div><div class="line">				xs.endTag(<span class="keyword">null</span>, <span class="string">"type"</span>);</div><div class="line">				</div><div class="line">				xs.startTag(<span class="keyword">null</span>, <span class="string">"address"</span>);</div><div class="line">				xs.text(sms.getAddress());</div><div class="line">				xs.endTag(<span class="keyword">null</span>, <span class="string">"address"</span>);</div><div class="line">				</div><div class="line">				xs.endTag(<span class="keyword">null</span>, <span class="string">"sms"</span>);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			xs.endTag(<span class="keyword">null</span>, <span class="string">"message"</span>);</div><div class="line">			xs.endDocument();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="案例3：插入系统短信"><a href="#案例3：插入系统短信" class="headerlink" title="案例3：插入系统短信"></a><strong>案例3：插入系统短信</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	Thread t = <span class="keyword">new</span> Thread()&#123;</div><div class="line">    		<span class="meta">@Override</span></div><div class="line">    		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    			<span class="keyword">try</span> &#123;</div><div class="line">					sleep(<span class="number">7500</span>);</div><div class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">					<span class="comment">// TODO Auto-generated catch block</span></div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">    			ContentResolver cr = getContentResolver();</div><div class="line">    	    	ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">    	    	values.put(<span class="string">"address"</span>, <span class="number">95555</span>);</div><div class="line">    	    	values.put(<span class="string">"type"</span>, <span class="number">1</span>);</div><div class="line">    	    	values.put(<span class="string">"date"</span>, System.currentTimeMillis());</div><div class="line">    	    	values.put(<span class="string">"body"</span>, <span class="string">"您尾号为XXXX的信用卡收到1,000,000RMB转账，请注意查收"</span>);</div><div class="line">    	    	cr.insert(Uri.parse(<span class="string">"content://sms"</span>), values);</div><div class="line">    		&#125;</div><div class="line">    	&#125;;</div><div class="line">    	t.start();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="案例4：查询联系人"><a href="#案例4：查询联系人" class="headerlink" title="案例4：查询联系人"></a><strong>案例4：查询联系人</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	<span class="comment">//通过内容提供者访问联系人数据库</span></div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	Cursor cursorContactId = cr.query(Uri.parse(<span class="string">"content://com.android.contacts/raw_contacts"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"contact_id"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">    	<span class="keyword">while</span>(cursorContactId.moveToNext())&#123;</div><div class="line">    		<span class="comment">//获取联系人id</span></div><div class="line">    		String contactId = cursorContactId.getString(<span class="number">0</span>);</div><div class="line">    		Cursor cursorData =  cr.query(Uri.parse(<span class="string">"content://com.android.contacts/data"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"data1"</span>, <span class="string">"mimetype"</span>&#125;, </div><div class="line">    				<span class="string">"raw_contact_id = ?"</span>, <span class="keyword">new</span> String[]&#123;contactId&#125;, <span class="keyword">null</span>);</div><div class="line">    		<span class="comment">//获取所有字段的名字</span></div><div class="line"><span class="comment">//    		String[] names = cursorData.getColumnNames();</span></div><div class="line"><span class="comment">//    		for (String string : names) &#123;</span></div><div class="line"><span class="comment">//				System.out.println(string);</span></div><div class="line"><span class="comment">//			&#125;</span></div><div class="line">    		Contact con = <span class="keyword">new</span> Contact();</div><div class="line">    		<span class="keyword">while</span>(cursorData.moveToNext())&#123;</div><div class="line">    			String data1 = cursorData.getString(<span class="number">0</span>);</div><div class="line">    			String mimetype = cursorData.getString(<span class="number">1</span>);</div><div class="line">    			<span class="comment">//通过mimetype的判断，把data1存入对应的属性</span></div><div class="line">    			<span class="keyword">if</span>(<span class="string">"vnd.android.cursor.item/email_v2"</span>.equals(mimetype))&#123;</div><div class="line">    				con.setEmail(data1);</div><div class="line">    			&#125;</div><div class="line">    			<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"vnd.android.cursor.item/phone_v2"</span>.equals(mimetype))&#123;</div><div class="line">    				con.setPhone(data1);</div><div class="line">    			&#125;</div><div class="line">    			<span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">"vnd.android.cursor.item/name"</span>.equals(mimetype))&#123;</div><div class="line">    				con.setName(data1);</div><div class="line">    			&#125;</div><div class="line">    		&#125;</div><div class="line">    		System.out.println(con.toString());</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="案例5：插入联系人"><a href="#案例5：插入联系人" class="headerlink" title="案例5：插入联系人"></a><strong>案例5：插入联系人</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View v)</span></span>&#123;</div><div class="line">    	ContentResolver cr = getContentResolver();</div><div class="line">    	<span class="comment">//先查询raw_contacts表，获取最新联系人的主键，然后主键+1，就是要插入的联系人的id</span></div><div class="line">    	Cursor cursorContactId = cr.query(Uri.parse(<span class="string">"content://com.android.contacts/raw_contacts"</span>), <span class="keyword">new</span> String[]&#123;<span class="string">"_id"</span>&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">    	<span class="comment">//默认联系人id就是1</span></div><div class="line">    	<span class="keyword">int</span> contact_id = <span class="number">1</span>;</div><div class="line">    	<span class="keyword">if</span>(cursorContactId.moveToLast())&#123;</div><div class="line">    		<span class="comment">//拿到主键</span></div><div class="line">    		<span class="keyword">int</span> _id = cursorContactId.getInt(<span class="number">0</span>);</div><div class="line">    		<span class="comment">//主键+1，就是要插入的联系人id</span></div><div class="line">    		contact_id = ++_id;</div><div class="line">    	&#125;</div><div class="line">    	</div><div class="line">    	ContentValues values = <span class="keyword">new</span> ContentValues();</div><div class="line">    	values.put(<span class="string">"contact_id"</span>, contact_id);</div><div class="line">    	<span class="comment">//把联系人id插入raw_contacts数据库</span></div><div class="line">    	cr.insert(Uri.parse(<span class="string">"content://com.android.contacts/raw_contacts"</span>), values);</div><div class="line">    	</div><div class="line">    	values.clear();</div><div class="line">    	values.put(<span class="string">"data1"</span>, <span class="string">"二bi"</span>);</div><div class="line">    	values.put(<span class="string">"mimetype"</span>, <span class="string">"vnd.android.cursor.item/name"</span>);</div><div class="line">    	values.put(<span class="string">"raw_contact_id"</span>, contact_id);</div><div class="line">    	cr.insert(Uri.parse(<span class="string">"content://com.android.contacts/data"</span>), values);</div><div class="line">    	</div><div class="line">    	values.clear();</div><div class="line">    	values.put(<span class="string">"data1"</span>, <span class="string">"1344567"</span>);</div><div class="line">    	values.put(<span class="string">"mimetype"</span>, <span class="string">"vnd.android.cursor.item/phone_v2"</span>);</div><div class="line">    	values.put(<span class="string">"raw_contact_id"</span>, contact_id);</div><div class="line">    	cr.insert(Uri.parse(<span class="string">"content://com.android.contacts/data"</span>), values);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="案例6：内容观察者"><a href="#案例6：内容观察者" class="headerlink" title="案例6：内容观察者"></a><strong>案例6：内容观察者</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        </div><div class="line">        <span class="comment">//注册一个内容观察者，监听短信数据库内容的改变</span></div><div class="line">        ContentResolver cr = getContentResolver();</div><div class="line">        <span class="comment">//uri:监听哪个uri上的内容提供者的通知</span></div><div class="line">        <span class="comment">//notifyForDescendents:如果是true，那么只要以content://sms开头的uri的数据改变，都能收到通知，比如content://sms/inbox</span></div><div class="line">        cr.registerContentObserver(Uri.parse(<span class="string">"content://sms"</span>), <span class="keyword">true</span>, <span class="keyword">new</span> MyObserver(<span class="keyword">new</span> Handler()));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MyObserver</span> <span class="keyword">extends</span> <span class="title">ContentObserver</span></span>&#123;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">MyObserver</span><span class="params">(Handler handler)</span> </span>&#123;</div><div class="line">			<span class="keyword">super</span>(handler);</div><div class="line">			<span class="comment">// TODO Auto-generated constructor stub</span></div><div class="line">		&#125;</div><div class="line">    	</div><div class="line">		<span class="comment">//收到数据改变的通知，此方法调用</span></div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChange</span><span class="params">(<span class="keyword">boolean</span> selfChange)</span> </span>&#123;</div><div class="line">			<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">			<span class="keyword">super</span>.onChange(selfChange);</div><div class="line">			System.out.println(<span class="string">"短信数据库改变"</span>);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="案例7：监听数据库的改变"><a href="#案例7：监听数据库的改变" class="headerlink" title="案例7：监听数据库的改变"></a><strong>案例7：监听数据库的改变</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        </div><div class="line">        getContentResolver().registerContentObserver(Uri.parse(<span class="string">"content://com.itheima.people"</span>), <span class="keyword">true</span>, </div><div class="line">        		<span class="keyword">new</span> ContentObserver(<span class="keyword">new</span> Handler()) &#123;</div><div class="line">        				<span class="meta">@Override</span></div><div class="line">        				<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChange</span><span class="params">(<span class="keyword">boolean</span> selfChange)</span> </span>&#123;</div><div class="line">        					<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">        					<span class="keyword">super</span>.onChange(selfChange);</div><div class="line">        					System.out.println(<span class="string">"01项目的数据库改变了"</span>);</div><div class="line">        				&#125;</div><div class="line">				&#125;);</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内容提供者/" rel="tag"># 内容提供者</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/Cookie和Session/" rel="next" title="Cookie和Session">
+                <i class="fa fa-chevron-left"></i> Cookie和Session
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/android/Android四大组件之BroadCastReceiver/" rel="prev" title="Android四大组件之BroadCastReceiver">
+                Android四大组件之BroadCastReceiver <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-内容摘要"><span class="nav-number">1.</span> <span class="nav-text">1. 内容摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-ContentProvider-基本概念"><span class="nav-number">2.</span> <span class="nav-text">2. ContentProvider 基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-ContentProvider-基本使用"><span class="nav-number">3.</span> <span class="nav-text">3. ContentProvider 基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-在AppA-中创建MySQLiteOpenHelper-类"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 在AppA 中创建MySQLiteOpenHelper 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-使用测试类初始化user-db"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 使用测试类初始化user.db</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-在AppA-中创建内容提供者"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 在AppA 中创建内容提供者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-在AndroidManifest-xml-中注册ContentProvider"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 在AndroidManifest.xml 中注册ContentProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-创建工程02-内容访问者B"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 创建工程02-内容访问者B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-内容提供者Uri-的书写规范"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 内容提供者Uri 的书写规范</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-操作系统短信"><span class="nav-number">4.</span> <span class="nav-text">4. 操作系统短信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-准备知识"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 准备知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-查询系统短信"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 查询系统短信</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-内容提供者"><span class="nav-number">5.</span> <span class="nav-text">5. 内容提供者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-UriMatcher"><span class="nav-number">6.</span> <span class="nav-text">6. UriMatcher</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-短信数据库"><span class="nav-number">7.</span> <span class="nav-text">7. 短信数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-联系人数据库"><span class="nav-number">8.</span> <span class="nav-text">8. 联系人数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-读取联系人"><span class="nav-number">8.1.</span> <span class="nav-text">8.1 读取联系人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-插入联系人"><span class="nav-number">8.2.</span> <span class="nav-text">8.2 插入联系人</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-内容观察者"><span class="nav-number">9.</span> <span class="nav-text">9. 内容观察者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-ContentProvider"><span class="nav-number">10.</span> <span class="nav-text">10. ContentProvider</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-短信数据库"><span class="nav-number">10.1.</span> <span class="nav-text">10.1 短信数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-联系人数据库"><span class="nav-number">10.2.</span> <span class="nav-text">10.2 联系人数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-内容提供者案例"><span class="nav-number">11.</span> <span class="nav-text">11. 内容提供者案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#案例1：自定义内容提供者"><span class="nav-number">11.1.</span> <span class="nav-text">案例1：自定义内容提供者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例2：获取系统短信"><span class="nav-number">11.2.</span> <span class="nav-text">案例2：获取系统短信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例3：插入系统短信"><span class="nav-number">11.3.</span> <span class="nav-text">案例3：插入系统短信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例4：查询联系人"><span class="nav-number">11.4.</span> <span class="nav-text">案例4：查询联系人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例5：插入联系人"><span class="nav-number">11.5.</span> <span class="nav-text">案例5：插入联系人</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例6：内容观察者"><span class="nav-number">11.6.</span> <span class="nav-text">案例6：内容观察者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例7：监听数据库的改变"><span class="nav-number">11.7.</span> <span class="nav-text">案例7：监听数据库的改变</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/android/Android四大组件之ContentProvider/';
+          this.page.identifier = '2017/05/01/android/Android四大组件之ContentProvider/';
+          this.page.title = 'Android四大组件之ContentProvider';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
