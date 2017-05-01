@@ -1,0 +1,1330 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jdbc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="keywords" content="jdbc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC之事务">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/javaweb/JDBC之事务/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:image" content="http://img.blog.csdn.net/20161104231511358">
+<meta property="og:updated_time" content="2017-05-01T04:28:06.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBC之事务">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161104231511358">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/javaweb/JDBC之事务/"/>
+
+
+
+
+
+  <title>JDBC之事务 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/JDBC之事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JDBC之事务
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:00+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaweb/" itemprop="url" rel="index">
+                    <span itemprop="name">javaweb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/javaweb/JDBC之事务/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/javaweb/JDBC之事务/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.blog.csdn.net/20161104231511358" alt="jdbc事务"></p>
+<a id="more"></a>
+<h1 id="系列阅读"><a href="#系列阅读" class="headerlink" title="系列阅读"></a><strong>系列阅读</strong></h1><ol>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52954659" target="_blank" rel="external">JavaWeb：用JDBC操作数据库</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52981430" target="_blank" rel="external">JavaWeb：JDBC之事务</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52981389" target="_blank" rel="external">JavaWeb：JDBC之数据库连接池</a></li>
+</ol>
+<h1 id="1-事务"><a href="#1-事务" class="headerlink" title="1. 事务"></a>1. 事务</h1><ul>
+<li>事务的四大特性：ACID</li>
+<li>mysql中操作事务</li>
+<li>jdbc中操作事务</li>
+</ul>
+<h2 id="1-1-事务概述"><a href="#1-1-事务概述" class="headerlink" title="1.1 事务概述"></a><strong>1.1 事务概述</strong></h2><p>为了方便演示事务，我们需要创建一个account表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">account</span>(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</div><div class="line">	<span class="keyword">NAME</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>),</div><div class="line">	balance <span class="built_in">NUMERIC</span>(<span class="number">10.2</span>)</div><div class="line">);</div><div class="line"></div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">account</span>(<span class="keyword">NAME</span>,balance) <span class="keyword">VALUES</span>(<span class="string">'zs'</span>, <span class="number">100000</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">account</span>(<span class="keyword">NAME</span>,balance) <span class="keyword">VALUES</span>(<span class="string">'ls'</span>, <span class="number">100000</span>);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">account</span>(<span class="keyword">NAME</span>,balance) <span class="keyword">VALUES</span>(<span class="string">'ww'</span>, <span class="number">100000</span>);</div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">account</span>;</div></pre></td></tr></table></figure>
+<h2 id="1-2-什么是事务"><a href="#1-2-什么是事务" class="headerlink" title="1.2 什么是事务"></a><strong>1.2 什么是事务</strong></h2><p>银行转账！张三转10000块到李四的账户，这其实需要两条SQL语句：</p>
+<ul>
+<li>给张三的账户减去10000元</li>
+<li>给李四的账户加上10000元</li>
+</ul>
+<p>如果在第一条SQL语句执行成功后，在执行第二条SQL语句之前，程序被中断了（可能是抛出了某个异常，也可能是其他什么原因），那么李四的账户没有加上10000元，而张三却减去了10000元。这肯定是不行的！</p>
+<p>你现在可能已经知道什么是事务了吧！事务中的多个操作，要么完全成功，要么完全失败！不可能存在成功一半的情况！也就是说给张三的账户减去10000元如果成功了，那么给李四的账户加上10000元的操作也必须是成功的；否则给张三减去10000元，以及给李四加上10000元都是失败的！</p>
+<h2 id="1-3-事务的四大特性（ACID）"><a href="#1-3-事务的四大特性（ACID）" class="headerlink" title="1.3 事务的四大特性（ACID）"></a><strong>1.3 事务的四大特性（ACID）</strong></h2><p>事务的四大特性是：</p>
+<ul>
+<li><p><strong>原子性（Atomicity）</strong>：事务中所有操作是不可再分割的原子单位。事务中所有操作要么全部执行成功，要么全部执行失败</p>
+</li>
+<li><p><strong>一致性（Consistency）</strong>：事务执行后，数据库状态与其它业务规则保持一致。如转账业务，无论事务执行成功与否，参与转账的两个账号余额之和应该是不变的</p>
+</li>
+<li><p><strong>隔离性（Isolation）</strong>：隔离性是指在并发操作中，不同事务之间应该隔离开来，使每个并发中的事务不会相互干扰</p>
+</li>
+<li><p><strong>持久性（Durability）</strong>：一旦事务提交成功，事务中所有的数据操作都必须被持久化到数据库中，即使提交事务后，数据库马上崩溃，在数据库重启时，也必须能保证通过某种机制恢复数据</p>
+</li>
+</ul>
+<h2 id="1-4-MySQL中的事务"><a href="#1-4-MySQL中的事务" class="headerlink" title="1.4 MySQL中的事务"></a><strong>1.4 MySQL中的事务</strong></h2><p>在默认情况下，MySQL每执行一条SQL语句，都是一个单独的事务。如果需要在一个事务中包含多条SQL语句，那么需要开启事务和结束事务。</p>
+<ul>
+<li>开启事务：start transaction</li>
+<li>结束事务：commit或rollback</li>
+</ul>
+<p>在执行SQL语句之前，先执行strat transaction，这就开启了一个事务（事务的起点），然后可以去执行多条SQL语句，最后要结束事务，commit表示提交，即事务中的多条SQL语句所做出的影响会持久化到数据库中。或者rollback，表示回滚，即回滚到事务的起点，之前做的所有操作都被撤消了！</p>
+<p>下面演示zs给li转账10000元的示例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance=balance<span class="number">-10000</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">1</span>;</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance=balance+<span class="number">10000</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">2</span>;</div><div class="line"><span class="keyword">ROLLBACK</span>;</div><div class="line"></div><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance=balance<span class="number">-10000</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">1</span>;</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance=balance+<span class="number">10000</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">2</span>;</div><div class="line"><span class="keyword">COMMIT</span>;</div><div class="line"></div><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance=balance<span class="number">-10000</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">1</span>;</div><div class="line"><span class="keyword">UPDATE</span> <span class="keyword">account</span> <span class="keyword">SET</span> balance=balance+<span class="number">10000</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">2</span>;</div><div class="line">quit;</div></pre></td></tr></table></figure>
+<h1 id="2-JDBC事务"><a href="#2-JDBC事务" class="headerlink" title="2. JDBC事务"></a>2. JDBC事务</h1><p>在jdbc中处理事务，都是通过Connection完成的！同一事务中所有的操作，都在使用同一个Connection对象！</p>
+<h2 id="2-1-JDBC中的事务"><a href="#2-1-JDBC中的事务" class="headerlink" title="2.1 JDBC中的事务"></a><strong>2.1 JDBC中的事务</strong></h2><p>Connection的三个方法与事务相关：</p>
+<ul>
+<li>setAutoCommit(boolean)：设置是否为自动提交事务，如果true（默认值就是true）表示自动提交，也就是每条执行的SQL语句都是一个单独的事务，如果设置false，那么就相当于开启了事务了</li>
+<li>commit()：提交结束事务</li>
+<li>rollback()：回滚结束事务</li>
+</ul>
+<p>jdbc处理事务的代码格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">  con.setAutoCommit(<span class="keyword">false</span>);<span class="comment">//开启事务…</span></div><div class="line">  ….</div><div class="line">  …</div><div class="line">  con.commit();<span class="comment">//try的最后提交事务</span></div><div class="line">&#125; <span class="keyword">catch</span>() &#123;</div><div class="line">  con.rollback();<span class="comment">//回滚事务</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">		</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			<span class="comment">//手动提交</span></div><div class="line">			con.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">			</div><div class="line">			String sql = <span class="string">"update account set balance=balance+? where id=?"</span>;</div><div class="line">			pstmt = con.prepareStatement(sql);</div><div class="line">			</div><div class="line">			<span class="comment">//操作</span></div><div class="line">			pstmt.setDouble(<span class="number">1</span>, -<span class="number">10000</span>);</div><div class="line">			pstmt.setInt(<span class="number">2</span>, <span class="number">1</span>);</div><div class="line">			pstmt.executeUpdate();</div><div class="line">			</div><div class="line">			<span class="comment">// 在两个操作中抛出异常</span></div><div class="line">			<span class="keyword">if</span>(b) &#123;</div><div class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> Exception();</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			pstmt.setDouble(<span class="number">1</span>, <span class="number">10000</span>);</div><div class="line">			pstmt.setInt(<span class="number">2</span>, <span class="number">2</span>);</div><div class="line">			pstmt.executeUpdate();</div><div class="line">			</div><div class="line">			<span class="comment">//提交事务</span></div><div class="line">			con.commit();</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="comment">//回滚事务</span></div><div class="line">			<span class="keyword">if</span>(con != <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					con.rollback();</div><div class="line">				&#125; <span class="keyword">catch</span>(SQLException ex) &#123;&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="comment">//关闭</span></div><div class="line">			JdbcUtils.close(con, pstmt);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h1 id="3-保存点"><a href="#3-保存点" class="headerlink" title="3. 保存点"></a>3. 保存点</h1><p>保存点是JDBC3.0的东西！当要求数据库服务器支持保存点方式的回滚。<br>校验数据库服务器是否支持保存点！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> b = con.getMetaData().supportsSavepoints();</div></pre></td></tr></table></figure>
+<p>保存点的作用是允许事务回滚到指定的保存点位置。在事务中设置好保存点，然后回滚时可以选择回滚到指定的保存点，而不是回滚整个事务！注意，回滚到指定保存点并没有结束事务！！！只有回滚了整个事务才算是结束事务了！</p>
+<p>Connection类的设置保存点，以及回滚到指定保存点方法：</p>
+<ul>
+<li>设置保存点：Savepoint setSavepoint()</li>
+<li>回滚到指定保存点：void rollback(Savepoint)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * 李四对张三说，如果你给我转1W，我就给你转100W。</div><div class="line"> * ==========================================</div><div class="line"> * </div><div class="line"> * 张三给李四转1W（张三减去1W，李四加上1W）</div><div class="line"> * 设置保存点！</div><div class="line"> * 李四给张三转100W（李四减去100W，张三加上100W）</div><div class="line"> * 查看李四余额为负数，那么回滚到保存点。</div><div class="line"> * 提交事务</div><div class="line"> */</div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</div><div class="line">	Connection con = <span class="keyword">null</span>;</div><div class="line">	PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		con = JdbcUtils.getConnection();</div><div class="line">		<span class="comment">//手动提交</span></div><div class="line">		con.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">		</div><div class="line">		String sql = <span class="string">"update account set balance=balance+? where name=?"</span>;</div><div class="line">		pstmt = con.prepareStatement(sql);</div><div class="line">		</div><div class="line">		<span class="comment">//操作1（张三减去1W）</span></div><div class="line">		pstmt.setDouble(<span class="number">1</span>, -<span class="number">10000</span>);</div><div class="line">		pstmt.setString(<span class="number">2</span>, <span class="string">"zs"</span>);</div><div class="line">		pstmt.executeUpdate();</div><div class="line">		</div><div class="line">		<span class="comment">//操作2（李四加上1W）</span></div><div class="line">		pstmt.setDouble(<span class="number">1</span>, <span class="number">10000</span>);</div><div class="line">		pstmt.setString(<span class="number">2</span>, <span class="string">"ls"</span>);</div><div class="line">		pstmt.executeUpdate();</div><div class="line">		</div><div class="line">		<span class="comment">// 设置保存点</span></div><div class="line">		Savepoint sp = con.setSavepoint();</div><div class="line">		</div><div class="line">		<span class="comment">//操作3（李四减去100W）</span></div><div class="line">		pstmt.setDouble(<span class="number">1</span>, -<span class="number">1000000</span>);</div><div class="line">		pstmt.setString(<span class="number">2</span>, <span class="string">"ls"</span>);</div><div class="line">		pstmt.executeUpdate();		</div><div class="line">		</div><div class="line">		<span class="comment">//操作4（张三加上100W）</span></div><div class="line">		pstmt.setDouble(<span class="number">1</span>, <span class="number">1000000</span>);</div><div class="line">		pstmt.setString(<span class="number">2</span>, <span class="string">"zs"</span>);</div><div class="line">		pstmt.executeUpdate();</div><div class="line">		</div><div class="line">		<span class="comment">//操作5（查看李四余额）</span></div><div class="line">		sql = <span class="string">"select balance from account where name=?"</span>;</div><div class="line">		pstmt = con.prepareStatement(sql);</div><div class="line">		pstmt.setString(<span class="number">1</span>, <span class="string">"ls"</span>);</div><div class="line">		ResultSet rs = pstmt.executeQuery();</div><div class="line">		rs.next();</div><div class="line">		<span class="keyword">double</span> balance = rs.getDouble(<span class="number">1</span>);</div><div class="line">　　　　　　<span class="comment">//如果李四余额为负数，那么回滚到指定保存点</span></div><div class="line">		<span class="keyword">if</span>(balance &lt; <span class="number">0</span>) &#123;</div><div class="line">			con.rollback(sp);</div><div class="line">			System.out.println(<span class="string">"张三，你上当了！"</span>);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="comment">//提交事务</span></div><div class="line">		con.commit();</div><div class="line">	&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">		<span class="comment">//回滚事务</span></div><div class="line">		<span class="keyword">if</span>(con != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				con.rollback();</div><div class="line">			&#125; <span class="keyword">catch</span>(SQLException ex) &#123;&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">		<span class="comment">//关闭</span></div><div class="line">		JdbcUtils.close(con, pstmt);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="4-事务隔离级别"><a href="#4-事务隔离级别" class="headerlink" title="4. 事务隔离级别"></a>4. 事务隔离级别</h1><h2 id="4-1-事务的并发读问题"><a href="#4-1-事务的并发读问题" class="headerlink" title="4.1 事务的并发读问题"></a><strong>4.1 事务的并发读问题</strong></h2><ul>
+<li>脏读：读取到另一个事务未提交数据</li>
+<li>不可重复读：两次读取不一致</li>
+<li>幻读（虚读）：读到另一事务已提交数据</li>
+</ul>
+<h2 id="4-2-并发事务问题"><a href="#4-2-并发事务问题" class="headerlink" title="4.2 并发事务问题"></a><strong>4.2 并发事务问题</strong></h2><p>因为并发事务导致的问题大致有5类，其中两类是更新问题，三类是读问题</p>
+<ul>
+<li>脏读（dirty read）：读到另一个事务的未提交更新数据，即读取到了脏数据</li>
+<li>不可重复读（unrepeatable read）：对同一记录的两次读取不一致，因为另一事务对该记录做了修改</li>
+<li>幻读（虚读）（phantom read）：对同一张表的两次查询不一致，因为另一事务插入了一条记录</li>
+</ul>
+<h3 id="4-2-1-脏读"><a href="#4-2-1-脏读" class="headerlink" title="4.2.1 脏读"></a><strong>4.2.1 脏读</strong></h3><p>事务1：张三给李四转账100元<br>事务2：李四查看自己的账户</p>
+<ul>
+<li>t1：事务1：开始事务</li>
+<li>t2：事务1：张三给李四转账100元</li>
+<li>t3：事务2：开始事务</li>
+<li>t4：事务2：李四查看自己的账户，看到账户多出100元（脏读）</li>
+<li>t5：事务2：提交事务</li>
+<li>t6：事务1：回滚事务，回到转账之前的状态</li>
+</ul>
+<h3 id="4-2-2不可重复读"><a href="#4-2-2不可重复读" class="headerlink" title="4.2.2不可重复读"></a><strong>4.2.2不可重复读</strong></h3><p>事务1：酒店查看两次1048号房间状态<br>事务2：预订1048号房间</p>
+<ul>
+<li>t1：事务1：开始事务</li>
+<li>t2：事务1：查看1048号房间状态为空闲</li>
+<li>t3：事务2：开始事务</li>
+<li>t4：事务2：预定1048号房间</li>
+<li>t5：事务2：提交事务</li>
+<li>t6：事务1：再次查看1048号房间状态为使用</li>
+<li>t7：事务1：提交事务<br>对同一记录的两次查询结果不一致！</li>
+</ul>
+<h3 id="4-2-3幻读"><a href="#4-2-3幻读" class="headerlink" title="4.2.3幻读"></a><strong>4.2.3幻读</strong></h3><p>事务1：对酒店房间预订记录两次统计<br>事务2：添加一条预订房间记录</p>
+<ul>
+<li>t1：事务1：开始事务</li>
+<li>t2：事务1：统计预订记录100条</li>
+<li>t3：事务2：开始事务</li>
+<li>t4：事务2：添加一条预订房间记录</li>
+<li>t5：事务2：提交事务</li>
+<li>t6：事务1：再次统计预订记录为101记录</li>
+<li>t7：事务1：提交</li>
+</ul>
+<p>对同一表的两次查询不一致！</p>
+<p>不可重复读和幻读的区别：</p>
+<ul>
+<li>不可重复读是读取到了另一事务的更新；</li>
+<li>幻读是读取到了另一事务的插入（MySQL中无法测试到幻读）；</li>
+</ul>
+<h2 id="4-3-四大隔离级别"><a href="#4-3-四大隔离级别" class="headerlink" title="4.3 四大隔离级别"></a><strong>4.3 四大隔离级别</strong></h2><p>4个等级的事务隔离级别，在相同数据环境下，使用相同的输入，执行相同的工作，根据不同的隔离级别，可以导致不同的结果。不同事务隔离级别能够解决的数据并发问题的能力是不同的</p>
+<h3 id="4-3-1-SERIALIZABLE（串行化）"><a href="#4-3-1-SERIALIZABLE（串行化）" class="headerlink" title="4.3.1 SERIALIZABLE（串行化）"></a><strong>4.3.1 SERIALIZABLE（串行化）</strong></h3><ul>
+<li>不会出现任何并发问题，因为它是对同一数据的访问是串行的，非并发访问的</li>
+<li>性能最差</li>
+</ul>
+<h3 id="4-3-2-REPEATABLE-READ（可重复读）（MySQL）"><a href="#4-3-2-REPEATABLE-READ（可重复读）（MySQL）" class="headerlink" title="4.3.2 REPEATABLE READ（可重复读）（MySQL）"></a><strong>4.3.2 REPEATABLE READ（可重复读）（MySQL）</strong></h3><ul>
+<li>防止脏读和不可重复读，不能处理幻读问题</li>
+<li>性能比SERIALIZABLE好</li>
+</ul>
+<h3 id="4-3-3-READ-COMMITTED（读已提交数据）（Oracle）"><a href="#4-3-3-READ-COMMITTED（读已提交数据）（Oracle）" class="headerlink" title="4.3.3 READ COMMITTED（读已提交数据）（Oracle）"></a><strong>4.3.3 READ COMMITTED（读已提交数据）（Oracle）</strong></h3><ul>
+<li>防止脏读，没有处理不可重复读，也没有处理幻读；</li>
+<li>性能比REPEATABLE READ好</li>
+</ul>
+<h3 id="4-3-4-READ-UNCOMMITTED（读未提交数据）"><a href="#4-3-4-READ-UNCOMMITTED（读未提交数据）" class="headerlink" title="4.3.4 READ UNCOMMITTED（读未提交数据）"></a><strong>4.3.4 READ UNCOMMITTED（读未提交数据）</strong></h3><ul>
+<li>可能出现任何事务并发问题</li>
+<li>性能最好</li>
+</ul>
+<p>MySQL的默认隔离级别为REPEATABLE READ，这是一个很不错的选择吧！</p>
+<h3 id="4-3-5-MySQL隔离级别"><a href="#4-3-5-MySQL隔离级别" class="headerlink" title="4.3.5 MySQL隔离级别"></a><strong>4.3.5 MySQL隔离级别</strong></h3><p>MySQL的默认隔离级别为Repeatable read，可以通过下面语句查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select @@tx_isolation</div></pre></td></tr></table></figure>
+<p>也可以通过下面语句来设置当前连接的隔离级别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">set transaction isolationlevel [4先1]</div></pre></td></tr></table></figure>
+<h3 id="4-3-6-JDBC设置隔离级别"><a href="#4-3-6-JDBC设置隔离级别" class="headerlink" title="4.3.6 JDBC设置隔离级别"></a><strong>4.3.6 JDBC设置隔离级别</strong></h3><p>con. setTransactionIsolation(int level);参数可选值如下：</p>
+<ul>
+<li>Connection.TRANSACTION_READ_UNCOMMITTED</li>
+<li>Connection.TRANSACTION_READ_COMMITTED</li>
+<li>Connection.TRANSACTION_REPEATABLE_READ</li>
+<li>Connection.TRANSACTION_SERIALIZABLE</li>
+</ul>
+<h2 id="5-事务总结"><a href="#5-事务总结" class="headerlink" title="5. 事务总结"></a><strong>5. 事务总结</strong></h2><ul>
+<li>事务的特性：ACID</li>
+<li>事务开始边界与结束边界：开始边界（con.setAutoCommit(false)），结束边界（con.commit()或con.rollback()）</li>
+<li>事务的隔离级别： READ_UNCOMMITTED、READ_COMMITTED、REPEATABLE_READ、SERIALIZABLE。多个事务并发执行时才需要考虑并发事务</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jdbc/" rel="tag"># jdbc</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/30/Http协议/" rel="next" title="Http协议">
+                <i class="fa fa-chevron-left"></i> Http协议
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/JDBC之数据库连接池/" rel="prev" title="JDBC之数据库连接池">
+                JDBC之数据库连接池 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#系列阅读"><span class="nav-number">1.</span> <span class="nav-text">系列阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-事务"><span class="nav-number">2.</span> <span class="nav-text">1. 事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-事务概述"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 事务概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-什么是事务"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 什么是事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-事务的四大特性（ACID）"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 事务的四大特性（ACID）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-MySQL中的事务"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 MySQL中的事务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-JDBC事务"><span class="nav-number">3.</span> <span class="nav-text">2. JDBC事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-JDBC中的事务"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 JDBC中的事务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-保存点"><span class="nav-number">4.</span> <span class="nav-text">3. 保存点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-事务隔离级别"><span class="nav-number">5.</span> <span class="nav-text">4. 事务隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-事务的并发读问题"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 事务的并发读问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-并发事务问题"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 并发事务问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-脏读"><span class="nav-number">5.2.1.</span> <span class="nav-text">4.2.1 脏读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2不可重复读"><span class="nav-number">5.2.2.</span> <span class="nav-text">4.2.2不可重复读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3幻读"><span class="nav-number">5.2.3.</span> <span class="nav-text">4.2.3幻读</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-四大隔离级别"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 四大隔离级别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-SERIALIZABLE（串行化）"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1 SERIALIZABLE（串行化）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-REPEATABLE-READ（可重复读）（MySQL）"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2 REPEATABLE READ（可重复读）（MySQL）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-READ-COMMITTED（读已提交数据）（Oracle）"><span class="nav-number">5.3.3.</span> <span class="nav-text">4.3.3 READ COMMITTED（读已提交数据）（Oracle）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-READ-UNCOMMITTED（读未提交数据）"><span class="nav-number">5.3.4.</span> <span class="nav-text">4.3.4 READ UNCOMMITTED（读未提交数据）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-5-MySQL隔离级别"><span class="nav-number">5.3.5.</span> <span class="nav-text">4.3.5 MySQL隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-6-JDBC设置隔离级别"><span class="nav-number">5.3.6.</span> <span class="nav-text">4.3.6 JDBC设置隔离级别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-事务总结"><span class="nav-number">5.4.</span> <span class="nav-text">5. 事务总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/javaweb/JDBC之事务/';
+          this.page.identifier = '2017/05/01/javaweb/JDBC之事务/';
+          this.page.title = 'JDBC之事务';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

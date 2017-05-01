@@ -1,0 +1,1263 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="上传下载," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. JavaWeb：上传下载文件 http://blog.csdn.net/axi295309066/article/details/52984462 2. 课程概述在Web应用系统开发中，文件上传功能是非常常用的功能，今天来主要讲讲JavaWeb中的文件上传功能的相关技术实现，并且随着互联网技术的飞速发展，用户对网站的体验要求越来越高，在文件上传功能的技术上也出现许多创新点，例如异步上传文件，">
+<meta name="keywords" content="上传下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="酷炫的文件上传技术">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/javaweb/酷炫的文件上传技术/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. JavaWeb：上传下载文件 http://blog.csdn.net/axi295309066/article/details/52984462 2. 课程概述在Web应用系统开发中，文件上传功能是非常常用的功能，今天来主要讲讲JavaWeb中的文件上传功能的相关技术实现，并且随着互联网技术的飞速发展，用户对网站的体验要求越来越高，在文件上传功能的技术上也出现许多创新点，例如异步上传文件，">
+<meta property="og:image" content="http://img.blog.csdn.net/20161116184907067">
+<meta property="og:image" content="http://img.blog.csdn.net/20161116184949287">
+<meta property="og:image" content="http://img.blog.csdn.net/20161116185045313">
+<meta property="og:image" content="http://img.blog.csdn.net/20161116185529346">
+<meta property="og:image" content="http://img.blog.csdn.net/20161116185607940">
+<meta property="og:image" content="http://img.blog.csdn.net/20161116185640049">
+<meta property="og:updated_time" content="2017-05-01T04:29:43.595Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="酷炫的文件上传技术">
+<meta name="twitter:description" content="1. JavaWeb：上传下载文件 http://blog.csdn.net/axi295309066/article/details/52984462 2. 课程概述在Web应用系统开发中，文件上传功能是非常常用的功能，今天来主要讲讲JavaWeb中的文件上传功能的相关技术实现，并且随着互联网技术的飞速发展，用户对网站的体验要求越来越高，在文件上传功能的技术上也出现许多创新点，例如异步上传文件，">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161116184907067">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/javaweb/酷炫的文件上传技术/"/>
+
+
+
+
+
+  <title>酷炫的文件上传技术 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/酷炫的文件上传技术/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                酷炫的文件上传技术
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:12+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaweb/" itemprop="url" rel="index">
+                    <span itemprop="name">javaweb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/javaweb/酷炫的文件上传技术/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/javaweb/酷炫的文件上传技术/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-JavaWeb：上传下载文件"><a href="#1-JavaWeb：上传下载文件" class="headerlink" title="1. JavaWeb：上传下载文件"></a><strong>1. JavaWeb：上传下载文件</strong></h1><p> <a href="http://blog.csdn.net/axi295309066/article/details/52984462" target="_blank" rel="external">http://blog.csdn.net/axi295309066/article/details/52984462</a></p>
+<h1 id="2-课程概述"><a href="#2-课程概述" class="headerlink" title="2. 课程概述"></a><strong>2. 课程概述</strong></h1><p>在Web应用系统开发中，文件上传功能是非常常用的功能，今天来主要讲讲JavaWeb中的文件上传功能的相关技术实现，并且随着互联网技术的飞速发展，用户对网站的体验要求越来越高，在文件上传功能的技术上也出现许多创新点，例如异步上传文件，拖拽式上传，黏贴上传，上传进度监控，文件缩略图，大文件断点续传，大文件秒传等等。</p>
+<p>本课程需要的基础知识：</p>
+<ul>
+<li>了解基本的Http协议内容</li>
+<li>基本IO流操作技术</li>
+<li>Servlet基础知识</li>
+<li>javascript/jQuery技术基础知识</li>
+</ul>
+<a id="more"></a>
+<h1 id="3-文件上传的基础"><a href="#3-文件上传的基础" class="headerlink" title="3. 文件上传的基础"></a><strong>3. 文件上传的基础</strong></h1><p>对于文件上传，浏览器在上传的过程中是将文件以流的形式提交到服务器端的，并且所有流数据都会随着Http请求携带到服务器端。所以，文件上传时的请求内容格式要能够基本看懂。</p>
+<p>文件上传页面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/itheimaUpload/UploadServlet"</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></div><div class="line">   	请选择上传的文件：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"attach"</span>/&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line">   	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>/&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Http请求内容：</p>
+<p><img src="http://img.blog.csdn.net/20161116184907067" alt="文件上传"></p>
+<p><img src="http://img.blog.csdn.net/20161116184949287" alt="文件上传"></p>
+<h1 id="4-Java后台使用Servlet接收文件"><a href="#4-Java后台使用Servlet接收文件" class="headerlink" title="4. Java后台使用Servlet接收文件"></a><strong>4. Java后台使用Servlet接收文件</strong></h1><p>如果使用Servlet获取上传文件的输入流然后再解析里面的请求参数是比较麻烦，所以一般后台选择采用Apache的开源工具common-fileupload这个文件上传组件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Java后台代码：Commons-fileUpload组件上传文件</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UploadServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">            <span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">        <span class="comment">//1.配置缓存</span></div><div class="line">        DiskFileItemFactory factory = <span class="keyword">new</span> DiskFileItemFactory(<span class="number">1</span>*<span class="number">1024</span>*<span class="number">1024</span>,<span class="keyword">new</span> File(<span class="string">"c:/tempFiles/"</span>));</div><div class="line"></div><div class="line">        <span class="comment">//2.创建ServleFileUpload对象</span></div><div class="line">        ServletFileUpload sfu = <span class="keyword">new</span> ServletFileUpload(factory);</div><div class="line"></div><div class="line">        <span class="comment">//解决文件名称中文问题</span></div><div class="line">        sfu.setHeaderEncoding(<span class="string">"utf-8"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//3.解析</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            List&lt;FileItem&gt; list = sfu.parseRequest(request);</div><div class="line"></div><div class="line">            <span class="comment">//解析所有内容</span></div><div class="line">            <span class="keyword">if</span>(list!=<span class="keyword">null</span>)&#123;</div><div class="line">                <span class="keyword">for</span>(FileItem item:list)&#123;</div><div class="line">                    <span class="comment">//判断是否为普通表单参数</span></div><div class="line">                    <span class="keyword">if</span>(item.isFormField())&#123;</div><div class="line">                        <span class="comment">//普通表单参数</span></div><div class="line">                        <span class="comment">//获取表单的name属性名称</span></div><div class="line">                        String fieldName = item.getFieldName();</div><div class="line">                        <span class="comment">//获取表单参数值</span></div><div class="line">                        String value = item.getString(<span class="string">"utf-8"</span>);</div><div class="line">                    &#125;<span class="keyword">else</span>&#123;</div><div class="line"></div><div class="line">                        <span class="comment">//文件</span></div><div class="line">                        <span class="keyword">if</span>(item.getName()!=<span class="keyword">null</span> &amp;&amp; !item.getName().equals(<span class="string">""</span>))  &#123;</div><div class="line"></div><div class="line">                            <span class="comment">//保存到服务器硬盘                  </span></div><div class="line">                            FileUtils.copyInputStreamToFile(item.getInputStream(), <span class="keyword">new</span> File(<span class="string">"c:/targetFiles/"</span>+item.getName()));</div><div class="line">                            item.delete();</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (FileUploadException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doPost</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">            <span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">        doGet(request, response);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="5-使用WebUploader上传组件"><a href="#5-使用WebUploader上传组件" class="headerlink" title="5. 使用WebUploader上传组件"></a><strong>5. 使用WebUploader上传组件</strong></h1><p>文件上传页面的前端我们可以选择使用一些比较好用的上传组件，例如百度的开源组件WebUploader，这个组件基本能满足文件上传的一些日常所需功能，如异步上传文件，拖拽式上传，黏贴上传，上传进度监控，文件缩略图，甚至是大文件断点续传，大文件秒传。</p>
+<h2 id="5-1-下载WebUpload组件"><a href="#5-1-下载WebUpload组件" class="headerlink" title="5.1 下载WebUpload组件"></a><strong>5.1 下载WebUpload组件</strong></h2><p><a href="http://fex.baidu.com/webuploader/" target="_blank" rel="external">http://fex.baidu.com/webuploader/</a>    到WebUpload官网下载WebUpload包</p>
+<p>WebUpload目录结构：</p>
+<p><img src="http://img.blog.csdn.net/20161116185045313" alt="WebUpload目录结构"></p>
+<h2 id="5-2-基本文件上传Demo（包含上传进度）"><a href="#5-2-基本文件上传Demo（包含上传进度）" class="headerlink" title="5.2 基本文件上传Demo（包含上传进度）"></a><strong>5.2 基本文件上传Demo（包含上传进度）</strong></h2><p>前端</p>
+<p>1.1 在页面导入所需css，js</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span></span></div><div class="line">	<span class="attr">href</span>=<span class="string">"$&#123;pageContext.request.contextPath&#125;/css/webuploader.css"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span></span></div><div class="line">	<span class="attr">src</span>=<span class="string">"$&#123;pageContext.request.contextPath &#125;/js/jquery-1.10.2.min.js"</span>&gt;<span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span></span></div><div class="line">	<span class="attr">src</span>=<span class="string">"$&#123;pageContext.request.contextPath &#125;/js/webuploader.js"</span>&gt;<span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>1.2 编写上传页面标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 上传div --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"uploader"</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 显示文件列表信息 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"fileList"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!-- 选择文件区域 --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"filePicker"</span>&gt;</span>点击选择文件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>1.3 编写webupload代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">		<span class="comment">//1.初始化WebUpload，以及配置全局的参数</span></div><div class="line">		<span class="keyword">var</span> uploader = WebUploader.create(</div><div class="line">			&#123;</div><div class="line">			<span class="comment">//flashk控件的地址</span></div><div class="line">			swf: <span class="string">"$&#123;pageContext.request.contextPath&#125;/js/Uploader.swf"</span>,</div><div class="line">			<span class="comment">//后台提交地址</span></div><div class="line">			server:<span class="string">"$&#123;pageContext.request.contextPath&#125;/UploadServlet"</span>,</div><div class="line">			<span class="comment">//选择文件控件的标签</span></div><div class="line">			pick:<span class="string">"#filePicker"</span>,</div><div class="line">			<span class="comment">//自动上传文件</span></div><div class="line">			auto:<span class="literal">true</span>,</div><div class="line">			&#125;</div><div class="line">		);</div><div class="line"></div><div class="line">		<span class="comment">//2.选择文件后，文件信息队列展示</span></div><div class="line">		<span class="comment">// 注册fileQueued事件：当文件加入队列后触发</span></div><div class="line">		<span class="comment">// file: 代表当前选择的文件</span></div><div class="line">		uploader.on(<span class="string">"fileQueued"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</div><div class="line">			<span class="comment">//追加文件信息div</span></div><div class="line">			$(<span class="string">"#fileList"</span>).append(<span class="string">"&lt;div id='"</span>+file.id+<span class="string">"' class='fileInfo'&gt;&lt;span&gt;"</span>+file.name+<span class="string">"&lt;/span&gt;&lt;div class='state'&gt;等待上传...&lt;/div&gt;&lt;span class='text'&gt;&lt;/span&gt;&lt;/div&gt;"</span>);</div><div class="line">		&#125;);</div><div class="line"></div><div class="line"></div><div class="line">		<span class="comment">//3.注册上传进度监听</span></div><div class="line">		<span class="comment">//file: 正在上传的文件</span></div><div class="line">		<span class="comment">//percentage: 当前进度的比例。最大为1.例如:0.2</span></div><div class="line">		uploader.on(<span class="string">"uploadProgress"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">file,percentage</span>)</span>&#123;</div><div class="line">			<span class="keyword">var</span> id = $(<span class="string">"#"</span>+file.id);</div><div class="line">			<span class="comment">//更新状态信息</span></div><div class="line">			id.find(<span class="string">"div.state"</span>).text(<span class="string">"上传中..."</span>);</div><div class="line">			<span class="comment">//更新上传百分比</span></div><div class="line">			id.find(<span class="string">"span.text"</span>).text(<span class="built_in">Math</span>.round(percentage*<span class="number">100</span>)+<span class="string">"%"</span>);</div><div class="line">		&#125;);</div><div class="line"></div><div class="line">		<span class="comment">//4.注册上传完毕监听</span></div><div class="line">		<span class="comment">//file:上传完毕的文件</span></div><div class="line">		<span class="comment">//response:后台回送的数据，以json格式返回</span></div><div class="line">		uploader.on(<span class="string">"uploadSuccess"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">file,response</span>)</span>&#123;</div><div class="line">			<span class="comment">//更新状态信息</span></div><div class="line">			$(<span class="string">"#"</span>+file.id).find(<span class="string">"div.state"</span>).text(<span class="string">"上传完毕"</span>);</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<p>2）后端Servlet代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">DiskFileItemFactory factory = <span class="keyword">new</span> DiskFileItemFactory();</div><div class="line">ServletFileUpload sfu = <span class="keyword">new</span> ServletFileUpload(factory);</div><div class="line">      sfu.setHeaderEncoding(<span class="string">"utf-8"</span>);</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	List&lt;FileItem&gt; items = sfu.parseRequest(request);</div><div class="line">	<span class="keyword">for</span>(FileItem item:items)&#123;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(item.isFormField())&#123;</div><div class="line">			<span class="comment">//普通信息</span></div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			<span class="comment">//文件信息</span></div><div class="line">			<span class="comment">//判断只有文件才需要进行保存处理</span></div><div class="line">			System.out.println(<span class="string">"接收的文件名称:"</span>+item.getName());</div><div class="line">			<span class="comment">//拷贝文件到后台的硬盘</span></div><div class="line">			FileUtils.copyInputStreamToFile(item.getInputStream(), <span class="keyword">new</span> File(serverPath+<span class="string">"/"</span>+item.getName()));</div><div class="line">			System.out.println(<span class="string">"文件保存成功"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125; <span class="keyword">catch</span> (FileUploadException e) &#123;</div><div class="line">	e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="5-3-生成图片缩略图"><a href="#5-3-生成图片缩略图" class="headerlink" title="5.3 生成图片缩略图"></a><strong>5.3 生成图片缩略图</strong></h2><p>关键点：调用uploader.makeThumb()方法生成缩略图</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">uploader.on(<span class="string">"fileQueued"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</div><div class="line">			<span class="comment">//追加文件信息div</span></div><div class="line">			$(<span class="string">"#fileList"</span>).append(<span class="string">"&lt;div id='"</span>+file.id+<span class="string">"' class='fileInfo'&gt;&lt;img/&gt;&lt;span&gt;"</span>+file.name+<span class="string">"&lt;/span&gt;&lt;div class='state'&gt;等待上传...&lt;/div&gt;&lt;span class='text'&gt;&lt;/span&gt;&lt;/div&gt;"</span>);</div><div class="line"></div><div class="line">			<span class="comment">//制造图片缩略图：调用makeThumb()方法</span></div><div class="line">			<span class="comment">//error: 制造缩略图失败</span></div><div class="line">			<span class="comment">//src: 缩略图的路径</span></div><div class="line">			uploader.makeThumb(file,<span class="function"><span class="keyword">function</span>(<span class="params">error,src</span>)</span>&#123;</div><div class="line">				<span class="keyword">var</span> id = $(<span class="string">"#"</span>+file.id);</div><div class="line">				<span class="comment">//如果失败，则显示“不能预览”</span></div><div class="line">				<span class="keyword">if</span>(error)&#123;</div><div class="line">					id.find(<span class="string">"img"</span>).replaceWith(<span class="string">"不能预览"</span>);</div><div class="line">				&#125;</div><div class="line">				<span class="comment">//成功，则显示缩略图到指定位置</span></div><div class="line">				id.find(<span class="string">"img"</span>).attr(<span class="string">"src"</span>,src);		</div><div class="line">			&#125;);</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<h2 id="5-4-拖拽，黏贴上传"><a href="#5-4-拖拽，黏贴上传" class="headerlink" title="5.4 拖拽，黏贴上传"></a><strong>5.4 拖拽，黏贴上传</strong></h2><p>1）页面添加拖拽区域的div</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 上传div --&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"uploader"</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 文件拖拽区域 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"dndArea"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">p</span>&gt;</span>将文件直接拖拽到这里即可自动上传<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">		<span class="comment">&lt;!-- 显示文件列表信息 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"fileList"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">		<span class="comment">&lt;!-- 选择文件区域 --&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"filePicker"</span>&gt;</span>点击选择文件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>2）在webuploader的全局配置参数添加拖拽功能的参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.初始化WebUpload，以及配置全局的参数</span></div><div class="line">		<span class="keyword">var</span> uploader = WebUploader.create(</div><div class="line">			&#123;</div><div class="line">			<span class="comment">//flashk控件的地址</span></div><div class="line">			swf: <span class="string">"$&#123;pageContext.request.contextPath&#125;/js/Uploader.swf"</span>,</div><div class="line">			<span class="comment">//后台提交地址</span></div><div class="line">			server:<span class="string">"$&#123;pageContext.request.contextPath&#125;/UploadServlet"</span>,</div><div class="line">			<span class="comment">//选择文件控件的标签</span></div><div class="line">			pick:<span class="string">"#filePicker"</span>,</div><div class="line">			<span class="comment">//自动上传文件</span></div><div class="line">			auto:<span class="literal">true</span>,</div><div class="line">			<span class="comment">//开启拖拽功能，指定拖拽区域</span></div><div class="line">			dnd:<span class="string">"#dndArea"</span>,</div><div class="line">			<span class="comment">//禁用页面其他地方的拖拽功能，防止页面直接打开文件</span></div><div class="line">			disableGlobalDnd:<span class="literal">true</span></div><div class="line">            <span class="comment">//开启黏贴功能</span></div><div class="line">			paste:<span class="string">"#uploader"</span></div><div class="line">			&#125;</div><div class="line">		);</div></pre></td></tr></table></figure>
+<h2 id="5-5-大文件分块上传"><a href="#5-5-大文件分块上传" class="headerlink" title="5.5 大文件分块上传"></a><strong>5.5 大文件分块上传</strong></h2><p>1）在webuploader全局参数中添加分块上传参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.初始化WebUpload，以及配置全局的参数</span></div><div class="line">		<span class="keyword">var</span> uploader = WebUploader.create(</div><div class="line">			&#123;</div><div class="line">			<span class="comment">//flashk控件的地址</span></div><div class="line">			swf: <span class="string">"$&#123;pageContext.request.contextPath&#125;/js/Uploader.swf"</span>,</div><div class="line">			<span class="comment">//后台提交地址</span></div><div class="line">			server:<span class="string">"$&#123;pageContext.request.contextPath&#125;/UploadServlet"</span>,</div><div class="line">			<span class="comment">//选择文件控件的标签</span></div><div class="line">			pick:<span class="string">"#filePicker"</span>,</div><div class="line">			<span class="comment">//自动上传文件</span></div><div class="line">			auto:<span class="literal">true</span>,</div><div class="line">			<span class="comment">//开启拖拽功能，指定拖拽区域</span></div><div class="line">			dnd:<span class="string">"#dndArea"</span>,</div><div class="line">			<span class="comment">//禁用页面其他地方的拖拽功能，防止页面直接打开文件</span></div><div class="line">			disableGlobalDnd:<span class="literal">true</span>,</div><div class="line">			<span class="comment">//开启黏贴功能</span></div><div class="line">			paste:<span class="string">"#uploader"</span>,</div><div class="line"></div><div class="line">			<span class="comment">//分块上传设置</span></div><div class="line">			<span class="comment">//是否分块上传</span></div><div class="line">			chunked:<span class="literal">true</span>,</div><div class="line">			<span class="comment">//每块文件大小（默认5M）</span></div><div class="line">			chunkSize:<span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>,</div><div class="line">			<span class="comment">//开启几个并发线程（默认3个）</span></div><div class="line">			threads:<span class="number">3</span>,</div><div class="line">			<span class="comment">//在上传当前文件时，准备好下一个文件</span></div><div class="line">			prepareNextFile:<span class="literal">true</span></div><div class="line">			&#125;</div><div class="line">		);</div></pre></td></tr></table></figure>
+<p>2）监控上传文件的三个时间点</p>
+<p>添加以上三个配置后，会发现当文件超过5M时，webuploader自动把文件会分几个请求发送给后台</p>
+<p><img src="http://img.blog.csdn.net/20161116185529346" alt="文件上传"></p>
+<p>每个分块请求，包含的信息：</p>
+<p><img src="http://img.blog.csdn.net/20161116185607940" alt="文件上传"></p>
+<p>可以监听文件分块上传的三个重要的时间点。</p>
+<p><img src="http://img.blog.csdn.net/20161116185640049" alt="文件上传"></p>
+<p>before-send-file : 在所有分块发送之前调用<br>before-send: 如果有分块，在每个分块发送之前调用<br>after-send-file: 在所有分块发送完成之后调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//5.监控文件上传的三个时间点(注意：该段代码必须放在WebUploader.create之前)</span></div><div class="line">		<span class="comment">//时间点1：:所有分块进行上传之前（1.可以计算文件的唯一标记;2.可以判断是否秒传）   </span></div><div class="line">		<span class="comment">//时间点2： 如果分块上传，每个分块上传之前（1.询问后台该分块是否已经保存成功，用于断点续传）</span></div><div class="line">		<span class="comment">//时间点3：所有分块上传成功之后（1.通知后台进行分块文件的合并工作）</span></div><div class="line">		WebUploader.Uploader.register(&#123;</div><div class="line">			<span class="string">"before-send-file"</span>:<span class="string">"beforeSendFile"</span>,</div><div class="line">			<span class="string">"before-send"</span>:<span class="string">"beforeSend"</span>,</div><div class="line">			<span class="string">"after-send-file"</span>:<span class="string">"afterSendFile"</span></div><div class="line">		&#125;,&#123;</div><div class="line">			<span class="comment">//时间点1：:所有分块进行上传之前调用此函数</span></div><div class="line">			beforeSendFile:function()&#123;</div><div class="line">				<span class="comment">//1.计算文件的唯一标记，用于断点续传和秒传</span></div><div class="line">				<span class="comment">//2.请求后台是否保存过该文件，如果存在，则跳过该文件，实现秒传功能</span></div><div class="line">			&#125;,</div><div class="line">			<span class="comment">//时间点2：如果有分块上传，则 每个分块上传之前调用此函数</span></div><div class="line">			beforeSend:function()&#123;</div><div class="line">				<span class="comment">//1.请求后台是否保存过当前分块，如果存在，则跳过该分块文件，实现断点续传功能</span></div><div class="line">			&#125;,</div><div class="line">			<span class="comment">//时间点3：所有分块上传成功之后调用此函数</span></div><div class="line">			afterSendFile:function()&#123;</div><div class="line">				<span class="comment">//1.如果分块上传，则通过后台合并所有分块文件</span></div><div class="line">			&#125;</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<p>before-send-file逻辑：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//利用md5File（）方法计算文件的唯一标记符</span></div><div class="line"></div><div class="line"><span class="comment">//该函数接收一个deferred</span></div><div class="line">			beforeSendFile:function(file)&#123;</div><div class="line">				<span class="comment">//创建一个deffered</span></div><div class="line">				var deferred = WebUploader.Deferred();</div><div class="line"></div><div class="line">				<span class="comment">//1.计算文件的唯一标记，用于断点续传和秒传</span></div><div class="line">				(<span class="keyword">new</span> WebUploader.Uploader()).md5File(file,<span class="number">0</span>,<span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>)</div><div class="line">					.progress(function(percentage)&#123;</div><div class="line">						$(<span class="string">"#"</span>+file.id).find(<span class="string">"div.state"</span>).text(<span class="string">"正在获取文件信息..."</span>);</div><div class="line">					&#125;)</div><div class="line">					.then(function(val)&#123;</div><div class="line">						uniqueFileTag = val;</div><div class="line"></div><div class="line">						$(<span class="string">"#"</span>+file.id).find(<span class="string">"div.state"</span>).text(<span class="string">"成功获取文件信息"</span>);</div><div class="line">						<span class="comment">//只有文件信息获取成功，才进行下一步操作</span></div><div class="line">						deferred.resolve();</div><div class="line">					&#125;);</div><div class="line"></div><div class="line"></div><div class="line">				<span class="comment">//alert(uniqueFileTag);</span></div><div class="line">				<span class="comment">//2.请求后台是否保存过该文件，如果存在，则跳过该文件，实现秒传功能</span></div><div class="line"></div><div class="line">				<span class="comment">//返回deffered</span></div><div class="line">				<span class="keyword">return</span> deferred.promise();</div><div class="line">			&#125;</div></pre></td></tr></table></figure>
+<p>before-send逻辑：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//向后台发送当前文件的唯一标记，用于后台创建保存分块文件的目录</span></div><div class="line"></div><div class="line">beforeSend:function()&#123;</div><div class="line"></div><div class="line">	<span class="comment">//携带当前文件的唯一标记到后台，用于让后台创建保存该文件分块的目录</span></div><div class="line">	<span class="keyword">this</span>.owner.options.formData.fileMd5 = fileMd5;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3）后台需要保存所有分块文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//为每个文件创建一个目录，并保存这个文件的所有分块文件</span></div><div class="line">                  <span class="comment">//判断是否已经分块上传</span></div><div class="line">					<span class="keyword">if</span>(chunks!=<span class="keyword">null</span>)&#123;</div><div class="line">						System.out.println(<span class="string">"分块处理..."</span>);</div><div class="line">						<span class="comment">//进行分块上传了</span></div><div class="line"></div><div class="line">						<span class="comment">//建立一个临时目录，用于保存所有分块文件</span></div><div class="line">						File chunksDir = <span class="keyword">new</span> File(serverPath+<span class="string">"/"</span>+fileMd5);</div><div class="line">						<span class="keyword">if</span>(!chunksDir.exists())&#123;</div><div class="line">							chunksDir.mkdir();</div><div class="line">						&#125;</div><div class="line"></div><div class="line">						<span class="keyword">if</span>(chunk!=<span class="keyword">null</span>)&#123;</div><div class="line">							<span class="comment">//保存分块文件</span></div><div class="line">							File chunkFile = <span class="keyword">new</span> File(chunksDir.getPath()+<span class="string">"/"</span>+chunk);</div><div class="line">							FileUtils.copyInputStreamToFile(item.getInputStream(), chunkFile);</div><div class="line">						&#125;</div></pre></td></tr></table></figure>
+<p>4）前台通知后台合并所有分块文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//前台通知后台合并文件</span></div><div class="line">after-send-file逻辑：</div><div class="line"></div><div class="line">afterSendFile:<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</div><div class="line">				<span class="comment">//1.如果分块上传，则通过后台合并所有分块文件</span></div><div class="line"></div><div class="line">				<span class="comment">//请求后台合并文件</span></div><div class="line">				$.ajax(</div><div class="line">					&#123;</div><div class="line">					<span class="attr">type</span>:<span class="string">"POST"</span>,</div><div class="line">					<span class="attr">url</span>:<span class="string">"$&#123;pageContext.request.contextPath&#125;/UploadCheckServlet?action=mergeChunks"</span>,</div><div class="line">					<span class="attr">data</span>:&#123;</div><div class="line">						<span class="comment">//文件唯一标记</span></div><div class="line">						fileMd5:fileMd5,</div><div class="line">						<span class="comment">//文件名称</span></div><div class="line">						fileName:file.name</div><div class="line">					&#125;,</div><div class="line">					<span class="attr">dataType</span>:<span class="string">"json"</span>,</div><div class="line">					<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</div><div class="line">						alert(response.msg);</div><div class="line">					&#125;</div><div class="line">					&#125;</div><div class="line">				);</div><div class="line"></div><div class="line">			&#125;</div><div class="line"></div><div class="line"><span class="comment">//后台合并所有分块文件</span></div><div class="line"></div><div class="line"><span class="keyword">if</span>(<span class="string">"mergeChunks"</span>.equals(action))&#123;</div><div class="line">			System.out.println(<span class="string">"开始合并文件..."</span>);</div><div class="line">			<span class="comment">//合并文件</span></div><div class="line">			<span class="built_in">String</span> fileMd5 = request.getParameter(<span class="string">"fileMd5"</span>);</div><div class="line">			<span class="built_in">String</span> fileName = request.getParameter(<span class="string">"fileName"</span>);</div><div class="line"></div><div class="line">			<span class="comment">//读取目录里面的所有文件</span></div><div class="line">			File f = <span class="keyword">new</span> File(serverPath+<span class="string">"/"</span>+fileMd5);</div><div class="line">			File[] fileArray = f.listFiles(<span class="keyword">new</span> FileFilter()&#123;</div><div class="line"></div><div class="line">				<span class="comment">//排除目录，只要文件</span></div><div class="line">				public boolean accept(File pathname) &#123;</div><div class="line">					<span class="keyword">if</span>(pathname.isDirectory())&#123;</div><div class="line">						<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">					&#125;</div><div class="line">					<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			<span class="comment">//转成集合，便于排序</span></div><div class="line">			List&lt;File&gt; fileList = <span class="keyword">new</span> ArrayList&lt;File&gt;(Arrays.asList(fileArray));</div><div class="line"></div><div class="line">			<span class="comment">//从小到大排序</span></div><div class="line">			Collections.sort(fileList, <span class="keyword">new</span> Comparator&lt;File&gt;() &#123;</div><div class="line"></div><div class="line">				public int compare(File o1, File o2) &#123;</div><div class="line">					<span class="keyword">if</span>(Integer.parseInt(o1.getName()) &lt; Integer.parseInt(o2.getName()))&#123;</div><div class="line">						<span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">					&#125;</div><div class="line">					<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">				&#125;</div><div class="line"></div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			File outputFile = <span class="keyword">new</span> File(serverPath+<span class="string">"/"</span>+fileName);</div><div class="line"></div><div class="line">			<span class="comment">//创建文件</span></div><div class="line">			 outputFile.createNewFile();</div><div class="line"></div><div class="line">			 <span class="comment">//输出流</span></div><div class="line">	         FileChannel outChannel = <span class="keyword">new</span> FileOutputStream(outputFile).getChannel();</div><div class="line"></div><div class="line">	         <span class="comment">//合并</span></div><div class="line">	         FileChannel inChannel;</div><div class="line">	         <span class="keyword">for</span>(File file : fileList)&#123;</div><div class="line">	             inChannel = <span class="keyword">new</span> FileInputStream(file).getChannel();</div><div class="line">	             inChannel.transferTo(<span class="number">0</span>, inChannel.size(), outChannel);</div><div class="line">	             inChannel.close();</div><div class="line"></div><div class="line">	             <span class="comment">//删除分片</span></div><div class="line">	             file.delete();</div><div class="line">	         &#125;</div><div class="line"></div><div class="line">	         <span class="comment">//清除文件夹</span></div><div class="line">	         File tempFile = <span class="keyword">new</span> File(serverPath+<span class="string">"/"</span>+fileMd5);</div><div class="line">	         <span class="keyword">if</span>(tempFile.isDirectory() &amp;&amp; tempFile.exists())&#123;</div><div class="line">	        	 tempFile.delete();</div><div class="line">	         &#125;</div><div class="line"></div><div class="line">	         <span class="comment">//关闭流</span></div><div class="line">	         outChannel.close();</div><div class="line">	         response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line">	        response.getWriter().write(<span class="string">"&#123;\"msg\":\"合并成功\"&#125;"</span>);</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-6-大文件断点续传"><a href="#5-6-大文件断点续传" class="headerlink" title="5.6 大文件断点续传"></a><strong>5.6 大文件断点续传</strong></h2><p>在实现了分块上传的基础上，实现断点续传就非常简单了！！！</p>
+<p>前端：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//时间点2：如果有分块上传，则 每个分块上传之前调用此函数</span></div><div class="line">			<span class="comment">//block:代表当前分块对象</span></div><div class="line">			beforeSend:<span class="function"><span class="keyword">function</span>(<span class="params">block</span>)</span>&#123;</div><div class="line">				<span class="comment">//1.请求后台是否保存过当前分块，如果存在，则跳过该分块文件，实现断点续传功能</span></div><div class="line">				<span class="keyword">var</span> deferred = WebUploader.Deferred();</div><div class="line"></div><div class="line">				<span class="comment">//请求后台是否保存完成该文件信息，如果保存过，则跳过，如果没有，则发送该分块内容</span></div><div class="line">				$.ajax(</div><div class="line">					&#123;</div><div class="line">					<span class="attr">type</span>:<span class="string">"POST"</span>,</div><div class="line">					<span class="attr">url</span>:<span class="string">"$&#123;pageContext.request.contextPath&#125;/UploadCheckServlet?action=checkChunk"</span>,</div><div class="line">					<span class="attr">data</span>:&#123;</div><div class="line">						<span class="comment">//文件唯一标记</span></div><div class="line">						fileMd5:fileMd5,</div><div class="line">						<span class="comment">//当前分块下标</span></div><div class="line">						chunk:block.chunk,</div><div class="line">						<span class="comment">//当前分块大小</span></div><div class="line">						chunkSize:block.end-block.start</div><div class="line">					&#125;,</div><div class="line">					<span class="attr">dataType</span>:<span class="string">"json"</span>,</div><div class="line">					<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</div><div class="line">						<span class="keyword">if</span>(response.ifExist)&#123;</div><div class="line">							<span class="comment">//分块存在，跳过该分块</span></div><div class="line">							deferred.reject();</div><div class="line">						&#125;<span class="keyword">else</span>&#123;</div><div class="line">							<span class="comment">//分块不存在或者不完整，重新发送该分块内容</span></div><div class="line">							deferred.resolve();</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">					&#125;</div><div class="line">				);</div><div class="line"></div><div class="line">				<span class="comment">//携带当前文件的唯一标记到后台，用于让后台创建保存该文件分块的目录</span></div><div class="line">				<span class="keyword">this</span>.owner.options.formData.fileMd5 = fileMd5;</div><div class="line">				<span class="keyword">return</span> deferred.promise();			</div><div class="line">			&#125;,</div></pre></td></tr></table></figure>
+<p>后台：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//检查该分块是否存在或者完整保存</span></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkChunk</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">			HttpServletResponse response) <span class="keyword">throws</span> IOException,</div><div class="line">			FileNotFoundException &#123;</div><div class="line">		System.out.println(<span class="string">"checkChunk..."</span>);</div><div class="line">		String fileMd5 = request.getParameter(<span class="string">"fileMd5"</span>);</div><div class="line">		String chunk = request.getParameter(<span class="string">"chunk"</span>);</div><div class="line">		String chunkSize = request.getParameter(<span class="string">"chunkSize"</span>);</div><div class="line"></div><div class="line">		File checkFile = <span class="keyword">new</span> File(serverPath+<span class="string">"/"</span>+fileMd5+<span class="string">"/"</span>+chunk);</div><div class="line"></div><div class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line">		<span class="comment">//检查文件是否存在，且大小是否一致</span></div><div class="line">		<span class="keyword">if</span>(checkFile.exists() &amp;&amp; checkFile.length()==Integer.parseInt(chunkSize))&#123;</div><div class="line">			response.getWriter().write(<span class="string">"&#123;\"ifExist\":1&#125;"</span>);</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			response.getWriter().write(<span class="string">"&#123;\"ifExist\":0&#125;"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="5-7-文件秒传"><a href="#5-7-文件秒传" class="headerlink" title="5.7 文件秒传"></a><strong>5.7 文件秒传</strong></h2><p>在所有分块请求之前，就已经可以进行实现秒传功能！！！</p>
+<p>前端：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">beforeSendFile:<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</div><div class="line">				<span class="comment">//创建一个deffered</span></div><div class="line">				<span class="keyword">var</span> deferred = WebUploader.Deferred();</div><div class="line"></div><div class="line">				<span class="comment">//1.计算文件的唯一标记，用于断点续传和秒传</span></div><div class="line">				(<span class="keyword">new</span> WebUploader.Uploader()).md5File(file,<span class="number">0</span>,<span class="number">5</span>*<span class="number">1024</span>*<span class="number">1024</span>)</div><div class="line">					.progress(<span class="function"><span class="keyword">function</span>(<span class="params">percentage</span>)</span>&#123;</div><div class="line">						$(<span class="string">"#"</span>+file.id).find(<span class="string">"div.state"</span>).text(<span class="string">"正在获取文件信息..."</span>);</div><div class="line">					&#125;)</div><div class="line">					.then(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</div><div class="line">						fileMd5 = val;</div><div class="line"></div><div class="line">						$(<span class="string">"#"</span>+file.id).find(<span class="string">"div.state"</span>).text(<span class="string">"成功获取文件信息"</span>);</div><div class="line"></div><div class="line"></div><div class="line">						<span class="comment">//2.请求后台是否保存过该文件，如果存在，则跳过该文件，实现秒传功能</span></div><div class="line">						$.ajax(</div><div class="line">							&#123;</div><div class="line">							<span class="attr">type</span>:<span class="string">"POST"</span>,</div><div class="line">							<span class="attr">url</span>:<span class="string">"$&#123;pageContext.request.contextPath&#125;/UploadCheckServlet?action=fileCheck"</span>,</div><div class="line">							<span class="attr">data</span>:&#123;</div><div class="line">								<span class="comment">//文件唯一标记</span></div><div class="line">								fileMd5:fileMd5</div><div class="line">							&#125;,</div><div class="line">							<span class="attr">dataType</span>:<span class="string">"json"</span>,</div><div class="line">							<span class="attr">success</span>:<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</div><div class="line">								<span class="keyword">if</span>(response.ifExist)&#123;</div><div class="line">									$(<span class="string">"#"</span>+file.id).find(<span class="string">"div.state"</span>).text(<span class="string">"秒传成功"</span>);</div><div class="line">									<span class="comment">//如果存在，则跳过该文件，秒传成功</span></div><div class="line">									deferred.reject();</div><div class="line">								&#125;<span class="keyword">else</span>&#123;</div><div class="line">									<span class="comment">//继续上传</span></div><div class="line">									deferred.resolve();</div><div class="line">								&#125;</div><div class="line">							&#125;</div><div class="line">							&#125;</div><div class="line">						);</div><div class="line"></div><div class="line">					&#125;);</div><div class="line"></div><div class="line">				<span class="comment">//返回deffered</span></div><div class="line">				<span class="keyword">return</span> deferred.promise();</div><div class="line">			&#125;,</div></pre></td></tr></table></figure>
+<p>后台：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//检查文件的md5数据是否跟在数据库存在</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fileCheck</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">		HttpServletResponse response) <span class="keyword">throws</span> IOException,</div><div class="line">		FileNotFoundException &#123;</div><div class="line">	String fileMd5 = request.getParameter(<span class="string">"fileMd5"</span>);</div><div class="line"></div><div class="line">	<span class="comment">//模拟数据库</span></div><div class="line">	Map&lt;String,String&gt; database = <span class="keyword">new</span> HashMap&lt;String,String&gt;();</div><div class="line">	database.put(<span class="string">"576018603f4091782b68b78af85704a1"</span>, <span class="string">"01.课程回顾.itcast"</span>);</div><div class="line"></div><div class="line">	response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line">	<span class="keyword">if</span>(database.containsKey(fileMd5))&#123;</div><div class="line">		response.getWriter().write(<span class="string">"&#123;\"ifExist\":1&#125;"</span>);</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		response.getWriter().write(<span class="string">"&#123;\"ifExist\":0&#125;"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/上传下载/" rel="tag"># 上传下载</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/用JDBC操作数据库/" rel="next" title="用JDBC操作数据库">
+                <i class="fa fa-chevron-left"></i> 用JDBC操作数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/上传下载文件/" rel="prev" title="上传下载文件">
+                上传下载文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-JavaWeb：上传下载文件"><span class="nav-number">1.</span> <span class="nav-text">1. JavaWeb：上传下载文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-课程概述"><span class="nav-number">2.</span> <span class="nav-text">2. 课程概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-文件上传的基础"><span class="nav-number">3.</span> <span class="nav-text">3. 文件上传的基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Java后台使用Servlet接收文件"><span class="nav-number">4.</span> <span class="nav-text">4. Java后台使用Servlet接收文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-使用WebUploader上传组件"><span class="nav-number">5.</span> <span class="nav-text">5. 使用WebUploader上传组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-下载WebUpload组件"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 下载WebUpload组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-基本文件上传Demo（包含上传进度）"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 基本文件上传Demo（包含上传进度）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-生成图片缩略图"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 生成图片缩略图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-拖拽，黏贴上传"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 拖拽，黏贴上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-大文件分块上传"><span class="nav-number">5.5.</span> <span class="nav-text">5.5 大文件分块上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-大文件断点续传"><span class="nav-number">5.6.</span> <span class="nav-text">5.6 大文件断点续传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-7-文件秒传"><span class="nav-number">5.7.</span> <span class="nav-text">5.7 文件秒传</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/javaweb/酷炫的文件上传技术/';
+          this.page.identifier = '2017/05/01/javaweb/酷炫的文件上传技术/';
+          this.page.title = '酷炫的文件上传技术';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

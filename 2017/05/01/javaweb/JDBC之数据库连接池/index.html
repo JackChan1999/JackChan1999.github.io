@@ -1,0 +1,1445 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jdbc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="keywords" content="jdbc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC之数据库连接池">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/javaweb/JDBC之数据库连接池/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:image" content="http://img.blog.csdn.net/20161104231600003">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031121829027">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123148801">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123324485">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123222238">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123355223">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123412221">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123423177">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123454427">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123506271">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123515239">
+<meta property="og:image" content="http://img.blog.csdn.net/20161031123523505">
+<meta property="og:image" content="http://img.blog.csdn.net/20161102182901093">
+<meta property="og:updated_time" content="2017-05-01T04:28:57.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBC之数据库连接池">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161104231600003">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/javaweb/JDBC之数据库连接池/"/>
+
+
+
+
+
+  <title>JDBC之数据库连接池 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/JDBC之数据库连接池/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JDBC之数据库连接池
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:00+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaweb/" itemprop="url" rel="index">
+                    <span itemprop="name">javaweb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/javaweb/JDBC之数据库连接池/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/javaweb/JDBC之数据库连接池/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.blog.csdn.net/20161104231600003" alt="jdbc"></p>
+<a id="more"></a>
+<h1 id="JDBC系列阅读"><a href="#JDBC系列阅读" class="headerlink" title="JDBC系列阅读"></a><strong>JDBC系列阅读</strong></h1><ol>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52954659" target="_blank" rel="external">JavaWeb：用JDBC操作数据库</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52981430" target="_blank" rel="external">JavaWeb：JDBC之事务</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52981389" target="_blank" rel="external">JavaWeb：JDBC之数据库连接池</a></li>
+</ol>
+<h1 id="1-池参数（所有池参数都有默认值）"><a href="#1-池参数（所有池参数都有默认值）" class="headerlink" title="1. 池参数（所有池参数都有默认值）"></a>1. 池参数（所有池参数都有默认值）</h1><ul>
+<li>初始大小：10个</li>
+<li>最小空闲连接数：3个</li>
+<li>增量：一次创建的最小单位（5个）</li>
+<li>最大空闲连接数：12个</li>
+<li>最大连接数：20个</li>
+<li>最大的等待时间：1000毫秒</li>
+</ul>
+<h1 id="2-四大连接参数"><a href="#2-四大连接参数" class="headerlink" title="2. 四大连接参数"></a>2. 四大连接参数</h1><p>连接池也是使用四大连接参数来完成创建连接对象！</p>
+<h1 id="3-实现的接口"><a href="#3-实现的接口" class="headerlink" title="3. 实现的接口"></a>3. 实现的接口</h1><p>连接池必须实现：javax.sql.DataSource接口！</p>
+<p>连接池返回的Connection对象，它的close()方法与众不同！调用它的close()不是关闭，而是把连接归还给池！</p>
+<h1 id="4-数据库连接池"><a href="#4-数据库连接池" class="headerlink" title="4. 数据库连接池"></a>4. 数据库连接池</h1><h2 id="4-1-数据库连接池的概念"><a href="#4-1-数据库连接池的概念" class="headerlink" title="4.1 数据库连接池的概念"></a><strong>4.1 数据库连接池的概念</strong></h2><p>用池来管理Connection，这可以重复使用Connection。有了池，所以我们就不用自己来创建Connection，而是通过池来获取Connection对象。当使用完Connection后，调用Connection的close()方法也不会真的关闭Connection，而是把Connection“归还”给池。池就可以再利用这个Connection对象了</p>
+<p><img src="http://img.blog.csdn.net/20161031121829027" alt="jdbc"></p>
+<h2 id="4-2-JDBC数据库连接池接口（DataSource）"><a href="#4-2-JDBC数据库连接池接口（DataSource）" class="headerlink" title="4.2 JDBC数据库连接池接口（DataSource）"></a><strong>4.2 JDBC数据库连接池接口（DataSource）</strong></h2><p>Java为数据库连接池提供了公共的接口：javax.sql.DataSource，各个厂商可以让自己的连接池实现这个接口。这样应用程序可以方便的切换不同厂商的连接池！</p>
+<h2 id="4-3-自定义连接池（ItcastPool）"><a href="#4-3-自定义连接池（ItcastPool）" class="headerlink" title="4.3 自定义连接池（ItcastPool）"></a><strong>4.3 自定义连接池（ItcastPool）</strong></h2><p>分析：ItcastPool需要有一个List，用来保存连接对象。在ItcastPool的构造器中创建5个连接对象放到List中！当用人调用了ItcastPool的getConnection()时，那么就从List拿出一个返回。当List中没有连接可用时，抛出异常</p>
+<p>我们需要对Connection的close()方法进行增强，所以我们需要自定义ItcastConnection类，对Connection进行装饰！即对close()方法进行增强。因为需要在调用close()方法时把连接“归还”给池，所以ItcastConnection类需要拥有池对象的引用，并且池类还要提供“归还”的方法</p>
+<p><img src="http://img.blog.csdn.net/20161031123148801" alt="jdbc"></p>
+<p>ItcastPool.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItcastPool</span> <span class="keyword">implements</span> <span class="title">DataSource</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Properties props = <span class="keyword">new</span> Properties();</div><div class="line">	<span class="keyword">private</span> List&lt;Connection&gt; list = <span class="keyword">new</span> ArrayList&lt;Connection&gt;();</div><div class="line">	<span class="keyword">static</span> &#123;</div><div class="line">		InputStream in = ItcastPool.class.getClassLoader()</div><div class="line">				.getResourceAsStream(<span class="string">"dbconfig.properties"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			props.load(in);</div><div class="line">			Class.forName(props.getProperty(<span class="string">"driverClassName"</span>));</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ItcastPool</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">			Connection con = DriverManager.getConnection(</div><div class="line">					props.getProperty(<span class="string">"url"</span>), props.getProperty(<span class="string">"username"</span>),</div><div class="line">					props.getProperty(<span class="string">"password"</span>));</div><div class="line">			ItcastConnection conWapper = <span class="keyword">new</span> ItcastConnection(con, <span class="keyword">this</span>);</div><div class="line">			list.add(conWapper);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Connection con)</span> </span>&#123;</div><div class="line">		list.add(con);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		<span class="keyword">if</span>(list.size() &gt; <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> list.remove(<span class="number">0</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"没连接了"</span>);</div><div class="line">	&#125;</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ItcastConnection.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ItcastConnection</span> <span class="keyword">extends</span> <span class="title">ConnectionWrapper</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> ItcastPool pool;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ItcastConnection</span><span class="params">(Connection con, ItcastPool pool)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>(con);</div><div class="line">		<span class="keyword">this</span>.pool = pool;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		pool.add(<span class="keyword">this</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="5-DBCP"><a href="#5-DBCP" class="headerlink" title="5. DBCP"></a>5. DBCP</h1><h2 id="5-1-什么是DBCP？"><a href="#5-1-什么是DBCP？" class="headerlink" title="5.1 什么是DBCP？"></a><strong>5.1 什么是DBCP？</strong></h2><p>DBCP是Apache提供的一款开源免费的数据库连接池！</p>
+<p>Hibernate3.0之后不再对DBCP提供支持！因为Hibernate声明DBCP有致命的缺欠！DBCP因为Hibernate的这一毁谤很是生气，并且说自己没有缺欠</p>
+<h2 id="5-2-DBCP的使用"><a href="#5-2-DBCP的使用" class="headerlink" title="5.2 DBCP的使用"></a><strong>5.2 DBCP的使用</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  BasicDataSource ds = <span class="keyword">new</span> BasicDataSource();</div><div class="line">  ds.setUsername(<span class="string">"root"</span>);</div><div class="line">  ds.setPassword(<span class="string">"123"</span>);</div><div class="line">  ds.setUrl(<span class="string">"jdbc:mysql://localhost:3306/mydb1"</span>);</div><div class="line">  ds.setDriverClassName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"></div><div class="line">  ds.setMaxActive(<span class="number">20</span>);</div><div class="line">  ds.setMaxIdle(<span class="number">10</span>);</div><div class="line">  ds.setInitialSize(<span class="number">10</span>);</div><div class="line">  ds.setMinIdle(<span class="number">2</span>);</div><div class="line">  ds.setMaxWait(<span class="number">1000</span>);</div><div class="line"></div><div class="line">  Connection con = ds.getConnection();</div><div class="line">  System.out.println(con.getClass().getName());</div><div class="line">  con.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-3-DBCP的配置信息"><a href="#5-3-DBCP的配置信息" class="headerlink" title="5.3 DBCP的配置信息"></a><strong>5.3 DBCP的配置信息</strong></h2><p>下面是对DBCP的配置介绍：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">#基本配置</div><div class="line">driverClassName=com.mysql.jdbc.Driver</div><div class="line">url=jdbc:mysql://localhost:3306/mydb1</div><div class="line">username=root</div><div class="line">password=123</div><div class="line"></div><div class="line">#初始化池大小，即一开始池中就会有10个连接对象</div><div class="line">默认值为0</div><div class="line">initialSize=0</div><div class="line"></div><div class="line">#最大连接数，如果设置maxActive=50时，池中最多可以有50个连接，当然这50个连接中包含被使用的和没被使用的（空闲）</div><div class="line">#你是一个包工头，你一共有50个工人，但这50个工人有的当前正在工作，有的正在空闲</div><div class="line">#默认值为8，如果设置为非正数，表示没有限制！即无限大</div><div class="line">maxActive=8</div><div class="line"></div><div class="line">#最大空闲连接</div><div class="line">#当设置maxIdle=30时，你是包工头，你允许最多有20个工人空闲，如果现在有30个空闲工人，那么要开除10个</div><div class="line">#默认值为8，如果设置为负数，表示没有限制！即无限大</div><div class="line">maxIdle=8</div><div class="line"></div><div class="line">#最小空闲连接</div><div class="line">#如果设置minIdel=5时，如果你的工人只有3个空闲，那么你需要再去招2个回来，保证有5个空闲工人</div><div class="line">#默认值为0</div><div class="line">minIdle=0</div><div class="line"></div><div class="line">#最大等待时间</div><div class="line">#当设置maxWait=5000时，现在你的工作都出去工作了，又来了一个工作，需要一个工人。</div><div class="line">#这时就要等待有工人回来，如果等待5000毫秒还没回来，那就抛出异常</div><div class="line">#没有工人的原因：最多工人数为50，已经有50个工人了，不能再招了，但50人都出去工作了。</div><div class="line">#默认值为-1，表示无限期等待，不会抛出异常。</div><div class="line">maxWait=-1</div><div class="line"></div><div class="line">#连接属性</div><div class="line">#就是原来放在url后面的参数，可以使用connectionProperties来指定</div><div class="line">#如果已经在url后面指定了，那么就不用在这里指定了。</div><div class="line">#useServerPrepStmts=true，MySQL开启预编译功能</div><div class="line">#cachePrepStmts=true，MySQL开启缓存PreparedStatement功能，</div><div class="line">#prepStmtCacheSize=50，缓存PreparedStatement的上限</div><div class="line">#prepStmtCacheSqlLimit=300，当SQL模板长度大于300时，就不再缓存它</div><div class="line">connectionProperties=useUnicode=true;characterEncoding=UTF8;useServerPrepStmts=true;cachePrepStmts=true;prepStmtCacheSize=50;prepStmtCacheSqlLimit=300</div><div class="line"></div><div class="line">#连接的默认提交方式</div><div class="line">#默认值为true</div><div class="line">defaultAutoCommit=true</div><div class="line"></div><div class="line">#连接是否为只读连接</div><div class="line">#Connection有一对方法：setReadOnly(boolean)和isReadOnly()</div><div class="line">#如果是只读连接，那么你只能用这个连接来做查询</div><div class="line">#指定连接为只读是为了优化！这个优化与并发事务相关！</div><div class="line">#如果两个并发事务，对同一行记录做增、删、改操作，是不是一定要隔离它们啊？</div><div class="line">#如果两个并发事务，对同一行记录只做查询操作，那么是不是就不用隔离它们了？</div><div class="line">#如果没有指定这个属性值，那么是否为只读连接，这就由驱动自己来决定了。即Connection的实现类自己来决定！</div><div class="line">defaultReadOnly=false</div><div class="line"></div><div class="line">#指定事务的事务隔离级别</div><div class="line">#可选值：NONE,READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE</div><div class="line">#如果没有指定，那么由驱动中的Connection实现类自己来决定</div><div class="line">defaultTransactionIsolation=REPEATABLE_READ</div></pre></td></tr></table></figure>
+<h1 id="6-C3P0"><a href="#6-C3P0" class="headerlink" title="6. C3P0"></a>6. C3P0</h1><h2 id="6-1-C3P0简介"><a href="#6-1-C3P0简介" class="headerlink" title="6.1 C3P0简介"></a><strong>6.1 C3P0简介</strong></h2><p>C3P0也是开源免费的连接池！C3P0被很多人看好！</p>
+<h2 id="6-2-C3P0的使用"><a href="#6-2-C3P0的使用" class="headerlink" title="6.2 C3P0的使用"></a><strong>6.2 C3P0的使用</strong></h2><p>C3P0中池类是：ComboPooledDataSource。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> <span class="keyword">throws</span> PropertyVetoException, SQLException </span>&#123;</div><div class="line">  ComboPooledDataSource ds = <span class="keyword">new</span> ComboPooledDataSource();</div><div class="line">  ds.setJdbcUrl(<span class="string">"jdbc:mysql://localhost:3306/mydb1"</span>);</div><div class="line">  ds.setUser(<span class="string">"root"</span>);</div><div class="line">  ds.setPassword(<span class="string">"123"</span>);</div><div class="line">  ds.setDriverClass(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"></div><div class="line">  ds.setAcquireIncrement(<span class="number">5</span>);</div><div class="line">  ds.setInitialPoolSize(<span class="number">20</span>);</div><div class="line">  ds.setMinPoolSize(<span class="number">2</span>);</div><div class="line">  ds.setMaxPoolSize(<span class="number">50</span>);</div><div class="line"></div><div class="line">  Connection con = ds.getConnection();</div><div class="line">  System.out.println(con);</div><div class="line">  con.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>配置文件要求：</p>
+<ul>
+<li>文件名称：必须叫c3p0-config.xml</li>
+<li>文件位置：必须在src下</li>
+</ul>
+<p>c3p0也可以指定配置文件，而且配置文件可以是properties，也可骒xml的。当然xml的高级一些了。但是c3p0的配置文件名必须为c3p0-config.xml，并且必须放在类路径下。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">c3p0-config</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">default-config</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span>&gt;</span>jdbc:mysql://localhost:3306/mydb1<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"acquireIncrement"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"minPoolSize"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">default-config</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">named-config</span> <span class="attr">name</span>=<span class="string">"oracle-config"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"jdbcUrl"</span>&gt;</span>jdbc:mysql://localhost:3306/mydb1<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driverClass"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"user"</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"acquireIncrement"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"initialPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"minPoolSize"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxPoolSize"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">named-config</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">c3p0-config</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>c3p0的配置文件中可以配置多个连接信息，可以给每个配置起个名字，这样可以方便的通过配置名称来切换配置信息。上面文件中默认配置为mysql的配置，名为oracle-config的配置也是mysql的配置，呵呵</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> <span class="keyword">throws</span> PropertyVetoException, SQLException </span>&#123;</div><div class="line">  ComboPooledDataSource ds = <span class="keyword">new</span> ComboPooledDataSource();</div><div class="line">  Connection con = ds.getConnection();</div><div class="line">  System.out.println(con);</div><div class="line">  con.close();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> <span class="keyword">throws</span> PropertyVetoException, SQLException </span>&#123;</div><div class="line">  ComboPooledDataSource ds = <span class="keyword">new</span> ComboPooledDataSource(<span class="string">"orcale-config"</span>);</div><div class="line">  Connection con = ds.getConnection();</div><div class="line">  System.out.println(con);</div><div class="line">  con.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="7-Tomcat配置连接池"><a href="#7-Tomcat配置连接池" class="headerlink" title="7. Tomcat配置连接池"></a>7. Tomcat配置连接池</h1><h2 id="7-1-Tomcat配置JNDI资源"><a href="#7-1-Tomcat配置JNDI资源" class="headerlink" title="7.1 Tomcat配置JNDI资源"></a><strong>7.1 Tomcat配置JNDI资源</strong></h2><p>JNDI（Java Naming and Directory Interface），Java命名和目录接口。JNDI的作用就是：在服务器上配置资源，然后通过统一的方式来获取配置的资源</p>
+<p>我们这里要配置的资源当然是连接池了，这样项目中就可以通过统一的方式来获取连接池对象了</p>
+<p>下图是Tomcat文档提供的：</p>
+<p><img src="http://img.blog.csdn.net/20161031123324485" alt="jdbc"></p>
+<p>配置JNDI资源需要到&lt;Context&gt;元素中配置&lt;Resource&gt;子元素：</p>
+<ul>
+<li>name：指定资源的名称，这个名称可以随便给，在获取资源时需要这个名称</li>
+<li>factory：用来创建资源的工厂，这个值基本上是固定的，不用修改</li>
+<li>type：资源的类型，我们要给出的类型当然是我们连接池的类型了</li>
+<li>bar：表示资源的属性，如果资源存在名为bar的属性，那么就配置bar的值。对于DBCP连接池而言，你需要配置的不是bar，因为它没有bar这个属性，而是应该去配置url、username等属性</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Context</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">"mydbcp"</span></span></div><div class="line">			<span class="attr">type</span>=<span class="string">"org.apache.tomcat.dbcp.dbcp.BasicDataSource"</span></div><div class="line">			<span class="attr">factory</span>=<span class="string">"org.apache.naming.factory.BeanFactory"</span></div><div class="line">			<span class="attr">username</span>=<span class="string">"root"</span></div><div class="line">			<span class="attr">password</span>=<span class="string">"123"</span></div><div class="line">			<span class="attr">driverClassName</span>=<span class="string">"com.mysql.jdbc.Driver"</span>    </div><div class="line">			<span class="attr">url</span>=<span class="string">"jdbc:mysql://127.0.0.1/mydb1"</span></div><div class="line">			<span class="attr">maxIdle</span>=<span class="string">"3"</span></div><div class="line">			<span class="attr">maxWait</span>=<span class="string">"5000"</span></div><div class="line">			<span class="attr">maxActive</span>=<span class="string">"5"</span></div><div class="line">			<span class="attr">initialSize</span>=<span class="string">"3"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">Context</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">Resource</span> <span class="attr">name</span>=<span class="string">"myc3p0"</span></span></div><div class="line">			<span class="attr">type</span>=<span class="string">"com.mchange.v2.c3p0.ComboPooledDataSource"</span></div><div class="line">			<span class="attr">factory</span>=<span class="string">"org.apache.naming.factory.BeanFactory"</span></div><div class="line">			<span class="attr">user</span>=<span class="string">"root"</span></div><div class="line">			<span class="attr">password</span>=<span class="string">"123"</span></div><div class="line">			<span class="attr">classDriver</span>=<span class="string">"com.mysql.jdbc.Driver"</span>    </div><div class="line">			<span class="attr">jdbcUrl</span>=<span class="string">"jdbc:mysql://127.0.0.1/mydb1"</span></div><div class="line">			<span class="attr">maxPoolSize</span>=<span class="string">"20"</span></div><div class="line">			<span class="attr">minPoolSize</span> =<span class="string">"5"</span></div><div class="line">			<span class="attr">initialPoolSize</span>=<span class="string">"10"</span></div><div class="line">			<span class="attr">acquireIncrement</span>=<span class="string">"2"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">Context</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="7-2-获取资源"><a href="#7-2-获取资源" class="headerlink" title="7.2 获取资源"></a><strong>7.2 获取资源</strong></h2><p>配置资源的目的当然是为了获取资源了。只要你启动了Tomcat，那么就可以在项目中任何类中通过JNDI获取资源的方式来获取资源了</p>
+<p>下图是Tomcat文档提供的，与上面Tomcat文档提供的配置资源是对应的。</p>
+<p><img src="http://img.blog.csdn.net/20161031123222238" alt="jdbc"></p>
+<p>获取资源：</p>
+<ul>
+<li>Context：javax.naming.Context</li>
+<li>InitialContext：javax.naming.InitialContext</li>
+<li>lookup(String)：获取资源的方法，其中”java:comp/env”是资源的入口（这是固定的名称），获取过来的还是一个Context，这说明需要在获取到的Context上进一步进行获取。”bean/MyBeanFactory”对应&lt;Resource&gt;中配置的name值，这回获取的就是资源对象了</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Context cxt = <span class="keyword">new</span> InitialContext();</div><div class="line">DataSource ds = (DataSource)cxt.lookup(<span class="string">"java:/comp/env/mydbcp"</span>);</div><div class="line">Connection con = ds.getConnection();</div><div class="line">System.out.println(con);</div><div class="line">con.close();</div><div class="line">Context cxt = <span class="keyword">new</span> InitialContext();</div><div class="line">Context envCxt = (Context)cxt.lookup(<span class="string">"java:/comp/env"</span>);</div><div class="line">DataSource ds = (DataSource)env.lookup(<span class="string">"mydbcp"</span>);</div><div class="line">Connection con = ds.getConnection();</div><div class="line">System.out.println(con);</div><div class="line">con.close();</div></pre></td></tr></table></figure>
+<p>上面两种方式是相同的效果</p>
+<h2 id="7-3-修改JdbcUtils"><a href="#7-3-修改JdbcUtils" class="headerlink" title="7.3 修改JdbcUtils"></a><strong>7.3 修改JdbcUtils</strong></h2><p>因为已经学习了连接池，那么JdbcUtils的获取连接对象的方法也要修改一下了。</p>
+<p>JdbcUtils.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtils</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> DataSource dataSource = <span class="keyword">new</span> ComboPooledDataSource();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DataSource <span class="title">getDataSource</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> dataSource;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">return</span> dataSource.getConnection();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="8-ThreadLocal"><a href="#8-ThreadLocal" class="headerlink" title="8. ThreadLocal"></a>8. ThreadLocal</h1><p>Thread -&gt;人类<br>Runnable -&gt; 任务类</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">key</th>
+<th style="text-align:left">value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">thread1</td>
+<td style="text-align:left">aaa</td>
+</tr>
+<tr>
+<td style="text-align:left">thread2</td>
+<td style="text-align:left">bbb</td>
+</tr>
+<tr>
+<td style="text-align:left">thread3</td>
+<td style="text-align:left">ccc</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-1-ThreadLocal-API"><a href="#8-1-ThreadLocal-API" class="headerlink" title="8.1 ThreadLocal API"></a><strong>8.1 ThreadLocal API</strong></h2><p>ThreadLocal类只有三个方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回值</th>
+<th style="text-align:left">方法说明</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">void</td>
+<td style="text-align:left">set(T value)</td>
+<td style="text-align:left">保存值</td>
+</tr>
+<tr>
+<td style="text-align:left">T</td>
+<td style="text-align:left">get()</td>
+<td style="text-align:left">获取值</td>
+</tr>
+<tr>
+<td style="text-align:left">void</td>
+<td style="text-align:left">remove()</td>
+<td style="text-align:left">移除值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-2-ThreadLocal的内部是Map"><a href="#8-2-ThreadLocal的内部是Map" class="headerlink" title="8.2 ThreadLocal的内部是Map"></a><strong>8.2 ThreadLocal的内部是Map</strong></h2><p>ThreadLocal内部其实是个Map来保存数据。虽然在使用ThreadLocal时只给出了值，没有给出键，其实它内部使用了当前线程做为键</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThreadLocal</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">	<span class="keyword">private</span> Map&lt;Thread,T&gt; map = <span class="keyword">new</span> HashMap&lt;Thread,T&gt;();</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">		map.put(Thread.currentThread(), value);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">		map.remove(Thread.currentThread());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> map.get(Thread.currentThread());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> <img src="http://img.blog.csdn.net/20161031123355223" alt="jdbc"></p>
+<h1 id="9-BaseServlet"><a href="#9-BaseServlet" class="headerlink" title="9. BaseServlet"></a>9. BaseServlet</h1><h2 id="9-1-BaseServlet的作用"><a href="#9-1-BaseServlet的作用" class="headerlink" title="9.1 BaseServlet的作用"></a><strong>9.1 BaseServlet的作用</strong></h2><p>在开始客户管理系统之前，我们先写一个工具类：BaseServlet</p>
+<p>我们知道，写一个项目可能会出现N多个Servlet，而且一般一个Servlet只有一个方法（doGet或doPost），如果项目大一些，那么Servlet的数量就会很惊人</p>
+<p>为了避免Servlet的“膨胀”，我们写一个BaseServlet。它的作用是让一个Servlet可以处理多种不同的请求。不同的请求调用Servlet的不同方法。我们写好了BaseServlet后，让其他Servlet继承BaseServlet，例如CustomerServlet继承BaseServlet，然后在CustomerServlet中提供add()、update()、delete()等方法，每个方法对应不同的请求。</p>
+<p><img src="http://img.blog.csdn.net/20161031123412221" alt="jdbc"></p>
+<h2 id="9-2-BaseServlet分析"><a href="#9-2-BaseServlet分析" class="headerlink" title="9.2 BaseServlet分析"></a><strong>9.2 BaseServlet分析</strong></h2><p>我们知道，Servlet中处理请求的方法是service()方法，这说明我们需要让service()方法去调用其他方法。例如调用add()、mod()、del()、all()等方法！具体调用哪个方法需要在请求中给出方法名称！然后service()方法通过方法名称来调用指定的方法</p>
+<p>无论是点击超链接，还是提交表单，请求中必须要有method参数，这个参数的值就是要请求的方法名称，这样BaseServlet的service()才能通过方法名称来调用目标方法。例如某个链接如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">”/xxx/CustomerServlet?method</span>=<span class="string">add”</span>&gt;</span>添加客户<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20161031123423177" alt="jdbc"></p>
+<h2 id="9-3-BaseServlet代码"><a href="#9-3-BaseServlet代码" class="headerlink" title="9.3 BaseServlet代码"></a><strong>9.3 BaseServlet代码</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</div><div class="line">	<span class="comment">/*</span></div><div class="line">	 * 它会根据请求中的m，来决定调用本类的哪个方法</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest req, HttpServletResponse res)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		req.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">		res.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 例如：http://localhost:8080/demo1/xxx?m=add</span></div><div class="line">		String methodName = req.getParameter(<span class="string">"method"</span>);<span class="comment">// 它是一个方法名称</span></div><div class="line"></div><div class="line">		<span class="comment">// 当没用指定要调用的方法时，那么默认请求的是execute()方法。</span></div><div class="line">		<span class="keyword">if</span>(methodName == <span class="keyword">null</span> || methodName.isEmpty()) &#123;</div><div class="line">			methodName = <span class="string">"execute"</span>;</div><div class="line">		&#125;</div><div class="line">		Class c = <span class="keyword">this</span>.getClass();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="comment">// 通过方法名称获取方法的反射对象</span></div><div class="line">			Method m = c.getMethod(methodName, HttpServletRequest.class,</div><div class="line">					HttpServletResponse.class);</div><div class="line">			<span class="comment">// 反射方法目标方法，也就是说，如果methodName为add，那么就调用add方法。</span></div><div class="line">			String result = (String) m.invoke(<span class="keyword">this</span>, req, res);</div><div class="line">			<span class="comment">// 通过返回值完成请求转发</span></div><div class="line">			<span class="keyword">if</span>(result != <span class="keyword">null</span> &amp;&amp; !result.isEmpty()) &#123;</div><div class="line">				req.getRequestDispatcher(result).forward(req, res);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> ServletException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="10-DBUtils"><a href="#10-DBUtils" class="headerlink" title="10. DBUtils"></a>10. DBUtils</h1><h2 id="10-1-DBUtils简介"><a href="#10-1-DBUtils简介" class="headerlink" title="10.1 DBUtils简介"></a><strong>10.1 DBUtils简介</strong></h2><p>DBUtils是Apache Commons组件中的一员，开源免费！<br>DBUtils是对JDBC的简单封装，但是它还是被很多公司使用！<br>DBUtils的Jar包：dbutils.jar</p>
+<h2 id="10-2-DBUtils主要类"><a href="#10-2-DBUtils主要类" class="headerlink" title="10.2 DBUtils主要类"></a><strong>10.2 DBUtils主要类</strong></h2><ul>
+<li>DbUtils：都是静态方法，一系列的close()方法；</li>
+<li>QueryRunner：</li>
+<li>update()：执行insert、update、delete</li>
+<li>query()：执行select语句</li>
+<li>batch()：执行批处理</li>
+</ul>
+<h2 id="10-3-QueryRunner"><a href="#10-3-QueryRunner" class="headerlink" title="10.3 QueryRunner"></a><strong>10.3 QueryRunner</strong></h2><h3 id="update-方法"><a href="#update-方法" class="headerlink" title="update()方法"></a><strong>update()方法</strong></h3><p>QueryRunner的update()方法可以用来执行insert、update、delete语句。</p>
+<ul>
+<li>无参构造QueryRunner()</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可执行增、删、改语句，需要调用者提供Connection，这说明本方法不再管理Connection了。支持事务!</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(Connection con, String sql, Object… params)</span></span>;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">	QueryRunner qr = <span class="keyword">new</span> QueryRunner();</div><div class="line">	String sql = <span class="string">"insert into user values(?,?,?)"</span>;</div><div class="line">	qr.update(JdbcUtils.getConnection(), sql, <span class="string">"u1"</span>, <span class="string">"zhangSan"</span>, <span class="string">"123"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有另一种方式来使用QueryRunner，QueryRunner(DataSource)带连接池的构造，这种方式在创建QueryRunner时传递了连接池对象，那么在调用update()方法时就不用再传递Connection了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可执行增、删、改语句</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(String sql, Object… params)</span></span>;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">	QueryRunner qr = <span class="keyword">new</span> QueryRunner(JdbcUtils.getDataSource());</div><div class="line">	String sql = <span class="string">"insert into user values(?,?,?)"</span>;</div><div class="line">	qr.update(sql, <span class="string">"u1"</span>, <span class="string">"zhangSan"</span>, <span class="string">"123"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###<strong>query()方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//可执行查询，它会先得到ResultSet，然后调用rsh的handle()把rs转换成需要的类型！</span></div><div class="line"><span class="function">T <span class="title">query</span><span class="params">(String sql, ResultSetHandler rsh, Object... params)</span></span>;</div><div class="line"></div><div class="line"><span class="comment">//支持事务</span></div><div class="line"><span class="function">T <span class="title">query</span><span class="params">(Connection con, String sql, ResultSetHadler rsh, Object... params)</span></span>;</div></pre></td></tr></table></figure>
+<h2 id="10-4-ResultSetHandler"><a href="#10-4-ResultSetHandler" class="headerlink" title="10.4 ResultSetHandler"></a><strong>10.4 ResultSetHandler</strong></h2><p>我们知道在执行select语句之后得到的是ResultSet，然后我们还需要对ResultSet进行转换，得到最终我们想要的数据。你可以希望把ResultSet的数据放到一个List中，也可能想把数据放到一个Map中，或是一个Bean中</p>
+<p>DBUtils提供了一个接口ResultSetHandler，它就是用来ResultSet转换成目标类型的工具。你可以自己去实现这个接口，把ResultSet转换成你想要的类型</p>
+<p>DBUtils提供了很多个ResultSetHandler接口的实现，这些实现已经基本够用了，我们通常不用自己去实现ResultSet接口了</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">处理器</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MapHandler</td>
+<td style="text-align:left">单行处理器！把结果集转换成Map&lt;String,Object&gt;，其中列名为键</td>
+</tr>
+<tr>
+<td style="text-align:left">MapListHandler</td>
+<td style="text-align:left">多行处理器！把结果集转换成List&lt;Map&lt;String,Object&gt;&gt;</td>
+</tr>
+<tr>
+<td style="text-align:left">BeanHandler</td>
+<td style="text-align:left">单行处理器！把结果集转换成Bean，该处理器需要Class参数，即Bean的类型</td>
+</tr>
+<tr>
+<td style="text-align:left">BeanListHandler</td>
+<td style="text-align:left">多行处理器！把结果集转换成List&lt;Bean&gt;</td>
+</tr>
+<tr>
+<td style="text-align:left">ColumnListHandler</td>
+<td style="text-align:left">多行单列处理器！把结果集转换成List&lt;Object&gt;，使用ColumnListHandler时需要指定某一列的名称或编号，例如：new ColumListHandler(“name”)表示把name列的数据放到List中</td>
+</tr>
+<tr>
+<td style="text-align:left">ScalarHandler</td>
+<td style="text-align:left">单行单列处理器！把结果集转换成Object。一般用于聚集查询，例如select count(*) from tab_student</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>Map处理器</p>
+<p><img src="http://img.blog.csdn.net/20161031123454427" alt="jdbc"></p>
+<p>Bean处理器</p>
+<p><img src="http://img.blog.csdn.net/20161031123506271" alt="jdbc"></p>
+<p>Column处理器</p>
+<p> <img src="http://img.blog.csdn.net/20161031123515239" alt="jdbc"></p>
+<p>Scalar处理器</p>
+<p> <img src="http://img.blog.csdn.net/20161031123523505" alt="jdbc"></p>
+<h2 id="10-5-QueryRunner之查询"><a href="#10-5-QueryRunner之查询" class="headerlink" title="10.5 QueryRunner之查询"></a><strong>10.5 QueryRunner之查询</strong></h2><p>QueryRunner的查询方法是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">query</span><span class="params">(String sql, ResultSetHandler&lt;T&gt; rh, Object… params)</span></span></div><div class="line"><span class="keyword">public</span> &lt;T&gt; T <span class="title">query</span><span class="params">(Connection con, String sql, ResultSetHandler&lt;T&gt; rh, Object… params)</span></div></pre></td></tr></table></figure>
+<p>query()方法会通过sql语句和params查询出ResultSet，然后通过rh把ResultSet转换成对应的类型再返回</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  DataSource ds = JdbcUtils.getDataSource();</div><div class="line">  QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">  String sql = <span class="string">"select * from tab_student where number=?"</span>;</div><div class="line">  Map&lt;String,Object&gt; map = qr.query(sql, <span class="keyword">new</span> MapHandler(), <span class="string">"S_2000"</span>);</div><div class="line">  System.out.println(map);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  DataSource ds = JdbcUtils.getDataSource();</div><div class="line">  QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">  String sql = <span class="string">"select * from tab_student"</span>;</div><div class="line">  List&lt;Map&lt;String,Object&gt;&gt; list = qr.query(sql, <span class="keyword">new</span> MapListHandler());</div><div class="line">  <span class="keyword">for</span>(Map&lt;String,Object&gt; map : list) &#123;</div><div class="line">    System.out.println(map);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun3</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  DataSource ds = JdbcUtils.getDataSource();</div><div class="line">  QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">  String sql = <span class="string">"select * from tab_student where number=?"</span>;</div><div class="line">  Student stu = qr.query(sql, <span class="keyword">new</span> BeanHandler&lt;Student&gt;(Student.class), <span class="string">"S_2000"</span>);</div><div class="line">  System.out.println(stu);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun4</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  DataSource ds = JdbcUtils.getDataSource();</div><div class="line">  QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">  String sql = <span class="string">"select * from tab_student"</span>;</div><div class="line">  List&lt;Student&gt; list = qr.query(sql, <span class="keyword">new</span> BeanListHandler&lt;Student&gt;(Student.class));</div><div class="line">  <span class="keyword">for</span>(Student stu : list) &#123;</div><div class="line">    System.out.println(stu);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun5</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  DataSource ds = JdbcUtils.getDataSource();</div><div class="line">  QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">  String sql = <span class="string">"select * from tab_student"</span>;</div><div class="line">  List&lt;Object&gt; list = qr.query(sql, <span class="keyword">new</span> ColumnListHandler(<span class="string">"name"</span>));</div><div class="line">  <span class="keyword">for</span>(Object s : list) &#123;</div><div class="line">    System.out.println(s);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun6</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">  DataSource ds = JdbcUtils.getDataSource();</div><div class="line">  QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">  String sql = <span class="string">"select count(*) from tab_student"</span>;</div><div class="line">  Number number = (Number)qr.query(sql, <span class="keyword">new</span> ScalarHandler());</div><div class="line">  <span class="keyword">int</span> cnt = number.intValue();</div><div class="line">  System.out.println(cnt);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="10-6-QueryRunner之批处理"><a href="#10-6-QueryRunner之批处理" class="headerlink" title="10.6 QueryRunner之批处理"></a><strong>10.6 QueryRunner之批处理</strong></h2><p>QueryRunner还提供了批处理方法：batch()</p>
+<p>我们更新一行记录时需要指定一个Object[]为参数，如果是批处理，那么就要指定Object[][]为参数了。即多个Object[]就是Object[][]了，其中每个Object[]对应一行记录：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun10</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">	DataSource ds = JdbcUtils.getDataSource();</div><div class="line">	QueryRunner qr = <span class="keyword">new</span> QueryRunner(ds);</div><div class="line">	String sql = <span class="string">"insert into tab_student values(?,?,?,?)"</span>;</div><div class="line">	Object[][] params = <span class="keyword">new</span> Object[<span class="number">10</span>][];<span class="comment">//表示 要插入10行记录</span></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; params.length; i++) &#123;</div><div class="line">		params[i] = <span class="keyword">new</span> Object[]&#123;<span class="string">"S_300"</span> + i, <span class="string">"name"</span> + i, <span class="number">30</span> + i, i%<span class="number">2</span>==<span class="number">0</span>?<span class="string">"男"</span>:<span class="string">"女"</span>&#125;;</div><div class="line">	&#125;</div><div class="line">	qr.batch(sql, params);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="11-Service事务"><a href="#11-Service事务" class="headerlink" title="11. Service事务"></a>11. Service事务</h1><p>在Service中使用ThreadLocal来完成事务，为将来学习Spring事务打基础！</p>
+<h2 id="11-1-DAO中的事务"><a href="#11-1-DAO中的事务" class="headerlink" title="11.1 DAO中的事务"></a><strong>11.1 DAO中的事务</strong></h2><p>在DAO中处理事务真是“小菜一碟”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">()</span> </span>&#123;</div><div class="line">   Connection con = <span class="keyword">null</span>;</div><div class="line">   <span class="keyword">try</span> &#123;</div><div class="line">      con = JdbcUtils.getConnection();</div><div class="line">      con.setAutoCommitted(<span class="keyword">false</span>);</div><div class="line">      QueryRunner qr = <span class="keyword">new</span> QueryRunner();</div><div class="line">      String sql = …;</div><div class="line">      Object[] params = …;</div><div class="line">      qr.update(con, sql, params);</div><div class="line"></div><div class="line">	  sql = …;</div><div class="line">      Object[] params = …;</div><div class="line">      qr.update(con, sql, params);</div><div class="line">      con.commit();</div><div class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">       <span class="keyword">if</span>(con != <span class="keyword">null</span>) &#123;con.rollback();&#125;</div><div class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;&#125;</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">       con.close();</div><div class="line">&#125; <span class="keyword">catch</span>(Exception e) &#123;&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="11-2-Service才是处理事务的地方"><a href="#11-2-Service才是处理事务的地方" class="headerlink" title="11.2 Service才是处理事务的地方"></a><strong>11.2 Service才是处理事务的地方</strong></h2><p>我们要清楚一件事，DAO中不是处理事务的地方，因为DAO中的每个方法都是对数据库的一次操作，而Service中的方法才是对应一个业务逻辑。也就是说我们需要在Service中的一方法中调用DAO的多个方法，而这些方法应该在一起事务中。</p>
+<p>怎么才能让DAO的多个方法使用相同的Connection呢？方法不能再自己来获得Connection，而是由外界传递进去。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">daoMethod1</span><span class="params">(Connection con, …)</span> </span>&#123;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">daoMethod2</span><span class="params">(Connection con, …)</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Service中调用DAO的多个方法时，传递相同的Connection就可以了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">XXXService</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> XXXDao dao = <span class="keyword">new</span> XXXDao();</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serviceMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">      Connection con = <span class="keyword">null</span>;</div><div class="line">      <span class="keyword">try</span> &#123;</div><div class="line">         con = JdbcUtils.getConnection();</div><div class="line">         con.setAutoCommitted(<span class="keyword">false</span>);</div><div class="line">         dao.daoMethod1(con, …);</div><div class="line">         dao.doaMethod2(con, …);</div><div class="line">         com.commint();</div><div class="line">	&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">   <span class="keyword">try</span> &#123;</div><div class="line">      con.rollback();</div><div class="line">	&#125; <span class="keyword">catch</span>(Exception e) &#123;&#125;</div><div class="line">	&#125; <span class="keyword">finally</span> &#123;</div><div class="line">   <span class="keyword">try</span> &#123;</div><div class="line">     con.close();</div><div class="line">   &#125; <span class="keyword">catch</span>(Exception e) &#123;&#125;</div><div class="line">	&#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是，在Service中不应该出现Connection，它应该只在DAO中出现，因为它是JDBC的东西，JDBC的东西是用来连接数据库的，连接数据库是DAO的事儿！！！但是，事务是Service的事儿，不能放到DAO中！！！</p>
+<h2 id="11-3-修改JdbcUtils"><a href="#11-3-修改JdbcUtils" class="headerlink" title="11.3 修改JdbcUtils"></a><strong>11.3 修改JdbcUtils</strong></h2><p>我们把对事务的开启和关闭放到JdbcUtils中，在Service中调用JdbcUtils的方法来完成事务的处理，但在Service中就不会再出现Connection这一“禁忌”了。</p>
+<p>DAO中的方法不用再让Service来传递Connection了。DAO会主动从JdbcUtils中获取Connection对象，这样，JdbcUtils成为了DAO和Service的中介！</p>
+<p>我们在JdbcUtils中添加beginTransaction()和rollbackTransaction()，以及commitTransaction()方法。这样在Service中的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">XXXService</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> XXXDao dao = <span class="keyword">new</span> XXXDao();</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">serviceMethod</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">try</span> &#123;</div><div class="line">      JdbcUtils.beginTransaction();</div><div class="line">      dao.daoMethod1(…);</div><div class="line">      dao.daoMethod2(…);</div><div class="line">      JdbcUtils.commitTransaction();</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">   JdbcUtils.rollbackTransaction();</div><div class="line">	&#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function">DAO</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">daoMethod1</span><span class="params">(…)</span> &#123;</div><div class="line">  Connection con = JdbcUtils.getConnection();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">daoMethod2</span><span class="params">(…)</span> </span>&#123;</div><div class="line">  Connection con = JdbcUtils.getConnection();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Service中调用了JdbcUtils.beginTransaction()方法时，JdbcUtils要做准备好一个已经调用了setAuthCommitted(false)方法的Connection对象，因为在Service中调用JdbcUtils.beginTransaction()之后，马上就会调用DAO的方法，而在DAO方法中会调用JdbcUtils.getConnection()方法。这说明JdbcUtils要在getConnection()方法中返回刚刚准备好的，已经设置了手动提交的Connection对象。</p>
+<p> <img src="http://img.blog.csdn.net/20161102182901093" alt="jdbc"></p>
+<p>在JdbcUtils中创建一个Connection con属性，当它为null时，说明没有事务！当它不为null时，表示开启了事务。</p>
+<ul>
+<li>在没有开启事务时，可以调用“开启事务”方法；</li>
+<li>在开启事务后，可以调用“提交事务”和“回滚事务”方法；</li>
+<li>getConnection()方法会在con不为null时返回con，再con为null时，从连接池中返回连接。</li>
+</ul>
+<p><strong>beginTransaction()</strong></p>
+<p>判断con是否为null，如果不为null，就抛出异常！<br>如果con为null，那么从连接池中获取一个Connection对象，赋值给con！然后设置它为“手动提交”。</p>
+<p><strong>getConnection()</strong></p>
+<p>判断con是否为null，如果为null说明没有事务，那么从连接池获取一个连接返回；<br>如果不为null，说明已经开始了事务，那么返回con属性返回。这说明在con不为null时，无论调用多少次getConnection()方法，返回的都是同个Connection对象。</p>
+<p><strong>commitTransaction()</strong></p>
+<p>判断con是否为null，如果为null，说明没有开启事务就提交事务，那么抛出异常；<br>如果con不为null，那么调用con的commit()方法来提交事务；<br>调用con.close()方法关闭连接；<br>con = null，这表示事务已经结束！</p>
+<p><strong>rollbackTransaction()</strong></p>
+<p>判断con是否为null，如果为null，说明没有开启事务就回滚事务，那么抛出异常；<br>如果con不为null，那么调用con的rollback()方法来回滚事务；<br>调用con.close()方法关闭连接；<br>con = null，这表示事务已经结束！</p>
+<p>JdbcUtils.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtils</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> DataSource dataSource = <span class="keyword">new</span> ComboPooledDataSource();</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Connection con = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DataSource <span class="title">getDataSource</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> dataSource;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		<span class="keyword">if</span>(con == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">return</span> dataSource.getConnection();</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> con;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beginTranscation</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		<span class="keyword">if</span>(con != <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"事务已经开启，在没有结束当前事务时，不能再开启事务！"</span>);</div><div class="line">		&#125;</div><div class="line">		con = dataSource.getConnection();</div><div class="line">		con.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">commitTransaction</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		<span class="keyword">if</span>(con == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"当前没有事务，所以不能提交事务！"</span>);</div><div class="line">		&#125;</div><div class="line">		con.commit();</div><div class="line">		con.close();</div><div class="line">		con = <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rollbackTransaction</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		<span class="keyword">if</span>(con == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"当前没有事务，所以不能回滚事务！"</span>);</div><div class="line">		&#125;</div><div class="line">		con.rollback();</div><div class="line">		con.close();</div><div class="line">		con = <span class="keyword">null</span>;		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="11-4-再次修改JdbcUtils"><a href="#11-4-再次修改JdbcUtils" class="headerlink" title="11.4 再次修改JdbcUtils"></a><strong>11.4 再次修改JdbcUtils</strong></h2><p>现在JdbcUtils有个问题，如果有两个线程！第一个线程调用了beginTransaction()方法，另一个线程再调用beginTransaction()方法时，因为con已经不再为null，所以就会抛出异常了。</p>
+<p>我们希望JdbcUtils可以多线程环境下被使用！这说明最好的方法是为每个线程提供一个Connection，这样每个线程都可以开启自己的事务了。<br>还记得ThreadLocal类么？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtils</span> </span>&#123;</div><div class="line">	<span class="comment">// 配置文件的默认配置！要求你必须给出c3p0-config.xml！！！</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ComboPooledDataSource dataSource = <span class="keyword">new</span> ComboPooledDataSource();</div><div class="line"></div><div class="line">	<span class="comment">// 它是事务专用连接！</span></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;Connection&gt; tl = <span class="keyword">new</span> ThreadLocal&lt;Connection&gt;();</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 使用连接池返回一个连接对象</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 * <span class="doctag">@throws</span> SQLException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		Connection con = tl.get();</div><div class="line">		<span class="comment">// 当con不等于null，说明已经调用过beginTransaction()，表示开启了事务！</span></div><div class="line">		<span class="keyword">if</span>(con != <span class="keyword">null</span>) <span class="keyword">return</span> con;</div><div class="line">		<span class="keyword">return</span> dataSource.getConnection();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 返回连接池对象！</div><div class="line">	 * <span class="doctag">@return</span></div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DataSource <span class="title">getDataSource</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> dataSource;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 开启事务</div><div class="line">	 * 1. 获取一个Connection，设置它的setAutoComnmit(false)</div><div class="line">	 * 2. 还要保证dao中使用的连接是我们刚刚创建的！</div><div class="line">	 * --------------</div><div class="line">	 * 1. 创建一个Connection，设置为手动提交</div><div class="line">	 * 2. 把这个Connection给dao用！</div><div class="line">	 * 3. 还要让commitTransaction或rollbackTransaction可以获取到！</div><div class="line">	 * <span class="doctag">@throws</span> SQLException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beginTransaction</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		Connection con = tl.get();</div><div class="line">		<span class="keyword">if</span>(con != <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"已经开启了事务，就不要重复开启了！"</span>);</div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 1. 给con赋值！</div><div class="line">		 * 2. 给con设置为手动提交！</div><div class="line">		 */</div><div class="line">		con = getConnection();<span class="comment">//给con赋值，表示事务已经开始了</span></div><div class="line">		con.setAutoCommit(<span class="keyword">false</span>);</div><div class="line"></div><div class="line">		tl.set(con);<span class="comment">//把当前线程的连接保存起来！</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 提交事务</div><div class="line">	 * 1. 获取beginTransaction提供的Connection，然后调用commit方法</div><div class="line">	 * <span class="doctag">@throws</span> SQLException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">commitTransaction</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		Connection con = tl.get();<span class="comment">//获取当前线程的专用连接</span></div><div class="line">		<span class="keyword">if</span>(con == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"还没有开启事务，不能提交！"</span>);</div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 1. 直接使用con.commit()</div><div class="line">		 */</div><div class="line">		con.commit();</div><div class="line">		con.close();</div><div class="line">		<span class="comment">// 把它设置为null，表示事务已经结束了！下次再去调用getConnection()返回的就不是con了</span></div><div class="line">		tl.remove();<span class="comment">//从tl中移除连接</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 提交事务</div><div class="line">	 * 1. 获取beginTransaction提供的Connection，然后调用rollback方法</div><div class="line">	 * <span class="doctag">@throws</span> SQLException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">rollbackTransaction</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		Connection con = tl.get();</div><div class="line">		<span class="keyword">if</span>(con == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"还没有开启事务，不能回滚！"</span>);</div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 1. 直接使用con.rollback()</div><div class="line">		 */</div><div class="line">		con.rollback();</div><div class="line">		con.close();</div><div class="line">		tl.remove();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 释放连接　</div><div class="line">	 * <span class="doctag">@param</span> connection</div><div class="line">	 * <span class="doctag">@throws</span> SQLException</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">releaseConnection</span><span class="params">(Connection connection)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		Connection con = tl.get();</div><div class="line">		<span class="comment">/*</span></div><div class="line">		 * 判断它是不是事务专用，如果是，就不关闭！</div><div class="line">		 * 如果不是事务专用，那么就要关闭！</div><div class="line">		 */</div><div class="line">		<span class="comment">// 如果con == null，说明现在没有事务，那么connection一定不是事务专用的！</span></div><div class="line">		<span class="keyword">if</span>(con == <span class="keyword">null</span>) connection.close();</div><div class="line">		<span class="comment">// 如果con != null，说明有事务，那么需要判断参数连接是否与con相等，若不等，</span></div><div class="line">		<span class="comment">//说明参数连接不是事务专用连接</span></div><div class="line">		<span class="keyword">if</span>(con != connection) connection.close();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="11-5-转账示例"><a href="#11-5-转账示例" class="headerlink" title="11.5 转账示例"></a><strong>11.5 转账示例</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountDao</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateBalance</span><span class="params">(String name, <span class="keyword">double</span> balance)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		String sql = <span class="string">"update account set balance=balance+? where name=?"</span>;</div><div class="line">		Connection con = JdbcUtils.getConnection();</div><div class="line">		QueryRunner qr = <span class="keyword">new</span> QueryRunner();</div><div class="line">		qr.update(con, sql, balance, name);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountService</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> AccountDao dao = <span class="keyword">new</span> AccountDao();</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transfer</span><span class="params">(String from, String to, <span class="keyword">double</span> balance)</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			JdbcUtils.beginTranscation();</div><div class="line">			dao.updateBalance(from, -balance);</div><div class="line">			dao.updateBalance(to, balance);</div><div class="line">			JdbcUtils.commitTransaction();</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				JdbcUtils.rollbackTransaction();</div><div class="line">			&#125; <span class="keyword">catch</span> (SQLException e1) &#123;</div><div class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">AccountService as = <span class="keyword">new</span> AccountService();</div><div class="line">as.transfer(<span class="string">"zs"</span>, <span class="string">"ls"</span>, <span class="number">100</span>);</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jdbc/" rel="tag"># jdbc</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/JDBC之事务/" rel="next" title="JDBC之事务">
+                <i class="fa fa-chevron-left"></i> JDBC之事务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/用JDBC操作数据库/" rel="prev" title="用JDBC操作数据库">
+                用JDBC操作数据库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC系列阅读"><span class="nav-number">1.</span> <span class="nav-text">JDBC系列阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-池参数（所有池参数都有默认值）"><span class="nav-number">2.</span> <span class="nav-text">1. 池参数（所有池参数都有默认值）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-四大连接参数"><span class="nav-number">3.</span> <span class="nav-text">2. 四大连接参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-实现的接口"><span class="nav-number">4.</span> <span class="nav-text">3. 实现的接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-数据库连接池"><span class="nav-number">5.</span> <span class="nav-text">4. 数据库连接池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-数据库连接池的概念"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 数据库连接池的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-JDBC数据库连接池接口（DataSource）"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 JDBC数据库连接池接口（DataSource）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-自定义连接池（ItcastPool）"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 自定义连接池（ItcastPool）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-DBCP"><span class="nav-number">6.</span> <span class="nav-text">5. DBCP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-什么是DBCP？"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 什么是DBCP？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-DBCP的使用"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 DBCP的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-DBCP的配置信息"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 DBCP的配置信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-C3P0"><span class="nav-number">7.</span> <span class="nav-text">6. C3P0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-C3P0简介"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 C3P0简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-C3P0的使用"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 C3P0的使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-Tomcat配置连接池"><span class="nav-number">8.</span> <span class="nav-text">7. Tomcat配置连接池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Tomcat配置JNDI资源"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 Tomcat配置JNDI资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-获取资源"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 获取资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-修改JdbcUtils"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 修改JdbcUtils</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-ThreadLocal"><span class="nav-number">9.</span> <span class="nav-text">8. ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-ThreadLocal-API"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 ThreadLocal API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-ThreadLocal的内部是Map"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 ThreadLocal的内部是Map</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-BaseServlet"><span class="nav-number">10.</span> <span class="nav-text">9. BaseServlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-BaseServlet的作用"><span class="nav-number">10.1.</span> <span class="nav-text">9.1 BaseServlet的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-BaseServlet分析"><span class="nav-number">10.2.</span> <span class="nav-text">9.2 BaseServlet分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-BaseServlet代码"><span class="nav-number">10.3.</span> <span class="nav-text">9.3 BaseServlet代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-DBUtils"><span class="nav-number">11.</span> <span class="nav-text">10. DBUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-DBUtils简介"><span class="nav-number">11.1.</span> <span class="nav-text">10.1 DBUtils简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-DBUtils主要类"><span class="nav-number">11.2.</span> <span class="nav-text">10.2 DBUtils主要类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-QueryRunner"><span class="nav-number">11.3.</span> <span class="nav-text">10.3 QueryRunner</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#update-方法"><span class="nav-number">11.3.1.</span> <span class="nav-text">update()方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-ResultSetHandler"><span class="nav-number">11.4.</span> <span class="nav-text">10.4 ResultSetHandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-QueryRunner之查询"><span class="nav-number">11.5.</span> <span class="nav-text">10.5 QueryRunner之查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-QueryRunner之批处理"><span class="nav-number">11.6.</span> <span class="nav-text">10.6 QueryRunner之批处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-Service事务"><span class="nav-number">12.</span> <span class="nav-text">11. Service事务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-DAO中的事务"><span class="nav-number">12.1.</span> <span class="nav-text">11.1 DAO中的事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-Service才是处理事务的地方"><span class="nav-number">12.2.</span> <span class="nav-text">11.2 Service才是处理事务的地方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-修改JdbcUtils"><span class="nav-number">12.3.</span> <span class="nav-text">11.3 修改JdbcUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4-再次修改JdbcUtils"><span class="nav-number">12.4.</span> <span class="nav-text">11.4 再次修改JdbcUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-5-转账示例"><span class="nav-number">12.5.</span> <span class="nav-text">11.5 转账示例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/javaweb/JDBC之数据库连接池/';
+          this.page.identifier = '2017/05/01/javaweb/JDBC之数据库连接池/';
+          this.page.title = 'JDBC之数据库连接池';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

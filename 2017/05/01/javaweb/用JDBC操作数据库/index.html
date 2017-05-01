@@ -1,0 +1,1742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jdbc," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="keywords" content="jdbc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用JDBC操作数据库">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/javaweb/用JDBC操作数据库/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:image" content="http://img.blog.csdn.net/20161104231415000">
+<meta property="og:image" content="http://img.blog.csdn.net/20161028112134237">
+<meta property="og:updated_time" content="2017-05-01T04:31:26.763Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用JDBC操作数据库">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161104231415000">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/javaweb/用JDBC操作数据库/"/>
+
+
+
+
+
+  <title>用JDBC操作数据库 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/javaweb/用JDBC操作数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用JDBC操作数据库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:21:00+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaweb/" itemprop="url" rel="index">
+                    <span itemprop="name">javaweb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/javaweb/用JDBC操作数据库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/javaweb/用JDBC操作数据库/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://img.blog.csdn.net/20161104231415000" alt="jdbc"></p>
+<a id="more"></a>
+<h1 id="JDBC系列阅读"><a href="#JDBC系列阅读" class="headerlink" title="JDBC系列阅读"></a><strong>JDBC系列阅读</strong></h1><ol>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52954659" target="_blank" rel="external">JavaWeb：用JDBC操作数据库</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52981430" target="_blank" rel="external">JavaWeb：JDBC之事务</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52981389" target="_blank" rel="external">JavaWeb：JDBC之数据库连接池</a></li>
+</ol>
+<h1 id="1-什么是JDBC"><a href="#1-什么是JDBC" class="headerlink" title="1. 什么是JDBC"></a><strong>1. 什么是JDBC</strong></h1><p>JDBC（Java DataBase Connectivity）就是Java数据库连接，说白了就是用Java语言来操作数据库。原来我们操作数据库是在控制台使用SQL语句来操作数据库，JDBC是用Java语言向数据库发送SQL语句。</p>
+<h1 id="2-JDBC原理"><a href="#2-JDBC原理" class="headerlink" title="2. JDBC原理"></a><strong>2. JDBC原理</strong></h1><p>早期SUN公司的天才们想编写一套可以连接天下所有数据库的API，但是当他们刚刚开始时就发现这是不可完成的任务，因为各个厂商的数据库服务器差异太大了。后来SUN开始与数据库厂商们讨论，最终得出的结论是，由SUN提供一套访问数据库的规范（就是一组接口），并提供连接数据库的协议标准，然后各个数据库厂商会遵循SUN的规范提供一套访问自己公司的数据库服务器的API出现。SUN提供的规范命名为JDBC，而各个厂商提供的，遵循了JDBC规范的，可以访问自己数据库的API被称之为驱动！</p>
+<p><img src="http://img.blog.csdn.net/20161028112134237" alt="jdbc"></p>
+<p>JDBC是接口，而JDBC驱动才是接口的实现，没有驱动无法完成数据库连接！每个数据库厂商都有自己的驱动，用来连接自己公司的数据库。<br>当然还有第三方公司专门为某一数据库提供驱动，这样的驱动往往不是开源免费的！</p>
+<h1 id="3-JDBC核心类（接口）介绍"><a href="#3-JDBC核心类（接口）介绍" class="headerlink" title="3. JDBC核心类（接口）介绍"></a><strong>3. JDBC核心类（接口）介绍</strong></h1><p>JDBC中的核心类有：DriverManager、Connection、Statement，和ResultSet！</p>
+<p>DriverManger（驱动管理器）的作用有两个：</p>
+<ul>
+<li>注册驱动：这可以让JDBC知道要使用的是哪个驱动</li>
+<li>获取Connection：如果可以获取到Connection，那么说明已经与数据库连接上了</li>
+</ul>
+<p>Connection对象表示连接，与数据库的通讯都是通过这个对象展开的：</p>
+<ul>
+<li>Connection最为重要的一个方法就是用来获取Statement对象；</li>
+</ul>
+<p>Statement是用来向数据库发送SQL语句的，这样数据库就会执行发送过来的SQL语句：</p>
+<ul>
+<li>void executeUpdate(String sql)：执行更新操作（insert、update、delete等）</li>
+<li>ResultSet executeQuery(String sql)：执行查询操作，数据库在执行查询后会把查询结果，查询结果就是ResultSet</li>
+</ul>
+<p>ResultSet对象表示查询结果集，只有在执行查询操作后才会有结果集的产生。结果集是一个二维的表格，有行有列。操作结果集要学习移动ResultSet内部的“行光标”，以及获取当前行上的每一列上的数据：</p>
+<ul>
+<li>boolean next()：使“行光标”移动到下一行，并返回移动后的行是否存在</li>
+<li>XXX getXXX(int col)：获取当前行指定列上的值，参数就是列数，列数从1开始，而不是0</li>
+</ul>
+<h1 id="4-Hello-JDBC"><a href="#4-Hello-JDBC" class="headerlink" title="4. Hello JDBC"></a><strong>4. Hello JDBC</strong></h1><p>下面开始编写第一个JDBC程序</p>
+<h2 id="4-1-mysql数据库的驱动jar包"><a href="#4-1-mysql数据库的驱动jar包" class="headerlink" title="4.1 mysql数据库的驱动jar包"></a><strong>4.1 mysql数据库的驱动jar包</strong></h2><p>mysql-connector-java-5.1.13-bin.jar</p>
+<h2 id="4-2-获取连接"><a href="#4-2-获取连接" class="headerlink" title="4.2 获取连接"></a><strong>4.2 获取连接</strong></h2><p>获取连接需要两步，一是使用DriverManager来注册驱动，二是使用DriverManager来获取Connection对象。</p>
+<h3 id="4-2-1-注册驱动"><a href="#4-2-1-注册驱动" class="headerlink" title="4.2.1 注册驱动"></a><strong>4.2.1 注册驱动</strong></h3><p>看清楚了，注册驱动就只有一句话：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class.forName(“com.mysql.jdbc.Driver”);</div></pre></td></tr></table></figure>
+<p>下面的内容都是对这句代码的解释。今后我们的代码中，与注册驱动相关的代码只有这一句</p>
+<p>DriverManager类的registerDriver()方法的参数是java.sql.Driver，但java.sql.Driver是一个接口，实现类由mysql驱动来提供，mysql驱动中的java.sql.Driver接口的实现类为com.mysql.jdbc.Driver！那么注册驱动的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DriverManager.registerDriver(<span class="keyword">new</span> com.mysql.jdbc.Driver());</div></pre></td></tr></table></figure>
+<p>上面代码虽然可以注册驱动，但是出现硬编码（代码依赖mysql驱动jar包），如果将来想连接Oracle数据库，那么必须要修改代码的。并且其实这种注册驱动的方式是注册了两次驱动！</p>
+<p>JDBC中规定，驱动类在被加载时，需要自己“主动”把自己注册到DriverManger中，下面我们来看看com.mysql.jdbc.Driver类的源代码：</p>
+<p>com.mysql.jdbc.Driver.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Driver</span> <span class="keyword">extends</span> <span class="title">NonRegisteringDriver</span> <span class="keyword">implements</span> <span class="title">java</span>.<span class="title">sql</span>.<span class="title">Driver</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			java.sql.DriverManager.registerDriver(<span class="keyword">new</span> Driver());</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException E) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Can't register driver!"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">……</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>com.mysql.jdbc.Driver类中的static块会创建本类对象，并注册到DriverManager中。这说明只要去加载com.mysql.jdbc.Driver类，那么就会执行这个static块，从而也就会把com.mysql.jdbc.Driver注册到DriverManager中，所以可以把注册驱动类的代码修改为加载驱动类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Class.forName(“com.mysql.jdbc.Driver”);</div></pre></td></tr></table></figure>
+<h3 id="4-2-2-获取连接"><a href="#4-2-2-获取连接" class="headerlink" title="4.2.2 获取连接"></a><strong>4.2.2 获取连接</strong></h3><p>获取连接的也只有一句代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DriverManager.getConnection(url,username,password);</div></pre></td></tr></table></figure>
+<p>其中username和password是登录数据库的用户名和密码，如果我没说错的话，你的mysql数据库的用户名和密码分别是：root、123</p>
+<p>url查对复杂一点，它是用来找到要连接数据库“网址”，就好比你要浏览器中查找百度时，也需要提供一个url。下面是mysql的url：jdbc:mysql://localhost:3306/mydb1</p>
+<p>JDBC规定url的格式由三部分组成，每个部分中间使用逗号分隔。</p>
+<ul>
+<li>第一部分是jdbc，这是固定的</li>
+<li>第二部分是数据库名称，那么连接mysql数据库，第二部分当然是mysql了</li>
+<li>第三部分是由数据库厂商规定的，我们需要了解每个数据库厂商的要求，mysql的第三部分分别由数据库服务器的IP地址（localhost）、端口号（3306），以及DATABASE名称(mydb1)组成</li>
+</ul>
+<p>下面是获取连接的语句：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Connection con = DriverManager.getConnection(“jdbc:mysql:<span class="comment">//localhost:3306/mydb1”,”root”,”123”);</span></div></pre></td></tr></table></figure></p>
+<p>还可以在url中提供参数：<br>jdbc:mysql://localhost:3306/mydb1?useUnicode=true&amp;characterEncoding=UTF8</p>
+<ul>
+<li><p>useUnicode：参数指定这个连接数据库的过程中，使用的字节集是Unicode字节集</p>
+</li>
+<li><p>characherEncoding：参数指定穿上连接数据库的过程中，使用的字节集编码为UTF-8编码。请注意，mysql中指定UTF-8编码是给出的是UTF8，而不是UTF-8，要小心了</p>
+</li>
+</ul>
+<h2 id="4-3-获取Statement"><a href="#4-3-获取Statement" class="headerlink" title="4.3 获取Statement"></a><strong>4.3 获取Statement</strong></h2><p>在得到Connectoin之后，说明已经与数据库连接上了，下面是通过Connection获取Statement对象的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Statement stmt = con.createStatement();</div></pre></td></tr></table></figure>
+<p>Statement是用来向数据库发送要执行的SQL语句的！</p>
+<h2 id="4-4-发送SQL增、删、改语句"><a href="#4-4-发送SQL增、删、改语句" class="headerlink" title="4.4 发送SQL增、删、改语句"></a><strong>4.4 发送SQL增、删、改语句</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String sql = “<span class="function">insert into user <span class="title">value</span><span class="params">(’zhangSan’, ’<span class="number">123</span>’)</span>”</span>;</div><div class="line"><span class="keyword">int</span> m = stmt.executeUpdate(sql);</div></pre></td></tr></table></figure>
+<p>其中int类型的返回值表示执行这条SQL语句所影响的行数，我们知道，对insert来说，最后只能影响一行，而update和delete可能会影响0~n行。<br>如果SQL语句执行失败，那么executeUpdate()会抛出一个SQLException。</p>
+<h2 id="4-5-发送SQL查询语句"><a href="#4-5-发送SQL查询语句" class="headerlink" title="4.5 发送SQL查询语句"></a><strong>4.5 发送SQL查询语句</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String sql = “select * from user”;</div><div class="line">ResultSet rs = stmt.executeQuery(sql);</div></pre></td></tr></table></figure>
+<p>请注册，执行查询使用的不是executeUpdate()方法，而是executeQuery()方法。executeQuery()方法返回的是ResultSet，ResultSet封装了查询结果，我们称之为结果集。</p>
+<h2 id="4-6-读取结果集中的数据"><a href="#4-6-读取结果集中的数据" class="headerlink" title="4.6 读取结果集中的数据"></a><strong>4.6 读取结果集中的数据</strong></h2><p>ResultSet就是一张二维的表格，它内部有一个“行光标”，光标默认的位置在“第一行上方”，我们可以调用rs对象的next()方法把“行光标”向下移动一行，当第一次调用next()方法时，“行光标”就到了第一行记录的位置，这时就可以使用ResultSet提供的getXXX(int col)方法来获取指定列的数据了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rs.next();<span class="comment">//光标移动到第一行</span></div><div class="line">rs.getInt(<span class="number">1</span>);<span class="comment">//获取第一行第一列的数据</span></div></pre></td></tr></table></figure>
+<p>当你使用rs.getInt(1)方法时，你必须可以肯定第1列的数据类型就是int类型，如果你不能肯定，那么最好使用rs.getObject(1)。在ResultSet类中提供了一系列的getXXX()方法，比较常用的方法有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function">Object <span class="title">getObject</span><span class="params">(<span class="keyword">int</span> col)</span></span></div><div class="line">String <span class="title">getString</span><span class="params">(<span class="keyword">int</span> col)</span></div><div class="line"><span class="keyword">int</span> <span class="title">getInt</span><span class="params">(<span class="keyword">int</span> col)</span></div><div class="line"><span class="keyword">double</span> <span class="title">getDouble</span><span class="params">(<span class="keyword">int</span> col)</span></div></pre></td></tr></table></figure>
+<h2 id="4-7-关闭"><a href="#4-7-关闭" class="headerlink" title="4.7 关闭"></a><strong>4.7 关闭</strong></h2><p>与IO流一样，使用后的东西都需要关闭！关闭的顺序是先得到的后关闭，后得到的先关闭。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">rs.close();</div><div class="line">stmt.close();</div><div class="line">con.close();</div></pre></td></tr></table></figure>
+<h2 id="4-8-代码"><a href="#4-8-代码" class="headerlink" title="4.8 代码"></a><strong>4.8 代码</strong></h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line">		String url = <span class="string">"jdbc:mysql://localhost:3306/mydb1"</span>;</div><div class="line">		<span class="keyword">return</span> DriverManager.getConnection(url, <span class="string">"root"</span>, <span class="string">"123"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = getConnection();</div><div class="line">		Statement stmt = con.createStatement();</div><div class="line">		String sql = <span class="string">"insert into user values('zhangSan', '123')"</span>;</div><div class="line">		stmt.executeUpdate(sql);</div><div class="line">		System.out.println(<span class="string">"插入成功！"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = getConnection();</div><div class="line">		Statement stmt = con.createStatement();</div><div class="line">		String sql = <span class="string">"update user set password='456' where username='zhangSan'"</span>;</div><div class="line">		stmt.executeUpdate(sql);</div><div class="line">		System.out.println(<span class="string">"修改成功！"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = getConnection();</div><div class="line">		Statement stmt = con.createStatement();</div><div class="line">		String sql = <span class="string">"delete from user where username='zhangSan'"</span>;</div><div class="line">		stmt.executeUpdate(sql);</div><div class="line">		System.out.println(<span class="string">"删除成功！"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Test</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = getConnection();</div><div class="line">		Statement stmt = con.createStatement();</div><div class="line">		String sql = <span class="string">"select * from user"</span>;</div><div class="line">		ResultSet rs = stmt.executeQuery(sql);</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			String username = rs.getString(<span class="number">1</span>);</div><div class="line">			String password = rs.getString(<span class="number">2</span>);</div><div class="line">			System.out.println(username + <span class="string">", "</span> + password);</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-9-规范化代码"><a href="#4-9-规范化代码" class="headerlink" title="4.9 规范化代码"></a><strong>4.9 规范化代码</strong></h2><p>所谓规范化代码就是无论是否出现异常，都要关闭ResultSet、Statement，以及Connection，如果你还记得IO流的规范化代码，那么下面的代码你就明白什么意思了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">()</span> </span>&#123;</div><div class="line">        Connection con = <span class="keyword">null</span>;</div><div class="line">        Statement stmt = <span class="keyword">null</span>;</div><div class="line">        ResultSet rs = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">                con = getConnection();</div><div class="line">                stmt = con.createStatement();</div><div class="line">                String sql = <span class="string">"select * from user"</span>;</div><div class="line">                rs = stmt.executeQuery(sql);</div><div class="line">                <span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">                        String username = rs.getString(<span class="number">1</span>);</div><div class="line">                        String password = rs.getString(<span class="number">2</span>);</div><div class="line">                        System.out.println(username + <span class="string">", "</span> + password);</div><div class="line">                &#125;</div><div class="line">        &#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                        <span class="keyword">if</span>(rs != <span class="keyword">null</span>) rs.close();</div><div class="line">                        <span class="keyword">if</span>(stmt != <span class="keyword">null</span>) stmt.close();</div><div class="line">                        <span class="keyword">if</span>(con != <span class="keyword">null</span>) con.close();</div><div class="line">                &#125; <span class="keyword">catch</span>(SQLException e) &#123;&#125;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="5-JDBC对象介绍"><a href="#5-JDBC对象介绍" class="headerlink" title="5. JDBC对象介绍"></a>5. JDBC对象介绍</h1><h2 id="5-1-JDBC中的主要类（接口）"><a href="#5-1-JDBC中的主要类（接口）" class="headerlink" title="5.1 JDBC中的主要类（接口）"></a><strong>5.1 JDBC中的主要类（接口）</strong></h2><p>在JDBC中常用的类有：</p>
+<ul>
+<li>DriverManager</li>
+<li>Connection</li>
+<li>Statement</li>
+<li>ResultSet</li>
+</ul>
+<h2 id="5-2-DriverManager"><a href="#5-2-DriverManager" class="headerlink" title="5.2 DriverManager"></a><strong>5.2 DriverManager</strong></h2><p>其实我们今后只需要会用DriverManager的getConnection()方法即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Class.forName(“com.mysql.jdbc.Driver”);<span class="comment">//注册驱动</span></div><div class="line">String url = “jdbc:mysql:<span class="comment">//localhost:3306/mydb1”;</span></div><div class="line">String username = “root”;</div><div class="line">String password = “<span class="number">123</span>”;</div><div class="line">Connection con = DriverManager.getConnection(url, username, password);</div></pre></td></tr></table></figure>
+<p>注意，上面代码可能出现的两种异常：</p>
+<p>1、ClassNotFoundException：这个异常是在第1句上出现的，出现这个异常有两个可能：</p>
+<ul>
+<li>你没有给出mysql的jar包</li>
+<li>你把类名称打错了，查看类名是不是com.mysql.jdbc.Driver</li>
+</ul>
+<p>2、SQLException：这个异常出现在第5句，出现这个异常就是三个参数的问题，往往username和password一般不是出错，所以需要认真查看url是否打错</p>
+<p>对于DriverManager.registerDriver()方法了解即可，因为我们今后注册驱动只会Class.forName()，而不会使用这个方法</p>
+<h2 id="5-3-Connection"><a href="#5-3-Connection" class="headerlink" title="5.3 Connection"></a><strong>5.3 Connection</strong></h2><p>Connection最为重要的方法就是获取Statement：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Statement stmt = con.createStatement();</div></pre></td></tr></table></figure>
+<p>后面在学习ResultSet方法时，还要学习一下下面的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Statement stmt = con.createStatement(<span class="keyword">int</span>,<span class="keyword">int</span>);</div></pre></td></tr></table></figure>
+<h2 id="5-4-Statement"><a href="#5-4-Statement" class="headerlink" title="5.4 Statement"></a><strong>5.4 Statement</strong></h2><p>Statement最为重要的方法是：</p>
+<ul>
+<li>int executeUpdate(String sql)：执行更新操作，即执行insert、update、delete语句，其实这个方法也可以执行create table、alter table，以及drop table等语句，但我们很少会使用JDBC来执行这些语句</li>
+<li>ResultSet executeQuery(String sql)：执行查询操作，执行查询操作会返回ResultSet，即结果集</li>
+<li>boolean execute()</li>
+</ul>
+<p>Statement还有一个boolean execute()方法，这个方法可以用来执行增、删、改、查所有SQL语句。该方法返回的是boolean类型，表示SQL语句是否有结果集！</p>
+<p>如果使用execute()方法执行的是更新语句，那么还要调用int getUpdateCount()来获取insert、update、delete语句所影响的行数。</p>
+<p>如果使用execute()方法执行的是查询语句，那么还要调用ResultSet getResultSet()来获取select语句的查询结果。</p>
+<h2 id="5-5-ResultSet之滚动结果集"><a href="#5-5-ResultSet之滚动结果集" class="headerlink" title="5.5 ResultSet之滚动结果集"></a><strong>5.5 ResultSet之滚动结果集</strong></h2><p>下一行：默认只能使用它，其他的方法存在，但不能使用！默认的结果集不可滚动！<br>上一行<br>下N行<br>上N行<br>到N行！</p>
+<p>ResultSet表示结果集，它是一个二维的表格！ResultSet内部维护一个行光标（游标），ResultSet提供了一系列的方法来移动游标</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回值</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">void</td>
+<td style="text-align:left">beforeFirst()</td>
+<td style="text-align:left">把光标放到第一行的前面，这也是光标默认的位置</td>
+</tr>
+<tr>
+<td style="text-align:left">void</td>
+<td style="text-align:left">afterLast()</td>
+<td style="text-align:left">把光标放到最后一行的后面</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">first()</td>
+<td style="text-align:left">把光标放到第一行的位置上，返回值表示调控光标是否成功</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">last()</td>
+<td style="text-align:left">把光标放到最后一行的位置上</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">isBeforeFirst()</td>
+<td style="text-align:left">当前光标位置是否在第一行前面</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">isAfterLast()</td>
+<td style="text-align:left">当前光标位置是否在最后一行的后面；</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">isFirst()</td>
+<td style="text-align:left">当前光标位置是否在第一行上</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">isLast()</td>
+<td style="text-align:left">当前光标位置是否在最后一行上</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">previous()</td>
+<td style="text-align:left">把光标向上挪一行</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">next()</td>
+<td style="text-align:left">把光标向下挪一行</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">relative(int row)</td>
+<td style="text-align:left">相对位移，当row为正数时，表示向下移动row行，为负数时表示向上移动row行</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">absolute(int row)</td>
+<td style="text-align:left">绝对位移，把光标移动到指定的行上</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">getRow()</td>
+<td style="text-align:left">返回当前光标所有行</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>获取结果集元数据</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回值</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ResultSetMetaData</td>
+<td style="text-align:left">getMetaData()</td>
+<td style="text-align:left">得到元数据</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">getColumnCount()</td>
+<td style="text-align:left">获取结果集列数</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">getColumnName(int colIndex)</td>
+<td style="text-align:left">获取指定列的列名</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>结果集特性：当使用Connection的createStatement()时，已经确定了Statement生成的结果集是什么特性。</p>
+<ul>
+<li>是否可滚动</li>
+<li>是否敏感</li>
+<li>是否可更新</li>
+</ul>
+<p>con.createSttement()：生成的结果集：不滚动、不敏感、不可更新！</p>
+<p>con.createStatement(int resultSetType, int resultSetConcurrency)：</p>
+<p>第一个参数：</p>
+<ul>
+<li>ResultSet.TYPE_FORWARD_ONLY：不滚动结果集</li>
+<li>ResultSet.TYPE_SCROLL_INSENSITIVE：滚动结果集，但结果集数据不会再跟随数据库而变化</li>
+<li>ResultSet.TYPE_SCROLL_SENSITIVE：滚动结果集，但结果集数据会再跟随数据库而变化</li>
+</ul>
+<p>第二个参数：</p>
+<ul>
+<li>CONCUR_READ_ONLY：结果集是只读的，不能通过修改结果集而反向影响数据库</li>
+<li>CONCUR_UPDATABLE：结果集是可更新的，对结果集的更新可以反向影响数据库</li>
+</ul>
+<p>上面方法分为两类，一类用来判断游标位置的，另一类是用来移动游标的。如果结果集是不可滚动的，那么只能使用next()方法来移动游标，而beforeFirst()、afterLast()、first()、last()、previous()、relative()方法都不能使用</p>
+<p>结果集是否支持滚动，要从Connection类的createStatement()方法说起。也就是说创建的Statement决定了使用Statement创建的ResultSet是否支持滚动。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Statement <span class="title">createStatement</span><span class="params">(<span class="keyword">int</span> resultSetType, <span class="keyword">int</span> resultSetConcurrency)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>resultSetType的可选值：</p>
+<ul>
+<li>ResultSet.TYPE_FORWARD_ONLY：不滚动结果集；</li>
+<li>ResultSet.TYPE_SCROLL_INSENSITIVE：滚动结果集，但结果集数据不会再跟随数据库而变化；</li>
+<li>ResultSet.TYPE_SCROLL_SENSITIVE：滚动结果集，但结果集数据会再跟随数据库而变化；</li>
+</ul>
+<p>可以看出，如果想使用滚动的结果集，我们应该选择TYPE_SCROLL_INSENSITIVE！其实很少有数据库驱动会支持TYPE_SCROLL_SENSITIVE的特性！通常我们也不需要查询到的结果集再受到数据库变化的影响。</p>
+<p>resultSetConcurrency的可选值：</p>
+<ul>
+<li>CONCUR_READ_ONLY：结果集是只读的，不能通过修改结果集而反向影响数据库；</li>
+<li>CONCUR_UPDATABLE：结果集是可更新的，对结果集的更新可以反向影响数据库。</li>
+</ul>
+<p>通常可更新结果集这一“高级特性”我们也是不需要的！</p>
+<p>获取滚动结果集的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Connection con = …</div><div class="line">Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY);</div><div class="line">String sql = …<span class="comment">//查询语句</span></div><div class="line">ResultSet rs = stmt.executeQuery(sql);<span class="comment">//这个结果集是可滚动的</span></div></pre></td></tr></table></figure>
+<h2 id="5-6-ResultSet之获取列数据"><a href="#5-6-ResultSet之获取列数据" class="headerlink" title="5.6 ResultSet之获取列数据"></a><strong>5.6 ResultSet之获取列数据</strong></h2><p>可以通过next()方法使ResultSet的游标向下移动，当游标移动到你需要的行时，就需要来获取该行的数据了，ResultSet提供了一系列的获取列数据的方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回值</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">getString(int columnIndex)</td>
+<td style="text-align:left">获取指定列的String类型数据</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">getInt(int columnIndex)</td>
+<td style="text-align:left">获取指定列的int类型数据</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">getDouble(int columnIndex)</td>
+<td style="text-align:left">获取指定列的double类型数据</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">getBoolean(int columnIndex)</td>
+<td style="text-align:left">获取指定列的boolean类型数据</td>
+</tr>
+<tr>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">getObject(int columnIndex)</td>
+<td style="text-align:left">获取指定列的Object类型的数据</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>上面方法中，参数columnIndex表示列的索引，列索引从1开始，而不是0，这第一点与数组不同。如果你清楚当前列的数据类型，那么可以使用getInt()之类的方法来获取，如果你不清楚列的类型，那么你应该使用getObject()方法来获取</p>
+<p>ResultSet还提供了一套通过列名称来获取列数据的方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">返回值</th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">getString(String columnName)</td>
+<td style="text-align:left">获取名称为columnName的列的String数据</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">getInt(String columnName)</td>
+<td style="text-align:left">获取名称为columnName的列的int数据</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">getDouble(String columnName)</td>
+<td style="text-align:left">获取名称为columnName的列的double数据</td>
+</tr>
+<tr>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">getBoolean(String columnName)</td>
+<td style="text-align:left">获取名称为columnName的列的boolean数据</td>
+</tr>
+<tr>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">getObject(String columnName)</td>
+<td style="text-align:left">获取名称为columnName的列的Object数据</td>
+</tr>
+</tbody>
+</table>
+<h1 id="6-PreparedStatement"><a href="#6-PreparedStatement" class="headerlink" title="6. PreparedStatement"></a><strong>6. PreparedStatement</strong></h1><ul>
+<li>它是Statement接口的子接口；</li>
+<li>强大之处：</li>
+<li>防SQL攻击；</li>
+<li>提高代码的可读性、可维护性；</li>
+<li>提高效率！</li>
+<li>学习PreparedStatement的用法：<br> -如何得到PreparedStatement对象：</li>
+<li>给出SQL模板！<ul>
+<li>调用Connection的PreparedStatement prepareStatement(String sql模板)</li>
+<li>调用pstmt的setXxx()系列方法sql模板中的?赋值！</li>
+<li>调用pstmt的executeUpdate()或executeQuery()，但它的方法都没有参数</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-1-预处理的原理"><a href="#6-1-预处理的原理" class="headerlink" title="6.1 预处理的原理"></a><strong>6.1 预处理的原理</strong></h2><p>服务器的工作：</p>
+<ul>
+<li>校验sql语句的语法！</li>
+<li>编译：一个与函数相似的东西！</li>
+<li>执行：调用函数</li>
+</ul>
+<p>PreparedStatement：</p>
+<ul>
+<li>前提：连接的数据库必须支持预处理！几乎没有不支持的！</li>
+<li>每个pstmt都与一个sql模板绑定在一起，先把sql模板给数据库，数据库先进行校验，再进行编译。执行时只是把参数传递过去而已！</li>
+<li>若二次执行时，就不用再次校验语法，也不用再次编译！直接执行！</li>
+</ul>
+<h2 id="6-2-什么是SQL攻击"><a href="#6-2-什么是SQL攻击" class="headerlink" title="6.2 什么是SQL攻击"></a><strong>6.2 什么是SQL攻击</strong></h2><p>在需要用户输入的地方，用户输入的是SQL语句的片段，最终用户输入的SQL片段与我们DAO中写的SQL语句合成一个完整的SQL语句！例如用户在登录时输入的用户名和密码都是为SQL语句的片段！</p>
+<h2 id="6-3-演示SQL攻击"><a href="#6-3-演示SQL攻击" class="headerlink" title="6.3 演示SQL攻击"></a><strong>6.3 演示SQL攻击</strong></h2><p>首先我们需要创建一张用户表，用来存储用户的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE user(</div><div class="line">	uid	CHAR(32) PRIMARY KEY,</div><div class="line">	username	VARCHAR(30) UNIQUE KEY NOT NULL,</div><div class="line">	PASSWORD 	VARCHAR(30)</div><div class="line">);</div><div class="line"></div><div class="line">INSERT INTO user VALUES(&apos;U_1001&apos;, &apos;zs&apos;, &apos;zs&apos;);</div><div class="line">SELECT * FROM user;</div></pre></td></tr></table></figure>
+<p>现在用户表中只有一行记录，就是zs。<br>下面我们写一个login()方法！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(String username, String password)</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		Statement stmt = <span class="keyword">null</span>;</div><div class="line">		ResultSet rs = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			stmt = con.createStatement();</div><div class="line">			String sql = <span class="string">"SELECT * FROM user WHERE "</span> +</div><div class="line">					<span class="string">"username='"</span> + username +</div><div class="line">					<span class="string">"' and password='"</span> + password + <span class="string">"'"</span>;</div><div class="line">			rs = stmt.executeQuery(sql);</div><div class="line">			<span class="keyword">if</span>(rs.next()) &#123;</div><div class="line">				System.out.println(<span class="string">"欢迎"</span> + rs.getString(<span class="string">"username"</span>));</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				System.out.println(<span class="string">"用户名或密码错误！"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			JdbcUtils.close(con, stmt, rs);</div><div class="line">		&#125;		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>下面是调用这个方法的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">login(<span class="string">"a' or 'a'='a"</span>, <span class="string">"a' or 'a'='a"</span>);</div></pre></td></tr></table></figure>
+<p>这行当前会使我们登录成功！因为是输入的用户名和密码是SQL语句片段，最终与我们的login()方法中的SQL语句组合在一起！我们来看看组合在一起的SQL语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT * FROM tab_user WHERE username=&apos;a&apos; or &apos;a&apos;=&apos;a&apos; and password=&apos;a&apos; or &apos;a&apos;=&apos;a&apos;</div></pre></td></tr></table></figure>
+<h2 id="6-4-防止SQL攻击"><a href="#6-4-防止SQL攻击" class="headerlink" title="6.4 防止SQL攻击"></a><strong>6.4 防止SQL攻击</strong></h2><ul>
+<li>过滤用户输入的数据中是否包含非法字符</li>
+<li>分步交验！先使用用户名来查询用户，如果查找到了，再比较密码</li>
+<li>使用PreparedStatement</li>
+</ul>
+<h2 id="6-5-PreparedStatement是什么？"><a href="#6-5-PreparedStatement是什么？" class="headerlink" title="6.5 PreparedStatement是什么？"></a><strong>6.5 PreparedStatement是什么？</strong></h2><p>PreparedStatement叫预编译声明！</p>
+<p>PreparedStatement是Statement的子接口，你可以使用PreparedStatement来替换Statement。</p>
+<p>PreparedStatement的好处：</p>
+<ul>
+<li>防止SQL攻击</li>
+<li>提高代码的可读性，以可维护性</li>
+<li>提高效率</li>
+</ul>
+<h2 id="6-6-PreparedStatement的使用"><a href="#6-6-PreparedStatement的使用" class="headerlink" title="6.6 PreparedStatement的使用"></a><strong>6.6 PreparedStatement的使用</strong></h2><ul>
+<li>使用Connection的prepareStatement(String sql)：即创建它时就让它与一条SQL模板绑定</li>
+<li>调用PreparedStatement的setXXX()系列方法为问号设置值</li>
+<li>调用executeUpdate()或executeQuery()方法，但要注意，调用没有参数的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">String sql = “select * from tab_student where s_number=?”;</div><div class="line">PreparedStatement pstmt = con.prepareStatement(sql);</div><div class="line">pstmt.setString(<span class="number">1</span>, “S_1001”);</div><div class="line">ResultSet rs = pstmt.executeQuery();</div><div class="line">rs.close();</div><div class="line">pstmt.clearParameters();</div><div class="line">pstmt.setString(<span class="number">1</span>, “S_1002”);</div><div class="line">rs = pstmt.executeQuery();</div></pre></td></tr></table></figure>
+<p>在使用Connection创建PreparedStatement对象时需要给出一个SQL模板，所谓SQL模板就是有“?”的SQL语句，其中“?”就是参数</p>
+<p>在得到PreparedStatement对象后，调用它的setXXX()方法为“?”赋值，这样就可以得到把模板变成一条完整的SQL语句，然后再调用PreparedStatement对象的executeQuery()方法获取ResultSet对象</p>
+<p>注意PreparedStatement对象独有的executeQuery()方法是没有参数的，而Statement的executeQuery()是需要参数（SQL语句）的。因为在创建PreparedStatement对象时已经让它与一条SQL模板绑定在一起了，所以在调用它的executeQuery()和executeUpdate()方法时就不再需要参数了</p>
+<p>PreparedStatement最大的好处就是在于重复使用同一模板，给予其不同的参数来重复的使用它。这才是真正提高效率的原因</p>
+<p>所以，建议大家在今后的开发中，无论什么情况，都去需要PreparedStatement，而不是使用Statement</p>
+<h2 id="6-7-MySQL的预编译功能"><a href="#6-7-MySQL的预编译功能" class="headerlink" title="6.7 MySQL的预编译功能"></a><strong>6.7 MySQL的预编译功能</strong></h2><h3 id="6-7-1-预编译的好处"><a href="#6-7-1-预编译的好处" class="headerlink" title="6.7.1 预编译的好处"></a><strong>6.7.1 预编译的好处</strong></h3><p>大家平时都使用过JDBC中的PreparedStatement接口，它有预编译功能。什么是预编译功能呢？它有什么好处呢？</p>
+<p>当客户发送一条SQL语句给服务器后，服务器总是需要校验SQL语句的语法格式是否正确，然后把SQL语句编译成可执行的函数，最后才是执行SQL语句。其中校验语法，和编译所花的时间可能比执行SQL语句花的时间还要多。</p>
+<p>如果我们需要执行多次insert语句，但只是每次插入的值不同，MySQL服务器也是需要每次都去校验SQL语句的语法格式，以及编译，这就浪费了太多的时间。如果使用预编译功能，那么只对SQL语句进行一次语法校验和编译，所以效率要高。</p>
+<h3 id="6-7-2-MySQL执行预编译"><a href="#6-7-2-MySQL执行预编译" class="headerlink" title="6.7.2 MySQL执行预编译"></a><strong>6.7.2 MySQL执行预编译</strong></h3><p>MySQL执行预编译分为如三步：</p>
+<ul>
+<li>执行预编译语句，例如：prepare myfun from ‘select * from t_book where bid=?’</li>
+<li>设置变量，例如：set @str=’b1’</li>
+<li>执行语句，例如：execute myfun using @str</li>
+</ul>
+<p>如果需要再次执行myfun，那么就不再需要第一步，即不需要再编译语句了：</p>
+<ul>
+<li>设置变量，例如：set @str=’b2’</li>
+<li>执行语句，例如：execute myfun using @str</li>
+</ul>
+<p>通过查看MySQL日志可以看到执行的过程：</p>
+<p>使用Statement执行预编译</p>
+<p>使用Statement执行预编译就是把上面的SQL语句执行一次。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Connection con = JdbcUtils.getConnection();</div><div class="line">		Statement stmt = con.createStatement();</div><div class="line">		stmt.executeUpdate(<span class="string">"prepare myfun from 'select * from t_book where bid=?'"</span>);</div><div class="line">		stmt.executeUpdate(<span class="string">"set @str='b1'"</span>);</div><div class="line">		ResultSet rs = stmt.executeQuery(<span class="string">"execute myfun using @str"</span>);</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			System.out.print(rs.getString(<span class="number">1</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">2</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">3</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.println(rs.getString(<span class="number">4</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		stmt.executeUpdate(<span class="string">"set @str='b2'"</span>);</div><div class="line">		rs = stmt.executeQuery(<span class="string">"execute myfun using @str"</span>);</div><div class="line"></div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			System.out.print(rs.getString(<span class="number">1</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">2</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">3</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.println(rs.getString(<span class="number">4</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rs.close();</div><div class="line">		stmt.close();</div><div class="line">		con.close();</div></pre></td></tr></table></figure>
+<h3 id="6-7-3-useServerPrepStmts参数"><a href="#6-7-3-useServerPrepStmts参数" class="headerlink" title="6.7.3 useServerPrepStmts参数"></a><strong>6.7.3 useServerPrepStmts参数</strong></h3><p>默认使用PreparedStatement是不能执行预编译的，这需要在url中给出useServerPrepStmts=true参数（MySQL Server 4.1之前的版本是不支持预编译的，而Connector/J在5.0.5以后的版本，默认是没有开启预编译功能的）。</p>
+<p>例如：jdbc:mysql://localhost:3306/test?useServerPrepStmts=true</p>
+<p>这样才能保证mysql驱动会先把SQL语句发送给服务器进行预编译，然后在执行executeQuery()时只是把参数发送给服务器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Connection con = JdbcUtils.getConnection();</div><div class="line">		String sql = <span class="string">"select * from t_book where bid=?"</span>;</div><div class="line">		PreparedStatement pstmt = con.prepareStatement(sql);</div><div class="line"></div><div class="line">		pstmt.setString(<span class="number">1</span>, <span class="string">"b1"</span>);</div><div class="line">		ResultSet rs = pstmt.executeQuery();</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			System.out.print(rs.getString(<span class="number">1</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">2</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">3</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.println(rs.getString(<span class="number">4</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		pstmt.setString(<span class="number">1</span>, <span class="string">"b2"</span>);</div><div class="line">		rs = pstmt.executeQuery();</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			System.out.print(rs.getString(<span class="number">1</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">2</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">3</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.println(rs.getString(<span class="number">4</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rs.close();</div><div class="line">		pstmt.close();</div><div class="line">		con.close();</div></pre></td></tr></table></figure>
+<h3 id="6-7-4-cachePrepStmts参数"><a href="#6-7-4-cachePrepStmts参数" class="headerlink" title="6.7.4 cachePrepStmts参数"></a><strong>6.7.4 cachePrepStmts参数</strong></h3><p>当使用不同的PreparedStatement对象来执行相同的SQL语句时，还是会出现编译两次的现象，这是因为驱动没有缓存编译后的函数key，导致二次编译。如果希望缓存编译后函数的key，那么就要设置cachePrepStmts参数为true。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jdbc:mysql://localhost:3306/test?useServerPrepStmts=true&amp;cachePrepStmts=true</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">Connection con = JdbcUtils.getConnection();</div><div class="line">		String sql = <span class="string">"select * from t_book where bid=?"</span>;</div><div class="line">		PreparedStatement pstmt = con.prepareStatement(sql);</div><div class="line"></div><div class="line">		pstmt.setString(<span class="number">1</span>, <span class="string">"b1"</span>);</div><div class="line">		ResultSet rs = pstmt.executeQuery();</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			System.out.print(rs.getString(<span class="number">1</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">2</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">3</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.println(rs.getString(<span class="number">4</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		pstmt = con.prepareStatement(sql);</div><div class="line">		pstmt.setString(<span class="number">1</span>, <span class="string">"b2"</span>);</div><div class="line">		rs = pstmt.executeQuery();</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			System.out.print(rs.getString(<span class="number">1</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">2</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.print(rs.getString(<span class="number">3</span>) + <span class="string">", "</span>);</div><div class="line">			System.out.println(rs.getString(<span class="number">4</span>));</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		rs.close();</div><div class="line">		pstmt.close();</div><div class="line">		con.close();</div></pre></td></tr></table></figure>
+<h2 id="6-8-打开批处理"><a href="#6-8-打开批处理" class="headerlink" title="6.8 打开批处理"></a><strong>6.8 打开批处理</strong></h2><p>MySQL的批处理也需要通过参数来打开：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rewriteBatchedStatements=<span class="keyword">true</span></div></pre></td></tr></table></figure>
+<h1 id="7-JdbcUtils工具类"><a href="#7-JdbcUtils工具类" class="headerlink" title="7. JdbcUtils工具类"></a>7. JdbcUtils工具类</h1><h2 id="7-1-JdbcUtils的作用"><a href="#7-1-JdbcUtils的作用" class="headerlink" title="7.1 JdbcUtils的作用"></a><strong>7.1 JdbcUtils的作用</strong></h2><p>你也看到了，连接数据库的四大参数是：驱动类、url、用户名，以及密码。这些参数都与特定数据库关联，如果将来想更改数据库，那么就要去修改这四大参数，那么为了不去修改代码，我们写一个JdbcUtils类，让它从配置文件中读取配置参数，然后创建连接对象</p>
+<h2 id="7-2-JdbcUtils代码"><a href="#7-2-JdbcUtils代码" class="headerlink" title="7.2 JdbcUtils代码"></a><strong>7.2 JdbcUtils代码</strong></h2><p>JdbcUtils.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcUtils</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String dbconfig = <span class="string">"dbconfig.properties"</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Properties prop = <span class="keyword">new</span> Properties();</div><div class="line">	<span class="keyword">static</span> &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(dbconfig);</div><div class="line">			prop.load(in);</div><div class="line">			Class.forName(prop.getProperty(<span class="string">"driverClassName"</span>));</div><div class="line">		&#125; <span class="keyword">catch</span>(IOException e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">return</span> DriverManager.getConnection(prop.getProperty(<span class="string">"url"</span>),</div><div class="line">					prop.getProperty(<span class="string">"username"</span>), prop.getProperty(<span class="string">"password"</span>));</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>连接数据库的四大参数dbconfig.properties<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">driverClassName=com.mysql.jdbc.Driver</div><div class="line">url=jdbc:mysql:<span class="comment">//localhost:3306/mydb1?useUnicode=true&amp;characterEncoding=UTF8</span></div><div class="line">username=root</div><div class="line">password=<span class="number">123</span></div></pre></td></tr></table></figure></p>
+<h1 id="8-面向接口编程"><a href="#8-面向接口编程" class="headerlink" title="8. 面向接口编程"></a>8. 面向接口编程</h1><p>修改项目：</p>
+<ul>
+<li>把UserDao修改为接口，然后把原来的UserDao修改类名为UserDaoImpl</li>
+<li>修改UserService中对UserDao的实例化：private UserDao userDao = DaoFactory.getUserDao()</li>
+<li>创建DaoFactory，提供getUserDao()</li>
+</ul>
+<h2 id="8-1-DAO模式"><a href="#8-1-DAO模式" class="headerlink" title="8.1 DAO模式"></a><strong>8.1 DAO模式</strong></h2><p>DAO（Data Access Object）模式就是写一个类，把访问数据库的代码封装起来。DAO在数据库与业务逻辑（Service）之间</p>
+<ul>
+<li>实体域，即操作的对象，例如我们操作的表是user表，那么就需要先写一个User类</li>
+<li>DAO模式需要先提供一个DAO接口</li>
+<li>然后再提供一个DAO接口的实现类</li>
+<li>再编写一个DAO工厂，Service通过工厂来获取DAO实现</li>
+</ul>
+<h2 id="8-2-实现代码"><a href="#8-2-实现代码" class="headerlink" title="8.2 实现代码"></a><strong>8.2 实现代码</strong></h2><p>User.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> String uid;</div><div class="line">	<span class="keyword">private</span> String username;</div><div class="line">	<span class="keyword">private</span> String password;</div><div class="line">…</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>UserDao.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(User user)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mod</span><span class="params">(User user)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(String uid)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">load</span><span class="params">(String uid)</span></span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>UserDaoImpl.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title">UserDao</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			String sql = <span class="string">"insert into user value(?,?,?)"</span>;</div><div class="line">			pstmt = con.prepareStatement(sql);</div><div class="line">			pstmt.setString(<span class="number">1</span>, user.getUid());</div><div class="line">			pstmt.setString(<span class="number">2</span>, user.getUsername());</div><div class="line">			pstmt.setString(<span class="number">3</span>, user.getPassword());</div><div class="line">			pstmt.executeUpdate();</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(pstmt != <span class="keyword">null</span>) pstmt.close();</div><div class="line">				<span class="keyword">if</span>(con != <span class="keyword">null</span>) con.close();</div><div class="line">			&#125; <span class="keyword">catch</span>(SQLException e) &#123;&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mod</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			String sql = <span class="string">"update user set username=?, password=? where uid=?"</span>;</div><div class="line">			pstmt = con.prepareStatement(sql);</div><div class="line">			pstmt.setString(<span class="number">1</span>, user.getUsername());</div><div class="line">			pstmt.setString(<span class="number">2</span>, user.getPassword());</div><div class="line">			pstmt.setString(<span class="number">3</span>, user.getUid());</div><div class="line">			pstmt.executeUpdate();</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(pstmt != <span class="keyword">null</span>) pstmt.close();</div><div class="line">				<span class="keyword">if</span>(con != <span class="keyword">null</span>) con.close();</div><div class="line">			&#125; <span class="keyword">catch</span>(SQLException e) &#123;&#125;</div><div class="line">		&#125;		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(String uid)</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			String sql = <span class="string">"delete from user where uid=?"</span>;</div><div class="line">			pstmt = con.prepareStatement(sql);</div><div class="line">			pstmt.setString(<span class="number">1</span>, uid);</div><div class="line">			pstmt.executeUpdate();</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(pstmt != <span class="keyword">null</span>) pstmt.close();</div><div class="line">				<span class="keyword">if</span>(con != <span class="keyword">null</span>) con.close();</div><div class="line">			&#125; <span class="keyword">catch</span>(SQLException e) &#123;&#125;</div><div class="line">		&#125;			</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">load</span><span class="params">(String uid)</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">		ResultSet rs = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			String sql = <span class="string">"select * from user where uid=?"</span>;</div><div class="line">			pstmt = con.prepareStatement(sql);</div><div class="line">			pstmt.setString(<span class="number">1</span>, uid);</div><div class="line">			rs = pstmt.executeQuery();</div><div class="line">			<span class="keyword">if</span>(rs.next()) &#123;</div><div class="line">				<span class="keyword">return</span> <span class="keyword">new</span> User(rs.getString(<span class="number">1</span>), rs.getString(<span class="number">2</span>), rs.getString(<span class="number">3</span>));</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(pstmt != <span class="keyword">null</span>) pstmt.close();</div><div class="line">				<span class="keyword">if</span>(con != <span class="keyword">null</span>) con.close();</div><div class="line">			&#125; <span class="keyword">catch</span>(SQLException e) &#123;&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</div><div class="line">		Connection con = <span class="keyword">null</span>;</div><div class="line">		PreparedStatement pstmt = <span class="keyword">null</span>;</div><div class="line">		ResultSet rs = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			con = JdbcUtils.getConnection();</div><div class="line">			String sql = <span class="string">"select * from user"</span>;</div><div class="line">			pstmt = con.prepareStatement(sql);</div><div class="line">			rs = pstmt.executeQuery();</div><div class="line">			List&lt;User&gt; userList = <span class="keyword">new</span> ArrayList&lt;User&gt;();</div><div class="line">			<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">				userList.add(<span class="keyword">new</span> User(rs.getString(<span class="number">1</span>), rs.getString(<span class="number">2</span>), rs.getString(<span class="number">3</span>)));</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">return</span> userList;</div><div class="line">		&#125; <span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				<span class="keyword">if</span>(pstmt != <span class="keyword">null</span>) pstmt.close();</div><div class="line">				<span class="keyword">if</span>(con != <span class="keyword">null</span>) con.close();</div><div class="line">			&#125; <span class="keyword">catch</span>(SQLException e) &#123;&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>UserDaoFactory.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoFactory</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> UserDao userDao;</div><div class="line">	<span class="keyword">static</span> &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InputStream in = Thread.currentThread().getContextClassLoader()</div><div class="line">					.getResourceAsStream(<span class="string">"dao.properties"</span>);</div><div class="line">			Properties prop = <span class="keyword">new</span> Properties();</div><div class="line">			prop.load(in);</div><div class="line">			String className = prop.getProperty(<span class="string">"cn.itcast.jdbc.UserDao"</span>);</div><div class="line">			Class clazz = Class.forName(className);</div><div class="line">			userDao = (UserDao) clazz.newInstance();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> UserDao <span class="title">getUserDao</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> userDao;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>dao.properties</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cn.itcast.jdbc.UserDao=cn.itcast.jdbc.UserDaoImpl</div></pre></td></tr></table></figure>
+<h1 id="9-时间类型"><a href="#9-时间类型" class="headerlink" title="9. 时间类型"></a><strong>9. 时间类型</strong></h1><p>数据库类型与java中类型的对应关系：<br>DATE -&gt; java.sql.Date<br>TIME  -&gt; java.sql.Time<br>TIMESTAMP  -&gt; java.sql.Timestamp</p>
+<ul>
+<li>领域对象（domain）中的所有属性不能出现java.sql包下的东西！即不能使用java.sql.Date</li>
+<li>ResultSet#getDate()返回的是java.sql.Date</li>
+<li>PreparedStatement#setDate(int, Date)，其中第二个参数也是java.sql.Date</li>
+</ul>
+<p>时间类型的转换：</p>
+<ul>
+<li>java.util.Date -&gt; java.sql.Date、Time、Timestamp<br> -把util的Date转换成毫秒值<br>  -使用毫秒值创建sql的Date、Time、Timestamp</li>
+<li>java.sql.Date、Time、Timestamp -&gt; java.util.Date<br> -这一步不需要处理了：因为java.sql.Date是java.util.Date</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">java.util.Date date = <span class="keyword">new</span> java.util.Date();</div><div class="line"><span class="keyword">long</span> l = date.getTime();</div><div class="line">java.sql.Date sqlDate = <span class="keyword">new</span> java.sql.Date(l);</div></pre></td></tr></table></figure>
+<h2 id="9-1-Java中的时间类型"><a href="#9-1-Java中的时间类型" class="headerlink" title="9.1 Java中的时间类型"></a><strong>9.1 Java中的时间类型</strong></h2><p>java.sql包下给出三个与数据库相关的日期时间类型，分别是：</p>
+<ul>
+<li>Date：表示日期，只有年月日，没有时分秒。会丢失时间</li>
+<li>Time：表示时间，只有时分秒，没有年月日。会丢失日期</li>
+<li>Timestamp：表示时间戳，有年月日时分秒，以及毫秒</li>
+</ul>
+<p>这三个类都是java.util.Date的子类</p>
+<h2 id="9-2-时间类型相互转换"><a href="#9-2-时间类型相互转换" class="headerlink" title="9.2 时间类型相互转换"></a><strong>9.2 时间类型相互转换</strong></h2><p>把数据库的三种时间类型赋给java.util.Date，基本不用转换，因为这是把子类对象给父类的引用，不需要转换。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">java.sql.Date date = …</div><div class="line">java.util.Date d = date;</div><div class="line"></div><div class="line">java.sql.Time time = …</div><div class="line">java.util.Date d = time;</div><div class="line"></div><div class="line">java.sql.Timestamp timestamp = …</div><div class="line">java.util.Date d = timestamp;</div></pre></td></tr></table></figure></p>
+<p>当需要把java.util.Date转换成数据库的三种时间类型时，这就不能直接赋值了，这需要使用数据库三种时间类型的构造器。java.sql包下的Date、Time、TimeStamp三个类的构造器都需要一个long类型的参数，表示毫秒值。创建这三个类型的对象，只需要有毫秒值即可。我们知道java.util.Date有getTime()方法可以获取毫秒值，那么这个转换也就不是什么问题了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">java.utl.Date d = <span class="keyword">new</span> java.util.Date();</div><div class="line">java.sql.Date date = <span class="keyword">new</span> java.sql.Date(d.getTime());<span class="comment">//会丢失时分秒</span></div><div class="line">Time time = <span class="keyword">new</span> Time(d.getTime());<span class="comment">//会丢失年月日</span></div><div class="line">Timestamp timestamp = <span class="keyword">new</span> Timestamp(d.getTime());</div></pre></td></tr></table></figure>
+<h2 id="9-3-实现代码"><a href="#9-3-实现代码" class="headerlink" title="9.3 实现代码"></a><strong>9.3 实现代码</strong></h2><p>我们来创建一个dt表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE dt(</div><div class="line">  d DATE,</div><div class="line">  t TIME,</div><div class="line">  ts TIMESTAMP</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>下面是向dt表中插入数据的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">        Connection con = JdbcUtils.getConnection();</div><div class="line">        String sql = <span class="string">"insert into dt value(?,?,?)"</span>;</div><div class="line">        PreparedStatement pstmt = con.prepareStatement(sql);</div><div class="line"></div><div class="line">        java.util.Date d = <span class="keyword">new</span> java.util.Date();</div><div class="line">        pstmt.setDate(<span class="number">1</span>, <span class="keyword">new</span> java.sql.Date(d.getTime()));</div><div class="line">        pstmt.setTime(<span class="number">2</span>, <span class="keyword">new</span> Time(d.getTime()));</div><div class="line">        pstmt.setTimestamp(<span class="number">3</span>, <span class="keyword">new</span> Timestamp(d.getTime()));</div><div class="line">        pstmt.executeUpdate();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面是从dt表中查询数据的代码：<br>​</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">        Connection con = JdbcUtils.getConnection();</div><div class="line">        String sql = <span class="string">"select * from dt"</span>;</div><div class="line">        PreparedStatement pstmt = con.prepareStatement(sql);</div><div class="line">        ResultSet rs = pstmt.executeQuery();</div><div class="line"></div><div class="line">        rs.next();</div><div class="line">        java.util.Date d1 = rs.getDate(<span class="number">1</span>);</div><div class="line">        java.util.Date d2 = rs.getTime(<span class="number">2</span>);</div><div class="line">        java.util.Date d3 = rs.getTimestamp(<span class="number">3</span>);</div><div class="line"></div><div class="line">        System.out.println(d1);</div><div class="line">        System.out.println(d2);</div><div class="line">        System.out.println(d3);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="10-大数据"><a href="#10-大数据" class="headerlink" title="10. 大数据"></a>10. 大数据</h1><p>目标：把mp3保存到数据库中！<br>在my.ini中添加如下配置！<br>max_allowed_packet=10485760</p>
+<h2 id="10-1-什么是大数据"><a href="#10-1-什么是大数据" class="headerlink" title="10.1 什么是大数据"></a><strong>10.1 什么是大数据</strong></h2><p>所谓大数据，就是大的字节数据，或大的字符数据。标准SQL中提供了如下类型来保存大数据类型</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">tinyblob</td>
+<td style="text-align:left">2<sup>8</sup>–1B（256B）</td>
+</tr>
+<tr>
+<td style="text-align:left">blob</td>
+<td style="text-align:left">2<sup>16</sup>-1B（64K）</td>
+</tr>
+<tr>
+<td style="text-align:left">mediumblob</td>
+<td style="text-align:left">2<sup>24</sup>-1B（16M）</td>
+</tr>
+<tr>
+<td style="text-align:left">longblob</td>
+<td style="text-align:left">2<sup>32</sup>-1B（4G）</td>
+</tr>
+<tr>
+<td style="text-align:left">tinyclob</td>
+<td style="text-align:left">2<sup>8</sup>–1B（256B）</td>
+</tr>
+<tr>
+<td style="text-align:left">clob</td>
+<td style="text-align:left">2<sup>16</sup>-1B（64K）</td>
+</tr>
+<tr>
+<td style="text-align:left">mediumclob</td>
+<td style="text-align:left">2<sup>24</sup>-1B（16M）</td>
+</tr>
+<tr>
+<td style="text-align:left">longclob</td>
+<td style="text-align:left">2<sup>32</sup>-1B（4G）</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>但是，在mysql中没有提供tinyclob、clob、mediumclob、longclob四种类型，而是使用如下四种类型来处理文本大数据</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">tinytext</td>
+<td style="text-align:left">2<sup>8</sup>–1B（256B）</td>
+</tr>
+<tr>
+<td style="text-align:left">text</td>
+<td style="text-align:left">2<sup>16</sup>-1B（64K）</td>
+</tr>
+<tr>
+<td style="text-align:left">mediumtext</td>
+<td style="text-align:left">2<sup>24</sup>-1B（16M）</td>
+</tr>
+<tr>
+<td style="text-align:left">longtext</td>
+<td style="text-align:left">2<sup>32</sup>-1B（4G）</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>首先我们需要创建一张表，表中要有一个mediumblob（16M）类型的字段<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE tab_bin(</div><div class="line">	id 	INT 	PRIMARY KEY AUTO_INCREMENT,</div><div class="line">	filename	VARCHAR(100),</div><div class="line">	data 	MEDIUMBLOB</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>向数据库插入二进制数据需要使用PreparedStatement的setBinaryStream(int, InputSteam)方法来完成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">con = JdbcUtils.getConnection();</div><div class="line">String sql = <span class="string">"insert into tab_bin(filename,data) values(?, ?)"</span>;</div><div class="line">pstmt = con.prepareStatement(sql);</div><div class="line">pstmt.setString(<span class="number">1</span>, <span class="string">"a.jpg"</span>);</div><div class="line">InputStream in = <span class="keyword">new</span> FileInputStream(<span class="string">"f:\\a.jpg"</span>);</div><div class="line">pstmt.setBinaryStream(<span class="number">2</span>, in);</div><div class="line">pstmt.executeUpdate();</div></pre></td></tr></table></figure></p>
+<p>读取二进制数据，需要在查询后使用ResultSet类的getBinaryStream()方法来获取输入流对象。也就是说，PreparedStatement有setXXX()，那么ResultSet就有getXXX()<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">con = JdbcUtils.getConnection();</div><div class="line">String sql = <span class="string">"select filename,data from tab_bin where id=?"</span>;</div><div class="line">pstmt = con.prepareStatement(sql);</div><div class="line">pstmt.setInt(<span class="number">1</span>, <span class="number">1</span>);</div><div class="line">rs = pstmt.executeQuery();</div><div class="line">rs.next();</div><div class="line"></div><div class="line">String filename = rs.getString(<span class="string">"filename"</span>);</div><div class="line">OutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="string">"F:\\"</span> + filename);</div><div class="line"></div><div class="line">InputStream in = rs.getBinaryStream(<span class="string">"data"</span>);</div><div class="line">IOUtils.copy(in, out);</div><div class="line">out.close();</div></pre></td></tr></table></figure></p>
+<p>还有一种方法，就是把要存储的数据包装成Blob类型，然后调用PreparedStatement的setBlob()方法来设置数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">con = JdbcUtils.getConnection();</div><div class="line">String sql = <span class="string">"insert into tab_bin(filename,data) values(?, ?)"</span>;</div><div class="line">pstmt = con.prepareStatement(sql);</div><div class="line">pstmt.setString(<span class="number">1</span>, <span class="string">"a.jpg"</span>);</div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"f:\\a.jpg"</span>);</div><div class="line"><span class="keyword">byte</span>[] datas = FileUtils.getBytes(file);<span class="comment">//获取文件中的数据</span></div><div class="line">Blob blob = <span class="keyword">new</span> SerialBlob(datas);<span class="comment">//创建Blob对象</span></div><div class="line">pstmt.setBlob(<span class="number">2</span>, blob);<span class="comment">//设置Blob类型的参数</span></div><div class="line">pstmt.executeUpdate();</div><div class="line">con = JdbcUtils.getConnection();</div><div class="line">String sql = <span class="string">"select filename,data from tab_bin where id=?"</span>;</div><div class="line">pstmt = con.prepareStatement(sql);</div><div class="line">pstmt.setInt(<span class="number">1</span>, <span class="number">1</span>);</div><div class="line">rs = pstmt.executeQuery();</div><div class="line">rs.next();</div><div class="line"></div><div class="line">String filename = rs.getString(<span class="string">"filename"</span>);</div><div class="line">File file = <span class="keyword">new</span> File(<span class="string">"F:\\"</span> + filename) ;</div><div class="line">Blob blob = rs.getBlob(<span class="string">"data"</span>);</div><div class="line"><span class="keyword">byte</span>[] datas = blob.getBytes(<span class="number">0</span>, (<span class="keyword">int</span>)file.length());</div><div class="line">FileUtils.writeByteArrayToFile(file, datas);</div></pre></td></tr></table></figure></p>
+<h1 id="11-批处理"><a href="#11-批处理" class="headerlink" title="11. 批处理"></a>11. 批处理</h1><h2 id="11-1-Statement批处理"><a href="#11-1-Statement批处理" class="headerlink" title="11.1 Statement批处理"></a><strong>11.1 Statement批处理</strong></h2><p>批处理就是一批一批的处理，而不是一个一个的处理！<br>当你有10条SQL语句要执行时，一次向服务器发送一条SQL语句，这么做效率上很差！处理的方案是使用批处理，即一次向服务器发送多条SQL语句，然后由服务器一次性处理。</p>
+<p>批处理只针对更新（增、删、改）语句，批处理没有查询什么事儿！</p>
+<p>可以多次调用Statement类的addBatch(String sql)方法，把需要执行的所有SQL语句添加到一个“批”中，然后调用Statement类的executeBatch()方法来执行当前“批”中的语句。</p>
+<ul>
+<li>void addBatch(String sql)：添加一条语句到“批”中</li>
+<li>int[] executeBatch()：执行“批”中所有语句。返回值表示每条语句所影响的行数据</li>
+<li>void clearBatch()：清空“批”中的所有语句<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">     String number = <span class="string">"S_10"</span> + i;</div><div class="line">     String name = <span class="string">"stu"</span> + i;</div><div class="line">     <span class="keyword">int</span> age = <span class="number">20</span> + i;</div><div class="line">     String gender = i % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">"male"</span> : <span class="string">"female"</span>;</div><div class="line">     String sql = <span class="string">"insert into stu values('"</span> + number + <span class="string">"', '"</span> + name + <span class="string">"', "</span> + age + <span class="string">", '"</span> + gender + <span class="string">"')"</span>;</div><div class="line">     stmt.addBatch(sql);</div><div class="line">&#125;</div><div class="line">stmt.executeBatch();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当执行了“批”之后，“批”中的SQL语句就会被清空！也就是说，连续两次调用executeBatch()相当于调用一次！因为第二次调用时，“批”中已经没有SQL语句了。</p>
+<p>还可以在执行“批”之前，调用Statement的clearBatch()方法来清空“批”！</p>
+<h2 id="2、PreparedStatement批处理"><a href="#2、PreparedStatement批处理" class="headerlink" title="2、PreparedStatement批处理"></a><strong>2、PreparedStatement批处理</strong></h2><p>PreparedStatement的批处理有所不同，因为每个PreparedStatement对象都绑定一条SQL模板。所以向PreparedStatement中添加的不是SQL语句，而是给“?”赋值<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">con = JdbcUtils.getConnection();</div><div class="line">String sql = <span class="string">"insert into stu values(?,?,?,?)"</span>;</div><div class="line">pstmt = con.prepareStatement(sql);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">        pstmt.setString(<span class="number">1</span>, <span class="string">"S_10"</span> + i);</div><div class="line">        pstmt.setString(<span class="number">2</span>, <span class="string">"stu"</span> + i);</div><div class="line">        pstmt.setInt(<span class="number">3</span>, <span class="number">20</span> + i);</div><div class="line">        pstmt.setString(<span class="number">4</span>, i % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">"male"</span> : <span class="string">"female"</span>);</div><div class="line">        pstmt.addBatch();</div><div class="line">&#125;</div><div class="line">pstmt.executeBatch();</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jdbc/" rel="tag"># jdbc</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/JDBC之数据库连接池/" rel="next" title="JDBC之数据库连接池">
+                <i class="fa fa-chevron-left"></i> JDBC之数据库连接池
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/javaweb/酷炫的文件上传技术/" rel="prev" title="酷炫的文件上传技术">
+                酷炫的文件上传技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC系列阅读"><span class="nav-number">1.</span> <span class="nav-text">JDBC系列阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-什么是JDBC"><span class="nav-number">2.</span> <span class="nav-text">1. 什么是JDBC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-JDBC原理"><span class="nav-number">3.</span> <span class="nav-text">2. JDBC原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-JDBC核心类（接口）介绍"><span class="nav-number">4.</span> <span class="nav-text">3. JDBC核心类（接口）介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Hello-JDBC"><span class="nav-number">5.</span> <span class="nav-text">4. Hello JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-mysql数据库的驱动jar包"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 mysql数据库的驱动jar包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-获取连接"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 获取连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-注册驱动"><span class="nav-number">5.2.1.</span> <span class="nav-text">4.2.1 注册驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-获取连接"><span class="nav-number">5.2.2.</span> <span class="nav-text">4.2.2 获取连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-获取Statement"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 获取Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-发送SQL增、删、改语句"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 发送SQL增、删、改语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-发送SQL查询语句"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 发送SQL查询语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-读取结果集中的数据"><span class="nav-number">5.6.</span> <span class="nav-text">4.6 读取结果集中的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-关闭"><span class="nav-number">5.7.</span> <span class="nav-text">4.7 关闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-代码"><span class="nav-number">5.8.</span> <span class="nav-text">4.8 代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-9-规范化代码"><span class="nav-number">5.9.</span> <span class="nav-text">4.9 规范化代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-JDBC对象介绍"><span class="nav-number">6.</span> <span class="nav-text">5. JDBC对象介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-JDBC中的主要类（接口）"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 JDBC中的主要类（接口）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-DriverManager"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 DriverManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-Connection"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 Connection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-Statement"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 Statement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-ResultSet之滚动结果集"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 ResultSet之滚动结果集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-ResultSet之获取列数据"><span class="nav-number">6.6.</span> <span class="nav-text">5.6 ResultSet之获取列数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-PreparedStatement"><span class="nav-number">7.</span> <span class="nav-text">6. PreparedStatement</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-预处理的原理"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 预处理的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-什么是SQL攻击"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 什么是SQL攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-演示SQL攻击"><span class="nav-number">7.3.</span> <span class="nav-text">6.3 演示SQL攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-防止SQL攻击"><span class="nav-number">7.4.</span> <span class="nav-text">6.4 防止SQL攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-PreparedStatement是什么？"><span class="nav-number">7.5.</span> <span class="nav-text">6.5 PreparedStatement是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-PreparedStatement的使用"><span class="nav-number">7.6.</span> <span class="nav-text">6.6 PreparedStatement的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-7-MySQL的预编译功能"><span class="nav-number">7.7.</span> <span class="nav-text">6.7 MySQL的预编译功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-1-预编译的好处"><span class="nav-number">7.7.1.</span> <span class="nav-text">6.7.1 预编译的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-2-MySQL执行预编译"><span class="nav-number">7.7.2.</span> <span class="nav-text">6.7.2 MySQL执行预编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-3-useServerPrepStmts参数"><span class="nav-number">7.7.3.</span> <span class="nav-text">6.7.3 useServerPrepStmts参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-4-cachePrepStmts参数"><span class="nav-number">7.7.4.</span> <span class="nav-text">6.7.4 cachePrepStmts参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-8-打开批处理"><span class="nav-number">7.8.</span> <span class="nav-text">6.8 打开批处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-JdbcUtils工具类"><span class="nav-number">8.</span> <span class="nav-text">7. JdbcUtils工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-JdbcUtils的作用"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 JdbcUtils的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-JdbcUtils代码"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 JdbcUtils代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-面向接口编程"><span class="nav-number">9.</span> <span class="nav-text">8. 面向接口编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-DAO模式"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 DAO模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-实现代码"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 实现代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-时间类型"><span class="nav-number">10.</span> <span class="nav-text">9. 时间类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-Java中的时间类型"><span class="nav-number">10.1.</span> <span class="nav-text">9.1 Java中的时间类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-时间类型相互转换"><span class="nav-number">10.2.</span> <span class="nav-text">9.2 时间类型相互转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-实现代码"><span class="nav-number">10.3.</span> <span class="nav-text">9.3 实现代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-大数据"><span class="nav-number">11.</span> <span class="nav-text">10. 大数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-什么是大数据"><span class="nav-number">11.1.</span> <span class="nav-text">10.1 什么是大数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-批处理"><span class="nav-number">12.</span> <span class="nav-text">11. 批处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-Statement批处理"><span class="nav-number">12.1.</span> <span class="nav-text">11.1 Statement批处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、PreparedStatement批处理"><span class="nav-number">12.2.</span> <span class="nav-text">2、PreparedStatement批处理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/javaweb/用JDBC操作数据库/';
+          this.page.identifier = '2017/05/01/javaweb/用JDBC操作数据库/';
+          this.page.title = '用JDBC操作数据库';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
