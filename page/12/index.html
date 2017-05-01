@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/泛型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程池/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/泛型/" itemprop="url">
-                  泛型
+                <a class="post-title-link" href="/2017/04/30/java/线程池/" itemprop="url">
+                  线程池
                 </a>
               
             
@@ -326,7 +326,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:59+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
                 2017-04-30
               </time>
             
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/泛型/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/线程池/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/泛型/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/线程池/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,14 +395,52 @@
 
       
         
-          <h2 id="1-泛型概述"><a href="#1-泛型概述" class="headerlink" title="1. 泛型概述"></a>1. 泛型概述</h2><p>泛型（Generic type 或者 generics）是对 Java 语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看作是使用参数化类型时指定的类型的一个占位符，就像方法的形式参数是运行时传递的值的占位符一样。</p>
-<p>泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法的创建中，分别称为泛型类、泛型接口、泛型方法。 Java语言引入泛型的好处是安全简单。</p>
-<p>在Java SE 1.5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的“任意化”，“任意化”带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。</p>
-<p>泛型的好处是在编译的时候检查类型安全，并且所有的强制转换都是自动和隐式的，以提高代码的重用率。</p>
-<p>可以在集合框架（Collection framework）中看到泛型的动机。例如，Map 类允许您向一个 Map添加任意类的对象，即使最常见的情况是在给定映射（map）中保存某个特定类型（比如 String）的对象。</p>
+          <p>这里首先介绍了java5中的并发的小工具包：java.util.concurrent.atomic，然后介绍了线程池的概念，对使用java5的方式创建不同形式的线程进行了演示，之后介绍了两个 对象：Callable和Future，用于获取线程执行后的结果，对于<a href="线程锁技术.md">线程锁技术</a>则在另外一篇文章中介绍。</p>
+<p>Java5中的线程并发库都在java.util.concurrent包及子包中</p>
+<h1 id="1-Executor类的继承结构"><a href="#1-Executor类的继承结构" class="headerlink" title="1. Executor类的继承结构"></a><strong>1. Executor类的继承结构</strong></h1><p><img src="http://img.blog.csdn.net/20161024205013699" alt="ThreadPoolExecutor"></p>
+<p>Executor是线程池的顶级接口，只有一个执行任务的方法execute()</p>
+<p>ExecutorService是Executor的子接口，该接口中包含了线程池常用的一些方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">execute()</td>
+<td style="text-align:left">执行任务</td>
+</tr>
+<tr>
+<td style="text-align:left">shutdown()</td>
+<td style="text-align:left">调用后不再接收新任务，如果里面有任务，就执行完</td>
+</tr>
+<tr>
+<td style="text-align:left">shutdownNow()</td>
+<td style="text-align:left">调用后不再接受新任务，如果有等待任务，移出队列；有正在执行的，尝试停止之</td>
+</tr>
+<tr>
+<td style="text-align:left">isShutdown()</td>
+<td style="text-align:left">判断线程池是否关闭</td>
+</tr>
+<tr>
+<td style="text-align:left">isTerminated()</td>
+<td style="text-align:left">判断线程池中任务是否执行完成</td>
+</tr>
+<tr>
+<td style="text-align:left">submit()</td>
+<td style="text-align:left">提交任务</td>
+</tr>
+<tr>
+<td style="text-align:left">invokeAll()</td>
+<td style="text-align:left">执行一组任务</td>
+</tr>
+</tbody>
+</table>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/泛型/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/线程池/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -448,7 +486,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/反射/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多个线程之间共享数据的方式探讨/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -470,8 +508,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/反射/" itemprop="url">
-                  反射
+                <a class="post-title-link" href="/2017/04/30/java/多个线程之间共享数据的方式探讨/" itemprop="url">
+                  多个线程之间共享数据的方式探讨
                 </a>
               
             
@@ -487,7 +525,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
                 2017-04-30
               </time>
             
@@ -528,9 +566,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/反射/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/多个线程之间共享数据的方式探讨/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/反射/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/多个线程之间共享数据的方式探讨/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -556,18 +594,10 @@
 
       
         
-          <h1 id="反射注解动态代理相关阅读"><a href="#反射注解动态代理相关阅读" class="headerlink" title="反射注解动态代理相关阅读"></a><strong>反射注解动态代理相关阅读</strong></h1><ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
-</ul>
-<h1 id="1-反射概述"><a href="#1-反射概述" class="headerlink" title="1. 反射概述"></a><strong>1. 反射概述</strong></h1><p>Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
-<p>Java 反射机制主要提供了以下功能：  在运行时判断任意一个对象所属的类；在运行时构造任意一个类的对象；在运行时判断任意一个类所具有的成员变量和方法；在运行时调用任意一个对象的方法；生成动态代理。</p>
-<p>Java中，反射是一种强大的工具。它使您能够创建灵活的代码，这些代码可以在运行时装配，无需在组件之间进行源代码链接。反射允许我们在编写于执行时，使我们的程序代码能够接入装载到JVM中的类的内部信息，而不是源代码中选定的类协作的代码。这使反射成为构建灵活的应用的主要工具。但需注意的是：如果使用不当，反射的成本很高。</p>
+          <h2 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a><strong>内容摘要</strong></h2><p>多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/反射/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/多个线程之间共享数据的方式探讨/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -613,7 +643,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/动态代理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程锁技术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -635,8 +665,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/动态代理/" itemprop="url">
-                  动态代理
+                <a class="post-title-link" href="/2017/04/30/java/线程锁技术/" itemprop="url">
+                  线程锁技术
                 </a>
               
             
@@ -652,7 +682,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
                 2017-04-30
               </time>
             
@@ -693,9 +723,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/动态代理/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/线程锁技术/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/动态代理/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/线程锁技术/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -721,21 +751,45 @@
 
       
         
-          <h2 id="系列阅读"><a href="#系列阅读" class="headerlink" title="系列阅读"></a><strong>系列阅读</strong></h2><ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
-</ul>
-<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>在运行时，动态创建一组指定的接口的实现类对象（代理对象）！</p>
-<p>代理是实现AOP（面向切面编程）的核心和关键技术，动态代理的用途与装饰模式很相似，就是为了对某个对象进行增强。所有使用装饰者模式的案例都可以使用动态代理来替换。</p>
-<p>代理：本来应该自己做的事情，却请了别人来做，被请的人就是代理对象。</p>
-<p>举例：春季回家买票让人代买</p>
-<p>动态代理：在程序运行过程中产生的这个对象</p>
-<p>而程序运行过程中产生对象其实就是我们刚才反射讲解的内容，所以，动态代理其实就是通过反射来生成一个代理</p>
+          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>这里介绍了java5中的线程锁技术：Lock和Condition，实现线程间的通信，其中的读锁和写锁的使用通过一个缓存系统进行了演示，对于Condition的应用通过一个阻塞队列进行演示。</p>
+<p>线程锁技术：Lock &amp; Condition 实现线程同步通信所属包：java.util.concurrent.locks</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">线程锁</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Synchronized</td>
+<td style="text-align:left">同步方法，锁对象是this；静态同步方法，锁对象是字节码.class；同步代码块，锁对象是任意对象，但必须是同一个对象</td>
+</tr>
+<tr>
+<td style="text-align:left">Lock</td>
+<td style="text-align:left">同步锁接口</td>
+</tr>
+<tr>
+<td style="text-align:left">ReentrantLock</td>
+<td style="text-align:left">lock()，unlock()，newCondition()</td>
+</tr>
+<tr>
+<td style="text-align:left">ReadWriteLock</td>
+<td style="text-align:left">读写锁接口</td>
+</tr>
+<tr>
+<td style="text-align:left">ReentrantReadWriteLock</td>
+<td style="text-align:left">readLock()获取读锁，writeLock()获取写锁</td>
+</tr>
+<tr>
+<td style="text-align:left">Condition</td>
+<td style="text-align:left">线程间通信  await()等待  signal()唤醒</td>
+</tr>
+</tbody>
+</table>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/动态代理/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/线程锁技术/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -781,7 +835,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/注解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/定时器、互斥、同步通信技术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -803,8 +857,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/注解/" itemprop="url">
-                  注解
+                <a class="post-title-link" href="/2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="url">
+                  定时器、互斥、同步通信技术
                 </a>
               
             
@@ -820,7 +874,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
                 2017-04-30
               </time>
             
@@ -861,9 +915,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/注解/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/定时器、互斥、同步通信技术/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/注解/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -889,28 +943,10 @@
 
       
         
-          <h1 id="系列阅读"><a href="#系列阅读" class="headerlink" title="系列阅读"></a><strong>系列阅读</strong></h1><ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>注解相当于一种标记，在程序中加了注解就等于为程序打上了某种标记，没加，则等于没有某种标记，以后，javac编译器，开发工具和其他程序可以用反射来了解你的类及各种元素上有无何种标记，看你有什么标记，就去干相应的事。标记可以加在包，类，字段，方法，方法的参数以及局部变量上</p>
-<p>开发中常见注解：</p>
-<ul>
-<li>@Override：作用在方法上的注解。当方法不是重写父类的方法时会报错</li>
-<li>@Deprecated：作用在方法上。标记该方法为作废方法（已过时）</li>
-<li>@SuppressWarnings：作用在方法上，压制警告</li>
-</ul>
-<p>应用</p>
-<ul>
-<li>标记一些信息</li>
-<li>运行时动态处理</li>
-<li>编译时动态处理</li>
-</ul>
+          <h1 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h1><p>这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/注解/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/定时器、互斥、同步通信技术/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -956,7 +992,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/类加载器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -978,8 +1014,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/类加载器/" itemprop="url">
-                  类加载器
+                <a class="post-title-link" href="/2017/04/30/java/多线程/" itemprop="url">
+                  多线程
                 </a>
               
             
@@ -995,7 +1031,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
                 2017-04-30
               </time>
             
@@ -1036,9 +1072,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/类加载器/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/多线程/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/类加载器/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/多线程/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1064,25 +1100,11 @@
 
       
         
-          <h1 id="系列阅读"><a href="#系列阅读" class="headerlink" title="系列阅读"></a><strong>系列阅读</strong></h1><ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
-</ul>
-<h1 id="1-什么是类加载器"><a href="#1-什么是类加载器" class="headerlink" title="1. 什么是类加载器"></a><strong>1. 什么是类加载器</strong></h1><p>类加载器就是用来加载类的东西！类加载器也是一个类：ClassLoader</p>
-<p>类加载器可以被加载到内存，是通过类加载器完成的！Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：</p>
-<ul>
-<li>BootStrap：引导类加载器，加载rt.jar中的类</li>
-<li>ExtClassLoader：扩展类加载器，加载lib/ext目录下的类</li>
-<li>AppClassLoader：系统类加载器，加载CLASSPATH下的类，即我们写的类，以及第三方提供的类</li>
-</ul>
-<p>类加载器之间存在上下级关系，系统类加载器的上级是扩展类加载器，而扩展类加载器的上级是引导类加载器</p>
-<p>类加载器也是Java类，因为其它java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是java类，这正是BootStrap。</p>
-<p>Java虚拟机中的所有类装载器采用具有父子关系的树形结构进行组织，在实例化每个类装载器对象时，需要为其指定一个父级类装载器对象或者默认采用系统类装载器为其父级类加载</p>
+          <h1 id="1-多线程概述"><a href="#1-多线程概述" class="headerlink" title="1. 多线程概述"></a><strong>1. 多线程概述</strong></h1><h2 id="1-1-多线程引入"><a href="#1-1-多线程引入" class="headerlink" title="1.1 多线程引入"></a><strong>1.1 多线程引入</strong></h2><p><img src="http://img.blog.csdn.net/20150827214823243" alt=""></p>
+<p>由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/类加载器/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/多线程/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1123,7 +1145,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1168,7 +1190,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1179,7 +1201,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1190,7 +1212,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

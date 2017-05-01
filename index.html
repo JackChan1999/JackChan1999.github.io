@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：消息摘要MessageDigest/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/数据结构和算法/二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/安全加密/Android安全加密：消息摘要MessageDigest/" itemprop="url">
-                  Android安全加密：消息摘要Message Digest
+                <a class="post-title-link" href="/2017/05/01/数据结构和算法/二叉树/" itemprop="url">
+                  二叉树
                 </a>
               
             
@@ -326,7 +326,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:29:10+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:56:40+08:00">
                 2017-05-01
               </time>
             
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全加密/" itemprop="url" rel="index">
-                    <span itemprop="name">安全加密</span>
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
                   </a>
                 </span>
 
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/安全加密/Android安全加密：消息摘要MessageDigest/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/数据结构和算法/二叉树/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/安全加密/Android安全加密：消息摘要MessageDigest/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/数据结构和算法/二叉树/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,31 +395,19 @@
 
       
         
-          <p>##Android安全加密专题文章索引</p>
-<ol>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52491077" target="_blank" rel="external">Android安全加密：对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494640" target="_blank" rel="external">Android安全加密：非对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494725" target="_blank" rel="external">Android安全加密：消息摘要Message Digest</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494832" target="_blank" rel="external">Android安全加密：数字签名和数字证书</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494902" target="_blank" rel="external">Android安全加密：Https编程</a></li>
-</ol>
-<p>#<strong>1. 常见算法</strong><br>MD5、SHA、CRC 等</p>
-<p>#<strong>2. 使用场景</strong></p>
+          <h1 id="1-二叉查找树简介"><a href="#1-二叉查找树简介" class="headerlink" title="1. 二叉查找树简介"></a>1. 二叉查找树简介</h1><p>二叉查找树(Binary Search Tree)，又被称为二叉搜索树。</p>
+<p>它是特殊的二叉树：对于二叉树，假设x为二叉树中的任意一个结点，x节点包含关键字key，节点x的key值记为key[x]。如果y是x的左子树中的一个结点，则key[y] &lt;= key[x]；如果y是x的右子树的一个结点，则key[y] &gt;= key[x]。那么，这棵树就是二叉查找树。如下图所示</p>
+<p><img src="../assets/3.6.jpg" alt="二叉树"></p>
+<p>在二叉查找树中：</p>
 <ul>
-<li>对用户密码进行md5 加密后保存到数据库里</li>
-<li>软件下载站使用消息摘要计算文件指纹，防止被篡改</li>
-<li>数字签名（后面知识点）</li>
-<li>百度云，360网盘等云盘的妙传功能用的就是sha1值</li>
-<li>Eclipse和Android Studio开发工具根据sha1值来判断v4，v7包是否冲突</li>
-<li>据说银行的密码使用的就是MD5加密（因为MD5具有不可逆性）</li>
-<li>病毒查杀，把每个病毒文件或apk进行MD5后得到一个特征码，拿着特征码去跟病毒数据库对比，特征码一致说明该文件是病毒</li>
-<li>Git版本控制也使用到了sha1</li>
+<li>若任意节点的左子树不空，则左子树上所有结点的值均小于它的根结点的值</li>
+<li>任意节点的右子树不空，则右子树上所有结点的值均大于它的根结点的值</li>
+<li>任意节点的左、右子树也分别为二叉查找树</li>
+<li>没有键值相等的节点（no duplicate nodes）</li>
 </ul>
-<p>例如软件下载站数据指纹：<a href="http://dev.mysql.com/downloads/installer/" target="_blank" rel="external">http://dev.mysql.com/downloads/installer/</a></p>
-<p><img src="http://img.blog.csdn.net/20160910135955384" alt="数字摘要"></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/安全加密/Android安全加密：消息摘要MessageDigest/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/数据结构和算法/二叉树/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -465,7 +453,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：数字签名和数字证书/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/数据结构和算法/哈夫曼树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -487,8 +475,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/安全加密/Android安全加密：数字签名和数字证书/" itemprop="url">
-                  Android安全加密：数字签名和数字证书
+                <a class="post-title-link" href="/2017/05/01/数据结构和算法/哈夫曼树/" itemprop="url">
+                  哈夫曼树
                 </a>
               
             
@@ -504,7 +492,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:29:10+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:56:40+08:00">
                 2017-05-01
               </time>
             
@@ -527,8 +515,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全加密/" itemprop="url" rel="index">
-                    <span itemprop="name">安全加密</span>
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
                   </a>
                 </span>
 
@@ -545,9 +533,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/安全加密/Android安全加密：数字签名和数字证书/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/数据结构和算法/哈夫曼树/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/安全加密/Android安全加密：数字签名和数字证书/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/数据结构和算法/哈夫曼树/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -573,23 +561,182 @@
 
       
         
-          <h2 id="Android安全加密专题文章索引"><a href="#Android安全加密专题文章索引" class="headerlink" title="Android安全加密专题文章索引"></a>Android安全加密专题文章索引</h2><ol>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52491077" target="_blank" rel="external">Android安全加密：对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494640" target="_blank" rel="external">Android安全加密：非对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494725" target="_blank" rel="external">Android安全加密：消息摘要Message Digest</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494832" target="_blank" rel="external">Android安全加密：数字签名和数字证书</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494902" target="_blank" rel="external">Android安全加密：Https编程</a></li>
-</ol>
-<h1 id="1-数字签名"><a href="#1-数字签名" class="headerlink" title="1. 数字签名"></a>1. 数字签名</h1><h2 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a><strong>1.1 概述</strong></h2><p>数字签名是非对称加密与数字摘要的组合应用</p>
-<h2 id="1-2-应用场景"><a href="#1-2-应用场景" class="headerlink" title="1.2 应用场景"></a><strong>1.2 应用场景</strong></h2><ul>
-<li>校验用户身份（使用私钥签名，公钥校验，只要用公钥能校验通过，则该信息一定是私钥持有者发布的）</li>
-<li>校验数据的完整性（用解密后的消息摘要跟原文的消息摘要进行对比）</li>
+          <h2 id="1-哈夫曼树的介绍"><a href="#1-哈夫曼树的介绍" class="headerlink" title="1. 哈夫曼树的介绍"></a><strong>1. 哈夫曼树的介绍</strong></h2><p>Huffman Tree，中文名是哈夫曼树或霍夫曼树，它是最优二叉树。</p>
+<p><strong>定义</strong>：给定n个权值作为n个叶子结点，构造一棵二叉树，若树的带权路径长度达到最小，则这棵树被称为哈夫曼树。 这个定义里面涉及到了几个陌生的概念，下面就是一颗哈夫曼树，我们来看图解答。</p>
+<p><img src="../assets/2.2.jpg" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/01/数据结构和算法/哈夫曼树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/数据结构和算法/栈/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/01/数据结构和算法/栈/" itemprop="url">
+                  栈
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:52:43+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/数据结构和算法/栈/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/数据结构和算法/栈/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="1-栈的介绍"><a href="#1-栈的介绍" class="headerlink" title="1. 栈的介绍"></a>1. 栈的介绍</h1><p>注意：本文所说的栈是数据结构中的栈，而不是内存模型中栈</p>
+<p>栈（stack）是限定仅在表尾一端进行插入或删除操作的特殊线性表。对于栈来说, 允许进行插入或删除操作的一端称为栈顶（top）,而另一端称为栈底（bottom）。不含元素栈称为空栈，向栈中插入一个新元素称为入栈或压栈， 从栈中删除一个元素称为出栈或退栈。</p>
+<p>假设有一个栈Ｓ＝（a1, a2, …, an), a1先进栈, an最后进栈。称a1为栈底元素, an为栈顶元素, 如图3.1所示。出栈时只允许在栈顶进行, 所以an先出栈, a1最后出栈。因此又称栈为后进先出（Last In First Out，LIFO）的线性表。</p>
+<p>栈（stack），是一种线性存储结构，它有以下几个特点：</p>
+<ul>
+<li>栈中数据是按照”后进先出（LIFO, Last In First Out）”方式进出栈的。</li>
+<li>向栈中添加/删除数据时，只能从栈顶进行操作。</li>
 </ul>
-<h2 id="1-3-签名过程"><a href="#1-3-签名过程" class="headerlink" title="1.3 签名过程"></a><strong>1.3 签名过程</strong></h2><p>“发送报文时，发送方用一个哈希函数从报文文本中生成<a href="http://baike.baidu.com/view/4971320.htm" target="_blank" rel="external">报文摘要</a>,然后用自己的私人密钥对这个摘要进行加密，这个加密后的摘要将作为报文的数字签名和报文一起发送给接收方，接收方首先用与发送方一样的哈希函数从接收到的原始报文中计算出报文摘要，接着再用发送方的公用密钥来对报文附加的数字签名进行解密，如果这两个摘要相同、那么接收方就能确认该数字签名是发送方的。</p>
-<p>数字签名有两种功效：一是能确定消息确实是由发送方签名并发出来的，因为别人假冒不了发送方的签名。二是数字签名能确定消息的完整性。因为数字签名的特点是它代表了文件的特征，文件如果发生改变，数字摘要的值也将发生变化。不同的文件将得到不同的数字摘要。一次数字签名涉及到一个哈希函数、发送者的<a href="http://baike.baidu.com/view/355291.htm" target="_blank" rel="external">公钥</a>、发送者的<a href="http://baike.baidu.com/view/493846.htm" target="_blank" rel="external">私钥</a>。</p>
+<p>栈通常包括的三种操作：push、peek、pop。</p>
+<ul>
+<li>push – 向栈中添加元素。</li>
+<li>peek – 返回栈顶元素。</li>
+<li>pop  – 返回并删除栈顶元素的操作。</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/安全加密/Android安全加密：数字签名和数字证书/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/数据结构和算法/栈/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -635,7 +782,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：非对称加密/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/数据结构和算法/数组和链表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -657,8 +804,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/安全加密/Android安全加密：非对称加密/" itemprop="url">
-                  Android安全加密：非对称加密
+                <a class="post-title-link" href="/2017/05/01/数据结构和算法/数组和链表/" itemprop="url">
+                  数组和链表
                 </a>
               
             
@@ -674,7 +821,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:29:10+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:52:43+08:00">
                 2017-05-01
               </time>
             
@@ -697,8 +844,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全加密/" itemprop="url" rel="index">
-                    <span itemprop="name">安全加密</span>
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
                   </a>
                 </span>
 
@@ -715,9 +862,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/安全加密/Android安全加密：非对称加密/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/数据结构和算法/数组和链表/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/安全加密/Android安全加密：非对称加密/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/数据结构和算法/数组和链表/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -743,19 +890,14 @@
 
       
         
-          <h2 id="Android安全加密专题文章索引"><a href="#Android安全加密专题文章索引" class="headerlink" title="Android安全加密专题文章索引"></a>Android安全加密专题文章索引</h2><ol>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52491077" target="_blank" rel="external">Android安全加密：对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494640" target="_blank" rel="external">Android安全加密：非对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494725" target="_blank" rel="external">Android安全加密：消息摘要Message Digest</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494832" target="_blank" rel="external">Android安全加密：数字签名和数字证书</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494902" target="_blank" rel="external">Android安全加密：Https编程</a></li>
-</ol>
-<h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a><strong>1. 介绍</strong></h2><p>与对称加密算法不同，非对称加密算法需要两个密钥：公钥（publickey）和私钥（privatekey）。公钥与私钥是一对，如果用公钥对数据进行加密，只有用对应的私钥才能解密；如果用私钥对数据进行加密，那么只有用对应的公钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。</p>
-<p>简单理解为：加密和解密是不同的钥匙</p>
-<p><img src="http://img.blog.csdn.net/20160910133438466" alt="对称加密"></p>
+          <h1 id="1-概要"><a href="#1-概要" class="headerlink" title="1. 概要"></a>1. 概要</h1><p>线性表是一种线性结构，它是具有相同类型的n(n≥0)个数据元素组成的有限序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表；随后给出双向链表的C、C++和Java三种语言的实现</p>
+<h1 id="2-数组"><a href="#2-数组" class="headerlink" title="2. 数组"></a>2. 数组</h1><p>数组有上界和下界，数组的元素在上下界内是连续的。存储10,20,30,40,50的数组的示意图如下</p>
+<p><img src="../assets/1.13.jpg" alt="数组"></p>
+<p>数组的特点是：数据是连续的；随机访问速度快。</p>
+<p>数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维数组实现的。至于动态数组，是指数组的容量能动态增长的数组；对于C语言而言，若要提供动态数组，需要手动实现；而对于C++而言，STL提供了Vector；对于Java而言，Collection集合中提供了ArrayList和Vector。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/安全加密/Android安全加密：非对称加密/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/数据结构和算法/数组和链表/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -801,7 +943,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：对称加密/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/数据结构和算法/队列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -823,8 +965,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/安全加密/Android安全加密：对称加密/" itemprop="url">
-                  Android安全加密：对称加密
+                <a class="post-title-link" href="/2017/05/01/数据结构和算法/队列/" itemprop="url">
+                  队列
                 </a>
               
             
@@ -840,7 +982,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:29:10+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:52:42+08:00">
                 2017-05-01
               </time>
             
@@ -863,8 +1005,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全加密/" itemprop="url" rel="index">
-                    <span itemprop="name">安全加密</span>
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
                   </a>
                 </span>
 
@@ -881,9 +1023,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/安全加密/Android安全加密：对称加密/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/数据结构和算法/队列/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/安全加密/Android安全加密：对称加密/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/数据结构和算法/队列/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -909,184 +1051,18 @@
 
       
         
-          <h2 id="Android安全加密专题文章索引"><a href="#Android安全加密专题文章索引" class="headerlink" title="Android安全加密专题文章索引"></a>Android安全加密专题文章索引</h2><ol>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52491077" target="_blank" rel="external">Android安全加密：对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494640" target="_blank" rel="external">Android安全加密：非对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494725" target="_blank" rel="external">Android安全加密：消息摘要Message Digest</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494832" target="_blank" rel="external">Android安全加密：数字签名和数字证书</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494902" target="_blank" rel="external">Android安全加密：Https编程</a></li>
-</ol>
-<h2 id="1-凯撒密码"><a href="#1-凯撒密码" class="headerlink" title="1. 凯撒密码"></a><strong>1. 凯撒密码</strong></h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a><strong>1.1 概述</strong></h3><p>凯撒密码作为一种最为古老的对称加密体制，在古罗马的时候都已经很流行，他的基本思想是：通过把字母移动一定的位数来实现加密和解密。明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。例如，当偏移量是3 的时候，所有的字母A 将被替换成D，B 变成E，由此可见，位数就是凯撒密码加密和解密的密钥。</p>
-<p>例如：字符串”ABC”的每个字符都右移3 位则变成”DEF”，解密的时候”DEF”的每个字符左移3 位即能还原，如下图所示：</p>
-<p><img src="http://img.blog.csdn.net/20160909221215656" alt=""></p>
+          <h1 id="1-队列的介绍"><a href="#1-队列的介绍" class="headerlink" title="1. 队列的介绍"></a><strong>1. 队列的介绍</strong></h1><p>队列 (Queue)是另一种限定性的线性表，它只允许在表的一端插入元素，而在另一端删除元素，所以队列具有先进先出(Fist In Fist Out， 缩写为FIFO)的特性。在队列中，允许插入的一端叫做队尾(rear)，允许删除的一端则称为队头(front)。 在队列中插入一个新元素的操作简称为进队或入队，新元素进队后就成为新的队尾元素；从队列中删除一个元素的操作简称为出队或离队，当元素出队后，其后继元素就成为新的队头元素</p>
+<p>假设队列为q=(a1，a2，…，an)，那么a1就是队头元素，an则是队尾元素。队列中的元素是按照a1，a2，…，an的顺序进入的， 退出队列也必须按照同样的次序依次出队，也就是说，只有在a1，a2，…，an-1都离开队列之后，an才能退出队列。 </p>
+<p><img src="../assets/1.6.png" alt="队列"></p>
+<p>队列（Queue），是一种线性存储结构。它有以下几个特点：</p>
+<ul>
+<li>队列中数据是按照”先进先出（FIFO, First-In-First-Out）”方式进出队列的。</li>
+<li>队列只允许在”队首”进行删除操作，而在”队尾”进行插入操作。</li>
+</ul>
+<p>队列通常包括的两种操作：入队列 和 出队列。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/安全加密/Android安全加密：对称加密/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/安全加密/Android安全加密：Https编程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/01/安全加密/Android安全加密：Https编程/" itemprop="url">
-                  Android安全加密：Https编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:29:10+08:00">
-                2017-05-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全加密/" itemprop="url" rel="index">
-                    <span itemprop="name">安全加密</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/01/安全加密/Android安全加密：Https编程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/安全加密/Android安全加密：Https编程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Android安全加密专题文章索引"><a href="#Android安全加密专题文章索引" class="headerlink" title="Android安全加密专题文章索引"></a>Android安全加密专题文章索引</h2><ol>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52491077" target="_blank" rel="external">Android安全加密：对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494640" target="_blank" rel="external">Android安全加密：非对称加密</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494725" target="_blank" rel="external">Android安全加密：消息摘要Message Digest</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494832" target="_blank" rel="external">Android安全加密：数字签名和数字证书</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52494902" target="_blank" rel="external">Android安全加密：Https编程</a></li>
-</ol>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a><strong>概述</strong></h2><p><strong>SSL</strong>(Secure Sockets Layer <strong>安全套接层</strong>)，为网景公司(Netscape)所研发，用以保障在Internet 上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取及窃听。一般通用之规格为40 bit 之安全标准，美国则已推出128 bit 之更高安全标准，但限制出境。只要3.0 版本以上之I.E.或Netscape 浏览器即可支持SSL。</p>
-<p><strong>TLS</strong>（Transport Layer Security <strong>传输层安全</strong>），用于在两个通信应用程序之间提供保密性和数据完整性。TLS 是SSL 的标准化后的产物，有1.0 ，1.1 ，1.2 三个版本，默认使用1.0。TLS1.0 和SSL3.0 几乎没<br>有区别，事实上我们现在用的都是TLS，但因为历史上习惯了SSL 这个称呼。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/安全加密/Android安全加密：Https编程/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/数据结构和算法/队列/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1127,7 +1103,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1172,7 +1148,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1183,7 +1159,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1194,7 +1170,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

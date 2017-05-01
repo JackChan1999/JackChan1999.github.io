@@ -1,0 +1,1232 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数组和链表," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 概要线性表是一种线性结构，它是具有相同类型的n(n≥0)个数据元素组成的有限序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表；随后给出双向链表的C、C++和Java三种语言的实现 2. 数组数组有上界和下界，数组的元素在上下界内是连续的。存储10,20,30,40,50的数组的示意图如下  数组的特点是：数据是连续的；随机访问速度快。 数组中稍微复杂一点的是多维数组和动态数">
+<meta name="keywords" content="数组和链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组和链表">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/数据结构和算法/数组和链表/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="1. 概要线性表是一种线性结构，它是具有相同类型的n(n≥0)个数据元素组成的有限序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表；随后给出双向链表的C、C++和Java三种语言的实现 2. 数组数组有上界和下界，数组的元素在上下界内是连续的。存储10,20,30,40,50的数组的示意图如下  数组的特点是：数据是连续的；随机访问速度快。 数组中稍微复杂一点的是多维数组和动态数">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.13.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.14.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.15.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.16.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.17.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.18.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.19.jpg">
+<meta property="og:updated_time" content="2017-05-01T10:54:23.887Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数组和链表">
+<meta name="twitter:description" content="1. 概要线性表是一种线性结构，它是具有相同类型的n(n≥0)个数据元素组成的有限序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表；随后给出双向链表的C、C++和Java三种语言的实现 2. 数组数组有上界和下界，数组的元素在上下界内是连续的。存储10,20,30,40,50的数组的示意图如下  数组的特点是：数据是连续的；随机访问速度快。 数组中稍微复杂一点的是多维数组和动态数">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/1.13.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/01/数据结构和算法/数组和链表/"/>
+
+
+
+
+
+  <title>数组和链表 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/数据结构和算法/数组和链表/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数组和链表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T18:52:43+08:00">
+                2017-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/01/数据结构和算法/数组和链表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/01/数据结构和算法/数组和链表/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-概要"><a href="#1-概要" class="headerlink" title="1. 概要"></a>1. 概要</h1><p>线性表是一种线性结构，它是具有相同类型的n(n≥0)个数据元素组成的有限序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表；随后给出双向链表的C、C++和Java三种语言的实现</p>
+<h1 id="2-数组"><a href="#2-数组" class="headerlink" title="2. 数组"></a>2. 数组</h1><p>数组有上界和下界，数组的元素在上下界内是连续的。存储10,20,30,40,50的数组的示意图如下</p>
+<p><img src="../assets/1.13.jpg" alt="数组"></p>
+<p>数组的特点是：数据是连续的；随机访问速度快。</p>
+<p>数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维数组实现的。至于动态数组，是指数组的容量能动态增长的数组；对于C语言而言，若要提供动态数组，需要手动实现；而对于C++而言，STL提供了Vector；对于Java而言，Collection集合中提供了ArrayList和Vector。</p>
+<a id="more"></a>
+<h1 id="3-单向链表"><a href="#3-单向链表" class="headerlink" title="3. 单向链表"></a>3. 单向链表</h1><p>单向链表(单链表)是链表的一种，它由节点组成，每个节点都包含下一个节点的指针。</p>
+<p>单链表的示意图如下：</p>
+<p><img src="../assets/1.14.jpg" alt="单链表"></p>
+<p>表头为空，表头的后继节点是”节点10”(数据为10的节点)，”节点10”的后继节点是”节点20”(数据为10的节点)</p>
+<h2 id="3-1-单链表删除节点"><a href="#3-1-单链表删除节点" class="headerlink" title="3.1 单链表删除节点"></a>3.1 单链表删除节点</h2><p><img src="../assets/1.15.jpg" alt="单链表"></p>
+<p>删除”节点30”<br>删除之前：”节点20” 的后继节点为”节点30”，而”节点30” 的后继节点为”节点40”。<br>删除之后：”节点20” 的后继节点为”节点40”。</p>
+<h2 id="3-2-单链表添加节点"><a href="#3-2-单链表添加节点" class="headerlink" title="3.2 单链表添加节点"></a>3.2 单链表添加节点</h2><p><img src="../assets/1.16.jpg" alt="单链表"></p>
+<p>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10” 的后继节点为”节点20”。<br>添加之后：”节点10” 的后继节点为”节点15”，而”节点15” 的后继节点为”节点20”。</p>
+<p>单链表的特点是：节点的链接方向是单向的；相对于数组来说，单链表的的随机访问速度较慢，但是单链表删除/添加数据的效率很高。</p>
+<h1 id="4-双向链表"><a href="#4-双向链表" class="headerlink" title="4. 双向链表"></a>4. 双向链表</h1><p>双向链表(双链表)是链表的一种。和单链表一样，双链表也是由节点组成，它的每个数据结点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表。</p>
+<p>双链表的示意图如下：</p>
+<p><img src="../assets/1.17.jpg" alt="双链表"></p>
+<p>表头为空，表头的后继节点为”节点10”(数据为10的节点)；”节点10”的后继节点是”节点20”(数据为10的节点)，”节点20”的前继节点是”节点10”；”节点20”的后继节点是”节点30”，”节点30”的前继节点是”节点20”；…；末尾节点的后继节点是表头。</p>
+<h2 id="4-1-双链表删除节点"><a href="#4-1-双链表删除节点" class="headerlink" title="4.1 双链表删除节点"></a>4.1 双链表删除节点</h2><p><img src="../assets/1.18.jpg" alt="双链表"></p>
+<p>删除”节点30”<br>删除之前：”节点20”的后继节点为”节点30”，”节点30” 的前继节点为”节点20”。”节点30”的后继节点为”节点40”，”节点40” 的前继节点为”节点30”。<br>删除之后：”节点20”的后继节点为”节点40”，”节点40” 的前继节点为”节点20”。</p>
+<h2 id="4-2-双链表添加节点"><a href="#4-2-双链表添加节点" class="headerlink" title="4.2 双链表添加节点"></a>4.2 双链表添加节点</h2><p><img src="../assets/1.19.jpg" alt="双链表"></p>
+<p>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10”的后继节点为”节点20”，”节点20” 的前继节点为”节点10”。<br>添加之后：”节点10”的后继节点为”节点15”，”节点15” 的前继节点为”节点10”。”节点15”的后继节点为”节点20”，”节点20” 的前继节点为”节点15”。</p>
+<h1 id="5-Java实现双链表"><a href="#5-Java实现双链表" class="headerlink" title="5. Java实现双链表"></a>5. Java实现双链表</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Java 实现的双向链表。 </div><div class="line"> * 注：java自带的集合包中有实现双向链表，路径是:java.util.LinkedList</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> skywang</div><div class="line"> * <span class="doctag">@date</span> 2013/11/07</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoubleLink</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 表头</span></div><div class="line">    <span class="keyword">private</span> DNode&lt;T&gt; mHead;</div><div class="line">    <span class="comment">// 节点个数</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mCount;</div><div class="line"></div><div class="line">    <span class="comment">// 双向链表“节点”对应的结构体</span></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">DNode</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">public</span> DNode prev;</div><div class="line">        <span class="keyword">public</span> DNode next;</div><div class="line">        <span class="keyword">public</span> T value;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DNode</span><span class="params">(T value, DNode prev, DNode next)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.prev = prev;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 构造函数</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DoubleLink</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 创建“表头”。注意：表头没有存储数据！</span></div><div class="line">        mHead = <span class="keyword">new</span> DNode&lt;T&gt;(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        mHead.prev = mHead.next = mHead;</div><div class="line">        <span class="comment">// 初始化“节点个数”为0</span></div><div class="line">        mCount = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 返回节点数目</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mCount;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 返回链表是否为空</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mCount==<span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 获取第index位置的节点</span></div><div class="line">    <span class="function"><span class="keyword">private</span> DNode&lt;T&gt; <span class="title">getNode</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (index&lt;<span class="number">0</span> || index&gt;=mCount)</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IndexOutOfBoundsException();</div><div class="line"></div><div class="line">        <span class="comment">// 正向查找</span></div><div class="line">        <span class="keyword">if</span> (index &lt;= mCount/<span class="number">2</span>) &#123;</div><div class="line">            DNode&lt;T&gt; node = mHead.next;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;index; i++)</div><div class="line">                node = node.next;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> node;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 反向查找</span></div><div class="line">        DNode&lt;T&gt; rnode = mHead.prev;</div><div class="line">        <span class="keyword">int</span> rindex = mCount - index -<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;rindex; j++)</div><div class="line">            rnode = rnode.prev;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> rnode;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 获取第index位置的节点的值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getNode(index).value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 获取第1个节点的值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getFirst</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getNode(<span class="number">0</span>).value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 获取最后一个节点的值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getLast</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getNode(mCount-<span class="number">1</span>).value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 将节点插入到第index位置之前</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> index, T t)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (index==<span class="number">0</span>) &#123;</div><div class="line">            DNode&lt;T&gt; node = <span class="keyword">new</span> DNode&lt;T&gt;(t, mHead, mHead.next);</div><div class="line">            mHead.next.prev = node;</div><div class="line">            mHead.next = node;</div><div class="line">            mCount++;</div><div class="line">            <span class="keyword">return</span> ;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        DNode&lt;T&gt; inode = getNode(index);</div><div class="line">        DNode&lt;T&gt; tnode = <span class="keyword">new</span> DNode&lt;T&gt;(t, inode.prev, inode);</div><div class="line">        inode.prev.next = tnode;</div><div class="line">        inode.next = tnode;</div><div class="line">        mCount++;</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 将节点插入第一个节点处。</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertFirst</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        insert(<span class="number">0</span>, t);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 将节点追加到链表的末尾</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendLast</span><span class="params">(T t)</span> </span>&#123;</div><div class="line">        DNode&lt;T&gt; node = <span class="keyword">new</span> DNode&lt;T&gt;(t, mHead.prev, mHead);</div><div class="line">        mHead.prev.next = node;</div><div class="line">        mHead.prev = node;</div><div class="line">        mCount++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 删除index位置的节点</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        DNode&lt;T&gt; inode = getNode(index);</div><div class="line">        inode.prev.next = inode.next;</div><div class="line">        inode.next.prev = inode.prev;</div><div class="line">        inode = <span class="keyword">null</span>;</div><div class="line">        mCount--;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 删除第一个节点</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteFirst</span><span class="params">()</span> </span>&#123;</div><div class="line">        del(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 删除最后一个节点</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteLast</span><span class="params">()</span> </span>&#123;</div><div class="line">        del(mCount-<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试程序(DlinkTest.java)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Java 实现的双向链表。 </div><div class="line"> * 注：java自带的集合包中有实现双向链表，路径是:java.util.LinkedList</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> skywang</div><div class="line"> * <span class="doctag">@date</span> 2013/11/07</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DlinkTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 双向链表操作int数据</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">int_test</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span>[] iarr = &#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>&#125;;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"\n----int_test----"</span>);</div><div class="line">        <span class="comment">// 创建双向链表</span></div><div class="line">        DoubleLink&lt;Integer&gt; dlink = <span class="keyword">new</span> DoubleLink&lt;Integer&gt;();</div><div class="line"></div><div class="line">        dlink.insert(<span class="number">0</span>, <span class="number">20</span>);    <span class="comment">// 将 20 插入到第一个位置</span></div><div class="line">        dlink.appendLast(<span class="number">10</span>);    <span class="comment">// 将 10 追加到链表末尾</span></div><div class="line">        dlink.insertFirst(<span class="number">30</span>);    <span class="comment">// 将 30 插入到第一个位置</span></div><div class="line"></div><div class="line">        <span class="comment">// 双向链表是否为空</span></div><div class="line">        System.out.printf(<span class="string">"isEmpty()=%b\n"</span>, dlink.isEmpty());</div><div class="line">        <span class="comment">// 双向链表的大小</span></div><div class="line">        System.out.printf(<span class="string">"size()=%d\n"</span>, dlink.size());</div><div class="line"></div><div class="line">        <span class="comment">// 打印出全部的节点</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;dlink.size(); i++)</div><div class="line">            System.out.println(<span class="string">"dlink("</span>+i+<span class="string">")="</span>+ dlink.get(i));</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">string_test</span><span class="params">()</span> </span>&#123;</div><div class="line">        String[] sarr = &#123;<span class="string">"ten"</span>, <span class="string">"twenty"</span>, <span class="string">"thirty"</span>, <span class="string">"forty"</span>&#125;;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"\n----string_test----"</span>);</div><div class="line">        <span class="comment">// 创建双向链表</span></div><div class="line">        DoubleLink&lt;String&gt; dlink = <span class="keyword">new</span> DoubleLink&lt;String&gt;();</div><div class="line"></div><div class="line">        dlink.insert(<span class="number">0</span>, sarr[<span class="number">1</span>]);    <span class="comment">// 将 sarr中第2个元素 插入到第一个位置</span></div><div class="line">        dlink.appendLast(sarr[<span class="number">0</span>]);    <span class="comment">// 将 sarr中第1个元素 追加到链表末尾</span></div><div class="line">        dlink.insertFirst(sarr[<span class="number">2</span>]);    <span class="comment">// 将 sarr中第3个元素 插入到第一个位置</span></div><div class="line"></div><div class="line">        <span class="comment">// 双向链表是否为空</span></div><div class="line">        System.out.printf(<span class="string">"isEmpty()=%b\n"</span>, dlink.isEmpty());</div><div class="line">        <span class="comment">// 双向链表的大小</span></div><div class="line">        System.out.printf(<span class="string">"size()=%d\n"</span>, dlink.size());</div><div class="line"></div><div class="line">        <span class="comment">// 打印出全部的节点</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;dlink.size(); i++)</div><div class="line">            System.out.println(<span class="string">"dlink("</span>+i+<span class="string">")="</span>+ dlink.get(i));</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// 内部类</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> id;</div><div class="line">        <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id, String name)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.id = id;</div><div class="line">            <span class="keyword">this</span>.name = name;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"["</span>+id+<span class="string">", "</span>+name+<span class="string">"]"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Student[] students = <span class="keyword">new</span> Student[]&#123;</div><div class="line">        <span class="keyword">new</span> Student(<span class="number">10</span>, <span class="string">"sky"</span>),</div><div class="line">        <span class="keyword">new</span> Student(<span class="number">20</span>, <span class="string">"jody"</span>),</div><div class="line">        <span class="keyword">new</span> Student(<span class="number">30</span>, <span class="string">"vic"</span>),</div><div class="line">        <span class="keyword">new</span> Student(<span class="number">40</span>, <span class="string">"dan"</span>),</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">object_test</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"\n----object_test----"</span>);</div><div class="line">        <span class="comment">// 创建双向链表</span></div><div class="line">        DoubleLink&lt;Student&gt; dlink = <span class="keyword">new</span> DoubleLink&lt;Student&gt;();</div><div class="line"></div><div class="line">        dlink.insert(<span class="number">0</span>, students[<span class="number">1</span>]);    <span class="comment">// 将 students中第2个元素 插入到第一个位置</span></div><div class="line">        dlink.appendLast(students[<span class="number">0</span>]);    <span class="comment">// 将 students中第1个元素 追加到链表末尾</span></div><div class="line">        dlink.insertFirst(students[<span class="number">2</span>]);    <span class="comment">// 将 students中第3个元素 插入到第一个位置</span></div><div class="line"></div><div class="line">        <span class="comment">// 双向链表是否为空</span></div><div class="line">        System.out.printf(<span class="string">"isEmpty()=%b\n"</span>, dlink.isEmpty());</div><div class="line">        <span class="comment">// 双向链表的大小</span></div><div class="line">        System.out.printf(<span class="string">"size()=%d\n"</span>, dlink.size());</div><div class="line"></div><div class="line">        <span class="comment">// 打印出全部的节点</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;dlink.size(); i++) &#123;</div><div class="line">            System.out.println(<span class="string">"dlink("</span>+i+<span class="string">")="</span>+ dlink.get(i));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        int_test();        <span class="comment">// 演示向双向链表操作“int数据”。</span></div><div class="line">        string_test();    <span class="comment">// 演示向双向链表操作“字符串数据”。</span></div><div class="line">        object_test();    <span class="comment">// 演示向双向链表操作“对象”。</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">----int_test----</div><div class="line">isEmpty()=false</div><div class="line">size()=3</div><div class="line">dlink(0)=30</div><div class="line">dlink(1)=20</div><div class="line">dlink(2)=10</div><div class="line"></div><div class="line">----string_test----</div><div class="line">isEmpty()=false</div><div class="line">size()=3</div><div class="line">dlink(0)=thirty</div><div class="line">dlink(1)=twenty</div><div class="line">dlink(2)=ten</div><div class="line"></div><div class="line">----object_test----</div><div class="line">isEmpty()=false</div><div class="line">size()=3</div><div class="line">dlink(0)=[30, vic]</div><div class="line">dlink(1)=[20, jody]</div><div class="line">dlink(2)=[10, sky]</div></pre></td></tr></table></figure>
+<h1 id="6-双链表实现2"><a href="#6-双链表实现2" class="headerlink" title="6. 双链表实现2"></a>6. 双链表实现2</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDoubleLink</span> <span class="keyword">implements</span> <span class="title">Iterable</span>&lt;<span class="title">Object</span>&gt;</span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">			<span class="keyword">this</span>.data = data;</div><div class="line">		&#125;</div><div class="line">		Node next;</div><div class="line">		Node prev;</div><div class="line">		Object data;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">private</span> Node head;</div><div class="line">	<span class="keyword">private</span> Node rear;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = <span class="keyword">new</span> Node(data);</div><div class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>)&#123;</div><div class="line">			head = node;</div><div class="line">			rear = node;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			rear.next = node;</div><div class="line">			node.prev = rear;</div><div class="line">			rear = node;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = find(data);</div><div class="line">		<span class="keyword">return</span> node != <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">		Node temp = head;</div><div class="line">		<span class="keyword">while</span>(temp != <span class="keyword">null</span>)&#123;</div><div class="line">			System.out.print(temp.data + <span class="string">","</span>);</div><div class="line">			temp = temp.next;</div><div class="line">		&#125;</div><div class="line">		System.out.println();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">private</span> Node <span class="title">find</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = head;</div><div class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">if</span> (node.data.equals(data) &amp;&amp; node.data.hashCode() == data.hashCode())&#123;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				node = node.next;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> node;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = find(data);</div><div class="line">		<span class="keyword">if</span> (node != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">if</span> (node == head &amp;&amp; node == rear)&#123;<span class="comment">//只有一个节点</span></div><div class="line">				head = <span class="keyword">null</span>;</div><div class="line">				rear = <span class="keyword">null</span>;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (node == head)&#123; <span class="comment">//头节点</span></div><div class="line">				head = head.next;</div><div class="line">				head.prev = <span class="keyword">null</span>;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (node == rear)&#123; <span class="comment">//尾节点</span></div><div class="line">				rear = rear.prev;</div><div class="line">				rear.next = <span class="keyword">null</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123; <span class="comment">//中间节点</span></div><div class="line">				node.prev.next = node.next;</div><div class="line">				node.next.prev = node.prev;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Iterator&lt;Object&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">		Iterator&lt;Object&gt; ite = <span class="keyword">new</span> Iterator&lt;Object&gt;() &#123;</div><div class="line">			<span class="keyword">private</span> Node temp = head;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> temp != <span class="keyword">null</span>;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">				Object data = temp.data;</div><div class="line">				temp = temp.next;</div><div class="line">				<span class="keyword">return</span> data;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="comment">// TODO Auto-generated method stub		</span></div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line">		<span class="keyword">return</span> ite;</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-1-测试双链表"><a href="#6-1-测试双链表" class="headerlink" title="6.1 测试双链表"></a>6.1 测试双链表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span>  <span class="class"><span class="keyword">class</span> <span class="title">Instance</span></span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Instance</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Instance</span><span class="params">()</span></span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Instance in  = <span class="keyword">new</span> Instance()&#123;</div><div class="line">			</div><div class="line">		&#125;;</div><div class="line">		MyDoubleLink datas = <span class="keyword">new</span> MyDoubleLink();</div><div class="line">		datas.add(<span class="string">"aaa"</span>);</div><div class="line">		datas.add(<span class="string">"bbb"</span>);</div><div class="line">		datas.add(<span class="string">"ccc"</span>);</div><div class="line">		datas.print();</div><div class="line">		datas.remove(<span class="string">"ccc"</span>);</div><div class="line">		datas.print();</div><div class="line">		<span class="keyword">for</span> (Object d : datas) &#123;</div><div class="line">			System.out.println(d);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="7-双链表"><a href="#7-双链表" class="headerlink" title="7. 双链表"></a>7. 双链表</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Iterator;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDoubleLink</span> <span class="keyword">implements</span> <span class="title">Iterable</span>&lt;<span class="title">Object</span>&gt;</span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">			<span class="keyword">this</span>.data = data;</div><div class="line">		&#125;</div><div class="line">		Node next;</div><div class="line">		Node prev;</div><div class="line">		Object data;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">private</span> Node head;</div><div class="line">	<span class="keyword">private</span> Node rear;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = <span class="keyword">new</span> Node(data);</div><div class="line">		<span class="keyword">if</span> (head == <span class="keyword">null</span>)&#123;</div><div class="line">			head = node;</div><div class="line">			rear = node;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			rear.next = node;</div><div class="line">			node.prev = rear;</div><div class="line">			rear = node;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = find(data);</div><div class="line">		<span class="keyword">return</span> node != <span class="keyword">null</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</div><div class="line">		Node temp = head;</div><div class="line">		<span class="keyword">while</span>(temp != <span class="keyword">null</span>)&#123;</div><div class="line">			System.out.print(temp.data + <span class="string">","</span>);</div><div class="line">			temp = temp.next;</div><div class="line">		&#125;</div><div class="line">		System.out.println();</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">private</span> Node <span class="title">find</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = head;</div><div class="line">		<span class="keyword">while</span> (node != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">if</span> (node.data.equals(data) &amp;&amp; node.data.hashCode() == data.hashCode())&#123;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				node = node.next;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> node;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(Object data)</span></span>&#123;</div><div class="line">		Node node = find(data);</div><div class="line">		<span class="keyword">if</span> (node != <span class="keyword">null</span>)&#123;</div><div class="line">			<span class="keyword">if</span> (node == head &amp;&amp; node == rear)&#123;<span class="comment">//只有一个节点</span></div><div class="line">				head = <span class="keyword">null</span>;</div><div class="line">				rear = <span class="keyword">null</span>;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (node == head)&#123; <span class="comment">//头节点</span></div><div class="line">				head = head.next;</div><div class="line">				head.prev = <span class="keyword">null</span>;</div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (node == rear)&#123; <span class="comment">//尾节点</span></div><div class="line">				rear = rear.prev;</div><div class="line">				rear.next = <span class="keyword">null</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123; <span class="comment">//中间节点</span></div><div class="line">				node.prev.next = node.next;</div><div class="line">				node.next.prev = node.prev;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> Iterator&lt;Object&gt; <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">		Iterator&lt;Object&gt; ite = <span class="keyword">new</span> Iterator&lt;Object&gt;() &#123;</div><div class="line">			<span class="keyword">private</span> Node temp = head;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="keyword">return</span> temp != <span class="keyword">null</span>;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">				Object data = temp.data;</div><div class="line">				temp = temp.next;</div><div class="line">				<span class="keyword">return</span> data;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">				<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">				</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line">		<span class="keyword">return</span> ite;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TEst</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span>  <span class="class"><span class="keyword">class</span> <span class="title">Instance</span></span>&#123;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Instance</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Instance</span><span class="params">()</span></span>&#123;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> args</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		Instance in  = <span class="keyword">new</span> Instance()&#123;</div><div class="line">			</div><div class="line">		&#125;;</div><div class="line">		MyDoubleLink datas = <span class="keyword">new</span> MyDoubleLink();</div><div class="line">		datas.add(<span class="string">"aaa"</span>);</div><div class="line">		datas.add(<span class="string">"bbb"</span>);</div><div class="line">		datas.add(<span class="string">"ccc"</span>);</div><div class="line">		datas.print();</div><div class="line">		datas.remove(<span class="string">"ccc"</span>);</div><div class="line">		datas.print();</div><div class="line">		<span class="keyword">for</span> (Object d : datas) &#123;</div><div class="line">			System.out.println(d);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-1-单链表的实现"><a href="#7-1-单链表的实现" class="headerlink" title="7.1 单链表的实现"></a>7.1 单链表的实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// linkList2.java</span></div><div class="line"><span class="comment">// demonstrates linked list</span></div><div class="line"><span class="comment">// to run this program: C&gt;java LinkList2App</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Link</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="keyword">public</span> <span class="keyword">int</span> iData;              <span class="comment">// data item (key)</span></div><div class="line">   <span class="keyword">public</span> <span class="keyword">double</span> dData;           <span class="comment">// data item</span></div><div class="line">   <span class="keyword">public</span> Link next;              <span class="comment">// next link in list</span></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Link</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">double</span> dd)</span> <span class="comment">// constructor</span></span></div><div class="line">      &#123;</div><div class="line">      iData = id;</div><div class="line">      dData = dd;</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayLink</span><span class="params">()</span>      <span class="comment">// display ourself</span></span></div><div class="line">      &#123;</div><div class="line">      System.out.print(<span class="string">"&#123;"</span> + iData + <span class="string">", "</span> + dData + <span class="string">"&#125; "</span>);</div><div class="line">      &#125;</div><div class="line">   &#125;  <span class="comment">// end class Link</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="keyword">private</span> Link first;            <span class="comment">// ref to first link on list</span></div><div class="line"></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">LinkList</span><span class="params">()</span>              <span class="comment">// constructor</span></span></div><div class="line">      &#123;</div><div class="line">      first = <span class="keyword">null</span>;               <span class="comment">// no links on list yet</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertFirst</span><span class="params">(<span class="keyword">int</span> id, <span class="keyword">double</span> dd)</span></span></div><div class="line">      &#123;                           <span class="comment">// make new link</span></div><div class="line">      Link newLink = <span class="keyword">new</span> Link(id, dd);</div><div class="line">      newLink.next = first;       <span class="comment">// it points to old first link</span></div><div class="line">      first = newLink;            <span class="comment">// now first points to this</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Link <span class="title">find</span><span class="params">(<span class="keyword">int</span> key)</span>      <span class="comment">// find link with given key</span></span></div><div class="line">      &#123;                           <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link current = first;              <span class="comment">// start at 'first'</span></div><div class="line">      <span class="keyword">while</span>(current.iData != key)        <span class="comment">// while no match,</span></div><div class="line">         &#123;</div><div class="line">         <span class="keyword">if</span>(current.next == <span class="keyword">null</span>)        <span class="comment">// if end of list,</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;                 <span class="comment">// didn't find it</span></div><div class="line">         <span class="keyword">else</span>                            <span class="comment">// not end of list,</span></div><div class="line">            current = current.next;      <span class="comment">// go to next link</span></div><div class="line">         &#125;</div><div class="line">      <span class="keyword">return</span> current;                    <span class="comment">// found it</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Link <span class="title">delete</span><span class="params">(<span class="keyword">int</span> key)</span>    <span class="comment">// delete link with given key</span></span></div><div class="line">      &#123;                           <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link current = first;              <span class="comment">// search for link</span></div><div class="line">      Link previous = first;</div><div class="line">      <span class="keyword">while</span>(current.iData != key)</div><div class="line">         &#123;</div><div class="line">         <span class="keyword">if</span>(current.next == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;                 <span class="comment">// didn't find it</span></div><div class="line">         <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">            previous = current;          <span class="comment">// go to next link</span></div><div class="line">            current = current.next;</div><div class="line">            &#125;</div><div class="line">         &#125;                               <span class="comment">// found it</span></div><div class="line">      <span class="keyword">if</span>(current == first)               <span class="comment">// if first link,</span></div><div class="line">         first = first.next;             <span class="comment">//    change first</span></div><div class="line">      <span class="keyword">else</span>                               <span class="comment">// otherwise,</span></div><div class="line">         previous.next = current.next;   <span class="comment">//    bypass it</span></div><div class="line">      <span class="keyword">return</span> current;</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayList</span><span class="params">()</span>      <span class="comment">// display the list</span></span></div><div class="line">      &#123;</div><div class="line">      System.out.print(<span class="string">"List (first--&gt;last): "</span>);</div><div class="line">      Link current = first;       <span class="comment">// start at beginning of list</span></div><div class="line">      <span class="keyword">while</span>(current != <span class="keyword">null</span>)      <span class="comment">// until end of list,</span></div><div class="line">         &#123;</div><div class="line">         current.displayLink();   <span class="comment">// print data</span></div><div class="line">         current = current.next;  <span class="comment">// move to next link</span></div><div class="line">         &#125;</div><div class="line">      System.out.println(<span class="string">""</span>);</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   &#125;  <span class="comment">// end class LinkList</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList2App</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">      &#123;</div><div class="line">      LinkList theList = <span class="keyword">new</span> LinkList();  <span class="comment">// make list</span></div><div class="line"></div><div class="line">      theList.insertFirst(<span class="number">22</span>, <span class="number">2.99</span>);      <span class="comment">// insert 4 items</span></div><div class="line">      theList.insertFirst(<span class="number">44</span>, <span class="number">4.99</span>);</div><div class="line">      theList.insertFirst(<span class="number">66</span>, <span class="number">6.99</span>);</div><div class="line">      theList.insertFirst(<span class="number">88</span>, <span class="number">8.99</span>);</div><div class="line"></div><div class="line">      theList.displayList();              <span class="comment">// display list</span></div><div class="line"></div><div class="line">      Link f = theList.find(<span class="number">44</span>);          <span class="comment">// find item</span></div><div class="line">      <span class="keyword">if</span>( f != <span class="keyword">null</span>)</div><div class="line">         System.out.println(<span class="string">"Found link with key "</span> + f.iData);</div><div class="line">      <span class="keyword">else</span></div><div class="line">         System.out.println(<span class="string">"Can't find link"</span>);</div><div class="line"></div><div class="line">      Link d = theList.delete(<span class="number">66</span>);        <span class="comment">// delete item</span></div><div class="line">      <span class="keyword">if</span>( d != <span class="keyword">null</span> )</div><div class="line">         System.out.println(<span class="string">"Deleted link with key "</span> + d.iData);</div><div class="line">      <span class="keyword">else</span></div><div class="line">         System.out.println(<span class="string">"Can't delete link"</span>);</div><div class="line"></div><div class="line">      theList.displayList();              <span class="comment">// display list</span></div><div class="line">      &#125;  <span class="comment">// end main()</span></div><div class="line">   &#125;  <span class="comment">// end class LinkList2App</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div></pre></td></tr></table></figure>
+<h2 id="7-2-有序链表"><a href="#7-2-有序链表" class="headerlink" title="7.2 有序链表"></a>7.2 有序链表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// sortedList.java</span></div><div class="line"><span class="comment">// demonstrates sorted list</span></div><div class="line"><span class="comment">// to run this program: C&gt;java SortedListApp</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Link</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="keyword">public</span> <span class="keyword">long</span> dData;                  <span class="comment">// data item</span></div><div class="line">   <span class="keyword">public</span> Link next;                   <span class="comment">// next link in list</span></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Link</span><span class="params">(<span class="keyword">long</span> dd)</span>                <span class="comment">// constructor</span></span></div><div class="line">      &#123; dData = dd; &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayLink</span><span class="params">()</span>           <span class="comment">// display this link</span></span></div><div class="line">      &#123; System.out.print(dData + <span class="string">" "</span>); &#125;</div><div class="line">   &#125;  <span class="comment">// end class Link</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SortedList</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="keyword">private</span> Link first;                 <span class="comment">// ref to first item</span></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">SortedList</span><span class="params">()</span>                 <span class="comment">// constructor</span></span></div><div class="line">      &#123; first = <span class="keyword">null</span>; &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span>            <span class="comment">// true if no links</span></span></div><div class="line">      &#123; <span class="keyword">return</span> (first==<span class="keyword">null</span>); &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">long</span> key)</span>        <span class="comment">// insert, in order</span></span></div><div class="line">      &#123;</div><div class="line">      Link newLink = <span class="keyword">new</span> Link(key);    <span class="comment">// make new link</span></div><div class="line">      Link previous = <span class="keyword">null</span>;            <span class="comment">// start at first</span></div><div class="line">      Link current = first;</div><div class="line">                                       <span class="comment">// until end of list,</span></div><div class="line">      <span class="keyword">while</span>(current != <span class="keyword">null</span> &amp;&amp; key &gt; current.dData)</div><div class="line">         &#123;                             <span class="comment">// or key &gt; current,</span></div><div class="line">         previous = current;</div><div class="line">         current = current.next;       <span class="comment">// go to next item</span></div><div class="line">         &#125;</div><div class="line">      <span class="keyword">if</span>(previous==<span class="keyword">null</span>)               <span class="comment">// at beginning of list</span></div><div class="line">         first = newLink;              <span class="comment">// first --&gt; newLink</span></div><div class="line">      <span class="keyword">else</span>                             <span class="comment">// not at beginning</span></div><div class="line">         previous.next = newLink;      <span class="comment">// old prev --&gt; newLink</span></div><div class="line">      newLink.next = current;          <span class="comment">// newLink --&gt; old currnt</span></div><div class="line">      &#125;  <span class="comment">// end insert()</span></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Link <span class="title">remove</span><span class="params">()</span>           <span class="comment">// return &amp; delete first link</span></span></div><div class="line">      &#123;                           <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link temp = first;               <span class="comment">// save first</span></div><div class="line">      first = first.next;              <span class="comment">// delete first</span></div><div class="line">      <span class="keyword">return</span> temp;                     <span class="comment">// return value</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayList</span><span class="params">()</span></span></div><div class="line">      &#123;</div><div class="line">      System.out.print(<span class="string">"List (first--&gt;last): "</span>);</div><div class="line">      Link current = first;       <span class="comment">// start at beginning of list</span></div><div class="line">      <span class="keyword">while</span>(current != <span class="keyword">null</span>)      <span class="comment">// until end of list,</span></div><div class="line">         &#123;</div><div class="line">         current.displayLink();   <span class="comment">// print data</span></div><div class="line">         current = current.next;  <span class="comment">// move to next link</span></div><div class="line">         &#125;</div><div class="line">      System.out.println(<span class="string">""</span>);</div><div class="line">      &#125;</div><div class="line">   &#125;  <span class="comment">// end class SortedList</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SortedListApp</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">      &#123;                            <span class="comment">// create new list</span></div><div class="line">      SortedList theSortedList = <span class="keyword">new</span> SortedList();</div><div class="line">      theSortedList.insert(<span class="number">20</span>);    <span class="comment">// insert 2 items</span></div><div class="line">      theSortedList.insert(<span class="number">40</span>);</div><div class="line"></div><div class="line">      theSortedList.displayList(); <span class="comment">// display list</span></div><div class="line"></div><div class="line">      theSortedList.insert(<span class="number">10</span>);    <span class="comment">// insert 3 more items</span></div><div class="line">      theSortedList.insert(<span class="number">30</span>);</div><div class="line">      theSortedList.insert(<span class="number">50</span>);</div><div class="line"></div><div class="line">      theSortedList.displayList(); <span class="comment">// display list</span></div><div class="line"></div><div class="line">      theSortedList.remove();      <span class="comment">// remove an item</span></div><div class="line"></div><div class="line">      theSortedList.displayList(); <span class="comment">// display list</span></div><div class="line">      &#125;  <span class="comment">// end main()</span></div><div class="line">   &#125;  <span class="comment">// end class SortedListApp</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div></pre></td></tr></table></figure>
+<h2 id="7-3-双向链表"><a href="#7-3-双向链表" class="headerlink" title="7.3 双向链表"></a>7.3 双向链表</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// doublyLinked.java</span></div><div class="line"><span class="comment">// demonstrates doubly-linked list</span></div><div class="line"><span class="comment">// to run this program: C&gt;java DoublyLinkedApp</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Link</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="keyword">public</span> <span class="keyword">long</span> dData;                 <span class="comment">// data item</span></div><div class="line">   <span class="keyword">public</span> Link next;                  <span class="comment">// next link in list</span></div><div class="line">   <span class="keyword">public</span> Link previous;              <span class="comment">// previous link in list</span></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Link</span><span class="params">(<span class="keyword">long</span> d)</span>                <span class="comment">// constructor</span></span></div><div class="line">      &#123; dData = d; &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayLink</span><span class="params">()</span>          <span class="comment">// display this link</span></span></div><div class="line">      &#123; System.out.print(dData + <span class="string">" "</span>); &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   &#125;  <span class="comment">// end class Link</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoublyLinkedList</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="keyword">private</span> Link first;               <span class="comment">// ref to first item</span></div><div class="line">   <span class="keyword">private</span> Link last;                <span class="comment">// ref to last item</span></div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">DoublyLinkedList</span><span class="params">()</span>         <span class="comment">// constructor</span></span></div><div class="line">      &#123;</div><div class="line">      first = <span class="keyword">null</span>;                  <span class="comment">// no items on list yet</span></div><div class="line">      last = <span class="keyword">null</span>;</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span>          <span class="comment">// true if no links</span></span></div><div class="line">      &#123; <span class="keyword">return</span> first==<span class="keyword">null</span>; &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertFirst</span><span class="params">(<span class="keyword">long</span> dd)</span>  <span class="comment">// insert at front of list</span></span></div><div class="line">      &#123;</div><div class="line">      Link newLink = <span class="keyword">new</span> Link(dd);   <span class="comment">// make new link</span></div><div class="line"></div><div class="line">      <span class="keyword">if</span>( isEmpty() )                <span class="comment">// if empty list,</span></div><div class="line">         last = newLink;             <span class="comment">// newLink &lt;-- last</span></div><div class="line">      <span class="keyword">else</span></div><div class="line">         first.previous = newLink;   <span class="comment">// newLink &lt;-- old first</span></div><div class="line">      newLink.next = first;          <span class="comment">// newLink --&gt; old first</span></div><div class="line">      first = newLink;               <span class="comment">// first --&gt; newLink</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertLast</span><span class="params">(<span class="keyword">long</span> dd)</span>   <span class="comment">// insert at end of list</span></span></div><div class="line">      &#123;</div><div class="line">      Link newLink = <span class="keyword">new</span> Link(dd);   <span class="comment">// make new link</span></div><div class="line">      <span class="keyword">if</span>( isEmpty() )                <span class="comment">// if empty list,</span></div><div class="line">         first = newLink;            <span class="comment">// first --&gt; newLink</span></div><div class="line">      <span class="keyword">else</span></div><div class="line">         &#123;</div><div class="line">         last.next = newLink;        <span class="comment">// old last --&gt; newLink</span></div><div class="line">         newLink.previous = last;    <span class="comment">// old last &lt;-- newLink</span></div><div class="line">         &#125;</div><div class="line">      last = newLink;                <span class="comment">// newLink &lt;-- last</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Link <span class="title">deleteFirst</span><span class="params">()</span>         <span class="comment">// delete first link</span></span></div><div class="line">      &#123;                              <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link temp = first;</div><div class="line">      <span class="keyword">if</span>(first.next == <span class="keyword">null</span>)         <span class="comment">// if only one item</span></div><div class="line">         last = <span class="keyword">null</span>;                <span class="comment">// null &lt;-- last</span></div><div class="line">      <span class="keyword">else</span></div><div class="line">         first.next.previous = <span class="keyword">null</span>; <span class="comment">// null &lt;-- old next</span></div><div class="line">      first = first.next;            <span class="comment">// first --&gt; old next</span></div><div class="line">      <span class="keyword">return</span> temp;</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Link <span class="title">deleteLast</span><span class="params">()</span>          <span class="comment">// delete last link</span></span></div><div class="line">      &#123;                              <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link temp = last;</div><div class="line">      <span class="keyword">if</span>(first.next == <span class="keyword">null</span>)         <span class="comment">// if only one item</span></div><div class="line">         first = <span class="keyword">null</span>;               <span class="comment">// first --&gt; null</span></div><div class="line">      <span class="keyword">else</span></div><div class="line">         last.previous.next = <span class="keyword">null</span>;  <span class="comment">// old previous --&gt; null</span></div><div class="line">      last = last.previous;          <span class="comment">// old previous &lt;-- last</span></div><div class="line">      <span class="keyword">return</span> temp;</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">                                     <span class="comment">// insert dd just after key</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insertAfter</span><span class="params">(<span class="keyword">long</span> key, <span class="keyword">long</span> dd)</span></span></div><div class="line">      &#123;                              <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link current = first;          <span class="comment">// start at beginning</span></div><div class="line">      <span class="keyword">while</span>(current.dData != key)    <span class="comment">// until match is found,</span></div><div class="line">         &#123;</div><div class="line">         current = current.next;     <span class="comment">// move to next link</span></div><div class="line">         <span class="keyword">if</span>(current == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;            <span class="comment">// didn't find it</span></div><div class="line">         &#125;</div><div class="line">      Link newLink = <span class="keyword">new</span> Link(dd);   <span class="comment">// make new link</span></div><div class="line"></div><div class="line">      <span class="keyword">if</span>(current==last)              <span class="comment">// if last link,</span></div><div class="line">         &#123;</div><div class="line">         newLink.next = <span class="keyword">null</span>;        <span class="comment">// newLink --&gt; null</span></div><div class="line">         last = newLink;             <span class="comment">// newLink &lt;-- last</span></div><div class="line">         &#125;</div><div class="line">      <span class="keyword">else</span>                           <span class="comment">// not last link,</span></div><div class="line">         &#123;</div><div class="line">         newLink.next = current.next; <span class="comment">// newLink --&gt; old next</span></div><div class="line">                                      <span class="comment">// newLink &lt;-- old next</span></div><div class="line">         current.next.previous = newLink;</div><div class="line">         &#125;</div><div class="line">      newLink.previous = current;    <span class="comment">// old current &lt;-- newLink</span></div><div class="line">      current.next = newLink;        <span class="comment">// old current --&gt; newLink</span></div><div class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;                   <span class="comment">// found it, did insertion</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Link <span class="title">deleteKey</span><span class="params">(<span class="keyword">long</span> key)</span>   <span class="comment">// delete item w/ given key</span></span></div><div class="line">      &#123;                              <span class="comment">// (assumes non-empty list)</span></div><div class="line">      Link current = first;          <span class="comment">// start at beginning</span></div><div class="line">      <span class="keyword">while</span>(current.dData != key)    <span class="comment">// until match is found,</span></div><div class="line">         &#123;</div><div class="line">         current = current.next;     <span class="comment">// move to next link</span></div><div class="line">         <span class="keyword">if</span>(current == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;             <span class="comment">// didn't find it</span></div><div class="line">         &#125;</div><div class="line">      <span class="keyword">if</span>(current==first)             <span class="comment">// found it; first item?</span></div><div class="line">         first = current.next;       <span class="comment">// first --&gt; old next</span></div><div class="line">      <span class="keyword">else</span>                           <span class="comment">// not first</span></div><div class="line">                                     <span class="comment">// old previous --&gt; old next</span></div><div class="line">         current.previous.next = current.next;</div><div class="line"></div><div class="line">      <span class="keyword">if</span>(current==last)              <span class="comment">// last item?</span></div><div class="line">         last = current.previous;    <span class="comment">// old previous &lt;-- last</span></div><div class="line">      <span class="keyword">else</span>                           <span class="comment">// not last</span></div><div class="line">                                     <span class="comment">// old previous &lt;-- old next</span></div><div class="line">         current.next.previous = current.previous;</div><div class="line">      <span class="keyword">return</span> current;                <span class="comment">// return value</span></div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayForward</span><span class="params">()</span></span></div><div class="line">      &#123;</div><div class="line">      System.out.print(<span class="string">"List (first--&gt;last): "</span>);</div><div class="line">      Link current = first;          <span class="comment">// start at beginning</span></div><div class="line">      <span class="keyword">while</span>(current != <span class="keyword">null</span>)         <span class="comment">// until end of list,</span></div><div class="line">         &#123;</div><div class="line">         current.displayLink();      <span class="comment">// display data</span></div><div class="line">         current = current.next;     <span class="comment">// move to next link</span></div><div class="line">         &#125;</div><div class="line">      System.out.println(<span class="string">""</span>);</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayBackward</span><span class="params">()</span></span></div><div class="line">      &#123;</div><div class="line">      System.out.print(<span class="string">"List (last--&gt;first): "</span>);</div><div class="line">      Link current = last;           <span class="comment">// start at end</span></div><div class="line">      <span class="keyword">while</span>(current != <span class="keyword">null</span>)         <span class="comment">// until start of list,</span></div><div class="line">         &#123;</div><div class="line">         current.displayLink();      <span class="comment">// display data</span></div><div class="line">         current = current.previous; <span class="comment">// move to previous link</span></div><div class="line">         &#125;</div><div class="line">      System.out.println(<span class="string">""</span>);</div><div class="line">      &#125;</div><div class="line"><span class="comment">// -------------------------------------------------------------</span></div><div class="line">   &#125;  <span class="comment">// end class DoublyLinkedList</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoublyLinkedApp</span></span></div><div class="line">   &#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">      &#123;                             <span class="comment">// make a new list</span></div><div class="line">      DoublyLinkedList theList = <span class="keyword">new</span> DoublyLinkedList();</div><div class="line"></div><div class="line">      theList.insertFirst(<span class="number">22</span>);      <span class="comment">// insert at front</span></div><div class="line">      theList.insertFirst(<span class="number">44</span>);</div><div class="line">      theList.insertFirst(<span class="number">66</span>);</div><div class="line"></div><div class="line">      theList.insertLast(<span class="number">11</span>);       <span class="comment">// insert at rear</span></div><div class="line">      theList.insertLast(<span class="number">33</span>);</div><div class="line">      theList.insertLast(<span class="number">55</span>);</div><div class="line"></div><div class="line">      theList.displayForward();     <span class="comment">// display list forward</span></div><div class="line">      theList.displayBackward();    <span class="comment">// display list backward</span></div><div class="line"></div><div class="line">      theList.deleteFirst();        <span class="comment">// delete first item</span></div><div class="line">      theList.deleteLast();         <span class="comment">// delete last item</span></div><div class="line">      theList.deleteKey(<span class="number">11</span>);        <span class="comment">// delete item with key 11</span></div><div class="line"></div><div class="line">      theList.displayForward();     <span class="comment">// display list forward</span></div><div class="line"></div><div class="line">      theList.insertAfter(<span class="number">22</span>, <span class="number">77</span>);  <span class="comment">// insert 77 after 22</span></div><div class="line">      theList.insertAfter(<span class="number">33</span>, <span class="number">88</span>);  <span class="comment">// insert 88 after 33</span></div><div class="line"></div><div class="line">      theList.displayForward();     <span class="comment">// display list forward</span></div><div class="line">      &#125;  <span class="comment">// end main()</span></div><div class="line">   &#125;  <span class="comment">// end class DoublyLinkedApp</span></div><div class="line"><span class="comment">////////////////////////////////////////////////////////////////</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数组和链表/" rel="tag"># 数组和链表</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/数据结构和算法/队列/" rel="next" title="队列">
+                <i class="fa fa-chevron-left"></i> 队列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/01/数据结构和算法/栈/" rel="prev" title="栈">
+                栈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-概要"><span class="nav-number">1.</span> <span class="nav-text">1. 概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-数组"><span class="nav-number">2.</span> <span class="nav-text">2. 数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-单向链表"><span class="nav-number">3.</span> <span class="nav-text">3. 单向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-单链表删除节点"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 单链表删除节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-单链表添加节点"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 单链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-双向链表"><span class="nav-number">4.</span> <span class="nav-text">4. 双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-双链表删除节点"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 双链表删除节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-双链表添加节点"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 双链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Java实现双链表"><span class="nav-number">5.</span> <span class="nav-text">5. Java实现双链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-双链表实现2"><span class="nav-number">6.</span> <span class="nav-text">6. 双链表实现2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-测试双链表"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 测试双链表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-双链表"><span class="nav-number">7.</span> <span class="nav-text">7. 双链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-单链表的实现"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 单链表的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-有序链表"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 有序链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-双向链表"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 双向链表</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/01/数据结构和算法/数组和链表/';
+          this.page.identifier = '2017/05/01/数据结构和算法/数组和链表/';
+          this.page.title = '数组和链表';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

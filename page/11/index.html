@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/android/Android的事件分发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/多线程/" itemprop="url">
-                  多线程
+                <a class="post-title-link" href="/2017/04/30/android/Android的事件分发/" itemprop="url">
+                  Android的事件分发
                 </a>
               
             
@@ -326,7 +326,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:57:25+08:00">
                 2017-04-30
               </time>
             
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/多线程/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/android/Android的事件分发/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/多线程/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/android/Android的事件分发/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,11 +395,12 @@
 
       
         
-          <h1 id="1-多线程概述"><a href="#1-多线程概述" class="headerlink" title="1. 多线程概述"></a><strong>1. 多线程概述</strong></h1><h2 id="1-1-多线程引入"><a href="#1-1-多线程引入" class="headerlink" title="1.1 多线程引入"></a><strong>1.1 多线程引入</strong></h2><p><img src="http://img.blog.csdn.net/20150827214823243" alt=""></p>
-<p>由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。</p>
+          <h1 id="1-Touch事件和绘制事件的异同之处"><a href="#1-Touch事件和绘制事件的异同之处" class="headerlink" title="1. Touch事件和绘制事件的异同之处"></a><strong>1. Touch事件和绘制事件的异同之处</strong></h1><p>Touch事件和绘制事件很类似，都是由ViewRoot派发下来的，但是不同之处在绘制事件是由应用中的某个View发起请求，一层一层上传到ViewRoot，再有ViewRoot下发绘制，传递canvas给所有子View让其绘制自身，绘制好后，再通知WMS进行画到屏幕上。而Touch事件是由硬件捕获到触摸后由系统传递给应用的ViewRoot，再由ViewRoot往下一层一层传递。</p>
+<p>他们的处理过程都是自上而下的分发，但是绘制多了一层自下往上的请求。</p>
+<p>事件存在消耗，事件的处理方法都会返回一个boolean值，如果该值为true，则本次事件下发将会终止。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/多线程/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/android/Android的事件分发/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -445,7 +446,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程锁技术/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/android/Android的消息机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -467,8 +468,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/线程锁技术/" itemprop="url">
-                  线程锁技术
+                <a class="post-title-link" href="/2017/04/30/android/Android的消息机制/" itemprop="url">
+                  Android的消息机制
                 </a>
               
             
@@ -484,7 +485,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:57:10+08:00">
                 2017-04-30
               </time>
             
@@ -507,8 +508,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -525,9 +526,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/线程锁技术/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/android/Android的消息机制/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/线程锁技术/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/android/Android的消息机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -553,45 +554,12 @@
 
       
         
-          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>这里介绍了java5中的线程锁技术：Lock和Condition，实现线程间的通信，其中的读锁和写锁的使用通过一个缓存系统进行了演示，对于Condition的应用通过一个阻塞队列进行演示。</p>
-<p>线程锁技术：Lock &amp; Condition 实现线程同步通信所属包：java.util.concurrent.locks</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">线程锁</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Synchronized</td>
-<td style="text-align:left">同步方法，锁对象是this；静态同步方法，锁对象是字节码.class；同步代码块，锁对象是任意对象，但必须是同一个对象</td>
-</tr>
-<tr>
-<td style="text-align:left">Lock</td>
-<td style="text-align:left">同步锁接口</td>
-</tr>
-<tr>
-<td style="text-align:left">ReentrantLock</td>
-<td style="text-align:left">lock()，unlock()，newCondition()</td>
-</tr>
-<tr>
-<td style="text-align:left">ReadWriteLock</td>
-<td style="text-align:left">读写锁接口</td>
-</tr>
-<tr>
-<td style="text-align:left">ReentrantReadWriteLock</td>
-<td style="text-align:left">readLock()获取读锁，writeLock()获取写锁</td>
-</tr>
-<tr>
-<td style="text-align:left">Condition</td>
-<td style="text-align:left">线程间通信  await()等待  signal()唤醒</td>
-</tr>
-</tbody>
-</table>
+          <h1 id="1-ANR异常"><a href="#1-ANR异常" class="headerlink" title="1. ANR异常"></a><strong>1. ANR异常</strong></h1><p>Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常。所以，比较耗时的操作都必须要交给子线程。</p>
+<p>解决办法：可以通过Handler来解决这个问题，将比较耗时的操作交给子线程，然后子线程通过Handler，发送消息给主线程，让主线程去更新界面。什么样的操作时比较耗时的？</p>
+<p>1、访问网络，2、大文件的拷贝，3、阻塞式的请求，socket</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/线程锁技术/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/android/Android的消息机制/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -637,7 +605,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/定时器、互斥、同步通信技术/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程范围内共享数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -659,8 +627,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="url">
-                  定时器、互斥、同步通信技术
+                <a class="post-title-link" href="/2017/04/30/java/线程范围内共享数据/" itemprop="url">
+                  线程范围内共享数据
                 </a>
               
             
@@ -717,9 +685,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/定时器、互斥、同步通信技术/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/线程范围内共享数据/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/线程范围内共享数据/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -745,10 +713,10 @@
 
       
         
-          <h1 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h1><p>这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性</p>
+          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>所谓线程范围内共享数据，即对于相同的程序代码，多个模块在同一个线程中运行时要共享一份数据，而在另外线程中运行时又共享另外一份数据，API中为我们提供了一个操作线程范围内共享数据的类ThreadLocal，对于线程范围内共享数据的应用，在ThreadLocal的应用场景中进行了介绍，然后主要对它的使用进行讲解，演示了由单一数据的共享到将多个数据封装到一个对象中，然后进行共享。在开始先用一个Map集合简单实现线程范围内数据的共享</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/定时器、互斥、同步通信技术/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/线程范围内共享数据/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -794,7 +762,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多个线程之间共享数据的方式探讨/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/使用JDK5中同步技术的3个面试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -816,8 +784,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/多个线程之间共享数据的方式探讨/" itemprop="url">
-                  多个线程之间共享数据的方式探讨
+                <a class="post-title-link" href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/" itemprop="url">
+                  使用JDK5中同步技术的3个面试题
                 </a>
               
             
@@ -874,9 +842,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/多个线程之间共享数据的方式探讨/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/多个线程之间共享数据的方式探讨/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/使用JDK5中同步技术的3个面试题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -902,10 +870,11 @@
 
       
         
-          <h2 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a><strong>内容摘要</strong></h2><p>多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计</p>
+          <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">          </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">              </div><div class="line">            System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">            <span class="comment">/*模拟处理16行日志，下面的代码产生了16个日志对象，当前代码需要运行16秒才能打印完这些日志。 </span></div><div class="line">            修改程序代码，开四个线程让这16个对象在4秒钟打完。 </div><div class="line">            */  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++)&#123;  <span class="comment">//这行代码不能改动  </span></div><div class="line">                <span class="keyword">final</span> String log = <span class="string">""</span>+(i+<span class="number">1</span>);   <span class="comment">//这行代码不能改动  </span></div><div class="line">                &#123;  </div><div class="line">                        Test.parseLog(log);  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        <span class="comment">//parseLog方法内部的代码不能改动  </span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">parseLog</span><span class="params">(String log)</span></span>&#123;  </div><div class="line">            System.out.println(log+<span class="string">":"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">              </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;         </div><div class="line">        &#125;     </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/多个线程之间共享数据的方式探讨/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -951,7 +920,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/volatile关键字解析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/同步工具类/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -973,8 +942,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/volatile关键字解析/" itemprop="url">
-                  volatile关键字解析
+                <a class="post-title-link" href="/2017/04/30/java/同步工具类/" itemprop="url">
+                  同步工具类
                 </a>
               
             
@@ -1031,9 +1000,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/volatile关键字解析/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/同步工具类/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/volatile关键字解析/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/同步工具类/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1059,21 +1028,10 @@
 
       
         
-          <blockquote>
-<p>原文链接：<a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920373.html</a></p>
-</blockquote>
-<p>volatile这个关键字可能很多朋友都听说过，或许也都用过。在Java 5之前，它是一个备受争议的关键字，因为在程序中使用它往往会导致出人意料的结果。在Java 5之后，volatile关键字才得以重获生机。</p>
-<p>volatile关键字虽然从字面上理解起来比较简单，但是要用好不是一件容易的事情。由于volatile关键字是与Java的内存模型有关的，因此在讲述volatile关键之前，我们先来了解一下与内存模型相关的概念和知识，然后分析了volatile关键字的实现原理，最后给出了几个使用volatile关键字的场景。</p>
-<h1 id="目录大纲"><a href="#目录大纲" class="headerlink" title="目录大纲"></a>目录大纲</h1><ul>
-<li>内存模型的相关概念</li>
-<li>并发编程中的三个概念</li>
-<li>Java内存模型</li>
-<li>深入剖析volatile关键字</li>
-<li>使用volatile关键字的场景</li>
-</ul>
+          <h1 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a><strong>内容摘要</strong></h1><p>这里主要介绍了java5中线程锁技术以外的其他同步工具，首先介绍Semaphore：一个计数信号量。用于控制同时访问资源的线程个数，CyclicBarrier同步辅助类：从字面意思看是路障，这里用于线程之间的相互等待，到达某点后，继续向下执行。CountDownLatch同步辅助类：在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。犹如倒计时计数器，然后是Exchanger：实现两个对象之间数据交换，可阻塞队列：ArrayBlockingQueue，通过阻塞队列间的通信来演示其作用，最后介绍了几个同步集合。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/volatile关键字解析/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/同步工具类/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1114,7 +1072,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1159,7 +1117,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1170,7 +1128,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1181,7 +1139,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
