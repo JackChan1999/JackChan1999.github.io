@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="消息机制," />
 
 
 
@@ -90,19 +90,20 @@
 
 
 
-<meta name="description" content="title: Android的消息机制categories: androidtags: 消息机制 1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么And">
+<meta name="description" content="1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常">
+<meta name="keywords" content="消息机制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="秋过冬漫长">
+<meta property="og:title" content="Android的消息机制">
 <meta property="og:url" content="http://yoursite.com/2017/04/30/Android的消息机制/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
-<meta property="og:description" content="title: Android的消息机制categories: androidtags: 消息机制 1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么And">
+<meta property="og:description" content="1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303152457864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303151844350?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170303172217572?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-05-01T02:27:10.060Z">
+<meta property="og:updated_time" content="2017-05-01T02:36:24.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="秋过冬漫长">
-<meta name="twitter:description" content="title: Android的消息机制categories: androidtags: 消息机制 1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么And">
+<meta name="twitter:title" content="Android的消息机制">
+<meta name="twitter:description" content="1. ANR异常Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170303152457864?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
@@ -137,7 +138,7 @@
 
 
 
-  <title> | 秋过冬漫长</title>
+  <title>Android的消息机制 | 秋过冬漫长</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +278,7 @@
             
             
               
-                
+                Android的消息机制
               
             
           </h1>
@@ -302,6 +303,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -338,8 +361,7 @@
       
 
       
-        <p>title: Android的消息机制<br>categories: android<br>tags: 消息机制</p>
-<h1 id="1-ANR异常"><a href="#1-ANR异常" class="headerlink" title="1. ANR异常"></a><strong>1. ANR异常</strong></h1><p>Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常。所以，比较耗时的操作都必须要交给子线程。</p>
+        <h1 id="1-ANR异常"><a href="#1-ANR异常" class="headerlink" title="1. ANR异常"></a><strong>1. ANR异常</strong></h1><p>Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常。所以，比较耗时的操作都必须要交给子线程。</p>
 <p>解决办法：可以通过Handler来解决这个问题，将比较耗时的操作交给子线程，然后子线程通过Handler，发送消息给主线程，让主线程去更新界面。什么样的操作时比较耗时的？</p>
 <p>1、访问网络，2、大文件的拷贝，3、阻塞式的请求，socket</p>
 <a id="more"></a>
@@ -488,6 +510,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/消息机制/" rel="tag"># 消息机制</a>
+          
+        </div>
+      
 
       
         
@@ -610,7 +638,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -835,7 +863,7 @@
         var disqus_config = function () {
           this.page.url = 'http://yoursite.com/2017/04/30/Android的消息机制/';
           this.page.identifier = '2017/04/30/Android的消息机制/';
-          this.page.title = '';
+          this.page.title = 'Android的消息机制';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
