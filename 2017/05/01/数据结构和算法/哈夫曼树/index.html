@@ -97,14 +97,14 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/01/数据结构和算法/哈夫曼树/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
 <meta property="og:description" content="1. 哈夫曼树的介绍Huffman Tree，中文名是哈夫曼树或霍夫曼树，它是最优二叉树。 定义：给定n个权值作为n个叶子结点，构造一棵二叉树，若树的带权路径长度达到最小，则这棵树被称为哈夫曼树。 这个定义里面涉及到了几个陌生的概念，下面就是一颗哈夫曼树，我们来看图解答。">
-<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/2.2.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/2.2.1.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/2.2.2.jpg">
-<meta property="og:updated_time" content="2017-05-01T10:58:22.719Z">
+<meta property="og:image" content="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.jpg">
+<meta property="og:image" content="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.1.jpg">
+<meta property="og:image" content="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.2.jpg">
+<meta property="og:updated_time" content="2017-05-06T13:18:36.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈夫曼树">
 <meta name="twitter:description" content="1. 哈夫曼树的介绍Huffman Tree，中文名是哈夫曼树或霍夫曼树，它是最优二叉树。 定义：给定n个权值作为n个叶子结点，构造一棵二叉树，若树的带权路径长度达到最小，则这棵树被称为哈夫曼树。 这个定义里面涉及到了几个陌生的概念，下面就是一颗哈夫曼树，我们来看图解答。">
-<meta name="twitter:image" content="http://yoursite.com/2017/05/01/数据结构和算法/assets/2.2.jpg">
+<meta name="twitter:image" content="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.jpg">
 
 
 
@@ -397,7 +397,7 @@
       
         <h2 id="1-哈夫曼树的介绍"><a href="#1-哈夫曼树的介绍" class="headerlink" title="1. 哈夫曼树的介绍"></a><strong>1. 哈夫曼树的介绍</strong></h2><p>Huffman Tree，中文名是哈夫曼树或霍夫曼树，它是最优二叉树。</p>
 <p><strong>定义</strong>：给定n个权值作为n个叶子结点，构造一棵二叉树，若树的带权路径长度达到最小，则这棵树被称为哈夫曼树。 这个定义里面涉及到了几个陌生的概念，下面就是一颗哈夫曼树，我们来看图解答。</p>
-<p><img src="../assets/2.2.jpg" alt=""></p>
+<p><img src="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.jpg" alt=""></p>
 <a id="more"></a>
 <h3 id="1-1-路径和路径长度"><a href="#1-1-路径和路径长度" class="headerlink" title="1.1 路径和路径长度"></a>1.1 路径和路径长度</h3><p><strong>定义</strong>：在一棵树中，从一个结点往下可以达到的孩子或孙子结点之间的通路，称为路径。通路中分支的数目称为路径长度。若规定根结点的层数为1，则从根结点到第L层结点的路径长度为L-1。 </p>
 <p><strong>例子</strong>：100和80的路径长度是1，50和30的路径长度是2，20和10的路径长度是3。</p>
@@ -406,7 +406,7 @@
 <h3 id="1-3-树的带权路径长度"><a href="#1-3-树的带权路径长度" class="headerlink" title="1.3  树的带权路径长度"></a>1.3  树的带权路径长度</h3><p><strong>定义</strong>：树的带权路径长度规定为所有叶子结点的带权路径长度之和，记为WPL。 </p>
 <p><strong>例子</strong>：示例中，树的WPL= 1<strong>100 + 2\</strong>80 + 3<strong>20 + 3\</strong>10 = 100 + 160 + 60 + 30 = 350。</p>
 <p>比较下面两棵树</p>
-<p><img src="../assets/2.2.1.jpg" alt=""></p>
+<p><img src="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.1.jpg" alt=""></p>
 <p>上面的两棵树都是以{10, 20, 50, 100}为叶子节点的树。</p>
 <p>左边的树WPL=2<em>10 + 2</em>20 + 2<em>50 + 2</em>100 = 360 </p>
 <p>右边的树WPL=350</p>
@@ -414,7 +414,7 @@
 <h2 id="2-哈夫曼树的图文解析"><a href="#2-哈夫曼树的图文解析" class="headerlink" title="2. 哈夫曼树的图文解析"></a><strong>2. 哈夫曼树的图文解析</strong></h2><p>假设有n个权值，则构造出的哈夫曼树有n个叶子结点。 n个权值分别设为 w1、w2、…、wn，哈夫曼树的构造规则为：</p>
 <p><strong>1</strong>. 将w1、w2、…，wn看成是有n 棵树的森林(每棵树仅有一个结点)；<br><strong>2</strong>. 在森林中选出根结点的权值最小的两棵树进行合并，作为一棵新树的左、右子树，且新树的根结点权值为其左、右子树根结点权值之和；<br><strong>3</strong>. 从森林中删除选取的两棵树，并将新树加入森林；<br><strong>4</strong>. 重复(02)、(03)步，直到森林中只剩一棵树为止，该树即为所求得的哈夫曼树。</p>
 <p>以{5,6,7,8,15}为例，来构造一棵哈夫曼树。</p>
-<p><img src="../assets/2.2.2.jpg" alt=""></p>
+<p><img src="https://alleniverson.gitbooks.io/data-structure-and-algorithms/content/assets/2.2.2.jpg" alt=""></p>
 <p><strong>第1步</strong>：创建森林，森林包括5棵树，这5棵树的权值分别是5,6,7,8,15。<br><strong>第2步</strong>：在森林中，选择根节点权值最小的两棵树(5和6)来进行合并，将它们作为一颗新树的左右孩子(谁左谁右无关紧要，这里，我们选择较小的作为左孩子)，并且新树的权值是左右孩子的权值之和。即，新树的权值是11。 然后，将”树5”和”树6”从森林中删除，并将新的树(树11)添加到森林中。<br><strong>第3步</strong>：在森林中，选择根节点权值最小的两棵树(7和8)来进行合并。得到的新树的权值是15。 然后，将”树7”和”树8”从森林中删除，并将新的树(树15)添加到森林中。<br><strong>第4步</strong>：在森林中，选择根节点权值最小的两棵树(11和15)来进行合并。得到的新树的权值是26。 然后，将”树11”和”树15”从森林中删除，并将新的树(树26)添加到森林中。<br><strong>第5步</strong>：在森林中，选择根节点权值最小的两棵树(15和26)来进行合并。得到的新树的权值是41。 然后，将”树15”和”树26”从森林中删除，并将新的树(树41)添加到森林中。<br>此时，森林中只有一棵树(树41)。这棵树就是我们需要的哈夫曼树！</p>
 <h2 id="3-哈夫曼树的基本操作"><a href="#3-哈夫曼树的基本操作" class="headerlink" title="3. 哈夫曼树的基本操作"></a><strong>3. 哈夫曼树的基本操作</strong></h2><p>哈夫曼树的重点是如何构造哈夫曼树。本文构造哈夫曼时，用到了以前介绍过的”(二叉堆)最小堆”。下面对哈夫曼树进行讲解。</p>
 <h3 id="基本定义"><a href="#基本定义" class="headerlink" title="基本定义"></a><strong>基本定义</strong></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HuffmanNode</span> <span class="keyword">implements</span> <span class="title">Comparable</span>, <span class="title">Cloneable</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> key;              <span class="comment">// 权值</span></div><div class="line">    <span class="keyword">protected</span> HuffmanNode left;     <span class="comment">// 左孩子</span></div><div class="line">    <span class="keyword">protected</span> HuffmanNode right;    <span class="comment">// 右孩子</span></div><div class="line">    <span class="keyword">protected</span> HuffmanNode parent;   <span class="comment">// 父结点</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">HuffmanNode</span><span class="params">(<span class="keyword">int</span> key, HuffmanNode left, HuffmanNode right, HuffmanNode parent)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.left = left;</div><div class="line">        <span class="keyword">this</span>.right = right;</div><div class="line">        <span class="keyword">this</span>.parent = parent;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        Object obj=<span class="keyword">null</span>;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            obj = (HuffmanNode)<span class="keyword">super</span>.clone();<span class="comment">//Object 中的clone()识别出你要复制的是哪一个对象。    </span></div><div class="line">        &#125; <span class="keyword">catch</span>(CloneNotSupportedException e) &#123;</div><div class="line">            System.out.println(e.toString());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> obj;    </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.key - ((HuffmanNode)obj).key;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
