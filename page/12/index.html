@@ -287,6 +287,205 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程池/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/30/java/线程池/" itemprop="url">
+                  线程池
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/30/java/线程池/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/30/java/线程池/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>这里首先介绍了java5中的并发的小工具包：java.util.concurrent.atomic，然后介绍了线程池的概念，对使用java5的方式创建不同形式的线程进行了演示，之后介绍了两个 对象：Callable和Future，用于获取线程执行后的结果，对于<a href="线程锁技术.md">线程锁技术</a>则在另外一篇文章中介绍。</p>
+<p>Java5中的线程并发库都在java.util.concurrent包及子包中</p>
+<h1 id="1-Executor类的继承结构"><a href="#1-Executor类的继承结构" class="headerlink" title="1. Executor类的继承结构"></a><strong>1. Executor类的继承结构</strong></h1><p><img src="http://img.blog.csdn.net/20161024205013699" alt="ThreadPoolExecutor"></p>
+<p>Executor是线程池的顶级接口，只有一个执行任务的方法execute()</p>
+<p>ExecutorService是Executor的子接口，该接口中包含了线程池常用的一些方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">execute()</td>
+<td style="text-align:left">执行任务</td>
+</tr>
+<tr>
+<td style="text-align:left">shutdown()</td>
+<td style="text-align:left">调用后不再接收新任务，如果里面有任务，就执行完</td>
+</tr>
+<tr>
+<td style="text-align:left">shutdownNow()</td>
+<td style="text-align:left">调用后不再接受新任务，如果有等待任务，移出队列；有正在执行的，尝试停止之</td>
+</tr>
+<tr>
+<td style="text-align:left">isShutdown()</td>
+<td style="text-align:left">判断线程池是否关闭</td>
+</tr>
+<tr>
+<td style="text-align:left">isTerminated()</td>
+<td style="text-align:left">判断线程池中任务是否执行完成</td>
+</tr>
+<tr>
+<td style="text-align:left">submit()</td>
+<td style="text-align:left">提交任务</td>
+</tr>
+<tr>
+<td style="text-align:left">invokeAll()</td>
+<td style="text-align:left">执行一组任务</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/30/java/线程池/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/使用JDK5中同步技术的3个面试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -445,7 +644,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/同步工具类/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多个线程之间共享数据的方式探讨/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -467,8 +666,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/同步工具类/" itemprop="url">
-                  同步工具类
+                <a class="post-title-link" href="/2017/04/30/java/多个线程之间共享数据的方式探讨/" itemprop="url">
+                  多个线程之间共享数据的方式探讨
                 </a>
               
             
@@ -525,9 +724,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/同步工具类/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/多个线程之间共享数据的方式探讨/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/同步工具类/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/多个线程之间共享数据的方式探讨/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -553,10 +752,10 @@
 
       
         
-          <h1 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a><strong>内容摘要</strong></h1><p>这里主要介绍了java5中线程锁技术以外的其他同步工具，首先介绍Semaphore：一个计数信号量。用于控制同时访问资源的线程个数，CyclicBarrier同步辅助类：从字面意思看是路障，这里用于线程之间的相互等待，到达某点后，继续向下执行。CountDownLatch同步辅助类：在完成一组正在其他线程中执行的操作之前，它允许一个或多个线程一直等待。犹如倒计时计数器，然后是Exchanger：实现两个对象之间数据交换，可阻塞队列：ArrayBlockingQueue，通过阻塞队列间的通信来演示其作用，最后介绍了几个同步集合。</p>
+          <h2 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a><strong>内容摘要</strong></h2><p>多个线程之间共享数据，按照每个线程执行代码是否相同，我们可以采取不同的处理方式，这里通过简单的卖票示例说明了当每个线程执行相同代码的情况，对于多个线程执行不同代码的情况，处理方式比较灵活，这里主要介绍了2种方式，通过2种方式的对比和归纳，我们可以总结出在多个线程执行不同的代码情况下，如何进行代码的设计</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/同步工具类/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/多个线程之间共享数据的方式探讨/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -602,7 +801,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/volatile关键字解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -624,8 +823,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/多线程/" itemprop="url">
-                  多线程
+                <a class="post-title-link" href="/2017/04/30/java/volatile关键字解析/" itemprop="url">
+                  volatile关键字解析
                 </a>
               
             
@@ -682,9 +881,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/多线程/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/volatile关键字解析/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/多线程/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/volatile关键字解析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -710,168 +909,21 @@
 
       
         
-          <h1 id="1-多线程概述"><a href="#1-多线程概述" class="headerlink" title="1. 多线程概述"></a><strong>1. 多线程概述</strong></h1><h2 id="1-1-多线程引入"><a href="#1-1-多线程引入" class="headerlink" title="1.1 多线程引入"></a><strong>1.1 多线程引入</strong></h2><p><img src="http://img.blog.csdn.net/20150827214823243" alt=""></p>
-<p>由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。</p>
+          <blockquote>
+<p>原文链接：<a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920373.html</a></p>
+</blockquote>
+<p>volatile这个关键字可能很多朋友都听说过，或许也都用过。在Java 5之前，它是一个备受争议的关键字，因为在程序中使用它往往会导致出人意料的结果。在Java 5之后，volatile关键字才得以重获生机。</p>
+<p>volatile关键字虽然从字面上理解起来比较简单，但是要用好不是一件容易的事情。由于volatile关键字是与Java的内存模型有关的，因此在讲述volatile关键之前，我们先来了解一下与内存模型相关的概念和知识，然后分析了volatile关键字的实现原理，最后给出了几个使用volatile关键字的场景。</p>
+<h1 id="目录大纲"><a href="#目录大纲" class="headerlink" title="目录大纲"></a>目录大纲</h1><ul>
+<li>内存模型的相关概念</li>
+<li>并发编程中的三个概念</li>
+<li>Java内存模型</li>
+<li>深入剖析volatile关键字</li>
+<li>使用volatile关键字的场景</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/多线程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/定时器、互斥、同步通信技术/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="url">
-                  定时器、互斥、同步通信技术
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
-                2017-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/java/定时器、互斥、同步通信技术/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h1><p>这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/定时器、互斥、同步通信技术/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/volatile关键字解析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1160,7 +1212,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
