@@ -1,0 +1,1238 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自定义控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="内容摘要该控件能够应用于内容资讯展示的功能模块中，如：腾讯和新浪微博的微博列表，微信朋友圈及其它社交类应用的好友动态展示列表等；实现了类似腾讯微博的微博列表展示功能，包含微博文本内容，表情，图片，话题和用户可点超链接等（请参见如下效果图）。该功能在实际项目开发中非常常见，除微博应用外，微信的朋友圈，陌陌、QQ空间的好友动态等也都有类似功能；  RecyclerView使用和嵌套问题 动态设置图片网">
+<meta name="keywords" content="自定义控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信朋友圈，QQ空间，微博等列表展示的功能实现">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/自定义控件/朋友圈列表展示的功能实现/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="内容摘要该控件能够应用于内容资讯展示的功能模块中，如：腾讯和新浪微博的微博列表，微信朋友圈及其它社交类应用的好友动态展示列表等；实现了类似腾讯微博的微博列表展示功能，包含微博文本内容，表情，图片，话题和用户可点超链接等（请参见如下效果图）。该功能在实际项目开发中非常常见，除微博应用外，微信的朋友圈，陌陌、QQ空间的好友动态等也都有类似功能；  RecyclerView使用和嵌套问题 动态设置图片网">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3981391-fd3e695b34db3821.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-05-16T08:00:39.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信朋友圈，QQ空间，微博等列表展示的功能实现">
+<meta name="twitter:description" content="内容摘要该控件能够应用于内容资讯展示的功能模块中，如：腾讯和新浪微博的微博列表，微信朋友圈及其它社交类应用的好友动态展示列表等；实现了类似腾讯微博的微博列表展示功能，包含微博文本内容，表情，图片，话题和用户可点超链接等（请参见如下效果图）。该功能在实际项目开发中非常常见，除微博应用外，微信的朋友圈，陌陌、QQ空间的好友动态等也都有类似功能；  RecyclerView使用和嵌套问题 动态设置图片网">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3981391-fd3e695b34db3821.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/16/自定义控件/朋友圈列表展示的功能实现/"/>
+
+
+
+
+
+  <title>微信朋友圈，QQ空间，微博等列表展示的功能实现 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/16/自定义控件/朋友圈列表展示的功能实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微信朋友圈，QQ空间，微博等列表展示的功能实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T15:57:13+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/16/自定义控件/朋友圈列表展示的功能实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/16/自定义控件/朋友圈列表展示的功能实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h2><p>该控件能够应用于内容资讯展示的功能模块中，如：腾讯和新浪微博的微博列表，微信朋友圈及其它社交类应用的好友动态展示列表等；实现了类似腾讯微博的微博列表展示功能，包含微博文本内容，表情，图片，话题和用户可点超链接等（请参见如下效果图）。该功能在实际项目开发中非常常见，除微博应用外，微信的朋友圈，陌陌、QQ空间的好友动态等也都有类似功能；</p>
+<ol>
+<li>RecyclerView使用和嵌套问题</li>
+<li>动态设置图片网格宽高</li>
+<li>正则表达式的使用</li>
+<li>Linkify实现自定义超链接</li>
+<li>TextView富文本显示</li>
+<li>点赞动画渐变动画效果</li>
+</ol>
+<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://upload-images.jianshu.io/upload_images/3981391-fd3e695b34db3821.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="朋友圈列表的实现"></p>
+<a id="more"></a>
+<h2 id="列表的item布局文件"><a href="#列表的item布局文件" class="headerlink" title="列表的item布局文件"></a>列表的item布局文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_marginBottom</span>=<span class="string">"5dp"</span></div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@color/white"</span></div><div class="line">    <span class="attr">android:descendantFocusability</span>=<span class="string">"blocksDescendants"</span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"60dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:paddingLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:paddingRight</span>=<span class="string">"10dp"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_avatar"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"45dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"45dp"</span></div><div class="line">            <span class="attr">android:layout_centerVertical</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"#11000000"</span></div><div class="line">            <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_centerVertical</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:layout_toRightOf</span>=<span class="string">"@id/iv_avatar"</span></div><div class="line">            <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/tv_user"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_marginRight</span>=<span class="string">"120dp"</span></div><div class="line">                <span class="attr">android:text</span>=<span class="string">"用户名"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/black"</span></div><div class="line">                <span class="attr">android:textSize</span>=<span class="string">"16sp"</span>/&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/tv_user_introduction"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_marginTop</span>=<span class="string">"5dp"</span></div><div class="line">                <span class="attr">android:singleLine</span>=<span class="string">"true"</span></div><div class="line">                <span class="attr">android:text</span>=<span class="string">"用户相关介绍"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_secondary"</span></div><div class="line">                <span class="attr">android:textSize</span>=<span class="string">"14sp"</span>/&gt;</div><div class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_date"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_alignParentRight</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:layout_marginTop</span>=<span class="string">"5dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"0000-00-00"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_secondary"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"14sp"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/tv_content"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_marginBottom</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"5dp"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"这是微博内容...这是微博内容..."</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_main"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"16sp"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--显示微博图片--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">android.support.v7.widget.RecyclerView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/rv_weibo_images"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_marginBottom</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:layout_marginRight</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:listSelector</span>=<span class="string">"@color/transparent"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"gone"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">View</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"1px"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"@color/activity_bg"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"40dp"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:clickable</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/tv_forward"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">                <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/selector_btn_share"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_secondary"</span></div><div class="line">                <span class="attr">android:drawablePadding</span>=<span class="string">"5dp"</span></div><div class="line">                <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">                <span class="attr">android:text</span>=<span class="string">"0"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:clickable</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/tv_comment"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">                <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/selector_btn_comment"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_secondary"</span></div><div class="line">                <span class="attr">android:drawablePadding</span>=<span class="string">"5dp"</span></div><div class="line">                <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">                <span class="attr">android:text</span>=<span class="string">"0"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">            <span class="attr">android:clickable</span>=<span class="string">"true"</span>&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">CheckBox</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/cb_like"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"40dp"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"40dp"</span></div><div class="line">                <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">                <span class="attr">android:button</span>=<span class="string">"@color/transparent"</span></div><div class="line">                <span class="attr">android:checked</span>=<span class="string">"false"</span></div><div class="line">                <span class="attr">android:drawableLeft</span>=<span class="string">"@drawable/selector_btn_prize"</span></div><div class="line">                <span class="attr">android:drawablePadding</span>=<span class="string">"5dp"</span></div><div class="line">                <span class="attr">android:background</span>=<span class="string">"@color/transparent"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_secondary"</span></div><div class="line">                <span class="attr">android:gravity</span>=<span class="string">"center"</span>/&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/tv_like"</span></div><div class="line">                <span class="attr">android:text</span>=<span class="string">"0"</span></div><div class="line">                <span class="attr">android:textColor</span>=<span class="string">"@color/item_text_secondary"</span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>item中的RecyclerView用于显示0-9张图片，根据服务器返回的图片数量不同显示的行列数和图片的大小也不同，需要动态设置，由于这个列表是RecyclerView，item中也使用了RecyclerView，这就产生了RecyclerView的嵌套</p>
+<p>id为tv_content的TextView用于显示内容，内容中包含了表情图片和超链接</p>
+<h2 id="json数据格式"><a href="#json数据格式" class="headerlink" title="json数据格式"></a>json数据格式</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"result"</span>:<span class="literal">true</span>,</div><div class="line">	<span class="attr">"weibo"</span>:[</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"avatar"</span>:<span class="string">"avatar_01"</span>,</div><div class="line">			<span class="attr">"comment"</span>:<span class="number">5</span>,</div><div class="line">			<span class="attr">"content"</span>:<span class="string">"我装作看不懂的样子[呲牙][偷笑][偷笑]，单身狗保重 [再见][再见] @冷笑话精选"</span>,</div><div class="line">			<span class="attr">"date"</span>:<span class="number">1489223423501</span>,</div><div class="line">			<span class="attr">"forward"</span>:<span class="number">8</span>,</div><div class="line">			<span class="attr">"imageUrls"</span>:[</div><div class="line">				<span class="string">"pic_1"</span>,</div><div class="line">				<span class="string">"pic_2"</span>,</div><div class="line">				<span class="string">"pic_3"</span>,</div><div class="line">				<span class="string">"pic_4"</span>,</div><div class="line">				<span class="string">"pic_5"</span>,</div><div class="line">				<span class="string">"pic_6"</span>,</div><div class="line">				<span class="string">"pic_7"</span>,</div><div class="line">				<span class="string">"pic_8"</span>,</div><div class="line">				<span class="string">"pic_9"</span></div><div class="line">			],</div><div class="line">			<span class="attr">"like"</span>:<span class="number">10</span>,</div><div class="line">			<span class="attr">"user_introduction"</span>:<span class="string">"最冷笑话精选，每天分享笑话N枚，你的贴身开心果。"</span>,</div><div class="line">			<span class="attr">"username"</span>:<span class="string">"冷笑话精选"</span></div><div class="line">		&#125;</div><div class="line">     ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对应的实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeChat</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">boolean</span> result;</div><div class="line">    <span class="keyword">public</span> List&lt;WeiboEntity&gt; weibo;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WeiboEntity</span> </span>&#123;</div><div class="line">        <span class="keyword">public</span> String       avatar;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">int</span>          comment;</div><div class="line">        <span class="keyword">public</span> String       content;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">long</span>         date;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">int</span>          forward;</div><div class="line">        <span class="keyword">public</span> <span class="keyword">int</span>          like;</div><div class="line">        <span class="keyword">public</span> String       user_introduction;</div><div class="line">        <span class="keyword">public</span> String       username;</div><div class="line">        <span class="keyword">public</span> List&lt;String&gt; imageUrls;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="动态设置图片宫格数"><a href="#动态设置图片宫格数" class="headerlink" title="动态设置图片宫格数"></a>动态设置图片宫格数</h2><p>根据图片的数量，动态设置RecyclerView的列数和宽度</p>
+<ul>
+<li>如果图片数量为0，则隐藏RecyclerView</li>
+<li>如果图片数量为1，RecyclerView列数设为1列，宽度设为WRAP_CONTENT</li>
+<li>如果图片数量为4，RecyclerView列数设为2列，宽度设为两个图片宫格的宽度</li>
+<li>其它，RecyclerView列数设为3列，宽度设为MATCH_PARENT</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 刷新item布局中子控件的显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRefreshView</span><span class="params">(WeChat.WeiboBean bean, <span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">        <span class="comment">// 显示用户名</span></div><div class="line">        tvUser.setText(bean.getUsername());</div><div class="line"></div><div class="line">        <span class="comment">// 显示用户介绍</span></div><div class="line">        <span class="keyword">if</span> (TextUtils.isEmpty(bean.getUser_introduction())) &#123;</div><div class="line">            tvUserIntroduction.setVisibility(View.GONE);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            tvUserIntroduction.setVisibility(View.VISIBLE);</div><div class="line">            tvUserIntroduction.setText(bean.getUser_introduction());</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 显示头像</span></div><div class="line">        <span class="keyword">int</span> imageResId = Global.getResId(context, bean.getAvatar());</div><div class="line">        ivAvatar.setBackgroundResource(imageResId);</div><div class="line"></div><div class="line">        <span class="comment">// 微博内容</span></div><div class="line">        <span class="comment">// tvContent.setText(bean.getContent());</span></div><div class="line">        EmojiUtil.setText(tvContent, bean.getContent());</div><div class="line">        LinkifyUtil.addCustomLink(tvContent);</div><div class="line">        LinkifyUtil.addCustomLink2(tvContent);</div><div class="line"></div><div class="line">        <span class="comment">// 发表时间</span></div><div class="line">        tvDate.setText(Global.formatDate(bean.getDate()));</div><div class="line"></div><div class="line">        <span class="comment">// 显示微博图片</span></div><div class="line">        <span class="keyword">int</span> imageCount = bean.getImageUrls() == <span class="keyword">null</span></div><div class="line">                ? <span class="number">0</span> : bean.getImageUrls().size();</div><div class="line">        <span class="keyword">if</span> (imageCount == <span class="number">0</span>) &#123;      <span class="comment">// 没有微博图片</span></div><div class="line">            rvWeiboImages.setVisibility(View.GONE);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;    <span class="comment">// 有微博图片</span></div><div class="line">            rvWeiboImages.setVisibility(View.VISIBLE);</div><div class="line">            imageAdapter.setDatas(bean.getImageUrls()); <span class="comment">// 刷新图片显示</span></div><div class="line"></div><div class="line">            <span class="comment">// 动态的指定图片宫格的宽高和RecyclerView的宽度</span></div><div class="line">            <span class="comment">// 1张图片 -&gt; 1列</span></div><div class="line">            <span class="comment">// 4张图片 -&gt; 2列</span></div><div class="line">            <span class="comment">// 其它    -&gt; 3列</span></div><div class="line">            ViewGroup.LayoutParams param = rvWeiboImages.getLayoutParams();</div><div class="line">            <span class="keyword">if</span> (imageCount == <span class="number">1</span>) &#123;</div><div class="line">                layoutManager.setSpanCount(<span class="number">1</span>);</div><div class="line">                param.width = ViewGroup.LayoutParams.WRAP_CONTENT;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (imageCount == <span class="number">4</span>) &#123;</div><div class="line">                layoutManager.setSpanCount(<span class="number">2</span>);</div><div class="line">                <span class="comment">// 两个图片宫格的宽度</span></div><div class="line">                param.width = Global.getGridWidth() * <span class="number">2</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;        <span class="comment">// 3列</span></div><div class="line">                layoutManager.setSpanCount(<span class="number">3</span>);</div><div class="line">                param.width = ViewGroup.LayoutParams.MATCH_PARENT;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="动态设置图片的大小"><a href="#动态设置图片的大小" class="headerlink" title="动态设置图片的大小"></a>动态设置图片的大小</h2><ul>
+<li>1张图片，宫格的宽高为图片的宽高</li>
+<li>其它情况，宫格的宽高为屏幕宽度的三分之一</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 刷新item子控件的显示</span></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onRefreshView</span><span class="params">(String imagePath, <span class="keyword">int</span> position)</span> </span>&#123;</div><div class="line">      <span class="comment">// 动态设置图片宫格的宽高</span></div><div class="line">      <span class="comment">// 1张图片  -&gt;   宫格的宽高为图片的宽高</span></div><div class="line">      <span class="comment">// 其它情况  -&gt;  宫格的宽高为Global.getGridWidth()</span></div><div class="line">      ViewGroup.LayoutParams param = <span class="keyword">super</span>.itemView.getLayoutParams();</div><div class="line">      <span class="keyword">if</span> (<span class="keyword">super</span>.adapter.getItemCount() == <span class="number">1</span>) &#123;    <span class="comment">// 一张图片</span></div><div class="line">          <span class="comment">// 图片资源id</span></div><div class="line">          <span class="keyword">int</span> imageResId = Global.getResId(context, imagePath);</div><div class="line">          Bitmap bitmap = BitmapFactory.decodeResource(</div><div class="line">                  context.getResources(), imageResId);</div><div class="line">          <span class="comment">// 指定宫格的宽高为图片的宽高</span></div><div class="line">          param.width = bitmap.getWidth();</div><div class="line">          param.height = bitmap.getHeight();</div><div class="line">          <span class="comment">// 显示图片</span></div><div class="line">          ivImage.setBackgroundResource(imageResId);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;    <span class="comment">// 多张图片</span></div><div class="line">          <span class="comment">// 显示宫格图片</span></div><div class="line">          <span class="keyword">int</span> imageResId = Global.getResId(context, imagePath);</div><div class="line">          ivImage.setBackgroundResource(imageResId);</div><div class="line"></div><div class="line">          param.width = Global.getGridWidth();    <span class="comment">// 指定宫格图片的宽</span></div><div class="line">          param.height = Global.getGridWidth();</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="TextView富文本显示"><a href="#TextView富文本显示" class="headerlink" title="TextView富文本显示"></a>TextView富文本显示</h2><p>显示文本中的表情，把文本中如<code>[呲牙][偷笑][偷笑]</code>的文字替换成表情图片，实现TextView的富文本显示（图文混排）。需要用正则去匹配文本中是否包含表情，匹配成功，表示文本中包含表情，用ImageSpan封装表情图片，再ImageSpan将设置给SpannableString，把文本中的表示表情的文字替换掉，最后将SpannableString设置给TextView即可。</p>
+<p>正则参考：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[高兴]    \\[([A-Za-z\u4E00-\u9FA5]+)\\]</div><div class="line">@用户     \\@([A-Za-z0-9\u4E00-\u9FA5]+)</div><div class="line">#话题#    \\#([A-Za-z0-9\u4E00-\u9FA5]+)\\#</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmojiUtil</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/** 显示文本和表情 */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setText</span><span class="params">(TextView textView, String text)</span> </span>&#123;</div><div class="line">        Context context = textView.getContext();</div><div class="line">        Resources resources = context.getResources();</div><div class="line">        SpannableString ss = <span class="keyword">new</span> SpannableString(text);</div><div class="line"></div><div class="line">        <span class="comment">// 正则表达式： [高兴]</span></div><div class="line">        Pattern p = Pattern.compile(<span class="string">"\\[([A-Za-z\u4E00-\u9FA5]+)\\]"</span>);</div><div class="line">        Matcher matcher = p.matcher(ss);</div><div class="line">        <span class="keyword">while</span> (matcher.find()) &#123;</div><div class="line">            <span class="comment">// 匹配到一个表情字符串</span></div><div class="line">            String emoji = matcher.group();</div><div class="line">            <span class="comment">// 过滤非表情符，比如： [xxx]</span></div><div class="line">            <span class="keyword">if</span> (EMOJI_DATAS.containsKey(emoji)) &#123;   <span class="comment">// 是表情才处理</span></div><div class="line">                <span class="comment">// System.out.println("----------" + emoji);</span></div><div class="line">                <span class="comment">// 指定了一张图片</span></div><div class="line">                Bitmap bitmap = BitmapFactory.decodeResource(resources, EMOJI_DATAS.get(emoji));</div><div class="line">                bitmap = Global.createBitmap(bitmap, Global.dp2px(<span class="number">20</span>));     <span class="comment">// 图片的宽高为20dp</span></div><div class="line">                ImageSpan span = <span class="keyword">new</span> ImageSpan(context, bitmap, ImageSpan.ALIGN_BOTTOM);</div><div class="line">                <span class="keyword">int</span> start = matcher.start();</div><div class="line">                <span class="keyword">int</span> end = matcher.end();</div><div class="line">                ss.setSpan(span, start, end, <span class="number">0</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        textView.setText(ss);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> HashMap&lt;String, Integer&gt; EMOJI_DATAS = <span class="keyword">new</span> HashMap&lt;String, Integer&gt;();</div><div class="line"></div><div class="line">    <span class="keyword">static</span> &#123;</div><div class="line">        EMOJI_DATAS.put(<span class="string">"[微笑]"</span>, R.drawable.smiley_0);</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="自定义超链接"><a href="#自定义超链接" class="headerlink" title="自定义超链接"></a>自定义超链接</h2><p>关于TextView 网页，电话，邮箱的自动识别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TextView</div><div class="line">	...</div><div class="line">	android:text=&quot; 电话 13609000000 邮箱 xxx@163.com 网址 http://www.google.com &quot; /&gt;</div></pre></td></tr></table></figure>
+<p>添加自定义超链接，把内容中如<code>@冷笑话精选</code>、<code>#编程#</code>、<code>#讲故事#</code>的文本显示为超链接，高亮显示并支持点击。先使用Linkify.MatchFilter 匹配过滤器过滤内容中的超链接，TextView在显示的内容要识别链接时，调用Linkify.addLinks()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LinkifyUtil</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 添加自定义超链接</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addCustomLink</span><span class="params">(TextView textView)</span> </span>&#123;</div><div class="line">        <span class="comment">// @用户:</span></div><div class="line">        Pattern pattern = Pattern.compile(<span class="string">"\\@([A-Za-z0-9\u4E00-\u9FA5]+)\\.?"</span>);</div><div class="line">        <span class="comment">// http://www.qq.com/path?uid=1&amp;username=xx</span></div><div class="line">        String scheme = <span class="string">"weibo://user?uid="</span>;</div><div class="line"></div><div class="line">        <span class="comment">// 匹配过滤器</span></div><div class="line">        Linkify.MatchFilter matchFilter = <span class="keyword">new</span> Linkify.MatchFilter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">acceptMatch</span><span class="params">(CharSequence s, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">                String text = s.subSequence(start, end).toString();</div><div class="line">                <span class="comment">// System.out.println("----text: " + text);</span></div><div class="line">                <span class="keyword">if</span> (text.endsWith(<span class="string">"."</span>)) &#123; <span class="comment">// 邮箱，不需要匹配</span></div><div class="line">                    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;    <span class="comment">// 返回true会显示为超链接</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Linkify.TransformFilter transformFilter = <span class="keyword">null</span>;</div><div class="line">        Linkify.addLinks(textView, pattern, scheme, matchFilter, transformFilter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addCustomLink2</span><span class="params">(TextView textView)</span> </span>&#123;</div><div class="line">        <span class="comment">// @用户:</span></div><div class="line">        Pattern pattern = Pattern.compile(<span class="string">"\\#([A-Za-z0-9\u4E00-\u9FA5]+)\\#"</span>);</div><div class="line">        <span class="comment">// http://www.qq.com/path?uid=1&amp;username=xx</span></div><div class="line">        String scheme = <span class="string">"weibo://topic?uid="</span>;</div><div class="line">        <span class="comment">// 匹配过滤器</span></div><div class="line">        Linkify.MatchFilter matchFilter = <span class="keyword">new</span> Linkify.MatchFilter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">acceptMatch</span><span class="params">(CharSequence s, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">                String text = s.subSequence(start, end).toString();</div><div class="line">                System.out.println(<span class="string">"----text: "</span> + text);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Linkify.TransformFilter transformFilter = <span class="keyword">new</span> Linkify.TransformFilter() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">transformUrl</span><span class="params">(Matcher match, String url)</span> </span>&#123;</div><div class="line">                <span class="keyword">return</span> match.group(<span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Linkify.addLinks(textView, pattern, scheme, matchFilter, transformFilter);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>点击自定义的链接后，点击超链接后会出错。 因为没有找到Activity可以处理发起的Intent, 需要定义两个Activity来接收意图中的参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        <span class="comment">// weibo://user?uid=@冷笑话精选</span></div><div class="line">        Uri uri = getIntent().getData();</div><div class="line">        String topic = uri.getQueryParameter(<span class="string">"uid"</span>);</div><div class="line"></div><div class="line">        TextView textView = <span class="keyword">new</span> TextView(<span class="keyword">this</span>);</div><div class="line">        textView.setGravity(Gravity.CENTER);</div><div class="line">        textView.setTextColor(Color.RED);</div><div class="line">        textView.setText(topic);</div><div class="line">        textView.setTextSize(<span class="number">20</span>);</div><div class="line"></div><div class="line">        setContentView(textView);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">        <span class="comment">// weibo://user?uid=@冷笑话精选</span></div><div class="line">        Uri uri = getIntent().getData();</div><div class="line">        String username = uri.getQueryParameter(<span class="string">"uid"</span>);</div><div class="line"></div><div class="line">        TextView textView = <span class="keyword">new</span> TextView(<span class="keyword">this</span>);</div><div class="line">        textView.setGravity(Gravity.CENTER);</div><div class="line">        textView.setTextColor(Color.GRAY);</div><div class="line">        textView.setText(username);</div><div class="line">        textView.setTextSize(<span class="number">20</span>);</div><div class="line"></div><div class="line">        setContentView(textView);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在清单文件中配置以上Activity，给Activity设置action、category、data</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--点击用户链接时，要调起该Activity--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".ui.activity.UserActivity"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"weibo"</span> <span class="attr">android:host</span>=<span class="string">"user"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".ui.activity.TopicActivity"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.VIEW"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.DEFAULT"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">"weibo"</span> <span class="attr">android:host</span>=<span class="string">"topic"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="点赞动画"><a href="#点赞动画" class="headerlink" title="点赞动画"></a>点赞动画</h2><p>在MainActivity的布局文件中，有一个TextView，是用来执行点赞后的+1的动画（向上平移，透明度变小，放大）。 该控件开始时隐藏，执行点赞动画时，注意不是列表项中的控件执行动画。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// WeiboHolder.java</span></div><div class="line">cbLike.setOnCheckedChangeListener(<span class="keyword">new</span> CompoundButton.OnCheckedChangeListener() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(CompoundButton buttonView, <span class="keyword">boolean</span> isChecked)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (isChecked) &#123;</div><div class="line">			<span class="comment">// 获取当前点击控件相对于窗口的所在位置</span></div><div class="line">            <span class="keyword">int</span>[] locations = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];</div><div class="line">            tvLike.getLocationInWindow(locations);</div><div class="line">            ((MainActivity) context).animateUp(locations);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">animateUp</span><span class="params">(<span class="keyword">int</span>[] locations)</span> </span>&#123;</div><div class="line">    <span class="comment">// 减去状态栏高度24dp</span></div><div class="line">    <span class="keyword">int</span> currentY = locations[<span class="number">1</span>] - Global.dp2px(<span class="number">24</span>);</div><div class="line">    tvLike.setVisibility(View.VISIBLE);</div><div class="line">    tvLike.setTranslationX(locations[<span class="number">0</span>]);</div><div class="line">    tvLike.setTranslationY(currentY);</div><div class="line">    tvLike.setScaleY(<span class="number">1</span>);</div><div class="line">    tvLike.setScaleX(<span class="number">1</span>);</div><div class="line">    tvLike.setAlpha(<span class="number">1f</span>);</div><div class="line"></div><div class="line">    <span class="comment">// 往上移动30dp</span></div><div class="line">    <span class="keyword">int</span> top = currentY - Global.dp2px(<span class="number">30</span>);</div><div class="line">    tvLike.animate().alpha(<span class="number">0</span>).translationY(top)</div><div class="line">            .setInterpolator(<span class="keyword">new</span> DecelerateInterpolator())</div><div class="line">            .scaleX(<span class="number">1.2f</span>).scaleY(<span class="number">1.2f</span>).setDuration(<span class="number">1000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>代码：<a href="https://github.com/JackChan1999/WeChatDemo" target="_blank" rel="external">https://github.com/JackChan1999/WeChatDemo</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义控件/" rel="tag"># 自定义控件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/01/gitbook/GitBook使用教程/" rel="next" title="GitBook使用教程">
+                <i class="fa fa-chevron-left"></i> GitBook使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容摘要"><span class="nav-number">1.</span> <span class="nav-text">内容摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果图"><span class="nav-number">2.</span> <span class="nav-text">效果图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表的item布局文件"><span class="nav-number">3.</span> <span class="nav-text">列表的item布局文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json数据格式"><span class="nav-number">4.</span> <span class="nav-text">json数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态设置图片宫格数"><span class="nav-number">5.</span> <span class="nav-text">动态设置图片宫格数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态设置图片的大小"><span class="nav-number">6.</span> <span class="nav-text">动态设置图片的大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TextView富文本显示"><span class="nav-number">7.</span> <span class="nav-text">TextView富文本显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义超链接"><span class="nav-number">8.</span> <span class="nav-text">自定义超链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#点赞动画"><span class="nav-number">9.</span> <span class="nav-text">点赞动画</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/16/自定义控件/朋友圈列表展示的功能实现/';
+          this.page.identifier = '2017/05/16/自定义控件/朋友圈列表展示的功能实现/';
+          this.page.title = '微信朋友圈，QQ空间，微博等列表展示的功能实现';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
