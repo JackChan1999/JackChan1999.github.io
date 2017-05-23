@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://alleniverson.gitbooks.io/android-develop/content/性能优化/images/Tree View Args.jpg">
 <meta property="og:image" content="https://alleniverson.gitbooks.io/android-develop/content/性能优化/images/merge.jpg">
 <meta property="og:image" content="https://alleniverson.gitbooks.io/android-develop/content/性能优化/images/merge02.jpg">
-<meta property="og:updated_time" content="2017-05-23T04:55:00.958Z">
+<meta property="og:updated_time" content="2017-05-23T05:29:35.316Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存优化">
 <meta name="twitter:description" content="为什么内存优化？在一个商业项目中，很有可能因为工程师的疏忽，导致代码质量不佳，影响到程序的运行效率，从而让用户感知到应用的卡顿、崩溃。而Android开发中，每个Android应用在手机上申请的内存空间都是有限的。虽然手机发展越来越快，可申请到的内存越来越大，但是也不能大手大脚，随便浪费应用可使用的内存空间。内存一旦不够时，你这个应用就会因为OOM（out of memory）而崩溃。因此，内存优">
@@ -442,7 +442,7 @@
 <p>像这样的代码，即使gc后，str对象仍然可以通过弱引用拿到。因为像”abc”这种，并没有存放在堆内    存中，它被存放在常量池里，所以gc不会去回收。</p>
 <h2 id="3-内存泄露的原因"><a href="#3-内存泄露的原因" class="headerlink" title="3. 内存泄露的原因"></a>3. 内存泄露的原因</h2><p><strong>对无用对象的引用一直未被释放，就会导致内存泄露。</strong>如果对象已经用不到了，但是因为疏忽，导致代码中对该无用对象的引用一直没有被清除掉，就会造成内存泄露。</p>
 <p>比如你按back键关掉了一个Activity，那么这个Activity页面就暂时没用了。但是某个后台任务如果一直持有着对该Activity对象的引用，这个时候就会导致内存泄露。</p>
-<h2 id="4-检测内存泄露—LeakCanary"><a href="#4-检测内存泄露—LeakCanary" class="headerlink" title="4. 检测内存泄露—LeakCanary"></a>4. 检测内存泄露—LeakCanary</h2><p>在全球最大的同性交友网站<a href="https://alleniverson.gitbooks.io/android-develop/content/性能优化/http://www.github.com" target="_blank" rel="external">github</a>中，有一个非常流行的开源项目<a href="https://alleniverson.gitbooks.io/android-develop/content/性能优化/https://github.com/square/leakcanary" target="_blank" rel="external">LeakCanary</a>，它能很方便的检测到当前开发的java项目中是否存在内存泄露。</p>
+<h2 id="4-检测内存泄露—LeakCanary"><a href="#4-检测内存泄露—LeakCanary" class="headerlink" title="4. 检测内存泄露—LeakCanary"></a>4. 检测内存泄露—LeakCanary</h2><p>在全球最大的同性交友网站<a href="https://github.com/" target="_blank" rel="external">github</a>中，有一个非常流行的开源项目<a href="https://github.com/square/leakcanary" target="_blank" rel="external">LeakCanary</a>，它能很方便的检测到当前开发的java项目中是否存在内存泄露。</p>
 <h2 id="5-LeakCanary的使用"><a href="#5-LeakCanary的使用" class="headerlink" title="5. LeakCanary的使用"></a>5. LeakCanary的使用</h2><h3 id="5-1-官方使用文档描述"><a href="#5-1-官方使用文档描述" class="headerlink" title="5.1 官方使用文档描述"></a>5.1 官方使用文档描述</h3><p>从LeakCanary的文档描述中，可以得知使用方式，简单翻译为如下步骤：</p>
 <p>1.在你的项目中，找到moudle级别的build.gradle文件，并在dependencies标签里加上以下代码：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">//... 你项目中以前声明的一些依赖</div><div class="line">  debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'</div><div class="line">  releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'</div><div class="line">  testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
