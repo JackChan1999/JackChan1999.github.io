@@ -444,7 +444,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/JNI与底层调用1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Android下的Linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -466,8 +466,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/android/JNI与底层调用1/" itemprop="url">
-                  JNI与底层调用1
+                <a class="post-title-link" href="/2017/05/01/android/Android下的Linux/" itemprop="url">
+                  Android下的Linux
                 </a>
               
             
@@ -483,7 +483,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:40:29+08:00">
                 2017-05-01
               </time>
             
@@ -524,9 +524,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/android/JNI与底层调用1/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/android/Android下的Linux/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/android/JNI与底层调用1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/android/Android下的Linux/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -552,21 +552,55 @@
 
       
         
-          <h1 id="1-JNI-简介"><a href="#1-JNI-简介" class="headerlink" title="1. JNI 简介"></a>1. JNI 简介</h1><h2 id="1-1-什么是JNI"><a href="#1-1-什么是JNI" class="headerlink" title="1.1 什么是JNI"></a>1.1 什么是JNI</h2><p>Java Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。</p>
-<p>Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就是本地语言，android底层是linux linux是c/c++开发的 所以对于android来说 c/c++就是本地语言。JNI 可以看做是一个翻译 实现JAVA语言和本地语言之间的相互调用</p>
-<h2 id="1-2-为什么用JNI"><a href="#1-2-为什么用JNI" class="headerlink" title="1.2 为什么用JNI"></a>1.2 为什么用JNI</h2><ul>
-<li>JNI 扩展了Java 虚拟机的能力,因为Java 不能直接和硬件交互, 不能开发驱动</li>
-<li>Java 代码效率一般要低于C 代码，而Native code 效率高,因此在数学运算,实时渲染的游戏上以及<br>音视频处理上都需要用Java 调用C 语言</li>
-<li>复用C/C++代码，C 语言经过几十年的发展，已经形成了强大的类库(比如文件压缩，人脸识别opencv，7zip，ffmpeg 等)，这些类库我们没必要用java 语言重新实现一遍，通过JNI 直接调用这些类库即可</li>
-<li>特殊的业务场景，比如电视、车载系统、微波炉等跟硬件直接相关的开发</li>
-<li>java代码 不可以直接操作硬件 硬件的驱动基本都是C代码写的 如果想操作硬件必须得让java代码可以调用C，这个时候JNI就发挥作用了 可以扩展JAVA代码的性能</li>
-<li>java代码安全性比较差 java-&gt;,class-&gt;. C安全性相对高一些 C编译之后直接生成机器码 机器码可以反汇编 汇编代码可以猜出C的源代码 伪代码 有些时候跟源代码有区别 比如登录先关 跟钱打交道的应用 可以通过JNI把加密的业务逻辑放到C里面实现</li>
-<li>Java特点 跨平台 一处编译到处运行 通过虚拟机来实现的 java是解释型语言 效率相对比较低在要求效率的地方 java性能会差一些 大型3d游戏 c/c++ 音视频解码 JNI可以提升java的效率 复式投注 需要效率的时候可以通过JNI来调用C/C++来实现</li>
-<li>c1972年 c++ java 1995年 ffmpeg音视频解码 opencv 图像处理 人脸识别 使用JNI可以让java代码调用 c/c++写的优秀开源项目，学习JNI目的是满足自己项目的需求</li>
+          <h1 id="1-Android目录结构"><a href="#1-Android目录结构" class="headerlink" title="1. Android目录结构"></a>1. Android目录结构</h1><p><img src="http://img.blog.csdn.net/20170219120525625?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYXhpMjk1MzA5MDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="android"></p>
+<ul>
+<li><p>data</p>
+<ul>
+<li>app：用户安装的应用</li>
+<li>data：应用的专属文件夹</li>
+<li>system：系统的配置信息，注册表文件</li>
+<li>anr：anr异常的记录信息</li>
+</ul>
+</li>
+<li><p>dev：devices的缩写</p>
+<ul>
+<li>存放设备所对应的文件</li>
+</ul>
+</li>
+<li><p>mnt：mount的缩写</p>
+<ul>
+<li>挂载在系统上的设备：sdcard，u盘</li>
+</ul>
+</li>
+<li><p>proc：硬件配置，状态信息</p>
+<ul>
+<li>cpuinfo、meminfo</li>
+</ul>
+</li>
+<li><p>sbin：system bin</p>
+<ul>
+<li>系统重要的二进制执行文件</li>
+<li>adbd：服务器的adb进程</li>
+</ul>
+</li>
+<li><p>system：</p>
+<ul>
+<li>app：存放系统应用，默认不能删除</li>
+<li>bin：Android中可执行的linux指令文件</li>
+<li>etc：host：主机名和ip地址的映射</li>
+<li>fonts：Android中自带的字体</li>
+<li>framework：存放谷歌提供的java api</li>
+<li>lib：核心功能的类库，C/C++文件</li>
+<li>media/audio：存放Android的音效文件</li>
+<li>tts：语音发声引擎，默认不支持中文</li>
+<li>usr：用户设备的配置信息，键盘编码和按键编码的映射</li>
+<li>xbin：是专为开发人员准备的二进制指令</li>
+</ul>
+</li>
 </ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/android/JNI与底层调用1/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/android/Android下的Linux/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -935,7 +969,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/01/android/JNI与底层调用1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -957,8 +991,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/" itemprop="url">
-                  Uri、URL、UriMatcher、ContentUris详解
+                <a class="post-title-link" href="/2017/05/01/android/JNI与底层调用1/" itemprop="url">
+                  JNI与底层调用1
                 </a>
               
             
@@ -974,7 +1008,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:38:58+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T12:39:44+08:00">
                 2017-05-01
               </time>
             
@@ -1015,9 +1049,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/01/android/JNI与底层调用1/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/01/android/JNI与底层调用1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1043,10 +1077,21 @@
 
       
         
-          <h1 id="1-URI：统一资源标识符"><a href="#1-URI：统一资源标识符" class="headerlink" title="1. URI：统一资源标识符"></a><strong>1. URI：统一资源标识符</strong></h1><p>URI是统一资源标识符，是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对任何（包括本地和互联网）的资源通过特定的协议进行交互操作。URI由包括确定语法和相关协议的方案所定义。由是三个组成部分：访问资源的命名机制、存放资源的主机名、资源自身的名称，由路径表示。</p>
+          <h1 id="1-JNI-简介"><a href="#1-JNI-简介" class="headerlink" title="1. JNI 简介"></a>1. JNI 简介</h1><h2 id="1-1-什么是JNI"><a href="#1-1-什么是JNI" class="headerlink" title="1.1 什么是JNI"></a>1.1 什么是JNI</h2><p>Java Native Interface(JNI)，它允许Java 代码和其他语言写的代码进行交互。JNI 一开始是为了本地已编译语言，尤其是C 和C++而设计的，但是它并不妨碍你使用其他语言，只要调用约定受支持就可以了。</p>
+<p>Java Native Interface，java本地接口，Native本地，当前系统用什么语言开发的那么 这种语言对于这个系统而言就是本地语言，android底层是linux linux是c/c++开发的 所以对于android来说 c/c++就是本地语言。JNI 可以看做是一个翻译 实现JAVA语言和本地语言之间的相互调用</p>
+<h2 id="1-2-为什么用JNI"><a href="#1-2-为什么用JNI" class="headerlink" title="1.2 为什么用JNI"></a>1.2 为什么用JNI</h2><ul>
+<li>JNI 扩展了Java 虚拟机的能力,因为Java 不能直接和硬件交互, 不能开发驱动</li>
+<li>Java 代码效率一般要低于C 代码，而Native code 效率高,因此在数学运算,实时渲染的游戏上以及<br>音视频处理上都需要用Java 调用C 语言</li>
+<li>复用C/C++代码，C 语言经过几十年的发展，已经形成了强大的类库(比如文件压缩，人脸识别opencv，7zip，ffmpeg 等)，这些类库我们没必要用java 语言重新实现一遍，通过JNI 直接调用这些类库即可</li>
+<li>特殊的业务场景，比如电视、车载系统、微波炉等跟硬件直接相关的开发</li>
+<li>java代码 不可以直接操作硬件 硬件的驱动基本都是C代码写的 如果想操作硬件必须得让java代码可以调用C，这个时候JNI就发挥作用了 可以扩展JAVA代码的性能</li>
+<li>java代码安全性比较差 java-&gt;,class-&gt;. C安全性相对高一些 C编译之后直接生成机器码 机器码可以反汇编 汇编代码可以猜出C的源代码 伪代码 有些时候跟源代码有区别 比如登录先关 跟钱打交道的应用 可以通过JNI把加密的业务逻辑放到C里面实现</li>
+<li>Java特点 跨平台 一处编译到处运行 通过虚拟机来实现的 java是解释型语言 效率相对比较低在要求效率的地方 java性能会差一些 大型3d游戏 c/c++ 音视频解码 JNI可以提升java的效率 复式投注 需要效率的时候可以通过JNI来调用C/C++来实现</li>
+<li>c1972年 c++ java 1995年 ffmpeg音视频解码 opencv 图像处理 人脸识别 使用JNI可以让java代码调用 c/c++写的优秀开源项目，学习JNI目的是满足自己项目的需求</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/01/android/Uri、URL、UriMatcher、ContentUris详解/#more" rel="contents">
+            <a class="btn" href="/2017/05/01/android/JNI与底层调用1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1132,7 +1177,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
