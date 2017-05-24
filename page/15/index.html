@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/类加载器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/类加载器/" itemprop="url">
-                  类加载器
+                <a class="post-title-link" href="/2017/04/30/java/注解/" itemprop="url">
+                  注解
                 </a>
               
             
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/类加载器/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/注解/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/类加载器/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/注解/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -401,19 +401,22 @@
 <li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
 <li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
 </ul>
-<h1 id="1-什么是类加载器"><a href="#1-什么是类加载器" class="headerlink" title="1. 什么是类加载器"></a><strong>1. 什么是类加载器</strong></h1><p>类加载器就是用来加载类的东西！类加载器也是一个类：ClassLoader</p>
-<p>类加载器可以被加载到内存，是通过类加载器完成的！Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：</p>
+<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>注解相当于一种标记，在程序中加了注解就等于为程序打上了某种标记，没加，则等于没有某种标记，以后，javac编译器，开发工具和其他程序可以用反射来了解你的类及各种元素上有无何种标记，看你有什么标记，就去干相应的事。标记可以加在包，类，字段，方法，方法的参数以及局部变量上</p>
+<p>开发中常见注解：</p>
 <ul>
-<li>BootStrap：引导类加载器，加载rt.jar中的类</li>
-<li>ExtClassLoader：扩展类加载器，加载lib/ext目录下的类</li>
-<li>AppClassLoader：系统类加载器，加载CLASSPATH下的类，即我们写的类，以及第三方提供的类</li>
+<li>@Override：作用在方法上的注解。当方法不是重写父类的方法时会报错</li>
+<li>@Deprecated：作用在方法上。标记该方法为作废方法（已过时）</li>
+<li>@SuppressWarnings：作用在方法上，压制警告</li>
 </ul>
-<p>类加载器之间存在上下级关系，系统类加载器的上级是扩展类加载器，而扩展类加载器的上级是引导类加载器</p>
-<p>类加载器也是Java类，因为其它java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是java类，这正是BootStrap。</p>
-<p>Java虚拟机中的所有类装载器采用具有父子关系的树形结构进行组织，在实例化每个类装载器对象时，需要为其指定一个父级类装载器对象或者默认采用系统类装载器为其父级类加载</p>
+<p>应用</p>
+<ul>
+<li>标记一些信息</li>
+<li>运行时动态处理</li>
+<li>编译时动态处理</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/类加载器/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/注解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -459,7 +462,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/反射/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -481,8 +484,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/" itemprop="url">
-                  写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket
+                <a class="post-title-link" href="/2017/04/30/java/反射/" itemprop="url">
+                  反射
                 </a>
               
             
@@ -498,7 +501,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:27+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
                 2017-04-30
               </time>
             
@@ -539,9 +542,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/反射/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/反射/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -567,14 +570,18 @@
 
       
         
-          <h2 id="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket"><a href="#写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket" class="headerlink" title="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket"></a>写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket</h2><p>先来一个讲TCP、UDP和HTTP关系的，注意红色mark的部分</p>
-<h3 id="1-TCP-IP是个协议组，可分为三个层次：网络层、传输层和应用层。"><a href="#1-TCP-IP是个协议组，可分为三个层次：网络层、传输层和应用层。" class="headerlink" title="1. TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层。"></a>1. TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层。</h3><p>在网络层有IP协议、ICMP协议、ARP协议、RARP协议和BOOTP协议。在传输层中有TCP协议与UDP协议。在应用层有FTP、HTTP、TELNET、SMTP、DNS等协议。因此，HTTP本身就是一个协议，是从Web服务器传输超文本到本地浏览器的传送协议。</p>
-<h3 id="2-HTTP协议是建立在请求-响应模型上的。"><a href="#2-HTTP协议是建立在请求-响应模型上的。" class="headerlink" title="2. HTTP协议是建立在请求/响应模型上的。"></a>2. HTTP协议是建立在请求/响应模型上的。</h3><p>首先由客户建立一条与服务器的TCP链接，并发送一个请求到服务器，请求中包含请求方法、URI、协议版本以及相关的MIME样式的消息。服务器响应一个状态行，包含消息的协议版本、一个成功和失败码以及相关的MIME式样的消息。</p>
-<p>HTTP/1.0为每一次HTTP的请求/响应建立一条新的TCP链接，因此一个包含HTML内容和图片的页面将需要建立多次的短期的TCP链接。一次TCP链接的建立将需要3次握手。</p>
-<p>另外，为了获得适当的传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销。    </p>
+          <h1 id="反射注解动态代理相关阅读"><a href="#反射注解动态代理相关阅读" class="headerlink" title="反射注解动态代理相关阅读"></a><strong>反射注解动态代理相关阅读</strong></h1><ul>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
+</ul>
+<h1 id="1-反射概述"><a href="#1-反射概述" class="headerlink" title="1. 反射概述"></a><strong>1. 反射概述</strong></h1><p>Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
+<p>Java 反射机制主要提供了以下功能：  在运行时判断任意一个对象所属的类；在运行时构造任意一个类的对象；在运行时判断任意一个类所具有的成员变量和方法；在运行时调用任意一个对象的方法；生成动态代理。</p>
+<p>Java中，反射是一种强大的工具。它使您能够创建灵活的代码，这些代码可以在运行时装配，无需在组件之间进行源代码链接。反射允许我们在编写于执行时，使我们的程序代码能够接入装载到JVM中的类的内部信息，而不是源代码中选定的类协作的代码。这使反射成为构建灵活的应用的主要工具。但需注意的是：如果使用不当，反射的成本很高。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/反射/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -781,7 +788,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/String类/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -803,8 +810,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/String类/" itemprop="url">
-                  String类
+                <a class="post-title-link" href="/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/" itemprop="url">
+                  写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket
                 </a>
               
             
@@ -820,7 +827,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:04+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:27+08:00">
                 2017-04-30
               </time>
             
@@ -861,9 +868,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/String类/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/String类/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -889,21 +896,14 @@
 
       
         
-          <h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><ol>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52765748" target="_blank" rel="external">Java基础：String类</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52820512" target="_blank" rel="external">Java字符串格式化</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52822073" target="_blank" rel="external">Java基础：正则表达式</a></li>
-</ol>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h1><p>字符串是由多个字符组成的一串数据(字符序列)，字符串可以看成是字符数组。</p>
-<p>在实际开发中，字符串的操作是最常见的操作，没有之一。而Java没有内置的字符串类型，所以，就在Java类库中提供了一个类String 供我们来使用。String 类代表字符串。</p>
-<h1 id="2-String类的特点"><a href="#2-String类的特点" class="headerlink" title="2. String类的特点"></a><strong>2. String类的特点</strong></h1><ul>
-<li>字符串是常量,它的值在创建之后不能更改</li>
-<li>Java 程序中的所有字符串字面值（如 “abc” ）都作为此类的实例实现。</li>
-<li>字符串如果是变量相加，先开空间，在拼接。</li>
-<li>字符串如果是常量相加，是先加，然后在常量池找，如果有就直接返回，否则，就创建。
+          <h2 id="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket"><a href="#写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket" class="headerlink" title="写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket"></a>写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket</h2><p>先来一个讲TCP、UDP和HTTP关系的，注意红色mark的部分</p>
+<h3 id="1-TCP-IP是个协议组，可分为三个层次：网络层、传输层和应用层。"><a href="#1-TCP-IP是个协议组，可分为三个层次：网络层、传输层和应用层。" class="headerlink" title="1. TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层。"></a>1. TCP/IP是个协议组，可分为三个层次：网络层、传输层和应用层。</h3><p>在网络层有IP协议、ICMP协议、ARP协议、RARP协议和BOOTP协议。在传输层中有TCP协议与UDP协议。在应用层有FTP、HTTP、TELNET、SMTP、DNS等协议。因此，HTTP本身就是一个协议，是从Web服务器传输超文本到本地浏览器的传送协议。</p>
+<h3 id="2-HTTP协议是建立在请求-响应模型上的。"><a href="#2-HTTP协议是建立在请求-响应模型上的。" class="headerlink" title="2. HTTP协议是建立在请求/响应模型上的。"></a>2. HTTP协议是建立在请求/响应模型上的。</h3><p>首先由客户建立一条与服务器的TCP链接，并发送一个请求到服务器，请求中包含请求方法、URI、协议版本以及相关的MIME样式的消息。服务器响应一个状态行，包含消息的协议版本、一个成功和失败码以及相关的MIME式样的消息。</p>
+<p>HTTP/1.0为每一次HTTP的请求/响应建立一条新的TCP链接，因此一个包含HTML内容和图片的页面将需要建立多次的短期的TCP链接。一次TCP链接的建立将需要3次握手。</p>
+<p>另外，为了获得适当的传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销。    </p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/String类/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/写给那些让我糊里糊涂的HTTP、TCP、UDP、Socket/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1153,7 +1153,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

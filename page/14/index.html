@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程锁技术/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/定时器、互斥、同步通信技术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/线程锁技术/" itemprop="url">
-                  线程锁技术
+                <a class="post-title-link" href="/2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="url">
+                  定时器、互斥、同步通信技术
                 </a>
               
             
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/线程锁技术/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/定时器、互斥、同步通信技术/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/线程锁技术/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/定时器、互斥、同步通信技术/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,45 +395,178 @@
 
       
         
-          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>这里介绍了java5中的线程锁技术：Lock和Condition，实现线程间的通信，其中的读锁和写锁的使用通过一个缓存系统进行了演示，对于Condition的应用通过一个阻塞队列进行演示。</p>
-<p>线程锁技术：Lock &amp; Condition 实现线程同步通信所属包：java.util.concurrent.locks</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">线程锁</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Synchronized</td>
-<td style="text-align:left">同步方法，锁对象是this；静态同步方法，锁对象是字节码.class；同步代码块，锁对象是任意对象，但必须是同一个对象</td>
-</tr>
-<tr>
-<td style="text-align:left">Lock</td>
-<td style="text-align:left">同步锁接口</td>
-</tr>
-<tr>
-<td style="text-align:left">ReentrantLock</td>
-<td style="text-align:left">lock()，unlock()，newCondition()</td>
-</tr>
-<tr>
-<td style="text-align:left">ReadWriteLock</td>
-<td style="text-align:left">读写锁接口</td>
-</tr>
-<tr>
-<td style="text-align:left">ReentrantReadWriteLock</td>
-<td style="text-align:left">readLock()获取读锁，writeLock()获取写锁</td>
-</tr>
-<tr>
-<td style="text-align:left">Condition</td>
-<td style="text-align:left">线程间通信  await()等待  signal()唤醒</td>
-</tr>
-</tbody>
-</table>
+          <h1 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h1><p>这里分析了多线程的一些细节问题，并介绍了传统定时器的创建，同时实现了根据自己的调度计划的自定义定时器，对于传统互斥技术中发现的内部类问题，进行了分析，最后对于同步通信技术，是重点，分析了如何处理类似的问题，如何设计能够更加清晰简单，体现了高内聚和程序的健壮性</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/线程锁技术/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/定时器、互斥、同步通信技术/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/volatile关键字解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/30/java/volatile关键字解析/" itemprop="url">
+                  volatile关键字解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/30/java/volatile关键字解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/30/java/volatile关键字解析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>原文链接：<a href="http://www.cnblogs.com/dolphin0520/p/3920373.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920373.html</a></p>
+</blockquote>
+<p>volatile这个关键字可能很多朋友都听说过，或许也都用过。在Java 5之前，它是一个备受争议的关键字，因为在程序中使用它往往会导致出人意料的结果。在Java 5之后，volatile关键字才得以重获生机。</p>
+<p>volatile关键字虽然从字面上理解起来比较简单，但是要用好不是一件容易的事情。由于volatile关键字是与Java的内存模型有关的，因此在讲述volatile关键之前，我们先来了解一下与内存模型相关的概念和知识，然后分析了volatile关键字的实现原理，最后给出了几个使用volatile关键字的场景。</p>
+<h1 id="目录大纲"><a href="#目录大纲" class="headerlink" title="目录大纲"></a>目录大纲</h1><ul>
+<li>内存模型的相关概念</li>
+<li>并发编程中的三个概念</li>
+<li>Java内存模型</li>
+<li>深入剖析volatile关键字</li>
+<li>使用volatile关键字的场景</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/30/java/volatile关键字解析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -640,6 +773,178 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/类加载器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/30/java/类加载器/" itemprop="url">
+                  类加载器
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/30/java/类加载器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/30/java/类加载器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="系列阅读"><a href="#系列阅读" class="headerlink" title="系列阅读"></a><strong>系列阅读</strong></h1><ul>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
+</ul>
+<h1 id="1-什么是类加载器"><a href="#1-什么是类加载器" class="headerlink" title="1. 什么是类加载器"></a><strong>1. 什么是类加载器</strong></h1><p>类加载器就是用来加载类的东西！类加载器也是一个类：ClassLoader</p>
+<p>类加载器可以被加载到内存，是通过类加载器完成的！Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：</p>
+<ul>
+<li>BootStrap：引导类加载器，加载rt.jar中的类</li>
+<li>ExtClassLoader：扩展类加载器，加载lib/ext目录下的类</li>
+<li>AppClassLoader：系统类加载器，加载CLASSPATH下的类，即我们写的类，以及第三方提供的类</li>
+</ul>
+<p>类加载器之间存在上下级关系，系统类加载器的上级是扩展类加载器，而扩展类加载器的上级是引导类加载器</p>
+<p>类加载器也是Java类，因为其它java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是java类，这正是BootStrap。</p>
+<p>Java虚拟机中的所有类装载器采用具有父子关系的树形结构进行组织，在实例化每个类装载器对象时，需要为其指定一个父级类装载器对象或者默认采用系统类装载器为其父级类加载</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/30/java/类加载器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/动态代理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -799,346 +1104,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/注解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/30/java/注解/" itemprop="url">
-                  注解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
-                2017-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/java/注解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/注解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="系列阅读"><a href="#系列阅读" class="headerlink" title="系列阅读"></a><strong>系列阅读</strong></h1><ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
-</ul>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>注解相当于一种标记，在程序中加了注解就等于为程序打上了某种标记，没加，则等于没有某种标记，以后，javac编译器，开发工具和其他程序可以用反射来了解你的类及各种元素上有无何种标记，看你有什么标记，就去干相应的事。标记可以加在包，类，字段，方法，方法的参数以及局部变量上</p>
-<p>开发中常见注解：</p>
-<ul>
-<li>@Override：作用在方法上的注解。当方法不是重写父类的方法时会报错</li>
-<li>@Deprecated：作用在方法上。标记该方法为作废方法（已过时）</li>
-<li>@SuppressWarnings：作用在方法上，压制警告</li>
-</ul>
-<p>应用</p>
-<ul>
-<li>标记一些信息</li>
-<li>运行时动态处理</li>
-<li>编译时动态处理</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/注解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/反射/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/30/java/反射/" itemprop="url">
-                  反射
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:55:45+08:00">
-                2017-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/java/反射/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/反射/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="反射注解动态代理相关阅读"><a href="#反射注解动态代理相关阅读" class="headerlink" title="反射注解动态代理相关阅读"></a><strong>反射注解动态代理相关阅读</strong></h1><ul>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893604" target="_blank" rel="external">Java基础：类加载器</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52888711" target="_blank" rel="external">Java基础：反射</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52893032" target="_blank" rel="external">Java基础：注解</a></li>
-<li><a href="http://blog.csdn.net/axi295309066/article/details/52892859" target="_blank" rel="external">Java基础：动态代理</a></li>
-</ul>
-<h1 id="1-反射概述"><a href="#1-反射概述" class="headerlink" title="1. 反射概述"></a><strong>1. 反射概述</strong></h1><p>Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。</p>
-<p>Java 反射机制主要提供了以下功能：  在运行时判断任意一个对象所属的类；在运行时构造任意一个类的对象；在运行时判断任意一个类所具有的成员变量和方法；在运行时调用任意一个对象的方法；生成动态代理。</p>
-<p>Java中，反射是一种强大的工具。它使您能够创建灵活的代码，这些代码可以在运行时装配，无需在组件之间进行源代码链接。反射允许我们在编写于执行时，使我们的程序代码能够接入装载到JVM中的类的内部信息，而不是源代码中选定的类协作的代码。这使反射成为构建灵活的应用的主要工具。但需注意的是：如果使用不当，反射的成本很高。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/反射/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1188,7 +1153,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
