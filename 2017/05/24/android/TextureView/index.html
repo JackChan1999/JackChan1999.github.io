@@ -1,0 +1,1223 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="多媒体," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="##Android多媒体开发系列文章  Android多媒体开发：录音机 Android多媒体开发：照相机  TextureView+MediaPlayer实现在线短视频播放 Android多媒体开发：第三方框架  TextureView+MediaPlayer实现在线短视频播放">
+<meta name="keywords" content="多媒体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TextureView+MediaPlayer实现在线短视频播放">
+<meta property="og:url" content="http://yoursite.com/2017/05/24/android/TextureView/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="##Android多媒体开发系列文章  Android多媒体开发：录音机 Android多媒体开发：照相机  TextureView+MediaPlayer实现在线短视频播放 Android多媒体开发：第三方框架  TextureView+MediaPlayer实现在线短视频播放">
+<meta property="og:image" content="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoPlayer.jpg">
+<meta property="og:image" content="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoMediaController1.jpg">
+<meta property="og:image" content="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoMediaController2.jpg">
+<meta property="og:updated_time" content="2017-05-24T12:37:12.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TextureView+MediaPlayer实现在线短视频播放">
+<meta name="twitter:description" content="##Android多媒体开发系列文章  Android多媒体开发：录音机 Android多媒体开发：照相机  TextureView+MediaPlayer实现在线短视频播放 Android多媒体开发：第三方框架  TextureView+MediaPlayer实现在线短视频播放">
+<meta name="twitter:image" content="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoPlayer.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/24/android/TextureView/"/>
+
+
+
+
+
+  <title>TextureView+MediaPlayer实现在线短视频播放 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/24/android/TextureView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                TextureView+MediaPlayer实现在线短视频播放
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T20:24:11+08:00">
+                2017-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/24/android/TextureView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/24/android/TextureView/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##<strong>Android多媒体开发系列文章</strong></p>
+<ul>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52724017" target="_blank" rel="external">Android多媒体开发：录音机</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52723527" target="_blank" rel="external">Android多媒体开发：照相机</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/72712340" target="_blank" rel="external"> TextureView+MediaPlayer实现在线短视频播放</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52724069" target="_blank" rel="external">Android多媒体开发：第三方框架</a></li>
+</ul>
+<h2 id="TextureView-MediaPlayer实现在线短视频播放"><a href="#TextureView-MediaPlayer实现在线短视频播放" class="headerlink" title="TextureView+MediaPlayer实现在线短视频播放"></a>TextureView+MediaPlayer实现在线短视频播放</h2><p><img src="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoPlayer.jpg" width="400"></p>
+<a id="more"></a>
+<h2 id="列表item布局文件"><a href="#列表item布局文件" class="headerlink" title="列表item布局文件"></a>列表item布局文件</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">              <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">              <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>&gt;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_bg"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">            <span class="attr">android:scaleType</span>=<span class="string">"centerCrop"</span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@mipmap/beautiful"</span></div><div class="line">            <span class="attr">android:visibility</span>=<span class="string">"visible"</span>/&gt;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">com.jackchan.videoplayer.view.VideoPlayer</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/videoPlayer"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">            <span class="attr">android:visibility</span>=<span class="string">"visible"</span>/&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center_vertical"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"10dp"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_author"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"@drawable/qq_allshare_normal"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_author_name"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"飞行的钢蛋儿"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"#000"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_play_count"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"109万次播放"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"#8b8787"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_comment"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:layout_marginRight</span>=<span class="string">"2dp"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"@drawable/comment_video_normal"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_comment_count"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginRight</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"3940"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"#8b8787"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_comment_more"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"@drawable/more_pgc_comment_normal_night"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>其中VideoPlayer是自定义View，继承于RelativeLayout，是视频播放的关键类</p>
+<h2 id="VideoPlayer"><a href="#VideoPlayer" class="headerlink" title="VideoPlayer"></a>VideoPlayer</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">VideoPlayer</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</div><div class="line">      <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">      initView();</div><div class="line">  &#125;</div><div class="line">      <span class="comment">//初始化布局</span></div><div class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</div><div class="line">      View view = View.inflate(getContext(), R.layout.video_play, <span class="keyword">this</span>);</div><div class="line">      ButterKnife.bind(<span class="keyword">this</span>,view);</div><div class="line">...</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--视频播放界面--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">TextureView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/video_view"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"visible"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--视频播放控制界面--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">com.jackchan.videoplayer.view.VideoMediaController</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/mediaController"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>/&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>实现视频播放功能的是TextureView，VideoMediaController视频播放控制器，自定义View，继承于RelativeLayout</p>
+<h3 id="视频播放（视频的初始化）"><a href="#视频播放（视频的初始化）" class="headerlink" title="视频播放（视频的初始化）"></a>视频播放（视频的初始化）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">(String url)</span></span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        mPlayer = MediaHelper.getInstance();</div><div class="line">        mPlayer.reset();</div><div class="line">        mPlayer.setDataSource(url);</div><div class="line">        <span class="comment">//让MediaPlayer和TextureView进行视频画面的结合</span></div><div class="line">        mPlayer.setSurface(mSurface);</div><div class="line">        <span class="comment">//设置监听</span></div><div class="line">        mPlayer.setOnBufferingUpdateListener(onBufferingUpdateListener);</div><div class="line">        mPlayer.setOnCompletionListener(onCompletionListener);</div><div class="line">        mPlayer.setOnErrorListener(onErrorListener);</div><div class="line">        mPlayer.setOnPreparedListener(onPreparedListener);</div><div class="line">        mPlayer.setScreenOnWhilePlaying(<span class="keyword">true</span>);<span class="comment">//在视频播放的时候保持屏幕的高亮</span></div><div class="line">        <span class="comment">//异步准备</span></div><div class="line">        mPlayer.prepareAsync();</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="准备完成监听"><a href="#准备完成监听" class="headerlink" title="准备完成监听"></a>准备完成监听</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> MediaPlayer.OnPreparedListener onPreparedListener = <span class="keyword">new</span> MediaPlayer.OnPreparedListener() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPrepared</span><span class="params">(MediaPlayer mp)</span> </span>&#123;</div><div class="line">        <span class="comment">//隐藏视频加载进度条</span></div><div class="line">        mediaController.setPbLoadingVisiable(View.GONE);</div><div class="line">        <span class="comment">//进行视频的播放</span></div><div class="line">        MediaHelper.play();</div><div class="line">        hasPlay = <span class="keyword">true</span>;</div><div class="line">        <span class="comment">//隐藏标题</span></div><div class="line">        mediaController.delayHideTitle();</div><div class="line">        <span class="comment">//设置视频的总时长</span></div><div class="line">        mediaController.setDuration(mPlayer.getDuration());</div><div class="line">        <span class="comment">//更新播放的时间和进度</span></div><div class="line">        mediaController.updatePlayTimeAndProgress();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="进行TextureView控件创建的监听"><a href="#进行TextureView控件创建的监听" class="headerlink" title="进行TextureView控件创建的监听"></a>进行TextureView控件创建的监听</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">videoView.setSurfaceTextureListener(surfaceTextureListener);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> TextureView.SurfaceTextureListener surfaceTextureListener = <span class="keyword">new</span> TextureView.SurfaceTextureListener() &#123;</div><div class="line"></div><div class="line">    <span class="comment">//创建完成  TextureView才可以进行视频画面的显示</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceTextureAvailable</span><span class="params">(SurfaceTexture surface, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</div><div class="line">       <span class="comment">// Log.i(TAG,"onSurfaceTextureAvailable");</span></div><div class="line">        mSurface = <span class="keyword">new</span> Surface(surface);<span class="comment">//连接对象（MediaPlayer和TextureView）</span></div><div class="line">        play(info.url);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceTextureSizeChanged</span><span class="params">(SurfaceTexture surface, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</div><div class="line">       <span class="comment">// Log.i(TAG,"onSurfaceTextureSizeChanged");</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onSurfaceTextureDestroyed</span><span class="params">(SurfaceTexture surface)</span> </span>&#123;</div><div class="line">       <span class="comment">// Log.i(TAG,"onSurfaceTextureDestroyed");</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSurfaceTextureUpdated</span><span class="params">(SurfaceTexture surface)</span> </span>&#123;</div><div class="line">       <span class="comment">// Log.i(TAG,"onSurfaceTextureUpdated");</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="VideoMediaController"><a href="#VideoMediaController" class="headerlink" title="VideoMediaController"></a>VideoMediaController</h2><p><img src="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoMediaController1.jpg" width="500"></p>
+<p><img src="https://github.com/JackChan1999/VideoPlayer/raw/master/art/VideoMediaController2.jpg" width="500"></p>
+<p>布局文件如下</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">FrameLayout</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"200dp"</span></div><div class="line">    &gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--视频加载进度条--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ProgressBar</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/pb_loading"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"gone"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">RelativeLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/rl_play_finish"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#b4000000"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"visible"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_centerInParent</span>=<span class="string">"true"</span></div><div class="line">            <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span>&gt;</div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_marginRight</span>=<span class="string">"20dp"</span></div><div class="line">                <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">                &gt;</div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                    <span class="attr">android:id</span>=<span class="string">"@+id/iv_replay"</span></div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"50dp"</span></div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"50dp"</span></div><div class="line">                    <span class="attr">android:src</span>=<span class="string">"@drawable/replay_video"</span>/&gt;</div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                    <span class="attr">android:layout_gravity</span>=<span class="string">"center_horizontal"</span></div><div class="line">                    <span class="attr">android:layout_marginTop</span>=<span class="string">"5dp"</span></div><div class="line">                    <span class="attr">android:text</span>=<span class="string">"重播"</span></div><div class="line">                    <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">                    <span class="attr">android:textSize</span>=<span class="string">"14sp"</span>/&gt;</div><div class="line">            <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line">            <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></div><div class="line">                &gt;</div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">                    <span class="attr">android:id</span>=<span class="string">"@+id/iv_share"</span></div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"50dp"</span></div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"50dp"</span></div><div class="line">                    <span class="attr">android:src</span>=<span class="string">"@drawable/share_video"</span>/&gt;</div><div class="line"></div><div class="line">                <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">                    <span class="attr">android:layout_gravity</span>=<span class="string">"center_horizontal"</span></div><div class="line">                    <span class="attr">android:layout_marginTop</span>=<span class="string">"5dp"</span></div><div class="line">                    <span class="attr">android:text</span>=<span class="string">"分享"</span></div><div class="line">                    <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">                    <span class="attr">android:textSize</span>=<span class="string">"14sp"</span>/&gt;</div><div class="line">            <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/tv_title"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_margin</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"@string/title"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"14sp"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/iv_play"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"50dp"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"50dp"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span></div><div class="line">        <span class="attr">android:src</span>=<span class="string">"@drawable/new_play_video"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"visible"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/tv_all_time"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"bottom|right"</span></div><div class="line">        <span class="attr">android:layout_margin</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"@drawable/tv_time_bg"</span></div><div class="line">        <span class="attr">android:paddingBottom</span>=<span class="string">"5dp"</span></div><div class="line">        <span class="attr">android:paddingLeft</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:paddingRight</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:paddingTop</span>=<span class="string">"5dp"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"02:30"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"10sp"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"visible"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/ll_play_control"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_gravity</span>=<span class="string">"bottom"</span></div><div class="line">        <span class="attr">android:background</span>=<span class="string">"#ca000000"</span></div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center_vertical"</span></div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"10dp"</span></div><div class="line">        <span class="attr">android:visibility</span>=<span class="string">"visible"</span></div><div class="line">        &gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_use_time"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginRight</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"00:00"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"10sp"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">SeekBar</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/seekBar"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginRight</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">            <span class="attr">android:progressDrawable</span>=<span class="string">"@drawable/sb_progress_drawable"</span></div><div class="line">            <span class="attr">android:thumb</span>=<span class="string">"@drawable/biz_video_progress_thumb"</span></div><div class="line">            /&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/tv_time"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginRight</span>=<span class="string">"10dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"02:30"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"#fff"</span></div><div class="line">            <span class="attr">android:textSize</span>=<span class="string">"10sp"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/iv_fullscreen"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"20dp"</span></div><div class="line">            <span class="attr">android:src</span>=<span class="string">"@drawable/enlarge_fullscreen"</span>/&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>显示或者隐藏视频控制界面<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showOrHideVideoController</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(llPlayControl.getVisibility() == View.GONE)&#123;</div><div class="line">        <span class="comment">//显示（标题、播放按钮、视频进度控制）</span></div><div class="line">        tvTitle.setVisibility(View.VISIBLE);</div><div class="line">        ivPlay.setVisibility(View.VISIBLE);</div><div class="line">        <span class="comment">//加载动画</span></div><div class="line">        Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.bottom_enter);</div><div class="line">        animation.setAnimationListener(<span class="keyword">new</span> SimpleAnimationListener()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onAnimationEnd(animation);</div><div class="line">                llPlayControl.setVisibility(View.VISIBLE);</div><div class="line">                <span class="comment">//过2秒后自动隐藏</span></div><div class="line">                mHandler.sendEmptyMessageDelayed(MSG_HIDE_CONTROLLER,<span class="number">2000</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="comment">//执行动画</span></div><div class="line">        llPlayControl.startAnimation(animation);</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="comment">//隐藏（标题、播放按钮、视频进度控制）</span></div><div class="line">        tvTitle.setVisibility(View.GONE);</div><div class="line">        ivPlay.setVisibility(View.GONE);</div><div class="line">        <span class="comment">//加载动画</span></div><div class="line">        Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.bottom_exit);</div><div class="line">        animation.setAnimationListener(<span class="keyword">new</span> SimpleAnimationListener()&#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animation animation)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onAnimationEnd(animation);</div><div class="line">                llPlayControl.setVisibility(View.GONE);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="comment">//执行动画</span></div><div class="line">        llPlayControl.startAnimation(animation);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>更新播放的时间和进度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updatePlayTimeAndProgress</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">//获取目前播放的进度</span></div><div class="line">    <span class="keyword">int</span> currentPosition = MediaHelper.getInstance().getCurrentPosition();</div><div class="line">    <span class="comment">//格式化</span></div><div class="line">    String useTime = formatDuration(currentPosition);</div><div class="line">    tvUseTime.setText(useTime);</div><div class="line">    <span class="comment">//更新进度</span></div><div class="line">    <span class="keyword">int</span> duration = MediaHelper.getInstance().getDuration();</div><div class="line">    <span class="keyword">if</span>(duration == <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> progress = <span class="number">100</span>*currentPosition/duration;</div><div class="line">    seekBar.setProgress(progress);</div><div class="line">    <span class="comment">//发送一个更新的延时消息</span></div><div class="line">    mHandler.sendEmptyMessageDelayed(MSG_UPDATE_TIME_PROGRESS,<span class="number">500</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="自定义SeekBar"><a href="#自定义SeekBar" class="headerlink" title="自定义SeekBar"></a>自定义SeekBar</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">SeekBar</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/seekBar"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">    <span class="attr">android:layout_marginRight</span>=<span class="string">"10dp"</span></div><div class="line">    <span class="attr">android:layout_weight</span>=<span class="string">"1"</span></div><div class="line">    <span class="attr">android:progressDrawable</span>=<span class="string">"@drawable/sb_progress_drawable"</span></div><div class="line">    <span class="attr">android:thumb</span>=<span class="string">"@drawable/biz_video_progress_thumb"</span></div><div class="line">    /&gt;</div></pre></td></tr></table></figure>
+<p>sb_progress_drawable</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">layer-list</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:id</span>=<span class="string">"@android:id/background"</span></span></div><div class="line">        <span class="attr">android:drawable</span>=<span class="string">"@drawable/sb_bg"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:id</span>=<span class="string">"@android:id/secondaryProgress"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scale</span> <span class="attr">android:scaleWidth</span>=<span class="string">"100%"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">selector</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_enabled</span>=<span class="string">"false"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">color</span> <span class="attr">android:color</span>=<span class="string">"@android:color/transparent"</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/sb_second"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">selector</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scale</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:id</span>=<span class="string">"@android:id/progress"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">scale</span> <span class="attr">android:scaleWidth</span>=<span class="string">"100%"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">selector</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_enabled</span>=<span class="string">"false"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">color</span> <span class="attr">android:color</span>=<span class="string">"@android:color/transparent"</span>/&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/sb_progress"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">selector</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">scale</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="列表的item滚动出屏幕时停止播放"><a href="#列表的item滚动出屏幕时停止播放" class="headerlink" title="列表的item滚动出屏幕时停止播放"></a>列表的item滚动出屏幕时停止播放</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> RecyclerView.OnScrollListener onScrollListener = <span class="keyword">new</span> RecyclerView.OnScrollListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> newState)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//进行滑动</span></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrolled</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</div><div class="line">            <span class="keyword">super</span>.onScrolled(recyclerView, dx, dy);</div><div class="line">            <span class="comment">//获取屏幕上显示的第一个条目和最后一个条目的下标</span></div><div class="line">            <span class="keyword">int</span> firstVisibleItemPosition = lm.findFirstVisibleItemPosition();</div><div class="line">            <span class="keyword">int</span> lastVisibleItemPosition = lm.findLastVisibleItemPosition();</div><div class="line">            <span class="comment">//获取播放条目的下标</span></div><div class="line">            <span class="keyword">int</span> currentPosition = adapter.currentPosition;</div><div class="line">            <span class="keyword">if</span>((firstVisibleItemPosition &gt; currentPosition || lastVisibleItemPosition &lt; currentPosition) &amp;&amp; currentPosition &gt; -<span class="number">1</span>)&#123;</div><div class="line">                <span class="comment">//让播放隐藏的条目停止</span></div><div class="line">                MediaHelper.release();</div><div class="line">                adapter.currentPosition = -<span class="number">1</span>;</div><div class="line">                adapter.notifyDataSetChanged();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>代码：<a href="https://github.com/JackChan1999/VideoPlayer" target="_blank" rel="external">https://github.com/JackChan1999/VideoPlayer</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多媒体/" rel="tag"># 多媒体</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/24/性能优化/消除卡顿/" rel="next" title="性能优化 - 消除卡顿">
+                <i class="fa fa-chevron-left"></i> 性能优化 - 消除卡顿
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#TextureView-MediaPlayer实现在线短视频播放"><span class="nav-number">1.</span> <span class="nav-text">TextureView+MediaPlayer实现在线短视频播放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表item布局文件"><span class="nav-number">2.</span> <span class="nav-text">列表item布局文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VideoPlayer"><span class="nav-number">3.</span> <span class="nav-text">VideoPlayer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视频播放（视频的初始化）"><span class="nav-number">3.1.</span> <span class="nav-text">视频播放（视频的初始化）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备完成监听"><span class="nav-number">3.2.</span> <span class="nav-text">准备完成监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行TextureView控件创建的监听"><span class="nav-number">3.3.</span> <span class="nav-text">进行TextureView控件创建的监听</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VideoMediaController"><span class="nav-number">4.</span> <span class="nav-text">VideoMediaController</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义SeekBar"><span class="nav-number">5.</span> <span class="nav-text">自定义SeekBar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表的item滚动出屏幕时停止播放"><span class="nav-number">6.</span> <span class="nav-text">列表的item滚动出屏幕时停止播放</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/24/android/TextureView/';
+          this.page.identifier = '2017/05/24/android/TextureView/';
+          this.page.title = 'TextureView+MediaPlayer实现在线短视频播放';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
