@@ -90,17 +90,20 @@
 
 
 
-<meta name="description" content="内存优化1-内存的管理机制 2-常见问题 3-Memory Monitor工具使用 4-内存抖动案例及优化 5-利用Allocation Tracker查找内存抖动中有问题的代码 6-利用Heap Viewer监控内存泄漏 7-利用AS中的Heap Viewer查看内存泄漏原因 8-AS中的Heap Viewer展示信息说明 9-利用LeakCanary工具监控内存泄漏 10-利用LeakCana">
+<meta name="description" content="性能优化系列阅读 Android性能优化 性能优化 - 消除卡顿 性能优化 - 内存优化 Android性能分析工具 性能分析工具 - TraceView  内存优化1-内存的管理机制 2-常见问题 3-Memory Monitor工具使用 4-内存抖动案例及优化 5-利用Allocation Tracker查找内存抖动中有问题的代码 6-利用Heap Viewer监控内存泄漏 7-利用AS中的H">
 <meta name="keywords" content="性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="性能优化">
 <meta property="og:url" content="http://yoursite.com/2017/05/23/性能优化/性能优化/index.html">
 <meta property="og:site_name" content="秋过冬漫长">
-<meta property="og:description" content="内存优化1-内存的管理机制 2-常见问题 3-Memory Monitor工具使用 4-内存抖动案例及优化 5-利用Allocation Tracker查找内存抖动中有问题的代码 6-利用Heap Viewer监控内存泄漏 7-利用AS中的Heap Viewer查看内存泄漏原因 8-AS中的Heap Viewer展示信息说明 9-利用LeakCanary工具监控内存泄漏 10-利用LeakCana">
-<meta property="og:updated_time" content="2017-05-23T04:41:38.160Z">
+<meta property="og:description" content="性能优化系列阅读 Android性能优化 性能优化 - 消除卡顿 性能优化 - 内存优化 Android性能分析工具 性能分析工具 - TraceView  内存优化1-内存的管理机制 2-常见问题 3-Memory Monitor工具使用 4-内存抖动案例及优化 5-利用Allocation Tracker查找内存抖动中有问题的代码 6-利用Heap Viewer监控内存泄漏 7-利用AS中的H">
+<meta property="og:image" content="http://img.blog.csdn.net/20160922105044737">
+<meta property="og:image" content="http://img.blog.csdn.net/20160922101239742">
+<meta property="og:updated_time" content="2017-05-24T08:19:11.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="性能优化">
-<meta name="twitter:description" content="内存优化1-内存的管理机制 2-常见问题 3-Memory Monitor工具使用 4-内存抖动案例及优化 5-利用Allocation Tracker查找内存抖动中有问题的代码 6-利用Heap Viewer监控内存泄漏 7-利用AS中的Heap Viewer查看内存泄漏原因 8-AS中的Heap Viewer展示信息说明 9-利用LeakCanary工具监控内存泄漏 10-利用LeakCana">
+<meta name="twitter:description" content="性能优化系列阅读 Android性能优化 性能优化 - 消除卡顿 性能优化 - 内存优化 Android性能分析工具 性能分析工具 - TraceView  内存优化1-内存的管理机制 2-常见问题 3-Memory Monitor工具使用 4-内存抖动案例及优化 5-利用Allocation Tracker查找内存抖动中有问题的代码 6-利用Heap Viewer监控内存泄漏 7-利用AS中的H">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160922105044737">
 
 
 
@@ -391,7 +394,14 @@
       
 
       
-        <h2 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h2><p>1-内存的管理机制</p>
+        <h1 id="性能优化系列阅读"><a href="#性能优化系列阅读" class="headerlink" title="性能优化系列阅读"></a>性能优化系列阅读</h1><ul>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52614967" target="_blank" rel="external">Android性能优化</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/72675365" target="_blank" rel="external">性能优化 - 消除卡顿</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/72638767" target="_blank" rel="external">性能优化 - 内存优化</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52733222" target="_blank" rel="external">Android性能分析工具</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52872912" target="_blank" rel="external">性能分析工具 - TraceView</a></li>
+</ul>
+<h2 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a><strong>内存优化</strong></h2><p>1-内存的管理机制</p>
 <p>2-常见问题</p>
 <p>3-Memory Monitor工具使用</p>
 <p>4-内存抖动案例及优化</p>
@@ -405,7 +415,7 @@
 <p>12-内存碎片问题展示</p>
 <p>13-使用对象池优化内存碎片问题</p>
 <a id="more"></a>
-<h2 id="界面卡顿优化"><a href="#界面卡顿优化" class="headerlink" title="界面卡顿优化"></a>界面卡顿优化</h2><p>1-什么是卡顿</p>
+<h2 id="界面卡顿优化"><a href="#界面卡顿优化" class="headerlink" title="界面卡顿优化"></a><strong>界面卡顿优化</strong></h2><p>1-什么是卡顿</p>
 <p>2-卡顿产生的原因分析-Profile GPU Rendering工具使用</p>
 <p>3-卡顿产生的原因分析-渲染流程讲解</p>
 <p>4-过渡绘制及优化</p>
@@ -425,7 +435,7 @@
 <p>18-过渡绘制</p>
 <p>19-优化布局层级</p>
 <p>20-Launch screens设置</p>
-<h2 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a>网络优化</h2><p>1-什么是网络优化</p>
+<h2 id="网络优化"><a href="#网络优化" class="headerlink" title="网络优化"></a><strong>网络优化</strong></h2><p>1-什么是网络优化</p>
 <p>2-网络优化工作流程</p>
 <p>3-网络监控工具使用</p>
 <p>4-通信数据优化</p>
@@ -445,7 +455,7 @@
 <p>18-SyncAdapter使用_创建SyncService类</p>
 <p>19-SyncAdapter使用_账户创建</p>
 <p>20-SyncAdapter使用_触发SyncAdapter</p>
-<h2 id="电量优化"><a href="#电量优化" class="headerlink" title="电量优化"></a>电量优化</h2><p>1-手机系统对应用的电量监控</p>
+<h2 id="电量优化"><a href="#电量优化" class="headerlink" title="电量优化"></a><strong>电量优化</strong></h2><p>1-手机系统对应用的电量监控</p>
 <p>2-使用Battery Historian查看电量监控数据</p>
 <p>3-电量报表数据查看</p>
 <p>4-应用电量分布情况</p>
@@ -453,6 +463,73 @@
 <p>6-常用API介绍</p>
 <p>7-Doze模式</p>
 <p>8-App Standby模式</p>
+<p>##<strong>内存泄露</strong></p>
+<p>内存泄露是指对象已经不再使用，但是因为某种原因还存在于内存中，没有及时地被垃圾回收器（GC）回收，从而造成了内存溢出</p>
+<p>导致内存溢出的最主要的原因就是某些长存对象持有了一些其它应该被回收的对象的引用，导致垃圾回收器无法去回收这些对象，那也就出现内存泄露了。或者说是长生命周期对象持有了短生命周期对象的引用就很可能发生内存泄露</p>
+<h2 id="监测内存泄露的工具"><a href="#监测内存泄露的工具" class="headerlink" title="监测内存泄露的工具"></a><strong>监测内存泄露的工具</strong></h2><ul>
+<li><a href="https://github.com/square/leakcanary" target="_blank" rel="external">Leakcanary</a>：内存泄露监测神器，出自著名的开源组织square</li>
+<li>Eclipse Analysis Memory Tools(MAT)：Eclipse的内存分析工具</li>
+<li>dumpsys meminfo命令</li>
+<li>ddms的heap内存监测工具</li>
+<li>Android studio Monitors：在该监听器下有图形化的分析工具，memory，cpu，gpu，network</li>
+</ul>
+<p>##内存溢出</p>
+<p>##<strong>垃圾回收</strong></p>
+<p>java中用有向图表示引用关系，可达，存在连接通路，不可达</p>
+<p>GC为了能够正确释放对象，GC必须监控每一个对象的运行状态，包括对象的申请，引用，被引用，复制等，GC都要进行监控</p>
+<p>java的内存管理就是对象的分配和释放问题，在java中，程序员需要通过关键字new为每个对象申请内存空间（基本数据类型除外），所有的对象都在堆heap中分配空间，另外对象的释放是由GC决定和执行的，在java中，内存的分配是有程序完成的，而内存的释放是由GC来完成的，这种收支两条线的方法确实减少了程序员的工作，但同时它也加重了JVM的工作，这也是java运行速度较慢的原因之一。因为GC为了能够正确释放对象，GC必须监控每一个对象的运行状态，包括对象的申请，引用，被引用，复制等，GC都需要进行监控</p>
+<p>监控对象状态是为了更加准确，及时的释放对象，而释放对象的根本原则就是该对象不再被引用</p>
+<p>###<strong>GC的工作原理</strong></p>
+<p>为了更好理解 GC 的工作原理，我们可以将对象考虑为有向图的顶点，将引用关系考虑为图的有向边，有向边从引用者指向被引对象。另外，每个线程对象可以作为一个图的起始顶点，例如大多程序从 main 进程开始执行，那么该图就是以 main 进程顶点开始的一棵根树。在这个有向图中，根顶点可达的对象都是有效对象，GC将不回收这些对象。如果某个对象 (连通子图)与这个根顶点不可达(注意，该图为有向图)，那么我们认为这个(这些)对象不再被引用，可以被 GC 回收。 以下，我们举一个例子说明如何用有向图表示内存管理。对于程序的每一个时刻，我们都有一个有向图表示JVM的内存分配情况。以下右图，就是左边程序运行到第6行的示意图。</p>
+<p><img src="http://img.blog.csdn.net/20160922105044737" alt="GC的工作原理"></p>
+<p>Java使用有向图的方式进行内存管理，可以消除引用循环的问题，例如有三个对象，相互引用，只要它们和根进程不可达的，那么GC也是可以回收它们的。这种方式的优点是管理内存的精度很高，但是效率较低。另外一种常用的内存管理技术是使用计数器，例如COM模型采用计数器方式管理构件，它与有向图相比，精度行低(很难处理循环引用的问题)，但执行效率很高。</p>
+<p>##<strong>内存管理</strong></p>
+<p><img src="http://img.blog.csdn.net/20160922101239742" alt="内存管理"></p>
+<p>从上图可以看出，java内存区域主要分为2部分</p>
+<ul>
+<li>线程共享内存区：java堆，方法区</li>
+<li>线程私有内存区：虚拟机栈，本地方法栈，程序计数器，这部分内存是随着线程的产生二产生，消亡而消亡，因此不需要过多的考虑内存回收的问题，编译时就已经确定所需内存的大小</li>
+</ul>
+<p>###<strong>1、栈</strong></p>
+<p>对象的引用，数组的引用</p>
+<p>###<strong>2、堆</strong></p>
+<p>new出来的对象，数组</p>
+<p>###<strong>3、方法区</strong></p>
+<p>类信息，常量（常量池），静态变量<br>Class文件中除了有类的版本，字段，方法，接口等描述信息外，还有一项信息是常量池（Class文件常量池），用于存放编译器生成的各种字面量和符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中</p>
+<p>###<strong>4、程序计数器</strong></p>
+<p>一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作时通过改变计数器的值来选择下一条需要执行的字节码指令，分支，跳转，循环等基础功能都要依赖它来实现。每条线程都有一个独立的程序计数器，各个线程间的计数器互不影响，因此该区域是线程私有的</p>
+<p>##<strong>内存分配策略</strong></p>
+<p>java程序运行时的内存分配策略有三种，分别是静态分配，栈式分配和堆式分配，对应的三种存储策略使用的内存空间分别是静态存储区（也叫方法区），栈区和堆区。</p>
+<p>###<strong>1、静态存储区（方法区）</strong></p>
+<p>主要存放静态数据，全局static数据和常量，这块内存在编译时就已经分配好，并且在程序整个运行期间都会存在</p>
+<p>###<strong>2、栈区</strong></p>
+<p>当方法被执行时，方法内部的局部变量（其中包括基本数据类型和对象的引用）都在栈上创建，并在方法执行结束的时候这些局部变量所持有的内存都将自动被释放。因为栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量很有限</p>
+<p>栈还分配堆中对象或数组的引用内存空间</p>
+<p>###<strong>3、堆区</strong></p>
+<p>又称为动态内存分配，通常就是指程序运行时直接new出来的内存，也就是对象的实例，数组，这部分内存在不使用时将由java垃圾回收器来负责回收</p>
+<p>##JVM</p>
+<p>##电量优化</p>
+<p>##布局优化</p>
+<p>##性能优化</p>
+<p>###<strong>1、使用IntentService</strong></p>
+<p>使用IntentService有两个好处，一个是任务执行完的时候，IntentService会自动结束，不会像Service那样长期呆在后台；另外一个是不需要手动开辟子线程去执行耗时操作，因为IntentService已经帮我们做了这些工作</p>
+<p>###<strong>2、使用优化的数据容器</strong></p>
+<ul>
+<li>SparseArray稀疏数组，替代HashMap</li>
+<li>SparseBooleanArray 替代HashMap</li>
+<li>LongSparseArray</li>
+<li>ArrayMap</li>
+</ul>
+<p>###<strong>3、使用线程池管理线程</strong></p>
+<p>在需要开辟子线程去执行耗时任务的时候不要通过new Thread的方式，因为创建和销毁一个线程所消耗的资源可能会比执行这个线程所消耗的资源更多，所以我们应该使用线程池技术，去统一的管理和缓存线程，提高效率</p>
+<p>###<strong>4、优化Bitmap</strong></p>
+<p>内存溢出大部分情况都是大图片导致的，大图片占用的内存是像素总数x每个像素占用的字节数，一张很小的图片都有可能占用很大的内存，所以我们很有必要对图片进行压缩，缓存图片（三级缓存），复用Bitmap（inBitmap属性），回收Bitmap（recycle()）</p>
+<h2 id="性能分析专题"><a href="#性能分析专题" class="headerlink" title="性能分析专题"></a>性能分析专题</h2><ol>
+<li><a href="http://blog.csdn.net/jdsjlzx/article/details/49532937" target="_blank" rel="external">Android性能优化典范1</a></li>
+<li><a href="http://blog.csdn.net/jdsjlzx/article/details/49532963" target="_blank" rel="external"> Android性能优化典范2</a></li>
+<li><a href="http://blog.csdn.net/jdsjlzx/article/details/49532977" target="_blank" rel="external">Android性能优化典范3</a></li>
+<li><a href="http://blog.csdn.net/jdsjlzx/article/details/50875702" target="_blank" rel="external">Android界面性能调优手册</a></li>
+</ol>
 
       
     </div>
@@ -728,7 +805,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存优化"><span class="nav-number">1.</span> <span class="nav-text">内存优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面卡顿优化"><span class="nav-number">2.</span> <span class="nav-text">界面卡顿优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络优化"><span class="nav-number">3.</span> <span class="nav-text">网络优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电量优化"><span class="nav-number">4.</span> <span class="nav-text">电量优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#性能优化系列阅读"><span class="nav-number">1.</span> <span class="nav-text">性能优化系列阅读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存优化"><span class="nav-number">1.1.</span> <span class="nav-text">内存优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#界面卡顿优化"><span class="nav-number">1.2.</span> <span class="nav-text">界面卡顿优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络优化"><span class="nav-number">1.3.</span> <span class="nav-text">网络优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电量优化"><span class="nav-number">1.4.</span> <span class="nav-text">电量优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监测内存泄露的工具"><span class="nav-number">1.5.</span> <span class="nav-text">监测内存泄露的工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能分析专题"><span class="nav-number">1.6.</span> <span class="nav-text">性能分析专题</span></a></li></ol></li></ol></div>
             
 
           </div>
