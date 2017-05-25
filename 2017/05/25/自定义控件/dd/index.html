@@ -1,0 +1,1274 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自定义控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="新闻频道管理的炫酷实现 自定义GridLayout控件，可以在新闻咨询类APP中的管理页面使用到，也可以应用在类别管理中，总之，可以帮助我们设计更加规范和炫酷的手机页面。 新闻类app是最常见的应用之一，而频道管理又是其必不可少的功能，该自定义控件不仅可以带我们实现炫酷的频道管理功能，还可以让我们学习如何使用Android拖拽框架实现我们想要的多种功能，以及让我们对自定义控件会有更多的理解。">
+<meta name="keywords" content="自定义控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新闻频道管理的炫酷实现">
+<meta property="og:url" content="http://yoursite.com/2017/05/25/自定义控件/dd/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="新闻频道管理的炫酷实现 自定义GridLayout控件，可以在新闻咨询类APP中的管理页面使用到，也可以应用在类别管理中，总之，可以帮助我们设计更加规范和炫酷的手机页面。 新闻类app是最常见的应用之一，而频道管理又是其必不可少的功能，该自定义控件不仅可以带我们实现炫酷的频道管理功能，还可以让我们学习如何使用Android拖拽框架实现我们想要的多种功能，以及让我们对自定义控件会有更多的理解。">
+<meta property="og:image" content="https://github.com/JackChan1999/DragGridLayout/raw/master/art/gridlayout.jpg">
+<meta property="og:updated_time" content="2017-05-25T14:09:04.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新闻频道管理的炫酷实现">
+<meta name="twitter:description" content="新闻频道管理的炫酷实现 自定义GridLayout控件，可以在新闻咨询类APP中的管理页面使用到，也可以应用在类别管理中，总之，可以帮助我们设计更加规范和炫酷的手机页面。 新闻类app是最常见的应用之一，而频道管理又是其必不可少的功能，该自定义控件不仅可以带我们实现炫酷的频道管理功能，还可以让我们学习如何使用Android拖拽框架实现我们想要的多种功能，以及让我们对自定义控件会有更多的理解。">
+<meta name="twitter:image" content="https://github.com/JackChan1999/DragGridLayout/raw/master/art/gridlayout.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/25/自定义控件/dd/"/>
+
+
+
+
+
+  <title>新闻频道管理的炫酷实现 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/自定义控件/dd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                新闻频道管理的炫酷实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T22:06:36+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/25/自定义控件/dd/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/05/25/自定义控件/dd/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="新闻频道管理的炫酷实现"><a href="#新闻频道管理的炫酷实现" class="headerlink" title="新闻频道管理的炫酷实现"></a>新闻频道管理的炫酷实现</h2><p><img src="https://github.com/JackChan1999/DragGridLayout/raw/master/art/gridlayout.jpg" width="400"></p>
+<p>自定义GridLayout控件，可以在新闻咨询类APP中的管理页面使用到，也可以应用在类别管理中，总之，可以帮助我们设计更加规范和炫酷的手机页面。</p>
+<p>新闻类app是最常见的应用之一，而频道管理又是其必不可少的功能，该自定义控件不仅可以带我们实现炫酷的频道管理功能，还可以让我们学习如何使用Android拖拽框架实现我们想要的多种功能，以及让我们对自定义控件会有更多的理解。</p>
+<a id="more"></a>
+<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a><strong>知识点</strong></h2><ol>
+<li><p>GridLayout的使用</p>
+<ul>
+<li>从Google官方文档学习GridLayout的功能以及用法</li>
+<li>使用GridLayout实现子控件排列显示</li>
+</ul>
+</li>
+<li><p>View的拖拽功能实现</p>
+<ul>
+<li>通过查看Google文档，学会调用view的拖拽方法</li>
+<li>拖拽事件的处理</li>
+<li>使用View的拖拽框架实现实现频道切换位置效果</li>
+</ul>
+</li>
+<li><p>自定义GridLayout控件</p>
+<p>自定义GridLayout控件，实现拖拽功能，继而实现频道管理操作</p>
+</li>
+<li><p>Rect类的使用</p>
+<p>使用Rect类确定被触摸到的子控件</p>
+</li>
+</ol>
+<h2 id="新闻频道管理的多种实现"><a href="#新闻频道管理的多种实现" class="headerlink" title="新闻频道管理的多种实现"></a>新闻频道管理的多种实现</h2><p>实现类似于网易新闻频道管理有几种方式</p>
+<p>实现方案1：使用两个GridView实现，这是比较早的一种解决方案，比较复杂，具体可以参考 <a href="http://blog.csdn.net/vipzjyno1/article/details/25005851" target="_blank" rel="external">Android 高仿 频道管理—-网易、今日头条、腾讯视频 </a></p>
+<p>实现方案2：使用两个RecyclerView或ListView实现，这种实现方式好于于方案1</p>
+<p>实现方案3：使用一个RecyclerView实现，这是我目前见过的比较好的方式，貌似比网易新闻等客户端的要流畅，具体可以参考：<a href="http://blog.csdn.net/tyk0910/article/details/51460808" target="_blank" rel="external">高仿网易新闻栏目动画效果</a> 、 <a href="http://www.jianshu.com/p/d30fd8da4eac" target="_blank" rel="external">使用ItemTouchHelper高效地实现 今日头条 、网易新闻 的频道排序、移动</a></p>
+<p>实现方案4：使用两个GridLayout实现，也就是本文要介绍的方式</p>
+<h2 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h2><p>长按item开始拖拽</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> View.OnLongClickListener longClickListener = <span class="keyword">new</span> View.OnLongClickListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onLongClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">            <span class="comment">//长按时，开始拖拽操作，显示出阴影</span></div><div class="line">            <span class="comment">//被拖拽的视图其实就是v参数</span></div><div class="line">            dragedView = v;</div><div class="line">            v.startDrag(<span class="keyword">null</span>, <span class="keyword">new</span> View.DragShadowBuilder(v), <span class="keyword">null</span>, <span class="number">0</span>);</div><div class="line">            v.setEnabled(<span class="keyword">false</span>);</div><div class="line">            <span class="comment">// v.startDragAndDrop(null, new View.DragShadowBuilder(v), null, 0);</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<p>拖拽方法参数说明</p>
+<ul>
+<li>startDragAndDrop() api24</li>
+<li>startDrag(ClipData data, DragShadowBuilder shadowBuilder, Object myLocalState, int flag)</li>
+</ul>
+<p>参数1：ClipData data 拖拽过程中可以transferred的数据，可以为空</p>
+<p>参数2：DragShadowBuilder shadowBuilder，拖拽阴影效果创建者</p>
+<p>参数3：Object myLocalState，拖拽状态</p>
+<p>参数4：int flag，可以控制拖拽操作的flag，未定义，传0即可</p>
+<h2 id="拖拽监听"><a href="#拖拽监听" class="headerlink" title="拖拽监听"></a>拖拽监听</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> View.OnDragListener dragListener =  <span class="keyword">new</span> View.OnDragListener() &#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * ACTION_DRAG_STARTED:当拖拽操作执行时，就会执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_ENDED：当拖拽事件结束，手指抬起时，就是执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_ENTERED：当手指进入设置了拖拽监听的控件范围内的瞬间执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_EXITED：当手指离开设置了拖拽监听的控件范围内的瞬间执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_LOCATION：当手指在设置了拖拽监听的控件范围内，移动时，实时会执行，执行N次</div><div class="line">         * DragEvent.ACTION_DROP：当手指在设置了拖拽监听的控件范围内松开时，执行一次</div><div class="line">         *</div><div class="line">         *</div><div class="line">         * <span class="doctag">@param</span> v 当前监听拖拽事件的view(其实就是mGridLayout)</div><div class="line">         * <span class="doctag">@param</span> event 拖拽事件</div><div class="line">         * <span class="doctag">@return</span></div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDrag</span><span class="params">(View v, DragEvent event)</span> </span>&#123;</div><div class="line">            String dragEventAction = getDragEventAction(event);</div><div class="line">            System.out.println(dragEventAction);</div><div class="line">            <span class="comment">//            Rect rect = new Rect();</span></div><div class="line">            <span class="comment">//            rect.contains()</span></div><div class="line">            <span class="keyword">switch</span> (event.getAction()) &#123;</div><div class="line">                <span class="comment">//当拖拽事件开始时，创建出与子控件对应的矩形数组</span></div><div class="line">                <span class="keyword">case</span> DragEvent.ACTION_DRAG_STARTED:</div><div class="line">                    initRects();</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> DragEvent.ACTION_DRAG_LOCATION:</div><div class="line">                    <span class="comment">//手指移动时，实时判断触摸是否进入了某一个子控件</span></div><div class="line">                    <span class="keyword">int</span> touchIndex = getTouchIndex(event);</div><div class="line">                    <span class="comment">//说明触摸点进入了某一个子控件,判断被拖拽的视图与进入的子控件对象不是同一个的时候才进行删除添加操作</span></div><div class="line"></div><div class="line">                    <span class="keyword">if</span> (touchIndex &gt; -<span class="number">1</span>&amp;&amp;dragedView != <span class="keyword">null</span>&amp;&amp;dragedView != mGridLayout.getChildAt(touchIndex)) &#123;</div><div class="line">                        mGridLayout.removeView(dragedView);</div><div class="line">                        mGridLayout.addView(dragedView,touchIndex);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> DragEvent.ACTION_DRAG_ENDED:</div><div class="line">                    <span class="comment">//拖拽事件结束后，让被拖拽的view设置为可用，否则背景变红，并且长按事件会失效</span></div><div class="line">                    <span class="keyword">if</span> (dragedView != <span class="keyword">null</span>) &#123;</div><div class="line">                        dragedView.setEnabled(<span class="keyword">true</span>);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<h2 id="DragEvent"><a href="#DragEvent" class="headerlink" title="DragEvent"></a>DragEvent</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">拖拽事件</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">ACTION_DRAG_STARTED</td>
+<td style="text-align:left">当拖拽操作执行时，就会执行一次</td>
+</tr>
+<tr>
+<td style="text-align:left">DragEvent.ACTION_DRAG_ENDED</td>
+<td style="text-align:left">当拖拽事件结束，手指抬起时，就是执行一次</td>
+</tr>
+<tr>
+<td style="text-align:left">DragEvent.ACTION_DRAG_ENTERED</td>
+<td style="text-align:left">当手指进入设置了拖拽监听的控件范围内的瞬间执行一次</td>
+</tr>
+<tr>
+<td style="text-align:left">DragEvent.ACTION_DRAG_EXITED</td>
+<td style="text-align:left">当手指离开设置了拖拽监听的控件范围内的瞬间执行一次</td>
+</tr>
+<tr>
+<td style="text-align:left">DragEvent.ACTION_DRAG_LOCATION</td>
+<td style="text-align:left">当手指在设置了拖拽监听的控件范围内，移动时，实时会执行，执行N次</td>
+</tr>
+<tr>
+<td style="text-align:left">DragEvent.ACTION_DROP</td>
+<td style="text-align:left">当手指在设置了拖拽监听的控件范围内松开时，执行一次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="当拖拽事件开始时，创建出与子控件对应的矩形数组"><a href="#当拖拽事件开始时，创建出与子控件对应的矩形数组" class="headerlink" title="当拖拽事件开始时，创建出与子控件对应的矩形数组"></a>当拖拽事件开始时，创建出与子控件对应的矩形数组</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> Rect[] mRects;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initRects</span><span class="params">()</span> </span>&#123;</div><div class="line">        mRects = <span class="keyword">new</span> Rect[mGridLayout.getChildCount()];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mGridLayout.getChildCount(); i++) &#123;</div><div class="line">            View childView = mGridLayout.getChildAt(i);</div><div class="line">            <span class="comment">//创建与每个子控件对应矩形对象</span></div><div class="line">            Rect rect = <span class="keyword">new</span> Rect(childView.getLeft(), childView.getTop(), childView.getRight(), childView.getBottom());</div><div class="line">            mRects[i] = rect;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="手指移动时，实时判断触摸是否进入了某一个子控件"><a href="#手指移动时，实时判断触摸是否进入了某一个子控件" class="headerlink" title="手指移动时，实时判断触摸是否进入了某一个子控件"></a>手指移动时，实时判断触摸是否进入了某一个子控件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getTouchIndex</span><span class="params">(DragEvent event)</span> </span>&#123;</div><div class="line">        <span class="comment">//遍历所有的数组，如果包含了当前的触摸点返回索引即可</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mRects.length; i++) &#123;</div><div class="line">            Rect rect = mRects[i];</div><div class="line">            <span class="keyword">if</span> (rect.contains((<span class="keyword">int</span>)event.getX(), (<span class="keyword">int</span>)event.getY())) &#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="是否允许拖拽"><a href="#是否允许拖拽" class="headerlink" title="是否允许拖拽"></a>是否允许拖拽</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAllowDrag</span><span class="params">(<span class="keyword">boolean</span> allowDrag)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.allowdrag = allowDrag;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.allowdrag) &#123;</div><div class="line">            <span class="keyword">this</span>.setOnDragListener(odl);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">this</span>.setOnDragListener(<span class="keyword">null</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="设置列数和动画"><a href="#设置列数和动画" class="headerlink" title="设置列数和动画"></a>设置列数和动画</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//初始化方法</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// android:columnCount="4"</span></div><div class="line">    <span class="comment">// android:animateLayoutChanges="true"</span></div><div class="line">    <span class="keyword">this</span>.setColumnCount(columnCount);</div><div class="line">    <span class="keyword">this</span>.setLayoutTransition(<span class="keyword">new</span> LayoutTransition());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="DragGridlayout"><a href="#DragGridlayout" class="headerlink" title="DragGridlayout"></a>DragGridlayout</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DragGridlayout</span> <span class="keyword">extends</span> <span class="title">GridLayout</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span>  <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> columnCount = <span class="number">4</span>;<span class="comment">//列数</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isAllowDrag;<span class="comment">//记录当前控件是否可以进行拖拽操作</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DragGridlayout</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context,<span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DragGridlayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context, attrs,<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DragGridlayout</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyleAttr)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="comment">/*  static SparseArray&lt;String&gt; dragEventType = new SparseArray&lt;&gt;();</span></div><div class="line">    static&#123;</div><div class="line">        dragEventType.put(DragEvent.ACTION_DRAG_STARTED, "STARTED");</div><div class="line">        dragEventType.put(DragEvent.ACTION_DRAG_ENDED, "ENDED");</div><div class="line">        dragEventType.put(DragEvent.ACTION_DRAG_ENTERED, "ENTERED");</div><div class="line">        dragEventType.put(DragEvent.ACTION_DRAG_EXITED, "EXITED");</div><div class="line">        dragEventType.put(DragEvent.ACTION_DRAG_LOCATION, "LOCATION");</div><div class="line">        dragEventType.put(DragEvent.ACTION_DROP, "DROP");</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static String getDragEventAction(DragEvent de)&#123;</div><div class="line">        return dragEventType.get(de.getAction());</div><div class="line">    &#125;*/</div><div class="line"></div><div class="line">    <span class="comment">//初始化方法</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">//  android:columnCount="4"</span></div><div class="line">        <span class="comment">//  android:animateLayoutChanges="true"</span></div><div class="line">        <span class="keyword">this</span>.setColumnCount(columnCount);</div><div class="line">        <span class="keyword">this</span>.setLayoutTransition(<span class="keyword">new</span> LayoutTransition());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setItems</span><span class="params">(List&lt;String&gt; items)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span> (String item : items) &#123;</div><div class="line">            addItem(item);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItem</span><span class="params">(String content, <span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        TextView tv = newItemView();</div><div class="line">        tv.setText(content);</div><div class="line">        addView(tv,index);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItem</span><span class="params">(String content)</span> </span>&#123;</div><div class="line">        TextView tv = newItemView();</div><div class="line">        tv.setText(content);</div><div class="line">        addView(tv);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> TextView <span class="title">newItemView</span><span class="params">()</span> </span>&#123;</div><div class="line">        TextView tv = <span class="keyword">new</span> TextView(getContext());</div><div class="line">        <span class="keyword">int</span> margin = dip2px(<span class="number">5</span>);</div><div class="line">        tv.setBackgroundResource(R.drawable.selector_tv_bg);</div><div class="line">        GridLayout.LayoutParams layoutParams = <span class="keyword">new</span> GridLayout.LayoutParams();</div><div class="line">        layoutParams.width = getResources().getDisplayMetrics().widthPixels/<span class="number">4</span> - <span class="number">2</span>*margin;<span class="comment">//宽为屏幕宽的4分之一</span></div><div class="line">        layoutParams.height = dip2px(<span class="number">25</span>);</div><div class="line">        layoutParams.setMargins(margin,margin,margin,margin);</div><div class="line">        tv.setGravity(Gravity.CENTER);</div><div class="line">        tv.setLayoutParams(layoutParams);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (isAllowDrag) &#123;</div><div class="line">            <span class="comment">//给条目设置长按点击事件</span></div><div class="line">            tv.setOnLongClickListener(mLongClickListener);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            tv.setOnLongClickListener(<span class="keyword">null</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//设置条目的点击事件</span></div><div class="line">        tv.setOnClickListener(onClickListener);</div><div class="line">        <span class="keyword">return</span> tv;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/** dip转换px */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">dip2px</span><span class="params">(<span class="keyword">int</span> dip)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">float</span> scale = getResources().getDisplayMetrics().density;</div><div class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) (dip * scale + <span class="number">0.5f</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> View dragedView;<span class="comment">//被拖拽的视图</span></div><div class="line"></div><div class="line">    <span class="keyword">private</span> View.OnLongClickListener mLongClickListener = <span class="keyword">new</span> View.OnLongClickListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onLongClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">            <span class="comment">//长按时，开始拖拽操作，显示出阴影</span></div><div class="line">            <span class="comment">//被拖拽的视图其实就是v参数</span></div><div class="line">            dragedView = v;</div><div class="line">            v.startDrag(<span class="keyword">null</span>, <span class="keyword">new</span> View.DragShadowBuilder(v), <span class="keyword">null</span>, <span class="number">0</span>);</div><div class="line">            v.setEnabled(<span class="keyword">false</span>);</div><div class="line">            <span class="comment">//v.startDragAndDrop(null, new View.DragShadowBuilder(v), null, 0); // api24</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> OnClickListener onClickListener = <span class="keyword">new</span> OnClickListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span>(onDragItemClickListener != <span class="keyword">null</span>)&#123;</div><div class="line">                onDragItemClickListener.onDragItemClick((TextView) v);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAllowDrag</span><span class="params">(<span class="keyword">boolean</span> isAllowDrag)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.isAllowDrag = isAllowDrag;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.isAllowDrag) &#123;</div><div class="line">            <span class="keyword">this</span>.setOnDragListener(mDragListener);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">this</span>.setOnDragListener(<span class="keyword">null</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> View.OnDragListener mDragListener =  <span class="keyword">new</span> View.OnDragListener() &#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * ACTION_DRAG_STARTED:当拖拽操作执行时，就会执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_ENDED：当拖拽事件结束，手指抬起时，就是执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_ENTERED：当手指进入设置了拖拽监听的控件范围内的瞬间执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_EXITED：当手指离开设置了拖拽监听的控件范围内的瞬间执行一次</div><div class="line">         * DragEvent.ACTION_DRAG_LOCATION：当手指在设置了拖拽监听的控件范围内，移动时，实时会执行，执行N次</div><div class="line">         * DragEvent.ACTION_DROP：当手指在设置了拖拽监听的控件范围内松开时，执行一次</div><div class="line">         *</div><div class="line">         * <span class="doctag">@param</span> v 当前监听拖拽事件的view(其实就是mGridLayout)</div><div class="line">         * <span class="doctag">@param</span> event 拖拽事件</div><div class="line">         * <span class="doctag">@return</span></div><div class="line">         */</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDrag</span><span class="params">(View v, DragEvent event)</span> </span>&#123;</div><div class="line">            <span class="keyword">switch</span> (event.getAction()) &#123;</div><div class="line">                <span class="comment">//当拖拽事件开始时，创建出与子控件对应的矩形数组</span></div><div class="line">                <span class="keyword">case</span> DragEvent.ACTION_DRAG_STARTED:</div><div class="line">                    initRects();</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> DragEvent.ACTION_DRAG_LOCATION:</div><div class="line">                    <span class="comment">//手指移动时，实时判断触摸是否进入了某一个子控件</span></div><div class="line">                    <span class="keyword">int</span> touchIndex = getTouchIndex(event);</div><div class="line">                    <span class="comment">//说明触摸点进入了某一个子控件,判断被拖拽的视图与进入的子控件对象不是同一个的时候才进行删除添加操作</span></div><div class="line"></div><div class="line">                    <span class="keyword">if</span> (touchIndex &gt; -<span class="number">1</span> &amp;&amp; dragedView != <span class="keyword">null</span> &amp;&amp; dragedView != DragGridlayout.<span class="keyword">this</span>.getChildAt(touchIndex)) &#123;</div><div class="line">                        DragGridlayout.<span class="keyword">this</span>.removeView(dragedView);</div><div class="line">                        DragGridlayout.<span class="keyword">this</span>.addView(dragedView,touchIndex);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                <span class="keyword">case</span> DragEvent.ACTION_DRAG_ENDED:</div><div class="line">                    <span class="comment">//拖拽事件结束后，让被拖拽的view设置为可用，否则背景变红，并且长按事件会失效</span></div><div class="line">                    <span class="keyword">if</span> (dragedView != <span class="keyword">null</span>) &#123;</div><div class="line">                        dragedView.setEnabled(<span class="keyword">true</span>);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//手指移动时，实时判断触摸是否进入了某一个子控件</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getTouchIndex</span><span class="params">(DragEvent event)</span> </span>&#123;</div><div class="line">        <span class="comment">//遍历所有的数组，如果包含了当前的触摸点返回索引即可</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mRects.length; i++) &#123;</div><div class="line">            Rect rect = mRects[i];</div><div class="line">            <span class="keyword">if</span> (rect.contains((<span class="keyword">int</span>)event.getX(), (<span class="keyword">int</span>)event.getY())) &#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//当拖拽事件开始时，创建出与子控件对应的矩形数组</span></div><div class="line">    <span class="keyword">private</span> Rect[] mRects;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initRects</span><span class="params">()</span> </span>&#123;</div><div class="line">        mRects = <span class="keyword">new</span> Rect[<span class="keyword">this</span>.getChildCount()];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.getChildCount(); i++) &#123;</div><div class="line">            View childView = <span class="keyword">this</span>.getChildAt(i);</div><div class="line">            <span class="comment">//创建与每个子控件对应矩形对象</span></div><div class="line">            Rect rect = <span class="keyword">new</span> Rect(childView.getLeft(), childView.getTop(), childView.getRight(), childView.getBottom());</div><div class="line">            mRects[i] = rect;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> OnDragItemClickListener onDragItemClickListener;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnDragItemClickListener</span></span>&#123;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDragItemClick</span><span class="params">(TextView tv)</span></span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOnDragItemClickListener</span><span class="params">(OnDragItemClickListener onDragItemClickListener)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.onDragItemClickListener = onDragItemClickListener;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="MainActivity"><a href="#MainActivity" class="headerlink" title="MainActivity"></a>MainActivity</h2><p>布局文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">android.support.v4.widget.NestedScrollView</span></span></div><div class="line">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">    &gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/activity_main"</span></div><div class="line">        <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></div><div class="line">        <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"36dp"</span></div><div class="line">            <span class="attr">android:gravity</span>=<span class="string">"center_vertical"</span></div><div class="line">            <span class="attr">android:onClick</span>=<span class="string">"addItem"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"添加条目"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"?android:attr/textColorPrimary"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">com.github.draggridlayout.DragGridlayout</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/selectedChannel"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginBottom</span>=<span class="string">"16dp"</span></div><div class="line">            <span class="attr">android:layout_marginTop</span>=<span class="string">"16dp"</span>/&gt;</div><div class="line"></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/textView"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"36dp"</span></div><div class="line">            <span class="attr">android:background</span>=<span class="string">"?attr/colorButtonNormal"</span></div><div class="line">            <span class="attr">android:gravity</span>=<span class="string">"center_vertical"</span></div><div class="line">            <span class="attr">android:padding</span>=<span class="string">"5dp"</span></div><div class="line">            <span class="attr">android:text</span>=<span class="string">"点击选择频道"</span></div><div class="line">            <span class="attr">android:textColor</span>=<span class="string">"?android:attr/textColorPrimary"</span>/&gt;</div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">com.github.draggridlayout.DragGridlayout</span></span></div><div class="line">            <span class="attr">android:id</span>=<span class="string">"@+id/unSelectedChannel"</span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">            <span class="attr">android:layout_marginTop</span>=<span class="string">"16dp"</span>/&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">android.support.v4.widget.NestedScrollView</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>代码实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> DragGridlayout mSelectedChannel;</div><div class="line">    <span class="keyword">private</span> DragGridlayout mUnSelectedChannel;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        initViews();</div><div class="line">        initData();</div><div class="line">        initEvent();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initViews</span><span class="params">()</span> </span>&#123;</div><div class="line">        setContentView(R.layout.activity_main);</div><div class="line">        mSelectedChannel = (DragGridlayout) findViewById(R.id.selectedChannel);</div><div class="line">        mUnSelectedChannel = (DragGridlayout) findViewById(R.id.unSelectedChannel);</div><div class="line">        mSelectedChannel.setAllowDrag(<span class="keyword">true</span>);</div><div class="line">        mUnSelectedChannel.setAllowDrag(<span class="keyword">true</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initData</span><span class="params">()</span> </span>&#123;</div><div class="line">        List&lt;String&gt; selectedChannel = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        selectedChannel.add(<span class="string">"头条"</span>);</div><div class="line">        ...</div><div class="line">        mSelectedChannel.setItems(selectedChannel);</div><div class="line"></div><div class="line">        List&lt;String&gt; unSelectedChannel = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        unSelectedChannel.add(<span class="string">"NBA"</span>);</div><div class="line">        ...</div><div class="line">        mUnSelectedChannel.setItems(unSelectedChannel);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initEvent</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="comment">//设置条目点击监听</span></div><div class="line">        mSelectedChannel.setOnDragItemClickListener(<span class="keyword">new</span> DragGridlayout.OnDragItemClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDragItemClick</span><span class="params">(TextView tv)</span> </span>&#123;</div><div class="line">                <span class="comment">//移除点击的条目，把条目添加到下面的Gridlayout</span></div><div class="line">                mSelectedChannel.removeView(tv);<span class="comment">//移除是需要时间,不能直接添加</span></div><div class="line">                mUnSelectedChannel.addItem(tv.getText().toString(),<span class="number">0</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        mUnSelectedChannel.setOnDragItemClickListener(<span class="keyword">new</span> DragGridlayout.OnDragItemClickListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDragItemClick</span><span class="params">(TextView tv)</span> </span>&#123;</div><div class="line">                <span class="comment">//移除点击的条目，把条目添加到上面的Gridlayout</span></div><div class="line">                mUnSelectedChannel.removeView(tv);<span class="comment">//移除是需要时间,不能直接添加</span></div><div class="line">                mSelectedChannel.addItem(tv.getText().toString());</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItem</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">        mSelectedChannel.addItem(<span class="string">"频道"</span> + index++,<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p><a href="https://github.com/JackChan1999/DragGridLayout" target="_blank" rel="external">https://github.com/JackChan1999/DragGridLayout</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义控件/" rel="tag"># 自定义控件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/24/自定义控件/gooview/" rel="next" title="QQ气泡效果粘性控件的实现">
+                <i class="fa fa-chevron-left"></i> QQ气泡效果粘性控件的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻频道管理的炫酷实现"><span class="nav-number">1.</span> <span class="nav-text">新闻频道管理的炫酷实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#知识点"><span class="nav-number">2.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新闻频道管理的多种实现"><span class="nav-number">3.</span> <span class="nav-text">新闻频道管理的多种实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拖拽"><span class="nav-number">4.</span> <span class="nav-text">拖拽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拖拽监听"><span class="nav-number">5.</span> <span class="nav-text">拖拽监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DragEvent"><span class="nav-number">6.</span> <span class="nav-text">DragEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当拖拽事件开始时，创建出与子控件对应的矩形数组"><span class="nav-number">7.</span> <span class="nav-text">当拖拽事件开始时，创建出与子控件对应的矩形数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手指移动时，实时判断触摸是否进入了某一个子控件"><span class="nav-number">8.</span> <span class="nav-text">手指移动时，实时判断触摸是否进入了某一个子控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是否允许拖拽"><span class="nav-number">9.</span> <span class="nav-text">是否允许拖拽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置列数和动画"><span class="nav-number">10.</span> <span class="nav-text">设置列数和动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DragGridlayout"><span class="nav-number">11.</span> <span class="nav-text">DragGridlayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MainActivity"><span class="nav-number">12.</span> <span class="nav-text">MainActivity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">13.</span> <span class="nav-text">源代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/05/25/自定义控件/dd/';
+          this.page.identifier = '2017/05/25/自定义控件/dd/';
+          this.page.title = '新闻频道管理的炫酷实现';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -287,7 +287,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/使用JDK5中同步技术的3个面试题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/android/Android的消息机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -309,8 +309,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/" itemprop="url">
-                  使用JDK5中同步技术的3个面试题
+                <a class="post-title-link" href="/2017/04/30/android/Android的消息机制/" itemprop="url">
+                  Android的消息机制
                 </a>
               
             
@@ -326,7 +326,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:57:10+08:00">
                 2017-04-30
               </time>
             
@@ -349,8 +349,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -367,9 +367,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/android/Android的消息机制/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/使用JDK5中同步技术的3个面试题/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/android/Android的消息机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -395,11 +395,12 @@
 
       
         
-          <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">          </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">              </div><div class="line">            System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">            <span class="comment">/*模拟处理16行日志，下面的代码产生了16个日志对象，当前代码需要运行16秒才能打印完这些日志。 </span></div><div class="line">            修改程序代码，开四个线程让这16个对象在4秒钟打完。 </div><div class="line">            */  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++)&#123;  <span class="comment">//这行代码不能改动  </span></div><div class="line">                <span class="keyword">final</span> String log = <span class="string">""</span>+(i+<span class="number">1</span>);   <span class="comment">//这行代码不能改动  </span></div><div class="line">                &#123;  </div><div class="line">                        Test.parseLog(log);  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        <span class="comment">//parseLog方法内部的代码不能改动  </span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">parseLog</span><span class="params">(String log)</span></span>&#123;  </div><div class="line">            System.out.println(log+<span class="string">":"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">              </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;         </div><div class="line">        &#125;     </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+          <h1 id="1-ANR异常"><a href="#1-ANR异常" class="headerlink" title="1. ANR异常"></a><strong>1. ANR异常</strong></h1><p>Application No Response：应用程序无响应。在主线程中，是不允许执行耗时的操作的，如果主线程阻塞的时间大于6秒，就很有可能出现anr异常。主线程，要完成界面的更新，事件的处理，窗体显示的回调，所以如果主线程阻塞时间较长，就不能很好的处理以上比较重要的事情，那么Android有一个机制，就是如果他发现消息队列中有很多消息，主线程没办法响应的话，他就会抛出anr异常。所以，比较耗时的操作都必须要交给子线程。</p>
+<p>解决办法：可以通过Handler来解决这个问题，将比较耗时的操作交给子线程，然后子线程通过Handler，发送消息给主线程，让主线程去更新界面。什么样的操作时比较耗时的？</p>
+<p>1、访问网络，2、大文件的拷贝，3、阻塞式的请求，socket</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/android/Android的消息机制/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -557,163 +558,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/30/java/同步工具类/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程范围内共享数据/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JackChan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/ai.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="秋过冬漫长">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/30/java/线程范围内共享数据/" itemprop="url">
-                  线程范围内共享数据
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
-                2017-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/30/java/线程范围内共享数据/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/线程范围内共享数据/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>所谓线程范围内共享数据，即对于相同的程序代码，多个模块在同一个线程中运行时要共享一份数据，而在另外线程中运行时又共享另外一份数据，API中为我们提供了一个操作线程范围内共享数据的类ThreadLocal，对于线程范围内共享数据的应用，在ThreadLocal的应用场景中进行了介绍，然后主要对它的使用进行讲解，演示了由单一数据的共享到将多个数据封装到一个对象中，然后进行共享。在开始先用一个Map集合简单实现线程范围内数据的共享</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/线程范围内共享数据/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -958,7 +802,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/多线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/使用JDK5中同步技术的3个面试题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -980,8 +824,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/多线程/" itemprop="url">
-                  多线程
+                <a class="post-title-link" href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/" itemprop="url">
+                  使用JDK5中同步技术的3个面试题
                 </a>
               
             
@@ -1038,9 +882,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/多线程/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/多线程/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/使用JDK5中同步技术的3个面试题/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1066,11 +910,168 @@
 
       
         
-          <h1 id="1-多线程概述"><a href="#1-多线程概述" class="headerlink" title="1. 多线程概述"></a><strong>1. 多线程概述</strong></h1><h2 id="1-1-多线程引入"><a href="#1-1-多线程引入" class="headerlink" title="1.1 多线程引入"></a><strong>1.1 多线程引入</strong></h2><p><img src="http://img.blog.csdn.net/20150827214823243" alt=""></p>
-<p>由上图中程序的调用流程可知，这个程序只有一个执行流程，所以这样的程序就是单线程程序。假如一个程序有多条执行流程，那么，该程序就是多线程程序。</p>
+          <h1 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h1><p>现有的程序代码模拟产生了16个日志对象，并且需要运行16秒才能打印完这些日志，请在程序中增加4个线程去调用parseLog()方法来分头打印这16个日志对象，程序只需要运行4秒即可打印完这些日志对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </div><div class="line">          </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </div><div class="line">              </div><div class="line">            System.out.println(<span class="string">"begin:"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">            <span class="comment">/*模拟处理16行日志，下面的代码产生了16个日志对象，当前代码需要运行16秒才能打印完这些日志。 </span></div><div class="line">            修改程序代码，开四个线程让这16个对象在4秒钟打完。 </div><div class="line">            */  </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">16</span>;i++)&#123;  <span class="comment">//这行代码不能改动  </span></div><div class="line">                <span class="keyword">final</span> String log = <span class="string">""</span>+(i+<span class="number">1</span>);   <span class="comment">//这行代码不能改动  </span></div><div class="line">                &#123;  </div><div class="line">                        Test.parseLog(log);  </div><div class="line">                &#125;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">          </div><div class="line">        <span class="comment">//parseLog方法内部的代码不能改动  </span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">parseLog</span><span class="params">(String log)</span></span>&#123;  </div><div class="line">            System.out.println(log+<span class="string">":"</span>+(System.currentTimeMillis()/<span class="number">1000</span>));  </div><div class="line">              </div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                Thread.sleep(<span class="number">1000</span>);  </div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;  </div><div class="line">                e.printStackTrace();  </div><div class="line">            &#125;         </div><div class="line">        &#125;     </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/多线程/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/使用JDK5中同步技术的3个面试题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程范围内共享数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/30/java/线程范围内共享数据/" itemprop="url">
+                  线程范围内共享数据
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T23:56:42+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/30/java/线程范围内共享数据/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/30/java/线程范围内共享数据/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>所谓线程范围内共享数据，即对于相同的程序代码，多个模块在同一个线程中运行时要共享一份数据，而在另外线程中运行时又共享另外一份数据，API中为我们提供了一个操作线程范围内共享数据的类ThreadLocal，对于线程范围内共享数据的应用，在ThreadLocal的应用场景中进行了介绍，然后主要对它的使用进行讲解，演示了由单一数据的共享到将多个数据封装到一个对象中，然后进行共享。在开始先用一个Map集合简单实现线程范围内数据的共享</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/30/java/线程范围内共享数据/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1156,7 +1157,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
