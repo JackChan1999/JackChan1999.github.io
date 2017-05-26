@@ -603,7 +603,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程池/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程范围内共享数据/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -625,8 +625,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/线程池/" itemprop="url">
-                  线程池
+                <a class="post-title-link" href="/2017/04/30/java/线程范围内共享数据/" itemprop="url">
+                  线程范围内共享数据
                 </a>
               
             
@@ -683,9 +683,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/线程池/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/线程范围内共享数据/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/线程池/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/线程范围内共享数据/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -711,52 +711,10 @@
 
       
         
-          <p>这里首先介绍了java5中的并发的小工具包：java.util.concurrent.atomic，然后介绍了线程池的概念，对使用java5的方式创建不同形式的线程进行了演示，之后介绍了两个 对象：Callable和Future，用于获取线程执行后的结果，对于<a href="线程锁技术.md">线程锁技术</a>则在另外一篇文章中介绍。</p>
-<p>Java5中的线程并发库都在java.util.concurrent包及子包中</p>
-<h1 id="1-Executor类的继承结构"><a href="#1-Executor类的继承结构" class="headerlink" title="1. Executor类的继承结构"></a><strong>1. Executor类的继承结构</strong></h1><p><img src="http://img.blog.csdn.net/20161024205013699" alt="ThreadPoolExecutor"></p>
-<p>Executor是线程池的顶级接口，只有一个执行任务的方法execute()</p>
-<p>ExecutorService是Executor的子接口，该接口中包含了线程池常用的一些方法</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">功能描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">execute()</td>
-<td style="text-align:left">执行任务</td>
-</tr>
-<tr>
-<td style="text-align:left">shutdown()</td>
-<td style="text-align:left">调用后不再接收新任务，如果里面有任务，就执行完</td>
-</tr>
-<tr>
-<td style="text-align:left">shutdownNow()</td>
-<td style="text-align:left">调用后不再接受新任务，如果有等待任务，移出队列；有正在执行的，尝试停止之</td>
-</tr>
-<tr>
-<td style="text-align:left">isShutdown()</td>
-<td style="text-align:left">判断线程池是否关闭</td>
-</tr>
-<tr>
-<td style="text-align:left">isTerminated()</td>
-<td style="text-align:left">判断线程池中任务是否执行完成</td>
-</tr>
-<tr>
-<td style="text-align:left">submit()</td>
-<td style="text-align:left">提交任务</td>
-</tr>
-<tr>
-<td style="text-align:left">invokeAll()</td>
-<td style="text-align:left">执行一组任务</td>
-</tr>
-</tbody>
-</table>
+          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>所谓线程范围内共享数据，即对于相同的程序代码，多个模块在同一个线程中运行时要共享一份数据，而在另外线程中运行时又共享另外一份数据，API中为我们提供了一个操作线程范围内共享数据的类ThreadLocal，对于线程范围内共享数据的应用，在ThreadLocal的应用场景中进行了介绍，然后主要对它的使用进行讲解，演示了由单一数据的共享到将多个数据封装到一个对象中，然后进行共享。在开始先用一个Map集合简单实现线程范围内数据的共享</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/线程池/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/线程范围内共享数据/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -960,7 +918,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程范围内共享数据/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/30/java/线程池/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JackChan">
@@ -982,8 +940,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/04/30/java/线程范围内共享数据/" itemprop="url">
-                  线程范围内共享数据
+                <a class="post-title-link" href="/2017/04/30/java/线程池/" itemprop="url">
+                  线程池
                 </a>
               
             
@@ -1040,9 +998,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/30/java/线程范围内共享数据/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/30/java/线程池/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/04/30/java/线程范围内共享数据/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/30/java/线程池/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1068,10 +1026,52 @@
 
       
         
-          <h2 id="笔记摘要"><a href="#笔记摘要" class="headerlink" title="笔记摘要"></a><strong>笔记摘要</strong></h2><p>所谓线程范围内共享数据，即对于相同的程序代码，多个模块在同一个线程中运行时要共享一份数据，而在另外线程中运行时又共享另外一份数据，API中为我们提供了一个操作线程范围内共享数据的类ThreadLocal，对于线程范围内共享数据的应用，在ThreadLocal的应用场景中进行了介绍，然后主要对它的使用进行讲解，演示了由单一数据的共享到将多个数据封装到一个对象中，然后进行共享。在开始先用一个Map集合简单实现线程范围内数据的共享</p>
+          <p>这里首先介绍了java5中的并发的小工具包：java.util.concurrent.atomic，然后介绍了线程池的概念，对使用java5的方式创建不同形式的线程进行了演示，之后介绍了两个 对象：Callable和Future，用于获取线程执行后的结果，对于<a href="线程锁技术.md">线程锁技术</a>则在另外一篇文章中介绍。</p>
+<p>Java5中的线程并发库都在java.util.concurrent包及子包中</p>
+<h1 id="1-Executor类的继承结构"><a href="#1-Executor类的继承结构" class="headerlink" title="1. Executor类的继承结构"></a><strong>1. Executor类的继承结构</strong></h1><p><img src="http://img.blog.csdn.net/20161024205013699" alt="ThreadPoolExecutor"></p>
+<p>Executor是线程池的顶级接口，只有一个执行任务的方法execute()</p>
+<p>ExecutorService是Executor的子接口，该接口中包含了线程池常用的一些方法</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">execute()</td>
+<td style="text-align:left">执行任务</td>
+</tr>
+<tr>
+<td style="text-align:left">shutdown()</td>
+<td style="text-align:left">调用后不再接收新任务，如果里面有任务，就执行完</td>
+</tr>
+<tr>
+<td style="text-align:left">shutdownNow()</td>
+<td style="text-align:left">调用后不再接受新任务，如果有等待任务，移出队列；有正在执行的，尝试停止之</td>
+</tr>
+<tr>
+<td style="text-align:left">isShutdown()</td>
+<td style="text-align:left">判断线程池是否关闭</td>
+</tr>
+<tr>
+<td style="text-align:left">isTerminated()</td>
+<td style="text-align:left">判断线程池中任务是否执行完成</td>
+</tr>
+<tr>
+<td style="text-align:left">submit()</td>
+<td style="text-align:left">提交任务</td>
+</tr>
+<tr>
+<td style="text-align:left">invokeAll()</td>
+<td style="text-align:left">执行一组任务</td>
+</tr>
+</tbody>
+</table>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/04/30/java/线程范围内共享数据/#more" rel="contents">
+            <a class="btn" href="/2017/04/30/java/线程池/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
