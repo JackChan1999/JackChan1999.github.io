@@ -1,0 +1,1244 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自定义控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="自定义控件之圆形菜单">
+<meta name="keywords" content="自定义控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="摩天轮控件">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/自定义控件/摩天轮控件/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="自定义控件之圆形菜单">
+<meta property="og:image" content="https://github.com/JackChan1999/CircleMenu/raw/master/art/circlemenu.jpg">
+<meta property="og:image" content="https://github.com/JackChan1999/CircleMenu/raw/master/art/circlemenu2.png">
+<meta property="og:image" content="https://github.com/JackChan1999/CircleMenu/raw/master/art/%E5%9C%86%E5%BD%A2%E8%8F%9C%E5%8D%95%E5%9B%BE%E7%A4%BA.png">
+<meta property="og:image" content="https://github.com/JackChan1999/CircleMenu/raw/master/art/%E6%91%A9%E5%A4%A9%E8%BD%AE%E6%8E%A7%E4%BB%B6%E5%88%86%E6%9E%90.png">
+<meta property="og:updated_time" content="2017-06-13T12:22:30.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="摩天轮控件">
+<meta name="twitter:description" content="自定义控件之圆形菜单">
+<meta name="twitter:image" content="https://github.com/JackChan1999/CircleMenu/raw/master/art/circlemenu.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/自定义控件/摩天轮控件/"/>
+
+
+
+
+
+  <title>摩天轮控件 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/自定义控件/摩天轮控件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                摩天轮控件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T20:17:43+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/自定义控件/摩天轮控件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/自定义控件/摩天轮控件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="自定义控件之圆形菜单"><a href="#自定义控件之圆形菜单" class="headerlink" title="自定义控件之圆形菜单"></a>自定义控件之圆形菜单</h2><p><img src="https://github.com/JackChan1999/CircleMenu/raw/master/art/circlemenu.jpg" width="300"></p>
+<a id="more"></a>
+<h2 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h2><p>如图所示，按钮之间的角度差等于360/按钮数，这里的角度差就是60度。根据几何知识可以算出每个按钮的左上右下坐标</p>
+<p><img src="https://github.com/JackChan1999/CircleMenu/raw/master/art/circlemenu2.png" alt=""></p>
+<p><img src="https://github.com/JackChan1999/CircleMenu/raw/master/art/%E5%9C%86%E5%BD%A2%E8%8F%9C%E5%8D%95%E5%9B%BE%E7%A4%BA.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> d;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> startAngle;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> l, <span class="keyword">int</span> t, <span class="keyword">int</span> r, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getChildCount(); i++) &#123;</div><div class="line">		View child = getChildAt(i);</div><div class="line">		<span class="comment">//获取孩子视图的测量宽度</span></div><div class="line">		<span class="keyword">int</span> childWidth = child.getMeasuredWidth();</div><div class="line">		<span class="comment">//temp:相当于自定义控件所在圆的圆心到子视图所在矩形的几何中心的距离</span></div><div class="line">		<span class="keyword">float</span> temp = d / <span class="number">3.0f</span>;</div><div class="line">		<span class="keyword">int</span> left = (<span class="keyword">int</span>) (d / <span class="number">2</span> + Math.round(temp * Math.cos(Math.toRadians(startAngle))) - childWidth / <span class="number">2</span>);</div><div class="line">		<span class="keyword">int</span> right = left + childWidth;</div><div class="line">		<span class="keyword">int</span> top = (<span class="keyword">int</span>) (d / <span class="number">2</span> + Math.round(temp * Math.sin(Math.toRadians(startAngle))) - childWidth / <span class="number">2</span>);</div><div class="line">		<span class="keyword">int</span> bottom = top + childWidth;</div><div class="line">		child.layout(left, top, right, bottom);</div><div class="line">		startAngle += <span class="number">360</span> / getChildCount();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="让菜单动起来"><a href="#让菜单动起来" class="headerlink" title="让菜单动起来"></a>让菜单动起来</h2><p>先通过CircleUtil.getAngle()算出手指滑动的两个点之间的角度差angle，再重新计算出按钮的开始角度startAngle += angle;调用requestLayout()方法，让界面重新布局和绘制，就可以让菜单动起来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">float</span> lastX;</div><div class="line"><span class="keyword">private</span> <span class="keyword">float</span> lastY;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">	<span class="keyword">float</span> x = event.getX();</div><div class="line">	<span class="keyword">float</span> y = event.getY();</div><div class="line">	<span class="keyword">switch</span> (event.getAction()) &#123;</div><div class="line">		<span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">			lastX = x;</div><div class="line">			lastY = y;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">			<span class="keyword">float</span> start = CircleUtil.getAngle(lastX, lastY, d);</div><div class="line">			<span class="keyword">float</span> end = CircleUtil.getAngle(x, y, d);</div><div class="line">			<span class="keyword">float</span> angle;</div><div class="line">			<span class="comment">//判断点击的点所处的象限,如果是1,4象限,角度值是正数,否则是负数</span></div><div class="line">			<span class="keyword">if</span> (CircleUtil.getQuadrant(x, y, d) == <span class="number">1</span> || CircleUtil.getQuadrant(x, y, d) == <span class="number">4</span>) &#123;</div><div class="line">				angle = end - start;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				angle = start - end;</div><div class="line">			&#125;</div><div class="line">			startAngle += angle;</div><div class="line">			<span class="comment">//让界面重新布局和绘制</span></div><div class="line">			requestLayout();</div><div class="line">			lastX = x;</div><div class="line">			lastY = y;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		<span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>CircleUtil，计算触摸点的角度和象限的工具类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleUtil</span> </span>&#123;</div><div class="line">  </div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">getAngle</span><span class="params">(<span class="keyword">float</span> xTouch, <span class="keyword">float</span> yTouch,<span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">		<span class="keyword">double</span> x = xTouch - (d / <span class="number">2f</span>);</div><div class="line">		<span class="keyword">double</span> y = yTouch - (d / <span class="number">2f</span>);</div><div class="line">		<span class="comment">//hypot:通过两条直角边,求斜边</span></div><div class="line">		<span class="keyword">return</span> (<span class="keyword">float</span>) (Math.asin(y / Math.hypot(x, y)) * <span class="number">180</span> / Math.PI);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getQuadrant</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y,<span class="keyword">int</span> d)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> tmpX = (<span class="keyword">int</span>) (x - d / <span class="number">2</span>);</div><div class="line">		<span class="keyword">int</span> tmpY = (<span class="keyword">int</span>) (y - d / <span class="number">2</span>);</div><div class="line">		<span class="keyword">if</span> (tmpX &gt;= <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> tmpY &gt;= <span class="number">0</span> ? <span class="number">4</span> : <span class="number">1</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">return</span> tmpY &gt;= <span class="number">0</span> ? <span class="number">3</span> : <span class="number">2</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>所需数据源</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> String[] mItemTexts = <span class="keyword">new</span> String[] &#123; <span class="string">"安全中心 "</span>, <span class="string">"特色服务"</span>, <span class="string">"投资理财"</span>,</div><div class="line">      <span class="string">"转账汇款"</span>, <span class="string">"我的账户"</span>, <span class="string">"信用卡"</span> &#125;;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] mItemImgs = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; R.drawable.home_mbank_1_normal,</div><div class="line">      R.drawable.home_mbank_2_normal, R.drawable.home_mbank_3_normal,</div><div class="line">      R.drawable.home_mbank_4_normal, R.drawable.home_mbank_5_normal,</div><div class="line">      R.drawable.home_mbank_6_normal &#125;;</div></pre></td></tr></table></figure>
+<p>准备条目布局</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line">              <span class="attr">android:layout_width</span>=<span class="string">"180dp"</span></div><div class="line">              <span class="attr">android:layout_height</span>=<span class="string">"180dp"</span></div><div class="line">              <span class="attr">android:gravity</span>=<span class="string">"center"</span></div><div class="line">              <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_circle_menu_item_image"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        /&gt;</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/id_circle_menu_item_text"</span></div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></div><div class="line">        <span class="attr">android:text</span>=<span class="string">"保险"</span></div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"@android:color/white"</span></div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"14.0dip"</span></div><div class="line">        /&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在自定义ViewGroup中定义加入子条目信息的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMenuItemIconsAndTexts</span><span class="params">(<span class="keyword">int</span>[] resIds, String[] texts)</span> </span>&#123;</div><div class="line">   <span class="comment">//根据用户设置的参数，初始化view,并将View添加到当前ViewGroup中</span></div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; resIds.length; i++) &#123;</div><div class="line">      View view = LayoutInflater.from(getContext()).inflate(R.layout.circle_menu_item, <span class="keyword">this</span>, <span class="keyword">false</span>);</div><div class="line">      ImageView iv = (ImageView) view.findViewById(R.id.id_circle_menu_item_image);</div><div class="line">      TextView tv = (TextView) view.findViewById(R.id.id_circle_menu_item_text);</div><div class="line"></div><div class="line">      iv.setImageResource(resIds[i]);</div><div class="line">      tv.setText(texts[i]);</div><div class="line"></div><div class="line">      <span class="comment">// 添加view到容器中</span></div><div class="line">      addView(view);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>设置数据到布局中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> CircleMenuLayout mCircleMenuLayout;</div><div class="line">   <span class="keyword">private</span> String[] texts= <span class="keyword">new</span> String[] &#123; <span class="string">"安全中心 "</span>, <span class="string">"特色服务"</span>, <span class="string">"投资理财"</span>,</div><div class="line">         <span class="string">"转账汇款"</span>, <span class="string">"我的账户"</span>, <span class="string">"信用卡"</span> &#125;;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">int</span>[] imgs= <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; R.drawable.home_mbank_1_normal,</div><div class="line">         R.drawable.home_mbank_2_normal, R.drawable.home_mbank_3_normal,</div><div class="line">         R.drawable.home_mbank_4_normal, R.drawable.home_mbank_5_normal,</div><div class="line">         R.drawable.home_mbank_6_normal &#125;;</div><div class="line"></div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></div><div class="line">   &#123;</div><div class="line">      <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">      <span class="comment">//自已切换布局文件看效果</span></div><div class="line">      setContentView(R.layout.activity_main);</div><div class="line">      mCircleMenuLayout = (CircleMenuLayout) findViewById(R.id.id_menulayout);</div><div class="line">      <span class="comment">//将准备的数据设置到自定义控件中,从而将数据设置到子视图中</span></div><div class="line">      mCircleMenuLayout.setMenuItemIconsAndTexts(imgs, texts);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>处理测量操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//如果不做这个操作,当前控件的子控件将无法得到宽度和高度</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</div><div class="line">   <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line">   <span class="comment">//遍历当前控件,测量每个孩子视图</span></div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getChildCount(); i++) &#123;</div><div class="line">      getChildAt(i).measure(widthMeasureSpec,heightMeasureSpec);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>布局条目的位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义控件所在的圆的直径</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> d = <span class="number">480</span>;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> l, <span class="keyword">int</span> t, <span class="keyword">int</span> r, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">   <span class="keyword">float</span> layoutRadius = d/<span class="number">2f</span>;</div><div class="line">   <span class="keyword">final</span> <span class="keyword">int</span> childCount = getChildCount();</div><div class="line">   <span class="keyword">int</span> left, top;</div><div class="line">   <span class="comment">// menu item 的尺寸</span></div><div class="line">   <span class="keyword">int</span> cWidth = getChildAt(<span class="number">0</span>).getLayoutParams().width;</div><div class="line">   <span class="comment">// 根据单个条目占用的弧度</span></div><div class="line">   <span class="keyword">float</span> angleDelay = <span class="number">360</span> / getChildCount();</div><div class="line">   <span class="comment">// 遍历去设置每个条目的位置</span></div><div class="line">   <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; childCount; i++) &#123;</div><div class="line">      <span class="keyword">final</span> View child = getChildAt(i);</div><div class="line">  <span class="comment">//将角度和360取余数,使得角度只能在0-360度范围内</span></div><div class="line">      mStartAngle %= <span class="number">360</span>;</div><div class="line">      <span class="comment">// 计算视图中心点到子条目中心点的距离</span></div><div class="line">      <span class="keyword">float</span> tmp = layoutRadius - cWidth / <span class="number">2</span>;</div><div class="line">      <span class="comment">//计算子条目的左边距</span></div><div class="line">	  <span class="comment">//Math.toRadians:将角度转化为弧度</span></div><div class="line">	  <span class="comment">//Math.round:四舍五入</span></div><div class="line">	  <span class="comment">//子条目的左边距=自定义控件的半径+(tmp的余弦值-子条目宽度的一半)</span></div><div class="line">      left =(<span class="keyword">int</span>) (layoutRadius</div><div class="line">            +  Math.round(tmp</div><div class="line">            * Math.cos(Math.toRadians(mStartAngle)) - <span class="number">1</span> / <span class="number">2f</span></div><div class="line">            * cWidth));</div><div class="line">      <span class="comment">// 原理同left的计算方法</span></div><div class="line">      top =(<span class="keyword">int</span>)( layoutRadius</div><div class="line">            +  Math.round(tmp</div><div class="line">            * Math.sin(Math.toRadians(mStartAngle)) - <span class="number">1</span> / <span class="number">2f</span></div><div class="line">            * cWidth));</div><div class="line">	  <span class="comment">//将子视图摆放到当前控件上</span></div><div class="line">      child.layout(left, top, left + cWidth, top + cWidth);</div><div class="line">      <span class="comment">// 叠加尺寸</span></div><div class="line">      mStartAngle += angleDelay;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="优化圆形菜单"><a href="#优化圆形菜单" class="headerlink" title="优化圆形菜单"></a>优化圆形菜单</h2><ul>
+<li><p>当前圆形菜单的宽高设置对自定义控件效果的影响</p>
+<p>先获取MeasureSpec的size和mode，用户在布局文件中定义宽高的情况分为三种,但由于控件是圆的,我们要做如下处理</p>
+<ul>
+<li>当用户宽高均输入MATCH_PARENT</li>
+</ul>
+<p>mode为MeasureSpec.EXACTLY，此时若想要显示为圆形且不超过屏幕，需要取宽度和高度的较小值</p>
+<ul>
+<li>用户宽高均输入固定值</li>
+</ul>
+<p>mode为MeasureSpec.EXACTLY，想要显示为圆形可能超过屏幕,需要取宽度和高度的较小值</p>
+<ul>
+<li>用户宽高均输入wrap_content,由于无法确定控件宽高,则直接取屏幕宽度和高度的较小值</li>
+</ul>
+</li>
+<li><p>当圆形菜单的大小确定后,孩子视图的的大小就不能随意由用户设置了,应该和父布局匹配</p>
+<p>孩子视图的宽或高均为圆形菜单的宽高的1/4(仅仅是当前需求,实际开发中按开发需求设置)</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> childMeasureSpec = MeasureSpec.makeMeasureSpec((<span class="keyword">int</span>) (mRadius / <span class="number">4f</span>), MeasureSpec.EXACTLY);</div><div class="line"><span class="comment">// 对孩子视图进行测量</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getChildCount(); i++) &#123;</div><div class="line">getChildAt(i).measure(childMeasureSpec, childMeasureSpec);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//需求:不管用户传多大,都要完全显示当前自定义控件</span></div><div class="line"><span class="keyword">int</span> measureWidth;</div><div class="line"><span class="keyword">int</span> measureHeight;</div><div class="line"><span class="comment">//判断模式:</span></div><div class="line"><span class="comment">//判断模式主要处理两种:1,确切的 2,至多</span></div><div class="line"><span class="keyword">int</span> mode = MeasureSpec.getMode(widthMeasureSpec);</div><div class="line"><span class="keyword">int</span> size = MeasureSpec.getSize(widthMeasureSpec);</div><div class="line"><span class="keyword">if</span> (mode != MeasureSpec.EXACTLY) &#123;</div><div class="line">   <span class="comment">//WRAP_CONTENT</span></div><div class="line">   <span class="comment">//未指定</span></div><div class="line">   <span class="comment">//指定包裹内容是包裹的背景?</span></div><div class="line">   <span class="comment">//原因:无法确定孩子视图的个数和大小,且为了能够让父布局完全显示子视图,则默认将WRAP_CONTENT设定为包裹背景,即:背景多大,控件就多大</span></div><div class="line">   <span class="comment">//背景有多大,控件就有多大</span></div><div class="line">   <span class="comment">//获取背景的宽度</span></div><div class="line">   <span class="keyword">int</span> suggestedMinimumWidth = getSuggestedMinimumWidth();</div><div class="line">   <span class="comment">//没有背景,判断将默认宽度作为控件宽度</span></div><div class="line">   <span class="comment">//如果suggestedMinimumWidth值为0,则无背景</span></div><div class="line">   <span class="keyword">if</span> (suggestedMinimumWidth == <span class="number">0</span>) &#123;</div><div class="line">      measureWidth = measureHeight = getDefaultWidth();</div><div class="line">   &#125; <span class="keyword">else</span> &#123;</div><div class="line">      measureWidth = measureHeight = Math.min(suggestedMinimumWidth, getDefaultWidth());</div><div class="line">   &#125;</div><div class="line"></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">   <span class="comment">//判断传入的宽度和屏幕宽度取较小值</span></div><div class="line">   measureWidth = measureHeight = Math.min(size, getDefaultWidth());</div><div class="line">&#125;</div><div class="line"></div><div class="line">d=measureWidth;</div><div class="line"></div><div class="line">setMeasuredDimension(measureWidth, measureHeight);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getChildCount(); i++) &#123;</div><div class="line">   View child = getChildAt(i);</div><div class="line">   <span class="comment">//默认系统是可以通过onMeasure给予MeasureSpec参数的,而对于inflate进来的子视图是没有MeasureSpec参数的</span></div><div class="line">   <span class="comment">//故:需要我们自己设计MeasureSpec</span></div><div class="line">   <span class="keyword">int</span> makeMeasureSpec = MeasureSpec.makeMeasureSpec(d/<span class="number">3</span>, MeasureSpec.EXACTLY);</div><div class="line">   child.measure(makeMeasureSpec, makeMeasureSpec);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>圆形菜单的手势旋转</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">float</span> lastX;</div><div class="line"><span class="keyword">private</span> <span class="keyword">float</span> lastY;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">   <span class="keyword">float</span> x = event.getX();</div><div class="line">   <span class="keyword">float</span> y = event.getY();</div><div class="line">   <span class="keyword">switch</span> (event.getAction()) &#123;</div><div class="line">      <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">         Log.i(<span class="string">"test"</span>, <span class="string">"ACTION_DOWN"</span>);</div><div class="line">         lastX = x;</div><div class="line">         lastY = y;</div><div class="line">         <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line">         Log.i(<span class="string">"test"</span>, <span class="string">"ACTION_MOVE"</span>);</div><div class="line">     <span class="comment">//获取触摸的点所在的角度</span></div><div class="line">         <span class="keyword">float</span> start = CircleUtil.getAngle(lastX, lastY, d);</div><div class="line">         <span class="keyword">float</span> end = CircleUtil.getAngle(x, y, d);</div><div class="line">         <span class="keyword">float</span> angle;</div><div class="line">         <span class="comment">//判断点击的点所处的象限,如果是1,4象限,角度值是正数,否则是负数</span></div><div class="line">     <span class="comment">//获取点所在的象限</span></div><div class="line">         <span class="keyword">if</span> (CircleUtil.getQuadrant(x, y, d) == <span class="number">1</span> || CircleUtil.getQuadrant(x, y, d) == <span class="number">4</span>) &#123;</div><div class="line">            angle = end - start;</div><div class="line">         &#125; <span class="keyword">else</span> &#123;</div><div class="line">            angle = start - end;</div><div class="line">         &#125;</div><div class="line">     <span class="comment">//将手指移动的角度叠加到绘制控件的起始角度上</span></div><div class="line">         startAngle += angle;</div><div class="line">         <span class="comment">//让界面重新布局和绘制</span></div><div class="line">         requestLayout();</div><div class="line">         lastX = x;</div><div class="line">         lastY = y;</div><div class="line"></div><div class="line">         <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">         Log.i(<span class="string">"test"</span>, <span class="string">"ACTION_UP"</span>);</div><div class="line"></div><div class="line">         <span class="keyword">break</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="comment">//return true 表示当前控件想要处理事件,如果没有其他控件想要处理,则所有的MotionEvent事件都会交给自己处理</span></div><div class="line">   <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="摩天轮控件"><a href="#摩天轮控件" class="headerlink" title="摩天轮控件"></a>摩天轮控件</h2><p><img src="https://github.com/JackChan1999/CircleMenu/raw/master/art/%E6%91%A9%E5%A4%A9%E8%BD%AE%E6%8E%A7%E4%BB%B6%E5%88%86%E6%9E%90.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SkyWheel</span> <span class="keyword">extends</span> <span class="title">ViewGroup</span> </span>&#123;</div><div class="line">    </div><div class="line">    PointF center; <span class="comment">// 圆心</span></div><div class="line">    <span class="keyword">float</span> radius; <span class="comment">// 半径</span></div><div class="line">    <span class="keyword">double</span> cellDegree; <span class="comment">// 子控件间的夹角</span></div><div class="line">    <span class="keyword">double</span> diffDegree;</div><div class="line">    <span class="keyword">private</span> GestureDetector mDetector;</div><div class="line">    <span class="keyword">private</span> ValueAnimator mAnimator;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SkyWheel</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context,<span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SkyWheel</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs);</div><div class="line">        init();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">        mDetector = <span class="keyword">new</span> GestureDetector(getContext(),<span class="keyword">new</span> GestureDetector</div><div class="line">                .SimpleOnGestureListener()&#123;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onDown</span><span class="params">(MotionEvent e)</span> </span>&#123;</div><div class="line">                <span class="keyword">if</span> (mAnimator != <span class="keyword">null</span> &amp;&amp; mAnimator.isRunning())&#123;</div><div class="line">                    mAnimator.cancel();</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">/**</span></div><div class="line">             * 手指点击一次的时候调用一次</div><div class="line">             * <span class="doctag">@param</span> e</div><div class="line">             * <span class="doctag">@return</span></div><div class="line">             */</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onSingleTapUp</span><span class="params">(MotionEvent e)</span> </span>&#123;</div><div class="line">                <span class="comment">// 点击时，判断当前点是否被某个子控件包含，如果包含直接调用子控件的点击事件即可</span></div><div class="line">                <span class="keyword">int</span> index = getClickPosition(e);</div><div class="line">                <span class="keyword">if</span> (index &gt; -<span class="number">1</span>)&#123;</div><div class="line">                    getChildAt(index).performClick();<span class="comment">// 强制让当前的控件的点击事件执行</span></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">/**</span></div><div class="line">             * </div><div class="line">             * <span class="doctag">@param</span> e1 按下事件 action—_down</div><div class="line">             * <span class="doctag">@param</span> e2 move事件，最近一次的action_move</div><div class="line">             * <span class="doctag">@param</span> distanceX = 上一次move事件的x值 - 当前move事件的x值</div><div class="line">             * <span class="doctag">@param</span> distanceY = 上一次move事件的y值 - 当前move事件的y值</div><div class="line">             * <span class="doctag">@return</span></div><div class="line">             */</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onScroll</span><span class="params">(MotionEvent e1, MotionEvent e2, <span class="keyword">float</span> distanceX, <span class="keyword">float</span> distanceY)</span> </span>&#123;</div><div class="line">                <span class="comment">// 计算出手指滑动过程中的角度变化夹角</span></div><div class="line">                <span class="comment">// 计算出起始点的角度</span></div><div class="line">                <span class="keyword">double</span> startDegree = getDegree(e2.getX()+distanceX, e2.getY()+distanceX);</div><div class="line">                <span class="comment">// 计算出结束点的角度</span></div><div class="line">                <span class="keyword">double</span> endDegree = getDegree(e2.getX(),e2.getY());</div><div class="line">                <span class="comment">// 计算出夹角</span></div><div class="line">                <span class="keyword">double</span> diff = endDegree - startDegree;</div><div class="line">                setDegree(diffDegree + diff);</div><div class="line">                </div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">/**</span></div><div class="line">             * </div><div class="line">             * <span class="doctag">@param</span> e1 手指按下的事件</div><div class="line">             * <span class="doctag">@param</span> e2 手指移动的事件</div><div class="line">             * <span class="doctag">@param</span> velocityX 手指离开屏幕时，在x轴的速率（像素/s）</div><div class="line">             * <span class="doctag">@param</span> velocityY 手指离开屏幕时，在y轴的速率（像素/s）</div><div class="line">             * <span class="doctag">@return</span></div><div class="line">             */</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onFling</span><span class="params">(MotionEvent e1, MotionEvent e2, <span class="keyword">float</span> velocityX, <span class="keyword">float</span> velocityY)</span> </span>&#123;</div><div class="line">                <span class="comment">// 计算当前点的角度</span></div><div class="line">                <span class="keyword">double</span> startDegree = getDegree(e2.getX(),e2.getY());</div><div class="line">                <span class="comment">// 计算1ms后的角度</span></div><div class="line">                <span class="keyword">double</span> endDegreeAfter1ms = getDegree(e2.getX() + velocityX/<span class="number">1000</span>,e2.getY() + velocityY/<span class="number">1000</span>);</div><div class="line">                <span class="comment">// 计算出1ms的角速度</span></div><div class="line">                <span class="keyword">double</span> velocityAfter1ms = endDegreeAfter1ms - startDegree;</div><div class="line">                <span class="comment">// 计算出1s的角速度</span></div><div class="line">                <span class="keyword">double</span> velocityAfter1s = velocityAfter1ms*<span class="number">1000</span>;</div><div class="line">                <span class="comment">// 通过角速度设置，要移动到的角度</span></div><div class="line">                startFlingAnimation(velocityAfter1s);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getClickPosition</span><span class="params">(MotionEvent e)</span> </span>&#123;</div><div class="line">        <span class="comment">// 遍历每个子控件是否包含当前点</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getChildCount(); i++) &#123;</div><div class="line">            View child = getChildAt(i);</div><div class="line">            RectF rect = <span class="keyword">new</span> RectF(child.getLeft(),child.getTop(),child.getRight(),child.getBottom());</div><div class="line">            <span class="keyword">if</span> (rect.contains(e.getX(),e.getY()))&#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startFlingAnimation</span><span class="params">(<span class="keyword">double</span> velocityAfter1s)</span> </span>&#123;</div><div class="line">        <span class="comment">// 根据当前的角速度，计算出执行时间，与对应时间之后的角度变化</span></div><div class="line">        <span class="keyword">int</span> duration = (<span class="keyword">int</span>) Math.abs(velocityAfter1s*<span class="number">1000</span>);</div><div class="line">        <span class="keyword">if</span> (duration &gt; <span class="number">1000</span>)&#123;</div><div class="line">            duration = <span class="number">1000</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 计算出角度变化</span></div><div class="line">        <span class="keyword">double</span> diff = velocityAfter1s*duration/<span class="number">1000</span>;</div><div class="line">        <span class="comment">// 设置角度变化</span></div><div class="line">        mAnimator = ValueAnimator.ofFloat((<span class="keyword">float</span>) diffDegree,(<span class="keyword">float</span>) (diffDegree+diff));</div><div class="line">        mAnimator.setDuration(<span class="number">1000</span>);</div><div class="line">        mAnimator.addUpdateListener(<span class="keyword">new</span> ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationUpdate</span><span class="params">(ValueAnimator animation)</span> </span>&#123;</div><div class="line">                <span class="comment">// 获取当前正在变化的角度，设置给转盘移动</span></div><div class="line">                <span class="keyword">float</span> animatedValue = (<span class="keyword">float</span>) animation.getAnimatedValue();</div><div class="line">                setDegree(animatedValue);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="comment">// 设置先快后慢的插值器/估值器</span></div><div class="line">        mAnimator.setInterpolator(<span class="keyword">new</span> DecelerateInterpolator());</div><div class="line">        mAnimator.start();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 使用反正切函数计算出角度</div><div class="line">     * <span class="doctag">@param</span> x</div><div class="line">     * <span class="doctag">@param</span> y</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getDegree</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> Math.atan2(y-center.y,x-center.x);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> l, <span class="keyword">int</span> t, <span class="keyword">int</span> r, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">        calculateValue();</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; getChildCount(); i++) &#123;</div><div class="line">            View childView = getChildAt(i);</div><div class="line">            <span class="comment">// 根据三角函数的规律，排版每个子控件的位置</span></div><div class="line">            childView.layout(</div><div class="line">                    (<span class="keyword">int</span>)(center.x + Math.sin(i*cellDegree + diffDegree)*radius - childView.getWidth()/<span class="number">2</span>),</div><div class="line">                    (<span class="keyword">int</span>)(center.y - Math.cos(i*cellDegree + diffDegree)*radius - childView.getHeight()/<span class="number">2</span>),</div><div class="line">                    (<span class="keyword">int</span>)(center.x + Math.sin(i*cellDegree + diffDegree)*radius + childView.getWidth()/<span class="number">2</span>),</div><div class="line">                    (<span class="keyword">int</span>)(center.y - Math.cos(i*cellDegree + diffDegree)*radius + childView.getHeight()/<span class="number">2</span>)</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 计算圆心、半径、夹角</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">calculateValue</span><span class="params">()</span></span>&#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 圆心</span></div><div class="line">        center = <span class="keyword">new</span> PointF();</div><div class="line">        center.x = getWidth()/<span class="number">2</span>;</div><div class="line">        center.y = getHeight()/<span class="number">2</span>;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> maxwidth = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxheight = <span class="number">0</span>;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;getChildCount();i++)&#123;</div><div class="line">            maxwidth = Math.max(maxwidth,getChildAt(i).getWidth());</div><div class="line">            maxheight = Math.max(maxheight,getChildAt(i).getHeight());</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// 半径</span></div><div class="line">        <span class="keyword">float</span> r1 = center.x - maxwidth;</div><div class="line">        <span class="keyword">float</span> r2 = center.y - maxheight;</div><div class="line">        radius = Math.min(r1,r2);</div><div class="line">        </div><div class="line">        <span class="comment">// 夹角</span></div><div class="line">        cellDegree = Math.PI*<span class="number">2</span>/getChildCount();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 动态切换控件的位置</div><div class="line">     * <span class="doctag">@param</span> degree</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDegree</span><span class="params">(<span class="keyword">double</span> degree)</span></span>&#123;</div><div class="line">        diffDegree += degree;</div><div class="line">        <span class="comment">// 强制控件重新排版，onlayout()方法重新执行</span></div><div class="line">        requestLayout();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">        mDetector.onTouchEvent(event);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onInterceptTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>源代码：<a href="https://github.com/JackChan1999/CircleMenu" target="_blank" rel="external">https://github.com/JackChan1999/CircleMenu</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义控件/" rel="tag"># 自定义控件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/javaweb/XML解析器/" rel="next" title="XML解析器">
+                <i class="fa fa-chevron-left"></i> XML解析器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/自定义控件/饼状图/" rel="prev" title="饼状图">
+                饼状图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义控件之圆形菜单"><span class="nav-number">1.</span> <span class="nav-text">自定义控件之圆形菜单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layout"><span class="nav-number">2.</span> <span class="nav-text">layout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让菜单动起来"><span class="nav-number">3.</span> <span class="nav-text">让菜单动起来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化圆形菜单"><span class="nav-number">4.</span> <span class="nav-text">优化圆形菜单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#摩天轮控件"><span class="nav-number">5.</span> <span class="nav-text">摩天轮控件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/13/自定义控件/摩天轮控件/';
+          this.page.identifier = '2017/06/13/自定义控件/摩天轮控件/';
+          this.page.title = '摩天轮控件';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

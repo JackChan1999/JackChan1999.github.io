@@ -1,0 +1,1311 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自定义控件," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="自定义控件之饼状图">
+<meta name="keywords" content="自定义控件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="饼状图">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/自定义控件/饼状图/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="自定义控件之饼状图">
+<meta property="og:image" content="https://github.com/JackChan1999/PieChart/raw/master/art/piechart.jpg">
+<meta property="og:image" content="https://github.com/JackChan1999/PieChart/raw/master/art/%E7%BB%98%E5%88%B6%E9%A5%BC%E7%8A%B6%E5%9B%BE%E5%88%86%E6%9E%90.png">
+<meta property="og:image" content="https://github.com/JackChan1999/PieChart/raw/master/art/%E7%BB%98%E5%88%B6%E7%9B%B4%E7%BA%BF.png">
+<meta property="og:image" content="https://github.com/JackChan1999/PieChart/raw/master/art/%E5%88%A4%E6%96%AD%E7%82%B9%E5%87%BB%E4%BD%8D%E7%BD%AE%E6%89%80%E5%9C%A8%E7%9A%84%E6%89%87%E5%BD%A2%E5%8C%BA%E5%9F%9F.png">
+<meta property="og:updated_time" content="2017-06-13T12:26:42.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="饼状图">
+<meta name="twitter:description" content="自定义控件之饼状图">
+<meta name="twitter:image" content="https://github.com/JackChan1999/PieChart/raw/master/art/piechart.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/自定义控件/饼状图/"/>
+
+
+
+
+
+  <title>饼状图 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/自定义控件/饼状图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                饼状图
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T20:22:53+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/自定义控件/饼状图/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/自定义控件/饼状图/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="自定义控件之饼状图"><a href="#自定义控件之饼状图" class="headerlink" title="自定义控件之饼状图"></a>自定义控件之饼状图</h1><p><img src="https://github.com/JackChan1999/PieChart/raw/master/art/piechart.jpg" width="400"></p>
+<a id="more"></a>
+<h2 id="绘制饼状图分析"><a href="#绘制饼状图分析" class="headerlink" title="绘制饼状图分析"></a>绘制饼状图分析</h2><ol>
+<li>定义一个起始角度</li>
+<li>计算每块扇形的弧度</li>
+<li>遍历数据，每一个起始角度，是上一个扇形的结束角度</li>
+<li>扇形的外接矩形的左上右下不需要计算，移动坐标系到屏幕中间</li>
+</ol>
+<p><img src="https://github.com/JackChan1999/PieChart/raw/master/art/%E7%BB%98%E5%88%B6%E9%A5%BC%E7%8A%B6%E5%9B%BE%E5%88%86%E6%9E%90.png" alt=""></p>
+<h2 id="绘制直线"><a href="#绘制直线" class="headerlink" title="绘制直线"></a>绘制直线</h2><p>直线的两个要素：</p>
+<ol>
+<li>直线的起点，这里是每块扇形的弧的中心点</li>
+<li>直线的终点，这里是连接圆心和起点的延长线上某个点</li>
+</ol>
+<p>起点的计算：</p>
+<ol>
+<li>获取对应扇形的弧度</li>
+<li>扇形起始角度+弧度/2</li>
+<li>半径*角度结果的余弦值，横坐标纵坐标同理</li>
+</ol>
+<p>终点的计算：起点计算的第三步将半径增大即可</p>
+<p><img src="https://github.com/JackChan1999/PieChart/raw/master/art/%E7%BB%98%E5%88%B6%E7%9B%B4%E7%BA%BF.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//绘制直线</span></div><div class="line"><span class="comment">//Math.toRadians(参数):指的是将参数的弧度转换为角度</span></div><div class="line"><span class="keyword">float</span> startX = (<span class="keyword">float</span>) (radius * Math.cos(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line"><span class="keyword">float</span> startY = (<span class="keyword">float</span>) (radius * Math.sin(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line"><span class="keyword">float</span> endX = (<span class="keyword">float</span>) ((radius + <span class="number">30</span>) * Math.cos(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line"><span class="keyword">float</span> endY = (<span class="keyword">float</span>) ((radius + <span class="number">30</span>) * Math.sin(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line">canvas.drawLine(startX, startY, endX, endY, linePaint);</div></pre></td></tr></table></figure>
+<h2 id="判断点击位置所在的扇形区域"><a href="#判断点击位置所在的扇形区域" class="headerlink" title="判断点击位置所在的扇形区域"></a>判断点击位置所在的扇形区域</h2><p><img src="https://github.com/JackChan1999/PieChart/raw/master/art/%E5%88%A4%E6%96%AD%E7%82%B9%E5%87%BB%E4%BD%8D%E7%BD%AE%E6%89%80%E5%9C%A8%E7%9A%84%E6%89%87%E5%BD%A2%E5%8C%BA%E5%9F%9F.png" alt=""></p>
+<p>将点击的坐标位置转化为以饼状图中心为原点的坐标，对坐标进行处理，将坐标转化为点击的角度，判断是否处于某一个饼状图所在的角度区域</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MathUtil</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">getTouchAngle</span><span class="params">(<span class="keyword">float</span> x, <span class="keyword">float</span> y)</span> </span>&#123;</div><div class="line">		<span class="keyword">float</span> touchAngle = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (x &lt; <span class="number">0</span> &amp;&amp; y &lt; <span class="number">0</span>) &#123;  <span class="comment">//2 象限</span></div><div class="line">			touchAngle += <span class="number">180</span>;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (y &lt; <span class="number">0</span> &amp;&amp; x &gt; <span class="number">0</span>) &#123;  <span class="comment">//1象限</span></div><div class="line">			touchAngle += <span class="number">360</span>;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (y &gt; <span class="number">0</span> &amp;&amp; x &lt; <span class="number">0</span>) &#123;  <span class="comment">//3象限</span></div><div class="line">			touchAngle += <span class="number">180</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="comment">//Math.atan(y/x) 返回正数值表示相对于 x 轴的逆时针转角，返回负数值则表示顺时针转角。</span></div><div class="line">		<span class="comment">//返回值乘以 180/π，将弧度转换为角度。</span></div><div class="line">		touchAngle += Math.toDegrees(Math.atan(y / x));</div><div class="line">		<span class="keyword">if</span> (touchAngle &lt; <span class="number">0</span>) &#123;</div><div class="line">			touchAngle = touchAngle + <span class="number">360</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> touchAngle;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>处理触摸事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//当用户与手机屏幕进行交互的时候(触摸)</span></div><div class="line">	<span class="comment">//触摸事件处理</span></div><div class="line">	<span class="comment">//1,按下去</span></div><div class="line">	<span class="comment">//2,移动</span></div><div class="line">	<span class="comment">//3,抬起</span></div><div class="line">	<span class="comment">//参数:触摸事件,这个事件是由用户与屏幕交互产生的,这个事件包含上述三种情况</span></div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">		<span class="comment">//获取用户对屏幕的行为</span></div><div class="line">		<span class="keyword">int</span> action = event.getAction();</div><div class="line">		<span class="keyword">switch</span> (action) &#123;</div><div class="line">			<span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">				<span class="comment">//做点击范围的认定</span></div><div class="line">				<span class="comment">//获取用户点击的位置距当前视图的左边缘的距离</span></div><div class="line">				<span class="keyword">float</span> x = event.getX();</div><div class="line">				<span class="keyword">float</span> y = event.getY();</div><div class="line">				<span class="comment">//将点击的x和y坐标转换为以饼状图为圆心的坐标</span></div><div class="line">				x = x - width / <span class="number">2</span>;</div><div class="line">				y = y - height / <span class="number">2</span>;</div><div class="line">				<span class="keyword">float</span> touchAngle = MathUtil.getTouchAngle(x, y);</div><div class="line">				<span class="keyword">float</span> touchRadius = (<span class="keyword">float</span>) Math.sqrt(x * x + y * y);</div><div class="line">				<span class="comment">//判断触摸的点距离饼状图圆心的距离&lt;饼状图对应圆的圆心</span></div><div class="line">				<span class="keyword">if</span> (touchRadius &lt; radius) &#123;</div><div class="line">					<span class="comment">//说明是一个有效点击区域</span></div><div class="line">					<span class="comment">//查找触摸的角度是否位于起始角度集合中</span></div><div class="line">					<span class="comment">//binarySearch:参数2在参数1对应的集合中的索引</span></div><div class="line">					<span class="comment">//未找到,则返回 -(和搜索的值附近的大于搜索值的正确值对应的索引值+1)</span></div><div class="line">					<span class="comment">//&#123;1,2,3&#125;</span></div><div class="line">					<span class="comment">//搜索1:返回值1在集合中对应的索引0</span></div><div class="line">					<span class="comment">//1.2:返回值为 -(1+1) -2</span></div><div class="line">					<span class="comment">//1.8:返回值 -(1+1) -2</span></div><div class="line">					<span class="keyword">int</span> searchResult = Arrays.binarySearch(startAngles, touchAngle);</div><div class="line">					<span class="keyword">if</span> (searchResult &lt; <span class="number">0</span>) &#123;</div><div class="line">						position = -searchResult - <span class="number">1</span> - <span class="number">1</span>;</div><div class="line">					&#125; <span class="keyword">else</span> &#123;</div><div class="line">						position = searchResult;</div><div class="line">					&#125;</div><div class="line">					Log.i(<span class="string">"test"</span>, <span class="string">"position:"</span> + position);</div><div class="line">					<span class="comment">//让onDraw方法重新调用:</span></div><div class="line">					<span class="comment">//重绘</span></div><div class="line">					invalidate();</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> MotionEvent.ACTION_MOVE:</div><div class="line"></div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			<span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line"></div><div class="line">				<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="定义基本信息载体，即javabean"><a href="#定义基本信息载体，即javabean" class="headerlink" title="定义基本信息载体，即javabean"></a>定义基本信息载体，即javabean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PieEntity</span> </span>&#123;</div><div class="line">	<span class="comment">//对应数据占用的份额</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">float</span> value;</div><div class="line">	<span class="comment">//对应数据的颜色</span></div><div class="line">	<span class="keyword">public</span> <span class="keyword">int</span> color;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">PieEntity</span><span class="params">(<span class="keyword">float</span> value, <span class="keyword">int</span> color)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.value = value;</div><div class="line">		<span class="keyword">this</span>.color = color;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] colors = &#123;<span class="number">0xFFCCFF00</span>, <span class="number">0xFF6495ED</span>, <span class="number">0xFFE32636</span>, <span class="number">0xFF800000</span>, <span class="number">0xFF808000</span>, <span class="number">0xFFFF8C69</span>, <span class="number">0xFF808080</span>,<span class="number">0xFFE6B800</span>, <span class="number">0xFF7CFC00</span>&#125;;</div></pre></td></tr></table></figure>
+<h2 id="初始化三个画笔"><a href="#初始化三个画笔" class="headerlink" title="初始化三个画笔"></a>初始化三个画笔</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">	rectF = <span class="keyword">new</span> RectF();</div><div class="line">	<span class="comment">//初始化path</span></div><div class="line">	path = <span class="keyword">new</span> Path();</div><div class="line">	<span class="comment">//初始化画笔</span></div><div class="line">	paint = <span class="keyword">new</span> Paint();</div><div class="line">	paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">	<span class="comment">//创建绘制直线对应的画笔</span></div><div class="line">	linePaint = <span class="keyword">new</span> Paint();</div><div class="line">	linePaint.setColor(Color.BLACK);</div><div class="line">	linePaint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">	linePaint.setStrokeWidth(<span class="number">3</span>);</div><div class="line">	linePaint.setTextSize(<span class="number">20</span>);</div><div class="line">	touchRectF = <span class="keyword">new</span> RectF();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="计算绘制饼状图的外接矩形的左上右下距离"><a href="#计算绘制饼状图的外接矩形的左上右下距离" class="headerlink" title="计算绘制饼状图的外接矩形的左上右下距离"></a>计算绘制饼状图的外接矩形的左上右下距离</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//当自定义控件的尺寸已经决定好的时候回调</span></div><div class="line"><span class="comment">//这个方法是在onMeasure方法执行后执行,最终的测量结果已经产生</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSizeChanged</span><span class="params">(<span class="keyword">int</span> w, <span class="keyword">int</span> h, <span class="keyword">int</span> oldw, <span class="keyword">int</span> oldh)</span> </span>&#123;</div><div class="line">	<span class="keyword">super</span>.onSizeChanged(w, h, oldw, oldh);</div><div class="line">	<span class="comment">//获得当前控件的宽高</span></div><div class="line">	<span class="keyword">this</span>.width = w;</div><div class="line">	<span class="keyword">this</span>.height = h;</div><div class="line">	<span class="comment">//为了防止绘制后超出屏幕区域,获取屏幕的宽高的较小值</span></div><div class="line">	<span class="keyword">int</span> min = Math.min(w, h);</div><div class="line">	<span class="comment">//获得饼状图的半径:宽度和高度的较小值/2*0.7</span></div><div class="line">	radius = (<span class="keyword">int</span>) (min * <span class="number">0.7f</span> / <span class="number">2</span>);</div><div class="line">	<span class="comment">//获取饼状图的内接矩形</span></div><div class="line">	rectF.left = -radius;</div><div class="line">	rectF.top = -radius;</div><div class="line">	rectF.right = radius;</div><div class="line">	rectF.bottom = radius;</div><div class="line">	touchRectF.left = -radius - <span class="number">15</span>;</div><div class="line">	touchRectF.top = -radius - <span class="number">15</span>;</div><div class="line">	touchRectF.right = radius + <span class="number">15</span>;</div><div class="line">	touchRectF.bottom = radius + <span class="number">15</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="绘制饼状图"><a href="#绘制饼状图" class="headerlink" title="绘制饼状图"></a>绘制饼状图</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (mDataList == <span class="keyword">null</span>)</div><div class="line">		<span class="keyword">return</span>;</div><div class="line"><span class="comment">//保存画布</span></div><div class="line">canvas.save();</div><div class="line"><span class="comment">//屏幕画布到屏幕中间</span></div><div class="line">canvas.translate(mTotalWidth / <span class="number">2</span>, mTotalHeight / <span class="number">2</span>);</div><div class="line"><span class="comment">//绘制饼图的每块区域</span></div><div class="line">drawPie(canvas);</div><div class="line"><span class="comment">//还原画布</span></div><div class="line">canvas.restore();</div><div class="line"><span class="comment">//5,绘制饼状图的步骤:</span></div><div class="line"><span class="comment">//起始的角度</span></div><div class="line"><span class="keyword">float</span> startAngle = <span class="number">0</span>;</div><div class="line"><span class="comment">//遍历数据绘制饼状图</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mDataList.size(); i++) &#123;</div><div class="line">	<span class="comment">/************************①绘制扇形****************************/</span></div><div class="line">	<span class="comment">//每个扇形的角度:数据值占总数据值的百分比</span></div><div class="line">	<span class="keyword">float</span> sweepAngle = mDataList.get(i).getValue() / mTotalValue * <span class="number">360</span> - <span class="number">1</span>;</div><div class="line">	<span class="comment">//移动到初始点</span></div><div class="line">	mPath.moveTo(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line">	<span class="comment">//绘制某一块扇形</span></div><div class="line">	mPath.arcTo(mRectF, startAngle, sweepAngle);</div><div class="line">	<span class="comment">//设置颜色</span></div><div class="line">	mPaint.setColor(mDataList.get(i).getColor());</div><div class="line">	<span class="comment">//绘制路径</span></div><div class="line">	canvas.drawPath(mPath, mPaint);</div><div class="line">	<span class="comment">//重置路径:为了下次再绘制不会和上一次重叠</span></div><div class="line">	mPath.reset();</div><div class="line">	<span class="comment">/***************************②绘制指示线*******************************/</span></div><div class="line">	<span class="comment">//绘制线和文本</span></div><div class="line">	<span class="comment">//确定直线的起始和结束的点的位置</span></div><div class="line">	<span class="keyword">float</span> startLineX = (<span class="keyword">float</span>) (mRadius * Math.cos(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line">	<span class="keyword">float</span> startLineY = (<span class="keyword">float</span>) (mRadius * Math.sin(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line">	<span class="keyword">float</span> endLineX = (<span class="keyword">float</span>) ((mRadius + <span class="number">30</span>) * Math.cos(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line">	<span class="keyword">float</span> endLineY = (<span class="keyword">float</span>) ((mRadius + <span class="number">30</span>) * Math.sin(Math.toRadians(startAngle + sweepAngle / <span class="number">2</span>)));</div><div class="line">	canvas.drawLine(startLineX, startLineY, endLineX, endLineY, mLinePaint);</div><div class="line">	<span class="comment">//记录下一次的起始角度为之前所有绘制的扇形弧度+1</span></div><div class="line">	startAngle += sweepAngle + <span class="number">1</span>;</div><div class="line">	<span class="comment">/***************************③绘制文本*******************************/</span></div><div class="line">	<span class="keyword">float</span> res = mDataList.get(i).getValue() / mTotalValue * <span class="number">100</span>;</div><div class="line">	<span class="comment">//格式化数据,小数点后保留1位有效数字</span></div><div class="line">	String percent = String.format(<span class="string">"%.1f"</span>, entities.get(i).value / totalValue * <span class="number">100</span>);</div><div class="line">	<span class="comment">//将弧度转化为角度</span></div><div class="line">	<span class="keyword">float</span> v = startAngle % <span class="number">360</span>;</div><div class="line">	<span class="comment">//判断如果起始角度&gt;90度并且小于270度</span></div><div class="line">	<span class="keyword">if</span> (startAngle % <span class="number">360.0</span> &gt;= <span class="number">90.0</span> &amp;&amp; startAngle % <span class="number">360.0</span> &lt;= <span class="number">270.0</span>) &#123;</div><div class="line">		Log.i(<span class="string">"test"</span>, <span class="string">"resToRound:"</span> + resToRound);</div><div class="line">		<span class="comment">//将文本绘制到文本连接线终点的左边</span></div><div class="line">		canvas.drawText(resToRound + <span class="string">"%"</span>, endLineX - mTextPaint.measureText(resToRound + <span class="string">"%"</span>), endLineY, mTextPaint);</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="comment">//将文本绘制到文本连接线终点所在位置</span></div><div class="line">		canvas.drawText(resToRound + <span class="string">"%"</span>, endLineX, endLineY, mTextPaint);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/****************************************************************/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><p>Math类提供了常用的一些数学函数，如：三角函数、对数、指数等。一个数学公式如果想用代码表示，则可以将其拆分然后套用Math类下的方法即可。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">atan(y/x)</td>
+<td>返回正数值表示相对于 x 轴的逆时针转角，返回负数值则表示顺时针转角</td>
+</tr>
+<tr>
+<td style="text-align:left">toDegrees()</td>
+<td>角度转换成弧度</td>
+</tr>
+<tr>
+<td style="text-align:left">toRadians()</td>
+<td>弧度转换成角度</td>
+</tr>
+<tr>
+<td style="text-align:left">cos()</td>
+<td>余弦值</td>
+</tr>
+<tr>
+<td style="text-align:left">sin()</td>
+<td>正弦值</td>
+</tr>
+<tr>
+<td style="text-align:left">tan()</td>
+<td>正切</td>
+</tr>
+<tr>
+<td style="text-align:left">sqrt()</td>
+<td>开平方</td>
+</tr>
+<tr>
+<td style="text-align:left">min()</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">max()</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">abs()</td>
+<td>绝对值</td>
+</tr>
+<tr>
+<td style="text-align:left">pow(x,y)</td>
+<td>x的y次幂</td>
+</tr>
+<tr>
+<td style="text-align:left">floor()</td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td style="text-align:left">ceil()</td>
+<td>向上取整</td>
+</tr>
+<tr>
+<td style="text-align:left">hypot(x, y)</td>
+<td>x和y平方和的二次方根</td>
+</tr>
+<tr>
+<td style="text-align:left">random()</td>
+<td>随机返回[0,1)之间的无符号double值</td>
+</tr>
+<tr>
+<td style="text-align:left">rint()</td>
+<td>返回最接近这个数的整数,如果刚好居中，则取偶数</td>
+</tr>
+<tr>
+<td style="text-align:left">round()</td>
+<td>与rint相似，返回值为long</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line">Math.abs(<span class="number">12.3</span>);                 <span class="comment">//12.3 返回这个数的绝对值  </span></div><div class="line">Math.abs(-<span class="number">12.3</span>);                <span class="comment">//12.3  </span></div><div class="line">  </div><div class="line">Math.copySign(<span class="number">1.23</span>, -<span class="number">12.3</span>);     <span class="comment">//-1.23,返回第一个参数的量值和第二个参数的符号  </span></div><div class="line">Math.copySign(-<span class="number">12.3</span>, <span class="number">1.23</span>);     <span class="comment">//12.3  </span></div><div class="line">  </div><div class="line">Math.signum(x);                 <span class="comment">//如果x大于0则返回1.0，小于0则返回-1.0，等于0则返回0  </span></div><div class="line">Math.signum(<span class="number">12.3</span>);              <span class="comment">//1.0  </span></div><div class="line">Math.signum(-<span class="number">12.3</span>);             <span class="comment">//-1.0  </span></div><div class="line">Math.signum(<span class="number">0</span>);                 <span class="comment">//0.0  </span></div><div class="line">  </div><div class="line">  </div><div class="line"><span class="comment">//指数  </span></div><div class="line">Math.exp(x);                    <span class="comment">//e的x次幂  </span></div><div class="line">Math.expm1(x);                  <span class="comment">//e的x次幂 - 1  </span></div><div class="line">  </div><div class="line">Math.scalb(x, y);               <span class="comment">//x*(2的y次幂）  </span></div><div class="line">Math.scalb(<span class="number">12.3</span>, <span class="number">3</span>);            <span class="comment">//12.3*2³  </span></div><div class="line">  </div><div class="line"><span class="comment">//取整  </span></div><div class="line">Math.ceil(<span class="number">12.3</span>);                <span class="comment">//返回最近的且大于这个数的整数13.0  </span></div><div class="line">Math.ceil(-<span class="number">12.3</span>);               <span class="comment">//-12.0  </span></div><div class="line">  </div><div class="line">Math.floor(<span class="number">12.3</span>);               <span class="comment">//返回最近的且小于这个数的整数12.0  </span></div><div class="line">Math.floor(-<span class="number">12.3</span>);              <span class="comment">//-13.0  </span></div><div class="line">  </div><div class="line"><span class="comment">//x和y平方和的二次方根  </span></div><div class="line">Math.hypot(x, y);               <span class="comment">//√（x²+y²）  </span></div><div class="line">  </div><div class="line"><span class="comment">//返回概述的二次方根  </span></div><div class="line">Math.sqrt(x);                   <span class="comment">//√(x) x的二次方根  </span></div><div class="line">Math.sqrt(<span class="number">9</span>);                   <span class="comment">//3.0  </span></div><div class="line">Math.sqrt(<span class="number">16</span>);                  <span class="comment">//4.0  </span></div><div class="line">  </div><div class="line"><span class="comment">//返回该数的立方根  </span></div><div class="line">Math.cbrt(<span class="number">27.0</span>);                <span class="comment">//3   </span></div><div class="line">Math.cbrt(-<span class="number">125.0</span>);              <span class="comment">//-5  </span></div><div class="line">  </div><div class="line"><span class="comment">//对数函数  </span></div><div class="line">Math.log(e);                    <span class="comment">//1 以e为底的对数  </span></div><div class="line">Math.log10(<span class="number">100</span>);                <span class="comment">//10 以10为底的对数  </span></div><div class="line">Math.log1p(x);                  <span class="comment">//Ln（x+ 1）  </span></div><div class="line">  </div><div class="line"><span class="comment">//返回较大值和较小值  </span></div><div class="line">Math.max(x, y);                 <span class="comment">//返回x、y中较大的那个数  </span></div><div class="line">Math.min(x, y);                 <span class="comment">//返回x、y中较小的那个数  </span></div><div class="line">  </div><div class="line"><span class="comment">//返回 x的y次幂  </span></div><div class="line">Math.pow(x, y);                   </div><div class="line">Math.pow(<span class="number">2</span>, <span class="number">3</span>);                 <span class="comment">//即2³ 即返回：8  </span></div><div class="line">  </div><div class="line"><span class="comment">//随机返回[0,1)之间的无符号double值  </span></div><div class="line">Math.random();                    </div><div class="line">  </div><div class="line"><span class="comment">//返回最接近这个数的整数,如果刚好居中，则取偶数  </span></div><div class="line">Math.rint(<span class="number">12.3</span>);                <span class="comment">//12.0   </span></div><div class="line">Math.rint(-<span class="number">12.3</span>);               <span class="comment">//-12.0  </span></div><div class="line">Math.rint(<span class="number">78.9</span>);                <span class="comment">//79.0  </span></div><div class="line">Math.rint(-<span class="number">78.9</span>);               <span class="comment">//-79.0  </span></div><div class="line">Math.rint(<span class="number">34.5</span>);                <span class="comment">//34.0  </span></div><div class="line">Math.rint(<span class="number">35.5</span>);                <span class="comment">//36.0  </span></div><div class="line">  </div><div class="line">Math.round(<span class="number">12.3</span>);               <span class="comment">//与rint相似，返回值为long  </span></div><div class="line">  </div><div class="line"><span class="comment">//三角函数  </span></div><div class="line">Math.sin(α);                    <span class="comment">//sin（α）的值  </span></div><div class="line">Math.cos(α);                    <span class="comment">//cos（α）的值  </span></div><div class="line">Math.tan(α);                    <span class="comment">//tan（α）的值  </span></div><div class="line">  </div><div class="line"><span class="comment">//求角  </span></div><div class="line">Math.asin(x/z);                 <span class="comment">//返回角度值[-π/2，π/2]  arc sin（x/z）  </span></div><div class="line">Math.acos(y/z);                 <span class="comment">//返回角度值[0~π]   arc cos（y/z）  </span></div><div class="line">Math.atan(y/x);                 <span class="comment">//返回角度值[-π/2，π/2]  </span></div><div class="line">Math.atan2(y-y0, x-x0);         <span class="comment">//同上，返回经过点（x，y）与原点的的直线和经过点（x0，y0）与原点的直线之间所成的夹角  </span></div><div class="line">  </div><div class="line">Math.sinh(x);                   <span class="comment">//双曲正弦函数sinh(x)=(exp(x) - exp(-x)) / 2.0;  </span></div><div class="line">Math.cosh(x);                   <span class="comment">//双曲余弦函数cosh(x)=(exp(x) + exp(-x)) / 2.0;  </span></div><div class="line">Math.tanh(x);                   <span class="comment">//tanh(x) = sinh(x) / cosh(x);  </span></div><div class="line">  </div><div class="line"><span class="comment">//角度弧度互换  </span></div><div class="line">Math.toDegrees(angrad);         <span class="comment">//角度转换成弧度，返回：angrad * 180d / PI  </span></div><div class="line">  </div><div class="line">Math.toRadians(angdeg);         <span class="comment">//弧度转换成角度，返回：angdeg / 180d * PI</span></div></pre></td></tr></table></figure>
+<h2 id="角度与弧度"><a href="#角度与弧度" class="headerlink" title="角度与弧度"></a>角度与弧度</h2><p>角的度量单位通常有两种，一种是角度制，另一种就是弧度制。 </p>
+<p>角度制，就是用角的大小来度量角的大小的方法。在角度制中，我们把周角的1/360看作1度，那么，半周就是180度，一周就是360度。由于1度的大小不因为圆的大小而改变，所以角度大小是一个与圆的半径无关的量。 </p>
+<p>弧度制，顾名思义，就是用弧的长度来度量角的大小的方法。单位弧度定义为圆周上长度等于半径的圆弧与圆心构成的角。由于圆弧长短与圆半径之比，不因为圆的大小而改变，所以弧度数也是一个与圆的半径无关的量。角度以弧度给出时，通常不写弧度单位，有时记为rad或R。 </p>
+<p>根据弧度的定义，以长为圆周长（2πr）的弧所对的圆心角为2π 弧度，半个圆周长的弧所对的圆心角为π 弧度。<br>于是，角度与弧度间换算关系就十分明了了。因为360度=2π，所以，1度=π/180≈0.01745弧度，1弧度=180/π≈57.3度。 </p>
+<blockquote>
+<p>源代码：<a href="https://github.com/JackChan1999/PieChart" target="_blank" rel="external">https://github.com/JackChan1999/PieChart</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自定义控件/" rel="tag"># 自定义控件</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/自定义控件/摩天轮控件/" rel="next" title="摩天轮控件">
+                <i class="fa fa-chevron-left"></i> 摩天轮控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义控件之饼状图"><span class="nav-number">1.</span> <span class="nav-text">自定义控件之饼状图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制饼状图分析"><span class="nav-number">1.1.</span> <span class="nav-text">绘制饼状图分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制直线"><span class="nav-number">1.2.</span> <span class="nav-text">绘制直线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断点击位置所在的扇形区域"><span class="nav-number">1.3.</span> <span class="nav-text">判断点击位置所在的扇形区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义基本信息载体，即javabean"><span class="nav-number">1.4.</span> <span class="nav-text">定义基本信息载体，即javabean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化三个画笔"><span class="nav-number">1.5.</span> <span class="nav-text">初始化三个画笔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算绘制饼状图的外接矩形的左上右下距离"><span class="nav-number">1.6.</span> <span class="nav-text">计算绘制饼状图的外接矩形的左上右下距离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制饼状图"><span class="nav-number">1.7.</span> <span class="nav-text">绘制饼状图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Math"><span class="nav-number">1.8.</span> <span class="nav-text">Math</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#角度与弧度"><span class="nav-number">1.9.</span> <span class="nav-text">角度与弧度</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/13/自定义控件/饼状图/';
+          this.page.identifier = '2017/06/13/自定义控件/饼状图/';
+          this.page.title = '饼状图';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
