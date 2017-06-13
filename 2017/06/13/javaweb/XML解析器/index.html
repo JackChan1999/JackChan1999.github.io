@@ -1,0 +1,1866 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="xml," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="相关阅读 XML约束 Xml 格式数据的生成和解析 XML解析器">
+<meta name="keywords" content="xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XML解析器">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/javaweb/XML解析器/index.html">
+<meta property="og:site_name" content="秋过冬漫长">
+<meta property="og:description" content="相关阅读 XML约束 Xml 格式数据的生成和解析 XML解析器">
+<meta property="og:image" content="https://alleniverson.gitbooks.io/javaweb/content/%E7%AC%AC4%E7%AB%A0%20XML%E5%9F%BA%E7%A1%80/img/xml.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20161008232212197">
+<meta property="og:image" content="http://img.blog.csdn.net/20161016085213108">
+<meta property="og:image" content="http://img.blog.csdn.net/20161008232634305">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009000722318">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009121713603">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009122322502">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009102319983">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009000821304">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009144859638">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009094119293">
+<meta property="og:image" content="http://img.blog.csdn.net/20161009154118951">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103153437612">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103153358395">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103153319347">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103153051798">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103153218580">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103153005204">
+<meta property="og:image" content="http://img.blog.csdn.net/20161103152916155">
+<meta property="og:updated_time" content="2017-06-13T12:06:09.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XML解析器">
+<meta name="twitter:description" content="相关阅读 XML约束 Xml 格式数据的生成和解析 XML解析器">
+<meta name="twitter:image" content="https://alleniverson.gitbooks.io/javaweb/content/%E7%AC%AC4%E7%AB%A0%20XML%E5%9F%BA%E7%A1%80/img/xml.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/javaweb/XML解析器/"/>
+
+
+
+
+
+  <title>XML解析器 | 秋过冬漫长</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">秋过冬漫长</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">没有比脚更长的路，走过去，前面是个天！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/javaweb/XML解析器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JackChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/ai.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="秋过冬漫长">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                XML解析器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T19:57:41+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javaweb/" itemprop="url" rel="index">
+                    <span itemprop="name">javaweb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/javaweb/XML解析器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/javaweb/XML解析器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><ol>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52761609" target="_blank" rel="external">XML约束</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52760959" target="_blank" rel="external">Xml 格式数据的生成和解析</a></li>
+<li><a href="http://blog.csdn.net/axi295309066/article/details/52761771" target="_blank" rel="external">XML解析器</a></li>
+</ol>
+<p><img src="https://alleniverson.gitbooks.io/javaweb/content/%E7%AC%AC4%E7%AB%A0%20XML%E5%9F%BA%E7%A1%80/img/xml.png" alt="img"></p>
+<a id="more"></a>
+<h1 id="1-操作XML文档概述"><a href="#1-操作XML文档概述" class="headerlink" title="1. 操作XML文档概述"></a>1. 操作XML文档概述</h1><h2 id="1-1-如何操作XML文档"><a href="#1-1-如何操作XML文档" class="headerlink" title="1.1 如何操作XML文档"></a>1.1 如何操作XML文档</h2><p>XML文档也是数据的一种，对数据的操作也不外乎是“增删改查”。也被大家称之为“CRUD”</p>
+<ul>
+<li>C：Create</li>
+<li>R：Retrieve</li>
+<li>U：Update</li>
+<li>D：Delete</li>
+</ul>
+<h2 id="1-2-XML解析技术"><a href="#1-2-XML解析技术" class="headerlink" title="1.2 XML解析技术"></a>1.2 XML解析技术</h2><p>XML解析方式分为两种：DOM（Document Object Model）和SAX（Simple API for XML）。这两种方式不是针对Java语言来解析XML的技术，而是跨语言的解析方式。例如DOM还在Javascript中存在！</p>
+<p>DOM是W3C组织提供的解析XML文档的标准接口，而SAX是社区讨论的产物，是一种事实上的标准。</p>
+<p>DOM和SAX只是定义了一些接口，以及某些接口的缺省实现，而这个缺省实现只是用空方法来实现接口。一个应用程序如果需要DOM或SAX来访问XML文档，还需要一个实现了DOM或SAX的解析器，也就是说这个解析器需要实现DOM或SAX中定义的接口。提供DOM或SAX中定义的功能。</p>
+<h1 id="2-解析原理"><a href="#2-解析原理" class="headerlink" title="2. 解析原理"></a>2. 解析原理</h1><h2 id="2-1-DOM解析原理"><a href="#2-1-DOM解析原理" class="headerlink" title="2.1 DOM解析原理"></a>2.1 DOM解析原理</h2><p>使用DOM要求解析器把整个XML文档装载到一个Document对象中。Document对象包含文档元素，即根元素，根元素包含N多个子元素…</p>
+<p>一个XML文档解析后对应一个Document对象，这说明使用DOM解析XML文档方便使用，因为元素与元素之间还保存着结构关系。</p>
+<p>优点：使用DOM，XML文档的结构在内存中依然清晰。元素与元素之间的关系保留了下来！</p>
+<p>缺点：如果XML文档过大，那么把整个XML文档装载进内存，可能会出现内存溢出的现象！</p>
+<h2 id="2-2-设置Java最大内存"><a href="#2-2-设置Java最大内存" class="headerlink" title="2.2 设置Java最大内存"></a>2.2 设置Java最大内存</h2><p>运行Java程序，指定初始内存大小，以及最大内存大小。</p>
+<p>java -Xms20m -Xmx100m MyClass</p>
+<p><img src="http://img.blog.csdn.net/20161008232212197" alt="设置Java最大内存"></p>
+<h2 id="2-3-SAX解析原理"><a href="#2-3-SAX解析原理" class="headerlink" title="2.3 SAX解析原理"></a>2.3 SAX解析原理</h2><p>DOM会一行一行的读取XML文档，最终会把XML文档所有数据存放到Document对象中。SAX也是一行一行的读取XML文档，但是当XML文档读取结束后，SAX不会保存任何数据，同时整个解析XML文档的工作也就结束了。</p>
+<p>但是，SAX在读取一行XML文档数据后，就会给感兴趣的用户一个通知！例如当SAX读取到一个元素的开始时，会通知用户当前解析到一个元素的开始标签。而用户可以在整个解析的过程中完成自己的业务逻辑，当SAX解析结束，不会保存任何XML文档的数据。</p>
+<p>优点：使用SAX，不会占用大量内存来保存XML文档数据，效率也高。</p>
+<p>缺点：当解析到一个元素时，上一个元素的信息已经丢弃，也就是说没有保存元素与元素之间的结构关系，这也大大限制了SAX的使用范围。如果只是想查询XML文档中的数据，那么使用SAX是最佳选择！</p>
+<p><img src="http://img.blog.csdn.net/20161016085213108" alt="sax"></p>
+<h2 id="2-4-SAX解析过程"><a href="#2-4-SAX解析过程" class="headerlink" title="2.4 SAX解析过程"></a>2.4 SAX解析过程</h2><p>采用事件驱动，边读边解析：从上到下，一行一行的解析，解析到某一个对象，把对象名称返回</p>
+<p>使用SAX方式不会造成内存溢出，实现查询；使用SAX方式不能实现增删改操纵</p>
+<p>使用DOM方式解析XML时，如果文件过大，会造成内存溢出，优点是DOM方式很方便的实现增删改操作</p>
+<h1 id="3-解析器概述"><a href="#3-解析器概述" class="headerlink" title="3. 解析器概述"></a>3. 解析器概述</h1><h2 id="3-1-什么是XML解析器"><a href="#3-1-什么是XML解析器" class="headerlink" title="3.1 什么是XML解析器"></a>3.1 什么是XML解析器</h2><p>DOM、SAX都是一组解析XML文档的规范，其实就是接口，这说明需要有实现者能使用，而解析器就是对DOM、SAX的实现了。一般解析器都会实现DOM、SAX两个规范！</p>
+<ul>
+<li>Crimson(sun)：JDK1.4之前，Java使用的解析器。性能效差，可以忘记它了！</li>
+<li>Xerces(IBM)：IBM开发的DOM、SAX解析器，现在已经由Apache基金会维护。是当前最为流行的解析器之一！在1.5之后，已经添加到JDK之中，也是JAXP的默认使用解析器，但不过在JDK中的包名与Xerces不太一样。例如：org.apache.xerces包名改为了com.sun.org.apache.xerces.internal包名，也就是说JDK1.5中的Xerces是被包装后的XML解析器，但二者区别很小。</li>
+<li>Aelfred2(dom4j)：DOM4J默认解析器，当DOM4J找不到解析器时会使用他自己的解析器。</li>
+</ul>
+<h1 id="4-JAXP概述"><a href="#4-JAXP概述" class="headerlink" title="4. JAXP概述"></a>4. JAXP概述</h1><h2 id="4-1-什么是JAXP"><a href="#4-1-什么是JAXP" class="headerlink" title="4.1 什么是JAXP"></a>4.1 什么是JAXP</h2><p>JAXP是由Java提供的，用于隐藏底层解析器的实现。Java要求XML解析器去实现JAXP提供的接口，这样可以让用户使用解析器时不依赖特定的XML解析器。</p>
+<p>JAXP本身不是解析器（不是Xerces），也不是解析方式（DOM或SAX），它只是让用户在使用DOM或SAX解析器时不依赖特定的解析器。</p>
+<p>当用户使用JAXP提供的方式来解析XML文档时，用户无需编写与特定解析器相关的代码，而是由JAXP通过特定的方式去查找解析器，来解析XML文档。</p>
+<p><img src="http://img.blog.csdn.net/20161008232634305" alt="JAXP"></p>
+<h2 id="4-2-JAXP对DOM的支持"><a href="#4-2-JAXP对DOM的支持" class="headerlink" title="4.2 JAXP对DOM的支持"></a>4.2 JAXP对DOM的支持</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</div><div class="line">DocumentBuilder builder = factory.newDocumentBuilder();</div><div class="line">Document doc = builder.parse(<span class="string">"src/students.xml"</span>);</div></pre></td></tr></table></figure>
+<p>在javax.xml.parsers包中，定义了DOM解析器工厂类DocumentBuilderFactory，用于产生DOM解析器。DocumentBuilderFactory是一个抽象类，它有一个静态方法newInstance()，可以返回一个本类的实例对象。其实该方法返回的是DocumentBuilderFactory类的子类的实例（即工厂实例对象）。那么这个子类又是哪个子类呢？其实这个子类是由XML解析器提供商提供的，不同的厂商提供的工厂类对抽象工厂的实现是不同的。然后由工厂实例创建解析器对象。</p>
+<p>那么newInstance()这个方法又是如果找到解析器提供商的工厂类的呢？此方法使用下面有序的查找过程来确定要加载的DocumentBuilderFactory实现类：</p>
+<p>使用javax.xml.parsers.DocumentBuilderFactory系统属性。如果设置了这个系统属性的值，那么newInstance()方法就以这个属性的值来构造这个工厂的实例。通过下面的方法可以设置这个系统属性值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">System.setProperty(“javax.xml.parsers.DocumentBuilderFactory”, “工厂实现类名字”);</div></pre></td></tr></table></figure>
+<p>我们不建议大家用上面的方法来硬编码这个系统属性的值，如果这样设置，假如将来需要更换解析器，就必需修改代码。</p>
+<p>如果你没有设置上面的系统属性，newInstance()方法就会采用下面的途径来查找抽象工厂的实现类。第二个途径在查找JRE下的lib子目录下的jaxp.properties文件。如果这个文件存在，那么就读取这个文件。我们可以在%JAVA_HOME%\jre\lib\目录下创建一个jaxp.properties文件。在这个文件中给出一个键值对。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javax.xml.parsers.DocumentBuilderFactory=工厂实现类名字</div></pre></td></tr></table></figure>
+<p>这个key名字必须是javax.xml.parsers.DocumentBuilderFactory，而相对应的值也必须设置类路径。</p>
+<p>如果通过前两种途径下没有找到工厂的实现类，那么就需要使用服务API。这个服务API实际上是查找一个JAR文件的META-INF\ services\ javax.xml.parsers.DocumentBuilderFactory这个文件（该文件无扩展名）。如果找到了这个文件，就以这个文件的内容做为工厂实现类。这种方式被大多数解析器提供商所采用。在它们发布的解析器JAR包中往往会找到上述文件。然后在这个文件当中指定自己解析器的工厂类的名字。我们只需要把这个JAR文件的路径写到类路径（classpath）中就可以了。但要注意的是，如果在你的classpath中有多个解析器的JAR包路径，这时以前面的类路径优先。</p>
+<p>如果说在前三种途径中都没有找到工厂实现类，那么就使用平台缺省工厂实现类。</p>
+<p>在JAXP的早期的版本（5.0以前）中，除了JAXP API外，还包含了一个叫做Crimson的解析器。从JAXP1.2开始，Sun公司对Apache的Xerces解析器重新包装了一下，并将org.apache.xerces包名改为了com.sun.org.apache.xerces.internal，然后在JAXP的开发包中一起提供，作为缺省的解析器。我们所使用的JDK1.5中包含的缺省解析器就是被重新包装过后的Xerces解析器。</p>
+<p>在获取到某个特定解析器厂商的DocumentBuilderFactory后，那么这个工厂对象创建出来的解析器对象当然就是自己厂商的解析器对象了。</p>
+<h2 id="4-3-JAXP对SAX的支持"><a href="#4-3-JAXP对SAX的支持" class="headerlink" title="4.3 JAXP对SAX的支持"></a>4.3 JAXP对SAX的支持</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">SAXParserFactory factory = SAXParserFactory.newInstance();</div><div class="line">SAXParser parser = factory.newSAXParser();</div><div class="line">parser.parse(<span class="string">"src/students.xml"</span>, <span class="keyword">new</span> DefaultHandler() &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"解析开始"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"解析结束"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processingInstruction</span><span class="params">(String target, String data)</span></span></div><div class="line">            <span class="keyword">throws</span> SAXException &#123;</div><div class="line">        System.out.println(<span class="string">"处理指令"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startElement</span><span class="params">(String uri, String localName, String qName,</span></span></div><div class="line">            Attributes atts) <span class="keyword">throws</span> SAXException &#123;</div><div class="line">        System.out.println(<span class="string">"元素开始："</span> + qName);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">characters</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> length)</span></span></div><div class="line">            <span class="keyword">throws</span> SAXException &#123;</div><div class="line">        System.out.println(<span class="string">"文本内容："</span> + <span class="keyword">new</span> String(ch, start, length).trim());</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endElement</span><span class="params">(String uri, String localName, String qName)</span></span></div><div class="line">            <span class="keyword">throws</span> SAXException &#123;</div><div class="line">        System.out.println(<span class="string">"元素结束："</span> + qName);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>JAXP对SAX的支持与JAXP对DOM的支持是相同的，这里就不在赘述！</p>
+<h1 id="5-JDOM和DOM4J"><a href="#5-JDOM和DOM4J" class="headerlink" title="5. JDOM和DOM4J"></a>5. JDOM和DOM4J</h1><h2 id="5-1-JDOM和DOM4J概述"><a href="#5-1-JDOM和DOM4J概述" class="headerlink" title="5.1 JDOM和DOM4J概述"></a>5.1 JDOM和DOM4J概述</h2><p>JDOM和DOM4J都是针对Java解析XML设计的方式，它们与DOM相似。但DOM不是只针对Java，DOM是跨语言的，DOM在Javascript中也可以使用。而JDOM和DOM4J都是专业为Java而设计的，使用JDOM和DOM4J，对Java程序员而言会更加方便。</p>
+<h2 id="5-2-JDOM和DOM4J比较"><a href="#5-2-JDOM和DOM4J比较" class="headerlink" title="5.2 JDOM和DOM4J比较"></a>5.2 JDOM和DOM4J比较</h2><p>JDOM与DOM4J相比，DOM4J完胜！！！所以，我们应该在今后的开发中，把DOM4J视为首选。</p>
+<p>在2000年，JDOM开发过程中，因为团队建议不同，分离出一支队伍，开发了DOM4J。DOM4J要比JDOM更加全面。</p>
+<h2 id="5-3-DOM4J查找解析器的过程"><a href="#5-3-DOM4J查找解析器的过程" class="headerlink" title="5.3 DOM4J查找解析器的过程"></a>5.3 DOM4J查找解析器的过程</h2><p>DOM4J首先会去通过JAXP的查找方法去查找解析器，如果找到解析器，那么就使用之；否则会使用自己的默认解析器Aelfred2。</p>
+<p>DOM4J对DOM和SAX都提供了支持，可以把DOM解析后的Document对象转换成DOM4J的Document对象，当然了可以把DOM4J的Document对象转换成DOM的Document对象。</p>
+<p>DOM4J使用SAX解析器把XML文档加载到内存，生成DOM对象。当然也支持事件驱动的方式来解析XML文档。</p>
+<h1 id="6-XML解析之JAXP（DOM）"><a href="#6-XML解析之JAXP（DOM）" class="headerlink" title="6. XML解析之JAXP（DOM）"></a>6. XML解析之JAXP（DOM）</h1><h2 id="6-1-JAXP获取解析器"><a href="#6-1-JAXP获取解析器" class="headerlink" title="6.1 JAXP获取解析器"></a>6.1 JAXP获取解析器</h2><h3 id="6-1-1-JAXP相关包"><a href="#6-1-1-JAXP相关包" class="headerlink" title="6.1.1 JAXP相关包"></a>6.1.1 JAXP相关包</h3><ul>
+<li>JAXP相关开发包：javax.xml</li>
+<li>DOM相关开发包：org.w3c.dom</li>
+<li>SAX相关开发包：org.xml.sax</li>
+</ul>
+<h3 id="6-1-2-JAXP与DOM、SAX解析器的关系"><a href="#6-1-2-JAXP与DOM、SAX解析器的关系" class="headerlink" title="6.1.2 JAXP与DOM、SAX解析器的关系"></a>6.1.2 JAXP与DOM、SAX解析器的关系</h3><p>JAXP的作用只是为了让使用者不依赖某一特定DOM、SAX的解析器实现，当使用JAXP API时，使用者直接接触的就是JAXP API，而不用接触DOM、SAX的解析器实现API。</p>
+<h3 id="6-1-3-JAXP获取DOM解析器"><a href="#6-1-3-JAXP获取DOM解析器" class="headerlink" title="6.1.3 JAXP获取DOM解析器"></a>6.1.3 JAXP获取DOM解析器</h3><p>当我们需要解析XML文档时，首先需要通过JAXP API解析XML文档，获取Document对象。然后用户就需要使用DOM API来操作Document对象了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</div><div class="line">factory.setValidating(<span class="keyword">false</span>);</div><div class="line">DocumentBuilder builder = factory.newDocumentBuilder();</div><div class="line">Document doc = builder.parse(<span class="string">"src/students.xml"</span>);</div></pre></td></tr></table></figure>
+<h3 id="6-1-4-JAXP保存Document"><a href="#6-1-4-JAXP保存Document" class="headerlink" title="6.1.4 JAXP保存Document"></a>6.1.4 JAXP保存Document</h3><p>当我们希望把Document保存到文件中去时，可以使用Transformer对象的transform()方法来完成。想获取Transformer对象，需要使用TransformerFactory对象。 与JAXP获取DOM解析器一样，隐藏了底层解析器的实现。也是通过抽象工厂来完成的，这里就不在赘述了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">TransformerFactory tFactory = TransformerFactory.newInstance();</div><div class="line">Transformer transformer = tFactory.newTransformer();</div><div class="line">trans.setOutputProperty(OutputKeys.ENCODING, <span class="string">"UTF-8"</span>);</div><div class="line">trans.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, <span class="string">"students.dtd"</span>);</div><div class="line">trans.setOutputProperty(OutputKeys.INDENT, <span class="string">"yes"</span>);</div><div class="line">Source source = <span class="keyword">new</span> DOMSource(doc);</div><div class="line">Result result = <span class="keyword">new</span> StreamResult(xmlName);</div><div class="line">transformer.transform(source, result);</div></pre></td></tr></table></figure>
+<p>Transformer类的transform()方法的两个参数类型为：Source和Result，DOMSource是Source的实现类，StreamResult是Result的实现类。</p>
+<h3 id="6-1-5-JAXP创建Document"><a href="#6-1-5-JAXP创建Document" class="headerlink" title="6.1.5 JAXP创建Document"></a>6.1.5 JAXP创建Document</h3><p>有时我们需要创建一个Document对象，而不是从XML文档解析而来。这需要使用DocumentBuider对象的newDocument()方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();</div><div class="line">DocumentBuilder builder = factory.newDocumentBuilder();</div><div class="line">Document doc = builder.newDocument();</div><div class="line">doc.setXmlVersion(<span class="string">"1.0"</span>);</div><div class="line">doc.setXmlStandalone(<span class="keyword">true</span>);</div></pre></td></tr></table></figure>
+<h3 id="6-1-6-学习DOM之前，先写两个方法"><a href="#6-1-6-学习DOM之前，先写两个方法" class="headerlink" title="6.1.6 学习DOM之前，先写两个方法"></a>6.1.6 学习DOM之前，先写两个方法</h3><ul>
+<li>Document getDocument(String xmlName)：通过xmlName获取Document对象；</li>
+<li>void saveDocument(Document doc, String xmlName)：保存doc到xmlName文件中。</li>
+</ul>
+<h1 id="7-DOM-API概述"><a href="#7-DOM-API概述" class="headerlink" title="7. DOM API概述"></a>7. DOM API概述</h1><h2 id="7-1-Document对应XML文档"><a href="#7-1-Document对应XML文档" class="headerlink" title="7.1 Document对应XML文档"></a>7.1 Document对应XML文档</h2><p>无论使用什么DOM解析器，最终用户都需要获取到Document对象，一个Document对象对应整个XML文档。也可以这样说，Document对象就是XML文档在内存中的表示形式。</p>
+<p>通常我们最为“关心”的就是文档的根元素。所以我们必须要把Document获取根元素的方法记住：Element getDocumentElement()。然后通过根元素再一步步获取XML文档中的数据。</p>
+<h2 id="7-2-DOM-API中的类"><a href="#7-2-DOM-API中的类" class="headerlink" title="7.2 DOM API中的类"></a>7.2 DOM API中的类</h2><p>在DOM中提供了很多接口，用来描述XML文档中的组成部分。其中包括：</p>
+<ul>
+<li>文档（Document）</li>
+<li>元素（Element）</li>
+<li>属性（Attr）</li>
+<li>文本（Text）</li>
+<li>注释（Comment）</li>
+<li>CDATA段（CDATASection）</li>
+</ul>
+<p>等等。无论是哪种XML文档组成部分，都是节点（Node）的子接口。</p>
+<p><img src="http://img.blog.csdn.net/20161009000722318" alt="DOM"></p>
+<h2 id="7-3-Node方法介绍"><a href="#7-3-Node方法介绍" class="headerlink" title="7.3 Node方法介绍"></a>7.3 Node方法介绍</h2><p>Node基本方法：</p>
+<ul>
+<li>String getNodeName()</li>
+</ul>
+<p>获取当前节点的名字。如果当前节点是Element，那么返回元素名称。如果当前节点是Text那么返回#text。如果当前节点是Document那么返回#document</p>
+<ul>
+<li>String getNodeValue()</li>
+</ul>
+<p>获取当前节点的值。只有文本节点有值，其它节点的值都为null</p>
+<ul>
+<li>String getTextContent()</li>
+</ul>
+<p>获取当前节点的文本字符串。如果当前节点为Text，那么获取节点内容。如果当前节点为Element，那么获取元素中所有Text子节点的内容。例如当前节点为：&lt;name&gt;zhangSan&lt;/name&gt;，那么本方法返回zhangSan。如果当前节点为：&lt;student&gt;&lt;name&gt;zhangSan&lt;/name&gt;&lt;age&gt;23&lt;/age&gt;&lt;sex&gt;male&lt;/sex&gt;&lt;/student&gt;，那么本方法返回zhangSan23male。</p>
+<ul>
+<li>short getNodeType()</li>
+</ul>
+<p>获取当前节点的类型。Node中有很多short类型的常量，可以通过与这些常量的比较来判断当前节点的类型。if(node.getNodeType() == Node.ELEMENT_NODE)；</p>
+<p>Node获取子节点和父节点方法，只有Document和Element才能使用这些方法：</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NodeList</td>
+<td>getChildNodes()</td>
+<td>获取当前节点的所有子节点</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>getFirstNode()</td>
+<td>获取当前节点的第一个子节点</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>getLastNode()</td>
+<td>获取当前节点的最后一个子节点</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>getParentNode()</td>
+<td>获取当前节点的父节点。注意Document的父节点为null</td>
+</tr>
+</tbody>
+</table>
+<p>NodeList表示节点列表，它有两个方法</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int</td>
+<td>getLength()</td>
+<td>获取集合长度</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>item(int index)</td>
+<td>获取指定下标的节点</td>
+</tr>
+</tbody>
+</table>
+<p>Node获取弟兄节点的方法，只有Element才能使用这些方法：</p>
+<ul>
+<li>Node getNextSibling()：获取当前节点的下一个兄弟节点；</li>
+<li>Node getPreviousSibling()：获取当前节点的上一个兄弟节点。</li>
+</ul>
+<p>Node添加、替换、删除子节点方法：</p>
+<ul>
+<li>Node appendChild(Node newChild)</li>
+</ul>
+<p>把参数节点newChild添加到当前节点的子节点列表的末尾处。返回值为被添加的子节点newChild对象，方便使用链式操作。如果newChild在添加之前已经在文档中存在，那么就是修改节点的位置了；</p>
+<ul>
+<li>Node insertBefore(Node newChild, Node refNode)</li>
+</ul>
+<p>把参数节点newChild添加到当前节点的子节点refNode之前。返回值为被添加的子节点newChild对象，方便使用链式操作。如果refNode为null，那么本方法与appendNode()方法功能相同。如果newChild节点在添加之前已经在文档中存在，那么就是修改节点的位置了。</p>
+<ul>
+<li>Node removeNode(Node oldChild)</li>
+</ul>
+<p>从当前节点中移除子元素oldChild。返回值为被添加的子节点oldChild对象，方便使用链式操作。</p>
+<ul>
+<li>Node replaceNode(Node newChild, Node oldChild)</li>
+</ul>
+<p>将当前节点的子节点oldChild替换为newChild。</p>
+<p>Node获取属性集合方法，只有Element可以使用：</p>
+<ul>
+<li>NamedNodeMap getAttributes()：返回当前节点的属性集合。</li>
+</ul>
+<p>NamedNodeMap表示属性的集合，方法如下：</p>
+<p><img src="http://img.blog.csdn.net/20161009121713603" alt="dom"></p>
+<p>Node的判断方法：</p>
+<ul>
+<li>boolean hasChildNodes()：判断当前节点是否有子节点</li>
+<li>boolean hasAttribute()：判断当前节点是否有属性</li>
+</ul>
+<h2 id="7-4-Docment方法介绍"><a href="#7-4-Docment方法介绍" class="headerlink" title="7.4 Docment方法介绍"></a>7.4 Docment方法介绍</h2><p>创建节点方法：</p>
+<p><img src="http://img.blog.csdn.net/20161009122322502" alt="Docment"></p>
+<p>获取子元素方法：</p>
+<ul>
+<li>Element getElementById(String elementId)</li>
+</ul>
+<p>通过元素的ID属性获取元素节点，如果没有DTD指定属性类型为ID，那么这个方法将返回null</p>
+<ul>
+<li>NodeList getElementsByTagName(String tagName)</li>
+</ul>
+<p>获取指定元素名称的所有元素</p>
+<ul>
+<li>Element getDocumentElement()：获取文档元素，即获取根元素</li>
+</ul>
+<p>文档声明相关方法</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>getXmlVersion()</td>
+<td>获取文档声明的version属性值</td>
+</tr>
+<tr>
+<td>String</td>
+<td>getXmlEncoding()</td>
+<td>获取文档声明的encoding属性值</td>
+</tr>
+<tr>
+<td>String</td>
+<td>getXmlStandalone()</td>
+<td>获取文档声明的standalone属性值</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setXmlVersion()</td>
+<td>设置文档声明version属性值</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setXmlStandalone()</td>
+<td>设置文档声明standalone属性值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-5-Element方法介绍"><a href="#7-5-Element方法介绍" class="headerlink" title="7.5 Element方法介绍"></a>7.5 Element方法介绍</h2><p>获取方法：</p>
+<ul>
+<li>NodeList getElementsByTagName(String tagName)</li>
+</ul>
+<p>获取当前元素的指定元素名称的所有子元素</p>
+<ul>
+<li>String getTagName()</li>
+</ul>
+<p>获取当前元素的元素名。调用元素节点的getNodeName()也是返回名</p>
+<p>属性相关方法</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>getAttribute(String name)</td>
+<td>获取当前元素指定属性名的属性值</td>
+</tr>
+<tr>
+<td>Attr</td>
+<td>getAttributeNode(String name)</td>
+<td>获取当前元素指定属性名的属性节点</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>hasAttribute(String name)</td>
+<td>判断当前元素是否有指定属性</td>
+</tr>
+<tr>
+<td>void</td>
+<td>removeAttribute(String name)</td>
+<td>移除当前元素的指定属性</td>
+</tr>
+<tr>
+<td>void</td>
+<td>removeAttributeNode(Attr attr)</td>
+<td>移除当前元素的指定属性</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setAttribute(String name, String value)</td>
+<td>为当前元素添加或修改属性</td>
+</tr>
+<tr>
+<td>Attr</td>
+<td>setAttributeNode(Attr attr)</td>
+<td>为当前元素添加或修改属性，返回值为添加的属性</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-6-Attr方法介绍"><a href="#7-6-Attr方法介绍" class="headerlink" title="7.6 Attr方法介绍"></a>7.6 Attr方法介绍</h2><table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>getName()</td>
+<td>获取当前属性节点的属性名</td>
+</tr>
+<tr>
+<td>String</td>
+<td>getValue()</td>
+<td>获取当前属性节点的属性值</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setValue(String value)</td>
+<td>设置当前属性节点的属性值</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>isId()</td>
+<td>判断当前属性节点是否为ID类型属性</td>
+</tr>
+</tbody>
+</table>
+<p>实现代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div></pre></td><td class="code"><pre><div class="line">/</div><div class="line"> * 实现jaxp操作xml</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestJaxp</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//selectAll();</span></div><div class="line">        <span class="comment">//selectSin();</span></div><div class="line">        <span class="comment">//addSex();</span></div><div class="line">        <span class="comment">//modifySex();</span></div><div class="line">        <span class="comment">//delSex();</span></div><div class="line">        listElement();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//遍历节点，把所有元素名称打印出来</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">listElement</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器工厂</div><div class="line">         * 2、根据解析器工厂创建解析器</div><div class="line">         * 3、解析xml，返回document</div><div class="line">         *</div><div class="line">         * ====使用递归实现=====</div><div class="line">         * 4、得到根节点</div><div class="line">         * 5、得到根节点子节点</div><div class="line">         * 6、得到根节点子节点的子节点</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器工厂</span></div><div class="line">        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        DocumentBuilder builder = builderFactory.newDocumentBuilder();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = builder.parse(<span class="string">"src/person.xml"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//编写一个方法实现遍历操作</span></div><div class="line">        list1(document);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//递归遍历的方法</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">list1</span><span class="params">(Node node)</span> </span>&#123;</div><div class="line">        <span class="comment">//判断是元素类型时候才打印</span></div><div class="line">        <span class="keyword">if</span>(node.getNodeType() == Node.ELEMENT_NODE) &#123;           </div><div class="line">            System.out.println(node.getNodeName());</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">//得到一层子节点</span></div><div class="line">        NodeList list = node.getChildNodes();</div><div class="line">        <span class="comment">//遍历list</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.getLength();i++) &#123;</div><div class="line">            <span class="comment">//得到每一个节点</span></div><div class="line">            Node node1 = list.item(i);</div><div class="line">            <span class="comment">//继续得到node1的子节点</span></div><div class="line">            <span class="comment">//node1.getChildNodes()</span></div><div class="line">            list1(node1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//删除&lt;sex&gt;nan&lt;/sex&gt;节点</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delSex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器工厂</div><div class="line">         * 2、根据解析器工厂创建解析器</div><div class="line">         * 3、解析xml，返回document</div><div class="line">         *</div><div class="line">         * 4、获取sex元素</div><div class="line">         * 5、获取sex的父节点</div><div class="line">         * 6、删除使用父节点删除 removeChild方法</div><div class="line">         *</div><div class="line">         * 7、回写xml</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器工厂</span></div><div class="line">        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        DocumentBuilder builder = builderFactory.newDocumentBuilder();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = builder.parse(<span class="string">"src/person.xml"</span>);</div><div class="line">        <span class="comment">//得到sex元素</span></div><div class="line">        Node sex1 = document.getElementsByTagName(<span class="string">"sex"</span>).item(<span class="number">0</span>);</div><div class="line">        <span class="comment">//得到sex1父节点</span></div><div class="line">        Node p1 = sex1.getParentNode();</div><div class="line">        <span class="comment">//删除操作</span></div><div class="line">        p1.removeChild(sex1);</div><div class="line">        <span class="comment">//回写xml</span></div><div class="line">        TransformerFactory transformerFactory = TransformerFactory.newInstance();</div><div class="line">        Transformer transformer = transformerFactory.newTransformer();</div><div class="line">        transformer.transform(<span class="keyword">new</span> DOMSource(document), <span class="keyword">new</span> StreamResult(<span class="string">"src/person.xml"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//修改第一个p1下面的sex内容是nan</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">modifySex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器工厂</div><div class="line">         * 2、根据解析器工厂创建解析器</div><div class="line">         * 3、解析xml，返回document</div><div class="line">         *</div><div class="line">         * 4、得到sex item方法</div><div class="line">         * 5、修改sex里面的值  setTextContent方法</div><div class="line">         *</div><div class="line">         * 6、回写xml</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器工厂</span></div><div class="line">        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        DocumentBuilder builder = builderFactory.newDocumentBuilder();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = builder.parse(<span class="string">"src/person.xml"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//得到sex</span></div><div class="line">        Node sex1 = document.getElementsByTagName(<span class="string">"sex"</span>).item(<span class="number">0</span>);</div><div class="line">        <span class="comment">//修改sex值</span></div><div class="line">        sex1.setTextContent(<span class="string">"nan"</span>);</div><div class="line">        <span class="comment">//回写xml</span></div><div class="line">        TransformerFactory transformerFactory = TransformerFactory.newInstance();</div><div class="line">        Transformer transformer = transformerFactory.newTransformer();</div><div class="line">        transformer.transform(<span class="keyword">new</span> DOMSource(document), <span class="keyword">new</span> StreamResult(<span class="string">"src/person.xml"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//在第一个p1下面（末尾）添加 &lt;sex&gt;nv&lt;/sex&gt;</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addSex</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器工厂</div><div class="line">         * 2、根据解析器工厂创建解析器</div><div class="line">         * 3、解析xml，返回document</div><div class="line">         *</div><div class="line">         * 4、得到第一个p1</div><div class="line">         *  - 得到所有p1，使用item方法下标得到</div><div class="line">         * 5、创建sex标签 createElement</div><div class="line">         * 6、创建文本 createTextNode</div><div class="line">         * 7、把文本添加到sex下面 appendChild</div><div class="line">         * 8、把sex添加到第一个p1下面</div><div class="line">         *</div><div class="line">         * 9、回写xml</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器工厂</span></div><div class="line">        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        DocumentBuilder builder = builderFactory.newDocumentBuilder();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = builder.parse(<span class="string">"src/person.xml"</span>);</div><div class="line"></div><div class="line">        <span class="comment">//得到所有的p1</span></div><div class="line">        NodeList list = document.getElementsByTagName(<span class="string">"p1"</span>);</div><div class="line">        <span class="comment">//得到第一个p1</span></div><div class="line">        Node p1 = list.item(<span class="number">0</span>);</div><div class="line">        <span class="comment">//创建标签</span></div><div class="line">        Element sex1 = document.createElement(<span class="string">"sex"</span>);</div><div class="line">        <span class="comment">//创建文本</span></div><div class="line">        Text text1 = document.createTextNode(<span class="string">"nv"</span>);</div><div class="line">        <span class="comment">//把文本添加到sex1下面</span></div><div class="line">        sex1.appendChild(text1);</div><div class="line">        <span class="comment">//把sex1添加到p1下面</span></div><div class="line">        p1.appendChild(sex1);</div><div class="line">        <span class="comment">//回写xml</span></div><div class="line">        TransformerFactory transformerFactory = TransformerFactory.newInstance();</div><div class="line">        Transformer transformer = transformerFactory.newTransformer();</div><div class="line">        transformer.transform(<span class="keyword">new</span> DOMSource(document), <span class="keyword">new</span> StreamResult(<span class="string">"src/person.xml"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//查询xml中第一个name元素的值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectSin</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器工厂</div><div class="line">         * 2、根据解析器工厂创建解析器</div><div class="line">         * 3、解析xml，返回document</div><div class="line">         *</div><div class="line">         * 4、得到所有name元素</div><div class="line">         * 5、使用返回集合，里面方法 item，下标获取具体的元素</div><div class="line">         * 6、得到具体的值，使用 getTextContent方法</div><div class="line">         *</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器工厂</span></div><div class="line">        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        DocumentBuilder builder = builderFactory.newDocumentBuilder();</div><div class="line">        <span class="comment">//解析xml，得到document</span></div><div class="line">        Document document = builder.parse(<span class="string">"src/person.xml"</span>);</div><div class="line">        <span class="comment">//得到所有的name元素</span></div><div class="line">        NodeList list = document.getElementsByTagName(<span class="string">"name"</span>);</div><div class="line">        <span class="comment">//使用下标 得到第一个元素</span></div><div class="line">        Node name1 = list.item(<span class="number">1</span>);</div><div class="line">        <span class="comment">//得到name里面的具体的值</span></div><div class="line">        String s1 = name1.getTextContent();</div><div class="line">        System.out.println(s1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//查询所有name元素的值</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectAll</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">//查询所有name元素的值</span></div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器工厂</div><div class="line">         * 2、根据解析器工厂创建解析器</div><div class="line">         * 3、解析xml返回document</div><div class="line">         *  </div><div class="line">         * 4、得到所有的name元素</div><div class="line">         * 5、返回集合，遍历集合，得到每一个name元素</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器工厂    atl / : 代码提示</span></div><div class="line">        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        DocumentBuilder builder = builderFactory.newDocumentBuilder();</div><div class="line">        <span class="comment">//解析xml返回document</span></div><div class="line">        Document document = builder.parse(<span class="string">"src/person.xml"</span>);</div><div class="line">        <span class="comment">//得到name元素</span></div><div class="line">        NodeList list = document.getElementsByTagName(<span class="string">"name"</span>);</div><div class="line">        <span class="comment">//遍历集合</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.getLength();i++) &#123;</div><div class="line">            Node name1 = list.item(i); <span class="comment">//得到每一个name元素</span></div><div class="line">            <span class="comment">//得到name元素里面的值</span></div><div class="line">            String s = name1.getTextContent();</div><div class="line">            System.out.println(s);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="8-SAX"><a href="#8-SAX" class="headerlink" title="8. SAX"></a>8. SAX</h1><h2 id="8-1-SAX解析原理"><a href="#8-1-SAX解析原理" class="headerlink" title="8.1 SAX解析原理"></a>8.1 SAX解析原理</h2><p>首先我们想一下，DOM解析器是不是需要把XML文档遍历一次，然后把每次读取到的数据转换成节点对象（到底哪一种节点对象，这要看解析时遇到了什么东西）保存起来，最后生成一个Document对象返回。也就是说，当你调用了builder.parse(“a.xml”)后，这个方法就会把XML文档中的数据转换成节点对象保存起来，然后生成一个Document对象。这个解析XML文档的过程在parse()方法调用结束后也就结束了。我们的工作是在解析之后，开始对Document对象进行操作。</p>
+<p>但是SAX不同，当SAX解析器的parse()方法调用结束后，不会给我们一个Document对象，而是什么都不给。SAX不会把XML数据保存到内存中，如果我们的解析工作是在SAX解析器的parse()方法调用结束后开始，那么就已经晚了！！！这说明我们必须在SAX解析XML文档的同时完成我们的工作。</p>
+<p>SAX解析器在解析XML文档的过程中，读取到XML文档的一个部分后，会调用ContentHandler（内容处理器）中的方法。例如当SAX解析到一个元素的开始标签时，它会调用ContentHandler的startElement()方法；在解析到一个元素的结束标签时会调用ContentHandler的endElement()方法。</p>
+<p>ContentHandler是一个接口，我们的工作是编写该接口的实现类，然后创建实现类的对象，在SAX解析器开始解析之前，把我们写的内容处理类对象交给SAX解析器，这样在解析过程中，我们的内容处理中的方法就会被调用了。</p>
+<h2 id="8-2-获取SAX解析器"><a href="#8-2-获取SAX解析器" class="headerlink" title="8.2 获取SAX解析器"></a>8.2 获取SAX解析器</h2><p>与DOM相同，你应该通过JAXP获取SAX解析器，而不是直接使用特定厂商的SAX解析器。JAXP查找特定厂商的SAX解析器实现的方式与查找DOM解析器实现的方式完全相同，这里就不在赘述了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SAXParserFactory factory = SAXParserFactory.newInstance();</div><div class="line">javax.xml.parsers.SAXParser parser = factory.newSAXParser();</div><div class="line">parser.parse(<span class="string">"src/students.xml"</span>, <span class="keyword">new</span> MyContentHandler());</div></pre></td></tr></table></figure>
+<p>上面代码中，MyContentHandler就是我们自己需要编写的ContentHandler的实现类对象。</p>
+<h2 id="8-3-内容处理器"><a href="#8-3-内容处理器" class="headerlink" title="8.3 内容处理器"></a>8.3 内容处理器</h2><p>org.xml.sax.ContentHandler中的方法：</p>
+<p><img src="http://img.blog.csdn.net/20161009102319983" alt="ContentHandler"></p>
+<p>org.xml.sax.helpers.DefualtHandler对ContentHandler做了空实现，所以我们可以自定义内容处理器时可以继承DefaultHandler类。</p>
+<h2 id="8-4-SAX应用"><a href="#8-4-SAX应用" class="headerlink" title="8.4 SAX应用"></a>8.4 SAX应用</h2><h2 id="8-5-测试SAX"><a href="#8-5-测试SAX" class="headerlink" title="8.5 测试SAX"></a>8.5 测试SAX</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SAXTest</span> </span>&#123;</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSAX</span><span class="params">()</span> <span class="keyword">throws</span> ParserConfigurationException, SAXException, IOException </span>&#123;</div><div class="line">        SAXParserFactory factory = SAXParserFactory.newInstance();</div><div class="line">        SAXParser parser = factory.newSAXParser();</div><div class="line">        parser.parse(<span class="string">"src/students.xml"</span>, <span class="keyword">new</span> MyContentHandler());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyContentHandler</span> <span class="keyword">extends</span> <span class="title">DefaultHandler</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</div><div class="line">            System.out.println(<span class="string">"开始解析..."</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</div><div class="line">            System.out.println(<span class="string">"解析结束..."</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startElement</span><span class="params">(String uri, String localName, String qName,</span></span></div><div class="line">                Attributes atts) <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            System.out.println(qName + <span class="string">"元素解析开始"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endElement</span><span class="params">(String uri, String localName, String qName)</span></span></div><div class="line">                <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            System.out.println(qName + <span class="string">"元素解析结束"</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">characters</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> length)</span></span></div><div class="line">                <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            String s = <span class="keyword">new</span> String(ch, start, length);</div><div class="line">            <span class="keyword">if</span>(s.trim().isEmpty()) &#123;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            System.out.println(<span class="string">"文本内容："</span> + s);</div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ignorableWhitespace</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> length)</span></span></div><div class="line">                <span class="keyword">throws</span> SAXException &#123;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processingInstruction</span><span class="params">(String target, String data)</span></span></div><div class="line">                <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            System.out.println(<span class="string">"处理指令"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="8-6-使用SAX打印XML文档"><a href="#8-6-使用SAX打印XML文档" class="headerlink" title="8.6 使用SAX打印XML文档"></a>8.6 使用SAX打印XML文档</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SAXTest2</span> </span>&#123;</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSAX</span><span class="params">()</span> <span class="keyword">throws</span></span></div><div class="line">ParserConfigurationException, SAXException, IOException &#123;</div><div class="line">        SAXParserFactory factory = SAXParserFactory.newInstance();</div><div class="line">        SAXParser parser = factory.newSAXParser();</div><div class="line">        parser.parse(<span class="string">"src/students.xml"</span>, <span class="keyword">new</span> MyContentHandler());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyContentHandler</span> <span class="keyword">extends</span> <span class="title">DefaultHandler</span> </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startDocument</span><span class="params">()</span> <span class="keyword">throws</span> SAXException </span>&#123;</div><div class="line">            System.out.println(<span class="string">"&lt;?xml version='1.0' encoding='utf-8'?&gt;"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startElement</span><span class="params">(String uri, String localName, String qName,</span></span></div><div class="line">                Attributes atts) <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">            sb.append(<span class="string">"&lt;"</span>).append(qName);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; atts.getLength(); i++) &#123;</div><div class="line">                sb.append(<span class="string">" "</span>);</div><div class="line">                sb.append(atts.getQName(i));</div><div class="line">                sb.append(<span class="string">"="</span>);</div><div class="line">                sb.append(<span class="string">"'"</span>);</div><div class="line">                sb.append(atts.getValue(i));</div><div class="line">                sb.append(<span class="string">"'"</span>);</div><div class="line">            &#125;</div><div class="line">            sb.append(<span class="string">"&gt;"</span>);</div><div class="line">            System.out.print(sb);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">endElement</span><span class="params">(String uri, String localName, String qName)</span></span></div><div class="line">                <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            System.out.print(<span class="string">"&lt;/"</span> + qName + <span class="string">"&gt;"</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">characters</span><span class="params">(<span class="keyword">char</span>[] ch, <span class="keyword">int</span> start, <span class="keyword">int</span> length)</span></span></div><div class="line">                <span class="keyword">throws</span> SAXException &#123;</div><div class="line">            System.out.print(<span class="keyword">new</span> String(ch, start, length));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="9-DOM4J"><a href="#9-DOM4J" class="headerlink" title="9. DOM4J"></a>9. DOM4J</h1><h2 id="9-1-DOM4J是什么"><a href="#9-1-DOM4J是什么" class="headerlink" title="9.1 DOM4J是什么"></a>9.1 DOM4J是什么</h2><p>DOM4J是针对Java开发人员专门提供的XML文档解析规范，它不同与DOM，但与DOM相似。DOM4J针对Java开发人员而设计，所以对于Java开发人员来说，使用DOM4J要比使用DOM更加方便。</p>
+<p>DOM4J对DOM和SAX提供了支持，使用DOM4J可以把org.dom4j.document转换成org.w3c.Document，DOM4J也支持基于SAX的事件驱动处理模式。</p>
+<p>使用者需要注意，DOM4J解析的结果是org.dom4j.Document，而不是org.w3c.Document。DOM4J与DOM一样，只是一组规范（接口与抽象类组成），底层必须要有DOM4J解析器的实现来支持。</p>
+<p>DOM4J使用JAXP来查找SAX解析器，然后把XML文档解析为org.dom4j.Document对象。它还支持使用org.w3c.Document来转换为org.dom4j.Docment对象。</p>
+<h2 id="9-2-DOM4J中的类结构"><a href="#9-2-DOM4J中的类结构" class="headerlink" title="9.2 DOM4J中的类结构"></a>9.2 DOM4J中的类结构</h2><p>在DOM4J中，也有Node、Document、Element等接口，结构上与DOM中的接口比较相似。但还是有很多的区别：</p>
+<p>在DOM4J中，所有XML组成部分都是一个Node，其中Branch表示可以包含子节点的节点，例如Document和Element都是可以有子节点的，它们都是Branch的子接口。</p>
+<p>Attribute是属性节点，CharacterData是文本节点，文本节点有三个子接口，分别是CDATA、Text、Comment。</p>
+<p><img src="http://img.blog.csdn.net/20161009000821304" alt="DOM4J"></p>
+<h2 id="9-3-DOM4J获取Document对象"><a href="#9-3-DOM4J获取Document对象" class="headerlink" title="9.3 DOM4J获取Document对象"></a>9.3 DOM4J获取Document对象</h2><p>使用DOM4J来加载XML文档，需要先获取SAXReader对象，然后通过SAXReader对象的read()方法来加载XML文档：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SAXReader reader = <span class="keyword">new</span> SAXReader();</div><div class="line"><span class="comment">//reader.setValidation(true);</span></div><div class="line">Document doc = reader.read(<span class="string">"src/students.xml"</span>);</div></pre></td></tr></table></figure>
+<h2 id="9-4-DOM4J保存Document对象"><a href="#9-4-DOM4J保存Document对象" class="headerlink" title="9.4 DOM4J保存Document对象"></a>9.4 DOM4J保存Document对象</h2><p>保存Document对象需要使用XMLWriter对象的write()方法来完成，在创建XMLWriter时还可以为其指定XML文档的格式（缩进字符串以及是否换行），这需要使用OutputFormat来指定。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">doc.addDocType(<span class="string">"students"</span>, <span class="string">""</span>, <span class="string">"students.dtd"</span>);</div><div class="line">OutputFormat format = <span class="keyword">new</span> OutputFormat(<span class="string">"\t"</span>, <span class="keyword">true</span>);</div><div class="line">format.setEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">XMLWriter writer = <span class="keyword">new</span> XMLWriter(<span class="keyword">new</span> FileWriter(xmlName), format);</div><div class="line">writer.write(doc);</div><div class="line">writer.close();</div></pre></td></tr></table></figure>
+<h2 id="9-5-DOM4J创建Document对象"><a href="#9-5-DOM4J创建Document对象" class="headerlink" title="9.5 DOM4J创建Document对象"></a>9.5 DOM4J创建Document对象</h2><p>DocumentHelper类有很多的createXXX()方法，用来创建各种Node对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Document doc = DocumentHelper.createDocument();</div></pre></td></tr></table></figure>
+<h1 id="10-Document操作"><a href="#10-Document操作" class="headerlink" title="10. Document操作"></a>10. Document操作</h1><h2 id="10-1-遍历students-xml"><a href="#10-1-遍历students-xml" class="headerlink" title="10.1 遍历students.xml"></a>10.1 遍历students.xml</h2><p>涉及的相关方法：</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Element</td>
+<td>getRootElement()</td>
+<td>Document的方法，用来获取根元素</td>
+</tr>
+<tr>
+<td>List</td>
+<td>elements()</td>
+<td>Element的方法，用来获取所有子元素</td>
+</tr>
+<tr>
+<td>String</td>
+<td>attributeValue(String name)</td>
+<td>Element的方法，用来获取指定名字的属性值</td>
+</tr>
+<tr>
+<td>Element</td>
+<td>element(String name)</td>
+<td>Element的方法，用来获取第一个指定名字的子元素</td>
+</tr>
+<tr>
+<td>Element</td>
+<td>elementText(String name)</td>
+<td>Element的方法，用来获取第一个指定名字的子元素的文本内容</td>
+</tr>
+</tbody>
+</table>
+<p>分析步骤：</p>
+<ul>
+<li>获取Document对象</li>
+<li>获取root元素</li>
+<li>获取root所有子元素</li>
+<li>遍历每个student元素</li>
+<li>打印student元素number属性</li>
+<li>打印student元素的name子元素内容</li>
+<li>打印student元素的age子元素内容</li>
+<li>打印student元素的sex子元素内容</li>
+</ul>
+<h2 id="10-2-给学生元素添加-lt-score-gt-子元素"><a href="#10-2-给学生元素添加-lt-score-gt-子元素" class="headerlink" title="10.2 给学生元素添加&lt;score&gt;子元素"></a>10.2 给学生元素添加&lt;score&gt;子元素</h2><p>涉及的相关方法：</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Element</td>
+<td>addElement(String name)</td>
+<td>Element的方法，为当前元素添加指定名字子元素。返回值为新建元素对象</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setText(String text)</td>
+<td>Element的方法，为当前元素设置文本内容</td>
+</tr>
+</tbody>
+</table>
+<p>分析步骤：</p>
+<ul>
+<li>获取Document对象</li>
+<li>获取root对象</li>
+<li>获取root所有子元素</li>
+<li>遍历所有学生子元素</li>
+<li>创建&lt;score&gt;元素，为&lt;score&gt;添加文本内容</li>
+<li>把&lt;score&gt;元素添加到学生元素中</li>
+<li>保存Document对象</li>
+</ul>
+<h2 id="10-3-为张三添加friend属性，指定为李四学号"><a href="#10-3-为张三添加friend属性，指定为李四学号" class="headerlink" title="10.3 为张三添加friend属性，指定为李四学号"></a>10.3 为张三添加friend属性，指定为李四学号</h2><p>涉及方法：</p>
+<ul>
+<li>addAttribute(String name, String value)：Element的方法，为当前元素添加属性。</li>
+</ul>
+<p>分析步骤：</p>
+<ul>
+<li>获取Document对象</li>
+<li>获取root对象</li>
+<li>获取root所有子元素</li>
+<li>创建两个Element引用：zhangSanEle、liSiEle，赋值为null</li>
+<li>遍历所有学生子元素</li>
+<li>如果zhangSanEle和liSiEle都不是null，break</li>
+<li>判断当前学生元素的name子元素文本内容是zhangSan，那么把当前学生元素赋给zhangSanEle</li>
+<li>判断当前学生元素的name子元素文本内容是liSi，那么把当前学生元素赋给liSiEle</li>
+<li>判断zhangSanEle和liSiEle都不为null时</li>
+<li>获取liSiEle的number属性</li>
+<li>为zhangSanEle添加friend属性，属性值为liSi的number属性值</li>
+<li>保存Document对象</li>
+</ul>
+<h2 id="10-4-删除number为ID-1003的学生元素"><a href="#10-4-删除number为ID-1003的学生元素" class="headerlink" title="10.4 删除number为ID_1003的学生元素"></a>10.4 删除number为ID_1003的学生元素</h2><p>涉及方法：</p>
+<ul>
+<li>boolean remove(Element e)：Element和Document的方法，移除指定子元素</li>
+<li>Element getParent()：获取父元素，根元素的父元素为null</li>
+</ul>
+<p>分析步骤：</p>
+<ul>
+<li>获取Document对象</li>
+<li>获取root对象</li>
+<li>获取root所有子元素</li>
+<li>遍历所有学生子元素</li>
+<li>判断当前学生元素的number属性是否为ID_1003</li>
+<li>获取当前元素的父元素</li>
+<li>父元素中删除当前元素</li>
+<li>保存Document对象</li>
+</ul>
+<h2 id="10-5-通过List-lt-Student-gt-生成Document并保存"><a href="#10-5-通过List-lt-Student-gt-生成Document并保存" class="headerlink" title="10.5 通过List&lt;Student&gt;生成Document并保存"></a>10.5 通过List&lt;Student&gt;生成Document并保存</h2><p>涉及方法：</p>
+<ul>
+<li>DocumentHelper.createDocument()：创建Document对象</li>
+<li>DocumentHelper.createElement(String name)：创建指定名称的Element元素</li>
+</ul>
+<p>分析步骤：</p>
+<ul>
+<li>创建Document对象</li>
+<li>为Document添加根元素&lt;students&gt;</li>
+<li>循环遍历学生集合List&lt;Student&gt;</li>
+<li>把当前学生对象转换成Element元素</li>
+<li>把Element元素添加到根元素中</li>
+<li>保存Document对象</li>
+</ul>
+<p>把学生转换成Element步骤分析：</p>
+<ul>
+<li>创建Element对象</li>
+<li>为Element添加number属性，值为学生的number</li>
+<li>为Element添加name子元素，文本内容为学生的name</li>
+<li>为Element添加age子元素，文本内容为学生的age</li>
+<li>为Element添加sex子元素，文本内容为学生的sex</li>
+</ul>
+<h2 id="10-6-新建赵六学生元素，插入到李四之前"><a href="#10-6-新建赵六学生元素，插入到李四之前" class="headerlink" title="10.6 新建赵六学生元素，插入到李四之前"></a>10.6 新建赵六学生元素，插入到李四之前</h2><p>涉及方法：</p>
+<ul>
+<li>int indexOf(Node node)：Branch的方法，查找指定节点，在当前Branch的子节点集合中的下标位置。</li>
+</ul>
+<p>分析步骤：</p>
+<ul>
+<li>创建赵六学生对象</li>
+<li>通过学生对象创建赵六学生元素</li>
+<li>通过名称查找李四元素</li>
+<li>查看李四元素在其父元素中的位置</li>
+<li>获取学生子元素List</li>
+<li>将赵六元素插入到List中</li>
+</ul>
+<p>通过名字查找元素：</p>
+<ul>
+<li>获取Document</li>
+<li>获取根元素</li>
+<li>获取所有学生元素</li>
+<li>遍历学生元素</li>
+<li>获取学生元素name子元素的文本内容，与指定名称比较</li>
+<li>返回当前学生元素</li>
+</ul>
+<h2 id="10-7-其它方法介绍"><a href="#10-7-其它方法介绍" class="headerlink" title="10.7 其它方法介绍"></a>10.7 其它方法介绍</h2><p>Node接口</p>
+<p><img src="http://img.blog.csdn.net/20161009144859638" alt="Node"></p>
+<p>Branch接口，实现了Node接口</p>
+<p><img src="http://img.blog.csdn.net/20161009094119293" alt="Branch"></p>
+<p>Document</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法声明</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Element</td>
+<td>getRootElement()</td>
+<td>获取根元素</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setRootElement()</td>
+<td>设置根元素</td>
+</tr>
+<tr>
+<td>String</td>
+<td>getXmlEncoding()</td>
+<td>获取XML文档的编码</td>
+</tr>
+<tr>
+<td>void</td>
+<td>setXmlEncoding()</td>
+<td>设置XML文档的编码</td>
+</tr>
+</tbody>
+</table>
+<p>Element方法：</p>
+<p><img src="http://img.blog.csdn.net/20161009154118951" alt="Element"></p>
+<p>DocumentHelper静态方法介绍：</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td>createDocument()</td>
+<td>创建Dcoument对象</td>
+</tr>
+<tr>
+<td>Element</td>
+<td>createElement(String name)</td>
+<td>创建指定名称的元素对象</td>
+</tr>
+<tr>
+<td>Attribute</td>
+<td>createAttrbute(Element owner, String name, String value)</td>
+<td>创建属性对象</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>createText(String text)</td>
+<td>创建文本对象</td>
+</tr>
+<tr>
+<td>Document</td>
+<td>parseText(String text)</td>
+<td>通过给定的字符串生成Document对象</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StuService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//查询 根据id查询学生信息</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Student <span class="title">getStu</span><span class="params">(String id)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器</div><div class="line">         * 2、得到document</div><div class="line">         *</div><div class="line">         * 3、获取到所有的id</div><div class="line">         * 4、返回的是list集合，遍历list集合</div><div class="line">         * 5、得到每一个id的节点</div><div class="line">         * 6、id节点的值</div><div class="line">         * 7、判断id的值和传递的id值是否相同</div><div class="line">         * 8、如果相同，先获取到id的父节点stu</div><div class="line">         * 9、通过stu获取到name age值</div><div class="line">         *</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        SAXReader saxReader = <span class="keyword">new</span> SAXReader();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = saxReader.read(<span class="string">"src/student.xml"</span>);</div><div class="line">        <span class="comment">//获取所有的id</span></div><div class="line">        List&lt;Node&gt; list = document.selectNodes(<span class="string">"//id"</span>);</div><div class="line">        <span class="comment">//创建student对象</span></div><div class="line">        Student student = <span class="keyword">new</span> Student();</div><div class="line">        <span class="comment">//遍历list</span></div><div class="line">        <span class="keyword">for</span> (Node node : list) &#123; <span class="comment">//node是每一个id节点</span></div><div class="line">            <span class="comment">//得到id节点的值</span></div><div class="line">            String idv = node.getText();</div><div class="line">            <span class="comment">//判断id是否相同</span></div><div class="line">            <span class="keyword">if</span>(idv.equals(id)) &#123;</div><div class="line">                <span class="comment">//得到id的父节点 stu</span></div><div class="line">                Element stu = node.getParent();</div><div class="line">                <span class="comment">//通过stu获取name和age</span></div><div class="line">                String namev = stu.element(<span class="string">"name"</span>).getText();</div><div class="line">                String agev = stu.element(<span class="string">"age"</span>).getText();</div><div class="line">                student.setId(idv);</div><div class="line">                student.setName(namev);</div><div class="line">                student.setAge(agev);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> student;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//增加</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addStu</span><span class="params">(Student student)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器</div><div class="line">         * 2、得到document</div><div class="line">         * 3、获取到根节点</div><div class="line">         * 4、在根节点上面创建stu标签</div><div class="line">         * 5、在stu标签上面依次添加id name age</div><div class="line">         * 6、在id name age上面依次添加值</div><div class="line">         *</div><div class="line">         * 7、回写xml</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        SAXReader saxReader = <span class="keyword">new</span> SAXReader();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = saxReader.read(<span class="string">"src/student.xml"</span>);</div><div class="line">        <span class="comment">//得到根节点</span></div><div class="line">        Element root = document.getRootElement();</div><div class="line">        <span class="comment">//在根节点上面添加stu</span></div><div class="line">        Element stu = root.addElement(<span class="string">"stu"</span>);</div><div class="line">        <span class="comment">//在stu标签上面依次添加id name age标签</span></div><div class="line">        Element id1 = stu.addElement(<span class="string">"id"</span>);</div><div class="line">        Element name1 = stu.addElement(<span class="string">"name"</span>);</div><div class="line">        Element age1 = stu.addElement(<span class="string">"age"</span>);</div><div class="line">        <span class="comment">//在id name age上面依次添加值</span></div><div class="line">        id1.setText(student.getId());</div><div class="line">        name1.setText(student.getName());</div><div class="line">        age1.setText(student.getAge());</div><div class="line">        <span class="comment">//回写xml</span></div><div class="line">        OutputFormat format = OutputFormat.createPrettyPrint();</div><div class="line">        XMLWriter xmlWriter = <span class="keyword">new</span> XMLWriter(</div><div class="line">                    <span class="keyword">new</span> FileOutputStream(<span class="string">"src/student.xml"</span>), format);</div><div class="line">        xmlWriter.write(document);</div><div class="line">        xmlWriter.close();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//删除 根据学生的id删除</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delStu</span><span class="params">(String id)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、创建解析器</div><div class="line">         * 2、得到document</div><div class="line">         *</div><div class="line">         * 3、获取到所有的id   </div><div class="line">         *  使用xpath //id 返回 list集合</div><div class="line">         * 4、遍历list集合</div><div class="line">         * 5、判断集合里面的id和传递的id是否相同</div><div class="line">         * 6、如果相同，把id所在的stu删除</div><div class="line">         *</div><div class="line">         * */</div><div class="line">        <span class="comment">//创建解析器</span></div><div class="line">        SAXReader saxReader = <span class="keyword">new</span> SAXReader();</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = saxReader.read(<span class="string">"src/student.xml"</span>);</div><div class="line">        <span class="comment">//获取所有的id  xpath: //id</span></div><div class="line">        List&lt;Node&gt; list = document.selectNodes(<span class="string">"//id"</span>);</div><div class="line">        <span class="comment">//遍历list集合</span></div><div class="line">        <span class="keyword">for</span> (Node node : list) &#123; <span class="comment">//node是每一个id的元素</span></div><div class="line">            <span class="comment">//得到id的值</span></div><div class="line">            String idv = node.getText();</div><div class="line">            <span class="comment">//判断idv和传递的id是否相同</span></div><div class="line">            <span class="keyword">if</span>(idv.equals(id)) &#123; <span class="comment">//id相同</span></div><div class="line">                <span class="comment">//得到stu节点</span></div><div class="line">                Element stu = node.getParent();</div><div class="line">                <span class="comment">//获取stu的父节点</span></div><div class="line">                Element student = stu.getParent();</div><div class="line">                <span class="comment">//删除stu</span></div><div class="line">                student.remove(stu);</div><div class="line">            &#125;       </div><div class="line">        &#125;</div><div class="line">        <span class="comment">//回写xml</span></div><div class="line">        OutputFormat format = OutputFormat.createPrettyPrint();</div><div class="line">        XMLWriter xmlWriter = <span class="keyword">new</span> XMLWriter(</div><div class="line">                    <span class="keyword">new</span> FileOutputStream(<span class="string">"src/student.xml"</span>), format);</div><div class="line">        xmlWriter.write(document);</div><div class="line">        xmlWriter.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="11-Schema"><a href="#11-Schema" class="headerlink" title="11. Schema"></a>11. Schema</h1><p>我们学习Schema的第一目标是：参照Schema的要求可以编写XML文档； 第二目标是：可以自己来定义Schema文档。</p>
+<h2 id="11-1-Schema是什么"><a href="#11-1-Schema是什么" class="headerlink" title="11.1 Schema是什么"></a>11.1 Schema是什么</h2><p>XML文档的约束，用来替代DTD。 DTD文档不是XML语法，而Schema本身也是XML文档，这对解析器来说不用再去处理非XML的文档了；</p>
+<p>DTD只能表述平台线束，而Schema本身也是XML，所以可以描述结构化的约束信息。</p>
+<p>DTD不只约束元素或属性的类型，但Schema可以。例如让age属性的取值在0~100之间。</p>
+<p>Schema文档的扩展名为xsd，即XML Schema Definition。</p>
+<h2 id="11-2-为students-xml编写DTD"><a href="#11-2-为students-xml编写DTD" class="headerlink" title="11.2 为students.xml编写DTD"></a>11.2 为students.xml编写DTD</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt; !<span class="attr">ELEMENT</span> <span class="attr">students</span> (<span class="attr">student</span>+)&gt;</span></div><div class="line"><span class="tag">&lt; !<span class="attr">ELEMENT</span> <span class="attr">student</span> (<span class="attr">name</span>,<span class="attr">age</span>,<span class="attr">sex</span>)&gt;</span></div><div class="line"><span class="tag">&lt; !<span class="attr">ELEMENT</span> <span class="attr">name</span> (#<span class="attr">PCDATA</span>)&gt;</span></div><div class="line"><span class="tag">&lt; !<span class="attr">ELEMENT</span> <span class="attr">age</span> (#<span class="attr">PCDATA</span>)&gt;</span></div><div class="line"><span class="tag">&lt; !<span class="attr">ELEMENT</span> <span class="attr">sex</span> (#<span class="attr">PCDATA</span>)&gt;</span></div><div class="line"><span class="tag">&lt; !<span class="attr">ATTLIST</span> <span class="attr">student</span> <span class="attr">number</span> <span class="attr">CDATA</span> #<span class="attr">REQUIRED</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="11-3-为students-xml编写schema"><a href="#11-3-为students-xml编写schema" class="headerlink" title="11.3 为students.xml编写schema"></a>11.3 为students.xml编写schema</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">xsd:schema</span> <span class="attr">xmlns:xsd</span>=<span class="string">"http://www.w3.org/2001/XMLSchema"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">"students"</span> <span class="attr">type</span>=<span class="string">"studentsType"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">xsd:complexType</span> <span class="attr">name</span>=<span class="string">"studentsType"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">xsd:sequence</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">"student"</span> <span class="attr">type</span>=<span class="string">"studentType"</span> <span class="attr">minOccurs</span>=<span class="string">"0"</span> <span class="attr">maxOccurs</span>=<span class="string">"unbounded"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">xsd:sequence</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">xsd:complexType</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">xsd:complexType</span> <span class="attr">name</span>=<span class="string">"studentType"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">xsd:sequence</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">type</span>=<span class="string">"xsd:string"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">"age"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">xsd:simpleType</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">xsd:restriction</span> <span class="attr">base</span>=<span class="string">"xsd:integer"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">xsd:maxInclusive</span> <span class="attr">value</span>=<span class="string">"100"</span>/&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">xsd:minInclusive</span> <span class="attr">value</span>=<span class="string">"0"</span>/&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">xsd:restriction</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">xsd:simpleType</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">xsd:element</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">xsd:element</span> <span class="attr">name</span>=<span class="string">"sex"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">xsd:simpleType</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">xsd:restriction</span> <span class="attr">base</span>=<span class="string">"xsd:string"</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">xsd:enumeration</span> <span class="attr">value</span>=<span class="string">"男"</span>/&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">xsd:enumeration</span> <span class="attr">value</span>=<span class="string">"女"</span>/&gt;</span></div><div class="line">                    <span class="tag">&lt;/<span class="name">xsd:restriction</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">xsd:simpleType</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">xsd:element</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">xsd:sequence</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">xsd:attribute</span> <span class="attr">name</span>=<span class="string">"number"</span> <span class="attr">type</span>=<span class="string">"xsd:string"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">xsd:complexType</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">xsd:schema</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>参照Schema编写XML文档 我们参照上面的Schema文档编写一个studens.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8" standalone="no" ?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">students</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></div><div class="line">    <span class="attr">xsi:noNamespaceSchemaLocation</span>=<span class="string">"students.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">student</span> <span class="attr">number</span>=<span class="string">"ID_1001"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>张三<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>23<span class="tag">&lt;/<span class="name">age</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">sex</span>&gt;</span>男<span class="tag">&lt;/<span class="name">sex</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">student</span> <span class="attr">number</span>=<span class="string">"ID_1002"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>李四<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>32<span class="tag">&lt;/<span class="name">age</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">sex</span>&gt;</span>女<span class="tag">&lt;/<span class="name">sex</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">student</span> <span class="attr">number</span>=<span class="string">"ID_1003"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>王五<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">age</span>&gt;</span>50<span class="tag">&lt;/<span class="name">age</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">sex</span>&gt;</span>男<span class="tag">&lt;/<span class="name">sex</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">student</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">students</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>名称空间相关内容<br>XSD文档中是创建元素和属性的地方；<br>XML文档中是使用元素和属性的地方。<br>所以在XML文档中需要说明使用了哪些XSD文档。</p>
+<h2 id="11-4-什么是名称空间"><a href="#11-4-什么是名称空间" class="headerlink" title="11.4 什么是名称空间"></a>11.4 什么是名称空间</h2><p>名称空间是用来处理XML元素或属性的名字冲突问题。你可以理解为Java中的包！包的作用就是用来处理类的名字冲突问题。</p>
+<p>注意：XML与Java有很大区别，虽然都是处理名字冲突问题，但语法上是有很大区别的。例如在Java中可以使用import来导入类，但你一定要保存你导入的类已经在类路径（classpath）中存在。使用package为当前Java文件中所有类声明名。但XML的名称空间要比Java复杂很多。</p>
+<p>我们在下面讲解XML名称空间时，会使用Java包的概念来理解XML的名称空间的概念，所以现在大家就要注意这么几个特性：</p>
+<ul>
+<li>import：导包，声明名称空间</li>
+<li>package：定义包，指定目标名称空间</li>
+<li>classpath：添加到类路径，关联XSD文件</li>
+</ul>
+<h2 id="11-5-声明名称空间（导包）"><a href="#11-5-声明名称空间（导包）" class="headerlink" title="11.5 声明名称空间（导包）"></a>11.5 声明名称空间（导包）</h2><p>无论是在XML中，还是在XSD中，都需要声明名称空间。这与Java中使用import来导包是一个道理。当然，前提是有包（创建类是使用了package）才可以导，没包就不能导了。如果被定义的元素在声明时没有指定目标名称空间，那么就是在无名称空间中，那么我们在使用这些在无名称空间中的元素时，就不用再去声明名称空间了。</p>
+<p>声明名称空间使用xmlns，例如：<code>xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</code>。 这表示声明了一个名称空间，相当与Java中的import。但是，Java中的import的含义是在下面使用的类，如果没有给出包名，那么就是import导入的这个类。而xmlns表示，下面使用xsi为前缀的元素或属性，都是来自<code>http://www.w3.org/2001/XMLSchema-instance</code> 名称空间。也就是说给名称空间起了一个简称，这就相当于我们称呼“北京传智播客教育科技有限公司”为“传智”一样。“传智”就是简称。</p>
+<p>例如在XSD文件中，<code>xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;</code> 就是声明名称空间，而这个名称空间是W3C的名称空间，无需关联文件就可以直接声明！在XSD文件中所有使用xsd为前面的元素和属性都是来自 <code>http://www.w3.org/2001/XMLSchema</code> 名称空间。</p>
+<p>名称空间命名：一般名称空间都是以公司的URL来命名，即网址！当然也可以给名称空间命名为aa、bb之类的名字，但这可能会导致名称空间的重名问题。</p>
+<p>前缀命名：前缀的命名没有什么要求，但一般对 <code>http://www.w3.org/2001/XMLSchema</code>名称空间的前缀都是使用xs或xsd。<code>http://www.w3.org/2001/XMLSchema-instance</code> 的前缀使用xsi。</p>
+<p>在XML文档中声明 <code>xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</code> 名称空间的目的是使用xsi中的一个属性：xsi:noNamespaceSchemaLocation，它是用W3C提供的库属性，用来关联XSD文件用的。当然，它只能关联那些没有“目标名称空间”的XSD文件。下面会讲解目标名称空间！</p>
+<h2 id="11-6-默认名称空间"><a href="#11-6-默认名称空间" class="headerlink" title="11.6 默认名称空间"></a>11.6 默认名称空间</h2><p>所谓默认名称空间就是在声明名称空间时，不指定前缀，也可以理解为前缀为空字符串的意思。这样定义元素时，如果没有指定前缀的元素都是在使用默认名称空间中的元素。</p>
+<p><code>xmlns=”http://www.itcast.cn”</code> 当在文档中使用&lt;xxx&gt;时，那么&lt;xxx&gt;元素就是 <code>http://www.itcast.cn</code> 名称空间中声明的元素。</p>
+<p>注意：没有指定前缀的属性不表示在默认名称空间中，而是表示没有名称空间。也就是说，默认名称空间不会涉及到属性，只对元素有效！</p>
+<h1 id="12-XPath（扩展）"><a href="#12-XPath（扩展）" class="headerlink" title="12. XPath（扩展）"></a>12. XPath（扩展）</h1><h2 id="12-1-什么是XPath"><a href="#12-1-什么是XPath" class="headerlink" title="12.1 什么是XPath"></a>12.1 什么是XPath</h2><p>XPath即为XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的语言，使用XPath可以直接获取到某个元素。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。起初 XPath 的提出的初衷是将其作为一个通用的、介于XPointer与XSL间的语法模型。但是 XPath 很快的被开发者采用来当作小型查询语言。</p>
+<ul>
+<li>第一种形式，/AAA/DDD/BBB： 表示一层一层的，AAA下面 DDD下面的BBB</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161103153437612" alt="XPath"></p>
+<ul>
+<li>第二种形式，//BBB： 表示和这个名称相同，表示只要名称是BBB，都得到</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161103153358395" alt="XPath"></p>
+<ul>
+<li>第三种形式，/*: 所有元素</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161103153319347" alt="XPath"></p>
+<ul>
+<li>第四种形式，BBB[1]：　表示第一个BBB元素</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161103153051798" alt="XPath"></p>
+<p>BBB[last()]：表示最后一个BBB元素</p>
+<p><img src="http://img.blog.csdn.net/20161103153218580" alt="XPath"></p>
+<ul>
+<li>第五种形式，//BBB[@id]： 表示只要BBB元素上面有id属性，都得到</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161103153005204" alt="XPath"></p>
+<ul>
+<li>第六种形式，//BBB[@id=’b1’] 表示元素名称是BBB,在BBB上面有id属性，并且id的属性值是b1</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20161103152916155" alt="XPath"></p>
+<h2 id="12-2-DOM4J对XPath的支持"><a href="#12-2-DOM4J对XPath的支持" class="headerlink" title="12.2 DOM4J对XPath的支持"></a>12.2 DOM4J对XPath的支持</h2><p>默认的情况下，dom4j不支持xpath，如果想要在dom4j里面是有xpath，第一步需要，引入支持xpath的jar包，使用 jaxen-1.1-beta-6.jar</p>
+<p>在dom4j里面提供了两个方法，用来支持xpath　</p>
+<ul>
+<li>List selectNodes(String xpathExpression)：在当前节点中查找满足XPath表达式的所有子节点；</li>
+<li>Node selectSingleNode(String xpathExpression)：在当前节点中查找满足XPath表达式的第一个子节点；</li>
+<li>String valueOf(String xpathExpression)：在当前节点中查找满足XPath表达式的第一个子节点的文本内容；</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dom4jUtils</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String PATH = <span class="string">"src/p1.xml"</span>;</div><div class="line"></div><div class="line">    <span class="comment">//返回document</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Document <span class="title">getDocument</span><span class="params">(String path)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//创建解析器</span></div><div class="line">            SAXReader reader = <span class="keyword">new</span> SAXReader();</div><div class="line">            <span class="comment">//得到document</span></div><div class="line">            Document document = reader.read(path);</div><div class="line">            <span class="keyword">return</span> document;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//回写xml的方法</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">xmlWriters</span><span class="params">(String path,Document document)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            OutputFormat format = OutputFormat.createPrettyPrint();</div><div class="line">            XMLWriter xmlWriter = <span class="keyword">new</span> XMLWriter(<span class="keyword">new</span> FileOutputStream(path), format);</div><div class="line">            xmlWriter.write(document);</div><div class="line">            xmlWriter.close();</div><div class="line">        &#125;<span class="keyword">catch</span>(Exception e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestDom4jXpath</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line"><span class="comment">//        test1();</span></div><div class="line">        test2();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//使用xpath实现：获取第一个p1下面的name的值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、得到document</div><div class="line">         * 2、直接使用selectSingleNode方法实现</div><div class="line">         *     - xpath ： //p1[@id1='aaaa']/name</div><div class="line">         * */</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);</div><div class="line">        <span class="comment">//直接使用selectSingleNode方法实现</span></div><div class="line">        Node name1 = document.selectSingleNode(<span class="string">"//p1[@id1='aaaa']/name"</span>); <span class="comment">//name的元素</span></div><div class="line">        <span class="comment">//得到name里面的值</span></div><div class="line">        String s1 = name1.getText();</div><div class="line">        System.out.println(s1);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//查询xml中所有name元素的值</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">         * 1、得到document</div><div class="line">         * 2、直接使用selectNodes("//name")方法得到所有的name元素</div><div class="line">         *</div><div class="line">         * */</div><div class="line">        <span class="comment">//得到document</span></div><div class="line">        Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);</div><div class="line">        <span class="comment">//使用selectNodes("//name")方法得到所有的name元素</span></div><div class="line">        List&lt;Node&gt; list = document.selectNodes(<span class="string">"//name"</span>);</div><div class="line">        <span class="comment">//遍历list集合</span></div><div class="line">        <span class="keyword">for</span> (Node node : list) &#123;</div><div class="line">            <span class="comment">//node是每一个name元素</span></div><div class="line">            <span class="comment">//得到name元素里面的值</span></div><div class="line">            String s = node.getText();</div><div class="line">            System.out.println(s);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="JackChan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay-reward-image.jpg" alt="JackChan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xml/" rel="tag"># xml</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/自定义控件/歌词展示控件/" rel="next" title="自定义歌词展示控件">
+                <i class="fa fa-chevron-left"></i> 自定义歌词展示控件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ai.jpg"
+               alt="JackChan" />
+          <p class="site-author-name" itemprop="name">JackChan</p>
+           
+              <p class="site-description motion-element" itemprop="description">生活不止眼前的苟且，还有诗和远方！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JackChan1999" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.gitbook.com/@alleniverson" target="_blank" title="GitBook">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  GitBook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1848214604?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/axi295309066" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  CSDN
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="鸿洋" target="_blank">鸿洋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="张帅" target="_blank">张帅</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#相关阅读"><span class="nav-number">1.</span> <span class="nav-text">相关阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-操作XML文档概述"><span class="nav-number">2.</span> <span class="nav-text">1. 操作XML文档概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-如何操作XML文档"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 如何操作XML文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-XML解析技术"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 XML解析技术</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-解析原理"><span class="nav-number">3.</span> <span class="nav-text">2. 解析原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-DOM解析原理"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 DOM解析原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-设置Java最大内存"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 设置Java最大内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-SAX解析原理"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 SAX解析原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-SAX解析过程"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 SAX解析过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-解析器概述"><span class="nav-number">4.</span> <span class="nav-text">3. 解析器概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-什么是XML解析器"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 什么是XML解析器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-JAXP概述"><span class="nav-number">5.</span> <span class="nav-text">4. JAXP概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-什么是JAXP"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 什么是JAXP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-JAXP对DOM的支持"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 JAXP对DOM的支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-JAXP对SAX的支持"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 JAXP对SAX的支持</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-JDOM和DOM4J"><span class="nav-number">6.</span> <span class="nav-text">5. JDOM和DOM4J</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-JDOM和DOM4J概述"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 JDOM和DOM4J概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-JDOM和DOM4J比较"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 JDOM和DOM4J比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-DOM4J查找解析器的过程"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 DOM4J查找解析器的过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-XML解析之JAXP（DOM）"><span class="nav-number">7.</span> <span class="nav-text">6. XML解析之JAXP（DOM）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-JAXP获取解析器"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 JAXP获取解析器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-JAXP相关包"><span class="nav-number">7.1.1.</span> <span class="nav-text">6.1.1 JAXP相关包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-JAXP与DOM、SAX解析器的关系"><span class="nav-number">7.1.2.</span> <span class="nav-text">6.1.2 JAXP与DOM、SAX解析器的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-JAXP获取DOM解析器"><span class="nav-number">7.1.3.</span> <span class="nav-text">6.1.3 JAXP获取DOM解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-4-JAXP保存Document"><span class="nav-number">7.1.4.</span> <span class="nav-text">6.1.4 JAXP保存Document</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-5-JAXP创建Document"><span class="nav-number">7.1.5.</span> <span class="nav-text">6.1.5 JAXP创建Document</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-6-学习DOM之前，先写两个方法"><span class="nav-number">7.1.6.</span> <span class="nav-text">6.1.6 学习DOM之前，先写两个方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-DOM-API概述"><span class="nav-number">8.</span> <span class="nav-text">7. DOM API概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Document对应XML文档"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 Document对应XML文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-DOM-API中的类"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 DOM API中的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3-Node方法介绍"><span class="nav-number">8.3.</span> <span class="nav-text">7.3 Node方法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4-Docment方法介绍"><span class="nav-number">8.4.</span> <span class="nav-text">7.4 Docment方法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-5-Element方法介绍"><span class="nav-number">8.5.</span> <span class="nav-text">7.5 Element方法介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-6-Attr方法介绍"><span class="nav-number">8.6.</span> <span class="nav-text">7.6 Attr方法介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-SAX"><span class="nav-number">9.</span> <span class="nav-text">8. SAX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#8-1-SAX解析原理"><span class="nav-number">9.1.</span> <span class="nav-text">8.1 SAX解析原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-2-获取SAX解析器"><span class="nav-number">9.2.</span> <span class="nav-text">8.2 获取SAX解析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-3-内容处理器"><span class="nav-number">9.3.</span> <span class="nav-text">8.3 内容处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-4-SAX应用"><span class="nav-number">9.4.</span> <span class="nav-text">8.4 SAX应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-5-测试SAX"><span class="nav-number">9.5.</span> <span class="nav-text">8.5 测试SAX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-6-使用SAX打印XML文档"><span class="nav-number">9.6.</span> <span class="nav-text">8.6 使用SAX打印XML文档</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-DOM4J"><span class="nav-number">10.</span> <span class="nav-text">9. DOM4J</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-DOM4J是什么"><span class="nav-number">10.1.</span> <span class="nav-text">9.1 DOM4J是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-DOM4J中的类结构"><span class="nav-number">10.2.</span> <span class="nav-text">9.2 DOM4J中的类结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-DOM4J获取Document对象"><span class="nav-number">10.3.</span> <span class="nav-text">9.3 DOM4J获取Document对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-DOM4J保存Document对象"><span class="nav-number">10.4.</span> <span class="nav-text">9.4 DOM4J保存Document对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-DOM4J创建Document对象"><span class="nav-number">10.5.</span> <span class="nav-text">9.5 DOM4J创建Document对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-Document操作"><span class="nav-number">11.</span> <span class="nav-text">10. Document操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#10-1-遍历students-xml"><span class="nav-number">11.1.</span> <span class="nav-text">10.1 遍历students.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-2-给学生元素添加-lt-score-gt-子元素"><span class="nav-number">11.2.</span> <span class="nav-text">10.2 给学生元素添加<score>子元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-3-为张三添加friend属性，指定为李四学号"><span class="nav-number">11.3.</span> <span class="nav-text">10.3 为张三添加friend属性，指定为李四学号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-4-删除number为ID-1003的学生元素"><span class="nav-number">11.4.</span> <span class="nav-text">10.4 删除number为ID_1003的学生元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-5-通过List-lt-Student-gt-生成Document并保存"><span class="nav-number">11.5.</span> <span class="nav-text">10.5 通过List<Student>生成Document并保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-6-新建赵六学生元素，插入到李四之前"><span class="nav-number">11.6.</span> <span class="nav-text">10.6 新建赵六学生元素，插入到李四之前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-7-其它方法介绍"><span class="nav-number">11.7.</span> <span class="nav-text">10.7 其它方法介绍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-Schema"><span class="nav-number">12.</span> <span class="nav-text">11. Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-Schema是什么"><span class="nav-number">12.1.</span> <span class="nav-text">11.1 Schema是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-为students-xml编写DTD"><span class="nav-number">12.2.</span> <span class="nav-text">11.2 为students.xml编写DTD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-为students-xml编写schema"><span class="nav-number">12.3.</span> <span class="nav-text">11.3 为students.xml编写schema</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4-什么是名称空间"><span class="nav-number">12.4.</span> <span class="nav-text">11.4 什么是名称空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-5-声明名称空间（导包）"><span class="nav-number">12.5.</span> <span class="nav-text">11.5 声明名称空间（导包）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-6-默认名称空间"><span class="nav-number">12.6.</span> <span class="nav-text">11.6 默认名称空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-XPath（扩展）"><span class="nav-number">13.</span> <span class="nav-text">12. XPath（扩展）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-什么是XPath"><span class="nav-number">13.1.</span> <span class="nav-text">12.1 什么是XPath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-DOM4J对XPath的支持"><span class="nav-number">13.2.</span> <span class="nav-text">12.2 DOM4J对XPath的支持</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JackChan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/06/13/javaweb/XML解析器/';
+          this.page.identifier = '2017/06/13/javaweb/XML解析器/';
+          this.page.title = 'XML解析器';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      $('#local-search-input').focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
